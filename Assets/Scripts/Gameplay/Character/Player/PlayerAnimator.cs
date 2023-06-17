@@ -6,7 +6,8 @@ namespace Gameplay.Character.Player
     [RequireComponent(typeof(Animator))]
     public class PlayerAnimator : MonoBehaviour
     {
-        private static readonly int Walking = Animator.StringToHash("Walk");
+        private static readonly int IsWalkedHash = Animator.StringToHash("IsWalked");
+        private static readonly int IsRunningHash = Animator.StringToHash("IsRun");
         private Animator _animator;
 
         private void Awake()
@@ -14,9 +15,14 @@ namespace Gameplay.Character.Player
             _animator = GetComponent<Animator>();
         }
 
-        public void Walk(float speed)
+        public void Walk(bool isWalked)
         {
-            
+            _animator.SetBool(IsWalkedHash, isWalked);
+        }
+
+        public void Run(bool isRun)
+        {
+            _animator.SetBool(IsRunningHash, isRun);
         }
     }
 }

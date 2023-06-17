@@ -22,9 +22,17 @@ namespace Installers
         {
             BindLocationProvider();
             BindGameInit();
-            BindCameraFactory();
+            PlayerCameraFollower cameraFollowerPrefab = GetPlayerCameraFollowerPrefab();
+            BindCameraFactory(cameraFollowerPrefab);
+            BindCamera(cameraFollowerPrefab.GetComponent<Camera>());
             BindPlayerFactory();
             BindGameFactory();
+        }
+
+        private void BindCamera(Camera camera)
+        {
+            Container
+                .BindInstance(camera);
         }
 
         private void BindGameFactory()
@@ -43,14 +51,15 @@ namespace Installers
                 .FromComponentInNewPrefab(playerPrefab);
         }
 
-        private void BindCameraFactory()
+        private void BindCameraFactory(PlayerCameraFollower playerCameraFollower)
         {
-            var cameraFollowerPrefab = _assetProvider.GetAsset<PlayerCameraFollower>(AssetPath.MainCamera);
-        
             Container
                 .BindFactory<Player, PlayerCameraFollower, PlayerCameraFollower.Factory>()
-                .FromComponentInNewPrefab(cameraFollowerPrefab);
+                .FromComponentInNewPrefab(playerCameraFollower);
         }
+        
+        private PlayerCameraFollower GetPlayerCameraFollowerPrefab() =>
+            _assetProvider.GetAsset<PlayerCameraFollower>(AssetPath.MainCamera);
 
         private void BindGameInit()
         {
