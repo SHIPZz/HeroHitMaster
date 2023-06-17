@@ -7,5 +7,6 @@ namespace Services
          InputActions.PlayerActions PlayerActions { get; }
          InputAction PlayerMove { get; }
          InputAction PlayerJump { get; }
+         InputAction PlayerRun { get; }
     }
 }

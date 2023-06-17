@@ -9,5 +9,7 @@ namespace Gameplay.Character
         
         event Action<int> ValueChanged;
         event Action ValueZeroReached;
+
+        void Heal(int value);
     }
 }

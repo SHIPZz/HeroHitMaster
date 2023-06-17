@@ -1,4 +1,6 @@
 using Constants;
+using Services.Providers;
+using Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;
 
@@ -53,7 +55,7 @@ namespace Installers
         private void BindGameInit()
         {
             Container
-                .BindInterfacesAndSelfTo<GameInit>()
+                .BindInterfacesAndSelfTo<GameInit.GameInit>()
                 .AsSingle();
         }
 

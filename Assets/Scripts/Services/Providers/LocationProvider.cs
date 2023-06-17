@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Installers
+namespace Services.Providers
 {
     public struct LocationProvider
     {

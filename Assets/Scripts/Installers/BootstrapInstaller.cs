@@ -1,4 +1,5 @@
-﻿using UnityEngine.InputSystem;
+﻿using Services.Providers.AssetProviders;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Installers

@@ -8,6 +8,7 @@ public class InputService : IInputService
     public InputService()
     {
         _inputActions = new InputActions();
+        _inputActions.Player.Enable();
     }
 
     public InputActions.PlayerActions PlayerActions =>
@@ -18,4 +19,7 @@ public class InputService : IInputService
 
     public InputAction PlayerJump =>
         PlayerActions.Jump;
+
+    public InputAction PlayerRun =>
+        PlayerActions.Run;
 }
