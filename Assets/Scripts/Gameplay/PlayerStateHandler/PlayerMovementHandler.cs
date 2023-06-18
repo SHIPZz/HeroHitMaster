@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using System;
+using Services;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -10,8 +11,10 @@ namespace Gameplay.PlayerStateHandler
         [SerializeField] private float _movementForce = 1f;
         [SerializeField] private float _jumpForce = 5f;
         [SerializeField] private float _maxSpeed = 5f;
+        [SerializeField] private LayerMask _layerMask;
 
         private readonly float _valueForStartRunning = 0.5f;
+        private readonly float _additionalForce = 2f;
 
         private float _initalMovementForce;
         private Vector3 _forceDirection = Vector3.zero;
@@ -26,7 +29,6 @@ namespace Gameplay.PlayerStateHandler
 
         private UnityEngine.Camera _camera;
         private bool _isRunning;
-        private float _additionalForce = 2f;
 
         [Inject]
         public void Construct(IInputService inputService, UnityEngine.Camera camera)
@@ -50,8 +52,8 @@ namespace Gameplay.PlayerStateHandler
 
         private void OnEnable()
         {
-            _jumpAction.performed += OnJumpedAction;
             _inputService.PlayerActions.Enable();
+            _jumpAction.performed += OnJumpedAction;
             _runAction.performed += OnRunActionPerformed;
             _runAction.canceled += OnRunActionCanceled;
         }
@@ -63,21 +65,47 @@ namespace Gameplay.PlayerStateHandler
             _runAction.canceled -= OnRunActionCanceled;
             _inputService.PlayerActions.Disable();
         }
-
+        
         private void FixedUpdate()
         {
             if (_isRunning == false)
                 SetMovementForce(_initalMovementForce);
-
+            
+            if(IsColliding())
+                return;
+            
             HandleMovement();
             ApplyGravity();
             UpdatePlayerAnimation();
             LookAt();
         }
+        
+        private bool IsColliding()
+        {
+            RaycastHit hit;
+            float maxDistance = 3f;
+
+            var start = transform.position + Vector3.up * 2f;
+            Vector3 movementDirection = _rigidbody.velocity.normalized;
+            var end = transform.position + movementDirection * maxDistance;
+            
+            Debug.DrawLine(start, end, Color.red, 0.1f);
+
+            if (Physics.Linecast(start, end, out hit, _layerMask))
+            {
+                print(hit.collider.name);
+                SetMovementForce(0);
+                _forceDirection = Vector3.zero;
+                return true;
+            }
+            
+            return false;
+        }
 
         private void OnRunActionPerformed(InputAction.CallbackContext context)
         {
             _isRunning = context.ReadValueAsButton();
+            SetMovementForce(_runningForce);
         }
 
         private void OnRunActionCanceled(InputAction.CallbackContext context)
@@ -97,14 +125,13 @@ namespace Gameplay.PlayerStateHandler
             }
 
             _playerAnimation.SetRunning(_isRunning);
-            SetMovementForce(_runningForce);
         }
 
         private void HandleMovement()
         {
             _forceDirection += _moveAction.ReadValue<Vector2>().x * Vector3.right * _movementForce;
             _forceDirection += _moveAction.ReadValue<Vector2>().y * Vector3.forward * _movementForce;
-
+            
             _rigidbody.AddForce(_forceDirection, ForceMode.Impulse);
             _forceDirection = Vector3.zero;
         }
