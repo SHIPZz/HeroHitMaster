@@ -11,7 +11,6 @@ namespace Gameplay.PlayerStateHandler
         [SerializeField] private float _jumpForce = 5f;
         [SerializeField] private float _maxSpeed = 5f;
 
-        private readonly float _runningForce = 2f;
         private readonly float _valueForStartRunning = 0.5f;
 
         private float _initalMovementForce;
@@ -19,16 +18,18 @@ namespace Gameplay.PlayerStateHandler
         private IInputService _inputService;
         private PlayerAnimation _playerAnimation;
         private Rigidbody _rigidbody;
+        private float _runningForce;
 
         private InputAction _moveAction;
         private InputAction _jumpAction;
         private InputAction _runAction;
 
-        private Camera _camera;
+        private UnityEngine.Camera _camera;
         private bool _isRunning;
+        private float _additionalForce = 2f;
 
         [Inject]
-        public void Construct(IInputService inputService, Camera camera)
+        public void Construct(IInputService inputService, UnityEngine.Camera camera)
         {
             _inputService = inputService;
             _camera = camera;
@@ -43,6 +44,7 @@ namespace Gameplay.PlayerStateHandler
             _playerAnimation = GetComponent<PlayerAnimation>();
             _rigidbody = GetComponent<Rigidbody>();
             _inputService.PlayerActions.Enable();
+            _runningForce = _movementForce * _additionalForce;
             _initalMovementForce = _movementForce;
         }
 
@@ -64,9 +66,9 @@ namespace Gameplay.PlayerStateHandler
 
         private void FixedUpdate()
         {
-            if(_isRunning == false)
+            if (_isRunning == false)
                 SetMovementForce(_initalMovementForce);
-                
+
             HandleMovement();
             ApplyGravity();
             UpdatePlayerAnimation();
@@ -136,7 +138,6 @@ namespace Gameplay.PlayerStateHandler
         private bool IsMoveVectorValid(Vector2 moveVector) =>
             moveVector.x > _valueForStartRunning || moveVector.y > _valueForStartRunning ||
             moveVector.x < -_valueForStartRunning || moveVector.y < -_valueForStartRunning;
-
 
         private void SetMovementForce(float force) =>
             _movementForce = force;

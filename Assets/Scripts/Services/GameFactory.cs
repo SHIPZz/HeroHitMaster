@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gameplay.Camera;
+using UnityEngine;
 
 public class GameFactory
 {
