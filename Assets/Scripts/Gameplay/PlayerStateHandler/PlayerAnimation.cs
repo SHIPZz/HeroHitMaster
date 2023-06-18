@@ -10,16 +10,18 @@ namespace Gameplay.PlayerStateHandler
         private Rigidbody _rigidbody;
         private Animator _animator;
         private bool _isRunning;
+        private CharacterController _characterController;
 
-        private void Start()
+        private void Awake()
         {
+            _characterController = GetComponent<CharacterController>();
             _rigidbody = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
         }
 
         private void Update()
         {
-            var currentSpeed = _rigidbody.velocity.magnitude / _maxSpeed;
+            var currentSpeed = _characterController.velocity.magnitude / _maxSpeed;
             _animator.SetFloat(Speed, currentSpeed);
             _animator.SetBool(IsRun, _isRunning);
         }

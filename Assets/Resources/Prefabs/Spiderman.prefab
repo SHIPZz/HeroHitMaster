@@ -1897,6 +1897,7 @@ GameObject:
   - component: {fileID: 7620197244934224523}
   - component: {fileID: 1448250169026943829}
   - component: {fileID: 9132762366014867151}
+  - component: {fileID: -9186442293383300936}
   m_Layer: 6
   m_Name: Spiderman
   m_TagString: Untagged
@@ -1912,7 +1913,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7104437823445691341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6340237, y: -0.024, z: -7.087323}
+  m_LocalPosition: {x: -1.6340237, y: -0.08, z: -7.087323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2019,12 +2020,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192129322f9b4608b4c2a1373f8b007b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementForce: 1
   _jumpForce: 5
-  _maxSpeed: 5
+  _maxSpeed: 3
   _layerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 128
 --- !u!114 &9132762366014867151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2037,6 +2037,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fba44bcc044bbbaf468c8f003ac7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &-9186442293383300936
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7104437823445691341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.63, z: 0}
 --- !u!1 &7199224600033305784
 GameObject:
   m_ObjectHideFlags: 0
