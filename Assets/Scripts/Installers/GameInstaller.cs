@@ -1,5 +1,7 @@
 using Constants;
 using Gameplay.Camera;
+using Gameplay.Character.Player;
+using Services;
 using Services.Providers;
 using Services.Providers.AssetProviders;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Installers
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private Transform _spawnPoint;
-    
+
         private AssetProvider _assetProvider;
 
         [Inject]
@@ -18,15 +20,16 @@ namespace Installers
         {
             _assetProvider = assetProvider;
         }
-    
+
         public override void InstallBindings()
         {
             BindLocationProvider();
             BindGameInit();
             PlayerCameraFollower cameraFollowerPrefab = GetPlayerCameraFollowerPrefab();
+            Player player = GetPlayerPrefab();
             BindCameraFactory(cameraFollowerPrefab);
             BindCamera(cameraFollowerPrefab.GetComponent<Camera>());
-            BindPlayerFactory();
+            BindPlayerFactory(player);
             BindGameFactory();
         }
 
@@ -43,31 +46,27 @@ namespace Installers
                 .AsSingle();
         }
 
-        private void BindPlayerFactory()
-        {
-            var playerPrefab = _assetProvider.GetAsset<Player>(AssetPath.Spiderman);
-        
+        private void BindPlayerFactory(Player player) =>
             Container
                 .BindFactory<Vector3, Player, Player.Factory>()
-                .FromComponentInNewPrefab(playerPrefab);
-        }
+                .FromSubContainerResolve()
+                .ByNewContextPrefab<PlayerInstaller>(player);
 
-        private void BindCameraFactory(PlayerCameraFollower playerCameraFollower)
-        {
+        private void BindCameraFactory(PlayerCameraFollower playerCameraFollower) =>
             Container
                 .BindFactory<Player, PlayerCameraFollower, PlayerCameraFollower.Factory>()
                 .FromComponentInNewPrefab(playerCameraFollower);
-        }
-        
+
         private PlayerCameraFollower GetPlayerCameraFollowerPrefab() =>
             _assetProvider.GetAsset<PlayerCameraFollower>(AssetPath.MainCamera);
 
-        private void BindGameInit()
-        {
+        private void BindGameInit() =>
             Container
                 .BindInterfacesAndSelfTo<GameInit.GameInit>()
                 .AsSingle();
-        }
+
+        private Player GetPlayerPrefab() =>
+            _assetProvider.GetAsset<Player>(AssetPath.Spiderman);
 
         private void BindLocationProvider()
         {

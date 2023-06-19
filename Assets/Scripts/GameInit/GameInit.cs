@@ -1,4 +1,6 @@
-﻿using Services.Providers;
+﻿using Gameplay.Character.Player;
+using Services;
+using Services.Providers;
 using Zenject;
 
 namespace GameInit

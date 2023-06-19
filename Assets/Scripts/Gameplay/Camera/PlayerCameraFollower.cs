@@ -1,4 +1,5 @@
 using Cinemachine;
+using Gameplay.Character.Player;
 using UnityEngine;
 using Zenject;
 

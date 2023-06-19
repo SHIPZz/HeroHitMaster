@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class Player : MonoBehaviour
+namespace Gameplay.Character.Player
 {
-    private Vector3 _at;
-
-    [Inject]
-    public void Construct(Vector3 at)
+    public class Player : MonoBehaviour
     {
-        _at = at;
-    }
+        private Vector3 _at;
 
-    public class Factory : PlaceholderFactory<Vector3, Player> { }
+        [Inject]
+        public void Construct(Vector3 at)
+        {
+            _at = at;
+            transform.position = _at;
+        }
 
-    private void Awake()
-    {
-        transform.position = _at;
+        public class Factory : PlaceholderFactory<Vector3, Player> { }
     }
 }
