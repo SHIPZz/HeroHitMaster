@@ -22,7 +22,7 @@ public class PlayerInstaller : MonoInstaller
         Container.BindInstance(_rigidbody);
         Container.BindInstance(_characterController);
         Container.BindInstance(_animator);
-        Container.Bind<PlayerMovementHandler>().AsSingle();
+        Container.Bind<PlayerMovement>().AsSingle();
         Container.Bind<PlayerAnimation>().AsSingle();
         Container.BindInterfacesTo<PlayerMediator>().AsSingle();
     }

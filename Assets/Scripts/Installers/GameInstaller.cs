@@ -28,23 +28,25 @@ namespace Installers
             PlayerCameraFollower cameraFollowerPrefab = GetPlayerCameraFollowerPrefab();
             Player player = GetPlayerPrefab();
             BindCameraFactory(cameraFollowerPrefab);
-            BindCamera(cameraFollowerPrefab.GetComponent<Camera>());
             BindPlayerFactory(player);
             BindGameFactory();
+            BindCameraProvider();
+            BindPlayerProvider();
         }
 
-        private void BindCamera(Camera camera)
-        {
+        private void BindPlayerProvider() =>
             Container
-                .BindInstance(camera);
-        }
+                .Bind<PlayerProvider>()
+                .AsSingle();
 
-        private void BindGameFactory()
-        {
+        private void BindCameraProvider() =>
+            Container
+                .Bind<CameraProvider>().AsSingle();
+
+        private void BindGameFactory() =>
             Container
                 .Bind<GameFactory>()
                 .AsSingle();
-        }
 
         private void BindPlayerFactory(Player player) =>
             Container

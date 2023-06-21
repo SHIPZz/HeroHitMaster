@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e06786f6444b129c25e0407c1a423f, type: 3}
   m_Name: PlayerMovementSettings
   m_EditorClassIdentifier: 
-  _maxSpeed: 7
-  _rotationSpeed: 3
-  _jumpSpeed: 5
+  _walkingSpeed: 4
+  _rotationSpeed: 15
+  _jumpSpeed: 0.5
   _runSpeed: 14
+  _jumpForce: 2
