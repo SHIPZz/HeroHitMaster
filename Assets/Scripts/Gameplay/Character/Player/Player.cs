@@ -5,6 +5,8 @@ namespace Gameplay.Character.Player
 {
     public class Player : MonoBehaviour
     {
+        [field: SerializeField] public Transform Head { get; private set; }
+        
         private Vector3 _at;
 
         [Inject]

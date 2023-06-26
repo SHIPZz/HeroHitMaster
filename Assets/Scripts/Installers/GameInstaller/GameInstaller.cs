@@ -7,7 +7,7 @@ using Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;
 
-namespace Installers
+namespace Installers.GameInstaller
 {
     public class GameInstaller : MonoInstaller
     {
@@ -32,6 +32,11 @@ namespace Installers
             BindGameFactory();
             BindCameraProvider();
             BindPlayerProvider();
+            BindWebProvder();
+        }
+
+        private void BindWebProvder()
+        {
         }
 
         private void BindPlayerProvider() =>

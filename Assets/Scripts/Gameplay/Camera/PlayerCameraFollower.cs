@@ -17,14 +17,13 @@ namespace Gameplay.Camera
         public void Construct(Player player)
         {
             _player = player;
-            _cinemachineFreeLook = GetComponent<CinemachineFreeLook>();
-            _cinemachineFreeLook.Follow = _player.transform;
-            _player.transform.position -= new Vector3(0, -0.5f, 0);
-            _cinemachineFreeLook.LookAt = _player.transform;
+            // _cinemachineFreeLook = GetComponent<CinemachineFreeLook>();
+            // _cinemachineFreeLook.Follow = _player.transform;
         }
 
         private void LateUpdate()
         {
+            transform.position = _player.Head.position;
             // Vector3 targetPosition = _player.transform.position + _offset;
             // Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, _smoothSpeed * Time.deltaTime);
             // transform.position = smoothedPosition;

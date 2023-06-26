@@ -8,5 +8,6 @@ namespace Services
          InputAction PlayerMove { get; }
          InputAction PlayerJump { get; }
          InputAction PlayerRun { get; }
+         InputAction PlayerFire { get; }
     }
 }

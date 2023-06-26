@@ -6,5 +6,6 @@
         public const string Spiderman = "Prefabs/Spiderman";
         public const string Assasin = "Prefabs/assasin";
         public const string ThirdPerson = "Prefabs/ThirdPerson";
+        public const string SpiderWeb = "Prefabs/Spiderweb";
     }
 }

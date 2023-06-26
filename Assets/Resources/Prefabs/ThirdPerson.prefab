@@ -1659,8 +1659,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7956091343664744765}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000061094755}
-  m_LocalPosition: {x: 2.55, y: 0, z: -0.94}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1668,7 +1668,7 @@ Transform:
   - {fileID: 4212842552314611380}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8016104323761080923
 Animator:
   serializedVersion: 4
@@ -1857,7 +1857,7 @@ MonoBehaviour:
   noActiveRagdollWhileRolling: 1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 1
   groundCheckMethod: 1
   groundDetectionDistance: 10
   useSnapGround: 1

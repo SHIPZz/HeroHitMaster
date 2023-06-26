@@ -9,5 +9,11 @@ namespace Services.Providers.AssetProviders
             GameObject prefab = Resources.Load<GameObject>(path);
             return prefab.GetComponent<T>();
         }
+        
+        public GameObject GetAsset(string path)
+        {
+            GameObject prefab = Resources.Load<GameObject>(path);
+            return prefab;
+        }
     }
 }

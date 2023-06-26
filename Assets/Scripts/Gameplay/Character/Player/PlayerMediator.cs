@@ -1,4 +1,5 @@
 ﻿using System;
+using Cinemachine;
 using ScriptableObjects;
 using Services;
 using Services.Providers;
@@ -59,9 +60,9 @@ namespace Gameplay.Character.Player
         {
             var isJumping = context.ReadValueAsButton();
 
-
-            _playerMovement.SetJumping(isJumping);
-            _playerAnimation.SetJumping(isJumping);
+            _playerMovement.Jump();
+            // _playerMovement.SetJumping(isJumping);
+            // _playerAnimation.SetJumping(isJumping);
         }
 
         private void OnRunAction(InputAction.CallbackContext context)

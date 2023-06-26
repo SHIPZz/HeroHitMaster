@@ -22,4 +22,7 @@ public class InputService : IInputService
 
     public InputAction PlayerRun =>
         PlayerActions.Run;
+
+    public InputAction PlayerFire =>
+        PlayerActions.Fire;
 }

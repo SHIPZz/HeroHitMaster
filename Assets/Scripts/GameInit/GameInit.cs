@@ -25,9 +25,9 @@ namespace GameInit
         public void Initialize()
         {
             Player player = CreatePlayer();
+            _playerProvider.Player = player;
             Camera camera =  CreateCamera(player);
             _cameraProvider.Camera = camera;
-            _playerProvider.Player = player;
         }
 
         private Camera CreateCamera(Player player) =>
