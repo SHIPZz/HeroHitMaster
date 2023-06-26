@@ -2,6 +2,7 @@ using Constants;
 using Gameplay.Camera;
 using Gameplay.Character.Player;
 using Services;
+using Services.Factories;
 using Services.Providers;
 using Services.Providers.AssetProviders;
 using UnityEngine;
@@ -33,6 +34,14 @@ namespace Installers.GameInstaller
             BindCameraProvider();
             BindPlayerProvider();
             BindWebProvder();
+            BindWeaponFactory();
+        }
+
+        private void BindWeaponFactory()
+        {
+            Container
+                .Bind<WeaponFactory>()
+                .AsSingle();
         }
 
         private void BindWebProvder()

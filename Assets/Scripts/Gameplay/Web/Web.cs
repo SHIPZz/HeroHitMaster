@@ -1,28 +1,27 @@
 ﻿using Enums;
 using Gameplay.Character;
 using ScriptableObjects.WebSettings;
-using Services;
+using Services.ObjectPool;
 using UnityEngine;
 using Zenject;
+using static DG.Tweening.DOVirtual;
 
 namespace Gameplay.Web
 {
-    public class Web : MonoBehaviour
+    public class Web : MonoBehaviour, IWeapon
     {
-        [SerializeField] private WebTypeId webTypeId;
+        [SerializeField] private WebTypeId _webTypeId;
         
-        private WebSettingService _webSettingService;
         private WebSettings _webSettings;
         private Transform _rightHand;
-
-        public WebSettings WebSettings { get; private set; }
+        
+        private WebMovement _webMovement;
 
         [Inject]
-        private void Construct(WebSettingService webSettingService)
+        private void Construct([Inject(Id = WebTypeId.SpiderWeb)] WebSettings webSettings, WebMovement webMovement)
         {
-            _webSettingService = webSettingService;
-            _webSettings = _webSettingService.Get(webTypeId);
-            WebSettings = _webSettings;
+            _webMovement = webMovement;
+            _webSettings = webSettings;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -32,6 +31,11 @@ namespace Gameplay.Web
                 print(other.gameObject.name);
                 // damageable.TakeDamage(_webSettings.Damage);
             }
+        }
+
+        public void Shoot(Vector3 target, Vector3 initialPosition)
+        {
+            _webMovement.Move(target, this, initialPosition);
         }
     }
 }

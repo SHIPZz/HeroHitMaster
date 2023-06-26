@@ -2,7 +2,7 @@
 using Gameplay.Character.Player;
 using UnityEngine;
 
-namespace Services
+namespace Services.Factories
 {
     public class GameFactory
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Services.ObjectPool
@@ -13,9 +14,6 @@ namespace Services.ObjectPool
         private readonly Func<GameObject> _objectCreator;
 
         private int _count;
-
-        public int Count =>
-            _count;
 
         public GameObjectPool(Func<GameObject> objectCreator, int count)
         {
@@ -55,8 +53,9 @@ namespace Services.ObjectPool
 
         private void CreateObject()
         {
-            GameObject obj = _objectCreator.Invoke();
+            GameObject obj = _objectCreator?.Invoke();
 
+            // DOTween.Sequence().AppendInterval(0.5f).OnComplete(() => obj.SetActive(false));
             obj.SetActive(false);
 
             _count++;

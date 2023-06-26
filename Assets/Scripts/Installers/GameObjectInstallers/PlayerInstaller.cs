@@ -1,5 +1,7 @@
+using Enums;
 using Gameplay.Character.Player;
 using Gameplay.Web;
+using ScriptableObjects.WebSettings;
 using UnityEngine;
 using Zenject;
 
@@ -12,15 +14,20 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private Transform _rightHand;
 
     private Vector3 _at;
+    private WebSettings _webSettings;
 
     [Inject]
-    public void Construct(Vector3 at) =>
+    public void Construct([Inject(Id = WebTypeId.SpiderWeb)] WebSettings webSettings, Vector3 at)
+    {
         _at = at;
+        _webSettings = webSettings;
+    }
 
     public override void InstallBindings()
     {
         Container.BindInstance(_player);
         Container.BindInstance(_at).WhenInjectedInto<Player>();
+        Container.BindInstance(_webSettings);
         Container.BindInstance(_rigidbody);
         Container.BindInstance(_rightHand);
         Container.Bind<WebMovement>().AsSingle();

@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using Services.Providers;
 using UnityEngine;
 
 namespace Gameplay.Web

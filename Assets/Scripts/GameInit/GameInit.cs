@@ -1,5 +1,6 @@
 ﻿using Gameplay.Character.Player;
 using Services;
+using Services.Factories;
 using Services.Providers;
 using UnityEngine;
 using Zenject;

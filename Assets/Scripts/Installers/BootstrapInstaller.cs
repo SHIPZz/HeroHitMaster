@@ -11,13 +11,7 @@ namespace Installers
         {
             BindAssetProvider();
             BindInputService();
-            BindWebSettingsService();
         }
-
-        private void BindWebSettingsService() => 
-            Container
-                .Bind<WebSettingService>()
-                .AsSingle();
 
         private void BindInputService()
         {

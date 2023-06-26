@@ -43,30 +43,12 @@ public class ShootMediator : ITickable
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Ray ray = _cameraProvider.Camera.ScreenPointToRay(mousePosition);
             GameObject webGameObject = null;
-            Shoot(webGameObject, ray);
+            // Shoot(webGameObject, ray);
             _canShoot = false;
 
             DOTween.Sequence().AppendInterval(0.3f).OnComplete(() => _canShoot = true);
         }
     }
-
-    private void Shoot(GameObject webGameObject, Ray ray)
-    {
-        webGameObject = _gameObjectPool.Pop();
-        _web = webGameObject.GetComponent<Web>();
-        Vector3 target = Vector3.zero;
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            target = hit.point;
-            _webMovement.Move(target, _web, _righthand.position);
-        }
-        else
-        {
-            target = ray.GetPoint(100f);
-            _webMovement.Move(target, _web, _righthand.position);
-        }
-        DOVirtual.DelayedCall(0.5f, () => _gameObjectPool.Push(webGameObject));
-    }
+    
     
 }
