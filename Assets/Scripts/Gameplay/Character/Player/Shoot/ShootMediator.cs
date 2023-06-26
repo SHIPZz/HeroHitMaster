@@ -33,14 +33,8 @@ public class ShootMediator : ITickable
         _righthand = righthand;
         _webPrefab = assetProvider.GetAsset(AssetPath.SpiderWeb);
         _canShoot = true;
-        // _inputService.PlayerFire.performed += OnPlayerFirePerformed;
         _gameObjectPool = new GameObjectPool(() => Object.Instantiate(_webPrefab), 30);
     }
-
-    // public void Dispose()
-    // {
-    //     _inputService.PlayerFire.performed -= OnPlayerFirePerformed;
-    // }
 
     public void Tick()
     {
@@ -53,10 +47,6 @@ public class ShootMediator : ITickable
             _canShoot = false;
 
             DOTween.Sequence().AppendInterval(0.3f).OnComplete(() => _canShoot = true);
-
-            // if (Physics.Raycast(ray, out RaycastHit hit))
-            // {
-            // }
         }
     }
 
@@ -78,12 +68,5 @@ public class ShootMediator : ITickable
         }
         DOVirtual.DelayedCall(0.5f, () => _gameObjectPool.Push(webGameObject));
     }
-
-    // private void Shoot(GameObject webGameObject, RaycastHit hit)
-    // {
-    //     webGameObject = _gameObjectPool.Pop();
-    //     _web = webGameObject.GetComponent<Web>();
-    //     _webMovement.Move(hit.point, _web, _righthand.position);
-    //     DOVirtual.DelayedCall(0.5f, () => _gameObjectPool.Push(webGameObject));
-    // }
+    
 }
