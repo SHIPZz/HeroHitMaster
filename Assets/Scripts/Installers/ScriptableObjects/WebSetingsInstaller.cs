@@ -12,7 +12,7 @@ public class WebSetingsInstaller : ScriptableObjectInstaller<WebSetingsInstaller
     {
         foreach (var webSetting in _webSettings)
         {
-            Container.BindInstance(webSetting).WithId(webSetting.WebTypeId);
+            Container.BindInstance(webSetting).WithId(webSetting.WeaponTypeId);
         }
     }
 }

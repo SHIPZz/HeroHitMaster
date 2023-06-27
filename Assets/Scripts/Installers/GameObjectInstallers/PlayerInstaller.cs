@@ -1,7 +1,10 @@
 using Enums;
 using Gameplay.Character.Player;
+using Gameplay.Character.Player.Shoot;
 using Gameplay.Web;
 using ScriptableObjects.WebSettings;
+using Services;
+using Services.Inputs.Weapon;
 using UnityEngine;
 using Zenject;
 
@@ -17,10 +20,10 @@ public class PlayerInstaller : MonoInstaller
     private WebSettings _webSettings;
 
     [Inject]
-    public void Construct([Inject(Id = WebTypeId.SpiderWeb)] WebSettings webSettings, Vector3 at)
+    public void Construct(Vector3 at)
     {
         _at = at;
-        _webSettings = webSettings;
+        // _webSettings = webSettings;
     }
 
     public override void InstallBindings()
@@ -30,9 +33,10 @@ public class PlayerInstaller : MonoInstaller
         Container.BindInstance(_webSettings);
         Container.BindInstance(_rigidbody);
         Container.BindInstance(_rightHand);
-        Container.Bind<WebMovement>().AsSingle();
         Container.BindInstance(_characterController);
         Container.BindInstance(_animator);
+        Container.Bind<WebMovement>().AsSingle();
+        Container.Bind<WeaponSelectorHandler>().AsSingle();
         Container.Bind<PlayerMovement>().AsSingle();
         Container.Bind<PlayerAnimation>().AsSingle();
         Container.BindInterfacesAndSelfTo<ShootMediator>().AsSingle();

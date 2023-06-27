@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Gameplay.Web;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,20 +8,29 @@ namespace Services
     {
         [SerializeField] private Button _leftArrow;
         [SerializeField] private Button _rightArrow;
+        [SerializeField] private Button _apply;
         
-        private event Action LeftArrowClicked;
-        private event Action RightArrowClicked;
+        public event Action LeftArrowClicked;
+        public event Action RightArrowClicked;
+        public event Action ApplyButtonClicked;
 
         private void OnEnable()
         {
             _rightArrow.onClick.AddListener(OnRightArrowClicked);
             _leftArrow.onClick.AddListener(OnLeftArrowClicked);
+            _apply.onClick.AddListener(OnApplyButtonClicked);
         }
 
         private void OnDisable()
         {
+            _apply.onClick.RemoveListener(OnApplyButtonClicked);
             _rightArrow.onClick.RemoveListener(OnRightArrowClicked);
             _leftArrow.onClick.RemoveListener(OnLeftArrowClicked);
+        }
+
+        private void OnApplyButtonClicked()
+        {
+            ApplyButtonClicked?.Invoke();
         }
 
         private void OnRightArrowClicked()
@@ -35,17 +42,5 @@ namespace Services
         {
             LeftArrowClicked?.Invoke();
         }
-    }
-
-    public class WeaponSelectorHandler
-    {
-        private List<IWeapon> _weapons = new List<IWeapon>();
-        private WeaponSelectorInput _weaponSelectorInput;
-
-        public WeaponSelectorHandler(WeaponSelectorInput weaponSelectorInput)
-        {
-            _weaponSelectorInput = weaponSelectorInput;
-        }
-        
     }
 }

@@ -1,4 +1,5 @@
 using Constants;
+using Databases;
 using Gameplay.Camera;
 using Gameplay.Character.Player;
 using Services;
@@ -35,6 +36,20 @@ namespace Installers.GameInstaller
             BindPlayerProvider();
             BindWebProvder();
             BindWeaponFactory();
+            BindWeaponsProvider();
+            BindGameObjectPoolProvider();
+        }
+
+        private void BindWeaponsProvider()
+        {
+            Container
+                .Bind<WeaponsProvider>().AsSingle();
+        }
+
+        private void BindGameObjectPoolProvider()
+        {
+            Container
+                .Bind<GameObjectPoolProvider>().AsSingle();
         }
 
         private void BindWeaponFactory()

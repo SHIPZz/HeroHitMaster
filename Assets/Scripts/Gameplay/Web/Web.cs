@@ -1,41 +1,41 @@
-﻿using Enums;
+﻿using Constants;
+using Enums;
 using Gameplay.Character;
 using ScriptableObjects.WebSettings;
-using Services.ObjectPool;
 using UnityEngine;
 using Zenject;
-using static DG.Tweening.DOVirtual;
 
 namespace Gameplay.Web
 {
-    public class Web : MonoBehaviour, IWeapon
+    public class Web : MonoBehaviour, IShootable
     {
-        [SerializeField] private WebTypeId _webTypeId;
+        [field: SerializeField] public WebTypeId WebTypeId { get; private set; }
         
         private WebSettings _webSettings;
         private Transform _rightHand;
-        
-        private WebMovement _webMovement;
 
-        [Inject]
-        private void Construct([Inject(Id = WebTypeId.SpiderWeb)] WebSettings webSettings, WebMovement webMovement)
-        {
-            _webMovement = webMovement;
-            _webSettings = webSettings;
-        }
+        public int Id { get; } = ShootableObjectId.SpiderWeb;
+        //
+        // [Inject]
+        // private void Construct([Inject(Id = WeaponTypeId.SpiderWeb)] WebSettings webSettings)
+        // {
+        //     _webSettings = webSettings;
+        // }
 
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                print(other.gameObject.name);
+                print("damageable");
                 // damageable.TakeDamage(_webSettings.Damage);
             }
         }
 
-        public void Shoot(Vector3 target, Vector3 initialPosition)
-        {
-            _webMovement.Move(target, this, initialPosition);
-        }
+    }
+
+    public interface IShootable
+    {
+        int Id { get; }
+        
     }
 }
