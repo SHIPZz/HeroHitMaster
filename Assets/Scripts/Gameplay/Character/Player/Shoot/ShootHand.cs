@@ -14,7 +14,7 @@ namespace Gameplay.Character.Player.Shoot
 
         [SerializeField] private WeaponTypeId _weaponTypeId;
 
-        private readonly BulletMovement _bulletMovement = new BulletMovement();
+        private readonly IBulletMovement _bulletMovement = new WebMovement();
         private WeaponsProvider _weaponsProvider;
         private BulletFactory _bulletFactory;
 
@@ -35,14 +35,14 @@ namespace Gameplay.Character.Player.Shoot
         public void Shoot(Vector3 target, Vector3 initialPosition)
         {
             IBullet bullet = _bulletFactory.Pop();
-            _bulletMovement.Move(target, bullet, initialPosition);
+            _bulletMovement.Move(target, bullet, initialPosition, 0.2f);
 
             DOTween.Sequence().AppendInterval(ReleaseBulletDelay).OnComplete(() => _bulletFactory.Push(bullet));
         }
 
         private void Initialize()
         {
-            _bulletFactory.CreateBullet(_weaponTypeId);
+            _bulletFactory.CreateBulletsBy(_weaponTypeId);
             _weaponsProvider.CurrentWeapon = this;
             _weaponsProvider.Add(this);
             Debug.Log("initalized shoothand");

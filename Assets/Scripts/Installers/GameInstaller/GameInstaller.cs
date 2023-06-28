@@ -41,31 +41,21 @@ namespace Installers.GameInstaller
             BindBulletFactory();
         }
 
-        private void BindBulletFactory()
-        {
+        private void BindBulletFactory() =>
             Container
                 .Bind<BulletFactory>()
                 .AsSingle();
-        }
 
-        private void BindWeaponsProvider()
-        {
+        private void BindWeaponsProvider() =>
             Container
                 .Bind<WeaponsProvider>().AsSingle();
-        }
 
-        private void BindGameObjectPoolProvider()
-        {
+        private void BindGameObjectPoolProvider() =>
             Container
                 .Bind<GameObjectPoolProvider>().AsSingle();
-        }
 
-        private void BindWeaponFactory()
-        {
-            Container
-                .BindFactory<IWeapon, WeaponFactory>()
-                .FromFactory<CustomWeaponFactory>();
-        }
+        private void BindWeaponFactory() => 
+            Container.Bind<WeaponFactory>().AsSingle();
 
         private void BindWebProvder()
         {

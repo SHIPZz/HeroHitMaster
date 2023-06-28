@@ -35,7 +35,7 @@ public class PlayerInstaller : MonoInstaller
         // Container.BindInstance(_shootHand);
         Container.BindInstance(_characterController);
         Container.BindInstance(_animator);
-        Container.Bind<BulletMovement>().AsSingle();
+        Container.Bind<WebMovement>().AsSingle();
         Container.Bind<WeaponSelector>().AsSingle();
         Container.Bind<PlayerMovement>().AsSingle();
         Container.Bind<PlayerAnimation>().AsSingle();

@@ -11,8 +11,8 @@ namespace Services.Factories
     {
         private readonly Player.Factory _playerFactory;
         private readonly PlayerCameraFollower.Factory _cameraFollowerFactory;
-        private readonly WeaponFactory _weaponFactory;
         private readonly ShootHand.Factory _shootHandFactory;
+        private readonly WeaponFactory _weaponFactory;
 
         public GameFactory(Player.Factory playerFactory, PlayerCameraFollower.Factory cameraFollowerFactory,
             WeaponFactory weaponFactory)
