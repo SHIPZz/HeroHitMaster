@@ -1,5 +1,6 @@
 ﻿using Services;
 using UnityEngine.InputSystem;
+using Vector2 = UnityEngine.Vector2;
 
 public class InputService : IInputService
 {
@@ -25,4 +26,10 @@ public class InputService : IInputService
 
     public InputAction PlayerFire =>
         PlayerActions.Fire;
+
+    public bool LeftMouseButtonClicked =>
+        PlayerActions.Fire.WasPressedThisFrame();
+
+    public Vector2 MousePosition =>
+        Mouse.current.position.ReadValue();
 }

@@ -10,10 +10,7 @@ namespace Services.Providers.AssetProviders
             return prefab.GetComponent<T>();
         }
         
-        public GameObject GetAsset(string path)
-        {
-            GameObject prefab = Resources.Load<GameObject>(path);
-            return prefab;
-        }
+        public GameObject GetAsset(string path) => 
+            Resources.Load<GameObject>(path);
     }
 }

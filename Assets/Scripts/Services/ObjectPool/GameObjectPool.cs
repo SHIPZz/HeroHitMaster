@@ -55,7 +55,6 @@ namespace Services.ObjectPool
         {
             GameObject obj = _objectCreator?.Invoke();
 
-            // DOTween.Sequence().AppendInterval(0.5f).OnComplete(() => obj.SetActive(false));
             obj.SetActive(false);
 
             _count++;

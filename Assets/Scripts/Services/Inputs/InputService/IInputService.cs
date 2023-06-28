@@ -1,4 +1,5 @@
 ﻿using UnityEngine.InputSystem;
+using Vector2 = UnityEngine.Vector2;
 
 namespace Services
 {
@@ -9,5 +10,7 @@ namespace Services
          InputAction PlayerJump { get; }
          InputAction PlayerRun { get; }
          InputAction PlayerFire { get; }
+         Vector2 MousePosition { get; }
+         
     }
 }

@@ -2,7 +2,7 @@
 {
     public enum WeaponTypeId
     {
-        ShootHand = 1,
-        FreezeGun = 2,
+        ShootSpiderHand = 0,
+        ShootWolverineHand = 1
     }
 }

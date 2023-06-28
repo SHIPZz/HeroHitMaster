@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
 
 namespace Gameplay.Web
 {
     public interface IWeapon
     {
-        int Id { get; }
+        WeaponTypeId WeaponTypeId { get; }
         GameObject GameObject { get; }
-        void Shoot(Vector3 target, Vector3 initialPosition, Web web);
+        void Shoot(Vector3 target, Vector3 initialPosition);
     }
 }

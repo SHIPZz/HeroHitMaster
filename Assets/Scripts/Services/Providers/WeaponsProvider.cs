@@ -1,19 +1,22 @@
 ﻿using System.Collections.Generic;
+using Enums;
 using Gameplay.Web;
 
 namespace Databases
 {
     public class WeaponsProvider
     {
-        private Dictionary<int, IWeapon> _weapons = new Dictionary<int, IWeapon>();
+        private Dictionary<WeaponTypeId, IWeapon> _weapons = new Dictionary<WeaponTypeId, IWeapon>();
 
-        public IReadOnlyDictionary<int, IWeapon> Weapons =>
+        public IReadOnlyDictionary<WeaponTypeId, IWeapon> Weapons =>
             _weapons;
+        
+        public IWeapon CurrentWeapon { get; set; }
 
         public void Add(IWeapon weapon) =>
-            _weapons[weapon.Id] = weapon;
+            _weapons[weapon.WeaponTypeId] = weapon;
 
-        public IWeapon Get(int id) =>
-            _weapons[id];
+        public IWeapon Get(WeaponTypeId weaponTypeId) =>
+            _weapons[weaponTypeId];
     }
 }

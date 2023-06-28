@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using Services;
+using UnityEngine;
 using Zenject;
 
 namespace Installers
 {
     public class GameUIInstaller : MonoInstaller
     {
-        [SerializeField] 
+        [SerializeField] private WeaponSelectorView weaponSelectorView;
         
         public override void InstallBindings()
         {
+            Container
+                .BindInstance(weaponSelectorView);
         }
     }
 }

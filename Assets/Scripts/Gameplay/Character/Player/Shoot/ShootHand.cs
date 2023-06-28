@@ -1,33 +1,53 @@
-﻿using Constants;
-using Databases;
+﻿using Databases;
+using DG.Tweening;
 using Enums;
 using Gameplay.Web;
+using Services.Factories;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay.Character.Player.Shoot
 {
     public class ShootHand : MonoBehaviour, IWeapon
     {
-        public Web.Web Web { get; private set; }
-        
-        private readonly WebMovement _webMovement;
-        private readonly WeaponsProvider _weaponsProvider;
+        private const float ReleaseBulletDelay = 1.5f;
 
-        public ShootHand(WebMovement webMovement,WeaponsProvider weaponsProvider)
+        [SerializeField] private WeaponTypeId _weaponTypeId;
+
+        private readonly BulletMovement _bulletMovement = new BulletMovement();
+        private WeaponsProvider _weaponsProvider;
+        private BulletFactory _bulletFactory;
+
+        public WeaponTypeId WeaponTypeId => _weaponTypeId;
+
+        public GameObject GameObject =>
+            gameObject;
+
+        [Inject]
+        private void Construct(WeaponsProvider weaponsProvider,
+            BulletFactory bulletFactory)
         {
-            _webMovement = webMovement;
             _weaponsProvider = weaponsProvider;
-            Id = WeaponId.ShootHand;
-            GameObject = gameObject;
-            _weaponsProvider.Add(this);
+            _bulletFactory = bulletFactory;
+            Initialize();
         }
 
-        public int Id { get; }
-        public GameObject GameObject { get; }
-
-        public void Shoot(Vector3 target, Vector3 initialPosition, Web.Web web)
+        public void Shoot(Vector3 target, Vector3 initialPosition)
         {
-            _webMovement.Move(target, web, initialPosition);
+            IBullet bullet = _bulletFactory.Pop();
+            _bulletMovement.Move(target, bullet, initialPosition);
+
+            DOTween.Sequence().AppendInterval(ReleaseBulletDelay).OnComplete(() => _bulletFactory.Push(bullet));
         }
+
+        private void Initialize()
+        {
+            _bulletFactory.CreateBullet(_weaponTypeId);
+            _weaponsProvider.CurrentWeapon = this;
+            _weaponsProvider.Add(this);
+            Debug.Log("initalized shoothand");
+        }
+        
+        public class Factory : PlaceholderFactory<WeaponTypeId, ShootHand> { }
     }
 }
