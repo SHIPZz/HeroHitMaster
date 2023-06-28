@@ -1,22 +1,25 @@
 ﻿using System.Collections.Generic;
 using Enums;
-using Gameplay.Web;
+using ScriptableObjects;
 
-namespace Databases
+namespace Services.Providers
 {
     public class WeaponsProvider
     {
-        private Dictionary<WeaponTypeId, IWeapon> _weapons = new Dictionary<WeaponTypeId, IWeapon>();
-
-        public IReadOnlyDictionary<WeaponTypeId, IWeapon> Weapons =>
-            _weapons;
+        private readonly List<WeaponSettings> _weaponSettings;
+        public Dictionary<WeaponTypeId, WeaponSettings> WeaponConfigs { get; set; } = new();
+        public List<WeaponTypeId> CharactersAvailableWeapons { get; set; } = new();
         
-        public IWeapon CurrentWeapon { get; set; }
+         public WeaponsProvider(List<WeaponSettings> weaponSettings)
+         {
+             _weaponSettings = weaponSettings;
+             FillDictionary();
+         }
 
-        public void Add(IWeapon weapon) =>
-            _weapons[weapon.WeaponTypeId] = weapon;
-
-        public IWeapon Get(WeaponTypeId weaponTypeId) =>
-            _weapons[weaponTypeId];
+         private void FillDictionary()
+         {
+             foreach (var weaponSetting in _weaponSettings)
+                 WeaponConfigs[weaponSetting.WeaponTypeId] = weaponSetting;
+         }
     }
 }

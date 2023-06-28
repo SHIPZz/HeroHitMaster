@@ -3,9 +3,8 @@ using Enums;
 using Gameplay.Character;
 using ScriptableObjects.WebSettings;
 using UnityEngine;
-using Zenject;
 
-namespace Gameplay.Web
+namespace Gameplay.Bullet
 {
     public class Bullet : MonoBehaviour, IBullet
     {

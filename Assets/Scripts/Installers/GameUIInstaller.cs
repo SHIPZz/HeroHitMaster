@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.WeaponSelection;
 using UnityEngine;
 using Zenject;
 

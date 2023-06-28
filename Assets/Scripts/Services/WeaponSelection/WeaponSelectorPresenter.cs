@@ -1,6 +1,5 @@
 ﻿using System;
-using Databases;
-using Services.Factories;
+using Enums;
 using Zenject;
 
 namespace Services.WeaponSelection
@@ -9,33 +8,32 @@ namespace Services.WeaponSelection
     {
         private readonly WeaponSelectorView _weaponSelectorView;
         private readonly WeaponSelector _weaponSelector;
-        private readonly GameFactory _gameFactory;
-        private readonly WeaponsProvider _weaponsProvider;
 
-        public WeaponSelectorPresenter(WeaponSelectorView weaponSelectorView, WeaponSelector weaponSelector,
-            GameFactory gameFactory, WeaponsProvider weaponsProvider)
+        public WeaponSelectorPresenter(WeaponSelectorView weaponSelectorView, WeaponSelector weaponSelector)
         {
             _weaponSelectorView = weaponSelectorView;
             _weaponSelector = weaponSelector;
-            _gameFactory = gameFactory;
-            _weaponsProvider = weaponsProvider;
         }
         
         public void Initialize()
         {
             _weaponSelectorView.LeftArrowClicked += _weaponSelector.SelectPreviousWeapon;
             _weaponSelectorView.RightArrowClicked += _weaponSelector.SelectNextWeapon;
-            _weaponSelectorView.ApplyButtonClicked += Create;
+            _weaponSelectorView.ApplyButtonClicked += _weaponSelector.SaveCurrentWeapon;
+            _weaponSelector.WeaponChanged += OnWeaponChanged;
         }
 
         public void Dispose()
         {
             _weaponSelectorView.LeftArrowClicked -= _weaponSelector.SelectPreviousWeapon;
+            _weaponSelector.WeaponChanged -= OnWeaponChanged;
             _weaponSelectorView.RightArrowClicked -= _weaponSelector.SelectNextWeapon;
-            _weaponSelectorView.ApplyButtonClicked -= Create;
+            _weaponSelectorView.ApplyButtonClicked -= _weaponSelector.SaveCurrentWeapon;
         }
 
-        private void Create() => 
-            _weaponsProvider.CurrentWeapon = _gameFactory.CreateWeapon();
+        private void OnWeaponChanged(WeaponTypeId weaponTypeId)
+        {
+            _weaponSelectorView.ShowWeaponIcon(weaponTypeId);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Constants;
 using Enums;
+using Gameplay.Bullet;
 using Gameplay.Web;
 using ModestTree.Util;
 using Services.ObjectPool;
@@ -9,6 +10,7 @@ using Services.Providers;
 using Services.Providers.AssetProviders;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Vector3 = System.Numerics.Vector3;
 
 namespace Services.Factories
 {
@@ -32,7 +34,7 @@ namespace Services.Factories
             };
         }
 
-        public void CreateBulletsBy(WeaponTypeId weaponTypeId)
+        public void CreateBulletsBy(WeaponTypeId weaponTypeId, Transform parent)
         {
             if (!_bullets.TryGetValue(weaponTypeId, out var prefabPath))
             {
@@ -40,7 +42,7 @@ namespace Services.Factories
                 return;
             }
 
-            Create(prefabPath);
+            Create(prefabPath, parent);
         }
 
         public IBullet Pop() =>
@@ -49,10 +51,10 @@ namespace Services.Factories
         public void Push(IBullet bullet) =>
             _gameObjectPoolProvider.GameObjectPool.Push(bullet.GameObject);
 
-        private void Create(string prefabPath)
+        private void Create(string prefabPath, Transform parent)
         {
             GameObject bulletPrefab = _assetProvider.GetAsset(prefabPath);
-            _gameObjectPoolProvider.GameObjectPool = new GameObjectPool(() => Object.Instantiate(bulletPrefab), Count);
+            _gameObjectPoolProvider.GameObjectPool = new GameObjectPool(() => Object.Instantiate(bulletPrefab, parent), Count);
         }
     }
 }

@@ -13,7 +13,7 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Transform _initialShootPosition;
-    // [SerializeField] private ShootHand _shootHand;
+    // [SerializeField] private WebShooter _shootHand;
 
     private Vector3 _at;
     private WebSettings _webSettings;

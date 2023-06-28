@@ -1,4 +1,5 @@
-﻿using Gameplay.Web;
+﻿using Gameplay.Bullet;
+using Gameplay.Web;
 
 namespace Services.Providers
 {

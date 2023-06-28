@@ -1,7 +1,7 @@
 ﻿using Enums;
 using UnityEngine;
 
-namespace Gameplay.Web
+namespace Gameplay.Weapon
 {
     public interface IWeapon
     {

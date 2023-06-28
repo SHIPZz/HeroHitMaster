@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using Enums;
+using ScriptableObjects;
+using Services.Providers;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
-namespace Services
+namespace Services.WeaponSelection
 {
     public class WeaponSelectorView : MonoBehaviour
     {
@@ -10,9 +15,20 @@ namespace Services
         [SerializeField] private Button _rightArrow;
         [SerializeField] private Button _apply;
         
+        private WeaponsProvider _weaponsProvider;
+        private Dictionary<WeaponTypeId, Image> _icons = new();
+
         public event Action LeftArrowClicked;
         public event Action RightArrowClicked;
         public event Action ApplyButtonClicked;
+
+        [Inject]
+        private void Construct(WeaponsProvider weaponsProvider)
+        {
+            _weaponsProvider = weaponsProvider;
+
+            FillDictionary();
+        }
 
         private void OnEnable()
         {
@@ -26,6 +42,32 @@ namespace Services
             _apply.onClick.RemoveListener(OnApplyButtonClicked);
             _rightArrow.onClick.RemoveListener(OnRightArrowClicked);
             _leftArrow.onClick.RemoveListener(OnLeftArrowClicked);
+        }
+
+        private void FillDictionary()
+        {
+            foreach (WeaponSettings weaponConfig in _weaponsProvider.WeaponConfigs.Values)
+            {
+                Image image = Instantiate(weaponConfig.ImagePrefab, transform);
+                image.gameObject.SetActive(false);
+                _icons[weaponConfig.WeaponTypeId] = image;
+            }
+            
+            _icons[WeaponTypeId.ShootSpiderHand].gameObject.SetActive(true);
+        }
+
+        public void ShowWeaponIcon(WeaponTypeId weaponTypeId)
+        {
+            DisableAll();
+            _icons[weaponTypeId].gameObject.SetActive(true);
+        }
+
+        private void DisableAll()
+        {
+            foreach (var icon in _icons.Values)
+            {
+                icon.gameObject.SetActive(false);
+            }
         }
 
         private void OnApplyButtonClicked() => 

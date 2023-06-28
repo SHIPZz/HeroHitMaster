@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.Web
+namespace Gameplay.Bullet
 {
     public interface IBullet
     {

@@ -1,10 +1,9 @@
 ﻿using DG.Tweening;
-using Gameplay.Bullet;
 using UnityEngine;
 
-namespace Gameplay.Web
+namespace Gameplay.Bullet
 {
-    public class WebMovement : IBulletMovement
+    public class DefaultBulletMovement : IBulletMovement
     {
         public void Move(Vector3 target, IBullet bullet, Vector3 startPosition, float duration)
         {

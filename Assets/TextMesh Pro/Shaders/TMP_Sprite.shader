@@ -1,8 +1,8 @@
-Shader "TextMeshPro/Sprite"
+Shader "TextMeshPro/ImagePrefab"
 {
 	Properties
 	{
-        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+        [PerRendererData] _MainTex ("ImagePrefab Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
 		
 		_StencilComp ("Stencil Comparison", Float) = 8

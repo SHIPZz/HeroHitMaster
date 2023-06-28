@@ -1,8 +1,7 @@
 ﻿using Enums;
 using Gameplay.Camera;
 using Gameplay.Character.Player;
-using Gameplay.Character.Player.Shoot;
-using Gameplay.Web;
+using Gameplay.Weapon;
 using UnityEngine;
 
 namespace Services.Factories
@@ -11,7 +10,6 @@ namespace Services.Factories
     {
         private readonly Player.Factory _playerFactory;
         private readonly PlayerCameraFollower.Factory _cameraFollowerFactory;
-        private readonly ShootHand.Factory _shootHandFactory;
         private readonly WeaponFactory _weaponFactory;
 
         public GameFactory(Player.Factory playerFactory, PlayerCameraFollower.Factory cameraFollowerFactory,
@@ -28,7 +26,7 @@ namespace Services.Factories
         public Player CreatePlayer(Vector3 at) => 
             _playerFactory.Create(at);
 
-        public IWeapon CreateWeapon() =>
-            _weaponFactory.Create();
+        public Weapon CreateWeapon(WeaponTypeId weaponTypeId) =>
+            _weaponFactory.Create(weaponTypeId);
     }
 }
