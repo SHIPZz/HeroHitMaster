@@ -26,19 +26,17 @@ namespace Gameplay.Character.Player.Shoot
             _cameraProvider = cameraProvider;
             _righthand = righthand;
             _weaponsProvider = weaponsProvider;
-            Debug.Log("2131");
         }
 
         public void Initialize()
         {
-            Debug.Log("2131");
         }
 
         public void Tick()
         {
-            Debug.Log(_weaponsProvider);
+            Weapon.Weapon weapon = _weaponsProvider.CurrentWeapon;
             
-            if (!_inputService.PlayerFire.WasPressedThisFrame() || !_canShoot)
+            if (!_inputService.PlayerFire.WasPressedThisFrame() || !_canShoot || weapon is null )
                 return;
 
             Vector2 mousePosition = _inputService.MousePosition;
@@ -46,12 +44,12 @@ namespace Gameplay.Character.Player.Shoot
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                _weaponsProvider.CurrentWeapon.Shoot(hit.point, _righthand.position);
+                weapon.Shoot(hit.point, _righthand.position);
             }
             else
             {
                 Vector3 target = ray.GetPoint(ShootDistance);
-                _weaponsProvider.CurrentWeapon.Shoot(target, _righthand.position);
+                weapon.Shoot(target, _righthand.position);
             }
 
             _canShoot = false;

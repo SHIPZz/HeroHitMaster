@@ -41,7 +41,7 @@ namespace GameInit
 
         public void Initialize()
         {
-            CreatePlayerCamera();
+            InitializePlayerCamera();
             _playerSelector.PlayerSelected += InitializePlayer;
             _weaponSelector.WeaponSelected += InitializeWeapon;
         }
@@ -58,14 +58,17 @@ namespace GameInit
             _weaponSelector.WeaponSelected -= InitializeWeapon;
         }
 
-        private PlayerCameraFollower CreatePlayerCamera() => 
-           _playerCamera =  _gameFactory.CreateCamera(_locationProvider.CameraSpawnPoint.position);
+        private void InitializePlayerCamera()
+        {
+            _playerCamera =  _gameFactory.CreateCamera(_locationProvider.CameraSpawnPoint.position);
+            _cameraProvider.Camera = _playerCamera.GetComponent<Camera>();
+        }
 
         private void InitializePlayer(PlayerTypeId playerTypeId)
         {
             Player player = _gameFactory.CreatePlayer(playerTypeId, _locationProvider.PlayerSpawnPoint.position);
             _playerCamera.SetPlayer(player);
-            
+
             _playerProvider.CurrentPlayer = player;
         }
     }

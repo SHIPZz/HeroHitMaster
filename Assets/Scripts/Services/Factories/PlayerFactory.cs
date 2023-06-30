@@ -4,18 +4,21 @@ using Enums;
 using Gameplay.Character.Player;
 using Services.Providers.AssetProviders;
 using UnityEngine;
+using Zenject;
 
 namespace Services.Factories
 {
     public class PlayerFactory
     {
         private readonly AssetProvider _assetProvider;
+        private readonly DiContainer _diContainer;
         private Dictionary<PlayerTypeId, string> _characters;
 
-        public PlayerFactory(AssetProvider assetProvider)
+        public PlayerFactory(AssetProvider assetProvider, DiContainer diContainer)
         {
             _assetProvider = assetProvider;
-            
+            _diContainer = diContainer;
+
             _characters = new()
             {
                 { PlayerTypeId.Spider, AssetPath.Spiderman },
@@ -36,8 +39,8 @@ namespace Services.Factories
 
         private Player Create(string path, Vector3 at)
         {
-            var player = _assetProvider.GetAsset<Player>(path);
-            return Object.Instantiate(player, at, Quaternion.identity);
+            var player = _assetProvider.GetAsset(path);
+            return _diContainer.InstantiatePrefabForComponent<Player>(player, at, Quaternion.identity,null);
         }
     }
 }

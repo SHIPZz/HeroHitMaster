@@ -1,6 +1,7 @@
 ﻿using Enums;
 using Services.Providers;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay.Character.Player
 {
