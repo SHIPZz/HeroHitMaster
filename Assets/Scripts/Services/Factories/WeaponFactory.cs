@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Constants;
 using Enums;
-using Gameplay.Character.Player.Shoot;
 using Gameplay.Weapon;
-using Gameplay.Web;
-using Services.Providers;
 using Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;

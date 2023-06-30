@@ -1,10 +1,7 @@
-using Constants;
-using Gameplay.Camera;
-using Gameplay.Character.Player;
-using Gameplay.Web;
+using Gameplay.PlayerSelection;
+using Gameplay.WeaponSelection;
 using Services.Factories;
 using Services.Providers;
-using Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;
 
@@ -13,31 +10,45 @@ namespace Installers.GameInstaller
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private Transform _spawnPoint;
-
-        private AssetProvider _assetProvider;
-
-        [Inject]
-        public void Construct(AssetProvider assetProvider)
-        {
-            _assetProvider = assetProvider;
-        }
+        [SerializeField] private Transform _cameraTransformPoint;
 
         public override void InstallBindings()
         {
             BindLocationProvider();
             BindGameInit();
-            PlayerCameraFollower cameraFollowerPrefab = GetPlayerCameraFollowerPrefab();
-            Player player = GetPlayerPrefab();
-            BindCameraFactory(cameraFollowerPrefab);
-            BindPlayerFactory(player);
+            BindCameraFactory();
+            BindPlayerFactory();
             BindGameFactory();
             BindCameraProvider();
             BindPlayerProvider();
-            BindWebProvder();
             BindWeaponFactory();
             BindWeaponsProvider();
             BindGameObjectPoolProvider();
             BindBulletFactory();
+            BindWeaponSelection();
+            BindPlayerSelection();
+        }
+
+        private void BindPlayerSelection()
+        {
+            Container
+                .Bind<PlayerSelector>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<PlayerSelectorPresenter>()
+                .AsSingle();
+        }
+
+        private void BindWeaponSelection()
+        {
+            Container
+                .Bind<WeaponSelector>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<WeaponSelectorPresenter>()
+                .AsSingle();
         }
 
         private void BindBulletFactory() =>
@@ -53,12 +64,8 @@ namespace Installers.GameInstaller
             Container
                 .Bind<GameObjectPoolProvider>().AsSingle();
 
-        private void BindWeaponFactory() => 
+        private void BindWeaponFactory() =>
             Container.Bind<WeaponFactory>().AsSingle();
-
-        private void BindWebProvder()
-        {
-        }
 
         private void BindPlayerProvider() =>
             Container
@@ -74,31 +81,24 @@ namespace Installers.GameInstaller
                 .Bind<GameFactory>()
                 .AsSingle();
 
-        private void BindPlayerFactory(Player player) =>
+        private void BindPlayerFactory() =>
             Container
-                .BindFactory<Vector3, Player, Player.Factory>()
-                .FromSubContainerResolve()
-                .ByNewContextPrefab<PlayerInstaller>(player);
+                .Bind<PlayerFactory>()
+                .AsSingle();
 
-        private void BindCameraFactory(PlayerCameraFollower playerCameraFollower) =>
+        private void BindCameraFactory() =>
             Container
-                .BindFactory<Player, PlayerCameraFollower, PlayerCameraFollower.Factory>()
-                .FromComponentInNewPrefab(playerCameraFollower);
-
-        private PlayerCameraFollower GetPlayerCameraFollowerPrefab() =>
-            _assetProvider.GetAsset<PlayerCameraFollower>(AssetPath.MainCamera);
+                .Bind<PlayerCameraFactory>()
+                .AsSingle();
 
         private void BindGameInit() =>
             Container
                 .BindInterfacesAndSelfTo<GameInit.GameInit>()
                 .AsSingle();
 
-        private Player GetPlayerPrefab() =>
-            _assetProvider.GetAsset<Player>(AssetPath.Spiderman);
-
         private void BindLocationProvider()
         {
-            LocationProvider locationProvider = new(_spawnPoint);
+            LocationProvider locationProvider = new(_spawnPoint, _cameraTransformPoint);
             Container
                 .BindInstance(locationProvider)
                 .AsSingle();

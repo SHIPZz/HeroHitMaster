@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using System.Collections.Generic;
+using Enums;
 using Gameplay.Camera;
 using Gameplay.Character.Player;
 using Gameplay.Weapon;
@@ -8,23 +9,23 @@ namespace Services.Factories
 {
     public class GameFactory
     {
-        private readonly Player.Factory _playerFactory;
-        private readonly PlayerCameraFollower.Factory _cameraFollowerFactory;
+        private readonly PlayerFactory _playerFactory;
+        private readonly PlayerCameraFactory _playerCameraFactory;
         private readonly WeaponFactory _weaponFactory;
 
-        public GameFactory(Player.Factory playerFactory, PlayerCameraFollower.Factory cameraFollowerFactory,
+        public GameFactory(PlayerFactory playerFactory,PlayerCameraFactory playerCameraFactory,
             WeaponFactory weaponFactory)
         {
             _playerFactory = playerFactory;
-            _cameraFollowerFactory = cameraFollowerFactory;
+            _playerCameraFactory = playerCameraFactory;
             _weaponFactory = weaponFactory;
         }
 
-        public PlayerCameraFollower CreateCameraFollower(Player player) =>
-            _cameraFollowerFactory.Create(player);
-
-        public Player CreatePlayer(Vector3 at) => 
-            _playerFactory.Create(at);
+        public PlayerCameraFollower CreateCamera(Vector3 at) =>
+            _playerCameraFactory.Create(at);
+        
+        public Player CreatePlayer(PlayerTypeId playerTypeId, Vector3 at) =>
+            _playerFactory.Create(playerTypeId, at);
 
         public Weapon CreateWeapon(WeaponTypeId weaponTypeId) =>
             _weaponFactory.Create(weaponTypeId);

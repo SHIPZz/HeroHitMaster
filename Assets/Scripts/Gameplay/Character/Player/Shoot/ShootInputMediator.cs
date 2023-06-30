@@ -2,7 +2,6 @@
 using DG.Tweening;
 using Enums;
 using Services;
-using Services.Factories;
 using Services.Providers;
 using UnityEngine;
 using Zenject;
@@ -16,29 +15,30 @@ namespace Gameplay.Character.Player.Shoot
         private readonly IInputService _inputService;
         private readonly CameraProvider _cameraProvider;
         private readonly Transform _righthand;
-        private readonly WeaponSelector _weaponSelector;
-        private readonly GameFactory _gameFactory;
+        private readonly WeaponsProvider _weaponsProvider;
         private bool _canShoot = true;
         private Weapon.Weapon _weapon;
 
         public ShootInputMediator(IInputService inputService, CameraProvider cameraProvider,
-            Transform righthand, WeaponSelector weaponSelector, GameFactory gameFactory)
+            Transform righthand, WeaponsProvider weaponsProvider)
         {
             _inputService = inputService;
             _cameraProvider = cameraProvider;
             _righthand = righthand;
-            _weaponSelector = weaponSelector;
-            _gameFactory = gameFactory;
+            _weaponsProvider = weaponsProvider;
+            Debug.Log("2131");
         }
 
         public void Initialize()
         {
-            _weaponSelector.WeaponSelected += SetWeapon;
+            Debug.Log("2131");
         }
 
         public void Tick()
         {
-            if (!_inputService.PlayerFire.WasPressedThisFrame() || !_canShoot || _weapon is null)
+            Debug.Log(_weaponsProvider);
+            
+            if (!_inputService.PlayerFire.WasPressedThisFrame() || !_canShoot)
                 return;
 
             Vector2 mousePosition = _inputService.MousePosition;
@@ -46,12 +46,12 @@ namespace Gameplay.Character.Player.Shoot
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                _weapon.Shoot(hit.point, _righthand.position);
+                _weaponsProvider.CurrentWeapon.Shoot(hit.point, _righthand.position);
             }
             else
             {
                 Vector3 target = ray.GetPoint(ShootDistance);
-                _weapon.Shoot(target, _righthand.position);
+                _weaponsProvider.CurrentWeapon.Shoot(target, _righthand.position);
             }
 
             _canShoot = false;
@@ -61,12 +61,10 @@ namespace Gameplay.Character.Player.Shoot
 
         public void Dispose()
         {
-            _weaponSelector.WeaponSelected -= SetWeapon;
         }
 
         private void SetWeapon(WeaponTypeId weaponTypeId)
         {
-            _weapon = _gameFactory.CreateWeapon(weaponTypeId);
         }
     }
 }

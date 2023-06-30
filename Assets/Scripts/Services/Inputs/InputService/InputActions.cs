@@ -26,7 +26,7 @@ namespace UnityEngine.InputSystem
     ""name"": ""InputActions"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""PlayerPrefab"",
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
@@ -922,8 +922,8 @@ namespace UnityEngine.InputSystem
         }
     ]
 }");
-            // Player
-            m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+            // PlayerPrefab
+            m_Player = asset.FindActionMap("PlayerPrefab", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
@@ -997,7 +997,7 @@ namespace UnityEngine.InputSystem
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // Player
+        // PlayerPrefab
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Move;

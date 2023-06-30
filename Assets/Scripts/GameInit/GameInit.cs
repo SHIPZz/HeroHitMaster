@@ -1,40 +1,72 @@
-﻿using Gameplay.Character.Player;
-using Services;
+﻿using System;
+using Enums;
+using Extensions;
+using Gameplay.Camera;
+using Gameplay.PlayerSelection;
+using Gameplay.Weapon;
+using Gameplay.WeaponSelection;
 using Services.Factories;
 using Services.Providers;
 using UnityEngine;
 using Zenject;
+using Zenject.SpaceFighter;
+using Player = Gameplay.Character.Player.Player;
 
 namespace GameInit
 {
-    public class GameInit : IInitializable
+    public class GameInit : IInitializable, IDisposable
     {
         private readonly GameFactory _gameFactory;
         private readonly LocationProvider _locationProvider;
         private readonly CameraProvider _cameraProvider;
         private readonly PlayerProvider _playerProvider;
+        private readonly PlayerSelector _playerSelector;
+        private readonly WeaponSelector _weaponSelector;
+        private readonly WeaponsProvider _weaponsProvider;
+        private PlayerCameraFollower _playerCamera;
+        private Weapon _weapon;
+        private GameObjectContext _context;
 
         public GameInit(GameFactory gameFactory, LocationProvider locationProvider, CameraProvider cameraProvider,
-            PlayerProvider playerProvider)
+            PlayerProvider playerProvider, PlayerSelector playerSelector, WeaponSelector weaponSelector,  WeaponsProvider weaponsProvider)
         {
             _gameFactory = gameFactory;
             _locationProvider = locationProvider;
             _cameraProvider = cameraProvider;
             _playerProvider = playerProvider;
+            _playerSelector = playerSelector;
+            _weaponSelector = weaponSelector;
+            _weaponsProvider = weaponsProvider;
         }
 
         public void Initialize()
         {
-            Player player = CreatePlayer();
-            _playerProvider.Player = player;
-            Camera camera =  CreateCamera(player);
-            _cameraProvider.Camera = camera;
+            CreatePlayerCamera();
+            _playerSelector.PlayerSelected += InitializePlayer;
+            _weaponSelector.WeaponSelected += InitializeWeapon;
         }
 
-        private Camera CreateCamera(Player player) =>
-            _gameFactory.CreateCameraFollower(player).GetComponent<Camera>();
+        private void InitializeWeapon(WeaponTypeId weaponTypeId)
+        {
+           _weapon = _gameFactory.CreateWeapon(weaponTypeId);
+           _weaponsProvider.CurrentWeapon = _weapon;
+        }
 
-        private Player CreatePlayer() =>
-            _gameFactory.CreatePlayer(_locationProvider.PlayerSpawnPoint.position);
+        public void Dispose()
+        {
+            _playerSelector.PlayerSelected -= InitializePlayer;
+            _weaponSelector.WeaponSelected -= InitializeWeapon;
+        }
+
+        private PlayerCameraFollower CreatePlayerCamera() => 
+           _playerCamera =  _gameFactory.CreateCamera(_locationProvider.CameraSpawnPoint.position);
+
+        private void InitializePlayer(PlayerTypeId playerTypeId)
+        {
+            Player player = _gameFactory.CreatePlayer(playerTypeId, _locationProvider.PlayerSpawnPoint.position);
+            _playerCamera.SetPlayer(player);
+            
+            _playerProvider.CurrentPlayer = player;
+        }
     }
 }

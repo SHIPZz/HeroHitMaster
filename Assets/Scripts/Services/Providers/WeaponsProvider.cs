@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enums;
+using Gameplay.Weapon;
 using ScriptableObjects;
 
 namespace Services.Providers
@@ -9,8 +10,9 @@ namespace Services.Providers
         private readonly List<WeaponSettings> _weaponSettings;
         public Dictionary<WeaponTypeId, WeaponSettings> WeaponConfigs { get; set; } = new();
         public List<WeaponTypeId> CharactersAvailableWeapons { get; set; } = new();
-        
-         public WeaponsProvider(List<WeaponSettings> weaponSettings)
+        public Weapon CurrentWeapon { get; set; }
+
+        public WeaponsProvider(List<WeaponSettings> weaponSettings)
          {
              _weaponSettings = weaponSettings;
              FillDictionary();

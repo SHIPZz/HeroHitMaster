@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ee2af17fd140d44ac9b1e9f858a1cc, type: 3}
   m_Name: WolverineSettings
   m_EditorClassIdentifier: 
-  _player: {fileID: 3971735102458641760, guid: 078ee4515dc6ec544ad3cc441c9e7b19, type: 3}
+  _playerPrefab: {fileID: 3971735102458641760, guid: 078ee4515dc6ec544ad3cc441c9e7b19, type: 3}
+  _playerViewPrefab: {fileID: 6094225287135887322, guid: 3eab1cd600fca644c9c6835ef23a44cf, type: 3}
   _cost: 0
   _animator: {fileID: 3971735102458641788, guid: 078ee4515dc6ec544ad3cc441c9e7b19, type: 3}
   _skinnedMeshRenderer: {fileID: 774526769131761621, guid: 078ee4515dc6ec544ad3cc441c9e7b19, type: 3}
+  playerTypeId: 1
