@@ -9,6 +9,7 @@ using Services.ObjectPool;
 using Services.Providers;
 using Services.Providers.AssetProviders;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 using Vector3 = System.Numerics.Vector3;
 
@@ -21,11 +22,14 @@ namespace Services.Factories
         private Dictionary<WeaponTypeId, string> _bullets;
         private readonly AssetProvider _assetProvider;
         private readonly GameObjectPoolProvider _gameObjectPoolProvider;
+        private readonly DiContainer _diContainer;
 
-        public BulletFactory(AssetProvider assetProvider, GameObjectPoolProvider gameObjectPoolProvider)
+        public BulletFactory(AssetProvider assetProvider, GameObjectPoolProvider gameObjectPoolProvider, 
+            DiContainer diContainer)
         {
             _assetProvider = assetProvider;
             _gameObjectPoolProvider = gameObjectPoolProvider;
+            _diContainer = diContainer;
 
             _bullets = new Dictionary<WeaponTypeId, string>()
             {
@@ -54,7 +58,8 @@ namespace Services.Factories
         private void Create(string prefabPath, Transform parent)
         {
             GameObject bulletPrefab = _assetProvider.GetAsset(prefabPath);
-            _gameObjectPoolProvider.GameObjectPool = new GameObjectPool(() => Object.Instantiate(bulletPrefab, parent), Count);
+            _gameObjectPoolProvider.GameObjectPool = new GameObjectPool(() =>
+                _diContainer.InstantiatePrefab(bulletPrefab, parent), Count);
         }
     }
 }

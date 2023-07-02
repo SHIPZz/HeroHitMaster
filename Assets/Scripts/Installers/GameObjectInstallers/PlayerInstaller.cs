@@ -15,12 +15,12 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private Transform _initialShootPosition;
     // [SerializeField] private WebShooter _shootHand;
     
-    private WebSettings _webSettings;
+    private BulletSettings _bulletSettings;
 
     public override void InstallBindings()
     {
         Container.BindInstance(_player);
-        Container.BindInstance(_webSettings);
+        Container.BindInstance(_bulletSettings);
         Container.BindInstance(_rigidbody);
         Container.BindInstance(_initialShootPosition);
         // Container.BindInstance(_shootHand);
