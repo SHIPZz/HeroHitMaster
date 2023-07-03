@@ -16,7 +16,7 @@ namespace UI
         private void Construct(WindowService windowService)
         {
             _windowService = windowService;
-            _windowService.Close(WindowTypeId.WeaponSelectorWindow);
+            _windowService.CloseSelectorWindow(WindowTypeId.WeaponSelectorWindow);
         }
         
         private void OnEnable()
@@ -33,13 +33,12 @@ namespace UI
 
         private void OnApplyPlayerButtonClicked()
         {
-            _windowService.Close(WindowTypeId.PlayerSelectorWindow);
-            _windowService.Open(WindowTypeId.WeaponSelectorWindow);
+            _windowService.OpenSelectorWindow(WindowTypeId.WeaponSelectorWindow);
         }
 
         private void OnApplyWeaponButtonClicked()
         {
-            _windowService.Close(WindowTypeId.WeaponSelectorWindow);
+            _windowService.CloseSelectorWindow(WindowTypeId.WeaponSelectorWindow);
         }
     }
 }

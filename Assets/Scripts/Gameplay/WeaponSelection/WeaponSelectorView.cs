@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Enums;
 using ScriptableObjects;
+using Services.Factories;
 using Services.Providers;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -16,7 +18,6 @@ namespace Gameplay.WeaponSelection
         [SerializeField] private Button _apply;
         [field: SerializeField] public SelectorViewTypeId SelectorViewTypeId { get; private set; }
         
-        private WeaponsProvider _weaponsProvider;
         private Dictionary<WeaponTypeId, Image> _icons = new();
 
         public event Action LeftArrowClicked;
@@ -24,11 +25,10 @@ namespace Gameplay.WeaponSelection
         public event Action ApplyButtonClicked;
 
         [Inject]
-        private void Construct(WeaponsProvider weaponsProvider)
+        private void Construct(UIFactory uiFactory)
         {
-            _weaponsProvider = weaponsProvider;
-
-            FillDictionary();
+            _icons = uiFactory.CreateWeaponIcons();
+            ShowWeaponIcon(WeaponTypeId.ShootSpiderHand);
         }
 
         private void OnEnable()
@@ -67,17 +67,5 @@ namespace Gameplay.WeaponSelection
 
         private void OnLeftArrowClicked() => 
             LeftArrowClicked?.Invoke();
-
-        private void FillDictionary()
-        {
-            foreach (WeaponSettings weaponConfig in _weaponsProvider.WeaponConfigs.Values)
-            {
-                Image image = Instantiate(weaponConfig.ImagePrefab, transform);
-                image.gameObject.SetActive(false);
-                _icons[weaponConfig.WeaponTypeId] = image;
-            }
-            
-            _icons[WeaponTypeId.ShootSpiderHand].gameObject.SetActive(true);
-        }
     }
 }

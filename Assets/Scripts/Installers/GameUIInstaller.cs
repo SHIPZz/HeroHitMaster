@@ -1,6 +1,8 @@
 ﻿using Gameplay.PlayerSelection;
 using Gameplay.WeaponSelection;
+using Services.Factories;
 using Services.Providers;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +20,14 @@ namespace Installers
             BindPlayerSelectorView();
             BindWindowProvider();
             BindWindowService();
+            BindUIFactory();
+        }
+
+        private void BindUIFactory()
+        {
+            Container
+                .Bind<UIFactory>()
+                .AsSingle();
         }
 
         private void BindWindowProvider()

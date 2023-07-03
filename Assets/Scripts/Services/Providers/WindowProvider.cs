@@ -8,7 +8,7 @@ namespace Services.Providers
 {
     public class WindowProvider : SerializedMonoBehaviour
     {
-        [OdinSerialize] public Dictionary<WindowTypeId, Window> Windows { get; private set; }
+        [OdinSerialize] public Dictionary<WindowTypeId, Window> SelectorWindows { get; private set; }
         [OdinSerialize] public Dictionary<WindowTypeId, Window> HudWindows { get; private set; }
 
     }

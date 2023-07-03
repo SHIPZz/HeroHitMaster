@@ -12,6 +12,8 @@ namespace Installers.GameInstaller
     {
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private Transform _cameraTransformPoint;
+        [SerializeField] private Transform _playerParentTransform;
+        [SerializeField] private Transform _weaponIconParentTransform;
 
         public override void InstallBindings()
         {
@@ -99,7 +101,9 @@ namespace Installers.GameInstaller
 
         private void BindLocationProvider()
         {
-            LocationProvider locationProvider = new(_spawnPoint, _cameraTransformPoint);
+            LocationProvider locationProvider = new(_playerParentTransform, 
+                _spawnPoint,_cameraTransformPoint,_weaponIconParentTransform);
+            
             Container
                 .BindInstance(locationProvider)
                 .AsSingle();

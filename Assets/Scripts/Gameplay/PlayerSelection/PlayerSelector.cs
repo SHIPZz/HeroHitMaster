@@ -39,8 +39,6 @@ namespace Gameplay.PlayerSelection
             if (_currentPlayerId < 0)
                 _currentPlayerId = _playerProvider.PlayerConfigs.Count - 1;
             
-            Debug.Log((PlayerTypeId)_currentPlayerId);
-            
             PlayerChanged?.Invoke((PlayerTypeId)_currentPlayerId);
         }
 

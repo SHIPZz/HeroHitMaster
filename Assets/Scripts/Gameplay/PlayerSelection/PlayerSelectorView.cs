@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using Enums;
 using Gameplay.Character.Player;
-using ScriptableObjects.PlayerSettings;
-using Services.Providers;
+using Services.Factories;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -16,23 +15,18 @@ namespace Gameplay.PlayerSelection
         [SerializeField] private Button _rightArrow;
         [SerializeField] private Button _applyButton;
         [field: SerializeField] public SelectorViewTypeId SelectorViewTypeId { get; private set; }
-
-        private List<PlayerSettings> _playerSettingsList;
-        private Dictionary<PlayerTypeId, Player> _playerSettings = new();
-        private LocationProvider _locationProvider;
+        
+        private Dictionary<PlayerTypeId, Player> _playerIcons = new();
 
         public event Action LeftArrowClicked;
         public event Action RightArrowClicked;
         public event Action ApplyButtonClicked;
 
         [Inject]
-        private void Construct(List<PlayerSettings> playerSettingsList, LocationProvider locationProvider)
+        private void Construct(UIFactory uiFactory)
         {
-            _locationProvider = locationProvider;
-            _playerSettingsList = playerSettingsList;
-            FillDictionary();
-            DisableAll();
-            SetActiveInitialPlayer();
+            _playerIcons = uiFactory.CreatePlayersView();
+            Show(PlayerTypeId.Spider);
         }
 
         private void OnEnable()
@@ -52,41 +46,28 @@ namespace Gameplay.PlayerSelection
         public void Show(PlayerTypeId playerTypeId)
         {
             DisableAll();
-            Player targetPlayer = _playerSettings[playerTypeId];
+            Player targetPlayer = _playerIcons[playerTypeId];
             targetPlayer.gameObject.SetActive(true);
         }
 
         private void DisableAll()
         {
-            foreach (var playerSetting in _playerSettings)
+            foreach (var playerSetting in _playerIcons)
             {
                 playerSetting.Value.gameObject.SetActive(false);
             }
         }
 
-        private void SetActiveInitialPlayer()
+        private void OnApplyButtonClicked()
         {
-            Player player = _playerSettings[PlayerTypeId.Spider];
-            player.gameObject.SetActive(true);
-        }
-
-        private void OnApplyButtonClicked() => 
+            _playerIcons[PlayerTypeId.Spider].transform.parent.gameObject.SetActive(false);
             ApplyButtonClicked?.Invoke();
+        }
 
         private void OnRightArrowClicked() => 
             RightArrowClicked?.Invoke();
 
         private void OnLeftArrowClicked() => 
             LeftArrowClicked?.Invoke();
-
-        private void FillDictionary()
-        {
-            foreach (var playerSetting in _playerSettingsList)
-            {
-                Player player = Instantiate(playerSetting.PlayerViewPrefab);
-                player.transform.position = _locationProvider.PlayerSpawnPoint.position;
-                _playerSettings[player.PlayerTypeId] = player;
-            }
-        }
     }
 }

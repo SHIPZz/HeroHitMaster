@@ -30,7 +30,7 @@ This shader has NOT been tested on any other PC configuration except the followi
     CPU: Intel Core i5-6400
     GPU: NVidia GTX 750Ti
     RAM: 16GB
-    Windows: 10 x64
+    SelectorWindows: 10 x64
     DirectX: 11
 ____________________________________________________________________________________________________________________________________________
 */
