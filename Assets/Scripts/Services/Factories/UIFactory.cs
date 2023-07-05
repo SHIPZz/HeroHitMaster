@@ -52,7 +52,7 @@ namespace Services.Factories
             foreach (PlayerSettings playerSetting in _playerSettingsList)
             {
                 var player =
-                    _diContainer.InstantiatePrefabForComponent<Player>(playerSetting.PlayerPrefab,
+                    _diContainer.InstantiatePrefabForComponent<Player>(playerSetting.PlayerViewPrefab,
                         parent);
 
                 playersView[player.PlayerTypeId] = player;

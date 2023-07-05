@@ -1,6 +1,4 @@
-﻿using System;
-using DG.Tweening;
-using Enums;
+﻿using DG.Tweening;
 using Services;
 using Services.Providers;
 using UnityEngine;
@@ -8,7 +6,7 @@ using Zenject;
 
 namespace Gameplay.Character.Player.Shoot
 {
-    public class ShootInputMediator : ITickable, IInitializable, IDisposable
+    public class ShootInputMediator : ITickable
     {
         private const float ShootDistance = 100;
         private const float ShootDelay = 0.3f;
@@ -26,10 +24,6 @@ namespace Gameplay.Character.Player.Shoot
             _cameraProvider = cameraProvider;
             _righthand = righthand;
             _weaponsProvider = weaponsProvider;
-        }
-
-        public void Initialize()
-        {
         }
 
         public void Tick()
@@ -55,14 +49,6 @@ namespace Gameplay.Character.Player.Shoot
             _canShoot = false;
 
             DOTween.Sequence().AppendInterval(ShootDelay).OnComplete(() => _canShoot = true);
-        }
-
-        public void Dispose()
-        {
-        }
-
-        private void SetWeapon(WeaponTypeId weaponTypeId)
-        {
         }
     }
 }

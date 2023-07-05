@@ -17,8 +17,6 @@ namespace Services.Factories
 {
     public class BulletFactory
     {
-        private const int Count = 50;
-
         private Dictionary<WeaponTypeId, string> _bullets;
         private readonly AssetProvider _assetProvider;
         private readonly GameObjectPoolProvider _gameObjectPoolProvider;
@@ -38,7 +36,7 @@ namespace Services.Factories
             };
         }
 
-        public void CreateBulletsBy(WeaponTypeId weaponTypeId, Transform parent)
+        public void CreateBulletsBy(WeaponTypeId weaponTypeId, Transform parent, int count)
         {
             if (!_bullets.TryGetValue(weaponTypeId, out var prefabPath))
             {
@@ -46,7 +44,7 @@ namespace Services.Factories
                 return;
             }
 
-            Create(prefabPath, parent);
+            Create(prefabPath, parent, count);
         }
 
         public IBullet Pop() =>
@@ -55,11 +53,11 @@ namespace Services.Factories
         public void Push(IBullet bullet) =>
             _gameObjectPoolProvider.GameObjectPool.Push(bullet.GameObject);
 
-        private void Create(string prefabPath, Transform parent)
+        private void Create(string prefabPath, Transform parent, int count)
         {
             GameObject bulletPrefab = _assetProvider.GetAsset(prefabPath);
             _gameObjectPoolProvider.GameObjectPool = new GameObjectPool(() =>
-                _diContainer.InstantiatePrefab(bulletPrefab, parent), Count);
+                _diContainer.InstantiatePrefab(bulletPrefab, parent), count);
         }
     }
 }

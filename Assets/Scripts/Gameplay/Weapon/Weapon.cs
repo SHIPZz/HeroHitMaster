@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using Enums;
 using Gameplay.Bullet;
-using Gameplay.Web;
 using Services.Factories;
 using Services.Providers;
 using UnityEngine;
@@ -9,40 +8,38 @@ using Zenject;
 
 namespace Gameplay.Weapon
 {
-    public abstract class Weapon : MonoBehaviour
+    public abstract class Weapon : MonoBehaviour, IInitializable
     {
-        private const float ReturnBulletDelay = 1.5f;
-        
+        protected float ReturnBulletDelay = 1.5f;
+        protected float BulletMoveDuration = 0.2f;
+        protected int BulletsCount = 30;
+
         [field: SerializeField] public WeaponTypeId WeaponTypeId { get; protected set; }
 
-        protected IBulletMovement BulletMovement = new DefaultBulletMovement();
+        protected IBulletMovement BulletMovement;
 
-        private WeaponsProvider _weaponsProvider;
-        private BulletFactory _bulletFactory;
-        
-        public GameObject GameObject =>
-            gameObject;
-        
+        protected BulletFactory BulletFactory;
+
         [Inject]
         private void Construct(WeaponsProvider weaponsProvider,
             BulletFactory bulletFactory)
         {
-            _weaponsProvider = weaponsProvider;
-            _bulletFactory = bulletFactory;
+            BulletFactory = bulletFactory;
             Initialize();
         }
 
-        public void Shoot(Vector3 target, Vector3 initialPosition)
+        public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
-            IBullet bullet = _bulletFactory.Pop();
-            BulletMovement.Move(target, bullet, initialPosition, 0.2f);
+            IBullet bullet = BulletFactory.Pop();
+            BulletMovement.Move(target, bullet, initialPosition, BulletMoveDuration,bullet.Rigidbody);
 
-            DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => _bulletFactory.Push(bullet));
+            DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
         }
         
-        private void Initialize()
+        public virtual void Initialize()
         {
-            _bulletFactory.CreateBulletsBy(WeaponTypeId, transform);
+            BulletFactory.CreateBulletsBy(WeaponTypeId, transform,BulletsCount);
+            BulletMovement = new DefaultBulletMovement();
         }
     }
 }

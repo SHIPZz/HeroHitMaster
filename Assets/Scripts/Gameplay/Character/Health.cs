@@ -15,10 +15,11 @@ namespace Gameplay.Character
         public int MaxValue { get; private set; }
         public event Action<int> ValueChanged;
         public event Action ValueZeroReached;
+        public event Action ValueRecovered;
         
-        public void TakeDamage(int value)
+        public void Decrease(int value)
         {
-            Clamp(-value);
+            CurrentValue = Mathf.Clamp(CurrentValue - value, 0, MaxValue);
             
             if(CurrentValue == 0)
                 ValueZeroReached?.Invoke();
@@ -28,11 +29,9 @@ namespace Gameplay.Character
 
         public void Heal(int value)
         {
-            Clamp(value);
+            CurrentValue = Mathf.Clamp(CurrentValue + value, 0, MaxValue);
+            
             ValueChanged?.Invoke(value);
         }
-
-        private void Clamp(int value) => 
-            CurrentValue = Mathf.Clamp(CurrentValue + value, 0, MaxValue);
     }
 }

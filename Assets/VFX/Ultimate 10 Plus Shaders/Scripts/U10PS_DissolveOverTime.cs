@@ -5,12 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class U10PS_DissolveOverTime : MonoBehaviour
 {
-    private MeshRenderer meshRenderer;
+    private SkinnedMeshRenderer meshRenderer;
 
     public float speed = .5f;
 
     private void Start(){
-        meshRenderer = this.GetComponent<MeshRenderer>();
+        meshRenderer = this.GetComponent<SkinnedMeshRenderer>();
     }
 
     private float t = 0.0f;

@@ -2,7 +2,7 @@
 
 namespace Gameplay.Character
 {
-    public interface IHealth : IDamageable
+    public interface IHealth
     {
         int CurrentValue { get; }
         int MaxValue { get; }
@@ -11,5 +11,6 @@ namespace Gameplay.Character
         event Action ValueZeroReached;
 
         void Heal(int value);
+        void Decrease(int value);
     }
 }

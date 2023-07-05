@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1956703246876421126}
   - component: {fileID: 1956703246876421125}
+  - component: {fileID: -7713099217943664730}
+  - component: {fileID: -7712417059558525395}
   m_Layer: 0
   m_Name: SpiderWebGun
   m_TagString: Untagged
@@ -45,3 +47,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <WeaponTypeId>k__BackingField: 0
+--- !u!114 &-7713099217943664730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956703246876421124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b72a090e6f4ecb831580e61c33dd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 1956703246876421125}
+--- !u!114 &-7712417059558525395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956703246876421124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: -7713099217943664730}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
