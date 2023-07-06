@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Constants;
+﻿using System.Collections.Generic;
 using Enums;
 using Extensions;
 using Gameplay.Character;
@@ -13,34 +10,35 @@ namespace Gameplay.Bullet
 {
     public class Bullet : MonoBehaviour, IBullet
     {
-        [field: SerializeField] public BulletTypeId BulletTypeId { get; private set; }
+        [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
 
-        [SerializeField] private Material _material;
-
-        private BulletSettings _bulletSetting;
-        private Transform _target;
+        protected BulletSettings BulletSetting;
+        protected List<BulletSettings> BulletSettingsList;
 
         [Inject]
-        private void Construct(List<BulletSettings> bulletSettingsList) =>
-            _bulletSetting = bulletSettingsList.Find(x => x.BulletTypeId == BulletTypeId);
+        private void Construct(List<BulletSettings> bulletSettingsList)
+        {
+            BulletSettingsList = bulletSettingsList;
+            Initialize();
+        }
 
         public GameObject GameObject => gameObject;
 
         public Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out IViewChangeable viewChangeable))
-            {
-                viewChangeable.SetMaterial(_material);
-                this.SetActive(gameObject,  false,.2f);
-            }
+            if (!other.gameObject.TryGetComponent(out IDamageable damageable))
+                return;
+            
+            damageable.TakeDamage(BulletSetting.Damage);
+            this.SetActive(gameObject, false, .2f);
+        }
 
-            if (other.gameObject.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(_bulletSetting.Damage);
-                this.SetActive(gameObject,  false,.2f);
-            }
+        public virtual void Initialize()
+        {
+            BulletSetting = BulletSettingsList.Find(x => x.BulletTypeId == BulletTypeId);
+            print(BulletSetting.Damage);
         }
     }
 }

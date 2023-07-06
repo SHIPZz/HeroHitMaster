@@ -1,30 +1,27 @@
 ﻿using System;
 using Enums;
 using UnityEngine;
-using Zenject;
 
 namespace Gameplay.Character.Enemy
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class EnemyHealth : MonoBehaviour, IDamageable
     {
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
         [SerializeField] private int _healthValue;
-        
+
         private IHealth _health;
 
         public event Action<int> Damaged;
         public event Action Dead;
 
-        private void OnEnable()
-        {
+        private void Awake() =>
             _health = new Health(_healthValue);
-            _health.ValueZeroReached += Die;
-        }
 
-        private void OnDisable()
-        {
+        private void OnEnable() =>
+            _health.ValueZeroReached += Die;
+
+        private void OnDisable() =>
             _health.ValueZeroReached -= Die;
-        }
 
         public void TakeDamage(int value)
         {

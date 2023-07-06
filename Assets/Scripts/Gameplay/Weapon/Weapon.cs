@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Enums;
 using Gameplay.Bullet;
+using Gameplay.Character.Player.Shoot;
 using Services.Factories;
 using Services.Providers;
 using UnityEngine;
@@ -19,13 +20,13 @@ namespace Gameplay.Weapon
         protected IBulletMovement BulletMovement;
 
         protected BulletFactory BulletFactory;
+        protected EffectOnShoot EffectOnShoot;
 
         [Inject]
-        private void Construct(WeaponsProvider weaponsProvider,
-            BulletFactory bulletFactory)
+        private void Construct(BulletFactory bulletFactory, EffectOnShoot effectOnShoot)
         {
+            EffectOnShoot = effectOnShoot;
             BulletFactory = bulletFactory;
-            Initialize();
         }
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
@@ -33,6 +34,7 @@ namespace Gameplay.Weapon
             IBullet bullet = BulletFactory.Pop();
             BulletMovement.Move(target, bullet, initialPosition, BulletMoveDuration,bullet.Rigidbody);
 
+            EffectOnShoot.PlayEffects();
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
         }
         

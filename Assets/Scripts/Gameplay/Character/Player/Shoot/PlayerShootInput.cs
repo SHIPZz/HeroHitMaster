@@ -6,10 +6,10 @@ using Zenject;
 
 namespace Gameplay.Character.Player.Shoot
 {
-    public class ShootInputMediator : ITickable
+    public class PlayerShootInput : ITickable
     {
         private const float ShootDistance = 100;
-        private const float ShootDelay = 0.3f;
+        private const float ShootDelay = 0.5f;
         private readonly IInputService _inputService;
         private readonly CameraProvider _cameraProvider;
         private readonly Transform _righthand;
@@ -17,7 +17,7 @@ namespace Gameplay.Character.Player.Shoot
         private bool _canShoot = true;
         private Weapon.Weapon _weapon;
 
-        public ShootInputMediator(IInputService inputService, CameraProvider cameraProvider,
+        public PlayerShootInput(IInputService inputService, CameraProvider cameraProvider,
             Transform righthand, WeaponsProvider weaponsProvider)
         {
             _inputService = inputService;

@@ -25,7 +25,7 @@ namespace Installers.GameObjectInstallers.Player
             Container.Bind<WebMovement>().AsSingle();
             Container.Bind<PlayerMovement>().AsSingle();
             Container.Bind<PlayerAnimation>().AsSingle();
-            Container.BindInterfacesAndSelfTo<ShootInputMediator>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerShootInput>().AsSingle();
             Container.BindInterfacesTo<PlayerMediator>().AsSingle();
         }
     }
