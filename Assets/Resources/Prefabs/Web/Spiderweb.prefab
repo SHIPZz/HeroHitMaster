@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 3894634599279539162}
   - component: {fileID: 8532890716993097247}
   - component: {fileID: 8914413349907208982}
+  - component: {fileID: -4838835069748056510}
+  - component: {fileID: 8220929736475904644}
+  - component: {fileID: 8010233923837997559}
   m_Layer: 10
   m_Name: Spiderweb
   m_TagString: Untagged
@@ -129,7 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <BulletTypeId>k__BackingField: 1
-  _material: {fileID: 2100000, guid: 72004951b2a0664429e64bba9b4cd127, type: 2}
 --- !u!95 &8914413349907208982
 Animator:
   serializedVersion: 4
@@ -150,3 +152,47 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-4838835069748056510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714671991903669213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f14c611f92e412ab3d6a2f6cbdabab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8220929736475904644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714671991903669213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bullet: {fileID: 8532890716993097247}
+  _triggerObserver: {fileID: -4838835069748056510}
+--- !u!114 &8010233923837997559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714671991903669213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 8220929736475904644}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}

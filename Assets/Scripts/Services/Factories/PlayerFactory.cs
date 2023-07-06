@@ -19,7 +19,7 @@ namespace Services.Factories
             _assetProvider = assetProvider;
             _diContainer = diContainer;
 
-            _characters = new()
+            _characters = new Dictionary<PlayerTypeId, string>
             {
                 { PlayerTypeId.Spider, AssetPath.Spiderman },
                 { PlayerTypeId.Wolverine, AssetPath.Wolverine },

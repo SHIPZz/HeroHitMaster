@@ -3,7 +3,6 @@ using Enums;
 using Gameplay.Bullet;
 using Gameplay.Character.Player.Shoot;
 using Services.Factories;
-using Services.Providers;
 using UnityEngine;
 using Zenject;
 
@@ -33,7 +32,6 @@ namespace Gameplay.Weapon
         {
             IBullet bullet = BulletFactory.Pop();
             BulletMovement.Move(target, bullet, initialPosition, BulletMoveDuration,bullet.Rigidbody);
-
             EffectOnShoot.PlayEffects();
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
         }

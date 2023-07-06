@@ -25,10 +25,15 @@ namespace GameInit
         private readonly WeaponsProvider _weaponsProvider;
         private PlayerCameraFollower _playerCamera;
         private Weapon _weapon;
-        private GameObjectContext _context;
+        private Player _player;
 
-        public GameInit(GameFactory gameFactory, LocationProvider locationProvider, CameraProvider cameraProvider,
-            PlayerProvider playerProvider, PlayerSelector playerSelector, WeaponSelector weaponSelector,  WeaponsProvider weaponsProvider)
+        public GameInit(GameFactory gameFactory, 
+            LocationProvider locationProvider, 
+            CameraProvider cameraProvider,
+            PlayerProvider playerProvider, 
+            PlayerSelector playerSelector, 
+            WeaponSelector weaponSelector,  
+            WeaponsProvider weaponsProvider)
         {
             _gameFactory = gameFactory;
             _locationProvider = locationProvider;
@@ -48,7 +53,7 @@ namespace GameInit
 
         private void InitializeWeapon(WeaponTypeId weaponTypeId)
         {
-           _weapon = _gameFactory.CreateWeapon(weaponTypeId);
+           _weapon = _gameFactory.CreateWeapon(weaponTypeId,_player.gameObject.transform);
            _weaponsProvider.CurrentWeapon = _weapon;
         }
 
@@ -68,6 +73,7 @@ namespace GameInit
         {
             Player player = _gameFactory.CreatePlayer(playerTypeId, _locationProvider.PlayerSpawnPoint.position);
             _playerCamera.SetPlayer(player);
+            _player = player;
 
             _playerProvider.CurrentPlayer = player;
         }

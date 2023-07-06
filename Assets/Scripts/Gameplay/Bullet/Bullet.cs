@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Enums;
 using Extensions;
 using Gameplay.Character;
@@ -8,16 +9,18 @@ using Zenject;
 
 namespace Gameplay.Bullet
 {
-    public class Bullet : MonoBehaviour, IBullet
+    public class Bullet : MonoBehaviour, IInitializable, IDisposable, IBullet
     {
         [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
 
+        protected TriggerObserver TriggerObserver;
         protected BulletSettings BulletSetting;
         protected List<BulletSettings> BulletSettingsList;
 
         [Inject]
-        private void Construct(List<BulletSettings> bulletSettingsList)
+        private void Construct(List<BulletSettings> bulletSettingsList, TriggerObserver triggerObserver)
         {
+            TriggerObserver = triggerObserver;
             BulletSettingsList = bulletSettingsList;
             Initialize();
         }
@@ -26,19 +29,22 @@ namespace Gameplay.Bullet
 
         public Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
-        protected virtual void OnTriggerEnter(Collider other)
-        {
-            if (!other.gameObject.TryGetComponent(out IDamageable damageable))
-                return;
-            
-            damageable.TakeDamage(BulletSetting.Damage);
-            this.SetActive(gameObject, false, .2f);
-        }
-
         public virtual void Initialize()
         {
             BulletSetting = BulletSettingsList.Find(x => x.BulletTypeId == BulletTypeId);
-            print(BulletSetting.Damage);
+            TriggerObserver.Entered += DoDamage;
+        }
+
+        public virtual void Dispose() =>
+            TriggerObserver.Entered -= DoDamage;
+
+        protected virtual void DoDamage(Collider other)
+        {
+            if (!other.gameObject.TryGetComponent(out IDamageable damageable))
+                return;
+
+            damageable.TakeDamage(BulletSetting.Damage);
+            this.SetActive(gameObject,false,0.2f);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Services.Factories
             };
         }
 
-        public Weapon Create(WeaponTypeId weaponTypeId)
+        public Weapon Create(WeaponTypeId weaponTypeId, Transform parent)
         {
             if (!_weapons.TryGetValue(weaponTypeId, out var prefabPath))
             {
@@ -33,13 +33,13 @@ namespace Services.Factories
                 return null;
             }
 
-            return Create(prefabPath);
+            return Create(prefabPath, parent);
         }
 
-        private Weapon Create(string prefabGunPath)
+        private Weapon Create(string prefabGunPath, Transform parent)
         {
             var gunPrefab = _assetProvider.GetAsset<Weapon>(prefabGunPath);
-            return _diContainer.InstantiatePrefabForComponent<Weapon>(gunPrefab);
+            return _diContainer.InstantiatePrefabForComponent<Weapon>(gunPrefab, parent);
         }
     }
 }

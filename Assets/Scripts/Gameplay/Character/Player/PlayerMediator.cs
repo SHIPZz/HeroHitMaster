@@ -12,7 +12,7 @@ namespace Gameplay.Character.Player
     public class PlayerMediator : IDisposable, ITickable
     {
         private readonly PlayerMovement _playerMovement;
-        private readonly PlayerAnimation _playerAnimation;
+        private readonly PlayerAnimator _playerAnimator;
         private readonly UnityEngine.Camera _camera;
         private readonly IInputService _inputService;
         private readonly CameraProvider _cameraProvider;
@@ -27,11 +27,11 @@ namespace Gameplay.Character.Player
         private Vector2 _moveDirection;
         private float _jumpTimer;
 
-        public PlayerMediator(PlayerMovement playerMovement, PlayerAnimation playerAnimation,
+        public PlayerMediator(PlayerMovement playerMovement, PlayerAnimator playerAnimator,
             IInputService inputService, CameraProvider cameraProvider)
         {
             _playerMovement = playerMovement;
-            _playerAnimation = playerAnimation;
+            _playerAnimator = playerAnimator;
             _inputService = inputService;
             _cameraProvider = cameraProvider;
 
@@ -62,14 +62,14 @@ namespace Gameplay.Character.Player
 
             _playerMovement.Jump();
             // _playerMovement.SetJumping(isJumping);
-            // _playerAnimation.SetJumping(isJumping);
+            // _playerAnimator.SetJumping(isJumping);
         }
 
         private void OnRunAction(InputAction.CallbackContext context)
         {
             _isRunning = context.ReadValueAsButton();
             _playerMovement.SetRunning(_isRunning);
-            _playerAnimation.SetRunning(_isRunning);
+            _playerAnimator.SetRunning(_isRunning);
         }
 
         public void Tick()
@@ -80,7 +80,7 @@ namespace Gameplay.Character.Player
 
             float speed = _moveDirection == Vector2.zero ? 0f :
                 _isRunning ? _runningAnimationSpeed : _walkingAnimationSpeed;
-            _playerAnimation.SetSpeed(speed, 0.1f, Time.deltaTime);
+            _playerAnimator.SetSpeed(speed, 0.1f, Time.deltaTime);
         }
     }
 }

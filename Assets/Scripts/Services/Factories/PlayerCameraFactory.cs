@@ -2,22 +2,25 @@
 using Gameplay.Camera;
 using Services.Providers.AssetProviders;
 using UnityEngine;
+using Zenject;
 
 namespace Services.Factories
 {
     public class PlayerCameraFactory
     {
-        private AssetProvider _assetProvider;
+        private readonly AssetProvider _assetProvider;
+        private DiContainer _diContainer;
 
-        public PlayerCameraFactory(AssetProvider assetProvider)
+        public PlayerCameraFactory(AssetProvider assetProvider, DiContainer diContainer)
         {
+            _diContainer = diContainer;
             _assetProvider = assetProvider;
         }
 
         public PlayerCameraFollower Create(Vector3 at)
         {
-            PlayerCameraFollower camera = _assetProvider.GetAsset<PlayerCameraFollower>(AssetPath.MainCamera);
-            return Object.Instantiate(camera,at,Quaternion.identity);
+            var camera = _assetProvider.GetAsset(AssetPath.MainCamera);
+            return _diContainer.InstantiatePrefabForComponent<PlayerCameraFollower>(camera,at,Quaternion.identity, null);
         }
     }
 }

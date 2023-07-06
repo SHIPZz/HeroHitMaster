@@ -12,7 +12,7 @@ namespace Installers.GameObjectInstallers.Weapon
         
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<BulletSticking>().AsSingle();
+            // Container.BindInterfacesAndSelfTo<BulletSticking>().AsSingle();
             Container.BindInstance(_audioSource);
             Container.BindInterfacesAndSelfTo<Gameplay.Weapon.Weapon>().FromInstance(_weapon).AsSingle();
 

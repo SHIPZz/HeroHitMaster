@@ -1,4 +1,6 @@
-﻿using Gameplay.Character;
+﻿using System;
+using Extensions;
+using Gameplay.Character;
 using Gameplay.MaterialChanger;
 using UnityEngine;
 
@@ -10,7 +12,13 @@ namespace Gameplay.Bullet
 
         [SerializeField] private Material _material;
 
-        protected override void OnTriggerEnter(Collider other)
+        public override void Initialize() => 
+            TriggerObserver.Entered += DoDamage;
+
+        public override void Dispose() => 
+            TriggerObserver.Entered -= DoDamage;
+
+        protected override void DoDamage(Collider other)
         {
             if (!other.gameObject.TryGetComponent(out IMaterialChanger materialChanger) ||
                 !other.gameObject.TryGetComponent(out IDamageable damageable))
@@ -18,6 +26,8 @@ namespace Gameplay.Bullet
 
             materialChanger.Change(_material);
             damageable.TakeDamage(DestroyDamage);
+            this.SetActive(gameObject,false,0.2f);
         }
     }
 }
+

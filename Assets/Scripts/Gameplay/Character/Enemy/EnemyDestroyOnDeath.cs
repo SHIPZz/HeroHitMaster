@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEngine;
+using Constants;
 using Zenject;
 using Object = UnityEngine.Object;
 
@@ -8,13 +8,12 @@ namespace Gameplay.Character.Enemy
     public class EnemyDestroyOnDeath : IInitializable, IDisposable
     {
         private readonly EnemyHealth _enemyHealth;
-        private readonly Collider _collider;
-        private float _delay = 0.1f;
+        private float _delay;
 
-        public EnemyDestroyOnDeath(EnemyHealth enemyHealth, Collider collider)
+        public EnemyDestroyOnDeath(EnemyHealth enemyHealth)
         {
             _enemyHealth = enemyHealth;
-            _collider = collider;
+            _delay = DelayValues.DefaultDestroyDelay;
         }
 
         public void Delay(float targetDelay) =>
@@ -23,13 +22,12 @@ namespace Gameplay.Character.Enemy
         public void Initialize() => 
             _enemyHealth.Dead += Destroy;
 
-        public void Dispose() => 
-            _enemyHealth.Dead -= Destroy;
-
-        private void Destroy()
+        public void Dispose()
         {
-            _collider.enabled = false;
-            Object.Destroy(_enemyHealth.gameObject, _delay);
+            _enemyHealth.Dead -= Destroy;
         }
+
+        private void Destroy() => 
+            Object.Destroy(_enemyHealth.gameObject, _delay);
     }
 }

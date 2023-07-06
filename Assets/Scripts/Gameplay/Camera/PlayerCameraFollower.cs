@@ -19,7 +19,7 @@ namespace Gameplay.Camera
             if(_player is null)
                 return;
             
-            transform.position = _player.Head.position;
+            transform.position = _player.Head.position + new Vector3(0, 0, -0.1f);
             // Vector3 targetPosition = _player.transform.position + _offset;
             // Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, _smoothSpeed * Time.deltaTime);
             // transform.position = smoothedPosition;

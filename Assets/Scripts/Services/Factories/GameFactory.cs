@@ -27,7 +27,7 @@ namespace Services.Factories
         public Player CreatePlayer(PlayerTypeId playerTypeId, Vector3 at) =>
             _playerFactory.Create(playerTypeId, at);
 
-        public Weapon CreateWeapon(WeaponTypeId weaponTypeId) =>
-            _weaponFactory.Create(weaponTypeId);
+        public Weapon CreateWeapon(WeaponTypeId weaponTypeId, Transform parent) =>
+            _weaponFactory.Create(weaponTypeId, parent);
     }
 }
