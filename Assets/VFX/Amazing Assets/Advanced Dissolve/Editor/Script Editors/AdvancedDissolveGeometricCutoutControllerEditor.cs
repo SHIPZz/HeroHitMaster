@@ -331,7 +331,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                         if (xyzPivotPointTransform.objectReferenceValue == null)
                         {
-                            if (GUILayout.Button("Create", GUILayout.MaxWidth(70)))
+                            if (GUILayout.Button("Get", GUILayout.MaxWidth(70)))
                             {
                                 xyzPivotPointTransform.objectReferenceValue = Utilities.CreateGeometricCutoutTargetObject(((AdvancedDissolveGeometricCutoutController)serializedObject.targetObject).transform, "Pivot Point", xyzPivotPointPosition.vector3Value, Quaternion.identity, Vector3.one, true);
                             }
@@ -371,7 +371,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                     if (startPositionTransform.objectReferenceValue == null)
                     {
-                        if (GUILayout.Button("Create", GUILayout.MaxWidth(70)))
+                        if (GUILayout.Button("Get", GUILayout.MaxWidth(70)))
                         {
                             startPositionTransform.objectReferenceValue = Utilities.CreateGeometricCutoutTargetObject(((AdvancedDissolveGeometricCutoutController)serializedObject.targetObject).transform, "Target (" + index + ")", startPosition.vector3Value, Quaternion.FromToRotation(Vector3.up, normal.vector3Value), Vector3.one, true);
                         }
@@ -411,7 +411,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                     if (startPositionTransform.objectReferenceValue == null)
                     {
-                        if (GUILayout.Button("Create", GUILayout.MaxWidth(70)))
+                        if (GUILayout.Button("Get", GUILayout.MaxWidth(70)))
                         {
                             startPositionTransform.objectReferenceValue = Utilities.CreateGeometricCutoutTargetObject(((AdvancedDissolveGeometricCutoutController)serializedObject.targetObject).transform, "Target (" + index + ")", startPosition.vector3Value, Quaternion.identity, Vector3.one, true);
                         }
@@ -444,7 +444,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                     if (startPositionTransform.objectReferenceValue == null)
                     {
-                        if (GUILayout.Button("Create", GUILayout.MaxWidth(70)))
+                        if (GUILayout.Button("Get", GUILayout.MaxWidth(70)))
                         {
                             startPositionTransform.objectReferenceValue = Utilities.CreateGeometricCutoutTargetObject(((AdvancedDissolveGeometricCutoutController)serializedObject.targetObject).transform, "Target (" + index + ")", startPosition.vector3Value, Quaternion.Euler(rotation.vector3Value), size.vector3Value, true);
                         }
@@ -486,7 +486,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                     if (startPositionTransform.objectReferenceValue == null)
                     {
-                        if (GUILayout.Button("Create", GUILayout.MaxWidth(70)))
+                        if (GUILayout.Button("Get", GUILayout.MaxWidth(70)))
                         {
                             startPositionTransform.objectReferenceValue = Utilities.CreateGeometricCutoutTargetObject(((AdvancedDissolveGeometricCutoutController)serializedObject.targetObject).transform, "Target (" + index + ") Start", startPosition.vector3Value, Quaternion.identity, Vector3.one, true);
                         }
@@ -511,7 +511,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                     if (endPositionTransform.objectReferenceValue == null)
                     {
-                        if (GUILayout.Button("Create", GUILayout.MaxWidth(70)))
+                        if (GUILayout.Button("Get", GUILayout.MaxWidth(70)))
                         {
                             endPositionTransform.objectReferenceValue = Utilities.CreateGeometricCutoutTargetObject(((AdvancedDissolveGeometricCutoutController)serializedObject.targetObject).transform, "Target (" + index + ") End", endPosition.vector3Value, Quaternion.identity, Vector3.one, true);
                         }
@@ -545,7 +545,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                     if (startPositionTransform.objectReferenceValue == null)
                     {
-                        if (GUILayout.Button("Create", GUILayout.MaxWidth(70)))
+                        if (GUILayout.Button("Get", GUILayout.MaxWidth(70)))
                         {
                             startPositionTransform.objectReferenceValue = Utilities.CreateGeometricCutoutTargetObject(((AdvancedDissolveGeometricCutoutController)serializedObject.targetObject).transform, "Target (" + index + ") Start", startPosition.vector3Value, Quaternion.identity, Vector3.one, true);
                         }
@@ -570,7 +570,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                     if (endPositionTransform.objectReferenceValue == null)
                     {
-                        if (GUILayout.Button("Create", GUILayout.MaxWidth(70)))
+                        if (GUILayout.Button("Get", GUILayout.MaxWidth(70)))
                         {
                             endPositionTransform.objectReferenceValue = Utilities.CreateGeometricCutoutTargetObject(((AdvancedDissolveGeometricCutoutController)serializedObject.targetObject).transform, "Target (" + index + ") End", endPosition.vector3Value, Quaternion.identity, Vector3.one, true);
                         }

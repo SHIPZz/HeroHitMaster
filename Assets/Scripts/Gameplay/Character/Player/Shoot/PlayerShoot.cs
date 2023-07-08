@@ -30,7 +30,7 @@ namespace Gameplay.Character.Player.Shoot
         public void Fire(Vector2 mousePosition)
         {
             Weapon.Weapon weapon = _weaponsProvider.CurrentWeapon;
-
+            
             if (!_canShoot || weapon is null)
                 return;
 
@@ -42,14 +42,14 @@ namespace Gameplay.Character.Player.Shoot
             }
 
             weapon.Shoot(hit.point, _startShootPosition.position);
-            _playerAnimator.SetShooting(true);
+            // _playerAnimator.SetShooting(true);
 
             _canShoot = false;
 
             DOTween.Sequence().AppendInterval(ShootDelay).OnComplete(() =>
             {
                 _canShoot = true;
-                _playerAnimator.SetShooting(false);
+                /*_playerAnimator.SetShooting(false)*/;
             });
         }
     }

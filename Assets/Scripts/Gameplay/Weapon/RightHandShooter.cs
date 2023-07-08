@@ -6,7 +6,7 @@ namespace Gameplay.Weapon
     {
         public override void Initialize()
         {
-            WeaponTypeId = WeaponTypeId.ShootFireBallHand;
+            WeaponTypeId = WeaponTypeId.FireBallShooter;
         }
     }
 }

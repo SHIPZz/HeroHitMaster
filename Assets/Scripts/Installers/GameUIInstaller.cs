@@ -1,5 +1,4 @@
 ﻿using Gameplay.PlayerSelection;
-using Gameplay.WeaponSelection;
 using Services.Factories;
 using Services.Providers;
 using UI;
@@ -10,17 +9,23 @@ namespace Installers
 {
     public class GameUIInstaller : MonoInstaller
     {
-        [SerializeField] private WeaponSelectorView _weaponSelectorView;
         [SerializeField] private PlayerSelectorView _playerSelectorView;
         [SerializeField] private WindowProvider _windowProvider;
-        
+
         public override void InstallBindings()
         {
-            BindWeaponSelectorView();
             BindPlayerSelectorView();
             BindWindowProvider();
             BindWindowService();
             BindUIFactory();
+            BindWeaponIconsProvider();
+        }
+
+        private void BindWeaponIconsProvider()
+        {
+            Container
+                .Bind<WeaponIconsProvider>()
+                .AsSingle();
         }
 
         private void BindUIFactory()
@@ -44,12 +49,6 @@ namespace Installers
                 .AsSingle();
         }
 
-        private void BindWeaponSelectorView()
-        {
-            Container
-                .BindInstance(_weaponSelectorView);
-        }
-        
         private void BindPlayerSelectorView()
         {
             Container

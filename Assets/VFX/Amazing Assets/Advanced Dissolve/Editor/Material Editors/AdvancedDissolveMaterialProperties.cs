@@ -1300,7 +1300,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
             if (suitableControllers.Count == 0)
             {
-                if (materialEditor.HelpBoxWithButton(new GUIContent("When Global Control is enabled, dissolve propreties of this material need to be updated from controller script.", iconError), new GUIContent("Create")))
+                if (materialEditor.HelpBoxWithButton(new GUIContent("When Global Control is enabled, dissolve propreties of this material need to be updated from controller script.", iconError), new GUIContent("Get")))
                 {
                     GameObject go = new GameObject("AD Properties Controller");
                     Undo.RegisterCreatedObjectUndo(go, "Created Controller Script");
@@ -1394,7 +1394,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
             {
                 if (suitableScriptWithoutMaterial.Count == 0)
                 {
-                    if (materialEditor.HelpBoxWithButton(new GUIContent("Geometric properties need to be updated from controller script.", iconError), new GUIContent("Create")))
+                    if (materialEditor.HelpBoxWithButton(new GUIContent("Geometric properties need to be updated from controller script.", iconError), new GUIContent("Get")))
                     {
                         Utilities.CreategeometricCutoutControllerscripWithObjects(material, globalControlID, cutoutGeometricType, cutoutGeometricCount);
                     }
@@ -1460,7 +1460,7 @@ namespace AmazingAssets.AdvancedDissolveEditor
 
                             using (new EditorGUIHelper.GUIBackgroundColor(GUI.skin.settings.selectionColor))
                             {
-                                if (GUI.Button(drawRect, new GUIContent("Create", "Create new controller script for this material")))
+                                if (GUI.Button(drawRect, new GUIContent("Get", "Get new controller script for this material")))
                                 {
                                     Utilities.CreategeometricCutoutControllerscripWithObjects(material, globalControlID, cutoutGeometricType, cutoutGeometricCount);
                                 }

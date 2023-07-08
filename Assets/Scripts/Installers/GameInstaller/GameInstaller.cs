@@ -1,7 +1,8 @@
 using Gameplay.PlayerSelection;
-using Gameplay.WeaponSelection;
 using Services.Factories;
+using Services.GameObjectsPoolAccess;
 using Services.Providers;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -27,8 +28,38 @@ namespace Installers.GameInstaller
             BindWeaponsProvider();
             BindGameObjectPoolProvider();
             BindBulletFactory();
-            BindWeaponSelection();
             BindPlayerSelection();
+            BindPlayerFactoryByWeaponType();
+            BindWeaponSelection();
+            BindPlayerStorage();
+            BindPlayerSwitcher();
+        }
+
+        private void BindPlayerSwitcher()
+        {
+            Container
+                .BindInterfacesAndSelfTo<PlayerSwitcherHandler>()
+                .AsSingle();
+        }
+
+        private void BindPlayerStorage()
+        {
+            Container
+                .Bind<PlayerStorage>()
+                .AsSingle();
+        }
+
+        private void BindWeaponSelection()
+        {
+            Container.Bind<WeaponCreator>().AsSingle();
+            Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
+        }
+
+        private void BindPlayerFactoryByWeaponType()
+        {
+            Container
+                .Bind<PlayerStorageByWeaponType>()
+                .AsSingle();
         }
 
         private void BindPlayerSelection()
@@ -39,17 +70,6 @@ namespace Installers.GameInstaller
 
             Container
                 .BindInterfacesAndSelfTo<PlayerSelectorPresenter>()
-                .AsSingle();
-        }
-
-        private void BindWeaponSelection()
-        {
-            Container
-                .Bind<WeaponSelector>()
-                .AsSingle();
-
-            Container
-                .BindInterfacesAndSelfTo<WeaponSelectorPresenter>()
                 .AsSingle();
         }
 

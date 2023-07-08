@@ -12,13 +12,13 @@ namespace ScriptableObjects.PlayerSettings
         [SerializeField] private int _cost;
         [SerializeField] private Animator _animator;
         [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
-        [SerializeField] private PlayerTypeId playerTypeId;
+        [SerializeField] private PlayerTypeId _playerTypeId;
 
         public SkinnedMeshRenderer SkinnedMeshRenderer => _skinnedMeshRenderer;
         public Player PlayerPrefab => _playerPrefab;
         public int Cost => _cost;
         public Player PlayerViewPrefab => _playerViewPrefab;
-        public PlayerTypeId PlayerTypeId => playerTypeId;
+        public PlayerTypeId PlayerTypeId => _playerTypeId;
         public Animator Animator => _animator;
     }
 }

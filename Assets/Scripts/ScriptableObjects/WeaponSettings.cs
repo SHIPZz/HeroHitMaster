@@ -1,5 +1,6 @@
 ﻿using Enums;
 using Gameplay.Weapon;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +14,11 @@ namespace ScriptableObjects
         [SerializeField] private Weapon _weaponPrefab;
         [SerializeField] private int _price;
         [SerializeField] private Animator _animator;
+        [SerializeField] private WeaponSelectorView weaponSelectorView;
 
         public Weapon WeaponPrefab => _weaponPrefab;
+
+        public WeaponSelectorView WeaponSelectorView => weaponSelectorView;
 
         public WeaponTypeId WeaponTypeId => _weaponTypeId;
 

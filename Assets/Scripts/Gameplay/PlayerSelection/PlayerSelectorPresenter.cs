@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using Enums;
+using UI;
 using Zenject;
 
 namespace Gameplay.PlayerSelection
@@ -7,27 +10,29 @@ namespace Gameplay.PlayerSelection
     {
         private readonly PlayerSelectorView _playerSelectorView;
         private readonly PlayerSelector _playerSelector;
+        private readonly Dictionary<WeaponTypeId, WeaponSelectorView> _icons;
 
-        public PlayerSelectorPresenter(PlayerSelectorView playerSelectorView, PlayerSelector playerSelector)
+        public PlayerSelectorPresenter(WeaponIconsProvider weaponIconsProvider,PlayerSelector playerSelector)
         {
-            _playerSelectorView = playerSelectorView;
+            _icons = weaponIconsProvider.Icons;
+            
             _playerSelector = playerSelector;
         }
 
         public void Initialize()
         {
-            _playerSelectorView.ApplyButtonClicked += _playerSelector.ApplyPlayer;
-            _playerSelectorView.RightArrowClicked += _playerSelector.SelectNextPlayer;
-            _playerSelectorView.LeftArrowClicked += _playerSelector.SelectPreviousPlayer;
-            _playerSelector.PlayerChanged += _playerSelectorView.Show;
+            foreach (var weaponSelectorView in _icons.Values)
+            {
+                weaponSelectorView.Choosed += _playerSelector.SelectByWeaponType;
+            }
         }
 
         public void Dispose()
         {
-            _playerSelector.PlayerChanged -= _playerSelectorView.Show;
-            _playerSelectorView.ApplyButtonClicked -= _playerSelector.ApplyPlayer;
-            _playerSelectorView.RightArrowClicked -= _playerSelector.SelectNextPlayer;
-            _playerSelectorView.LeftArrowClicked -= _playerSelector.SelectPreviousPlayer;
+            foreach (var weaponSelectorView in _icons.Values)
+            {
+                weaponSelectorView.Choosed -= _playerSelector.SelectByWeaponType;
+            }
         }
     }
 }

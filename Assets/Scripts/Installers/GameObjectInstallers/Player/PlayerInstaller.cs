@@ -1,7 +1,9 @@
 using Gameplay.Character.Enemy;
 using Gameplay.Character.Player;
 using Gameplay.Character.Player.Shoot;
+using Gameplay.PlayerSelection;
 using Gameplay.Web;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -28,6 +30,8 @@ namespace Installers.GameObjectInstallers.Player
             Container.BindInterfacesAndSelfTo<PlayerShootMediator>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
             Container.BindInterfacesTo<PlayerMediator>().AsSingle();
+            // Container.Bind<WeaponCreator>().AsSingle();
+            // Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
         }
 
         private void BindAsSingle()

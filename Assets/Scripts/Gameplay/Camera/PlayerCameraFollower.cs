@@ -14,18 +14,19 @@ namespace Gameplay.Camera
         private PlayerProvider _playerProvider;
         private Player _player;
 
+        [Inject]
+        private void Construct(PlayerProvider playerProvider) =>
+            _playerProvider = playerProvider;
+
         private void LateUpdate()
         {
-            if(_player is null)
-                return;
+            // if(_player is null || _player.isActiveAndEnabled == false)
+            //     return;
             
-            transform.position = _player.Head.position + new Vector3(0, 0, -0.1f);
+            transform.position = _playerProvider.CurrentPlayer.Head.position + new Vector3(0, 0, -0.1f);
             // Vector3 targetPosition = _player.transform.position + _offset;
             // Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, _smoothSpeed * Time.deltaTime);
             // transform.position = smoothedPosition;
         }
-
-        public void SetPlayer(Player player) =>
-            _player = player;
     }
 }

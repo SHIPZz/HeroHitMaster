@@ -25,14 +25,10 @@ namespace Gameplay.Character.Enemy
         private void Die() =>
             Dead?.Invoke();
 
-        public void Initialize()
-        {
+        public void Initialize() => 
             _health.ValueZeroReached += Die;
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() => 
             _health.ValueZeroReached -= Die;
-        }
     }
 }

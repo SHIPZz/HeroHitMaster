@@ -20,15 +20,15 @@ namespace UI
         private GameObject _currentGroup;
         private int _itemCount;
 
-        private Dictionary<WeaponTypeId, Image> _icons = new();
+        private Dictionary<WeaponTypeId, WeaponSelectorView> _icons = new();
 
         [Inject]
-        private void Construct(UIFactory uiFactory)
+        private void Construct(WeaponIconsProvider weaponIconsProvider)
         {
-            _icons = uiFactory.CreateWeaponIcons();
+            _icons = weaponIconsProvider.Icons;
             SetInitialValues();
 
-            CreateIcons();
+            FillInventory();
         }
 
         private void SetInitialValues()
@@ -38,18 +38,16 @@ namespace UI
             _itemCount = 0;
         }
 
-        private void CreateIcons()
+        private void FillInventory()
         {
             foreach (var icon in _icons.Values)
             {
-                AddToLayoutGroup(icon);
+                AddToLayoutGroup(icon.gameObject);
             }
         }
 
-        private void AddToLayoutGroup(Image icon)
+        private void AddToLayoutGroup(GameObject item)
         {
-            GameObject item = icon.gameObject;
-
             if (_currentGroup == null || _itemCount % _itemsPerGroup == 0)
             {
                 _currentGroup = CreateItemGroup();

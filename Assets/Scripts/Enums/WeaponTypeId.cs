@@ -2,8 +2,9 @@
 {
     public enum WeaponTypeId
     {
-        ShootSpiderHand = 0,
-        ShootWolverineHand = 1,
-        ShootFireBallHand = 2,
+        WebSpiderShooter = 0,
+        SmudgeWebShooter = 1,
+        SharpWebShooter = 2,
+        FireBallShooter = 3,
     }
 }

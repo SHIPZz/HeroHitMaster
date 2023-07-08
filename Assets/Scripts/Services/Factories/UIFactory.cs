@@ -3,6 +3,7 @@ using Enums;
 using Gameplay.Character.Player;
 using ScriptableObjects.PlayerSettings;
 using Services.Providers;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -26,15 +27,15 @@ namespace Services.Factories
             _weaponsProvider = weaponsProvider;
         }
 
-        public Dictionary<WeaponTypeId, Image> CreateWeaponIcons()
+        public Dictionary<WeaponTypeId, WeaponSelectorView> CreateWeaponIcons()
         {
-            var weaponIcons = new Dictionary<WeaponTypeId, Image>();
+            var weaponIcons = new Dictionary<WeaponTypeId, WeaponSelectorView>();
             Transform parent = _locationProvider.WeaponIconParentTransform;
 
             foreach (var weaponSetting in _weaponsProvider.WeaponConfigs.Values)
             {
                 var weaponIcon =
-                    _diContainer.InstantiatePrefabForComponent<Image>(weaponSetting.ImagePrefab, parent);
+                    _diContainer.InstantiatePrefabForComponent<WeaponSelectorView>(weaponSetting.WeaponSelectorView, parent);
 
                 weaponIcons[weaponSetting.WeaponTypeId] = weaponIcon;
             }

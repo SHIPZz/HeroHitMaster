@@ -9,24 +9,10 @@ namespace Services.Providers
     {
         private readonly List<PlayerSettings> _playerSettings;
 
-        public PlayerProvider(List<PlayerSettings> playerSettings)
-        {
-            _playerSettings = playerSettings;
-            FillDicitonary();
-        }
-        
-        public Dictionary<PlayerTypeId, PlayerSettings> PlayerConfigs { get; set; } = new();
-
         public List<PlayerTypeId> AvailableCharacters { get; set; } = new();
-        
-        public Player CurrentPlayer { get; set; }
 
-        private void FillDicitonary()
-        {
-            foreach (var playerSetting in _playerSettings)
-            {
-                PlayerConfigs[playerSetting.PlayerTypeId] = playerSetting;
-            }
-        }
+        public Dictionary<PlayerTypeId, Player> Players { get; set; } = new();
+
+        public Player CurrentPlayer { get; set; }
     }
 }

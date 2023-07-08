@@ -1,15 +1,13 @@
 ﻿using System;
 using Enums;
-using Extensions;
 using Gameplay.Camera;
 using Gameplay.PlayerSelection;
 using Gameplay.Weapon;
-using Gameplay.WeaponSelection;
 using Services.Factories;
+using Services.GameObjectsPoolAccess;
 using Services.Providers;
 using UnityEngine;
 using Zenject;
-using Zenject.SpaceFighter;
 using Player = Gameplay.Character.Player.Player;
 
 namespace GameInit
@@ -21,61 +19,50 @@ namespace GameInit
         private readonly CameraProvider _cameraProvider;
         private readonly PlayerProvider _playerProvider;
         private readonly PlayerSelector _playerSelector;
-        private readonly WeaponSelector _weaponSelector;
         private readonly WeaponsProvider _weaponsProvider;
-        private PlayerCameraFollower _playerCamera;
-        private Weapon _weapon;
-        private Player _player;
+        private readonly PlayerStorage _playerStorage;
 
-        public GameInit(GameFactory gameFactory, 
-            LocationProvider locationProvider, 
+        public GameInit(GameFactory gameFactory,
+            LocationProvider locationProvider,
             CameraProvider cameraProvider,
-            PlayerProvider playerProvider, 
-            PlayerSelector playerSelector, 
-            WeaponSelector weaponSelector,  
-            WeaponsProvider weaponsProvider)
+            PlayerProvider playerProvider,
+            PlayerSelector playerSelector,
+            WeaponsProvider weaponsProvider, PlayerStorage playerStorage)
         {
             _gameFactory = gameFactory;
             _locationProvider = locationProvider;
             _cameraProvider = cameraProvider;
             _playerProvider = playerProvider;
             _playerSelector = playerSelector;
-            _weaponSelector = weaponSelector;
             _weaponsProvider = weaponsProvider;
+            _playerStorage = playerStorage;
         }
 
         public void Initialize()
         {
-            InitializePlayerCamera();
-            _playerSelector.PlayerSelected += InitializePlayer;
-            _weaponSelector.WeaponSelected += InitializeWeapon;
-        }
-
-        private void InitializeWeapon(WeaponTypeId weaponTypeId)
-        {
-           _weapon = _gameFactory.CreateWeapon(weaponTypeId,null);
-           _weaponsProvider.CurrentWeapon = _weapon;
-        }
-
-        public void Dispose()
-        {
-            _playerSelector.PlayerSelected -= InitializePlayer;
-            _weaponSelector.WeaponSelected -= InitializeWeapon;
-        }
-
-        private void InitializePlayerCamera()
-        {
-            _playerCamera =  _gameFactory.CreateCamera(_locationProvider.CameraSpawnPoint.position);
-            _cameraProvider.Camera = _playerCamera.GetComponent<Camera>();
-        }
-
-        private void InitializePlayer(PlayerTypeId playerTypeId)
-        {
-            Player player = _gameFactory.CreatePlayer(playerTypeId, _locationProvider.PlayerSpawnPoint.position);
-            _playerCamera.SetPlayer(player);
-            _player = player;
-
+            Player player = InitializeInitialPlayer(PlayerTypeId.Spider);
+            PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
+            Weapon weapon = InitializeInitialWeapon(WeaponTypeId.WebSpiderShooter, player.transform);
             _playerProvider.CurrentPlayer = player;
+            _weaponsProvider.CurrentWeapon = weapon;
         }
+
+        public void Dispose() { }
+
+        private Weapon InitializeInitialWeapon(WeaponTypeId weaponTypeId, Transform parent) =>
+            _gameFactory.CreateWeapon(weaponTypeId, parent);
+
+        private PlayerCameraFollower InitializePlayerCamera()
+        {
+            PlayerCameraFollower playerCamera = _gameFactory.CreateCamera(_locationProvider.CameraSpawnPoint.position);
+            _cameraProvider.Camera = playerCamera.GetComponent<Camera>();
+            return playerCamera;
+        }
+
+        private Player InitializeInitialPlayer(PlayerTypeId playerTypeId) =>
+            _playerStorage.Get(playerTypeId);
+
+        // private Player InitializeInitialPlayer(PlayerTypeId playerTypeId) =>
+        //     _gameFactory.CreatePlayer(playerTypeId, _locationProvider.PlayerSpawnPoint.position);
     }
 }
