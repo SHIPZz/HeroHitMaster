@@ -12,10 +12,11 @@ namespace Installers.GameObjectInstallers.Bullet
 
         public override void InstallBindings()
         {
+            Container.BindInstance(_triggerObserver);
+            
             Container.BindInterfacesAndSelfTo<IBullet>().FromInstance(_bullet)
                 .AsSingle();
 
-            Container.BindInstance(_triggerObserver);
         }
     }
 }

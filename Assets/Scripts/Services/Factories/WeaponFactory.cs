@@ -21,7 +21,8 @@ namespace Services.Factories
             _weapons = new Dictionary<WeaponTypeId, string>()
             {
                 {WeaponTypeId.ShootSpiderHand, AssetPath.SpiderWebGun},
-                {WeaponTypeId.ShootWolverineHand, AssetPath.WolverineWebGun}
+                {WeaponTypeId.ShootWolverineHand, AssetPath.WolverineWebGun},
+                {WeaponTypeId.ShootFireBallHand, AssetPath.FireBallRightHand}
             };
         }
 

@@ -1,10 +1,12 @@
 ﻿using DG.Tweening;
 using Gameplay.Bullet;
+using Gameplay.Web;
 using UnityEngine;
+using Zenject;
 
-namespace Gameplay.Web
+namespace Gameplay.Weapon
 {
-    public class WebShooter : Weapon.Weapon
+    public class WebShooter : Weapon
     {
         public override void Initialize()
         {
@@ -19,7 +21,7 @@ namespace Gameplay.Web
         {
             IBullet bullet = BulletFactory.Pop();
             BulletMovement.Move(target, bullet, initialPosition, BulletMoveDuration,bullet.Rigidbody);
-            EffectOnShoot.PlayEffects();
+            // EffectOnShoot.PlayEffects();
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
         }
     }

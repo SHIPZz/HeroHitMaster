@@ -14,7 +14,7 @@ namespace Installers.GameObjectInstallers.Enemy
         [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
         [SerializeField] private Animator _animator;
         [SerializeField] private Collider _collider;
-        [SerializeField] private EnemyHealth _enemyHealth;
+        [SerializeField] private CharacterHealth characterHealth;
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private ParticleSystem _hitEffect;
         [SerializeField] private ParticleSystem _dieEffect;
@@ -30,7 +30,7 @@ namespace Installers.GameObjectInstallers.Enemy
             Container.Bind<IMaterialChanger>().To<SkinnedMaterialChanger>()
                 .FromComponentOn(gameObject).AsSingle();
             
-            Container.Bind<IHealth>().FromMethod(context => context.Container.Resolve<EnemyHealth>().Health);
+            Container.Bind<IHealth>().FromMethod(context => context.Container.Resolve<CharacterHealth>().Health);
         }
 
         private void BindInstances()
@@ -43,12 +43,13 @@ namespace Installers.GameObjectInstallers.Enemy
 
         private void BindInterfacesAndSelfTo()
         {
-            Container.BindInterfacesAndSelfTo<EnemyHealth>().FromInstance(_enemyHealth).AsSingle();
+            Container.BindInterfacesAndSelfTo<CharacterHealth>().FromInstance(characterHealth).AsSingle();
             Container.BindInterfacesAndSelfTo<EnemyDestroyOnDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<EffectOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<DeathEffectOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<NonCollisionOnDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<SkinnedMeshVisibilityHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DestroyEnemyEffectsHandler>().AsSingle();
         }
 
         private void BindEffects()

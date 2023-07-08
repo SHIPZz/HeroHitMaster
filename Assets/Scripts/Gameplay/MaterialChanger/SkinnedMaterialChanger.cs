@@ -3,7 +3,6 @@ using AmazingAssets.AdvancedDissolve;
 using Constants;
 using DG.Tweening;
 using Gameplay.Character.Enemy;
-using Gameplay.EffectPlaying;
 using UnityEngine;
 using Zenject;
 
@@ -16,24 +15,17 @@ namespace Gameplay.MaterialChanger
 
         private SkinnedMeshRenderer _skinnedMeshRenderer;
         private EnemyDestroyOnDeath _enemyDestroyOnDeath;
-        private DeathEffectOnHit _deathEffectOnHit;
-        private EffectOnHit _effectOnHit;
         public event Action Changed;
 
         [Inject]
-        private void Construct(SkinnedMeshRenderer skinnedMeshRenderer, EnemyDestroyOnDeath enemyDestroyOnDeath,
-            EffectOnHit effectOnHit,  DeathEffectOnHit deathEffectOnHit)
+        private void Construct(SkinnedMeshRenderer skinnedMeshRenderer, EnemyDestroyOnDeath enemyDestroyOnDeath)
         {
-            _effectOnHit = effectOnHit;
-            _deathEffectOnHit = deathEffectOnHit;
             _enemyDestroyOnDeath = enemyDestroyOnDeath;
             _skinnedMeshRenderer = skinnedMeshRenderer;
         }
 
         public void Change(Material material)
         {
-            _deathEffectOnHit.Dispose();
-            _effectOnHit.Dispose();
             SetStartValues(material);
             
             DOTween.To(() => 0, x =>

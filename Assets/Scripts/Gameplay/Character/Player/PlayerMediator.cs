@@ -68,8 +68,8 @@ namespace Gameplay.Character.Player
         private void OnRunAction(InputAction.CallbackContext context)
         {
             _isRunning = context.ReadValueAsButton();
-            _playerMovement.SetRunning(_isRunning);
-            _playerAnimator.SetRunning(_isRunning);
+            // _playerMovement.SetRunning(_isRunning);
+            // _playerAnimator.SetRunning(_isRunning);
         }
 
         public void Tick()
@@ -80,7 +80,7 @@ namespace Gameplay.Character.Player
 
             float speed = _moveDirection == Vector2.zero ? 0f :
                 _isRunning ? _runningAnimationSpeed : _walkingAnimationSpeed;
-            _playerAnimator.SetSpeed(speed, 0.1f, Time.deltaTime);
+            // _playerAnimator.SetSpeed(speed, 0.1f, Time.deltaTime);
         }
     }
 }

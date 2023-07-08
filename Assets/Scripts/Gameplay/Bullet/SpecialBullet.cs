@@ -12,8 +12,11 @@ namespace Gameplay.Bullet
 
         [SerializeField] private Material _material;
 
-        public override void Initialize() => 
+        public override void Initialize()
+        {
             TriggerObserver.Entered += DoDamage;
+            Damage = DestroyDamage;
+        }
 
         public override void Dispose() => 
             TriggerObserver.Entered -= DoDamage;
@@ -25,7 +28,7 @@ namespace Gameplay.Bullet
                 return;
 
             materialChanger.Change(_material);
-            damageable.TakeDamage(DestroyDamage);
+            damageable.TakeDamage(Damage);
             this.SetActive(gameObject,false,0.2f);
         }
     }

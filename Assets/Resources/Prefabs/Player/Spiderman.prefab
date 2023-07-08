@@ -334,10 +334,10 @@ Animator:
   m_GameObject: {fileID: 1522591971707442030}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 224b4c56bb18d674ab90f1a2f0c60e3e, type: 3}
-  m_Controller: {fileID: 9100000, guid: 8c9b4e79f3b4afe4e9956435f825290c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 96a7c2e1ddffe7a4a82624729b7b82af, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -361,6 +361,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 5227176327529255851}
   _characterController: {fileID: 6922867484241855201}
   _initialShootPosition: {fileID: 1020078374127000589}
+  _characterHealth: {fileID: 0}
 --- !u!54 &5227176327529255851
 Rigidbody:
   m_ObjectHideFlags: 0

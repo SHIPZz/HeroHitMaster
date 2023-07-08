@@ -7,7 +7,7 @@ namespace Gameplay.Character.Player.Shoot
 {
     public class PlayerShoot
     {
-        private const float ShootDistance = 100;
+        private const float ShootDistance = 1000;
         private const float ShootDelay = 0.5f;
 
         private readonly CameraProvider _cameraProvider;
@@ -36,17 +36,13 @@ namespace Gameplay.Character.Player.Shoot
 
             Ray ray = _cameraProvider.Camera.ScreenPointToRay(mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (!Physics.Raycast(ray, out RaycastHit hit))
             {
-                weapon.Shoot(hit.point, _startShootPosition.position);
-                _playerAnimator.SetShooting(true);
+                return;
             }
-            else
-            {
-                Vector3 target = ray.GetPoint(ShootDistance);
-                weapon.Shoot(target, _startShootPosition.position);
-                _playerAnimator.SetShooting(true);
-            }
+
+            weapon.Shoot(hit.point, _startShootPosition.position);
+            _playerAnimator.SetShooting(true);
 
             _canShoot = false;
 

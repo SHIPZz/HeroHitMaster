@@ -32,7 +32,8 @@ namespace Services.Factories
             _bullets = new Dictionary<WeaponTypeId, string>()
             {
                 { WeaponTypeId.ShootSpiderHand, AssetPath.SpiderWeb },
-                { WeaponTypeId.ShootWolverineHand, AssetPath.WolverineWeb }
+                { WeaponTypeId.ShootWolverineHand, AssetPath.WolverineWeb },
+                { WeaponTypeId.ShootFireBallHand, AssetPath.FireBall }
             };
         }
 

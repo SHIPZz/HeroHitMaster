@@ -19,12 +19,10 @@ namespace Gameplay.Weapon
         protected IBulletMovement BulletMovement;
 
         protected BulletFactory BulletFactory;
-        protected EffectOnShoot EffectOnShoot;
 
         [Inject]
-        private void Construct(BulletFactory bulletFactory, EffectOnShoot effectOnShoot)
+        private void Construct(BulletFactory bulletFactory)
         {
-            EffectOnShoot = effectOnShoot;
             BulletFactory = bulletFactory;
         }
 
@@ -32,7 +30,6 @@ namespace Gameplay.Weapon
         {
             IBullet bullet = BulletFactory.Pop();
             BulletMovement.Move(target, bullet, initialPosition, BulletMoveDuration,bullet.Rigidbody);
-            EffectOnShoot.PlayEffects();
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
         }
         

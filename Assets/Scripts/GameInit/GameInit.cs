@@ -53,7 +53,7 @@ namespace GameInit
 
         private void InitializeWeapon(WeaponTypeId weaponTypeId)
         {
-           _weapon = _gameFactory.CreateWeapon(weaponTypeId,_player.gameObject.transform);
+           _weapon = _gameFactory.CreateWeapon(weaponTypeId,null);
            _weaponsProvider.CurrentWeapon = _weapon;
         }
 

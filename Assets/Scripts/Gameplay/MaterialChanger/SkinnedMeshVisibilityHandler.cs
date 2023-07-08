@@ -10,7 +10,7 @@ namespace Gameplay.MaterialChanger
         private readonly IHealth _health;
         private readonly IMaterialChanger _skinnedMaterialChanger;
         private readonly SkinnedMeshRenderer _skinnedMeshRenderer;
-        private bool _materialChanged;
+        private bool _isMaterialChanged;
 
         public SkinnedMeshVisibilityHandler(IHealth health, IMaterialChanger skinnedMaterialChanger,
             SkinnedMeshRenderer skinnedMeshRenderer)
@@ -33,11 +33,11 @@ namespace Gameplay.MaterialChanger
         }
 
         private void MaterialChanged() => 
-            _materialChanged = true;
+            _isMaterialChanged = true;
 
         private void Disable()
         {
-            if(_materialChanged)
+            if(_isMaterialChanged)
                 return;
             
             _skinnedMeshRenderer.enabled = false;
