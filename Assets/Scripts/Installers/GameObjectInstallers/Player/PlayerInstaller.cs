@@ -30,13 +30,13 @@ namespace Installers.GameObjectInstallers.Player
             Container.BindInterfacesAndSelfTo<PlayerShootMediator>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
             Container.BindInterfacesTo<PlayerMediator>().AsSingle();
-            // Container.Bind<WeaponCreator>().AsSingle();
+            // Container.Bind<WeaponSelector>().AsSingle();
             // Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
         }
 
         private void BindAsSingle()
         {
-            Container.Bind<WebMovement>().AsSingle();
+            Container.BindInterfacesTo<WebMovement>().AsSingle();
             Container.Bind<PlayerMovement>().AsSingle();
             Container.Bind<PlayerAnimator>().AsSingle();
             Container.Bind<PlayerShoot>().AsSingle();

@@ -8,14 +8,12 @@ namespace Gameplay.Bullet
 {
     public class SpecialBullet : Bullet
     {
-        private const int DestroyDamage = 1000;
-
         [SerializeField] private Material _material;
 
         public override void Initialize()
         {
             TriggerObserver.Entered += DoDamage;
-            Damage = DestroyDamage;
+            gameObject.layer = 11;
         }
 
         public override void Dispose() => 
@@ -26,6 +24,8 @@ namespace Gameplay.Bullet
             if (!other.gameObject.TryGetComponent(out IMaterialChanger materialChanger) ||
                 !other.gameObject.TryGetComponent(out IDamageable damageable))
                 return;
+            
+            Debug.Log(other.gameObject.name);
 
             materialChanger.Change(_material);
             damageable.TakeDamage(Damage);

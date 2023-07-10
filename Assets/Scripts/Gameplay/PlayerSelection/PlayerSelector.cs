@@ -1,29 +1,25 @@
 ﻿using System;
 using Enums;
 using Gameplay.Character.Player;
-using Services.GameObjectsPoolAccess;
 using Services.Providers;
+using Services.Storages;
 
 namespace Gameplay.PlayerSelection
 {
     public class PlayerSelector
     {
-        private readonly PlayerProvider _playerProvider;
-        private readonly PlayerStorage _playerStorage;
-        private PlayerTypeId _playerTypeId;
-        private  int _currentPlayerId;
+        private readonly IPlayerStorage _playerStorage;
 
-        public event Action<Player> OldPlayerChanged;
         public event Action<WeaponTypeId> NewPlayerChanged;
 
-        public PlayerSelector(PlayerProvider playerProvider)
+        public PlayerSelector(IPlayerStorage playerStorage)
         {
-            _playerProvider = playerProvider;
+            _playerStorage = playerStorage;
         }
 
         public void SelectByWeaponType(WeaponTypeId weaponTypeId)
-        { 
-            OldPlayerChanged?.Invoke(_playerProvider.CurrentPlayer);
+        {
+            _playerStorage.Get(weaponTypeId);
             NewPlayerChanged?.Invoke(weaponTypeId);
         }
     }

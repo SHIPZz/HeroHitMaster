@@ -11,6 +11,7 @@ namespace Installers
     {
         [SerializeField] private PlayerSelectorView _playerSelectorView;
         [SerializeField] private WindowProvider _windowProvider;
+        [SerializeField] private WeaponIconsProvider _weaponIconsProvider;
 
         public override void InstallBindings()
         {
@@ -24,8 +25,7 @@ namespace Installers
         private void BindWeaponIconsProvider()
         {
             Container
-                .Bind<WeaponIconsProvider>()
-                .AsSingle();
+                .BindInstance(_weaponIconsProvider);
         }
 
         private void BindUIFactory()

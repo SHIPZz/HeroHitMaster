@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8139934096566518623}
   - component: {fileID: 8110866113325747807}
   - component: {fileID: 8118894265983685911}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8136042766153654885}
   - component: {fileID: 8176561923775407225}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 8131414121560080137}
   - component: {fileID: 5060895568581285186}
   - component: {fileID: 5010306809371314558}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5091,7 +5091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 0}
+  _bullet: {fileID: 5010306809371314558}
   _triggerObserver: {fileID: 5161083994987592320}
 --- !u!114 &-141079101589294093
 MonoBehaviour:

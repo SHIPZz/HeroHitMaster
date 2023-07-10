@@ -21,7 +21,6 @@ namespace Gameplay.Weapon
         {
             IBullet bullet = BulletFactory.Pop();
             BulletMovement.Move(target, bullet, initialPosition, BulletMoveDuration,bullet.Rigidbody);
-            Debug.Log("shoot");
             // EffectOnShoot.PlayEffects();
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
         }

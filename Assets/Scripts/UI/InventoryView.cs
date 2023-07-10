@@ -101,7 +101,7 @@ namespace UI
         // }
     
 
-// public class Inventory
+// public class Shop
 // {
 //     private readonly List<Cell> _cells = new List<Cell>();
 //     private int _count;
@@ -153,9 +153,9 @@ namespace UI
 //     public event Action<DynamicItem> ItemAdded;
 //     public event Action<DynamicItem> ItemRemoved;
 //
-//     private readonly Inventory _inventory;
+//     private readonly Shop _inventory;
 //     
-//     public InventoryPresenter(Inventory inventory)
+//     public InventoryPresenter(Shop inventory)
 //     {
 //         _inventory = inventory;
 //     }

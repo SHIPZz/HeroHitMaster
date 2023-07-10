@@ -20,9 +20,10 @@ namespace Services.Factories
             _diContainer = diContainer;
             _weapons = new Dictionary<WeaponTypeId, string>()
             {
-                {WeaponTypeId.WebSpiderShooter, AssetPath.SpiderWebGun},
-                {WeaponTypeId.SmudgeWebShooter, AssetPath.WolverineWebGun},
-                {WeaponTypeId.FireBallShooter, AssetPath.FireBallRightHand}
+                {WeaponTypeId.WebSpiderShooter, AssetPath.SpiderWebShooter},
+                {WeaponTypeId.SmudgeWebShooter, AssetPath.SmudgeWebShooter},
+                {WeaponTypeId.FireBallShooter, AssetPath.FireBallRightHand},
+                {WeaponTypeId.SharpWebShooter, AssetPath.SharpWebShooter}
             };
         }
 

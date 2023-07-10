@@ -42,14 +42,14 @@ namespace Gameplay.Character.Player.Shoot
             }
 
             weapon.Shoot(hit.point, _startShootPosition.position);
-            // _playerAnimator.SetShooting(true);
+            _playerAnimator.SetShooting(true);
 
             _canShoot = false;
 
             DOTween.Sequence().AppendInterval(ShootDelay).OnComplete(() =>
             {
                 _canShoot = true;
-                /*_playerAnimator.SetShooting(false)*/;
+                _playerAnimator.SetShooting(false);
             });
         }
     }

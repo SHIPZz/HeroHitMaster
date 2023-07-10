@@ -3,28 +3,31 @@ using Enums;
 using Gameplay.Weapon;
 using Services.Factories;
 using Services.Providers;
+using Services.Storages;
 
 namespace UI
 {
-    public class WeaponCreator
+    public class WeaponSelector
     {
         private readonly WeaponFactory _weaponFactory;
         private readonly WeaponsProvider _weaponsProvider;
         private readonly PlayerProvider _playerProvider;
+        private readonly IWeaponStorage _weaponStorage;
 
         public event Action<Weapon> OldWeaponChanged;
         public event Action<Weapon> NewWeaponChanged;
 
-        public WeaponCreator(WeaponFactory weaponFactory,  WeaponsProvider weaponsProvider, PlayerProvider playerProvider)
+        public WeaponSelector(WeaponsProvider weaponsProvider, PlayerProvider playerProvider, IWeaponStorage weaponStorage)
         {
-            _weaponFactory = weaponFactory;
             _weaponsProvider = weaponsProvider;
             _playerProvider = playerProvider;
+            _weaponStorage = weaponStorage;
         }
 
         public void CreateWeapon(WeaponTypeId weaponTypeId)
         { 
-            var weapon =   _weaponFactory.Create(weaponTypeId, _playerProvider.CurrentPlayer.gameObject.transform);
+            Weapon weapon =   _weaponStorage.Get(weaponTypeId);
+            weapon.gameObject.transform.SetParent(_playerProvider.CurrentPlayer.transform);
            _weaponsProvider.CurrentWeapon = weapon;
         }
     }

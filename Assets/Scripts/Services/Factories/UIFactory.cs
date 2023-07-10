@@ -27,22 +27,6 @@ namespace Services.Factories
             _weaponsProvider = weaponsProvider;
         }
 
-        public Dictionary<WeaponTypeId, WeaponSelectorView> CreateWeaponIcons()
-        {
-            var weaponIcons = new Dictionary<WeaponTypeId, WeaponSelectorView>();
-            Transform parent = _locationProvider.WeaponIconParentTransform;
-
-            foreach (var weaponSetting in _weaponsProvider.WeaponConfigs.Values)
-            {
-                var weaponIcon =
-                    _diContainer.InstantiatePrefabForComponent<WeaponSelectorView>(weaponSetting.WeaponSelectorView, parent);
-
-                weaponIcons[weaponSetting.WeaponTypeId] = weaponIcon;
-            }
-
-            return weaponIcons;
-        }
-
         public Dictionary<PlayerTypeId, Player> CreatePlayersView()
         {
             var playersView = new Dictionary<PlayerTypeId, Player>();

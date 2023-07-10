@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Gameplay.Weapon
 {
-    public abstract class Weapon : MonoBehaviour, IInitializable
+    public abstract class Weapon : MonoBehaviour, IInitializable, ITickable
     {
         protected float ReturnBulletDelay = 1.5f;
         protected float BulletMoveDuration = 0.2f;
@@ -37,6 +37,10 @@ namespace Gameplay.Weapon
         {
             BulletFactory.CreateBulletsBy(WeaponTypeId, transform,BulletsCount);
             BulletMovement = new DefaultBulletMovement();
+        }
+
+        public virtual void Tick()
+        {
         }
     }
 }

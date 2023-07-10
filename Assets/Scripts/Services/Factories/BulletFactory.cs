@@ -21,19 +21,22 @@ namespace Services.Factories
         private readonly AssetProvider _assetProvider;
         private readonly GameObjectPoolProvider _gameObjectPoolProvider;
         private readonly DiContainer _diContainer;
+        private readonly PlayerProvider _playerProvider;
 
         public BulletFactory(AssetProvider assetProvider, GameObjectPoolProvider gameObjectPoolProvider, 
-            DiContainer diContainer)
+            DiContainer diContainer, PlayerProvider playerProvider)
         {
             _assetProvider = assetProvider;
             _gameObjectPoolProvider = gameObjectPoolProvider;
             _diContainer = diContainer;
+            _playerProvider = playerProvider;
 
             _bullets = new Dictionary<WeaponTypeId, string>()
             {
                 { WeaponTypeId.WebSpiderShooter, AssetPath.SpiderWeb },
                 { WeaponTypeId.SmudgeWebShooter, AssetPath.SmudgeWeb },
-                { WeaponTypeId.FireBallShooter, AssetPath.FireBall }
+                { WeaponTypeId.FireBallShooter, AssetPath.FireBall },
+                { WeaponTypeId.SharpWebShooter , AssetPath.SharpWeb}
             };
         }
 
@@ -58,7 +61,9 @@ namespace Services.Factories
         {
             GameObject bulletPrefab = _assetProvider.GetAsset(prefabPath);
             _gameObjectPoolProvider.GameObjectPool = new GameObjectPool(() =>
-                _diContainer.InstantiatePrefab(bulletPrefab, parent), count);
+                _diContainer.InstantiatePrefab(bulletPrefab, _playerProvider.CurrentPlayer.Head.transform.position, 
+            Quaternion.identity,
+                    parent), count);
         }
     }
 }

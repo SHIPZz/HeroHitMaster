@@ -7,10 +7,10 @@ namespace UI
 {
     class WeaponSelectorPresenter : IInitializable, IDisposable
     {
-        private readonly WeaponCreator _weaponSelector;
+        private readonly WeaponSelector _weaponSelector;
         private readonly Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIconClickers;
 
-        public WeaponSelectorPresenter(WeaponIconsProvider weaponIconsProvider, WeaponCreator weaponSelector)
+        public WeaponSelectorPresenter(WeaponIconsProvider weaponIconsProvider, WeaponSelector weaponSelector)
         {
             _weaponIconClickers = weaponIconsProvider.Icons;
             _weaponSelector = weaponSelector;

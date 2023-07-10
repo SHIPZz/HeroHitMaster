@@ -1,26 +1,13 @@
 ﻿using System.Collections.Generic;
 using Enums;
 using Services.Factories;
-using UnityEngine;
-using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 namespace UI
 {
-    public class WeaponIconsProvider
+    public class WeaponIconsProvider : SerializedMonoBehaviour
     {
-        private readonly UIFactory _uiFactory;
-
-        public WeaponIconsProvider(UIFactory uiFactory)
-        {
-            _uiFactory = uiFactory;
-            FillDictionaries();
-        }
-
-        public Dictionary<WeaponTypeId, WeaponSelectorView> Icons { get; private set; } = new();
-
-        private void FillDictionaries()
-        {
-            Icons = _uiFactory.CreateWeaponIcons();
-        }
+        [OdinSerialize] public Dictionary<WeaponTypeId, WeaponSelectorView> Icons { get; private set; }
     }
 }

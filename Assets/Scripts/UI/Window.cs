@@ -1,18 +1,19 @@
 using Enums;
 using UnityEngine;
-using Zenject;
 
-public class Window : MonoBehaviour
-{
-    [field: SerializeField] public WindowTypeId WindowTypeId { get; private set; }
-
-    public void Open()
+namespace UI {
+    public class Window : MonoBehaviour
     {
-        gameObject.SetActive(true);
-    }
+        [field: SerializeField] public WindowTypeId WindowTypeId { get; private set; }
 
-    public void Close()
-    {
-        gameObject.SetActive(false);
+        public void Open()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void Close()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

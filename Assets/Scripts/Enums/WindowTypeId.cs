@@ -4,6 +4,6 @@
     {
         WeaponSelectorWindow = 0,
         PlayerSelectorWindow = 1,
-        Inventory = 2,
+        Shop = 2,
     }
 }

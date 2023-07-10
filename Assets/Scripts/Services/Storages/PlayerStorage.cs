@@ -5,25 +5,23 @@ using ScriptableObjects.PlayerSettings;
 using Services.Factories;
 using Services.Providers;
 
-namespace Services.GameObjectsPoolAccess
+namespace Services.Storages
 {
-    public class PlayerStorage
+    public class PlayerStorage : IPlayerStorage
     {
-        private readonly PlayerStorageByWeaponType _playerStorageByWeaponType;
+        private readonly PlayerTypeIdStorageByWeaponType _playerTypeIdStorageByWeaponType;
         private readonly PlayerProvider _playerProvider;
         private readonly PlayerFactory _playerFactory;
         private readonly LocationProvider _locationProvider;
         private readonly Dictionary<PlayerTypeId, Player> _players = new();
         
-        private IReadOnlyDictionary<PlayerTypeId, Player> Players => _players;
-
         public PlayerStorage(List<PlayerSettings> playerSettings,
             PlayerFactory playerFactory, 
             LocationProvider locationProvider, 
-            PlayerStorageByWeaponType playerStorageByWeaponType, 
+            PlayerTypeIdStorageByWeaponType playerTypeIdStorageByWeaponType, 
             PlayerProvider playerProvider)
         {
-            _playerStorageByWeaponType = playerStorageByWeaponType;
+            _playerTypeIdStorageByWeaponType = playerTypeIdStorageByWeaponType;
             _playerProvider = playerProvider;
             _playerFactory = playerFactory;
             _locationProvider = locationProvider;
@@ -41,7 +39,7 @@ namespace Services.GameObjectsPoolAccess
         public Player Get(WeaponTypeId weaponTypeId)
         {
             SetActive(false);
-            PlayerTypeId playerTypeId = _playerStorageByWeaponType.Get(weaponTypeId);
+            PlayerTypeId playerTypeId = _playerTypeIdStorageByWeaponType.Get(weaponTypeId);
             Enable(playerTypeId);
             _playerProvider.CurrentPlayer = _players[playerTypeId];
             return _players[playerTypeId];

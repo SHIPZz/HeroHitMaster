@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Enums;
 using Services.Providers;
+using UI;
+using UnityEngine;
 
 public class WindowService
 {
@@ -10,6 +12,7 @@ public class WindowService
 
     public WindowService(WindowProvider windowProvider)
     {
+        _windows = windowProvider.Windows;
         _selectorWindows = windowProvider.SelectorWindows;
         _hudWindows = windowProvider.HudWindows;
     }
@@ -31,6 +34,12 @@ public class WindowService
 
     public void CloseSelectorWindow(WindowTypeId windowTypeId) => 
         Close(_selectorWindows, windowTypeId);
+
+    public void Close(WindowTypeId windowTypeId) =>
+        _windows[windowTypeId].Close();
+    
+    public void Open(WindowTypeId windowTypeId) =>
+        _windows[windowTypeId].Open();
 
     private void Open(Dictionary<WindowTypeId, Window> windows, WindowTypeId windowTypeId)
     {

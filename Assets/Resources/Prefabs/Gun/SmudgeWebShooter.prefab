@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1956703246876421126}
   - component: {fileID: 1956703246876421125}
-  - component: {fileID: -7713099217943664730}
-  - component: {fileID: -7712417059558525395}
-  - component: {fileID: 4474667881492262606}
-  m_Layer: 0
-  m_Name: SpiderWebGun
+  - component: {fileID: -1715698494564974231}
+  - component: {fileID: -5660997542016745574}
+  - component: {fileID: -6714401347663241248}
+  m_Layer: 12
+  m_Name: SmudgeWebShooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,22 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9712adf082541cdb4af8ba10b9091fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <WeaponTypeId>k__BackingField: 0
---- !u!114 &-7713099217943664730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956703246876421124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b72a090e6f4ecb831580e61c33dd12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 1956703246876421125}
-  _audioSource: {fileID: 4474667881492262606}
---- !u!114 &-7712417059558525395
+  <WeaponTypeId>k__BackingField: 1
+--- !u!114 &-1715698494564974231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,11 +62,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: -7713099217943664730}
+  - {fileID: -5660997542016745574}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!82 &4474667881492262606
+--- !u!114 &-5660997542016745574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956703246876421124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b72a090e6f4ecb831580e61c33dd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 1956703246876421125}
+  _audioSource: {fileID: -6714401347663241248}
+--- !u!82 &-6714401347663241248
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,7 +91,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79ba06c00ce930942918db2eab8f2e08, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

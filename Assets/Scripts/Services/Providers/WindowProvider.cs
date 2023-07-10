@@ -2,6 +2,7 @@
 using Enums;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using UI;
 using UnityEngine;
 
 namespace Services.Providers
@@ -10,6 +11,7 @@ namespace Services.Providers
     {
         [OdinSerialize] public Dictionary<WindowTypeId, Window> SelectorWindows { get; private set; }
         [OdinSerialize] public Dictionary<WindowTypeId, Window> HudWindows { get; private set; }
+        [OdinSerialize] public Dictionary<WindowTypeId, Window> Windows { get; private set; }
 
     }
 }

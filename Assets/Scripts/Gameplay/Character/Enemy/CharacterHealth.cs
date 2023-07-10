@@ -11,13 +11,14 @@ namespace Gameplay.Character.Enemy
 
         private IHealth _health;
 
-        public IHealth Health => _health ??= new Health(_healthValue);
+        public IHealth Health => _health;
 
         public event Action<int> Damaged;
         public event Action Dead;
 
         public void TakeDamage(int value)
         {
+            print(gameObject.name);
             _health.Decrease(value);
             Damaged?.Invoke(_health.CurrentValue);
         }
@@ -25,8 +26,11 @@ namespace Gameplay.Character.Enemy
         private void Die() =>
             Dead?.Invoke();
 
-        public void Initialize() => 
+        public void Initialize()
+        {
+            _health = new Health(_healthValue);
             _health.ValueZeroReached += Die;
+        }
 
         public void Dispose() => 
             _health.ValueZeroReached -= Die;
