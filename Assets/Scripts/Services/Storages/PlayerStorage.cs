@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Enums;
 using Gameplay.Character.Player;
-using ScriptableObjects.PlayerSettings;
+using Gameplay.Character.Players;
 using Services.Factories;
 using Services.Providers;
+using UnityEngine;
 
 namespace Services.Storages
 {
@@ -15,17 +16,16 @@ namespace Services.Storages
         private readonly LocationProvider _locationProvider;
         private readonly Dictionary<PlayerTypeId, Player> _players = new();
         
-        public PlayerStorage(List<PlayerSettings> playerSettings,
-            PlayerFactory playerFactory, 
+        public PlayerStorage(PlayerFactory playerFactory, 
             LocationProvider locationProvider, 
             PlayerTypeIdStorageByWeaponType playerTypeIdStorageByWeaponType, 
-            PlayerProvider playerProvider)
+            PlayerProvider playerProvider, List<PlayerTypeId> playerTypeIds)
         {
             _playerTypeIdStorageByWeaponType = playerTypeIdStorageByWeaponType;
             _playerProvider = playerProvider;
             _playerFactory = playerFactory;
             _locationProvider = locationProvider;
-            FillDictionary(playerSettings);
+            FillDictionary(playerTypeIds);
         }
 
         public Player Get(PlayerTypeId playerTypeId)
@@ -42,6 +42,7 @@ namespace Services.Storages
             PlayerTypeId playerTypeId = _playerTypeIdStorageByWeaponType.Get(weaponTypeId);
             Enable(playerTypeId);
             _playerProvider.CurrentPlayer = _players[playerTypeId];
+            Debug.Log(_players[playerTypeId]);
             return _players[playerTypeId];
         }
 
@@ -56,12 +57,12 @@ namespace Services.Storages
             }
         }
 
-        private void FillDictionary(List<PlayerSettings> playerSettingsList)
+        private void FillDictionary(List<PlayerTypeId> playerTypeIds)
         {
-            foreach (var player in playerSettingsList)
+            foreach (var player in playerTypeIds)
             {
-                  Player createdPlayer = _playerFactory.
-                   Create(player.PlayerTypeId, _locationProvider.PlayerSpawnPoint.position);
+                Player createdPlayer = _playerFactory.
+                   Create(player, _locationProvider.PlayerSpawnPoint.position);
                   _players[createdPlayer.PlayerTypeId] = createdPlayer;
             }
         }

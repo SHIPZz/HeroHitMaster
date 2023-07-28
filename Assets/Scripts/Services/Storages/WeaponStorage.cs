@@ -10,7 +10,6 @@ namespace Services.Storages
     {
         private readonly WeaponFactory _weaponFactory;
         private readonly Dictionary<WeaponTypeId, Weapon> _weapons = new();
-        private List<WeaponSettings> _weaponSettings;
 
         public WeaponStorage(List<WeaponSettings> weaponSettings, WeaponFactory weaponFactory)
         {

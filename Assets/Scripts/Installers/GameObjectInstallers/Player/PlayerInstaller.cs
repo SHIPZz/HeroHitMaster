@@ -1,9 +1,9 @@
-using Gameplay.Character.Enemy;
+using Gameplay.Character;
 using Gameplay.Character.Player;
 using Gameplay.Character.Player.Shoot;
-using Gameplay.PlayerSelection;
+using Gameplay.Character.Players;
+using Gameplay.Character.Players.Shoot;
 using Gameplay.Web;
-using UI;
 using UnityEngine;
 using Zenject;
 
@@ -11,12 +11,13 @@ namespace Installers.GameObjectInstallers.Player
 {
     public class PlayerInstaller : MonoInstaller
     {
-        [SerializeField] private Gameplay.Character.Player.Player _player;
+        [SerializeField] private Gameplay.Character.Players.Player _player;
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private Transform _initialShootPosition;
-        [SerializeField] private CharacterHealth _characterHealth;
+        [SerializeField] private PlayerHealth _playerHealth;
+        [SerializeField] private ShootingOnAnimationEvent _shootingOnAnimationEvent;
         
         public override void InstallBindings()
         {
@@ -27,9 +28,8 @@ namespace Installers.GameObjectInstallers.Player
 
         private void BindInterfacesAndSelfTo()
         {
-            Container.BindInterfacesAndSelfTo<PlayerShootMediator>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerShootPresenter>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
-            Container.BindInterfacesTo<PlayerMediator>().AsSingle();
             // Container.Bind<WeaponSelector>().AsSingle();
             // Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
         }
@@ -37,7 +37,6 @@ namespace Installers.GameObjectInstallers.Player
         private void BindAsSingle()
         {
             Container.BindInterfacesTo<WebMovement>().AsSingle();
-            Container.Bind<PlayerMovement>().AsSingle();
             Container.Bind<PlayerAnimator>().AsSingle();
             Container.Bind<PlayerShoot>().AsSingle();
         }
@@ -46,10 +45,11 @@ namespace Installers.GameObjectInstallers.Player
         {
             Container.BindInstance(_player);
             Container.BindInstance(_rigidbody);
+            Container.BindInstance(_shootingOnAnimationEvent);
             Container.BindInstance(_initialShootPosition);
             Container.BindInstance(_characterController);
             Container.BindInstance(_animator);
-            Container.BindInstance(_characterHealth);
+            Container.Bind<IHealth>().To<PlayerHealth>().FromInstance(_playerHealth);
         }
     }
 }

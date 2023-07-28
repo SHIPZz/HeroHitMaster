@@ -6,5 +6,6 @@ namespace Gameplay.Bullet
     {
         GameObject GameObject { get; }
         Rigidbody Rigidbody { get; }
+        Transform BulletModel { get; }
     }
 }

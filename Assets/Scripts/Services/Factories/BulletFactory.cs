@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Constants;
 using Enums;
 using Gameplay.Bullet;
-using Gameplay.Web;
-using ModestTree.Util;
 using Services.ObjectPool;
 using Services.Providers;
 using Services.Providers.AssetProviders;
 using UnityEngine;
-using Zenject;
-using Object = UnityEngine.Object;
-using Vector3 = System.Numerics.Vector3;
+using Zenject; 
 
 namespace Services.Factories
 {
@@ -31,13 +26,7 @@ namespace Services.Factories
             _diContainer = diContainer;
             _playerProvider = playerProvider;
 
-            _bullets = new Dictionary<WeaponTypeId, string>()
-            {
-                { WeaponTypeId.WebSpiderShooter, AssetPath.SpiderWeb },
-                { WeaponTypeId.SmudgeWebShooter, AssetPath.SmudgeWeb },
-                { WeaponTypeId.FireBallShooter, AssetPath.FireBall },
-                { WeaponTypeId.SharpWebShooter , AssetPath.SharpWeb}
-            };
+            FillDictionary();
         }
 
         public void CreateBulletsBy(WeaponTypeId weaponTypeId, Transform parent, int count)
@@ -60,10 +49,26 @@ namespace Services.Factories
         private void Create(string prefabPath, Transform parent, int count)
         {
             GameObject bulletPrefab = _assetProvider.GetAsset(prefabPath);
+            
             _gameObjectPoolProvider.GameObjectPool = new GameObjectPool(() =>
-                _diContainer.InstantiatePrefab(bulletPrefab, _playerProvider.CurrentPlayer.Head.transform.position, 
+                _diContainer.InstantiatePrefab(bulletPrefab, _playerProvider.CurrentPlayer.RightHand.transform.position, 
             Quaternion.identity,
                     parent), count);
+        }
+
+        private void FillDictionary()
+        {
+            _bullets = new Dictionary<WeaponTypeId, string>()
+            {
+                { WeaponTypeId.WebSpiderShooter, AssetPath.SpiderWeb },
+                { WeaponTypeId.SmudgeWebShooter, AssetPath.SmudgeWeb },
+                { WeaponTypeId.FireBallShooter, AssetPath.FireBall },
+                { WeaponTypeId.SharpWebShooter, AssetPath.SharpWeb },
+                { WeaponTypeId.ThrowingKnifeShooter, AssetPath.Knife },
+                { WeaponTypeId.ThrowingIceCreamShooter, AssetPath.IceCream },
+                { WeaponTypeId.ThrowingTridentShooter, AssetPath.Trident },
+                { WeaponTypeId.ThrowingHammerShooter, AssetPath.Hammer },
+            };
         }
     }
 }

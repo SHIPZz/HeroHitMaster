@@ -47,7 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9712adf082541cdb4af8ba10b9091fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BulletMovement:
+    rid: 8827635299697819657
   <WeaponTypeId>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8827635299697819657
+      type: {class: WebMovement, ns: Gameplay.Web, asm: Assembly-CSharp}
 --- !u!114 &-7713099217943664730
 MonoBehaviour:
   m_ObjectHideFlags: 0

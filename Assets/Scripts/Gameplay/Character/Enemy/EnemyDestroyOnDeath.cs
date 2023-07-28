@@ -7,12 +7,12 @@ namespace Gameplay.Character.Enemy
 {
     public class EnemyDestroyOnDeath : IInitializable, IDisposable
     {
-        private readonly CharacterHealth _characterHealth;
+        private readonly IHealth _enemyHealth;
         private float _delay;
 
-        public EnemyDestroyOnDeath(CharacterHealth characterHealth)
+        public EnemyDestroyOnDeath(IHealth enemyHealth)
         {
-            _characterHealth = characterHealth;
+            _enemyHealth = enemyHealth;
             _delay = DelayValues.DefaultDestroyDelay;
         }
 
@@ -20,16 +20,12 @@ namespace Gameplay.Character.Enemy
             _delay = targetDelay;
 
         public void Initialize() => 
-            _characterHealth.Dead += Destroy;
+            _enemyHealth.ValueZeroReached += Destroy;
 
-        public void Dispose()
-        {
-            _characterHealth.Dead -= Destroy;
-        }
-
-        private void Destroy()
-        {
-            // Object.Destroy(characterHealth.gameObject, _delay);
-        }
+        public void Dispose() => 
+            _enemyHealth.ValueZeroReached -= Destroy;
+        
+        private void Destroy() => 
+            Object.Destroy(_enemyHealth.GameObject, _delay);
     }
 }

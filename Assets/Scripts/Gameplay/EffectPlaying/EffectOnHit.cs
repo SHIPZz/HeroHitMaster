@@ -10,6 +10,7 @@ namespace Gameplay.EffectPlaying
     {
         private readonly IHealth _health;
         private readonly ParticleSystem _hitEffect;
+        private bool _canPlayEffect = true;
 
         public EffectOnHit(IHealth health, [Inject(Id = ParticleTypeId.HitEffect)] ParticleSystem hitEffect)
         {
@@ -17,13 +18,27 @@ namespace Gameplay.EffectPlaying
             _hitEffect = hitEffect;
         }
 
-        public void Initialize() => 
+        public void Initialize()
+        {
             _health.ValueChanged += PlayEffect;
+            _health.ValueZeroReached += BlockHitEffect;
+        }
 
-        public void Dispose() => 
+        public void Dispose()
+        {
             _health.ValueChanged -= PlayEffect;
+            _health.ValueZeroReached -= BlockHitEffect;
+        }
 
-        private void PlayEffect(int obj) => 
+        private void PlayEffect(int obj)
+        {
+            if(!_canPlayEffect)
+                return;
+            
             _hitEffect.Play();
+        }
+
+        private void BlockHitEffect() =>
+            _canPlayEffect = false;
     }
 }

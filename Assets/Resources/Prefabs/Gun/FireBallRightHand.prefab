@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1956703246876421126}
-  - component: {fileID: 1956703246876421125}
   - component: {fileID: -1715698494564974231}
   - component: {fileID: -5660997542016745574}
   - component: {fileID: -6714401347663241248}
+  - component: {fileID: -7881026047330398132}
   m_Layer: 12
   m_Name: FireBallRightHand
   m_TagString: Untagged
@@ -35,19 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1956703246876421125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956703246876421124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9712adf082541cdb4af8ba10b9091fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <WeaponTypeId>k__BackingField: 3
 --- !u!114 &-1715698494564974231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b72a090e6f4ecb831580e61c33dd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 1956703246876421125}
+  _weapon: {fileID: -7881026047330398132}
   _audioSource: {fileID: -6714401347663241248}
 --- !u!82 &-6714401347663241248
 AudioSource:
@@ -176,3 +163,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7881026047330398132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956703246876421124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b6ca7dbf5e49db9386cd701a6efa46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletMovement:
+    rid: 8827635299697819660
+  <WeaponTypeId>k__BackingField: 3
+  references:
+    version: 2
+    RefIds:
+    - rid: 8827635299697819660
+      type: {class: DefaultBulletMovement, ns: Gameplay.Bullet, asm: Assembly-CSharp}

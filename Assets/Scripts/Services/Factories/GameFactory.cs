@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Enums;
+﻿using Enums;
 using Gameplay.Camera;
 using Gameplay.Character.Player;
+using Gameplay.Character.Players;
 using Gameplay.Weapon;
 using UnityEngine;
 

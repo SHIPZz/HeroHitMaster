@@ -40,13 +40,13 @@ namespace Gameplay.Web
             StartToWallRotation(Vector3.left);
             StartToWallRotation(Vector3.right);
 
-            FloorToFloorRotation();
+            StartToFloorRotation();
 
             _canRotateToWall = false;
             _canRotateToFloor = false;
         }
 
-        private void FloorToFloorRotation()
+        private void StartToFloorRotation()
         {
             if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit floorHit, MaxFloorHitDistance))
             {
@@ -57,7 +57,7 @@ namespace Gameplay.Web
 
                 if (_distanceToFloor < TargetDistanceToFloor && !_isRotating && _canRotateToFloor)
                 {
-                    RotateWeb(_rotationToFloor);
+                    RotateWeb(_rotationToFloor, 0.5f);
                 }
             }
         }
@@ -74,7 +74,6 @@ namespace Gameplay.Web
                 if (_wallDistance < TargetDistanceToWall && !_isWallRotating && _canRotateToWall)
                 {
                     Vector3 rotationTarget = GetRotationTargetBy(target);
-                    Debug.Log(rotationTarget);
                     RotateWebToWall(rotationTarget);
                 }
             }
@@ -83,11 +82,11 @@ namespace Gameplay.Web
         private Vector3 GetRotationTargetBy(Vector3 target) =>
             _rotationTargets[target];
 
-        private void RotateWeb(Vector3 targetRotation)
+        private void RotateWeb(Vector3 targetRotation, float duration)
         {
             _isRotating = true;
 
-            transform.DORotate(targetRotation, 0.5f)
+            transform.DOLocalRotate(targetRotation, duration)
                 .SetEase(Ease.OutQuint)
                 .OnComplete(() => { _isRotating = false; });
         }
@@ -96,8 +95,7 @@ namespace Gameplay.Web
         {
             _isWallRotating = true;
 
-            transform.DORotate(targetRotation, 0.2f)
-                .SetEase(Ease.OutQuint)
+            transform.DOLocalRotate(targetRotation, 0.2f)
                 .OnComplete(() => { _isWallRotating = false; });
         }
     }

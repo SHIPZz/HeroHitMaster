@@ -1,6 +1,4 @@
-﻿using System;
-using DG.Tweening;
-using Enums;
+﻿using Enums;
 using Extensions;
 using Gameplay.Character;
 using UnityEngine;
@@ -8,11 +6,12 @@ using Zenject;
 
 namespace Gameplay.Bullet
 {
-    public class Bullet : MonoBehaviour, IInitializable, IDisposable, ITickable, IBullet
+    public class Bullet : MonoBehaviour, IBullet
     {
         [SerializeField] protected int Damage;
 
         [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
+        [field: SerializeField] public Transform BulletModel { get; private set; }
 
         protected TriggerObserver TriggerObserver;
         private GameObject _terrain;
@@ -22,45 +21,25 @@ namespace Gameplay.Bullet
         private void Construct(TriggerObserver triggerObserver)
         {
             TriggerObserver = triggerObserver;
-            Initialize();
         }
 
         public GameObject GameObject => gameObject;
 
         public Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
-        public virtual void Initialize() =>
+        private  void OnEnable() => 
             TriggerObserver.Entered += DoDamage;
 
-        public virtual void Dispose() =>
+        private void OnDisable() => 
             TriggerObserver.Entered -= DoDamage;
 
         protected virtual void DoDamage(Collider other)
         {
-            // if (other.gameObject.tag == "Terrain")
-            // {
-            //     gameObject.transform.DORotate(new Vector3(90, 0, 0), 0.5f);
-            // }
-
             if (!other.gameObject.TryGetComponent(out IDamageable damageable))
                 return;
 
             damageable.TakeDamage(Damage);
-            this.SetActive(gameObject, false, 0.2f);
-        }
-
-        public void Tick()
-        {
-            // RaycastHit hit;
-            //
-            // if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 100f))
-            // {
-            //     _distance = hit.distance;
-            //     print(_distance);
-            //     
-            //     if(_distance < 0.1)
-            //         gameObject.transform.DORotate(new Vector3(90, 0, 0), 0.1f);
-            // }
+            this.SetActive(gameObject, false, 0.5f);
         }
     }
 }

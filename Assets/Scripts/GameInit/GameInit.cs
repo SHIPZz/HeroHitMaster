@@ -1,15 +1,12 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using Gameplay.Camera;
-using Gameplay.PlayerSelection;
 using Gameplay.Weapon;
 using Services.Factories;
 using Services.Providers;
 using Services.Storages;
-using UI;
 using UnityEngine;
 using Zenject;
-using Player = Gameplay.Character.Player.Player;
+using Player = Gameplay.Character.Players.Player;
 
 namespace GameInit
 {
@@ -19,7 +16,7 @@ namespace GameInit
         private readonly LocationProvider _locationProvider;
         private readonly CameraProvider _cameraProvider;
         private readonly PlayerProvider _playerProvider;
-        private readonly WeaponsProvider _weaponsProvider;
+        private readonly WeaponProvider _weaponProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly IWeaponStorage _weaponStorage;
 
@@ -28,25 +25,27 @@ namespace GameInit
             CameraProvider cameraProvider,
             PlayerProvider playerProvider,
             IWeaponStorage weaponStorage,
-            WeaponsProvider weaponsProvider, IPlayerStorage playerStorage)
+            WeaponProvider weaponProvider, IPlayerStorage playerStorage)
         {
             _gameFactory = gameFactory;
             _weaponStorage = weaponStorage;
             _locationProvider = locationProvider;
             _cameraProvider = cameraProvider;
             _playerProvider = playerProvider;
-            _weaponsProvider = weaponsProvider;
+            _weaponProvider = weaponProvider;
             _playerStorage = playerStorage;
         }
 
         public void Initialize()
         {
-            Player player = InitializeInitialPlayer(PlayerTypeId.Spider);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Weapon weapon = InitializeInitialWeapon(WeaponTypeId.WebSpiderShooter);
-            weapon.transform.SetParent(player.transform);
+            Weapon weapon = InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
+            var weaponViewStorage = player.GetComponentInChildren<WeaponViewStorage>();
+            weaponViewStorage.Get(weapon.WeaponTypeId);
+            // weapon.transform.SetParent(player.transform);
             _playerProvider.CurrentPlayer = player;
-            _weaponsProvider.CurrentWeapon = weapon;
+            _weaponProvider.CurrentWeapon = weapon;
         }
 
         private Weapon InitializeInitialWeapon(WeaponTypeId weaponTypeId) =>

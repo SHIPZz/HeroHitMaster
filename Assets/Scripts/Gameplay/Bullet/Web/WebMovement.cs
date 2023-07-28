@@ -7,10 +7,12 @@ namespace Gameplay.Web
 {
     public class WebMovement : IBulletMovement
     {
-        public void Move(Vector3 target, IBullet bullet, Vector3 startPosition, float duration, Rigidbody rigidbody)
+        private const float Duration = 0.3f;
+        
+        public void Move(Vector3 target, IBullet bullet, Vector3 startPosition, Rigidbody rigidbody)
         {
             bullet.GameObject.transform.position = startPosition;
-            bullet.GameObject.transform.DOMove(target, duration);
+            bullet.GameObject.transform.DOMove(target, Duration);
             // rigidbody.DOMove(target, duration);
         }
     }

@@ -5,6 +5,7 @@ using Gameplay.Character.Enemy;
 using Gameplay.EffectPlaying;
 using Gameplay.MaterialChanger;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 namespace Installers.GameObjectInstallers.Enemy
@@ -14,42 +15,49 @@ namespace Installers.GameObjectInstallers.Enemy
         [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
         [SerializeField] private Animator _animator;
         [SerializeField] private Collider _collider;
-        [SerializeField] private CharacterHealth characterHealth;
+        [SerializeField] private EnemyHealth _enemyHealth;
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private ParticleSystem _hitEffect;
         [SerializeField] private ParticleSystem _dieEffect;
-
+        [SerializeField] private NavMeshAgent _navMeshAgent;
+        [SerializeField] private EnemyFollower _enemyFollower;
+        
         public override void InstallBindings()
         {
             BindInstances();
-            
+
             BindInterfacesAndSelfTo();
 
             BindEffects();
 
+            Container.Bind<EnemyAnimator>().AsSingle();
             Container.Bind<IMaterialChanger>().To<SkinnedMaterialChanger>()
                 .FromComponentOn(gameObject).AsSingle();
-            
-            Container.Bind<IHealth>().FromMethod(context => context.Container.Resolve<CharacterHealth>().Health);
         }
 
         private void BindInstances()
         {
+            Container.Bind<IHealth>().To<EnemyHealth>().FromInstance(_enemyHealth).AsSingle();
             Container.BindInstance(_skinnedMeshRenderer);
             Container.BindInstance(_triggerObserver);
             Container.BindInstance(_animator);
             Container.BindInstance(_collider);
+            Container.BindInstance(_navMeshAgent);
+            Container.BindInstance(_enemyFollower);
+            Container.Bind<EnemyAttacker>().AsSingle();
         }
 
         private void BindInterfacesAndSelfTo()
         {
-            Container.BindInterfacesAndSelfTo<CharacterHealth>().FromInstance(characterHealth).AsSingle();
             Container.BindInterfacesAndSelfTo<EnemyDestroyOnDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<EffectOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<DeathEffectOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<NonCollisionOnDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<SkinnedMeshVisibilityHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<DestroyEnemyEffectsHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AnimOnAgentMoving>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AnimOnHit>().AsSingle();
+            Container.BindInterfacesAndSelfTo<StopMovementOnHit>().AsSingle();
         }
 
         private void BindEffects()

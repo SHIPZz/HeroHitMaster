@@ -1,17 +1,22 @@
 ﻿using System.Collections.Generic;
+using Windows;
 using Enums;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using UI;
 using UnityEngine;
 
 namespace Services.Providers
 {
     public class WindowProvider : SerializedMonoBehaviour
     {
-        [OdinSerialize] public Dictionary<WindowTypeId, Window> SelectorWindows { get; private set; }
-        [OdinSerialize] public Dictionary<WindowTypeId, Window> HudWindows { get; private set; }
-        [OdinSerialize] public Dictionary<WindowTypeId, Window> Windows { get; private set; }
+        [OdinSerialize] private Dictionary<WindowTypeId, Window> _windows;
+        [OdinSerialize] private Dictionary<WindowTypeId, Window> _hudWindows;
+        [OdinSerialize] private Dictionary<WindowTypeId, Window> _selectorWindows;
 
+        public Dictionary<WindowTypeId, Window> Windows => _windows;
+
+        public Dictionary<WindowTypeId, Window> HUDWindows => _hudWindows;
+
+        public Dictionary<WindowTypeId, Window> SelectorWindows => _selectorWindows;
     }
 }

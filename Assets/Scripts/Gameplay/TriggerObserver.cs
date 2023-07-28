@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
+    [RequireComponent(typeof(Collider))]
     public class TriggerObserver : MonoBehaviour
     {
         public event Action<Collider> Entered;

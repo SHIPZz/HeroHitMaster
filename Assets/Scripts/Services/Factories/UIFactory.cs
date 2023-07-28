@@ -3,7 +3,6 @@ using Enums;
 using Gameplay.Character.Player;
 using ScriptableObjects.PlayerSettings;
 using Services.Providers;
-using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -15,35 +14,16 @@ namespace Services.Factories
         private readonly DiContainer _diContainer;
         private readonly List<PlayerSettings> _playerSettingsList;
         private readonly LocationProvider _locationProvider;
-        private readonly WeaponsProvider _weaponsProvider;
+        private readonly WeaponProvider _weaponProvider;
 
         public UIFactory(DiContainer diContainer, List<PlayerSettings> playerSettingsList,
             LocationProvider locationProvider,
-            WeaponsProvider weaponsProvider)
+            WeaponProvider weaponProvider)
         {
             _diContainer = diContainer;
             _playerSettingsList = playerSettingsList;
             _locationProvider = locationProvider;
-            _weaponsProvider = weaponsProvider;
-        }
-
-        public Dictionary<PlayerTypeId, Player> CreatePlayersView()
-        {
-            var playersView = new Dictionary<PlayerTypeId, Player>();
-            Transform parent = _locationProvider.PlayerParentTransform;
-            Transform targetSpawnPosition = _locationProvider.PlayerSpawnPoint;
-            parent.transform.position = targetSpawnPosition.position;
-
-            foreach (PlayerSettings playerSetting in _playerSettingsList)
-            {
-                var player =
-                    _diContainer.InstantiatePrefabForComponent<Player>(playerSetting.PlayerViewPrefab,
-                        parent);
-
-                playersView[player.PlayerTypeId] = player;
-            }
-
-            return playersView;
+            _weaponProvider = weaponProvider;
         }
     }
 }

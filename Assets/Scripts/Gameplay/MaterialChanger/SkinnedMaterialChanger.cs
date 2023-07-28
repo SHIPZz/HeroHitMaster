@@ -15,6 +15,7 @@ namespace Gameplay.MaterialChanger
 
         private SkinnedMeshRenderer _skinnedMeshRenderer;
         private EnemyDestroyOnDeath _enemyDestroyOnDeath;
+        
         public event Action Changed;
 
         [Inject]
@@ -31,7 +32,7 @@ namespace Gameplay.MaterialChanger
             DOTween.To(() => 0, x =>
                     _skinnedMeshRenderer.material.SetFloat(AdvancedDissolveProperties.Cutout.Standard._ids[0].clip, x),
                 _targetValue, _duration);
-            
+
             _enemyDestroyOnDeath.Delay(DelayValues.DestroyEffectDelay);
             
             Changed?.Invoke();

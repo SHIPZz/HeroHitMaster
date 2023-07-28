@@ -9,18 +9,17 @@ namespace Services.Storages
 {
     public class PlayerTypeIdStorageByWeaponType 
     {
-        private Dictionary<WeaponTypeId, PlayerTypeId> _characters;
-
-        public PlayerTypeIdStorageByWeaponType()
+        private readonly Dictionary<WeaponTypeId, PlayerTypeId> _characters = new()
         {
-            _characters = new Dictionary<WeaponTypeId, PlayerTypeId>()
-            {
-                { WeaponTypeId.SharpWebShooter, PlayerTypeId.Spider },
-                { WeaponTypeId.SmudgeWebShooter, PlayerTypeId.Spider },
-                { WeaponTypeId.WebSpiderShooter, PlayerTypeId.Spider },
-                { WeaponTypeId.FireBallShooter, PlayerTypeId.Wolverine }
-            };
-        }
+            { WeaponTypeId.SharpWebShooter, PlayerTypeId.Spider },
+            { WeaponTypeId.SmudgeWebShooter, PlayerTypeId.Spider },
+            { WeaponTypeId.WebSpiderShooter, PlayerTypeId.Spider },
+            { WeaponTypeId.FireBallShooter, PlayerTypeId.Wizard },
+            { WeaponTypeId.ThrowingKnifeShooter, PlayerTypeId.Wolverine },
+            { WeaponTypeId.ThrowingHammerShooter, PlayerTypeId.Wolverine },
+            { WeaponTypeId.ThrowingTridentShooter, PlayerTypeId.Wolverine },
+            { WeaponTypeId.ThrowingIceCreamShooter, PlayerTypeId.Wolverine },
+        };
 
         public PlayerTypeId Get(WeaponTypeId weaponTypeId)
         {

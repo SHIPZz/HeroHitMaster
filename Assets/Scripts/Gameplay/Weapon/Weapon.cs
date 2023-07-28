@@ -1,24 +1,23 @@
 ﻿using DG.Tweening;
 using Enums;
 using Gameplay.Bullet;
-using Gameplay.Character.Player.Shoot;
 using Services.Factories;
 using UnityEngine;
 using Zenject;
 
 namespace Gameplay.Weapon
 {
-    public abstract class Weapon : MonoBehaviour, IInitializable, ITickable
+    public class Weapon : MonoBehaviour, IInitializable
     {
-        protected float ReturnBulletDelay = 1.5f;
-        protected float BulletMoveDuration = 0.2f;
-        protected int BulletsCount = 30;
-
+        [SerializeReference] protected IBulletMovement BulletMovement;
         [field: SerializeField] public WeaponTypeId WeaponTypeId { get; protected set; }
 
-        protected IBulletMovement BulletMovement;
-
+        protected float ReturnBulletDelay = 15f;
+        protected float BulletMoveDuration = 0.2f;
+        protected int BulletsCount = 30;
         protected BulletFactory BulletFactory;
+
+        public GameObject GameObject => gameObject;
 
         [Inject]
         private void Construct(BulletFactory bulletFactory)
@@ -26,21 +25,23 @@ namespace Gameplay.Weapon
             BulletFactory = bulletFactory;
         }
 
+        public virtual void Initialize()
+        {
+            Init(WeaponTypeId, gameObject.transform, BulletsCount, BulletMovement);
+        }
+
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
             IBullet bullet = BulletFactory.Pop();
-            BulletMovement.Move(target, bullet, initialPosition, BulletMoveDuration,bullet.Rigidbody);
+            BulletMovement.Move(target, bullet, initialPosition, bullet.Rigidbody);
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
         }
-        
-        public virtual void Initialize()
-        {
-            BulletFactory.CreateBulletsBy(WeaponTypeId, transform,BulletsCount);
-            BulletMovement = new DefaultBulletMovement();
-        }
 
-        public virtual void Tick()
+        protected void Init(WeaponTypeId weaponTypeId, Transform parent, int bulletsCount,
+            IBulletMovement bulletMovement)
         {
+            BulletMovement = bulletMovement;
+            BulletFactory.CreateBulletsBy(weaponTypeId, null, bulletsCount);
         }
     }
 }

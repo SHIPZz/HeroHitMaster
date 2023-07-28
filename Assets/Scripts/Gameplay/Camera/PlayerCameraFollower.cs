@@ -1,5 +1,6 @@
 using Cinemachine;
 using Gameplay.Character.Player;
+using Gameplay.Character.Players;
 using Services.Providers;
 using UnityEngine;
 using Zenject;
@@ -20,13 +21,7 @@ namespace Gameplay.Camera
 
         private void LateUpdate()
         {
-            // if(_player is null || _player.isActiveAndEnabled == false)
-            //     return;
-            
-            transform.position = _playerProvider.CurrentPlayer.Head.position + new Vector3(0, 0, -0.1f);
-            // Vector3 targetPosition = _player.transform.position + _offset;
-            // Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, _smoothSpeed * Time.deltaTime);
-            // transform.position = smoothedPosition;
+            transform.position = _playerProvider.CurrentPlayer.Head.position + new Vector3(0, 0.1f, 0);
         }
     }
 }

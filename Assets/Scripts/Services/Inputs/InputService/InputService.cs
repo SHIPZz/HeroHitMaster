@@ -1,32 +1,34 @@
-﻿using Services;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using Vector2 = UnityEngine.Vector2;
 
-public class InputService : IInputService
+namespace Services.Inputs
 {
-    private readonly InputActions _inputActions;
-
-    public InputService()
+    public class InputService : IInputService
     {
-        _inputActions = new InputActions();
-        _inputActions.Player.Enable();
-    }
+        private readonly InputActions _inputActions;
 
-    public InputActions.PlayerActions PlayerActions =>
-        _inputActions.Player;
+        public InputService()
+        {
+            _inputActions = new InputActions();
+            _inputActions.Player.Enable();
+        }
     
-    public InputAction PlayerMove => 
-        PlayerActions.Move;
+        public InputActions.PlayerActions PlayerActions =>
+            _inputActions.Player;
 
-    public InputAction PlayerJump =>
-        PlayerActions.Jump;
+        public InputAction PlayerMove =>
+            PlayerActions.Move;
 
-    public InputAction PlayerRun =>
-        PlayerActions.Run;
+        public InputAction PlayerJump =>
+            PlayerActions.Jump;
 
-    public InputAction PlayerFire =>
-        PlayerActions.Fire;
+        public InputAction PlayerRun =>
+            PlayerActions.Run;
 
-    public Vector2 MousePosition =>
-        Mouse.current.position.ReadValue();
+        public InputAction PlayerFire =>
+            PlayerActions.Fire;
+
+        public Vector2 MousePosition =>
+            PlayerActions.MousePosition.ReadValue<Vector2>();
+    }
 }

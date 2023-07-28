@@ -2,6 +2,7 @@
 using Constants;
 using Enums;
 using Gameplay.Character.Player;
+using Gameplay.Character.Players;
 using Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;
@@ -12,18 +13,17 @@ namespace Services.Factories
     {
         private readonly AssetProvider _assetProvider;
         private readonly DiContainer _diContainer;
-        private Dictionary<PlayerTypeId, string> _characters;
+        private readonly Dictionary<PlayerTypeId, string> _characters = new()
+        {
+            { PlayerTypeId.Spider, AssetPath.Spiderman },
+            { PlayerTypeId.Wolverine, AssetPath.Wolverine },
+            { PlayerTypeId.Wizard, AssetPath.Wizard },
+        };
 
         public PlayerFactory(AssetProvider assetProvider, DiContainer diContainer)
         {
             _assetProvider = assetProvider;
             _diContainer = diContainer;
-
-            _characters = new Dictionary<PlayerTypeId, string>
-            {
-                { PlayerTypeId.Spider, AssetPath.Spiderman },
-                { PlayerTypeId.Wolverine, AssetPath.Wolverine },
-            };
         }
 
         public Player Create(PlayerTypeId playerTypeId, Vector3 at)
@@ -39,7 +39,7 @@ namespace Services.Factories
 
         private Player Create(string path, Vector3 at)
         {
-            var player = _assetProvider.GetAsset(path);
+            GameObject player = _assetProvider.GetAsset(path);
             return _diContainer.InstantiatePrefabForComponent<Player>(player, at, Quaternion.identity,null);
         }
     }

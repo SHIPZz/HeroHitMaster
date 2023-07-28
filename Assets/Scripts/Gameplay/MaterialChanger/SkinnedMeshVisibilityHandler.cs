@@ -1,4 +1,6 @@
 ﻿using System;
+using Constants;
+using DG.Tweening;
 using Gameplay.Character;
 using UnityEngine;
 using Zenject;
@@ -32,15 +34,16 @@ namespace Gameplay.MaterialChanger
             _skinnedMaterialChanger.Changed -= MaterialChanged;
         }
 
-        private void MaterialChanged() => 
+        private void MaterialChanged() =>
             _isMaterialChanged = true;
 
         private void Disable()
         {
-            if(_isMaterialChanged)
+            if (_isMaterialChanged)
                 return;
-            
-            _skinnedMeshRenderer.enabled = false;
+
+            DOTween.Sequence().AppendInterval(DelayValues.DefaultDestroyDelay)
+                .OnComplete(() => _skinnedMeshRenderer.enabled = false);
         }
     }
 }
