@@ -1,8 +1,7 @@
 ﻿using Enums;
 using Gameplay.Camera;
-using Gameplay.Character.Player;
 using Gameplay.Character.Players;
-using Gameplay.Weapon;
+using Gameplay.Weapons;
 using UnityEngine;
 
 namespace Services.Factories

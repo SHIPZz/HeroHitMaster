@@ -1,20 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using Gameplay.Character.Players.Shoot;
+using Services.Providers;
+using Zenject;
 
-namespace Gameplay.Character.Player.Shoot
+namespace Gameplay.EffectPlaying
 {
-    public class EffectOnShoot
+    public class EffectOnShoot : IInitializable, IDisposable
     {
-        private readonly AudioSource _audioSource;
+        private readonly SoundProvider _soundProvider;
+        private readonly ShootingOnAnimationEvent _shootingOnAnimationEvent;
 
-        public EffectOnShoot(AudioSource audioSource)
+        public EffectOnShoot(SoundProvider soundProvider, ShootingOnAnimationEvent shootingOnAnimationEvent)
         {
-            _audioSource = audioSource;
-            _audioSource.playOnAwake = false;
+            _shootingOnAnimationEvent = shootingOnAnimationEvent;
+            _soundProvider = soundProvider;
         }
 
-        public void PlayEffects()
+        public void Initialize() => 
+            _shootingOnAnimationEvent.Shooted += PlayEffects;
+
+        public void Dispose() => 
+            _shootingOnAnimationEvent.Shooted -= PlayEffects;
+
+        private void PlayEffects()
         {
-            _audioSource.Play();
+            _soundProvider.ShootSound.Play();
         }
     }
 }

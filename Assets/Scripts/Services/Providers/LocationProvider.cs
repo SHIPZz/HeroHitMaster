@@ -8,14 +8,19 @@ namespace Services.Providers
         public Transform CameraSpawnPoint { get; }
         public Transform PlayerParentTransform { get; }
         public Transform WeaponIconParentTransform { get; }
+        public Transform SoundsParent { get; }
 
-        public LocationProvider(Transform playerParentTransform, Transform playerSpawnPoint, Transform cameraSpawnPoint,
-            Transform weaponIconParentTransform)
+        public LocationProvider(Transform playerSpawnPoint, 
+            Transform cameraSpawnPoint, 
+            Transform playerParentTransform, 
+            Transform weaponIconParentTransform, 
+            Transform soundsParent)
         {
-            WeaponIconParentTransform = weaponIconParentTransform;
-            PlayerParentTransform = playerParentTransform;
             PlayerSpawnPoint = playerSpawnPoint;
             CameraSpawnPoint = cameraSpawnPoint;
+            PlayerParentTransform = playerParentTransform;
+            WeaponIconParentTransform = weaponIconParentTransform;
+            SoundsParent = soundsParent;
         }
     }
 }

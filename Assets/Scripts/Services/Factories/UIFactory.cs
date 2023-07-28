@@ -1,10 +1,6 @@
 ﻿using System.Collections.Generic;
-using Enums;
-using Gameplay.Character.Player;
 using ScriptableObjects.PlayerSettings;
 using Services.Providers;
-using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Services.Factories

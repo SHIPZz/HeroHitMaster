@@ -38,5 +38,29 @@
         public const string Sunflora = "Prefabs/Enemy/Sunflora";
         public const string SnowBomb = "Prefabs/Enemy/SnowBomb";
         public const string Bomb = "Prefabs/Enemy/Bomb";
+        //
+        //sounds
+        public const string KnifeShootSound = "Prefabs/Sounds/KnifeShootSound";
+        public const string WebShootSound = "Prefabs/Sounds/WebShootSound";
+        public const string EnemyBombDieSound = "Prefabs/Sounds/EnemyBombDieSound";
+        public const string DummyDieSound = "Prefabs/Sounds/DummyDieSound";
+        public const string SpikeDieSound = "Prefabs/Sounds/SpikeDieSound";
+        public const string SnakeletDieSound = "Prefabs/Sounds/SnakeletDieSound";
+        public const string SnakenagaDieSound = "Prefabs/Sounds/SnakenagaDieSound";
+        public const string SnowBombDieSound = "Prefabs/Sounds/SnowBombDieSound";
+        public const string WolfPupDieSound = "Prefabs/Sounds/WolfPupDieSound";
+        public const string WerewolfDieSound = "Prefabs/Sounds/WerewolfDieSound";
+        public const string SunfloraDieSound = "Prefabs/Sounds/SunfloraDieSound";
+        public const string FireBallSound = "Prefabs/Sounds/FireBallSound";
+        
+        public const string EnemyBombHitSound = "Prefabs/Sounds/EnemyBombHitSound";
+        public const string DummyHitSound = "Prefabs/Sounds/DummyHitSound";
+        public const string SpikeHitSound = "Prefabs/Sounds/SpikeHitSound";
+        public const string SnakeletHitSound = "Prefabs/Sounds/SnakeletHitSound";
+        public const string SnakenagaHitSound = "Prefabs/Sounds/SnakenagaHitSound";
+        public const string SnowBombHitSound = "Prefabs/Sounds/SnowBombHitSound";
+        public const string WolfPupHitSound = "Prefabs/Sounds/WolfPupHitSound";
+        public const string WerewolfHitSound = "Prefabs/Sounds/WerewolfHitSound";
+        public const string SunfloraHitSound = "Prefabs/Sounds/SunfloraHitSound";
     }
 }

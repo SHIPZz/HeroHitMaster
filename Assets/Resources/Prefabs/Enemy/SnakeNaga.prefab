@@ -16640,6 +16640,7 @@ MonoBehaviour:
   _dieEffect: {fileID: 5848382542368287807}
   _navMeshAgent: {fileID: 1844039836887472479}
   _enemyFollower: {fileID: 2048318171883013889}
+  _enemy: {fileID: 3427889625446868661}
 --- !u!114 &3427889625446868661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21947,7 +21948,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 96bbf34d7aee725449bb8a5f1a46bfbb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0.75
   Loop: 0

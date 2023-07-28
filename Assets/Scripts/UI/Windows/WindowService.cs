@@ -31,6 +31,9 @@ namespace Windows
         public void CloseHud() => 
             Close(_hudWindows);
 
+        public Window Get(WindowTypeId windowTypeId) =>
+            _windows[windowTypeId];
+
         public void OpenSelectorWindow(WindowTypeId windowTypeId) => 
             Open(_selectorWindows, windowTypeId);
 

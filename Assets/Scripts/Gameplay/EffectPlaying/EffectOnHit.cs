@@ -1,6 +1,7 @@
 ﻿using System;
 using Enums;
 using Gameplay.Character;
+using Services.Storages;
 using UnityEngine;
 using Zenject;
 
@@ -11,9 +12,13 @@ namespace Gameplay.EffectPlaying
         private readonly IHealth _health;
         private readonly ParticleSystem _hitEffect;
         private bool _canPlayEffect = true;
+        private readonly AudioSource _hitSound;
 
-        public EffectOnHit(IHealth health, [Inject(Id = ParticleTypeId.HitEffect)] ParticleSystem hitEffect)
+        public EffectOnHit(IHealth health, [Inject(Id = ParticleTypeId.HitEffect)] ParticleSystem hitEffect,
+            SoundsSettings soundsSettings, ISoundStorage soundStorage, EnemyTypeId enemyTypeId)
         {
+            SoundTypeId audioTypeId = soundsSettings.HitEnemySounds[enemyTypeId];
+            _hitSound = soundStorage.Get(audioTypeId);
             _health = health;
             _hitEffect = hitEffect;
         }
@@ -36,6 +41,7 @@ namespace Gameplay.EffectPlaying
                 return;
             
             _hitEffect.Play();
+            _hitSound.Play();
         }
 
         private void BlockHitEffect() =>

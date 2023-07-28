@@ -2019,7 +2019,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: _weaponViews
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[Enums.WeaponTypeId, Assembly-CSharp],[WeaponViewInHand,
+      Data: 0|System.Collections.Generic.Dictionary`2[[Enums.WeaponTypeId, Assembly-CSharp],[Weapons.WeaponViewInHand,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
@@ -2929,7 +2929,6 @@ GameObject:
   - component: {fileID: 4793112262101728540}
   - component: {fileID: 2190769903589965174}
   - component: {fileID: 3596559834916333940}
-  - component: {fileID: 7676504449209034089}
   - component: {fileID: 8397819301073918312}
   m_Layer: 0
   m_Name: Wolverine
@@ -3117,18 +3116,6 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &7676504449209034089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8579200577069415324}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f89f455cdb57401e8106386186fbf272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8397819301073918312
 MonoBehaviour:
   m_ObjectHideFlags: 0

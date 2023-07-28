@@ -1,4 +1,5 @@
-﻿using Services.Providers;
+﻿using Gameplay.Weapons;
+using Services.Providers;
 using UnityEngine;
 
 namespace Gameplay.Character.Players.Shoot
@@ -10,7 +11,7 @@ namespace Gameplay.Character.Players.Shoot
         private readonly WeaponProvider _weaponProvider;
 
         private bool _canShoot = true;
-        private Weapon.Weapon _weapon;
+        private Weapon _weapon;
         private Vector2 _mousePosition;
 
         public PlayerShoot(CameraProvider cameraProvider,

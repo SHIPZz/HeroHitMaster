@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using Enums;
-using Gameplay.Character.Player.Shoot;
 using Gameplay.Character.Players.Shoot;
 using UnityEngine;
 using Weapons;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enums;
-using Gameplay.Weapon;
+using Gameplay.Weapons;
 using ScriptableObjects;
 using Services.Factories;
 

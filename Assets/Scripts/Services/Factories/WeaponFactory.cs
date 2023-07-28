@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Constants;
 using Enums;
-using Gameplay.Weapon;
+using Gameplay.Weapons;
 using Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;

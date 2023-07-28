@@ -1,5 +1,5 @@
 ﻿using Enums;
-using Gameplay.Weapon;
+using Gameplay.Weapons;
 
 namespace Services.Storages
 {

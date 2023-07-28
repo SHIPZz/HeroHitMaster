@@ -21,6 +21,7 @@ namespace Installers.GameObjectInstallers.Enemy
         [SerializeField] private ParticleSystem _dieEffect;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private EnemyFollower _enemyFollower;
+        [SerializeField] private Gameplay.Character.Enemy.Enemy _enemy;
         
         public override void InstallBindings()
         {
@@ -40,6 +41,8 @@ namespace Installers.GameObjectInstallers.Enemy
             Container.Bind<IHealth>().To<EnemyHealth>().FromInstance(_enemyHealth).AsSingle();
             Container.BindInstance(_skinnedMeshRenderer);
             Container.BindInstance(_triggerObserver);
+            Container.BindInstance(_enemy);
+            Container.BindInstance(_enemy.EnemyTypeId);
             Container.BindInstance(_animator);
             Container.BindInstance(_collider);
             Container.BindInstance(_navMeshAgent);

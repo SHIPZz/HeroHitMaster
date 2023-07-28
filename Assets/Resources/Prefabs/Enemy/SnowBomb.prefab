@@ -19539,7 +19539,6 @@ Transform:
   - {fileID: 2440303823458388517}
   - {fileID: 8205220474514728275}
   - {fileID: 5282047407644837906}
-  - {fileID: 7269127475453383065}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19707,6 +19706,7 @@ MonoBehaviour:
   _dieEffect: {fileID: 7506782360195957608}
   _navMeshAgent: {fileID: 4951588246759515694}
   _enemyFollower: {fileID: 2372662492294861164}
+  _enemy: {fileID: 5760427383814377844}
 --- !u!114 &2372662492294861164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19934,37 +19934,6 @@ Transform:
   m_LocalRotation: {x: 0.07075994, y: -0.34069955, z: 0.9177171, w: -0.19160418}
   m_LocalPosition: {x: 0.32146043, y: 0.97401136, z: 0.000000043278558}
   m_LocalScale: {x: 1, y: 0.99999994, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6547005285148908584}
-  m_RootOrder: -2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5310164358506312030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7269127475453383065}
-  m_Layer: 0
-  m_Name: Snow Bomb
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7269127475453383065
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5310164358506312030}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.5327434e-10, y: 0.0020830536, z: -0.0035065077}
-  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6547005285148908584}

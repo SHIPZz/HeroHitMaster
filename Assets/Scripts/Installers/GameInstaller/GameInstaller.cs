@@ -1,3 +1,4 @@
+using Gameplay.Sound;
 using Services.Factories;
 using Services.Providers;
 using Services.Storages;
@@ -13,6 +14,7 @@ namespace Installers.GameInstaller
         [SerializeField] private Transform _cameraTransformPoint;
         [SerializeField] private Transform _playerParentTransform;
         [SerializeField] private Transform _weaponIconParentTransform;
+        [SerializeField] private Transform _soundsParent;
 
         public override void InstallBindings()
         {
@@ -27,34 +29,51 @@ namespace Installers.GameInstaller
             BindWeaponsProvider();
             BindGameObjectPoolProvider();
             BindBulletFactory();
-            BindPlayerFactoryByWeaponType();
+            BindPlayerTypeIdStorageByWeaponType();
             BindWeaponSelection();
             BindPlayerStorage();
             BindWeaponStorage();
             BindEnemyFactory();
+            BindSoundStorage();
+            BindSoundFactory();
+            BindSound();
+            BindSoundProvider();
         }
 
-        private void BindEnemyFactory()
+        private void BindSoundProvider() => 
+            Container.Bind<SoundProvider>().AsSingle();
+
+        private void BindSound()
         {
+            Container.Bind<SoundWeaponChanger>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SoundWeaponPresenter>().AsSingle();
+        }
+
+        private void BindSoundFactory() =>
+            Container.Bind<ISoundFactory>()
+                .To<SoundFactory>()
+                .AsSingle();
+
+        private void BindSoundStorage() =>
+            Container
+                .BindInterfacesAndSelfTo<SoundStorage>()
+                .AsSingle();
+
+        private void BindEnemyFactory() =>
             Container.Bind<EnemyFactory>()
                 .AsSingle();
-        }
 
-        private void BindWeaponStorage()
-        {
+        private void BindWeaponStorage() =>
             Container
                 .Bind<IWeaponStorage>()
                 .To<WeaponStorage>()
                 .AsSingle();
-        }
 
-        private void BindPlayerStorage()
-        {
+        private void BindPlayerStorage() =>
             Container
                 .Bind<IPlayerStorage>()
                 .To<PlayerStorage>()
                 .AsSingle();
-        }
 
         private void BindWeaponSelection()
         {
@@ -62,12 +81,10 @@ namespace Installers.GameInstaller
             Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
         }
 
-        private void BindPlayerFactoryByWeaponType()
-        {
+        private void BindPlayerTypeIdStorageByWeaponType() =>
             Container
                 .Bind<PlayerTypeIdStorageByWeaponType>()
                 .AsSingle();
-        }
 
         private void BindBulletFactory() =>
             Container
@@ -116,9 +133,11 @@ namespace Installers.GameInstaller
 
         private void BindLocationProvider()
         {
-            LocationProvider locationProvider = new(_playerParentTransform, 
-                _spawnPoint,_cameraTransformPoint,_weaponIconParentTransform);
-            
+            LocationProvider locationProvider = new(_spawnPoint,
+                _cameraTransformPoint, 
+                _playerParentTransform,
+                _weaponIconParentTransform,_soundsParent);
+
             Container
                 .BindInstance(locationProvider)
                 .AsSingle();

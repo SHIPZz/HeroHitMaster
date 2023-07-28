@@ -1,11 +1,12 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Enums;
 using Gameplay.Bullet;
 using Services.Factories;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Weapon
+namespace Gameplay.Weapons
 {
     public class Weapon : MonoBehaviour, IInitializable
     {
@@ -16,6 +17,8 @@ namespace Gameplay.Weapon
         protected float BulletMoveDuration = 0.2f;
         protected int BulletsCount = 30;
         protected BulletFactory BulletFactory;
+
+        public event Action Shooted;
 
         public GameObject GameObject => gameObject;
 
@@ -35,6 +38,7 @@ namespace Gameplay.Weapon
             IBullet bullet = BulletFactory.Pop();
             BulletMovement.Move(target, bullet, initialPosition, bullet.Rigidbody);
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
+            Shooted?.Invoke();
         }
 
         protected void Init(WeaponTypeId weaponTypeId, Transform parent, int bulletsCount,

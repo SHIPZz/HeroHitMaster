@@ -1,8 +1,7 @@
 using Gameplay.Character;
-using Gameplay.Character.Player;
-using Gameplay.Character.Player.Shoot;
 using Gameplay.Character.Players;
 using Gameplay.Character.Players.Shoot;
+using Gameplay.EffectPlaying;
 using Gameplay.Web;
 using UnityEngine;
 using Zenject;
@@ -30,8 +29,7 @@ namespace Installers.GameObjectInstallers.Player
         {
             Container.BindInterfacesAndSelfTo<PlayerShootPresenter>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
-            // Container.Bind<WeaponSelector>().AsSingle();
-            // Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EffectOnShoot>().AsSingle();
         }
 
         private void BindAsSingle()

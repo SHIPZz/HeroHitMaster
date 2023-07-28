@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums;
 using Gameplay.Character;
+using Services.Storages;
 using UnityEngine;
 using Zenject;
 
@@ -11,19 +13,37 @@ namespace Gameplay.EffectPlaying
         private readonly IHealth _health;
         private readonly ParticleSystem _dieEffect;
 
-        public DeathEffectOnHit(IHealth health,[Inject(Id = ParticleTypeId.DieEffect)] ParticleSystem dieEffect)
+        private Dictionary<EnemyTypeId, SoundTypeId> _audioSources;
+
+        private EnemyTypeId _enemyTypeId;
+        private AudioSource _dieSound;
+
+        public DeathEffectOnHit(IHealth health, [Inject(Id = ParticleTypeId.DieEffect)] ParticleSystem dieEffect,
+            EnemyTypeId enemyTypeId, SoundsSettings soundsSettings, ISoundStorage soundStorage)
         {
+            _enemyTypeId = enemyTypeId;
             _health = health;
             _dieEffect = dieEffect;
+            Init(soundsSettings, soundStorage);
         }
-        
-        public void Initialize() => 
+
+        public void Initialize() =>
             _health.ValueZeroReached += PlayEffect;
 
-        public void Dispose() => 
+        public void Dispose() =>
             _health.ValueZeroReached -= PlayEffect;
 
-        private void PlayEffect() => 
+        private void PlayEffect()
+        {
+            _dieSound.Play();
             _dieEffect.Play();
+        }
+
+        private void Init(SoundsSettings soundsSettings, ISoundStorage soundStorage)
+        {
+            _audioSources = soundsSettings.DieEnemySounds;
+            SoundTypeId soundTypeId = _audioSources[_enemyTypeId];
+            _dieSound = soundStorage.Get(soundTypeId);
+        }
     }
 }

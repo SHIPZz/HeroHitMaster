@@ -1,6 +1,7 @@
 ﻿using Enums;
 using Gameplay.Camera;
-using Gameplay.Weapon;
+using Gameplay.Sound;
+using Gameplay.Weapons;
 using Services.Factories;
 using Services.Providers;
 using Services.Storages;
@@ -19,14 +20,17 @@ namespace GameInit
         private readonly WeaponProvider _weaponProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly IWeaponStorage _weaponStorage;
+        private SoundWeaponChanger _soundWeaponChanger;
 
         public GameInit(GameFactory gameFactory,
             LocationProvider locationProvider,
             CameraProvider cameraProvider,
             PlayerProvider playerProvider,
             IWeaponStorage weaponStorage,
-            WeaponProvider weaponProvider, IPlayerStorage playerStorage)
+            WeaponProvider weaponProvider, IPlayerStorage playerStorage,
+            SoundWeaponChanger soundWeaponChanger)
         {
+            _soundWeaponChanger = soundWeaponChanger;
             _gameFactory = gameFactory;
             _weaponStorage = weaponStorage;
             _locationProvider = locationProvider;
@@ -46,6 +50,7 @@ namespace GameInit
             // weapon.transform.SetParent(player.transform);
             _playerProvider.CurrentPlayer = player;
             _weaponProvider.CurrentWeapon = weapon;
+            InitStartWeaponSoundBy(weapon.WeaponTypeId);
         }
 
         private Weapon InitializeInitialWeapon(WeaponTypeId weaponTypeId) =>
@@ -60,5 +65,8 @@ namespace GameInit
 
         private Player InitializeInitialPlayer(PlayerTypeId playerTypeId) =>
             _playerStorage.Get(playerTypeId);
+
+        private void InitStartWeaponSoundBy(WeaponTypeId weaponTypeId) =>
+            _soundWeaponChanger.SetCurrentSound(weaponTypeId);
     }
 }

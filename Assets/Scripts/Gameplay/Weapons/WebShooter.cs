@@ -1,15 +1,14 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Gameplay.Bullet;
-using Gameplay.Web;
 using UnityEngine;
 
-namespace Gameplay.Weapon
+namespace Gameplay.Weapons
 {
     public class WebShooter : Weapon
     {
         public override void Initialize()
         {
-            // transform.SetParent(null);
             ReturnBulletDelay = 10f;
             Init(WeaponTypeId, null, 50, BulletMovement);
         }
@@ -18,12 +17,12 @@ namespace Gameplay.Weapon
         {
             IBullet bullet = BulletFactory.Pop();
             BulletMovement.Move(target, bullet, initialPosition,bullet.Rigidbody);
-            // EffectOnShoot.PlayEffects();
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() =>
             {
                 bullet.GameObject.transform.DOLocalRotate(Vector3.zero, 0f);
                 BulletFactory.Push(bullet);
             });
+            
         }
     }
 }

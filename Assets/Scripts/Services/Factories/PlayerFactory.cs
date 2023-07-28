@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Constants;
 using Enums;
-using Gameplay.Character.Player;
 using Gameplay.Character.Players;
 using Services.Providers.AssetProviders;
 using UnityEngine;

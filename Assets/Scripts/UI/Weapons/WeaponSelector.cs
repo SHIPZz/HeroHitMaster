@@ -1,6 +1,6 @@
 ﻿using System;
 using Enums;
-using Gameplay.Weapon;
+using Gameplay.Weapons;
 using Services.Factories;
 using Services.Providers;
 using Services.Storages;

@@ -1,4 +1,4 @@
-﻿namespace Gameplay.Character.Player
+﻿namespace Enums
 {
     public enum StateId
     {

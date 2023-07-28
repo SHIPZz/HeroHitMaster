@@ -9876,7 +9876,7 @@ Transform:
   - {fileID: 1266329892078884750}
   - {fileID: 5204748516529656041}
   m_Father: {fileID: 0}
-  m_RootOrder: -2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4309867202426247413
 Animator:
@@ -9934,6 +9934,7 @@ MonoBehaviour:
   _dieEffect: {fileID: 3554374804185192529}
   _navMeshAgent: {fileID: 6183963054665002207}
   _enemyFollower: {fileID: 1901284566086169178}
+  _enemy: {fileID: 5482505976512218691}
 --- !u!137 &6358217333202742436
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

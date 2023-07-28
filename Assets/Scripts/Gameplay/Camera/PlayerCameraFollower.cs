@@ -1,5 +1,3 @@
-using Cinemachine;
-using Gameplay.Character.Player;
 using Gameplay.Character.Players;
 using Services.Providers;
 using UnityEngine;
@@ -9,9 +7,6 @@ namespace Gameplay.Camera
 {
     public class PlayerCameraFollower : MonoBehaviour
     {
-        [SerializeField] private float _smoothSpeed;
-        [SerializeField] private Vector3 _offset;
-
         private PlayerProvider _playerProvider;
         private Player _player;
 

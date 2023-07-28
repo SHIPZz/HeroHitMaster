@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using Enums;
-using Gameplay.Character.Player;
-using Gameplay.Character.Players;
-using ScriptableObjects.PlayerSettings;
+﻿using Gameplay.Character.Players;
 
 namespace Services.Providers
 {

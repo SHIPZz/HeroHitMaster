@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Windows;
+using Windows.Audio;
+using Windows.Setting;
 using Windows.Shop;
 using Services.Factories;
 using Services.Providers;
@@ -13,8 +15,10 @@ namespace Installers.UI
     {
         [SerializeField] private WindowProvider _windowProvider;
         [SerializeField] private WeaponIconsProvider _weaponIconsProvider;
-        [SerializeField] private ShopView _shopView;
         [SerializeField] private List<WeaponSelectorView> _weaponSelectorViews;
+        [SerializeField] private AudioView _audioView;
+        [SerializeField] private ShopView _shopView;
+        [SerializeField] private SettingView _settingView;
 
         public override void InstallBindings()
         {
@@ -25,6 +29,21 @@ namespace Installers.UI
             BindShopUI();
             BindPlayerSelector();
             BindWeaponSelectorViews();
+            BindAudioUI();
+            BindSettingUi();
+        }
+
+        private void BindSettingUi()
+        {
+            Container.BindInterfacesAndSelfTo<SettingPresenter>().AsSingle();
+            Container.BindInstance(_settingView);
+        }
+
+        private void BindAudioUI()
+        {
+            Container.BindInstance(_audioView);
+            Container.BindInterfacesAndSelfTo<AudioPresenter>().AsSingle();
+            Container.Bind<AudioChanger>().AsSingle();
         }
 
         private void BindWeaponSelectorViews()
@@ -38,7 +57,7 @@ namespace Installers.UI
             Container
                 .BindInterfacesAndSelfTo<PlayerSelectorPresenter>()
                 .AsSingle();
-            
+
             Container
                 .Bind<PlayerSelector>()
                 .AsSingle();
@@ -46,12 +65,10 @@ namespace Installers.UI
 
         private void BindShopUI()
         {
+            Container.BindInstance(_shopView);
             Container
                 .BindInterfacesAndSelfTo<ShopPresenter>()
                 .AsSingle();
-
-            Container
-                .BindInstance(_shopView);
         }
 
         private void BindWeaponIconsProvider()
