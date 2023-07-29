@@ -24,7 +24,7 @@ namespace Windows
         public void Open() =>
             DOTween.Sequence().OnComplete(() =>
             {
-                gameObject.SetActive(true);
+                // gameObject.SetActive(true);
                 gameObject.transform.DOScaleX(_targetScaleX, _targetOpenDuration)
                     .OnComplete(() => Opened?.Invoke());
             });
@@ -32,7 +32,7 @@ namespace Windows
         public void Close() =>
             DOTween.Sequence().OnComplete(() =>
             {
-                gameObject.SetActive(false);
+                // gameObject.SetActive(false);
                 gameObject.transform.DOScaleX(0, _targetCloseDuration)
                     .OnComplete(() =>Closed?.Invoke());
             });

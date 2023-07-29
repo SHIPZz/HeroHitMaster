@@ -14,35 +14,11 @@ namespace Services.Factories
         private readonly DiContainer _diContainer;
         private readonly AssetProvider _assetProvider;
         private readonly LocationProvider _locationProvider;
-        
-        private readonly Dictionary<SoundTypeId, string> _sounds = new()
+        private readonly Dictionary<SoundTypeId, string> _sounds;
+
+        public SoundFactory(DiContainer diContainer, AssetProvider assetProvider, SoundsSettings soundsSettings, LocationProvider locationProvider)
         {
-            {SoundTypeId.KnifeShootSound, AssetPath.KnifeShootSound},
-            {SoundTypeId.WebShootSound, AssetPath.WebShootSound},
-            {SoundTypeId.SpikeDieSound, AssetPath.SpikeDieSound},
-            {SoundTypeId.SnakeletDieSound, AssetPath.SnakeletDieSound},
-            {SoundTypeId.SnakenagaDieSound, AssetPath.SnakenagaDieSound},
-            {SoundTypeId.DummyDieSound, AssetPath.DummyDieSound},
-            {SoundTypeId.WolfPupDieSound, AssetPath.WolfPupDieSound},
-            {SoundTypeId.WerewolfDieSound, AssetPath.WerewolfDieSound},
-            {SoundTypeId.SnowBombDieSound, AssetPath.SnowBombDieSound},
-            {SoundTypeId.EnemyBombDieSound, AssetPath.EnemyBombDieSound},
-            {SoundTypeId.SunfloraDieSound, AssetPath.SunfloraDieSound},
-            {SoundTypeId.FireBallSound, AssetPath.FireBallSound},
-            
-            {SoundTypeId.SpikeHitSound, AssetPath.SpikeHitSound},
-            {SoundTypeId.SnakeletHitSound, AssetPath.SnakeletHitSound},
-            {SoundTypeId.SnakenagaHitSound, AssetPath.SnakenagaHitSound},
-            {SoundTypeId.DummyHitSound, AssetPath.DummyHitSound},
-            {SoundTypeId.WolfPupHitSound, AssetPath.WolfPupHitSound},
-            {SoundTypeId.WerewolfHitSound, AssetPath.WerewolfHitSound},
-            {SoundTypeId.SnowBombHitSound, AssetPath.SnowBombHitSound},
-            {SoundTypeId.EnemyBombHitSound, AssetPath.EnemyBombHitSound},
-            {SoundTypeId.SunfloraHitSound, AssetPath.SunfloraHitSound},
-        };
-        
-        public SoundFactory(DiContainer diContainer, AssetProvider assetProvider, LocationProvider locationProvider)
-        {
+            _sounds = soundsSettings.SoundPathesByTypeId;
             _locationProvider = locationProvider;
             _assetProvider = assetProvider;
             _diContainer = diContainer;
