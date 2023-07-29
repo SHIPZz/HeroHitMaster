@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b911925709a4848a45b7f0db44a93fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  Damage: 1000
   <BulletTypeId>k__BackingField: 3
   _material: {fileID: 2100000, guid: 5e75253ed4b4e284896f9e36426c3fff, type: 2}
 --- !u!114 &-820653508589360453
@@ -197,8 +197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bullet: {fileID: 6013555398133492335}
   _triggerObserver: {fileID: -820653508589360453}
-  _rotator: {fileID: 5639558429733571930}
-  _knifeParent: {fileID: 0}
 --- !u!114 &1780656889918929443
 MonoBehaviour:
   m_ObjectHideFlags: 0
