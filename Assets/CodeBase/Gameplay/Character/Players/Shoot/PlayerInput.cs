@@ -3,7 +3,7 @@ using Services.Inputs;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Character.Players.Shoot
+namespace CodeBase.Gameplay.Character.Players.Shoot
 {
     public class PlayerInput : ITickable
     {

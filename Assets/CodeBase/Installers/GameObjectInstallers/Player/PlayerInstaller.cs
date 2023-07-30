@@ -1,16 +1,16 @@
-using Gameplay.Character;
-using Gameplay.Character.Players;
-using Gameplay.Character.Players.Shoot;
-using Gameplay.EffectPlaying;
-using Gameplay.Web;
+using CodeBase.Gameplay.Bullet.Web;
+using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.Character.Players;
+using CodeBase.Gameplay.Character.Players.Shoot;
+using CodeBase.Gameplay.EffectPlaying;
 using UnityEngine;
 using Zenject;
 
-namespace Installers.GameObjectInstallers.Player
+namespace CodeBase.Installers.GameObjectInstallers.Player
 {
     public class PlayerInstaller : MonoInstaller
     {
-        [SerializeField] private Gameplay.Character.Players.Player _player;
+        [SerializeField] private CodeBase.Gameplay.Character.Players.Player _player;
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private CharacterController _characterController;

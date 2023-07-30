@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Gameplay.Bullet
+namespace CodeBase.Gameplay.Bullet
 {
     public class DefaultBulletMovement : IBulletMovement
     {

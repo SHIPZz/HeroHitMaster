@@ -1,9 +1,9 @@
 ﻿using System;
-using Gameplay.Character.Players.Shoot;
+using CodeBase.Gameplay.Character.Players.Shoot;
 using Services.Providers;
 using Zenject;
 
-namespace Gameplay.EffectPlaying
+namespace CodeBase.Gameplay.EffectPlaying
 {
     public class EffectOnShoot : IInitializable, IDisposable
     {

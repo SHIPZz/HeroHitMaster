@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Services.Providers;
 using Enums;
-using Gameplay.Character.Enemy;
 using Services.Providers.AssetProviders;
 using Zenject;
 

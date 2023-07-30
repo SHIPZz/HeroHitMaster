@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Gameplay.Bullet
+namespace CodeBase.Gameplay.Bullet
 {
     public class KnifeMovement : IBulletMovement
     {

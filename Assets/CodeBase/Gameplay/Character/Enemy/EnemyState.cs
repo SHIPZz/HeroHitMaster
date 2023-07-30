@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Character.Enemy
+namespace CodeBase.Gameplay.Character.Enemy
 {
     public class EnemyState : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using Constants;
 using DG.Tweening;
 using Zenject;
 
-namespace Gameplay.Character.Enemy
+namespace CodeBase.Gameplay.Character.Enemy
 {
     public class StopMovementOnHit : IInitializable, IDisposable
     {

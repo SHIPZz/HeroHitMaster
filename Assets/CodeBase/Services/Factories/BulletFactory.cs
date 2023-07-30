@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Bullet;
 using CodeBase.Services.Providers;
 using Constants;
 using Enums;
-using Gameplay.Bullet;
 using Services.ObjectPool;
 using Services.Providers;
 using Services.Providers.AssetProviders;

@@ -1,4 +1,4 @@
-﻿using Gameplay.Character.Players;
+﻿using CodeBase.Gameplay.Character.Players;
 
 namespace Services.Providers
 {

@@ -1,9 +1,7 @@
 ﻿using DG.Tweening;
-using Gameplay.Bullet;
 using UnityEngine;
-using Zenject;
 
-namespace Gameplay.Web
+namespace CodeBase.Gameplay.Bullet.Web
 {
     public class WebMovement : IBulletMovement
     {

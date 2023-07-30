@@ -1,9 +1,10 @@
+using CodeBase.Gameplay;
 using CodeBase.Gameplay.EnemyBodyParts;
+using CodeBase.Gameplay.Sound;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
-using Gameplay.Sound;
 using Services.Factories;
 using Services.Providers;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Installers.GameInstaller
         [SerializeField] private EnemyBodyPartStorage _enemyBodyPartStorage;
         [SerializeField] private EnemySpawnersProvider _enemySpawnersProvider;
         [SerializeField] private LocationProvider _locationProvider;
+        [SerializeField] private MaterialProvider _materialProvider;
 
         public override void InstallBindings()
         {
@@ -45,7 +47,12 @@ namespace Installers.GameInstaller
             BindEnemyBodyPartStorage();
             BindEnemyConfiguration();
             BindEnemySpawnerProvider();
+            BindMaterialProvider();
+            Container.BindInterfacesAndSelfTo<SetterWeaponToPlayerHand>().AsSingle();
         }
+
+        private void BindMaterialProvider() => 
+            Container.BindInstance(_materialProvider);
 
         private void BindEnemySpawnerProvider() =>
             Container

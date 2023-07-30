@@ -3,7 +3,7 @@ using AmazingAssets.AdvancedDissolve;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Gameplay.MaterialChanger
+namespace CodeBase.Gameplay.MaterialChanger
 {
     public class MeshMaterialChanger : MonoBehaviour, IMaterialChanger
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.Character.Enemy
+namespace CodeBase.Gameplay.Character.Enemy
 {
     public class EnemyAnimator
     {

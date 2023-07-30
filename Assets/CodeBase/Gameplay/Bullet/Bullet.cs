@@ -1,11 +1,11 @@
-﻿using CodeBase.Gameplay.Collision;
+﻿using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.Collision;
 using Enums;
 using Extensions;
-using Gameplay.Character;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Bullet
+namespace CodeBase.Gameplay.Bullet
 {
     public class Bullet : MonoBehaviour, IBullet
     {
@@ -32,7 +32,7 @@ namespace Gameplay.Bullet
         private void OnDisable() => 
             TriggerObserver.Entered -= DoDamage;
 
-        protected virtual void DoDamage(Collider other)
+        public void DoDamage(Collider other)
         {
             if (!other.gameObject.TryGetComponent(out IDamageable damageable))
                 return;

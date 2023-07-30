@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Constants;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Gameplay.Web
+namespace CodeBase.Gameplay.Bullet.Web
 {
     public class WebRotation : MonoBehaviour
     {
@@ -41,7 +40,7 @@ namespace Gameplay.Web
             StartToWallRotation(Vector3.right);
 
             StartToFloorRotation();
-
+            
             _canRotateToWall = false;
             _canRotateToFloor = false;
         }

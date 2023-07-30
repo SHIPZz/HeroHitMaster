@@ -1,20 +1,16 @@
 using System.Collections.Generic;
+using CodeBase.Enums;
 using Enums;
-using Gameplay.Character.Players;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace ScriptableObjects.PlayerSettings
 {
     [CreateAssetMenu(menuName = "Gameplay/PlayerSettings", fileName = "PlayerSettings")]
-    public class PlayerSettings : ScriptableObject
+    public class PlayerSettings : SerializedScriptableObject
     {
-        [SerializeField] private List<PlayerTypeId> _playerTypeIds;
-        [SerializeField] private Player _playerPrefab;
-        [SerializeField] private PlayerTypeId _playerTypeId;
-
-        public Player PlayerPrefab => _playerPrefab;
-        public PlayerTypeId PlayerTypeId => _playerTypeId;
-
-        public IReadOnlyList<PlayerTypeId> PlayerTypeIds => _playerTypeIds;
+        [field: SerializeField] public List<PlayerTypeId> PlayerTypeIds { get; private set; }
+        [OdinSerialize] public Dictionary<PlayerTypeId, PlayerWithWeaponInHandTypeId> PlayerWithWeaponInHands { get; private set; }
     }
 }

@@ -3,7 +3,7 @@ using Constants;
 using Zenject;
 using Object = UnityEngine.Object;
 
-namespace Gameplay.Character.Enemy
+namespace CodeBase.Gameplay.Character.Enemy
 {
     public class EnemyDestroyOnDeath : IInitializable, IDisposable
     {

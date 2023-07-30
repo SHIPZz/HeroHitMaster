@@ -1,14 +1,14 @@
-﻿using CodeBase.Services.Providers;
+﻿using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Sound;
+using CodeBase.Gameplay.Weapons;
+using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
 using Enums;
-using Gameplay.Camera;
-using Gameplay.Sound;
-using Gameplay.Weapons;
 using Services.Factories;
 using Services.Providers;
 using UnityEngine;
 using Zenject;
-using Player = Gameplay.Character.Players.Player;
+using Player = CodeBase.Gameplay.Character.Players.Player;
 
 namespace GameInit
 {
@@ -45,9 +45,7 @@ namespace GameInit
         {
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Weapon weapon = InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
-            var weaponViewStorage = player.GetComponentInChildren<WeaponViewStorage>();
-            weaponViewStorage.Get(weapon.WeaponTypeId);
+            Weapon weapon = InitializeInitialWeapon(WeaponTypeId.ThrowingTridentShooter);
             _playerProvider.CurrentPlayer = player;
             _weaponProvider.CurrentWeapon = weapon;
             InitStartWeaponSoundBy(weapon.WeaponTypeId);

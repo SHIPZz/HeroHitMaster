@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Gameplay.Character.Enemy
+namespace CodeBase.Gameplay.Character.Enemy
 {
     public class EnemyHealth : MonoBehaviour, IHealth, IDamageable
     {

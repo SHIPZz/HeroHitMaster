@@ -1,5 +1,5 @@
-﻿using Enums;
-using Gameplay.Weapons;
+﻿using CodeBase.Gameplay.Weapons;
+using Enums;
 
 namespace CodeBase.Services.Storages
 {

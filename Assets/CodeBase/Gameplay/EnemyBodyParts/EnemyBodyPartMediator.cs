@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Services.Storages;
-using Gameplay.Character.Enemy;
 using Zenject;
 
 namespace CodeBase.Gameplay.EnemyBodyParts

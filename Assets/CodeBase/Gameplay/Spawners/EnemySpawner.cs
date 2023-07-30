@@ -1,8 +1,8 @@
 ﻿using System;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Storages;
 using Enums;
-using Gameplay.Character.Enemy;
 using UnityEngine;
 using Zenject;
 

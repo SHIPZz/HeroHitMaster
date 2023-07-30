@@ -2,7 +2,7 @@
 using Enums;
 using UnityEngine;
 
-namespace Gameplay.Character.Enemy
+namespace CodeBase.Gameplay.Character.Enemy
 {
     public class Enemy : MonoBehaviour
     {

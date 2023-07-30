@@ -1,5 +1,5 @@
-﻿using Constants;
-using Gameplay.Camera;
+﻿using CodeBase.Gameplay.Camera;
+using Constants;
 using Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;

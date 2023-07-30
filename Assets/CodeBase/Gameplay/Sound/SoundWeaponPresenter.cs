@@ -2,7 +2,7 @@
 using Weapons;
 using Zenject;
 
-namespace Gameplay.Sound
+namespace CodeBase.Gameplay.Sound
 {
     public class SoundWeaponPresenter : IInitializable, IDisposable
     {

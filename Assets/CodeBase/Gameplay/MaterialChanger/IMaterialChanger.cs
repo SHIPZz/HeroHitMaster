@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Gameplay.MaterialChanger
+namespace CodeBase.Gameplay.MaterialChanger
 {
     public interface IMaterialChanger
     {

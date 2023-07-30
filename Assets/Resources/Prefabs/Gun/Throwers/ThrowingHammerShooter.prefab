@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: -8775872644594108061}
-  _audioSource: {fileID: 9145501376114857141}
+  _weaponTypeId: 0
 --- !u!114 &3424198531366639040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,10 +176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletMovement:
-    rid: 8827635299697819654
+    rid: 8827635391070732294
   <WeaponTypeId>k__BackingField: 7
   references:
     version: 2
     RefIds:
-    - rid: 8827635299697819654
-      type: {class: KnifeMovement, ns: Gameplay.Bullet, asm: Assembly-CSharp}
+    - rid: 8827635391070732294
+      type: {class: KnifeMovement, ns: CodeBase.Gameplay.Bullet, asm: Assembly-CSharp}

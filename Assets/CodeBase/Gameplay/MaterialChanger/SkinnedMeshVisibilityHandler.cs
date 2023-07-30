@@ -1,11 +1,11 @@
 ﻿using System;
+using CodeBase.Gameplay.Character;
 using Constants;
 using DG.Tweening;
-using Gameplay.Character;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.MaterialChanger
+namespace CodeBase.Gameplay.MaterialChanger
 {
     public class SkinnedMeshVisibilityHandler : IInitializable, IDisposable
     {

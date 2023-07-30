@@ -1,4 +1,4 @@
-﻿using Gameplay.Weapons;
+﻿using CodeBase.Gameplay.Weapons;
 
 namespace Services.Providers
 {

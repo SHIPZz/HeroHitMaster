@@ -48,13 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletMovement:
-    rid: 8827635299697819657
+    rid: 8827635391070732288
   <WeaponTypeId>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8827635299697819657
-      type: {class: WebMovement, ns: Gameplay.Web, asm: Assembly-CSharp}
+    - rid: 8827635391070732288
+      type: {class: WebMovement, ns: CodeBase.Gameplay.Bullet.Web, asm: Assembly-CSharp}
 --- !u!114 &-7713099217943664730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 1956703246876421125}
-  _audioSource: {fileID: 4474667881492262606}
+  _weaponTypeId: 0
 --- !u!114 &-7712417059558525395
 MonoBehaviour:
   m_ObjectHideFlags: 0

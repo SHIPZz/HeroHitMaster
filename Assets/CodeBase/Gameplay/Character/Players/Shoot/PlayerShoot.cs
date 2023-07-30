@@ -1,8 +1,8 @@
-﻿using Gameplay.Weapons;
+﻿using CodeBase.Gameplay.Weapons;
 using Services.Providers;
 using UnityEngine;
 
-namespace Gameplay.Character.Players.Shoot
+namespace CodeBase.Gameplay.Character.Players.Shoot
 {
     public class PlayerShoot
     {
@@ -39,6 +39,9 @@ namespace Gameplay.Character.Players.Shoot
             
             targetVector = !Physics.Raycast(ray, out RaycastHit hit) ? ray.GetPoint(70f) : hit.point;
 
+            Debug.Log(targetVector);
+            Debug.Log(_startShootPosition);
+            Debug.Log(weapon);
             weapon.Shoot(targetVector, _startShootPosition.position);
         }
     }

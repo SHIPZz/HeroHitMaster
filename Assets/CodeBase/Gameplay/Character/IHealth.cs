@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Gameplay.Character
+namespace CodeBase.Gameplay.Character
 {
     public interface IHealth
     {

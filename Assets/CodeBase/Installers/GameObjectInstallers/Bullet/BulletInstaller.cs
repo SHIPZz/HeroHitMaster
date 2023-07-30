@@ -1,14 +1,13 @@
-﻿using CodeBase.Gameplay.Collision;
-using Gameplay;
-using Gameplay.Bullet;
+﻿using CodeBase.Gameplay.Bullet;
+using CodeBase.Gameplay.Collision;
 using UnityEngine;
 using Zenject;
 
-namespace Installers.GameObjectInstallers.Bullet
+namespace CodeBase.Installers.GameObjectInstallers.Bullet
 {
     public class BulletInstaller : MonoInstaller
     {
-        [SerializeField] private Gameplay.Bullet.Bullet _bullet;
+        [SerializeField] private CodeBase.Gameplay.Bullet.Bullet _bullet;
         [SerializeField] private TriggerObserver _triggerObserver;
 
         public override void InstallBindings()

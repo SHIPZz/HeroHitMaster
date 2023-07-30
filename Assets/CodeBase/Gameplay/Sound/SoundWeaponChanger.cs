@@ -4,7 +4,7 @@ using CodeBase.Services.Storages;
 using Enums;
 using Services.Providers;
 
-namespace Gameplay.Sound
+namespace CodeBase.Gameplay.Sound
 {
     public class SoundWeaponChanger
     {

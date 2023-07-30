@@ -1,5 +1,5 @@
-﻿using CodeBase.Gameplay.Collision;
-using Gameplay.Character.Enemy;
+﻿using CodeBase.Gameplay.Character.Enemy;
+using CodeBase.Gameplay.Collision;
 
 namespace CodeBase.Gameplay.Spawners
 {

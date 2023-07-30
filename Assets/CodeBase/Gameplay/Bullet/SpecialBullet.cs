@@ -1,15 +1,15 @@
-﻿using Extensions;
-using Gameplay.Character;
-using Gameplay.MaterialChanger;
+﻿using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.MaterialChanger;
+using Extensions;
 using UnityEngine;
 
-namespace Gameplay.Bullet
+namespace CodeBase.Gameplay.Bullet
 {
-    public class SpecialBullet : Bullet
+    public class SpecialBullet : Bullet, IBullet
     {
         [SerializeField] private Material _material;
 
-        protected override void DoDamage(Collider other)
+        public void DoDamage(Collider other)
         {
             if (!other.gameObject.TryGetComponent(out IMaterialChanger materialChanger) ||
                 !other.gameObject.TryGetComponent(out IDamageable damageable))

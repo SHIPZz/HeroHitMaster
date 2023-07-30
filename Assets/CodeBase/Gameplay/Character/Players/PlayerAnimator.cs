@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.Character.Players
+namespace CodeBase.Gameplay.Character.Players
 {
     public class PlayerAnimator
     {

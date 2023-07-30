@@ -1,8 +1,8 @@
-﻿using CodeBase.Services.Factories;
+﻿using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Character.Players;
+using CodeBase.Gameplay.Weapons;
+using CodeBase.Services.Factories;
 using Enums;
-using Gameplay.Camera;
-using Gameplay.Character.Players;
-using Gameplay.Weapons;
 using UnityEngine;
 
 namespace Services.Factories

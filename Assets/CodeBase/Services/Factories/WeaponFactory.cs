@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using Constants;
 using Enums;
-using Gameplay.Weapons;
 using ScriptableObjects;
 using Services.Providers.AssetProviders;
 using UnityEngine;

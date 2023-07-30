@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Factories;
 using Enums;
-using Gameplay.Weapons;
 using ScriptableObjects;
 using Services.Factories;
+using UnityEngine;
 
 namespace CodeBase.Services.Storages
 {
@@ -43,6 +44,7 @@ namespace CodeBase.Services.Storages
             {
                 Weapon weapon = _weaponFactory.Create(weaponSetting);
                 _weapons[weapon.WeaponTypeId] = weapon;
+                Debug.Log(weapon.WeaponTypeId);
             }
         }
     }

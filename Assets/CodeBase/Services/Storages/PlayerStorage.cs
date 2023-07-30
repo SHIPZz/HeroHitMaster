@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Providers;
 using Enums;
-using Gameplay.Character.Players;
+using ScriptableObjects.PlayerSettings;
 using Services.Factories;
 using Services.Providers;
 using UnityEngine;
@@ -19,13 +20,13 @@ namespace CodeBase.Services.Storages
         public PlayerStorage(PlayerFactory playerFactory, 
             LocationProvider locationProvider, 
             PlayerTypeIdStorageByWeaponType playerTypeIdStorageByWeaponType, 
-            PlayerProvider playerProvider, List<PlayerTypeId> playerTypeIds)
+            PlayerProvider playerProvider, PlayerSettings playerSettings)
         {
             _playerTypeIdStorageByWeaponType = playerTypeIdStorageByWeaponType;
             _playerProvider = playerProvider;
             _playerFactory = playerFactory;
             _locationProvider = locationProvider;
-            FillDictionary(playerTypeIds);
+            FillDictionary(playerSettings.PlayerTypeIds);
         }
 
         public Player Get(PlayerTypeId playerTypeId)

@@ -1,4 +1,4 @@
-﻿namespace Gameplay.Character
+﻿namespace CodeBase.Gameplay.Character
 {
     public interface IDamageable
     {

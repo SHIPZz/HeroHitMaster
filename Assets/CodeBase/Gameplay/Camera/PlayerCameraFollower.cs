@@ -1,9 +1,9 @@
-using Gameplay.Character.Players;
+using CodeBase.Gameplay.Character.Players;
 using Services.Providers;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Camera
+namespace CodeBase.Gameplay.Camera
 {
     public class PlayerCameraFollower : MonoBehaviour
     {

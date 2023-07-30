@@ -1,10 +1,9 @@
 ﻿using System;
-using Gameplay.Character;
-using Gameplay.MaterialChanger;
-using UnityEngine;
+using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.MaterialChanger;
 using Zenject;
 
-namespace Gameplay.EffectPlaying
+namespace CodeBase.Gameplay.EffectPlaying
 {
     public class DestroyEnemyEffectsHandler : IInitializable, IDisposable
     {

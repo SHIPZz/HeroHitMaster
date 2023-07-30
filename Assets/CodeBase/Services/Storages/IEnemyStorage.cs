@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Character.Enemy;
 using Enums;
-using Gameplay.Character.Enemy;
 
 namespace CodeBase.Services.Storages
 {

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using CodeBase.Gameplay.Bullet;
 using DG.Tweening;
-using Gameplay.Bullet;
 using UnityEngine;
 
-namespace Gameplay.Weapons
+namespace CodeBase.Gameplay.Weapons
 {
     public class WebShooter : Weapon
     {

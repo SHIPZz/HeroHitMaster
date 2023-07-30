@@ -1,13 +1,12 @@
 ﻿using System;
+using CodeBase.Gameplay.Bullet;
 using CodeBase.Services.Factories;
 using DG.Tweening;
 using Enums;
-using Gameplay.Bullet;
-using Services.Factories;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Weapons
+namespace CodeBase.Gameplay.Weapons
 {
     public class Weapon : MonoBehaviour, IInitializable
     {

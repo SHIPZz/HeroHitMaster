@@ -3,6 +3,7 @@ using Windows;
 using Windows.Audio;
 using Windows.Setting;
 using Windows.Shop;
+using CodeBase.Gameplay.Character.PlayerSelection;
 using Services.Factories;
 using Services.Providers;
 using UnityEngine;

@@ -1,15 +1,15 @@
-﻿using CodeBase.Gameplay.Collision;
+﻿using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.Character.Enemy;
+using CodeBase.Gameplay.Collision;
+using CodeBase.Gameplay.EffectPlaying;
+using CodeBase.Gameplay.EnemyBodyParts;
+using CodeBase.Gameplay.MaterialChanger;
 using Enums;
-using Gameplay;
-using Gameplay.Character;
-using Gameplay.Character.Enemy;
-using Gameplay.EffectPlaying;
-using Gameplay.MaterialChanger;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-namespace Installers.GameObjectInstallers.Enemy
+namespace CodeBase.Installers.GameObjectInstallers.Enemy
 {
     public class EnemyInstaller : MonoInstaller
     {
@@ -22,7 +22,7 @@ namespace Installers.GameObjectInstallers.Enemy
         [SerializeField] private ParticleSystem _dieEffect;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private EnemyFollower _enemyFollower;
-        [SerializeField] private Gameplay.Character.Enemy.Enemy _enemy;
+        [SerializeField] private CodeBase.Gameplay.Character.Enemy.Enemy _enemy;
         
         public override void InstallBindings()
         {
@@ -62,6 +62,7 @@ namespace Installers.GameObjectInstallers.Enemy
             Container.BindInterfacesAndSelfTo<AnimOnAgentMoving>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<StopMovementOnHit>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyBodyActivatorDisabler>().AsSingle();
         }
 
         private void BindEffects()

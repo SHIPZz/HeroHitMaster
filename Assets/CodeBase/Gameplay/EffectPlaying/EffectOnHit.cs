@@ -1,12 +1,12 @@
 ﻿using System;
+using CodeBase.Gameplay.Character;
 using CodeBase.Installers.ScriptableObjects;
 using CodeBase.Services.Storages;
 using Enums;
-using Gameplay.Character;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.EffectPlaying
+namespace CodeBase.Gameplay.EffectPlaying
 {
     public class EffectOnHit : IInitializable, IDisposable
     {

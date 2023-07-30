@@ -1,12 +1,14 @@
 ﻿using System;
 using AmazingAssets.AdvancedDissolve;
+using CodeBase.Enums;
+using CodeBase.Gameplay.Character.Enemy;
 using Constants;
 using DG.Tweening;
-using Gameplay.Character.Enemy;
 using UnityEngine;
 using Zenject;
+using Random = System.Random;
 
-namespace Gameplay.MaterialChanger
+namespace CodeBase.Gameplay.MaterialChanger
 {
     public class SkinnedMaterialChanger : MonoBehaviour, IMaterialChanger
     {
@@ -15,19 +17,25 @@ namespace Gameplay.MaterialChanger
 
         private SkinnedMeshRenderer _skinnedMeshRenderer;
         private EnemyDestroyOnDeath _enemyDestroyOnDeath;
-        
+        private MaterialProvider _materialProvider;
+        private static Random _random = new();
+
         public event Action Changed;
 
         [Inject]
-        private void Construct(SkinnedMeshRenderer skinnedMeshRenderer, EnemyDestroyOnDeath enemyDestroyOnDeath)
+        private void Construct(SkinnedMeshRenderer skinnedMeshRenderer, EnemyDestroyOnDeath enemyDestroyOnDeath,MaterialProvider materialProvider)
         {
+            _materialProvider = materialProvider;
             _enemyDestroyOnDeath = enemyDestroyOnDeath;
             _skinnedMeshRenderer = skinnedMeshRenderer;
         }
 
         public void Change(Material material)
         {
-            SetStartValues(material);
+            // SetStartValues(material);
+
+            var randomMaterial = _materialProvider.Materials[(MaterialTypeId)2];
+            SetStartValues(randomMaterial);
             
             DOTween.To(() => 0, x =>
                     _skinnedMeshRenderer.material.SetFloat(AdvancedDissolveProperties.Cutout.Standard._ids[0].clip, x),

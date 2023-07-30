@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.Bullet
+namespace CodeBase.Gameplay.Bullet
 {
     public interface IBulletMovement
     {

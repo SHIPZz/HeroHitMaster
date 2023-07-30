@@ -1,8 +1,8 @@
 ﻿using System;
+using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Storages;
 using Enums;
-using Gameplay.Weapons;
 using Services.Factories;
 using Services.Providers;
 using UnityEngine;
