@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Enums;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.Bullet
 {
@@ -7,6 +8,7 @@ namespace CodeBase.Gameplay.Bullet
         GameObject GameObject { get; }
         Rigidbody Rigidbody { get; }
 
+        BulletTypeId BulletTypeId { get; }
         void DoDamage(Collider other);
     }
 }

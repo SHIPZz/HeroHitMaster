@@ -1,10 +1,10 @@
-﻿using CodeBase.Gameplay.Camera;
-using Constants;
-using Services.Providers.AssetProviders;
+﻿using CodeBase.Constants;
+using CodeBase.Gameplay.Camera;
+using CodeBase.Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;
 
-namespace Services.Factories
+namespace CodeBase.Services.Factories
 {
     public class PlayerCameraFactory
     {

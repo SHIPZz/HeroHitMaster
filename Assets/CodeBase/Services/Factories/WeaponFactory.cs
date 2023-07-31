@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.ScriptableObjects;
 using CodeBase.Services.Providers;
-using Constants;
-using Enums;
-using ScriptableObjects;
-using Services.Providers.AssetProviders;
+using CodeBase.Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;
 

@@ -1,4 +1,4 @@
-﻿namespace Constants
+﻿namespace CodeBase.Constants
 {
     public static class DelayValues
     {

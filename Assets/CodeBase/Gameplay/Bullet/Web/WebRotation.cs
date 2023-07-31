@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Constants;
+using CodeBase.Constants;
 using DG.Tweening;
 using UnityEngine;
 

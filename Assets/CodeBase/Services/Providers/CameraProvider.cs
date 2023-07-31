@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Services.Providers
+namespace CodeBase.Services.Providers
 {
     public class CameraProvider
     {

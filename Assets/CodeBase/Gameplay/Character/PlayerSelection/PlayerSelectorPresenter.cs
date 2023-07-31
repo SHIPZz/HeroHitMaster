@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Weapons;
+using CodeBase.UI.Weapons;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.PlayerSelection

@@ -1,10 +1,10 @@
-﻿using Services;
-using Services.Inputs;
-using Services.Providers.AssetProviders;
+﻿using CodeBase.Services.Inputs.InputService;
+using CodeBase.Services.Providers.AssetProviders;
+using CodeBase.UI;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Installers
+namespace CodeBase.Installers
 {
     public class BootstrapInstaller : MonoInstaller
     {
@@ -12,6 +12,13 @@ namespace Installers
         {
             BindAssetProvider();
             BindInputService();
+            BindAdService();
+        }
+
+        private void BindAdService()
+        {
+            Container.BindInterfacesAndSelfTo<YandexAdService>()
+                .AsSingle();
         }
 
         private void BindInputService()

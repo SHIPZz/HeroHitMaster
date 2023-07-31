@@ -1,8 +1,8 @@
 ﻿using System;
-using Enums;
+using CodeBase.Enums;
 using Zenject;
 
-namespace Windows.Shop
+namespace CodeBase.UI.Windows.Shop
 {
     public class ShopPresenter : IInitializable, IDisposable
     {

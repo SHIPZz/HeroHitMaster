@@ -1,10 +1,13 @@
-﻿using CodeBase.Gameplay.Character.Players;
-using Enums;
+﻿using System.Collections.Generic;
+using CodeBase.Enums;
+using CodeBase.Gameplay.Character.Players;
 
 namespace CodeBase.Services.Storages
 {
-    public interface IPlayerStorage : IPlayerStorageByWeaponType
+    public interface IPlayerStorage
     {
-        Player Get(PlayerTypeId playerTypeId);
+        Player GetById(PlayerTypeId playerTypeId);
+        Player GetByWeapon(WeaponTypeId weaponTypeId);
+        List<Player> GetAll();
     }
 }

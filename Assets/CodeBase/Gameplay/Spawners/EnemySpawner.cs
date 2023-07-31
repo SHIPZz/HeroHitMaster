@@ -1,8 +1,8 @@
 ﻿using System;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Storages;
-using Enums;
 using UnityEngine;
 using Zenject;
 
@@ -15,17 +15,15 @@ namespace CodeBase.Gameplay.Spawners
 
         private IEnemyStorage _enemyStorage;
 
-        public event Action<Enemy,TriggerObserver> Spawned; 
-
         [Inject]
         private void Construct(IEnemyStorage enemyStorage) => 
             _enemyStorage = enemyStorage;
 
-        private void Awake()
+        public void Init(Action<Enemy, TriggerObserver> callback)
         {
             Enemy enemy = _enemyStorage.Get(_enemyTypeId);
             enemy.gameObject.transform.position = transform.position;
-            Spawned?.Invoke(enemy, _aggroZone);
+            callback?.Invoke(enemy, _aggroZone);
         }
     }
 }

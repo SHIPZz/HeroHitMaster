@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Extensions
+namespace CodeBase.Extensions
 {
     public static class TransformExtension
     {

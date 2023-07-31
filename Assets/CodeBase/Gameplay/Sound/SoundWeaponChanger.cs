@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Installers.ScriptableObjects;
+using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
-using Enums;
-using Services.Providers;
 
 namespace CodeBase.Gameplay.Sound
 {

@@ -1,5 +1,5 @@
 using CodeBase.Gameplay.Character.Players;
-using Services.Providers;
+using CodeBase.Services.Providers;
 using UnityEngine;
 using Zenject;
 
@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.Camera
 
         private void LateUpdate()
         {
-            transform.position = _playerProvider.CurrentPlayer.Head.position + new Vector3(0, 0.1f, 0);
+            transform.position = _playerProvider.CurrentPlayer.Head.position + new Vector3(0, 0.2f, 0);
         }
     }
 }

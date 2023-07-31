@@ -1,10 +1,11 @@
-﻿using Services.ObjectPool;
+﻿using System.Collections.Generic;
+using CodeBase.Enums;
+using CodeBase.Services.ObjectPool;
 
-namespace Services.Providers
+namespace CodeBase.Services.Providers
 {
-    public class GameObjectPoolProvider
+    public class GameObjectPoolProvider 
     {
-        public GameObjectPool GameObjectPool { get; set; }
-        public GameObjectPool SpiderWebPool { get; set; }
+        public Dictionary<BulletTypeId, GameObjectPool> BulletPools = new();
     }
 }

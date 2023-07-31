@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.EnemyBodyParts;
-using Enums;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;

@@ -1,11 +1,10 @@
-﻿using CodeBase.Gameplay.Camera;
+﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Weapons;
-using CodeBase.Services.Factories;
-using Enums;
 using UnityEngine;
 
-namespace Services.Factories
+namespace CodeBase.Services.Factories
 {
     public class GameFactory
     {

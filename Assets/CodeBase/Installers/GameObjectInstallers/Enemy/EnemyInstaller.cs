@@ -1,10 +1,10 @@
-﻿using CodeBase.Gameplay.Character;
+﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.MaterialChanger;
-using Enums;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;

@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Weapons;
 
-namespace Services.Providers
+namespace CodeBase.Services.Providers
 {
     public class WeaponProvider
     {

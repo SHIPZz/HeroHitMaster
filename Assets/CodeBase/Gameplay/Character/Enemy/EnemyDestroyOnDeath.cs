@@ -1,5 +1,5 @@
 ﻿using System;
-using Constants;
+using CodeBase.Constants;
 using Zenject;
 using Object = UnityEngine.Object;
 

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Windows.Audio
+namespace CodeBase.UI.Windows.Audio
 {
     public class AudioView : MonoBehaviour
     {

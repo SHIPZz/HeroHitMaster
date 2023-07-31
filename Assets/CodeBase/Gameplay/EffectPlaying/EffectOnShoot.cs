@@ -1,6 +1,6 @@
 ﻿using System;
 using CodeBase.Gameplay.Character.Players.Shoot;
-using Services.Providers;
+using CodeBase.Services.Providers;
 using Zenject;
 
 namespace CodeBase.Gameplay.EffectPlaying

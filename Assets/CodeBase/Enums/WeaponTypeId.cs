@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace CodeBase.Enums
 {
     public enum WeaponTypeId
     {

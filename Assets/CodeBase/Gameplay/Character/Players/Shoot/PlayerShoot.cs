@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.Weapons;
-using Services.Providers;
+using CodeBase.Services.Providers;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Character.Players.Shoot
@@ -29,7 +29,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
         public void Fire()
         {
             Weapon weapon = _weaponProvider.CurrentWeapon;
-
+            
             if (weapon is null)
                 return;
 
@@ -38,10 +38,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
             Vector3 targetVector;
             
             targetVector = !Physics.Raycast(ray, out RaycastHit hit) ? ray.GetPoint(70f) : hit.point;
-
-            Debug.Log(targetVector);
-            Debug.Log(_startShootPosition);
-            Debug.Log(weapon);
+            
             weapon.Shoot(targetVector, _startShootPosition.position);
         }
     }

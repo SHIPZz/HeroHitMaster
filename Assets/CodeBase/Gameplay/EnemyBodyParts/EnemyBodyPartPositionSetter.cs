@@ -1,6 +1,6 @@
-﻿using CodeBase.Gameplay.Character.Enemy;
+﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Services.Storages;
-using Enums;
 
 namespace CodeBase.Gameplay.EnemyBodyParts
 {

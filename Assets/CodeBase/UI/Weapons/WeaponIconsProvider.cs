@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Enums;
+using CodeBase.Enums;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace Weapons
+namespace CodeBase.UI.Weapons
 {
     public class WeaponIconsProvider : SerializedMonoBehaviour
     {

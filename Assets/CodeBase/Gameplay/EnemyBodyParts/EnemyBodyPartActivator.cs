@@ -1,5 +1,5 @@
-﻿using DG.Tweening;
-using Enums;
+﻿using CodeBase.Enums;
+using DG.Tweening;
 
 namespace CodeBase.Gameplay.EnemyBodyParts
 {

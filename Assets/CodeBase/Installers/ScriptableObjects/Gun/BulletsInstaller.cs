@@ -1,13 +1,16 @@
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "BulletsInstaller", menuName = "Installers/BulletsInstaller")]
-public class BulletsInstaller : ScriptableObjectInstaller<BulletsInstaller>
+namespace CodeBase.Installers.ScriptableObjects.Gun
 {
-    [SerializeField] private BulletSettings _bulletSettings;
-    
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "BulletsInstaller", menuName = "Installers/BulletsInstaller")]
+    public class BulletsInstaller : ScriptableObjectInstaller<BulletsInstaller>
     {
-        Container.BindInstance(_bulletSettings);
+        [SerializeField] private BulletSettings _bulletSettings;
+    
+        public override void InstallBindings()
+        {
+            Container.BindInstance(_bulletSettings);
+        }
     }
 }

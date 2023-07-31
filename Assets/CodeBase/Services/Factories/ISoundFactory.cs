@@ -1,7 +1,7 @@
-﻿using Enums;
+﻿using CodeBase.Enums;
 using UnityEngine;
 
-namespace Services.Factories
+namespace CodeBase.Services.Factories
 {
     public interface ISoundFactory
     {

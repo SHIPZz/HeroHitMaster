@@ -1,16 +1,17 @@
-﻿using CodeBase.Gameplay.Camera;
+﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Sound;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
-using Enums;
-using Services.Factories;
-using Services.Providers;
+using CodeBase.UI.Weapons;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
 
-namespace GameInit
+namespace CodeBase.GameInit
 {
     public class GameInit : IInitializable
     {
@@ -22,6 +23,7 @@ namespace GameInit
         private readonly IPlayerStorage _playerStorage;
         private readonly IWeaponStorage _weaponStorage;
         private SoundWeaponChanger _soundWeaponChanger;
+        private WeaponSelector _weaponSelector;
 
         public GameInit(GameFactory gameFactory,
             LocationProvider locationProvider,
@@ -29,8 +31,9 @@ namespace GameInit
             PlayerProvider playerProvider,
             IWeaponStorage weaponStorage,
             WeaponProvider weaponProvider, IPlayerStorage playerStorage,
-            SoundWeaponChanger soundWeaponChanger)
+            SoundWeaponChanger soundWeaponChanger, WeaponSelector weaponSelector)
         {
+            _weaponSelector = weaponSelector;
             _soundWeaponChanger = soundWeaponChanger;
             _gameFactory = gameFactory;
             _weaponStorage = weaponStorage;
@@ -43,16 +46,15 @@ namespace GameInit
 
         public void Initialize()
         {
-            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Spider);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Weapon weapon = InitializeInitialWeapon(WeaponTypeId.ThrowingTridentShooter);
+            InitializeInitialWeapon(WeaponTypeId.SharpWebShooter);
             _playerProvider.CurrentPlayer = player;
-            _weaponProvider.CurrentWeapon = weapon;
-            InitStartWeaponSoundBy(weapon.WeaponTypeId);
+            InitStartWeaponSoundBy(_weaponProvider.CurrentWeapon.WeaponTypeId);
         }
 
-        private Weapon InitializeInitialWeapon(WeaponTypeId weaponTypeId) =>
-            _weaponStorage.Get(weaponTypeId);
+        private void InitializeInitialWeapon(WeaponTypeId weaponTypeId) =>
+            _weaponSelector.Select(weaponTypeId);
 
         private PlayerCameraFollower InitializePlayerCamera()
         {
@@ -62,7 +64,7 @@ namespace GameInit
         }
 
         private Player InitializeInitialPlayer(PlayerTypeId playerTypeId) =>
-            _playerStorage.Get(playerTypeId);
+            _playerStorage.GetById(playerTypeId);
 
         private void InitStartWeaponSoundBy(WeaponTypeId weaponTypeId) =>
             _soundWeaponChanger.SetCurrentSound(weaponTypeId);

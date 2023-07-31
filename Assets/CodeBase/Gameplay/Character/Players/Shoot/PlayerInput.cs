@@ -1,5 +1,5 @@
 ﻿using System;
-using Services.Inputs;
+using CodeBase.Services.Inputs.InputService;
 using UnityEngine;
 using Zenject;
 

@@ -1,9 +1,9 @@
 ﻿using System;
-using Enums;
+using CodeBase.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Weapons
+namespace CodeBase.UI.Weapons
 {
     public class WeaponSelectorView : MonoBehaviour
     {

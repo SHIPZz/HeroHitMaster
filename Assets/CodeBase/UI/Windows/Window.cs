@@ -1,9 +1,9 @@
 using System;
+using CodeBase.Enums;
 using DG.Tweening;
-using Enums;
 using UnityEngine;
 
-namespace Windows
+namespace CodeBase.UI.Windows
 {
     public class Window : MonoBehaviour
     {
@@ -29,12 +29,20 @@ namespace Windows
                     .OnComplete(() => Opened?.Invoke());
             });
 
-        public void Close() =>
+        public void Close(bool withAnimation)
+        {
+            if (!withAnimation)
+            {
+                transform.DOScaleX(0, 0);
+                gameObject.SetActive(false);
+            }
+            
             DOTween.Sequence().OnComplete(() =>
             {
                 gameObject.SetActive(false);
                 gameObject.transform.DOScaleX(0, _targetCloseDuration)
-                    .OnComplete(() =>Closed?.Invoke());
+                    .OnComplete(() => Closed?.Invoke());
             });
+        }
     }
 }

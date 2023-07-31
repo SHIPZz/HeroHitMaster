@@ -1,8 +1,8 @@
 ﻿using System;
 using AmazingAssets.AdvancedDissolve;
+using CodeBase.Constants;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
-using Constants;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;

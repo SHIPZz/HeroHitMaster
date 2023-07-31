@@ -1,7 +1,7 @@
-﻿using Enums;
+﻿using CodeBase.Enums;
 using UnityEngine;
 
-namespace Weapons
+namespace CodeBase.UI.Weapons
 {
     public class WeaponViewInHand : MonoBehaviour
     {

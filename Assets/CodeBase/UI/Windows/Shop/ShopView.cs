@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Windows.Shop
+namespace CodeBase.UI.Windows.Shop
 {
     public class ShopView : MonoBehaviour
     {

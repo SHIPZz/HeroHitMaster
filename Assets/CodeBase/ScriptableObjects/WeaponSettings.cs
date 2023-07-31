@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Enums;
+using CodeBase.Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace CodeBase.ScriptableObjects
 {
     [CreateAssetMenu(menuName = "Gameplay/WeaponSettings", fileName = "WeaponSettings")]
     public class WeaponSettings : SerializedScriptableObject

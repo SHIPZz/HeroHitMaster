@@ -1,7 +1,7 @@
 ﻿using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
 
-namespace Services.Inputs
+namespace CodeBase.Services.Inputs.InputService
 {
     public interface IInputService
     {

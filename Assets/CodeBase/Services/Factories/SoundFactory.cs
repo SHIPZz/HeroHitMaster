@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Installers.ScriptableObjects;
 using CodeBase.Services.Providers;
-using Constants;
-using Enums;
-using Services.Providers;
-using Services.Providers.AssetProviders;
+using CodeBase.Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;
 
-namespace Services.Factories
+namespace CodeBase.Services.Factories
 {
     public class SoundFactory : ISoundFactory
     {

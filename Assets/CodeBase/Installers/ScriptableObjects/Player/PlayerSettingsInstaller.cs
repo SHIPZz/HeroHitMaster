@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using CodeBase.Installers.GameObjectInstallers.Player;
-using Enums;
-using ScriptableObjects.PlayerSettings;
+using CodeBase.ScriptableObjects.PlayerSettings;
 using UnityEngine;
 using Zenject;
 

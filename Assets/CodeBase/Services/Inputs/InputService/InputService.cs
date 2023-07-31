@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Services.Inputs
+namespace CodeBase.Services.Inputs.InputService
 {
     public class InputService : IInputService
     {

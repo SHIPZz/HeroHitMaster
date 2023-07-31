@@ -20392,8 +20392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e904b7941e4fa58c2f1ec0ffbec7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentValue>k__BackingField: 691
-  <MaxValue>k__BackingField: 254
+  <CurrentValue>k__BackingField: 100
+  <MaxValue>k__BackingField: 100
 --- !u!195 &-3825427877069157911
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20453,6 +20453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2140aabccea46a1b9b4182e0bd0aeb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetStopDistance: 2.3
 --- !u!114 &5545511684069049637
 MonoBehaviour:
   m_ObjectHideFlags: 0

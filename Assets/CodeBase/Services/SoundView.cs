@@ -1,7 +1,7 @@
-﻿using Enums;
+﻿using CodeBase.Enums;
 using UnityEngine;
 
-namespace Services
+namespace CodeBase.Services
 {
     public class SoundView : MonoBehaviour
     {

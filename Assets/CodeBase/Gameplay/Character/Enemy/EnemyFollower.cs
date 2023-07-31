@@ -23,7 +23,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         {
             if (_target == Vector3.zero || _isBlocked)
                 return;
-
+            
             _navMeshAgent.SetDestination(_target);
         }
 
@@ -40,7 +40,6 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public void Block()
         {
-            // _navMeshAgent.destination = gameObject.transform.position;
             _navMeshAgent.isStopped = true;
             _navMeshAgent.velocity = Vector3.zero;
             _isBlocked = true;

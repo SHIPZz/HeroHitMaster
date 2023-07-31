@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Installers.ScriptableObjects;
-using Enums;
-using Services.Factories;
+using CodeBase.Services.Factories;
 using UnityEngine;
 using Zenject;
 

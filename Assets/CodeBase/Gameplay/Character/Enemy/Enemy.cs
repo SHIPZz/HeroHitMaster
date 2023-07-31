@@ -1,5 +1,5 @@
 ﻿using System;
-using Enums;
+using CodeBase.Enums;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Character.Enemy

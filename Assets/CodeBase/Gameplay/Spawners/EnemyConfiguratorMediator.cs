@@ -1,26 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Services.Storages;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Gameplay.Spawners
 {
-    public class EnemyConfiguratorMediator : MonoBehaviour
+    public class EnemyConfiguratorMediator : IInitializable, IDisposable
     {
-        private  List<EnemySpawner> _enemySpawners;
-        private  EnemyConfigurator _enemyConfigurator;
+        private readonly List<EnemySpawner> _enemySpawners;
+        private readonly EnemyConfigurator _enemyConfigurator;
 
         [Inject]
-        public void Construct(EnemySpawnersProvider enemySpawnersProvider, EnemyConfigurator enemyConfigurator)
+        public EnemyConfiguratorMediator(EnemySpawnersProvider enemySpawnersProvider, EnemyConfigurator enemyConfigurator)
         {
             _enemySpawners = enemySpawnersProvider.EnemySpawners;
             _enemyConfigurator = enemyConfigurator;
         }
 
-        public void OnEnable() => 
-            _enemySpawners.ForEach(x => x.Spawned += _enemyConfigurator.Configure);
+        public void Initialize()
+        {
+            foreach (var enemySpawner in _enemySpawners)
+            {
+                enemySpawner.Init((enemy, aggrozone) => _enemyConfigurator.Configure(enemy, aggrozone));
+                // enemySpawner.Spawned += _enemyConfigurator.Configure;
+            }
+        }
 
-        public void OnDisable() => 
-            _enemySpawners.ForEach(x => x.Spawned -= _enemyConfigurator.Configure);
+        public void Dispose()
+        {
+            // foreach (var enemySpawner in _enemySpawners)
+            // {
+            //     enemySpawner.Spawned += _enemyConfigurator.Configure;
+            // }
+            
+            // _enemySpawners.ForEach(x => x.Spawned -= _enemyConfigurator.Configure);
+        }
     }
 }

@@ -1,7 +1,7 @@
-﻿using CodeBase.Gameplay.Character;
+﻿using CodeBase.Enums;
+using CodeBase.Extensions;
+using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Collision;
-using Enums;
-using Extensions;
 using UnityEngine;
 using Zenject;
 
@@ -12,14 +12,15 @@ namespace CodeBase.Gameplay.Bullet
         [SerializeField] protected int Damage;
 
         [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
-        protected TriggerObserver TriggerObserver;
+        
+        private TriggerObserver _triggerObserver;
         private GameObject _terrain;
         private float _distance;
 
         [Inject]
         private void Construct(TriggerObserver triggerObserver)
         {
-            TriggerObserver = triggerObserver;
+            _triggerObserver = triggerObserver;
         }
 
         public GameObject GameObject => gameObject;
@@ -27,10 +28,10 @@ namespace CodeBase.Gameplay.Bullet
         public Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
         private  void OnEnable() => 
-            TriggerObserver.Entered += DoDamage;
+            _triggerObserver.Entered += DoDamage;
 
         private void OnDisable() => 
-            TriggerObserver.Entered -= DoDamage;
+            _triggerObserver.Entered -= DoDamage;
 
         public void DoDamage(Collider other)
         {

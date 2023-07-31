@@ -1,7 +1,7 @@
 ﻿using System;
 using Zenject;
 
-namespace Windows.Audio
+namespace CodeBase.UI.Windows.Audio
 {
     public class AudioPresenter : IInitializable, IDisposable
     {

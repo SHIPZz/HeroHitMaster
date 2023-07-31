@@ -1,8 +1,8 @@
 ﻿using System;
-using Enums;
+using CodeBase.Enums;
 using Zenject;
 
-namespace Windows.Setting
+namespace CodeBase.UI.Windows.Setting
 {
     public class SettingPresenter : IInitializable, IDisposable
     {

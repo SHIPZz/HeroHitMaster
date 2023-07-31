@@ -2,7 +2,7 @@
 using CodeBase.Services.Storages;
 using UnityEngine;
 
-namespace Windows.Audio
+namespace CodeBase.UI.Windows.Audio
 {
     public class AudioChanger
     {

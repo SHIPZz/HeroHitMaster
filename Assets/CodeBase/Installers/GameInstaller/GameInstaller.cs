@@ -1,17 +1,17 @@
+using System.Collections.Generic;
 using CodeBase.Gameplay;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Sound;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
-using Services.Factories;
-using Services.Providers;
+using CodeBase.UI.Weapons;
 using UnityEngine;
-using Weapons;
 using Zenject;
 
-namespace Installers.GameInstaller
+namespace CodeBase.Installers.GameInstaller
 {
     public class GameInstaller : MonoInstaller
     {
@@ -33,7 +33,6 @@ namespace Installers.GameInstaller
             BindWeaponsProvider();
             BindGameObjectPoolProvider();
             BindBulletFactory();
-            BindPlayerTypeIdStorageByWeaponType();
             BindWeaponSelection();
             BindPlayerStorage();
             BindWeaponStorage();
@@ -48,19 +47,26 @@ namespace Installers.GameInstaller
             BindEnemyConfiguration();
             BindEnemySpawnerProvider();
             BindMaterialProvider();
-            Container.BindInterfacesAndSelfTo<SetterWeaponToPlayerHand>().AsSingle();
+            BindSetterWeapon();
         }
+
+        private void BindSetterWeapon() => 
+            Container.BindInterfacesAndSelfTo<SetterWeaponToPlayerHand>().AsSingle();
 
         private void BindMaterialProvider() => 
             Container.BindInstance(_materialProvider);
 
-        private void BindEnemySpawnerProvider() =>
+        private void BindEnemySpawnerProvider()
+        {
             Container
                 .BindInstance(_enemySpawnersProvider);
+            Container.BindInterfacesAndSelfTo<List<EnemySpawner>>().FromInstance(_enemySpawnersProvider.EnemySpawners);
+        }
 
         private void BindEnemyConfiguration()
         {
             Container.Bind<EnemyConfigurator>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyConfiguratorMediator>().AsSingle();
         }
 
         private void BindEnemyBodyPartStorage() =>
@@ -121,11 +127,6 @@ namespace Installers.GameInstaller
             Container.Bind<WeaponSelector>().AsSingle();
             Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
         }
-
-        private void BindPlayerTypeIdStorageByWeaponType() =>
-            Container
-                .Bind<PlayerTypeIdStorageByWeaponType>()
-                .AsSingle();
 
         private void BindBulletFactory() =>
             Container

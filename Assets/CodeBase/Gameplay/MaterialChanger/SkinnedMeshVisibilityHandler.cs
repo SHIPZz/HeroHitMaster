@@ -1,6 +1,6 @@
 ﻿using System;
+using CodeBase.Constants;
 using CodeBase.Gameplay.Character;
-using Constants;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;

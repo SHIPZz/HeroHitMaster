@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Enums;
+using CodeBase.Enums;
 using UnityEngine;
 
 namespace CodeBase.Services.Storages

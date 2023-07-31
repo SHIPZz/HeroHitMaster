@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Windows.Setting
+namespace CodeBase.UI.Windows.Setting
 {
     public class SettingView : MonoBehaviour
     {

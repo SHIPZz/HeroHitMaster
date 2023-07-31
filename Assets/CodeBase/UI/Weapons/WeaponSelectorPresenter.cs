@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enums;
+using CodeBase.Enums;
 using Zenject;
 
-namespace Weapons
+namespace CodeBase.UI.Weapons
 {
     class WeaponSelectorPresenter : IInitializable, IDisposable
     {
@@ -19,13 +19,13 @@ namespace Weapons
         public void Initialize()
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosed += _weaponSelector.CreateWeapon;
+                weaponIcon.Choosed += _weaponSelector.Select;
         }
 
         public void Dispose()
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosed -= _weaponSelector.CreateWeapon;
+                weaponIcon.Choosed -= _weaponSelector.Select;
         }
     }
 }

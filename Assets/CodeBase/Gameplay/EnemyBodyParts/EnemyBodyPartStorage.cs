@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Enums;
+using CodeBase.Enums;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 

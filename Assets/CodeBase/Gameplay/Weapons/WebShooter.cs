@@ -14,7 +14,7 @@ namespace CodeBase.Gameplay.Weapons
 
         public override void Shoot(Vector3 target, Vector3 initialPosition)
         {
-            IBullet bullet = BulletFactory.Pop();
+            IBullet bullet = BulletFactory.Pop(WeaponTypeId);
             BulletMovement.Move(target, bullet, initialPosition,bullet.Rigidbody);
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() =>
             {

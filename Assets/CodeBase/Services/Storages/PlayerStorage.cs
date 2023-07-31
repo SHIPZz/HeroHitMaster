@@ -1,35 +1,32 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
+using CodeBase.ScriptableObjects.PlayerSettings;
+using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
-using Enums;
-using ScriptableObjects.PlayerSettings;
-using Services.Factories;
-using Services.Providers;
-using UnityEngine;
 
 namespace CodeBase.Services.Storages
 {
     public class PlayerStorage : IPlayerStorage
     {
-        private readonly PlayerTypeIdStorageByWeaponType _playerTypeIdStorageByWeaponType;
         private readonly PlayerProvider _playerProvider;
         private readonly PlayerFactory _playerFactory;
         private readonly LocationProvider _locationProvider;
         private readonly Dictionary<PlayerTypeId, Player> _players = new();
+        private readonly Dictionary<WeaponTypeId, PlayerTypeId> _playerTypeIdsByWeapon;
         
         public PlayerStorage(PlayerFactory playerFactory, 
             LocationProvider locationProvider, 
-            PlayerTypeIdStorageByWeaponType playerTypeIdStorageByWeaponType, 
             PlayerProvider playerProvider, PlayerSettings playerSettings)
         {
-            _playerTypeIdStorageByWeaponType = playerTypeIdStorageByWeaponType;
             _playerProvider = playerProvider;
             _playerFactory = playerFactory;
             _locationProvider = locationProvider;
             FillDictionary(playerSettings.PlayerTypeIds);
+            _playerTypeIdsByWeapon = playerSettings.PlayerTypeIdsByWeapon;
         }
 
-        public Player Get(PlayerTypeId playerTypeId)
+        public Player GetById(PlayerTypeId playerTypeId)
         {
             SetActive(false);
             Enable(playerTypeId);
@@ -37,14 +34,25 @@ namespace CodeBase.Services.Storages
             return _players[playerTypeId];
         }
 
-        public Player Get(WeaponTypeId weaponTypeId)
+        public Player GetByWeapon(WeaponTypeId weaponTypeId)
         {
             SetActive(false);
-            PlayerTypeId playerTypeId = _playerTypeIdStorageByWeaponType.Get(weaponTypeId);
+            PlayerTypeId playerTypeId = _playerTypeIdsByWeapon[weaponTypeId];
             Enable(playerTypeId);
             _playerProvider.CurrentPlayer = _players[playerTypeId];
-            Debug.Log(_players[playerTypeId]);
             return _players[playerTypeId];
+        }
+
+        public List<Player> GetAll()
+        {
+            var players = new List<Player>();
+
+            foreach (var player in _players.Values)
+            {
+                players.Add(player);
+            }
+
+            return players;
         }
 
         private void Enable(PlayerTypeId playerTypeId) =>

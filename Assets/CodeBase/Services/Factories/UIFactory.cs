@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
+using CodeBase.ScriptableObjects.PlayerSettings;
 using CodeBase.Services.Providers;
-using ScriptableObjects.PlayerSettings;
-using Services.Providers;
 using Zenject;
 
-namespace Services.Factories
+namespace CodeBase.Services.Factories
 {
     public class UIFactory
     {

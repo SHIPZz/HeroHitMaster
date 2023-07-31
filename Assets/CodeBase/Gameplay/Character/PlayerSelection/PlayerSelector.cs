@@ -1,5 +1,5 @@
-﻿using CodeBase.Services.Storages;
-using Enums;
+﻿using CodeBase.Enums;
+using CodeBase.Services.Storages;
 
 namespace CodeBase.Gameplay.Character.PlayerSelection
 {
@@ -7,14 +7,10 @@ namespace CodeBase.Gameplay.Character.PlayerSelection
     {
         private readonly IPlayerStorage _playerStorage;
 
-        public PlayerSelector(IPlayerStorage playerStorage)
-        {
+        public PlayerSelector(IPlayerStorage playerStorage) => 
             _playerStorage = playerStorage;
-        }
 
-        public void Select(WeaponTypeId weaponTypeId)
-        {
-            _playerStorage.Get(weaponTypeId);
-        }
+        public void Select(WeaponTypeId weaponTypeId) => 
+            _playerStorage.GetByWeapon(weaponTypeId);
     }
 }

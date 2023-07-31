@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Constants;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
-using Constants;
-using Enums;
-using Services.Providers.AssetProviders;
+using CodeBase.Services.Providers.AssetProviders;
 using UnityEngine;
 using Zenject;
 
-namespace Services.Factories
+namespace CodeBase.Services.Factories
 {
     public class PlayerFactory
     {

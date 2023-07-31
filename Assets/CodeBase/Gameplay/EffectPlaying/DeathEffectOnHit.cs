@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Character;
 using CodeBase.Installers.ScriptableObjects;
 using CodeBase.Services.Storages;
-using Enums;
 using UnityEngine;
 using Zenject;
 

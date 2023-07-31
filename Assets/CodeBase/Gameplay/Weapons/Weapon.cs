@@ -1,8 +1,8 @@
 ﻿using System;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Bullet;
 using CodeBase.Services.Factories;
 using DG.Tweening;
-using Enums;
 using UnityEngine;
 using Zenject;
 
@@ -35,7 +35,7 @@ namespace CodeBase.Gameplay.Weapons
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
-            IBullet bullet = BulletFactory.Pop();
+            IBullet bullet = BulletFactory.Pop(WeaponTypeId);
             BulletMovement.Move(target, bullet, initialPosition, bullet.Rigidbody);
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
             Shooted?.Invoke();

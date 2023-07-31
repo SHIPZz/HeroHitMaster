@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace ScriptableObjects
+namespace CodeBase.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "PlayerMovementSettings", menuName = "Gameplay/PlayerMovementSettings")]
     public class PlayerMovementSettings : ScriptableObject

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ScriptableObjects;
+using CodeBase.ScriptableObjects;
 using UnityEngine;
 using Zenject;
 
