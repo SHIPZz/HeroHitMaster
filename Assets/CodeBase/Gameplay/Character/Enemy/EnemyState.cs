@@ -31,7 +31,7 @@ namespace CodeBase.Gameplay.Character.Enemy
                 _targetStopDistance)
             {
                 _enemyFollower.Block();
-                _enemyAttacker.Attack(_playerProvider.PlayerHealth);
+                _enemyAttacker.SetTarget(_playerProvider.PlayerHealth);
             }
         }
 
@@ -50,7 +50,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             {
                 Debug.Log("sadasda");
                 _enemyFollower.Block();
-                _enemyAttacker.Attack(damageable);
+                _enemyAttacker.SetTarget(damageable);
             }
         }
     }

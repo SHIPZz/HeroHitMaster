@@ -48,7 +48,7 @@ namespace CodeBase.GameInit
         {
             Player player = InitializeInitialPlayer(PlayerTypeId.Spider);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            InitializeInitialWeapon(WeaponTypeId.SharpWebShooter);
+            InitializeInitialWeapon(WeaponTypeId.SmudgeWebShooter);
             _playerProvider.CurrentPlayer = player;
             InitStartWeaponSoundBy(_weaponProvider.CurrentWeapon.WeaponTypeId);
         }

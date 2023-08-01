@@ -1,18 +1,27 @@
-﻿namespace CodeBase.Gameplay.Character.Enemy
+﻿using CodeBase.Enums;
+using CodeBase.Services.Storages;
+
+namespace CodeBase.Gameplay.Character.Enemy
 {
     public class EnemyAttacker
     { 
-        private const int Damage = 1000;
-
+        private readonly int _damage;
         private readonly EnemyAnimator _enemyAnimator;
-        
-        public EnemyAttacker(EnemyAnimator enemyAnimator) => 
-            _enemyAnimator = enemyAnimator;
+        private IDamageable _damageable;
 
-        public void Attack(IDamageable damageable)
+        public EnemyAttacker(EnemyAnimator enemyAnimator , EnemyTypeId enemyTypeId, EnemyStaticDataService enemyStaticDataService)
+        {
+            _enemyAnimator = enemyAnimator;
+            _damage = enemyStaticDataService.GetEnemyData(enemyTypeId).Damage;
+        }
+
+        public void Attack() => 
+            _damageable.TakeDamage(_damage);
+
+        public void SetTarget(IDamageable damageable)
         {
             _enemyAnimator.SetAttack(true);
-            damageable.TakeDamage(Damage);
+            _damageable = damageable;
         }
     }
 }

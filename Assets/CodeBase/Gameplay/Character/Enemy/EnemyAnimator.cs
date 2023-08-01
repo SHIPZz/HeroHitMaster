@@ -12,10 +12,8 @@ namespace CodeBase.Gameplay.Character.Enemy
         private static readonly int _die = Animator.StringToHash("Die");
         private static readonly int _win = Animator.StringToHash("Win");
 
-        public EnemyAnimator(Animator animator)
-        {
+        public EnemyAnimator(Animator animator) => 
             _animator = animator;
-        }
 
         public void SetAttack(bool isAttacked) =>
             _animator.SetBool(_isAttacked, isAttacked);

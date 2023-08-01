@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Storages;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Death
@@ -13,12 +14,12 @@ namespace CodeBase.UI.Windows.Death
         private readonly DeathView _deathView;
         private readonly IAdService _adService;
         private PlayerHealth _playerHealth;
-        private readonly List<Player> _players;
+        private readonly List<PlayerHealth> _playerHealths = new();
 
         public DeathPresenter(WindowService windowService, DeathView deathView, IAdService adService,
             IPlayerStorage playerStorage)
         {
-            _players = playerStorage.GetAll();
+            playerStorage.GetAll().ForEach(x => _playerHealths.Add(x.GetComponent<PlayerHealth>()));
             _adService = adService;
             _windowService = windowService;
             _deathView = deathView;
@@ -26,14 +27,14 @@ namespace CodeBase.UI.Windows.Death
 
         public void Initialize()
         {
-            _players.ForEach(x => x.GetComponent<PlayerHealth>().ValueZeroReached += ShowDeathWindow);
+            _playerHealths.ForEach(x => x.ValueZeroReached += ShowDeathWindow);
             _deathView.RestartAdButtonClicked += DisableDeathWindowWithAd;
             _deathView.RestartButtonClicked += DisableDeathWindow;
         }
 
         public void Dispose()
         {
-            _players.ForEach(x => x.GetComponent<PlayerHealth>().ValueZeroReached -= ShowDeathWindow);
+            _playerHealths.ForEach(x => x.ValueZeroReached += ShowDeathWindow);
             _deathView.RestartAdButtonClicked -= DisableDeathWindowWithAd;
             _deathView.RestartButtonClicked -= DisableDeathWindow;
         }

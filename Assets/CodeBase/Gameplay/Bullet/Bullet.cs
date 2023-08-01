@@ -2,6 +2,7 @@
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Collision;
+using CodeBase.Services.Storages;
 using UnityEngine;
 using Zenject;
 
@@ -9,18 +10,18 @@ namespace CodeBase.Gameplay.Bullet
 {
     public class Bullet : MonoBehaviour, IBullet
     {
-        [SerializeField] protected int Damage;
-
         [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
         
         private TriggerObserver _triggerObserver;
         private GameObject _terrain;
         private float _distance;
+        private int _damage;
 
         [Inject]
-        private void Construct(TriggerObserver triggerObserver)
+        private void Construct(TriggerObserver triggerObserver, BulletStaticDataService bulletStaticDataService)
         {
             _triggerObserver = triggerObserver;
+            _damage = bulletStaticDataService.GetBy(BulletTypeId).Damage;
         }
 
         public GameObject GameObject => gameObject;
@@ -38,7 +39,7 @@ namespace CodeBase.Gameplay.Bullet
             if (!other.gameObject.TryGetComponent(out IDamageable damageable))
                 return;
 
-            damageable.TakeDamage(Damage);
+            damageable.TakeDamage(_damage);
             this.SetActive(gameObject, false, 0.5f);
         }
     }

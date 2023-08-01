@@ -55060,6 +55060,7 @@ GameObject:
   - component: {fileID: 4768357715295845017}
   - component: {fileID: 7300153421920450235}
   - component: {fileID: 3387138329450630393}
+  - component: {fileID: 3810803841251951434}
   m_Layer: 9
   m_Name: Werewolf
   m_TagString: Untagged
@@ -55405,6 +55406,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 3.5
   _targetValue: 1
+--- !u!114 &3810803841251951434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8478778344062012943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079e61dc71643ce983937da5a1e9fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8505215383648459198
 GameObject:
   m_ObjectHideFlags: 0

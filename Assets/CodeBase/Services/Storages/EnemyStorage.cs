@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
+using CodeBase.Installers.ScriptableObjects;
 using CodeBase.Services.Factories;
 
 namespace CodeBase.Services.Storages

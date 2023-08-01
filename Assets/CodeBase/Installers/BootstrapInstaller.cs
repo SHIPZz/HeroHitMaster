@@ -1,5 +1,6 @@
 ﻿using CodeBase.Services.Inputs.InputService;
 using CodeBase.Services.Providers.AssetProviders;
+using CodeBase.Services.Storages;
 using CodeBase.UI;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -15,11 +16,9 @@ namespace CodeBase.Installers
             BindAdService();
         }
 
-        private void BindAdService()
-        {
+        private void BindAdService() =>
             Container.BindInterfacesAndSelfTo<YandexAdService>()
                 .AsSingle();
-        }
 
         private void BindInputService()
         {

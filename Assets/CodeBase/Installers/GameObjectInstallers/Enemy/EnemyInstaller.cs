@@ -23,7 +23,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private EnemyFollower _enemyFollower;
         [SerializeField] private CodeBase.Gameplay.Character.Enemy.Enemy _enemy;
-        
+
         public override void InstallBindings()
         {
             BindInstances();
@@ -61,6 +61,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.BindInterfacesAndSelfTo<DestroyEnemyEffectsHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimOnAgentMoving>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimOnHit>().AsSingle();
+            Container.BindInterfacesAndSelfTo<WinAnimOnPlayerDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<StopMovementOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemyBodyActivatorDisabler>().AsSingle();
         }

@@ -19505,6 +19505,7 @@ GameObject:
   - component: {fileID: 8513813251415474590}
   - component: {fileID: 7204083755395706502}
   - component: {fileID: 304243848151652613}
+  - component: {fileID: -8066877390131506511}
   m_Layer: 9
   m_Name: SnowBomb
   m_TagString: Untagged
@@ -19815,6 +19816,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8066877390131506511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231067478400966202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079e61dc71643ce983937da5a1e9fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4245919642720257546
 GameObject:
   m_ObjectHideFlags: 0

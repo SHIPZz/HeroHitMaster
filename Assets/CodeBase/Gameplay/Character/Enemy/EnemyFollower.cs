@@ -1,4 +1,6 @@
-﻿using CodeBase.Gameplay.Collision;
+﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Collision;
+using CodeBase.Services.Storages;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -14,9 +16,10 @@ namespace CodeBase.Gameplay.Character.Enemy
         private EnemyAnimator _enemyAnimator;
 
         [Inject]
-        public void Construct(NavMeshAgent navMeshAgent)
+        public void Construct(NavMeshAgent navMeshAgent, EnemyTypeId enemyTypeId, EnemyStaticDataService enemyStaticDataService)
         {
             _navMeshAgent = navMeshAgent;
+            _navMeshAgent.speed = enemyStaticDataService.GetEnemyData(enemyTypeId).Speed;
         }
 
         private void Update()

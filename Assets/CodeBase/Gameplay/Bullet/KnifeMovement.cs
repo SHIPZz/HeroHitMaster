@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Services.Storages;
 using DG.Tweening;
 using UnityEngine;
 using Random = System.Random;
@@ -18,10 +19,20 @@ namespace CodeBase.Gameplay.Bullet
             new Vector3(360, 0, 0)
         };
 
+        private readonly BulletStaticDataService _bulletStaticDataService;
+
+        public KnifeMovement(BulletStaticDataService bulletStaticDataService)
+        {
+            _bulletStaticDataService = bulletStaticDataService;
+        }
+
         public void Move(Vector3 target, IBullet bullet, Vector3 startPosition, Rigidbody rigidbody)
         {
+            var rotateDuration = _bulletStaticDataService.GetBy(bullet.BulletTypeId).RotateDuration;
+            var moveDuration = _bulletStaticDataService.GetBy(bullet.BulletTypeId).MovementDuration;
+            
             bullet.GameObject.transform.position = startPosition;
-            bullet.GameObject.transform.DOMove(target, MoveDuration);
+            bullet.GameObject.transform.DOMove(target, moveDuration);
 
             Vector3 direction = target - startPosition;
             bullet.GameObject.transform.up = direction;
@@ -29,7 +40,7 @@ namespace CodeBase.Gameplay.Bullet
             int randomValue = _random.Next(0, _rotationVectors.Count - 1);
             Vector3 randomVector = _rotationVectors[randomValue];
             
-            bullet.GameObject.transform.DOLocalRotate(randomVector, RotateDuration).SetRelative(true).SetEase(Ease.Linear);
+            bullet.GameObject.transform.DOLocalRotate(randomVector, rotateDuration).SetRelative(true).SetEase(Ease.Linear);
         }
     }
 }

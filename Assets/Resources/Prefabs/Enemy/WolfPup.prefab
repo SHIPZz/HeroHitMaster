@@ -14867,6 +14867,7 @@ GameObject:
   - component: {fileID: 1118092928636270686}
   - component: {fileID: 1897377482384239776}
   - component: {fileID: 3076382840299512833}
+  - component: {fileID: -5855498672791202961}
   m_Layer: 9
   m_Name: WolfPup
   m_TagString: Untagged
@@ -15209,6 +15210,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetStopDistance: 0
+--- !u!114 &-5855498672791202961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3118573744419511053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079e61dc71643ce983937da5a1e9fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3421763005002276387
 GameObject:
   m_ObjectHideFlags: 0

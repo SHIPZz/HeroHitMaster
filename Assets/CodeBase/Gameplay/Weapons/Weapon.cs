@@ -14,38 +14,31 @@ namespace CodeBase.Gameplay.Weapons
         [field: SerializeField] public WeaponTypeId WeaponTypeId { get; protected set; }
 
         protected float ReturnBulletDelay = 15f;
-        protected float BulletMoveDuration = 0.2f;
-        protected int BulletsCount = 30;
-        protected BulletFactory BulletFactory;
-
-        public event Action Shooted;
-
-        public GameObject GameObject => gameObject;
-
+        protected BulletStorage _bulletStorage;
+        
         [Inject]
-        private void Construct(BulletFactory bulletFactory)
+        private void Construct(BulletStorage bulletStorage)
         {
-            BulletFactory = bulletFactory;
+            _bulletStorage = bulletStorage;
         }
 
         public virtual void Initialize()
         {
-            Init(WeaponTypeId, gameObject.transform, BulletsCount, BulletMovement);
+            Init(WeaponTypeId, BulletMovement);
         }
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
-            IBullet bullet = BulletFactory.Pop(WeaponTypeId);
+            IBullet bullet = _bulletStorage.Pop(WeaponTypeId);
             BulletMovement.Move(target, bullet, initialPosition, bullet.Rigidbody);
-            DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => BulletFactory.Push(bullet));
-            Shooted?.Invoke();
+            DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => _bulletStorage.Push(bullet));
         }
 
-        protected void Init(WeaponTypeId weaponTypeId, Transform parent, int bulletsCount,
+        protected void Init(WeaponTypeId weaponTypeId,
             IBulletMovement bulletMovement)
         {
             BulletMovement = bulletMovement;
-            BulletFactory.CreateBulletsBy(weaponTypeId,  bulletsCount);
+            _bulletStorage.CreateBulletsBy(weaponTypeId);
         }
     }
 }

@@ -16521,6 +16521,7 @@ GameObject:
   - component: {fileID: 5996834120854817119}
   - component: {fileID: 7026940431616544800}
   - component: {fileID: 1844039836887472479}
+  - component: {fileID: -8663274476146391413}
   m_Layer: 9
   m_Name: SnakeNaga
   m_TagString: Untagged
@@ -16925,6 +16926,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-8663274476146391413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4809348345125712461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079e61dc71643ce983937da5a1e9fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4859442703422839233
 GameObject:
   m_ObjectHideFlags: 0

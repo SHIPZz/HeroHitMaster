@@ -130,7 +130,7 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindBulletFactory() =>
             Container
-                .Bind<BulletFactory>()
+                .Bind<BulletStorage>()
                 .AsSingle();
 
         private void BindWeaponsProvider() =>

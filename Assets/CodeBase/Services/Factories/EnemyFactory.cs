@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
+using CodeBase.Installers.ScriptableObjects;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Providers.AssetProviders;
 using Zenject;

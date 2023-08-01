@@ -18,9 +18,11 @@ namespace CodeBase.Gameplay.MaterialChanger
             _meshRenderer.material = material;
             DOTween.To(() => 0, x =>
                     _meshRenderer.material.SetFloat(AdvancedDissolveProperties.Cutout.Standard._ids[0].clip, x),
-                _targetValue, _duration);
-            
-            Changed?.Invoke();
+                _targetValue, _duration).OnComplete(() =>
+            {
+                Changed?.Invoke();
+                gameObject.SetActive(false);
+            });
         }
     }
 }
