@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
-using CodeBase.Installers.ScriptableObjects;
-using CodeBase.ScriptableObjects.Enemy;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Providers.AssetProviders;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Services.Factories
@@ -13,30 +11,19 @@ namespace CodeBase.Services.Factories
     public class EnemyFactory
     {
         private readonly DiContainer _diContainer;
-        private readonly AssetProvider _assetProvider;
-        private readonly Dictionary<EnemyTypeId, string> _enemies;
+        private readonly Dictionary<EnemyTypeId, Enemy> _enemies;
         private readonly LocationProvider _locationProvider;
 
-        public EnemyFactory(DiContainer diContainer, AssetProvider assetProvider, EnemySetting enemySetting,
-            LocationProvider locationProvider)
+        public EnemyFactory(DiContainer diContainer, LocationProvider locationProvider)
         {
             _locationProvider = locationProvider;
-            _enemies = enemySetting.EnemyPathes;
+            _enemies = Resources.LoadAll<Enemy>("Prefabs/Enemy").ToDictionary(x => x.EnemyTypeId, x=> x);
             _diContainer = diContainer;
-            _assetProvider = assetProvider;
         }
 
         public Enemy CreateBy(EnemyTypeId enemyTypeId)
         {
-            if (!_enemies.TryGetValue(enemyTypeId, out string path))
-                throw new ArgumentException("Error");
-
-            return Create(path);
-        }
-
-        private Enemy Create(string value)
-        {
-            var enemy = _assetProvider.GetAsset(value);
+            Enemy enemy = _enemies[enemyTypeId];
             enemy.gameObject.SetActive(false);
             return _diContainer.InstantiatePrefabForComponent<Enemy>(enemy,_locationProvider.EnemyParent);
         }

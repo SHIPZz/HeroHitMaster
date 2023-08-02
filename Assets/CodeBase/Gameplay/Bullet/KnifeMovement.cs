@@ -38,9 +38,14 @@ namespace CodeBase.Gameplay.Bullet
             Vector3 direction = target - startPosition;
             bullet.GameObject.transform.up = direction;
             
+            Rotate(bullet, rotateDuration);
+        }
+
+        private void Rotate(IBullet bullet, float rotateDuration)
+        {
             int randomValue = _random.Next(0, _rotationVectors.Count - 1);
             Vector3 randomVector = _rotationVectors[randomValue];
-            
+
             bullet.GameObject.transform.DOLocalRotate(randomVector, rotateDuration).SetRelative(true).SetEase(Ease.Linear);
         }
     }

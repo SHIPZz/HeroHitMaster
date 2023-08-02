@@ -44,8 +44,6 @@ namespace CodeBase.Gameplay.Bullet
 
         public void DoDamage(Collider other)
         {
-            Debug.Log(other.gameObject.name);
-            
             if (other.TryGetComponent(out Animator animator))
                 animator.enabled = false;
             

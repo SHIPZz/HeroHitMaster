@@ -41,9 +41,9 @@ namespace CodeBase.Gameplay.MaterialChanger
         {
             if (_isMaterialChanged)
                 return;
-
-            DOTween.Sequence().AppendInterval(DelayValues.DefaultDestroyDelay)
-                .OnComplete(() => _skinnedMeshRenderer.enabled = false);
+            //
+            // DOTween.Sequence().AppendInterval(DelayValues.DefaultDestroyDelay)
+            //     .OnComplete(() => _skinnedMeshRenderer.enabled = false);
         }
     }
 }

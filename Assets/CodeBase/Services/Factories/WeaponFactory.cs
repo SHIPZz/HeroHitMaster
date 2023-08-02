@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.ScriptableObjects;
@@ -12,38 +13,24 @@ namespace CodeBase.Services.Factories
 {
     public class WeaponFactory
     {
-        private readonly AssetProvider _assetProvider;
         private readonly DiContainer _diContainer;
         private readonly LocationProvider _locationProvider;
 
-        private readonly Dictionary<WeaponTypeId, string> _weapons;
+        private readonly Dictionary<WeaponTypeId, Weapon> _weapons;
         
-        public WeaponFactory(AssetProvider assetProvider, DiContainer diContainer, 
-            LocationProvider locationProvider, 
-            WeaponSettings weaponSettings)
+        public WeaponFactory(AssetProvider assetProvider, DiContainer diContainer, LocationProvider locationProvider)
         {
-            _weapons = weaponSettings.WeaponPathes;
+            _weapons = Resources.LoadAll<Weapon>("Prefabs/Gun")
+                .ToDictionary(x => x.WeaponTypeId, x => x);
             _locationProvider = locationProvider;
-            _assetProvider = assetProvider;
             _diContainer = diContainer;
         }
 
         public Weapon Create(WeaponTypeId weaponTypeId)
-        {
-            if (!_weapons.TryGetValue(weaponTypeId, out var prefabPath))
-            {
-                Debug.Log("ERROR");
-                return null;
-            }
-
-            return Create(prefabPath);
-        }
-
-
-        private Weapon Create(string prefabGunPath)
-        {
-            var gunPrefab = _assetProvider.GetAsset<Weapon>(prefabGunPath);
+        {            
+            Weapon gunPrefab = _weapons[weaponTypeId];
             return _diContainer.InstantiatePrefabForComponent<Weapon>(gunPrefab, _locationProvider.WeaponsParent);
         }
+        
     }
 }

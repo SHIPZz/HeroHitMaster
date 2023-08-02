@@ -8,17 +8,17 @@ namespace CodeBase.Gameplay.EffectPlaying
     public class DestroyEnemyEffectsHandler : IInitializable, IDisposable
     {
         private readonly EffectOnHit _hitEffect;
-        private readonly DeathEffectOnHit _deathEffect;
+        private readonly DeathSoundOnHit _deathSound;
         private readonly IMaterialChanger _materialChanger;
         private readonly IHealth _health;
 
-        public DestroyEnemyEffectsHandler(EffectOnHit effectOnHit, DeathEffectOnHit deathEffectOnHit,
+        public DestroyEnemyEffectsHandler(EffectOnHit effectOnHit, DeathSoundOnHit deathSoundOnHit,
             IMaterialChanger materialChanger, IHealth health)
         {
             _materialChanger = materialChanger;
             _health = health;
             _hitEffect = effectOnHit;
-            _deathEffect = deathEffectOnHit;
+            _deathSound = deathSoundOnHit;
         }
 
         public void Initialize()
@@ -39,7 +39,7 @@ namespace CodeBase.Gameplay.EffectPlaying
         private void Destroy()
         {
             _hitEffect.Dispose();
-            _deathEffect.Dispose();
+            _deathSound.Dispose();
         }
     }
 }

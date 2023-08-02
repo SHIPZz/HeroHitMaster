@@ -19,7 +19,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
         [SerializeField] private EnemyHealth _enemyHealth;
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private ParticleSystem _hitEffect;
-        [SerializeField] private ParticleSystem _dieEffect;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private EnemyFollower _enemyFollower;
         [SerializeField] private CodeBase.Gameplay.Character.Enemy.Enemy _enemy;
@@ -48,6 +47,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.BindInstance(_collider);
             Container.BindInstance(_navMeshAgent);
             Container.BindInstance(_enemyFollower);
+            Container.BindInstance(GetComponent<DieOnAnimationEvent>());
             Container.Bind<EnemyAttacker>().AsSingle();
         }
 
@@ -55,7 +55,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
         {
             Container.BindInterfacesAndSelfTo<EnemyDestroyOnDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<EffectOnHit>().AsSingle();
-            Container.BindInterfacesAndSelfTo<DeathEffectOnHit>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DeathSoundOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<NonCollisionOnDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<SkinnedMeshVisibilityHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<DestroyEnemyEffectsHandler>().AsSingle();
@@ -69,7 +69,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
         private void BindEffects()
         {
             Container.BindInstance(_hitEffect).WithId(ParticleTypeId.HitEffect);
-            Container.BindInstance(_dieEffect).WithId(ParticleTypeId.DieEffect);
         }
     }
 }

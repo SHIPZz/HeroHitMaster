@@ -10,6 +10,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
 
         public event Action<EnemyTypeId> Dead;
+        public event Action<Enemy> QuickDestroyed;
 
         private void OnDisable()
         {
@@ -21,7 +22,10 @@ namespace CodeBase.Gameplay.Character.Enemy
             Dead?.Invoke(EnemyTypeId);
         }
 
-        public void Destroy() => 
+        public void Destroy()
+        {
             gameObject.SetActive(false);
+            QuickDestroyed?.Invoke(this);
+        }
     }
 }

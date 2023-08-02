@@ -10,5 +10,6 @@ namespace CodeBase.Services.Providers
         [field: SerializeField] public Transform EnemyParent { get; private set; }
         [field: SerializeField] public Transform WeaponsParent { get; private set; }
         [field: SerializeField] public Transform BulletParent { get; private set; }
+        [field: SerializeField] public Transform DeathEffectParent { get; private set; }
     }
 }

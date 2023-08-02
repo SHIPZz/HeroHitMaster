@@ -48,9 +48,9 @@ namespace CodeBase.GameInit
 
         public void Initialize()
         {
-            Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            InitializeInitialWeapon(WeaponTypeId.SuperWeapon);
+            InitializeInitialWeapon(WeaponTypeId.ThrowingHammerShooter);
             _playerProvider.CurrentPlayer = player;
             InitStartWeaponSoundBy(_weaponProvider.CurrentWeapon.WeaponTypeId);
         }

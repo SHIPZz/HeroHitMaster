@@ -22,8 +22,6 @@ namespace CodeBase.Gameplay.Character.Players
         [Inject]
         private void Construct(PlayerStaticDataService playerStaticDataService, PlayerTypeId playerTypeId)
         {
-            Debug.Log(playerStaticDataService);
-            Debug.Log(playerTypeId);
             CurrentValue = playerStaticDataService.GetPlayerData(playerTypeId).Hp;
             MaxValue = CurrentValue;
         }

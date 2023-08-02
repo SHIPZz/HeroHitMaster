@@ -25,7 +25,9 @@ namespace CodeBase.Gameplay.Character.Enemy
         public void Dispose() => 
             _enemyHealth.ValueZeroReached -= Destroy;
         
-        private void Destroy() => 
-            Object.Destroy(_enemyHealth.GameObject, _delay);
+        private void Destroy()
+        {
+            // Object.Destroy(_enemyHealth.GameObject, _delay);
+        }
     }
 }

@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using CodeBase.Gameplay;
 using CodeBase.Gameplay.Character.Players;
+using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.ObjectBodyPart;
 using CodeBase.Gameplay.Sound;
 using CodeBase.Gameplay.Spawners;
+using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
@@ -58,7 +60,15 @@ namespace CodeBase.Installers.GameInstaller
             BindSetterWeapon();
             BindBulletMovementStorage();
             BindDestroyableObjectStorages();
+            BindEnemyEffectDataStorage();
+            BindEnemiesDeathEffectOnQuickDestruction();
         }
+
+        private void BindEnemiesDeathEffectOnQuickDestruction() => 
+            Container.BindInterfacesAndSelfTo<EnemiesDeathEffectOnDestruction>().AsSingle();
+
+        private void BindEnemyEffectDataStorage() => 
+            Container.Bind<EnemyEffectDataStorage>().AsSingle();
 
         private void BindDestroyableObjectStorages()
         {

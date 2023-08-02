@@ -24,6 +24,7 @@ namespace CodeBase.UI.Weapons
                 return false;
             }
 
+            weaponViewInHand.gameObject.SetActive(true);
             SetActiveBy(weaponTypeId);
             return true;
         }
@@ -32,6 +33,7 @@ namespace CodeBase.UI.Weapons
         {
             SetActive(false);
 
+            Debug.Log(weaponTypeId);
             _weaponViews[weaponTypeId].gameObject.SetActive(true);
         }
 

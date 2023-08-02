@@ -12,10 +12,7 @@ namespace CodeBase.Gameplay.Character.PlayerSelection
         public PlayerSelector(IPlayerStorage playerStorage) => 
             _playerStorage = playerStorage;
 
-        public void Select(WeaponTypeId weaponTypeId)
-        {
-            Debug.Log(_playerStorage.GetByWeapon(weaponTypeId) + " Aaasdsa");
+        public void Select(WeaponTypeId weaponTypeId) => 
             _playerStorage.GetByWeapon(weaponTypeId);
-        }
     }
 }

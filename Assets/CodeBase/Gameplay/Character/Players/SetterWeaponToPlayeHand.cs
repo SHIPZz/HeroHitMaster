@@ -35,9 +35,6 @@ namespace CodeBase.Gameplay.Character.Players
         {
             foreach (var weaponViewStorage in _weaponViewStorages)
             {
-                if (!weaponViewStorage.TryShow(weaponTypeId))
-                    return;
-
                 weaponViewStorage.TryShow(weaponTypeId);
             }
         }
