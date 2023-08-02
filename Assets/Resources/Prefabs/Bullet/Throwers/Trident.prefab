@@ -134,9 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 50
   <BulletTypeId>k__BackingField: 8
-  <BulletModel>k__BackingField: {fileID: 8719885019659527343}
 --- !u!65 &1855190141666723992
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -152,12 +150,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.3550529, y: 0.9660846, z: 0.105793044}
+  m_Center: {x: -0.00817737, y: -0.079918385, z: 0.005537018}
 --- !u!54 &7042220620309592960
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -197,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 1842850554239668933}
   _triggerObserver: {fileID: 7352498448488671505}
 --- !u!114 &1136224848413310429
 MonoBehaviour:

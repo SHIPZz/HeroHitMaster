@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.PlayerSettings;
 using CodeBase.Services.Storages;
+using CodeBase.Services.Storages.Character;
 using CodeBase.UI.Weapons;
 
 namespace CodeBase.Gameplay.Character.Players

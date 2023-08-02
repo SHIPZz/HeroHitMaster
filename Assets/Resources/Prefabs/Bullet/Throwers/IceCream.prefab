@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 30
   <BulletTypeId>k__BackingField: 7
 --- !u!114 &3740314380413946689
 MonoBehaviour:
@@ -147,7 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 3348388861539322324}
   _triggerObserver: {fileID: 4899579176838006407}
 --- !u!54 &5246999414739111740
 Rigidbody:
@@ -195,8 +193,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.75371766, z: 1.88737}
-  m_Center: {x: 0, y: 0.12314117, z: -0.443685}
+  m_Size: {x: 0.44994235, y: 1.1338184, z: 0.4872467}
+  m_Center: {x: -0.0046931505, y: 0.31319156, z: -0.0062230527}
 --- !u!114 &3718999333956050877
 MonoBehaviour:
   m_ObjectHideFlags: 0

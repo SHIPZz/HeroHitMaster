@@ -2,7 +2,9 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character;
 using CodeBase.Installers.ScriptableObjects;
+using CodeBase.ScriptableObjects.Sound;
 using CodeBase.Services.Storages;
+using CodeBase.Services.Storages.Sound;
 using UnityEngine;
 using Zenject;
 

@@ -16,6 +16,7 @@
         public const string Hammer = "Prefabs/Bullet/Throwers/Hammer";
         public const string IceCream = "Prefabs/Bullet/Throwers/IceCream";
         public const string Trident = "Prefabs/Bullet/Throwers/Trident";
+        public const string Dynamite = "Prefabs/Bullet/Throwers/Dynamite";
         public const string FireBall = "Prefabs/Bullet/FireBall/Fireball";
         //
         //guns

@@ -7,7 +7,7 @@ namespace CodeBase.Gameplay.EnemyBodyParts
     {
         private const float DisableDelay = 5f;
         private readonly EnemyBodyPartStorage _enemyBodyPartStorage;
-        private bool _canActive = true;
+        private bool _canActivate = true;
 
         public EnemyBodyPartActivator(EnemyBodyPartStorage enemyBodyPartStorage)
         {
@@ -15,11 +15,11 @@ namespace CodeBase.Gameplay.EnemyBodyParts
         }
 
         public void Disable() =>
-            _canActive = false;
+            _canActivate = false;
         
         public void ActivateWithDisableDelay(EnemyTypeId enemyTypeId)
         {
-            if(!_canActive)
+            if(!_canActivate)
                 return;
             
             EnemyBodyPart enemyBodyPart = _enemyBodyPartStorage.Get(enemyTypeId);

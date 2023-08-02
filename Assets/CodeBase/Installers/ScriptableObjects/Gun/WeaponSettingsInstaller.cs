@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.ScriptableObjects;
+using CodeBase.ScriptableObjects.Weapon;
 using UnityEngine;
 using Zenject;
 

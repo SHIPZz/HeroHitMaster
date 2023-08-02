@@ -10,6 +10,7 @@
         Hammer = 6,
         IceCream = 7,
         Trident = 8,
-        Dynamite
+        Dynamite,
+        SuperBullet
     }
 }

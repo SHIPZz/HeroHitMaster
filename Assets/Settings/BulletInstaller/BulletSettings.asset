@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6134d7f62b64c49bdf1d4df06f08726, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c715b87e02447295a23a7c73edaec4, type: 3}
   m_Name: BulletSettings
   m_EditorClassIdentifier: 
   serializationData:
@@ -21,10 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: <BulletPathes>k__BackingField
+    - Name: BulletPathes
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Enums.BulletTypeId,
-        Assembly-CSharp],[System.String, mscorlib]], mscorlib
+        Assembly-CSharp],[System.Func`1[[System.String, mscorlib]], mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Enums.BulletTypeId,
@@ -40,103 +40,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 8
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/Web/Spiderweb
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 2
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/Web/SharpWeb
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/Web/Smudgeweb
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 4
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/FireBall/Fireball
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 8
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/Throwers/Trident
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 7
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/Throwers/IceCream
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 6
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/Throwers/Hammer
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 5
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/Throwers/Knife
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -162,7 +66,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 8
+      Data: 10
     - Name: 
       Entry: 7
       Data: 
@@ -228,18 +132,6 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 7
-    - Name: $v
-      Entry: 1
-      Data: Prefabs/Bullet/Throwers/Hammer
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
       Data: 5
     - Name: $v
       Entry: 1
@@ -260,6 +152,42 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 7
+    - Name: $v
+      Entry: 1
+      Data: Prefabs/Bullet/Throwers/Hammer
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 8
+    - Name: $v
+      Entry: 1
+      Data: Prefabs/Bullet/Throwers/Dynamite
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 9
+    - Name: $v
+      Entry: 1
+      Data: Prefabs/Bullet/SuperBullets/SuperBullet
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -270,21 +198,11 @@ MonoBehaviour:
       Data: 4|System.Collections.Generic.Dictionary`2[[CodeBase.Enums.WeaponTypeId,
         Assembly-CSharp],[CodeBase.Enums.BulletTypeId, Assembly-CSharp]], mscorlib
     - Name: comparer
-      Entry: 7
-      Data: 5|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Enums.WeaponTypeId,
-        Assembly-CSharp]], mscorlib
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 8
+      Data: 10
     - Name: 
       Entry: 7
       Data: 
@@ -382,9 +300,32 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 8
+    - Name: $v
+      Entry: 3
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 9
+    - Name: $v
+      Entry: 3
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  BulletTypeIds: 0100000002000000030000000400000005000000060000000700000008000000

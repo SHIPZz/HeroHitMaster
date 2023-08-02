@@ -2,11 +2,17 @@ using System.Collections.Generic;
 using CodeBase.Gameplay;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EnemyBodyParts;
+using CodeBase.Gameplay.ObjectBodyPart;
 using CodeBase.Gameplay.Sound;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
+using CodeBase.Services.Storages.Bullet;
+using CodeBase.Services.Storages.Character;
+using CodeBase.Services.Storages.ObjectParts;
+using CodeBase.Services.Storages.Sound;
+using CodeBase.Services.Storages.Weapon;
 using CodeBase.UI.Weapons;
 using UnityEngine;
 using Zenject;
@@ -19,6 +25,8 @@ namespace CodeBase.Installers.GameInstaller
         [SerializeField] private EnemySpawnersProvider _enemySpawnersProvider;
         [SerializeField] private LocationProvider _locationProvider;
         [SerializeField] private MaterialProvider _materialProvider;
+        [SerializeField] private DestroyableObjectStorage _destroyableObjectStorage;
+        [SerializeField] private DestroyableObjectPartStorage _destroyableObjectPartStorage;
 
         public override void InstallBindings()
         {
@@ -48,7 +56,19 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemySpawnerProvider();
             BindMaterialProvider();
             BindSetterWeapon();
+            BindBulletMovementStorage();
+            BindDestroyableObjectStorages();
         }
+
+        private void BindDestroyableObjectStorages()
+        {
+            Container.BindInstance(_destroyableObjectStorage);
+            Container.BindInstance(_destroyableObjectPartStorage);
+        }
+
+        private void BindBulletMovementStorage() =>
+            Container.Bind<BulletMovementStorage>()
+                .AsSingle();
 
         private void BindSetterWeapon() => 
             Container.BindInterfacesAndSelfTo<SetterWeaponToPlayerHand>().AsSingle();

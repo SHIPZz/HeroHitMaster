@@ -3,5 +3,6 @@
     public enum PlayerWithWeaponInHandTypeId
     {
         Wolverine,
+        Batman
     }
 }

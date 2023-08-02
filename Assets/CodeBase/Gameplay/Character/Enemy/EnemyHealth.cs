@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Enums;
+using CodeBase.Services.Data;
 using CodeBase.Services.Storages;
 using UnityEngine;
 using Zenject;
@@ -19,7 +20,6 @@ namespace CodeBase.Gameplay.Character.Enemy
         private void Construct(EnemyStaticDataService enemyStaticDataService, EnemyTypeId enemyTypeId)
         {
             CurrentValue = enemyStaticDataService.GetEnemyData(enemyTypeId).Hp;
-            print(CurrentValue);
             MaxValue = CurrentValue;
         }
 

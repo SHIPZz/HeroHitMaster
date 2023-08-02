@@ -1,3 +1,4 @@
+using CodeBase.Enums;
 using CodeBase.Gameplay.Bullet.Web;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Character.Players;
@@ -13,11 +14,11 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
         [SerializeField] private CodeBase.Gameplay.Character.Players.Player _player;
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private CharacterController _characterController;
         [SerializeField] private Transform _initialShootPosition;
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private ShootingOnAnimationEvent _shootingOnAnimationEvent;
-        
+        [SerializeField] private PlayerTypeId _playerTypeId;
+
         public override void InstallBindings()
         {
             BindInstances();
@@ -45,8 +46,8 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
             Container.BindInstance(_rigidbody);
             Container.BindInstance(_shootingOnAnimationEvent);
             Container.BindInstance(_initialShootPosition);
-            Container.BindInstance(_characterController);
             Container.BindInstance(_animator);
+            Container.BindInstance(_playerTypeId);
             Container.Bind<IHealth>().To<PlayerHealth>().FromInstance(_playerHealth);
         }
     }

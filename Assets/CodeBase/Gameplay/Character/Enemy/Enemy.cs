@@ -1,10 +1,11 @@
 ﻿using System;
 using CodeBase.Enums;
+using CodeBase.Gameplay.ObjectBodyPart;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IDestroyable
     {
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
 
@@ -19,5 +20,8 @@ namespace CodeBase.Gameplay.Character.Enemy
         {
             Dead?.Invoke(EnemyTypeId);
         }
+
+        public void Destroy() => 
+            gameObject.SetActive(false);
     }
 }

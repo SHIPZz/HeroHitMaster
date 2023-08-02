@@ -3,6 +3,8 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
+using CodeBase.Services.Storages.Weapon;
+using UnityEngine;
 
 namespace CodeBase.UI.Weapons
 {
@@ -25,6 +27,7 @@ namespace CodeBase.UI.Weapons
         {
             var weapon = _weaponStorage.Get(weaponTypeId);
             _weaponProvider.CurrentWeapon = weapon;
+            Debug.Log(weapon.WeaponTypeId);
             NewWeaponChanged?.Invoke(weaponTypeId);
         }
     }

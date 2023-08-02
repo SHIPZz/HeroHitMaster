@@ -12,5 +12,6 @@ namespace CodeBase.ScriptableObjects.PlayerSettings
         [field: SerializeField] public List<PlayerTypeId> PlayerTypeIds { get; private set; }
         [OdinSerialize] public Dictionary<PlayerTypeId, PlayerWithWeaponInHandTypeId> PlayerWithWeaponInHands { get; private set; }
         [OdinSerialize] public Dictionary<WeaponTypeId, PlayerTypeId> PlayerTypeIdsByWeapon { get; private set; }
+        [OdinSerialize] public Dictionary<PlayerTypeId, string> PlayerPathes;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CodeBase.Enums;
+using CodeBase.Services.Data;
 using CodeBase.Services.Storages;
 
 namespace CodeBase.Gameplay.Character.Enemy

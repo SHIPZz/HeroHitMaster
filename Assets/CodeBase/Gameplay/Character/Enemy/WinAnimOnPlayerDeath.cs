@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Storages;
+using CodeBase.Services.Storages.Character;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy

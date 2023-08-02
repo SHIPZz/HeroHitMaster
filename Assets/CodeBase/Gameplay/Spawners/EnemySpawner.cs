@@ -3,6 +3,7 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Storages;
+using CodeBase.Services.Storages.Character;
 using UnityEngine;
 using Zenject;
 

@@ -1492,6 +1492,103 @@ Transform:
   m_Father: {fileID: 2473002321832972407}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3252691141105242059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4369379535553384737}
+  - component: {fileID: 2740538518564473092}
+  - component: {fileID: 865466281688489090}
+  - component: {fileID: 7605958380240373113}
+  m_Layer: 0
+  m_Name: tnt 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4369379535553384737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252691141105242059}
+  m_LocalRotation: {x: 0.6920146, y: -0.3093866, z: 0.65004915, w: -0.05321628}
+  m_LocalPosition: {x: -0.183, y: 0.328, z: 0.173}
+  m_LocalScale: {x: 5, y: 5, z: 7}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5328946574748800211}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 19.183, y: 99.09, z: 211.778}
+--- !u!33 &2740538518564473092
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252691141105242059}
+  m_Mesh: {fileID: 408301610954974516, guid: 7fc7f1febcec6a84db84373d67992c21, type: 3}
+--- !u!23 &865466281688489090
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252691141105242059}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 27070fe850f2d48469119f9214697de8, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7605958380240373113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252691141105242059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df09bd345a804e6eaa28a668f002c36c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponTypeId: 8
 --- !u!1 &3504713019191530373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,6 +2080,7 @@ Transform:
   - {fileID: 2051690543136891106}
   - {fileID: 1983460369637676980}
   - {fileID: 1991963612889048418}
+  - {fileID: 4369379535553384737}
   - {fileID: 6159653953324720972}
   - {fileID: 7016950257763714542}
   - {fileID: 8279798593426213553}
@@ -2012,6 +2110,7 @@ MonoBehaviour:
     - {fileID: 792823556046430439}
     - {fileID: 8392529155979057306}
     - {fileID: 2597219467478893478}
+    - {fileID: 7605958380240373113}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -2037,7 +2136,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 
@@ -2083,6 +2182,18 @@ MonoBehaviour:
     - Name: $v
       Entry: 10
       Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 8
+    - Name: $v
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -2992,10 +3103,10 @@ MonoBehaviour:
   _player: {fileID: 6750809059316981548}
   _animator: {fileID: 8223481509084437642}
   _rigidbody: {fileID: 2771072595810197895}
-  _characterController: {fileID: 7138632867466148729}
   _initialShootPosition: {fileID: 9008425957648284854}
   _playerHealth: {fileID: 8397819301073918312}
   _shootingOnAnimationEvent: {fileID: 4793112262101728540}
+  _playerTypeId: 1
 --- !u!114 &6750809059316981548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3129,8 +3240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05dc4336d6b947cbb311b9ab59a95864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentValue>k__BackingField: 0
-  <MaxValue>k__BackingField: 0
 --- !u!1 &8642631035792443680
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.ScriptableObjects;
+using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Providers.AssetProviders;
 using UnityEngine;

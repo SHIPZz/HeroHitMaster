@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Installers.ScriptableObjects;
+using CodeBase.ScriptableObjects.Sound;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Providers.AssetProviders;
 using UnityEngine;

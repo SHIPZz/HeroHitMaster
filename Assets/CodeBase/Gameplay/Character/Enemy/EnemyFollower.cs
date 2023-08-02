@@ -1,5 +1,6 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Collision;
+using CodeBase.Services.Data;
 using CodeBase.Services.Storages;
 using UnityEngine;
 using UnityEngine.AI;
@@ -43,6 +44,9 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public void Block()
         {
+            if(!_navMeshAgent.isActiveAndEnabled)
+                return;
+            
             _navMeshAgent.isStopped = true;
             _navMeshAgent.velocity = Vector3.zero;
             _isBlocked = true;

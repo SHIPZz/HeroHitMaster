@@ -1,4 +1,7 @@
-﻿using CodeBase.Services.Inputs.InputService;
+﻿using CodeBase.Services;
+using CodeBase.Services.Ad;
+using CodeBase.Services.Data;
+using CodeBase.Services.Inputs.InputService;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.Storages;
 using CodeBase.UI;
@@ -14,6 +17,14 @@ namespace CodeBase.Installers
             BindAssetProvider();
             BindInputService();
             BindAdService();
+            BindStaticDataServices();
+        }
+
+        private void BindStaticDataServices()
+        {
+            Container.Bind<BulletStaticDataService>().AsSingle();
+            Container.Bind<EnemyStaticDataService>().AsSingle();
+            Container.Bind<PlayerStaticDataService>().AsSingle();
         }
 
         private void BindAdService() =>

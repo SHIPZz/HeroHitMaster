@@ -13,6 +13,7 @@ namespace CodeBase.Gameplay.EnemyBodyParts
 
         [SerializeField] private float _transformUpPosition;
         [SerializeField] private List<Rigidbody> _parts;
+        
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
 
         public void SetHeightPosition() =>

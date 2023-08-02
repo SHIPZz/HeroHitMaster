@@ -2,7 +2,7 @@
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Services.Storages;
+using CodeBase.Services.Data;
 using UnityEngine;
 using Zenject;
 
@@ -10,7 +10,7 @@ namespace CodeBase.Gameplay.Bullet
 {
     public class Bullet : MonoBehaviour, IBullet
     {
-        [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
+        [field: SerializeField] public BulletTypeId BulletTypeId { get; private set; }
         
         private TriggerObserver _triggerObserver;
         private GameObject _terrain;

@@ -6,6 +6,8 @@ using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
+using CodeBase.Services.Storages.Character;
+using CodeBase.Services.Storages.Weapon;
 using CodeBase.UI.Weapons;
 using UnityEngine;
 using Zenject;
@@ -22,8 +24,8 @@ namespace CodeBase.GameInit
         private readonly WeaponProvider _weaponProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly IWeaponStorage _weaponStorage;
-        private SoundWeaponChanger _soundWeaponChanger;
-        private WeaponSelector _weaponSelector;
+        private readonly SoundWeaponChanger _soundWeaponChanger;
+        private readonly WeaponSelector _weaponSelector;
 
         public GameInit(GameFactory gameFactory,
             LocationProvider locationProvider,
@@ -46,9 +48,9 @@ namespace CodeBase.GameInit
 
         public void Initialize()
         {
-            Player player = InitializeInitialPlayer(PlayerTypeId.Spider);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            InitializeInitialWeapon(WeaponTypeId.SmudgeWebShooter);
+            InitializeInitialWeapon(WeaponTypeId.SuperWeapon);
             _playerProvider.CurrentPlayer = player;
             InitStartWeaponSoundBy(_weaponProvider.CurrentWeapon.WeaponTypeId);
         }

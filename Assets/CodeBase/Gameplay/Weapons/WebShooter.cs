@@ -9,7 +9,7 @@ namespace CodeBase.Gameplay.Weapons
         public override void Initialize()
         {
             ReturnBulletDelay = 10f;
-            Init(WeaponTypeId,  BulletMovement);
+            Init(WeaponTypeId,  BulletmovementStorage.GetBulletMovementBy(WeaponTypeId));
         }
 
         public override void Shoot(Vector3 target, Vector3 initialPosition)

@@ -3,8 +3,10 @@ using CodeBase.Constants;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Providers.AssetProviders;
+using UnityEditor;
 using UnityEngine;
 using Zenject;
+using PlayerSettings = CodeBase.ScriptableObjects.PlayerSettings.PlayerSettings;
 
 namespace CodeBase.Services.Factories
 {
@@ -12,17 +14,13 @@ namespace CodeBase.Services.Factories
     {
         private readonly AssetProvider _assetProvider;
         private readonly DiContainer _diContainer;
-        private readonly Dictionary<PlayerTypeId, string> _characters = new()
-        {
-            { PlayerTypeId.Spider, AssetPath.Spiderman },
-            { PlayerTypeId.Wolverine, AssetPath.Wolverine },
-            { PlayerTypeId.Wizard, AssetPath.Wizard },
-        };
+        private readonly Dictionary<PlayerTypeId, string> _characters;
 
-        public PlayerFactory(AssetProvider assetProvider, DiContainer diContainer)
+        public PlayerFactory(AssetProvider assetProvider, DiContainer diContainer, PlayerSettings playerSettings)
         {
             _assetProvider = assetProvider;
             _diContainer = diContainer;
+            _characters = playerSettings.PlayerPathes;
         }
 
         public Player Create(PlayerTypeId playerTypeId, Vector3 at)
@@ -39,6 +37,7 @@ namespace CodeBase.Services.Factories
         private Player Create(string path, Vector3 at)
         {
             GameObject player = _assetProvider.GetAsset(path);
+            Debug.Log(player);
             return _diContainer.InstantiatePrefabForComponent<Player>(player, at, Quaternion.identity,null);
         }
     }

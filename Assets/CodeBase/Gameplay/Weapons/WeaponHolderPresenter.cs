@@ -1,6 +1,7 @@
 ﻿using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
+using CodeBase.UI.Weapons;
 using UnityEngine;
 using Zenject;
 
