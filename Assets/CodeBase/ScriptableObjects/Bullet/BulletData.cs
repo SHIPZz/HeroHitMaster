@@ -14,5 +14,9 @@ namespace CodeBase.ScriptableObjects.Bullet
         [Range(30, 100)] public int Count;
         
         public BulletTypeId BulletTypeId;
+        public WeaponTypeId WeaponTypeId;
+        public GameObject Prefab;
+        public ParticleSystem HitEffect;
+        public ParticleSystem StartEffect;
     }
 }

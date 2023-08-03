@@ -17,6 +17,11 @@ namespace CodeBase.Services.Data
         }
         
         public BulletData GetBy(BulletTypeId bulletTypeId) =>
-            !_bulletDatas.TryGetValue(bulletTypeId, out BulletData bulletData) ? null : _bulletDatas[bulletTypeId];
+            !_bulletDatas.TryGetValue(bulletTypeId, out BulletData bulletData) ? 
+                null : 
+                bulletData;
+        
+        public BulletData GetBy(WeaponTypeId weaponType) => 
+            _bulletDatas.First(x => x.Value.WeaponTypeId == weaponType).Value;
     }
 }

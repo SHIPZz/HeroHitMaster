@@ -4,6 +4,7 @@ using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Services.Data;
+using CodeBase.Services.Providers;
 using CodeBase.Services.Storages;
 using UnityEngine;
 using Zenject;

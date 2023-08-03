@@ -11,6 +11,6 @@
         IceCream = 7,
         Trident = 8,
         Dynamite,
-        SuperBullet
+        Freeze
     }
 }

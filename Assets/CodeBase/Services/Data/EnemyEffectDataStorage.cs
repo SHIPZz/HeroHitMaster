@@ -2,6 +2,7 @@
 using System.Linq;
 using CodeBase.Enums;
 using CodeBase.Gameplay;
+using CodeBase.Gameplay.EffectsData;
 using CodeBase.Services.Providers;
 using UnityEngine;
 using Zenject;

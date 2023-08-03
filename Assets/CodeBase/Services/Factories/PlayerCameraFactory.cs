@@ -9,7 +9,7 @@ namespace CodeBase.Services.Factories
     public class PlayerCameraFactory
     {
         private readonly AssetProvider _assetProvider;
-        private DiContainer _diContainer;
+        private readonly DiContainer _diContainer;
 
         public PlayerCameraFactory(AssetProvider assetProvider, DiContainer diContainer)
         {
@@ -20,6 +20,7 @@ namespace CodeBase.Services.Factories
         public PlayerCameraFollower Create(Vector3 at)
         {
             var camera = _assetProvider.GetAsset(AssetPath.MainCamera);
+            Debug.Log(camera.name);
             return _diContainer.InstantiatePrefabForComponent<PlayerCameraFollower>(camera,at,Quaternion.identity, null);
         }
     }

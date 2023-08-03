@@ -11,6 +11,6 @@
         ThrowingTridentShooter = 6,
         ThrowingHammerShooter = 7,
         ThrowingDynamiteShooter,
-        SuperWeapon
+        FreezeWeapon
     }
 }

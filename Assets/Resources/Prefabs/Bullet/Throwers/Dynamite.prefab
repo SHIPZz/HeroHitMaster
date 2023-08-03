@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: -8095552391912397926}
   - component: {fileID: 7767047072948085236}
   - component: {fileID: 5376442738813682070}
+  - component: {fileID: 4849756173462113157}
+  - component: {fileID: 6008633211220340257}
   m_Layer: 11
   m_Name: Dynamite
   m_TagString: Untagged
@@ -191,5 +193,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f14c611f92e412ab3d6a2f6cbdabab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4849756173462113157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311373604623348549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c390495438646f4904944cf8578f133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6008633211220340257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311373604623348549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0364d9115962ee47bba12ca4af57a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

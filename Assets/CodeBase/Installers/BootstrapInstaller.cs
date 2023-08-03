@@ -26,6 +26,7 @@ namespace CodeBase.Installers
             Container.Bind<EnemyStaticDataService>().AsSingle();
             Container.Bind<PlayerStaticDataService>().AsSingle();
             Container.Bind<WeaponStaticDataService>().AsSingle();
+            Container.Bind<EffectDataStorage>().AsSingle();
         }
 
         private void BindAdService() =>

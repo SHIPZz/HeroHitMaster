@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 2759715281220666811}
   - component: {fileID: 627307980354741232}
   - component: {fileID: 1177712166539509654}
+  - component: {fileID: -5081649180242672200}
   m_Layer: 11
   m_Name: Knife
   m_TagString: Untagged
@@ -82,9 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 30
   <BulletTypeId>k__BackingField: 5
-  <BulletModel>k__BackingField: {fileID: 7799738555903372020}
 --- !u!54 &5315063570748446400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,7 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 1992501198301504056}
   _triggerObserver: {fileID: 1817539379323392124}
 --- !u!114 &627307980354741232
 MonoBehaviour:
@@ -179,6 +177,18 @@ CapsuleCollider:
   m_Height: 1.2987509
   m_Direction: 1
   m_Center: {x: 0, y: 0.0813967, z: 0.028866649}
+--- !u!114 &-5081649180242672200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412643211829885466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0364d9115962ee47bba12ca4af57a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8465452993010180445
 GameObject:
   m_ObjectHideFlags: 0

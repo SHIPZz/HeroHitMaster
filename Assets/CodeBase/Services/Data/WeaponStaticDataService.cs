@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Enums;
+using CodeBase.ScriptableObjects.Weapon;
 using UnityEngine;
 
 namespace CodeBase.Services.Data
@@ -18,6 +19,6 @@ namespace CodeBase.Services.Data
         public WeaponData Get(WeaponTypeId weaponTypeId) => 
             !_weaponDatas.TryGetValue(weaponTypeId, out WeaponData weaponData) ? 
                 null :
-                _weaponDatas[weaponTypeId];
+                weaponData;
     }
 }

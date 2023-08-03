@@ -1,14 +1,16 @@
-using CodeBase.Installers.ScriptableObjects.PlayerCamera;
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "PlayerCameraInstaller", menuName = "Installers/PlayerCameraInstaller")]
-public class PlayerCameraInstaller : ScriptableObjectInstaller<PlayerCameraInstaller>
+namespace CodeBase.Installers.ScriptableObjects.PlayerCamera
 {
-    [SerializeField] private PlayerCameraSettings _playerCameraSettings;
-    
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "PlayerCameraInstaller", menuName = "Installers/PlayerCameraInstaller")]
+    public class PlayerCameraInstaller : ScriptableObjectInstaller<PlayerCameraInstaller>
     {
-        Container.BindInstance(_playerCameraSettings);
+        [SerializeField] private PlayerCameraSettings _playerCameraSettings;
+    
+        public override void InstallBindings()
+        {
+            Container.BindInstance(_playerCameraSettings);
+        }
     }
 }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17bd342e70d4790a6ca43df1f16dde9, type: 3}
+  m_Name: FreezeBullet
+  m_EditorClassIdentifier: 
+  MovementDuration: 0.3
+  RotateDuration: 0.3
+  Damage: 34
+  Count: 30
+  BulletTypeId: 10
+  WeaponTypeId: 9
+  Prefab: {fileID: 2634519650295375025, guid: 4b63f8c983d5cf04389fa5b158769769, type: 3}
+  HitEffect: {fileID: 8705353689705247190, guid: 3e74e109d26520945bdcd3e5841cdb51, type: 3}

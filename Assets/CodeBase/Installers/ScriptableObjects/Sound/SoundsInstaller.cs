@@ -2,7 +2,7 @@ using CodeBase.ScriptableObjects.Sound;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Installers.ScriptableObjects
+namespace CodeBase.Installers.ScriptableObjects.Sound
 {
     [CreateAssetMenu(fileName = "SoundsInstaller", menuName = "Installers/SoundsInstaller")]
     public class SoundsInstaller : ScriptableObjectInstaller<SoundsInstaller>

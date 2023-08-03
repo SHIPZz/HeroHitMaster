@@ -50,7 +50,7 @@ namespace CodeBase.GameInit
         {
             Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            InitializeInitialWeapon(WeaponTypeId.SuperWeapon);
+            InitializeInitialWeapon(WeaponTypeId.FreezeWeapon);
             _playerProvider.CurrentPlayer = player;
             InitStartWeaponSoundBy(_weaponProvider.CurrentWeapon.WeaponTypeId);
         }

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Dynamite
   m_EditorClassIdentifier: 
   MovementDuration: 0.5
+  RotateDuration: 0.3
   Damage: 1000
   Count: 45
   BulletTypeId: 9
+  WeaponTypeId: 8
+  Prefab: {fileID: 4311373604623348549, guid: f5b1e63a2b71ff6449fc6295d01868e0, type: 3}
+  HitEffect: {fileID: 3831096809390240745, guid: 9b25eca628b38e34684e6933c84947ba, type: 3}

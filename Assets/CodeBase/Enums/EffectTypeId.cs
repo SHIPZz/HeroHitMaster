@@ -8,6 +8,7 @@
         SnakenagaDeath,
         SnowBombDeath,
         DummyDeath,
+        BombExplosion,
         
     }
 }
