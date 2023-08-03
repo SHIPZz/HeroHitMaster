@@ -9,8 +9,6 @@ namespace CodeBase.Gameplay.Bullet
 {
     public class KnifeMovement : IBulletMovement
     {
-        private const float RotateDuration = 0.3f;
-        private const float MoveDuration = 0.5f;
         private static readonly Random _random = new();
 
         private readonly List<Vector3> _rotationVectors = new()

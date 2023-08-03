@@ -51,6 +51,9 @@ namespace CodeBase.Gameplay.Bullet
             if (!other.gameObject.TryGetComponent(out IDamageable damageable))
                 return;
 
+            if (other.gameObject.TryGetComponent(out Animator animator))
+                animator.enabled = false;
+            
             damageable.TakeDamage(_damage);
             this.SetActive(gameObject, false, 0.1f);
         }

@@ -29,19 +29,25 @@ namespace CodeBase.Gameplay.EffectPlaying
         public void Initialize()
         {
             _health.ValueChanged += PlayEffect;
-            _health.ValueZeroReached += BlockHitEffect;
+            _health.ValueZeroReached += Play;
         }
 
         public void Dispose()
         {
             _health.ValueChanged -= PlayEffect;
-            _health.ValueZeroReached -= BlockHitEffect;
+            _health.ValueZeroReached -= Play;
+        }
+
+        private void Play()
+        {
+            _hitEffect.Play();
+            _hitSound.Play();
         }
 
         private void PlayEffect(int obj)
         {
-            if(!_canPlayEffect)
-                return;
+            // if(!_canPlayEffect)
+            //     return;
             
             _hitEffect.Play();
             _hitSound.Play();

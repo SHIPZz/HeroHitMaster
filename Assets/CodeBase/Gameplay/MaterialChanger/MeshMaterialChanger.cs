@@ -16,13 +16,11 @@ namespace CodeBase.Gameplay.MaterialChanger
         public void Change(Material material)
         {
             _meshRenderer.material = material;
+            GetComponent<Collider>().enabled = false;
+            Changed?.Invoke();
             DOTween.To(() => 0, x =>
                     _meshRenderer.material.SetFloat(AdvancedDissolveProperties.Cutout.Standard._ids[0].clip, x),
-                _targetValue, _duration).OnComplete(() =>
-            {
-                Changed?.Invoke();
-                gameObject.SetActive(false);
-            });
+                _targetValue, _duration).OnComplete(() => { gameObject.SetActive(false); });
         }
     }
 }

@@ -53,7 +53,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
 
         private void BindInterfacesAndSelfTo()
         {
-            Container.BindInterfacesAndSelfTo<EnemyDestroyOnDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<EffectOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<DeathSoundOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<NonCollisionOnDeath>().AsSingle();

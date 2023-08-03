@@ -9,18 +9,14 @@ namespace CodeBase.Gameplay.Character.Enemy
     {
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
 
-        public event Action<EnemyTypeId> Dead;
+        public event Action<Enemy> Dead;
         public event Action<Enemy> QuickDestroyed;
 
-        private void OnDisable()
-        {
-            Dead?.Invoke(EnemyTypeId);
-        }
+        private void OnDisable() => 
+            Dead?.Invoke(this);
 
-        private void OnDestroy()
-        {
-            Dead?.Invoke(EnemyTypeId);
-        }
+        private void OnDestroy() => 
+            Dead?.Invoke(this);
 
         public void Destroy()
         {

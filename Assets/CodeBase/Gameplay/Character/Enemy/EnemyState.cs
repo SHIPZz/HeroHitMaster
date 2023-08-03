@@ -27,28 +27,24 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private void Update()
         {
-            if (Vector3.Distance(transform.position, _playerProvider.CurrentPlayer.transform.position) <
-                _targetStopDistance)
-            {
-                _enemyFollower.Block();
-                _enemyAttacker.SetTarget(_playerProvider.PlayerHealth);
-            }
+            if (!(Vector3.Distance(transform.position, _playerProvider.CurrentPlayer.transform.position) <
+                  _targetStopDistance))
+                return;
+            
+            _enemyFollower.Block();
+            _enemyAttacker.SetTarget(_playerProvider.PlayerHealth);
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _triggerObserver.Entered += PlayerApproached;
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _triggerObserver.Entered -= PlayerApproached;
-        }
+
         private void PlayerApproached(Collider obj)
         {
             if (obj.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                Debug.Log("sadasda");
                 _enemyFollower.Block();
                 _enemyAttacker.SetTarget(damageable);
             }

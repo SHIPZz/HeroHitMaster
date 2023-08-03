@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.MaterialChanger;
 using UnityEngine;
 using Zenject;
 

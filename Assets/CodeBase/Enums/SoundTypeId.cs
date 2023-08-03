@@ -22,6 +22,7 @@
         SnakenagaHitSound,
         SnowBombHitSound,
         WolfPupHitSound,
-        WerewolfHitSound
+        WerewolfHitSound,
+        SuperWeaponShootSound
     }
 }

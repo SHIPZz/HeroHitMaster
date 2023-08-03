@@ -1,28 +1,29 @@
-﻿using CodeBase.Enums;
-using CodeBase.Gameplay.Character.Enemy;
-using CodeBase.Services.Storages;
-using CodeBase.Services.Storages.Character;
+﻿using CodeBase.Gameplay.Character.Enemy;
 
 namespace CodeBase.Gameplay.EnemyBodyParts
 {
     public class EnemyBodyPartPositionSetter
     {
-        private readonly IEnemyStorage _enemyStorage;
         private readonly EnemyBodyPartStorage _enemyBodyPartStorage;
+        private bool _canSetPosition = true;
 
-        public EnemyBodyPartPositionSetter(IEnemyStorage enemyStorage, EnemyBodyPartStorage enemyBodyPartStorage)
+        public EnemyBodyPartPositionSetter(EnemyBodyPartStorage enemyBodyPartStorage)
         {
-            _enemyStorage = enemyStorage;
             _enemyBodyPartStorage = enemyBodyPartStorage;
         }
 
-        public void SetPosition(EnemyTypeId enemyTypeId)
+        public void SetPosition(Enemy enemy)
         {
-            Enemy enemy = _enemyStorage.Get(enemyTypeId);
-            EnemyBodyPart enemyBodyPart = _enemyBodyPartStorage.Get(enemyTypeId);
+            if(!_canSetPosition)
+                return;
+            
+            EnemyBodyPart enemyBodyPart = _enemyBodyPartStorage.Get(enemy.EnemyTypeId);
 
             enemyBodyPart.transform.position = enemy.transform.position;
             enemyBodyPart.SetHeightPosition();
         }
+
+        public void Disable() => 
+            _canSetPosition = false;
     }
 }

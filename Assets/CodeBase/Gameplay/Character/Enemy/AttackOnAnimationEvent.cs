@@ -12,9 +12,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         private void Construct(EnemyAttacker enemyAttacker) =>
             _enemyAttacker = enemyAttacker;
 
-        public void OnAnimationAttacked()
-        {
+        public void OnAnimationAttacked() => 
             _enemyAttacker.Attack();
-        }
     }
 }

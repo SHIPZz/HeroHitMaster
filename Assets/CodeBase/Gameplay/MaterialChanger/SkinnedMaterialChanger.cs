@@ -15,28 +15,24 @@ namespace CodeBase.Gameplay.MaterialChanger
         [SerializeField] private float _duration = 3.5f;
         [SerializeField] private float _targetValue = 1f;
 
-        private static Random _random = new();
         private SkinnedMeshRenderer _skinnedMeshRenderer;
-        private EnemyDestroyOnDeath _enemyDestroyOnDeath;
 
         public event Action Changed;
 
         [Inject]
-        private void Construct(SkinnedMeshRenderer skinnedMeshRenderer, EnemyDestroyOnDeath enemyDestroyOnDeath)
+        private void Construct(SkinnedMeshRenderer skinnedMeshRenderer)
         {
-            _enemyDestroyOnDeath = enemyDestroyOnDeath;
             _skinnedMeshRenderer = skinnedMeshRenderer;
         }
 
         public void Change(Material material)
         {
             SetStartValues(material);
+            GetComponent<Collider>().enabled = false;
 
             DOTween.To(() => 0, x =>
                     _skinnedMeshRenderer.material.SetFloat(AdvancedDissolveProperties.Cutout.Standard._ids[0].clip, x),
                 _targetValue, _duration);
-
-            _enemyDestroyOnDeath.Delay(DelayValues.DestroyEffectDelay);
             
             Changed?.Invoke();
         }

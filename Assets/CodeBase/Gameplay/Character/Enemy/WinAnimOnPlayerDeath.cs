@@ -9,8 +9,8 @@ namespace CodeBase.Gameplay.Character.Enemy
 {
     public class WinAnimOnPlayerDeath : IInitializable, IDisposable
     {
-        private EnemyAnimator _enemyAnimator;
-        private List<PlayerHealth> _playerHealths = new();
+        private readonly EnemyAnimator _enemyAnimator;
+        private readonly List<PlayerHealth> _playerHealths = new();
 
         public WinAnimOnPlayerDeath(IPlayerStorage playerStorage, EnemyAnimator enemyAnimator)
         {

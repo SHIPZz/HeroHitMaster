@@ -8,15 +8,11 @@ namespace CodeBase.Gameplay.Character.Enemy
 {
     public class AnimOnHit : IInitializable, IDisposable
     {
-        private const float MovementAnimation = 1f;
-        
         private readonly EnemyAnimator _enemyAnimator;
         private readonly IHealth _health;
-        private readonly NavMeshAgent _navMeshAgent;
 
-        public AnimOnHit(EnemyAnimator enemyAnimator, IHealth health, NavMeshAgent navMeshAgent)
+        public AnimOnHit(EnemyAnimator enemyAnimator, IHealth health)
         {
-            _navMeshAgent = navMeshAgent;
             _enemyAnimator = enemyAnimator;
             _health = health;
         }

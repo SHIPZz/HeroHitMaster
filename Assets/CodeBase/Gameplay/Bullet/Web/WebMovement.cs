@@ -11,7 +11,6 @@ namespace CodeBase.Gameplay.Bullet.Web
         {
             bullet.GameObject.transform.position = startPosition;
             bullet.GameObject.transform.DOMove(target, Duration);
-            // rigidbody.DOMove(target, duration);
         }
     }
 }

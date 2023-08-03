@@ -20,8 +20,8 @@ namespace CodeBase.Services.Storages.Bullet
         {
             _bulletMovements = new Dictionary<WeaponTypeId, IBulletMovement>
             {
-                { WeaponTypeId.FireBallShooter, new DefaultBulletMovement() },
-                { WeaponTypeId.SuperWeapon, new DefaultBulletMovement() },
+                { WeaponTypeId.FireBallShooter, new DefaultBulletMovement(bulletStaticDataService) },
+                { WeaponTypeId.SuperWeapon, new DefaultBulletMovement(bulletStaticDataService) },
                 { WeaponTypeId.WebSpiderShooter, new WebMovement() },
                 { WeaponTypeId.SharpWebShooter, new WebMovement() },
                 { WeaponTypeId.SmudgeWebShooter, new WebMovement() },

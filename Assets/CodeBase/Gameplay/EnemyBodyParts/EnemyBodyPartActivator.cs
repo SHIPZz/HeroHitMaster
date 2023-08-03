@@ -1,4 +1,5 @@
 ﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Character.Enemy;
 using DG.Tweening;
 
 namespace CodeBase.Gameplay.EnemyBodyParts
@@ -17,12 +18,12 @@ namespace CodeBase.Gameplay.EnemyBodyParts
         public void Disable() =>
             _canActivate = false;
         
-        public void ActivateWithDisableDelay(EnemyTypeId enemyTypeId)
+        public void ActivateWithDisableDelay(Enemy enemy)
         {
             if(!_canActivate)
                 return;
             
-            EnemyBodyPart enemyBodyPart = _enemyBodyPartStorage.Get(enemyTypeId);
+            EnemyBodyPart enemyBodyPart = _enemyBodyPartStorage.Get(enemy.EnemyTypeId);
             enemyBodyPart.Enable();
             DOTween.Sequence().AppendInterval(DisableDelay).OnComplete(enemyBodyPart.Disable);
         }

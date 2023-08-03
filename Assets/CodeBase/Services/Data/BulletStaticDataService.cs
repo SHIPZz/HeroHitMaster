@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Enums;
-using CodeBase.Installers.ScriptableObjects.Gun;
 using CodeBase.ScriptableObjects.Bullet;
 using UnityEngine;
 
