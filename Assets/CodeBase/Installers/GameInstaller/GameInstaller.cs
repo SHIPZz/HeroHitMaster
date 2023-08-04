@@ -66,7 +66,6 @@ namespace CodeBase.Installers.GameInstaller
             Container.Bind<EnemyStaticDataService>().AsSingle();
             Container.Bind<PlayerStaticDataService>().AsSingle();
             Container.Bind<WeaponStaticDataService>().AsSingle();
-            Container.Bind<EffectDataStorage>().AsSingle();
             Container.Bind<BulletEffectStorage>().AsSingle();
         }
 
