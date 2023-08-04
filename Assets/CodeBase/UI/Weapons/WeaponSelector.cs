@@ -27,7 +27,6 @@ namespace CodeBase.UI.Weapons
         {
             var weapon = _weaponStorage.Get(weaponTypeId);
             _weaponProvider.CurrentWeapon = weapon;
-            Debug.Log(weapon.WeaponTypeId);
             NewWeaponChanged?.Invoke(weaponTypeId);
         }
     }

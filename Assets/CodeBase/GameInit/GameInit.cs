@@ -1,11 +1,7 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Character.Players;
-using CodeBase.Gameplay.Sound;
-using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Character;
 using CodeBase.Services.Storages.Weapon;
 using CodeBase.UI.Weapons;
@@ -24,7 +20,6 @@ namespace CodeBase.GameInit
         private readonly WeaponProvider _weaponProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly IWeaponStorage _weaponStorage;
-        private readonly SoundWeaponChanger _soundWeaponChanger;
         private readonly WeaponSelector _weaponSelector;
 
         public GameInit(GameFactory gameFactory,
@@ -32,11 +27,9 @@ namespace CodeBase.GameInit
             CameraProvider cameraProvider,
             PlayerProvider playerProvider,
             IWeaponStorage weaponStorage,
-            WeaponProvider weaponProvider, IPlayerStorage playerStorage,
-            SoundWeaponChanger soundWeaponChanger, WeaponSelector weaponSelector)
+            WeaponProvider weaponProvider, IPlayerStorage playerStorage, WeaponSelector weaponSelector)
         {
             _weaponSelector = weaponSelector;
-            _soundWeaponChanger = soundWeaponChanger;
             _gameFactory = gameFactory;
             _weaponStorage = weaponStorage;
             _locationProvider = locationProvider;
@@ -52,7 +45,6 @@ namespace CodeBase.GameInit
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             InitializeInitialWeapon(WeaponTypeId.FreezeWeapon);
             _playerProvider.CurrentPlayer = player;
-            InitStartWeaponSoundBy(_weaponProvider.CurrentWeapon.WeaponTypeId);
         }
 
         private void InitializeInitialWeapon(WeaponTypeId weaponTypeId) =>
@@ -67,8 +59,5 @@ namespace CodeBase.GameInit
 
         private Player InitializeInitialPlayer(PlayerTypeId playerTypeId) =>
             _playerStorage.GetById(playerTypeId);
-
-        private void InitStartWeaponSoundBy(WeaponTypeId weaponTypeId) =>
-            _soundWeaponChanger.SetCurrentSound(weaponTypeId);
     }
 }

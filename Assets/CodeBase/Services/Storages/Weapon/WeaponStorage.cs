@@ -38,9 +38,9 @@ namespace CodeBase.Services.Storages.Weapon
 
         private void FillDictionary(List<WeaponTypeId> weaponTypeIds)
         {
-            foreach (var weaponSetting in weaponTypeIds)
+            foreach (var weaponTypeId in weaponTypeIds)
             {
-                Gameplay.Weapons.Weapon weapon = _weaponFactory.Create(weaponSetting);
+                Gameplay.Weapons.Weapon weapon = _weaponFactory.Create(weaponTypeId);
                 _weapons[weapon.WeaponTypeId] = weapon;
             }
         }

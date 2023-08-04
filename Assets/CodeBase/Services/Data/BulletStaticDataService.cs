@@ -15,7 +15,19 @@ namespace CodeBase.Services.Data
             _bulletDatas = Resources.LoadAll<BulletData>("Prefabs/BulletData")
                 .ToDictionary(x => x.BulletTypeId, x => x);
         }
-        
+
+        public List<BulletData> GetAll()
+        {
+            var bulletDatas = new List<BulletData>();
+            
+            foreach (var bulletDat in _bulletDatas.Values)
+            {
+                bulletDatas.Add(bulletDat);
+            }
+
+            return bulletDatas;
+        }
+
         public BulletData GetBy(BulletTypeId bulletTypeId) =>
             !_bulletDatas.TryGetValue(bulletTypeId, out BulletData bulletData) ? 
                 null : 

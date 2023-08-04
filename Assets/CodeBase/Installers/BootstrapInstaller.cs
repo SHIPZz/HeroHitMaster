@@ -4,6 +4,7 @@ using CodeBase.Services.Data;
 using CodeBase.Services.Inputs.InputService;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.Storages;
+using CodeBase.Services.Storages.Bullet;
 using CodeBase.UI;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -17,16 +18,6 @@ namespace CodeBase.Installers
             BindAssetProvider();
             BindInputService();
             BindAdService();
-            BindStaticDataServices();
-        }
-
-        private void BindStaticDataServices()
-        {
-            Container.Bind<BulletStaticDataService>().AsSingle();
-            Container.Bind<EnemyStaticDataService>().AsSingle();
-            Container.Bind<PlayerStaticDataService>().AsSingle();
-            Container.Bind<WeaponStaticDataService>().AsSingle();
-            Container.Bind<EffectDataStorage>().AsSingle();
         }
 
         private void BindAdService() =>

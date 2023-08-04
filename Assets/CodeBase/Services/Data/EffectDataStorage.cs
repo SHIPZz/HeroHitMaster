@@ -11,25 +11,13 @@ namespace CodeBase.Services.Data
     {
         private readonly DiContainer _diContainer;
         private readonly Dictionary<EffectTypeId, ParticleSystem> _effects = new();
-        private readonly Dictionary<BulletTypeId, ParticleSystem> _hitBulletEffects = new();
-        private readonly BulletStaticDataService _bulletStaticDataService;
 
         public EffectDataStorage(DiContainer diContainer, BulletStaticDataService bulletStaticDataService)
         {
-            _bulletStaticDataService = bulletStaticDataService;
             _diContainer = diContainer;
             var effectDatas = Resources.LoadAll<EffectData>("Prefabs/Effects").ToList();
 
             FillDictionary(effectDatas);
-        }
-
-        public ParticleSystem CreateBulletHitEffectBy(BulletTypeId bulletTypeId)
-        {
-            if (_bulletStaticDataService.GetBy(bulletTypeId).HitEffect is null)
-                return null;
-            
-            var targetParticlePrefab = _bulletStaticDataService.GetBy(bulletTypeId).HitEffect;
-            return _diContainer.InstantiatePrefab(targetParticlePrefab.gameObject).GetComponent<ParticleSystem>();
         }
 
         public ParticleSystem GetBy(EffectTypeId effectTypeId) => 

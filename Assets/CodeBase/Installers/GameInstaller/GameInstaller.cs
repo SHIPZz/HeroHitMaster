@@ -1,15 +1,11 @@
 using System.Collections.Generic;
-using CodeBase.Gameplay;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Gameplay.EnemyBodyParts;
-using CodeBase.Gameplay.ObjectBodyPart;
-using CodeBase.Gameplay.Sound;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Bullet;
 using CodeBase.Services.Storages.Character;
 using CodeBase.Services.Storages.ObjectParts;
@@ -49,8 +45,6 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemyFactory();
             BindSoundStorage();
             BindSoundFactory();
-            BindSound();
-            BindSoundProvider();
             BindEnemyStorage();
             BindEnemyBodyPartActivation();
             BindEnemyBodyPartStorage();
@@ -62,7 +56,22 @@ namespace CodeBase.Installers.GameInstaller
             BindDestroyableObjectStorages();
             BindEnemyEffectDataStorage();
             BindEnemiesDeathEffectOnQuickDestruction();
+            BindWeaponShootEffectStorage();
+            BindStaticDataServices();
         }
+        
+        private void BindStaticDataServices()
+        {
+            Container.Bind<BulletStaticDataService>().AsSingle();
+            Container.Bind<EnemyStaticDataService>().AsSingle();
+            Container.Bind<PlayerStaticDataService>().AsSingle();
+            Container.Bind<WeaponStaticDataService>().AsSingle();
+            Container.Bind<EffectDataStorage>().AsSingle();
+            Container.Bind<BulletEffectStorage>().AsSingle();
+        }
+
+        private void BindWeaponShootEffectStorage() => 
+            Container.Bind<WeaponShootEffectStorage>().AsSingle();
 
         private void BindEnemiesDeathEffectOnQuickDestruction() => 
             Container.BindInterfacesAndSelfTo<EnemiesDeathEffectOnDestruction>().AsSingle();
@@ -117,18 +126,9 @@ namespace CodeBase.Installers.GameInstaller
                 .AsSingle();
         }
 
-        private void BindSoundProvider() => 
-            Container.Bind<SoundProvider>().AsSingle();
-
-        private void BindSound()
-        {
-            Container.Bind<SoundWeaponChanger>().AsSingle();
-            Container.BindInterfacesAndSelfTo<SoundWeaponPresenter>().AsSingle();
-        }
-
         private void BindSoundFactory() =>
-            Container.Bind<ISoundFactory>()
-                .To<SoundFactory>()
+            Container.Bind<IEffectFactory>()
+                .To<EffectFactory>()
                 .AsSingle();
 
         private void BindSoundStorage() =>

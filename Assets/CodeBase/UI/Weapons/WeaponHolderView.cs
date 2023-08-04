@@ -33,7 +33,6 @@ namespace CodeBase.UI.Weapons
         {
             SetActive(false);
 
-            Debug.Log(weaponTypeId);
             _weaponViews[weaponTypeId].gameObject.SetActive(true);
         }
 

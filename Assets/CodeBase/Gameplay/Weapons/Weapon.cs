@@ -1,8 +1,5 @@
-﻿using System;
-using CodeBase.Enums;
+﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Bullet;
-using CodeBase.Services.Factories;
-using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Bullet;
 using DG.Tweening;
 using UnityEngine;

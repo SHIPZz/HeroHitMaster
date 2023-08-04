@@ -12,6 +12,7 @@ namespace CodeBase.ScriptableObjects.Weapon
     
         public WeaponTypeId WeaponTypeId;
         public ParticleSystem ShootEffect;
-
+        public AudioSource ShootSound;
+        public Gameplay.Weapons.Weapon Prefab;
     }
 }

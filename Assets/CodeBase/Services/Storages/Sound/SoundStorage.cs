@@ -11,16 +11,16 @@ namespace CodeBase.Services.Storages.Sound
     public class SoundStorage : IInitializable, ISoundStorage
     {
         private readonly Dictionary<SoundTypeId, AudioSource> _sounds = new();
-        private readonly ISoundFactory _soundFactory;
+        private readonly IEffectFactory _effectFactory;
         private readonly List<SoundTypeId> _soundTypeIds;
         
-        public SoundStorage(ISoundFactory soundFactory, SoundsSettings soundsSettings)
+        public SoundStorage(IEffectFactory effectFactory, SoundsSettings soundsSettings)
         {
             _soundTypeIds = soundsSettings.SoundTypeIds;
-            _soundFactory = soundFactory;
+            _effectFactory = effectFactory;
             FillDictionary();
         }
-
+        
         public AudioSource Get(SoundTypeId soundTypeId) =>
             _sounds[soundTypeId];
 
@@ -40,7 +40,7 @@ namespace CodeBase.Services.Storages.Sound
         {
             foreach (var soundTypeId in _soundTypeIds)
             {
-                AudioSource audioSource = _soundFactory.Create(soundTypeId);
+                AudioSource audioSource = _effectFactory.Create(soundTypeId);
                 _sounds[soundTypeId] = audioSource;
             }
         }

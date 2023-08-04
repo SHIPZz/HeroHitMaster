@@ -16,6 +16,18 @@ namespace CodeBase.Services.Data
                 .ToDictionary(x => x.WeaponTypeId, x => x);
         }
 
+        public List<WeaponData> GetAll()
+        {
+            var weaponDatas = new List<WeaponData>();
+            
+            foreach (var weaponData in _weaponDatas.Values)
+            {
+                weaponDatas.Add(weaponData);
+            }
+
+            return weaponDatas;
+        }
+
         public WeaponData Get(WeaponTypeId weaponTypeId) => 
             !_weaponDatas.TryGetValue(weaponTypeId, out WeaponData weaponData) ? 
                 null :
