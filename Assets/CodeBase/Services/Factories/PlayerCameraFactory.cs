@@ -20,7 +20,6 @@ namespace CodeBase.Services.Factories
         public PlayerCameraFollower Create(Vector3 at)
         {
             var camera = _assetProvider.GetAsset(AssetPath.MainCamera);
-            Debug.Log(camera.name);
             return _diContainer.InstantiatePrefabForComponent<PlayerCameraFollower>(camera,at,Quaternion.identity, null);
         }
     }

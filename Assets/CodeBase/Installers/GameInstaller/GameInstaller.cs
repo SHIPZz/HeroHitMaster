@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Gameplay.EnemyBodyParts;
@@ -25,6 +26,8 @@ namespace CodeBase.Installers.GameInstaller
         [SerializeField] private MaterialProvider _materialProvider;
         [SerializeField] private DestroyableObjectStorage _destroyableObjectStorage;
         [SerializeField] private DestroyableObjectPartStorage _destroyableObjectPartStorage;
+        [SerializeField] private EnemyQuantityZonesProvider _enemyQuantityZonesProvider;
+        [SerializeField] private TargetMovementStorage _targetMovementStorage;
 
         public override void InstallBindings()
         {
@@ -58,8 +61,15 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemiesDeathEffectOnQuickDestruction();
             BindWeaponShootEffectStorage();
             BindStaticDataServices();
+            BindEnemyQuantityZonesProvider();
+            BindTargetMovementStorage();
         }
-        
+
+        private void BindTargetMovementStorage()
+        {
+            Container.BindInstance(_targetMovementStorage);
+        }
+
         private void BindStaticDataServices()
         {
             Container.Bind<BulletStaticDataService>().AsSingle();
@@ -82,6 +92,11 @@ namespace CodeBase.Installers.GameInstaller
         {
             Container.BindInstance(_destroyableObjectStorage);
             Container.BindInstance(_destroyableObjectPartStorage);
+        }
+
+        private void BindEnemyQuantityZonesProvider()
+        {
+            Container.BindInstance(_enemyQuantityZonesProvider);
         }
 
         private void BindBulletMovementStorage() =>

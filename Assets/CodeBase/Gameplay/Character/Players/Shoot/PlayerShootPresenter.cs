@@ -11,17 +11,17 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
     {
         
         private float _shootDelay;
-        private readonly PlayerInput _playerInput;
+        private readonly PlayerShootInput _playerShootInput;
         private readonly PlayerShoot _playerShoot;
         private readonly PlayerAnimator _playerAnimator;
         private readonly WeaponProvider _weaponProvider;
         private readonly WeaponStaticDataService _weaponStaticDataService;
         private bool _canShoot = true;
 
-        public PlayerShootPresenter(PlayerInput playerInput, PlayerShoot playerShoot, PlayerAnimator playerAnimator, 
+        public PlayerShootPresenter(PlayerShootInput playerShootInput, PlayerShoot playerShoot, PlayerAnimator playerAnimator, 
             WeaponProvider weaponProvider, WeaponStaticDataService weaponStaticDataService)
         {
-            _playerInput = playerInput;
+            _playerShootInput = playerShootInput;
             _playerShoot = playerShoot;
             _playerAnimator = playerAnimator;
             _weaponProvider = weaponProvider;
@@ -29,10 +29,10 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
         }
 
         public void Initialize() =>
-            _playerInput.Fired += Shoot;
+            _playerShootInput.Fired += Shoot;
 
         public void Dispose() =>
-            _playerInput.Fired -= Shoot;
+            _playerShootInput.Fired -= Shoot;
 
         private void Shoot(Vector2 mousePosition)
         {

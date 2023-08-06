@@ -32,7 +32,8 @@ namespace CodeBase.Gameplay.MaterialChanger
 
             DOTween.To(() => 0, x =>
                     _skinnedMeshRenderer.material.SetFloat(AdvancedDissolveProperties.Cutout.Standard._ids[0].clip, x),
-                _targetValue, _duration);
+                _targetValue, _duration).OnComplete(() => { Destroy(gameObject); });
+            
             
             Changed?.Invoke();
         }

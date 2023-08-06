@@ -31,6 +31,7 @@ namespace CodeBase.Services.Storages.Sound
 
                 var targetSound = _effectFactory.Create(weaponData.ShootSound);
 
+                targetSound.playOnAwake = false;
                 _shootSounds[weaponData.WeaponTypeId] = targetSound;
             }
         }

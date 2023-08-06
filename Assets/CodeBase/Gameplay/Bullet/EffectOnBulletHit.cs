@@ -29,6 +29,7 @@ namespace CodeBase.Gameplay.Bullet
         private void Play(Collider obj)
         {
             _effect.transform.position = transform.position;
+            Debug.Log(_effect.name);
             _effect.Play();
             
             DOTween.Sequence().AppendInterval(1f).OnComplete(() =>

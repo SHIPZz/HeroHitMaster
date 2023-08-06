@@ -785,6 +785,8 @@ GameObject:
   - component: {fileID: 5461534085178350517}
   - component: {fileID: 6598193491934707509}
   - component: {fileID: 4371423195156132523}
+  - component: {fileID: -5723420579542113260}
+  - component: {fileID: -5241927958755114754}
   m_Layer: 8
   m_Name: Spiderman
   m_TagString: Untagged
@@ -807,6 +809,7 @@ Transform:
   - {fileID: 7254032617316704846}
   - {fileID: 5420036716478642199}
   - {fileID: 2556580853699206733}
+  - {fileID: 665827970518048608}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 13.773, y: 0, z: 0}
@@ -846,10 +849,10 @@ MonoBehaviour:
   _player: {fileID: 613138959839790400}
   _animator: {fileID: 1949302081613567714}
   _rigidbody: {fileID: 5022668777174610700}
-  _characterController: {fileID: 5461534085178350517}
   _initialShootPosition: {fileID: 5948368982141625659}
   _playerHealth: {fileID: 4371423195156132523}
   _shootingOnAnimationEvent: {fileID: 6598193491934707509}
+  _playerTypeId: 0
 --- !u!114 &7659068826430442205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,7 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008b98e4cbe6448ba276d31b5398098b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Head>k__BackingField: {fileID: 1934498505843682587}
+  <Head>k__BackingField: {fileID: 665827970518048608}
   <RightHand>k__BackingField: {fileID: 5948368982141625659}
   <PlayerTypeId>k__BackingField: 0
 --- !u!143 &5461534085178350517
@@ -983,8 +986,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05dc4336d6b947cbb311b9ab59a95864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentValue>k__BackingField: 100
-  <MaxValue>k__BackingField: 100
+--- !u!195 &-5723420579542113260
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600353082637849150}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-5241927958755114754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600353082637849150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236c16fbabde4be2b224d754e4fb2d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2827847476302856595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,6 +1761,37 @@ Transform:
   - {fileID: 8624591759593274201}
   m_Father: {fileID: 8022562204583965535}
   m_RootOrder: -2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5418487668946753255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665827970518048608}
+  m_Layer: 8
+  m_Name: ForCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &665827970518048608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5418487668946753255}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.454, z: -0.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1184051465846184060}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5495022159615921200
 GameObject:

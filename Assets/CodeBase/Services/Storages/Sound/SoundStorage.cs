@@ -41,6 +41,7 @@ namespace CodeBase.Services.Storages.Sound
             foreach (var soundTypeId in _soundTypeIds)
             {
                 AudioSource audioSource = _effectFactory.Create(soundTypeId);
+                audioSource.playOnAwake = false;
                 _sounds[soundTypeId] = audioSource;
             }
         }

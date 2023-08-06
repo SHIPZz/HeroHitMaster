@@ -17,6 +17,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 
         public void OnAnimationShoot()
         {
+            print("shoot");
             _playerShoot.Fire();
             Shooted?.Invoke();
         }

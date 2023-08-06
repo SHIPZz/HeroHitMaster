@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Storages;
 using Zenject;
 
 namespace CodeBase.Gameplay.Spawners
 {
-    public class EnemyConfiguratorMediator : IInitializable, IDisposable
+    public class EnemyConfiguratorMediator : IInitializable
     {
         private readonly List<EnemySpawner> _enemySpawners;
         private readonly EnemyConfigurator _enemyConfigurator;
@@ -20,21 +18,10 @@ namespace CodeBase.Gameplay.Spawners
 
         public void Initialize()
         {
-            foreach (var enemySpawner in _enemySpawners)
-            {
-                enemySpawner.Init((enemy, aggrozone) => _enemyConfigurator.Configure(enemy, aggrozone));
-                // enemySpawner.Spawned += _enemyConfigurator.Configure;
-            }
-        }
-
-        public void Dispose()
-        {
             // foreach (var enemySpawner in _enemySpawners)
             // {
-            //     enemySpawner.Spawned += _enemyConfigurator.Configure;
+            //     enemySpawner.Init((enemy, aggrozone) => _enemyConfigurator.Configure(enemy, aggrozone));
             // }
-            
-            // _enemySpawners.ForEach(x => x.Spawned -= _enemyConfigurator.Configure);
         }
     }
 }

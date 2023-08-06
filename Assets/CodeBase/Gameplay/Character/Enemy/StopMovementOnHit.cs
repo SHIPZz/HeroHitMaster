@@ -19,13 +19,13 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public void Initialize()
         {
-            _health.ValueChanged += Stop;
+            _health.ValueChanged += BlockMovement;
             _health.ValueZeroReached += Stop;
         }
 
         public void Dispose()
         {
-            _health.ValueChanged -= Stop;
+            _health.ValueChanged -= BlockMovement;
             _health.ValueZeroReached -= Stop;
         }
 
@@ -35,7 +35,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyFollower.Block();
         }
 
-        private void Stop(int obj)
+        private void BlockMovement(int obj)
         {
             if (_isDead)
                 return;

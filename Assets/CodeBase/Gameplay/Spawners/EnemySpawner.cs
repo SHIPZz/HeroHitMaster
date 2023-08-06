@@ -2,7 +2,6 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Character;
 using UnityEngine;
 using Zenject;
@@ -16,6 +15,8 @@ namespace CodeBase.Gameplay.Spawners
 
         private IEnemyStorage _enemyStorage;
 
+        public event Action Destroyed;
+        
         [Inject]
         private void Construct(IEnemyStorage enemyStorage) => 
             _enemyStorage = enemyStorage;
@@ -24,7 +25,14 @@ namespace CodeBase.Gameplay.Spawners
         {
             Enemy enemy = _enemyStorage.Get(_enemyTypeId);
             enemy.gameObject.transform.position = transform.position;
+            enemy.Dead += Disable;
             callback?.Invoke(enemy, _aggroZone);
+        }
+
+        private void Disable(Enemy enemy)
+        {
+            Destroyed?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

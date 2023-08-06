@@ -17,33 +17,28 @@ namespace CodeBase.GameInit
         private readonly LocationProvider _locationProvider;
         private readonly CameraProvider _cameraProvider;
         private readonly PlayerProvider _playerProvider;
-        private readonly WeaponProvider _weaponProvider;
         private readonly IPlayerStorage _playerStorage;
-        private readonly IWeaponStorage _weaponStorage;
         private readonly WeaponSelector _weaponSelector;
 
         public GameInit(GameFactory gameFactory,
             LocationProvider locationProvider,
             CameraProvider cameraProvider,
-            PlayerProvider playerProvider,
-            IWeaponStorage weaponStorage,
-            WeaponProvider weaponProvider, IPlayerStorage playerStorage, WeaponSelector weaponSelector)
+            PlayerProvider playerProvider, 
+            IPlayerStorage playerStorage, WeaponSelector weaponSelector)
         {
             _weaponSelector = weaponSelector;
             _gameFactory = gameFactory;
-            _weaponStorage = weaponStorage;
             _locationProvider = locationProvider;
             _cameraProvider = cameraProvider;
             _playerProvider = playerProvider;
-            _weaponProvider = weaponProvider;
             _playerStorage = playerStorage;
         }
 
         public void Initialize()
         {
-            Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Wizard);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            InitializeInitialWeapon(WeaponTypeId.FreezeWeapon);
+            InitializeInitialWeapon(WeaponTypeId.FireBallShooter);
             _playerProvider.CurrentPlayer = player;
         }
 

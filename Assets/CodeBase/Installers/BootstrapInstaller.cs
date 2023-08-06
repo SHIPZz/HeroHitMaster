@@ -18,7 +18,11 @@ namespace CodeBase.Installers
             BindAssetProvider();
             BindInputService();
             BindAdService();
+            BindCoroutineStarter();
         }
+
+        private void BindCoroutineStarter() => 
+            Container.BindInstance(GetComponent<ICoroutineStarter>());
 
         private void BindAdService() =>
             Container.BindInterfacesAndSelfTo<YandexAdService>()

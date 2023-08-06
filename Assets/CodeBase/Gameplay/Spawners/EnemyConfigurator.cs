@@ -1,6 +1,5 @@
 ﻿using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
-using UnityEngine;
 
 namespace CodeBase.Gameplay.Spawners
 {

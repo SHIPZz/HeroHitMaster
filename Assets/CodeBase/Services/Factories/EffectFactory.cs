@@ -44,7 +44,6 @@ namespace CodeBase.Services.Factories
         private AudioSource Create(string path)
         {
             var audioPrefab = _assetProvider.GetAsset(path);
-            Debug.Log(path);
             return _diContainer.InstantiatePrefabForComponent<AudioSource>(audioPrefab, _locationProvider.SoundsParent);
         }
     }

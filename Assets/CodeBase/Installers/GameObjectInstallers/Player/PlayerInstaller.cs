@@ -5,6 +5,7 @@ using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Gameplay.EffectPlaying;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 namespace CodeBase.Installers.GameObjectInstallers.Player
@@ -29,8 +30,9 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
         private void BindInterfacesAndSelfTo()
         {
             Container.BindInterfacesAndSelfTo<PlayerShootPresenter>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerShootInput>().AsSingle();
             Container.BindInterfacesAndSelfTo<EffectOnShoot>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerMovementMediator>().AsSingle();
         }
 
         private void BindAsSingle()
@@ -38,6 +40,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
             Container.BindInterfacesTo<WebMovement>().AsSingle();
             Container.Bind<PlayerAnimator>().AsSingle();
             Container.Bind<PlayerShoot>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerMovement>().AsSingle();
         }
 
         private void BindInstances()
@@ -48,6 +51,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
             Container.BindInstance(_initialShootPosition);
             Container.BindInstance(_animator);
             Container.BindInstance(_playerTypeId);
+            Container.BindInstance(GetComponent<NavMeshAgent>());
             Container.Bind<IHealth>().To<PlayerHealth>().FromInstance(_playerHealth);
         }
     }
