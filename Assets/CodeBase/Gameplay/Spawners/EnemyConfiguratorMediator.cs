@@ -18,10 +18,10 @@ namespace CodeBase.Gameplay.Spawners
 
         public void Initialize()
         {
-            // foreach (var enemySpawner in _enemySpawners)
-            // {
-            //     enemySpawner.Init((enemy, aggrozone) => _enemyConfigurator.Configure(enemy, aggrozone));
-            // }
+            foreach (var enemySpawner in _enemySpawners)
+            {
+                enemySpawner.Init((enemy, aggrozone) => _enemyConfigurator.Configure(enemy, aggrozone));
+            }
         }
     }
 }

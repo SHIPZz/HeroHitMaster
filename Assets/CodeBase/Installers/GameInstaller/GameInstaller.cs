@@ -3,6 +3,7 @@ using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Gameplay.EnemyBodyParts;
+using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
@@ -63,7 +64,13 @@ namespace CodeBase.Installers.GameInstaller
             BindStaticDataServices();
             BindEnemyQuantityZonesProvider();
             BindTargetMovementStorage();
+            BindLootStorage();
         }
+
+        private void BindLootStorage() =>
+            Container
+                .Bind<LootStorage>()
+                .AsSingle();
 
         private void BindTargetMovementStorage()
         {

@@ -2,13 +2,10 @@
 
 namespace CodeBase.Gameplay.Loots
 {
+    [CreateAssetMenu(fileName = "LootData", menuName = "Gameplay/Loot Data")]
     public class LootData : ScriptableObject
     {
-        
-    }
-
-    public enum LootTypeId
-    {
-        Money,
+        public LootTypeId LootTypeId;
+        public GameObject Prefab;
     }
 }
