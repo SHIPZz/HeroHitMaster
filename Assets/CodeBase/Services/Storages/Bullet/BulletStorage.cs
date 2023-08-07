@@ -41,7 +41,8 @@ namespace CodeBase.Services.Storages.Bullet
             
             _gameObjectPoolProvider.BulletPools[bulletPrefab.BulletTypeId] = new GameObjectPool(() =>
                 _diContainer.InstantiatePrefab(bulletPrefab.GameObject,
-                    rightHandPosition, Quaternion.identity, _locationProvider.BulletParent), count);
+                    rightHandPosition, Quaternion.identity, 
+                    _locationProvider.Values[LocationTypeId.BulletParent]), count);
         }
 
         public IBullet Pop(WeaponTypeId weaponTypeId)

@@ -72,7 +72,7 @@ namespace CodeBase.Services.Storages.Character
             foreach (var player in playerTypeIds)
             {
                 Player createdPlayer = _playerFactory.
-                   Create(player, _locationProvider.PlayerSpawnPoint.position);
+                   Create(player, _locationProvider.Values[LocationTypeId.PlayerSpawnPoint].position);
                   _players[createdPlayer.PlayerTypeId] = createdPlayer;
             }
         }

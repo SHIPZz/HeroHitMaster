@@ -25,7 +25,7 @@ namespace CodeBase.Services.Factories
         {
             Enemy enemy = _enemies[enemyTypeId];
             enemy.gameObject.SetActive(false);
-            return _diContainer.InstantiatePrefabForComponent<Enemy>(enemy,_locationProvider.EnemyParent);
+            return _diContainer.InstantiatePrefabForComponent<Enemy>(enemy,_locationProvider.Values[LocationTypeId.EnemyParent]);
         }
     }
 }

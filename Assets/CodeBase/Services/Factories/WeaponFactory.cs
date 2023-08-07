@@ -29,7 +29,7 @@ namespace CodeBase.Services.Factories
         public Weapon Create(WeaponTypeId weaponTypeId)
         {
             Weapon gunPrefab = _weaponStaticDataService.Get(weaponTypeId).Prefab;
-            return _diContainer.InstantiatePrefabForComponent<Weapon>(gunPrefab, _locationProvider.WeaponsParent);
+            return _diContainer.InstantiatePrefabForComponent<Weapon>(gunPrefab, _locationProvider.Values[LocationTypeId.WeaponsParent]);
         }
         
     }

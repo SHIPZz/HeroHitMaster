@@ -47,7 +47,8 @@ namespace CodeBase.GameInit
 
         private PlayerCameraFollower InitializePlayerCamera()
         {
-            PlayerCameraFollower playerCamera = _gameFactory.CreateCamera(_locationProvider.CameraSpawnPoint.position);
+            PlayerCameraFollower playerCamera = _gameFactory
+                .CreateCamera(_locationProvider.Values[LocationTypeId.CameraSpawnPoint].position);
             _cameraProvider.Camera = playerCamera.GetComponent<Camera>();
             return playerCamera;
         }

@@ -33,7 +33,7 @@ namespace CodeBase.Services.Data
             foreach (DeathEnemyEffect deathEnemyEffect in deathEnemyEffects)
             {
                 var targetEffect = _diContainer
-                    .InstantiatePrefabForComponent<DeathEnemyEffect>(deathEnemyEffect, _locationProvider.DeathEffectParent);
+                    .InstantiatePrefabForComponent<DeathEnemyEffect>(deathEnemyEffect, _locationProvider.Values[LocationTypeId.SoundsParent]);
                 _deathEnemyEffects[targetEffect.EnemyTypeId] = targetEffect.DieEffect;
             }
         }

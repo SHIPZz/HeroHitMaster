@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using CodeBase.Enums;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using UnityEngine;
 
 namespace CodeBase.Services.Providers
 {
-    public class LocationProvider : MonoBehaviour
+    public class LocationProvider : SerializedMonoBehaviour
     {
-        [field: SerializeField] public Transform PlayerSpawnPoint { get; private set; }
-        [field: SerializeField] public Transform CameraSpawnPoint { get; private set; }
-        [field: SerializeField] public Transform SoundsParent { get; private set; }
-        [field: SerializeField] public Transform EnemyParent { get; private set; }
-        [field: SerializeField] public Transform WeaponsParent { get; private set; }
-        [field: SerializeField] public Transform BulletParent { get; private set; }
-        [field: SerializeField] public Transform DeathEffectParent { get; private set; }
+        [OdinSerialize] private Dictionary<LocationTypeId, Transform> _values;
+
+        public Dictionary<LocationTypeId, Transform> Values => _values;
     }
 }

@@ -26,11 +26,11 @@ namespace CodeBase.Services.Factories
         }
         
         public AudioSource Create(AudioSource audioSource) =>
-            _diContainer.InstantiatePrefab(audioSource.gameObject, _locationProvider.SoundsParent)
+            _diContainer.InstantiatePrefab(audioSource.gameObject, _locationProvider.Values[LocationTypeId.SoundsParent])
                 .GetComponent<AudioSource>();
 
         public ParticleSystem Create(ParticleSystem particleSystem) =>
-            _diContainer.InstantiatePrefab(particleSystem.gameObject, _locationProvider.SoundsParent)
+            _diContainer.InstantiatePrefab(particleSystem.gameObject, _locationProvider.Values[LocationTypeId.SoundsParent])
                 .GetComponent<ParticleSystem>();
 
         public AudioSource Create(SoundTypeId soundTypeId)
@@ -44,7 +44,8 @@ namespace CodeBase.Services.Factories
         private AudioSource Create(string path)
         {
             var audioPrefab = _assetProvider.GetAsset(path);
-            return _diContainer.InstantiatePrefabForComponent<AudioSource>(audioPrefab, _locationProvider.SoundsParent);
+            return _diContainer
+                .InstantiatePrefabForComponent<AudioSource>(audioPrefab, _locationProvider.Values[LocationTypeId.SoundsParent]);
         }
     }
 }
