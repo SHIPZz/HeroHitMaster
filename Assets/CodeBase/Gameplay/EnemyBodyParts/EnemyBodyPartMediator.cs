@@ -10,33 +10,36 @@ namespace CodeBase.Gameplay.EnemyBodyParts
     public class EnemyBodyPartMediator : IInitializable, IDisposable
     {
         private readonly EnemyBodyPartActivator _enemyBodyPartActivator;
-        private readonly List<Enemy> _enemies;
+        private List<Enemy> _enemies;
         private readonly EnemyBodyPartPositionSetter _enemyBodyPartPositionSetter;
+        private readonly IEnemyStorage _enemyStorage;
 
         public EnemyBodyPartMediator(IEnemyStorage enemyStorage, EnemyBodyPartActivator enemyBodyPartActivator, 
             EnemyBodyPartPositionSetter enemyBodyPartPositionSetter)
         {
             _enemyBodyPartPositionSetter = enemyBodyPartPositionSetter;
             _enemyBodyPartActivator = enemyBodyPartActivator;
-            _enemies = enemyStorage.GetAll();
+            _enemyStorage = enemyStorage;
         }
 
-        public void Initialize()
+        public  void Initialize()
         {
-            foreach (var enemy in _enemies)
-            {
-                enemy.Dead += _enemyBodyPartActivator.ActivateWithDisableDelay;
-                enemy.Dead += _enemyBodyPartPositionSetter.SetPosition;
-            }
+            // _enemies =  _enemyStorage.GetAll();
+            //
+            // foreach (var enemy in _enemies)
+            // {
+            //     enemy.Dead += _enemyBodyPartActivator.ActivateWithDisableDelay;
+            //     enemy.Dead += _enemyBodyPartPositionSetter.SetPosition;
+            // }
         }
 
         public void Dispose()
         {
-            foreach (var enemy in _enemies)
-            {
-                enemy.Dead -= _enemyBodyPartActivator.ActivateWithDisableDelay;
-                enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
-            }
+            // foreach (var enemy in _enemies)
+            // {
+            //     enemy.Dead -= _enemyBodyPartActivator.ActivateWithDisableDelay;
+            //     enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
+            // }
         }
     }
 }

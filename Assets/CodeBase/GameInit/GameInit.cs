@@ -1,9 +1,11 @@
-﻿using CodeBase.Enums;
+﻿using CodeBase.Constants;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
+using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.Storages.Character;
-using CodeBase.Services.Storages.Weapon;
 using CodeBase.UI.Weapons;
 using UnityEngine;
 using Zenject;
@@ -13,32 +15,45 @@ namespace CodeBase.GameInit
 {
     public class GameInit : IInitializable
     {
-        private readonly GameFactory _gameFactory;
+        private readonly PlayerCameraFactory _playerCameraFactory;
         private readonly LocationProvider _locationProvider;
         private readonly CameraProvider _cameraProvider;
         private readonly PlayerProvider _playerProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly WeaponSelector _weaponSelector;
+        private readonly EnemySpawnersProvider _enemySpawnersProvider;
+        private readonly IEnemyStorage _enemyStorage;
+        private readonly EnemiesDeathEffectOnDestruction _enemiesDeathEffectOnDestruction;
 
-        public GameInit(GameFactory gameFactory,
+        public GameInit(PlayerCameraFactory playerCameraFactory,
             LocationProvider locationProvider,
             CameraProvider cameraProvider,
             PlayerProvider playerProvider, 
-            IPlayerStorage playerStorage, WeaponSelector weaponSelector)
+            IPlayerStorage playerStorage, 
+            WeaponSelector weaponSelector, 
+            EnemySpawnersProvider enemySpawnersProvider, 
+            IEnemyStorage enemyStorage, EnemiesDeathEffectOnDestruction enemiesDeathEffectOnDestruction)
         {
+            _enemiesDeathEffectOnDestruction = enemiesDeathEffectOnDestruction;
+            _enemyStorage = enemyStorage;
+            _enemySpawnersProvider = enemySpawnersProvider;
             _weaponSelector = weaponSelector;
-            _gameFactory = gameFactory;
+            _playerCameraFactory = playerCameraFactory;
             _locationProvider = locationProvider;
             _cameraProvider = cameraProvider;
             _playerProvider = playerProvider;
             _playerStorage = playerStorage;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
-            Player player = InitializeInitialPlayer(PlayerTypeId.Wizard);
+            await _enemyStorage.InitTask;
+            
+            _enemiesDeathEffectOnDestruction.Init();
+            _enemySpawnersProvider.EnemySpawners.ForEach(x => x.Init());
+            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            InitializeInitialWeapon(WeaponTypeId.FireBallShooter);
+            InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
             _playerProvider.CurrentPlayer = player;
         }
 
@@ -47,8 +62,8 @@ namespace CodeBase.GameInit
 
         private PlayerCameraFollower InitializePlayerCamera()
         {
-            PlayerCameraFollower playerCamera = _gameFactory
-                .CreateCamera(_locationProvider.Values[LocationTypeId.CameraSpawnPoint].position);
+            PlayerCameraFollower playerCamera = _playerCameraFactory
+                .Create(_locationProvider.Values[LocationTypeId.CameraSpawnPoint].position);
             _cameraProvider.Camera = playerCamera.GetComponent<Camera>();
             return playerCamera;
         }

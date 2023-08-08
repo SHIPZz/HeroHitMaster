@@ -41,6 +41,7 @@ namespace CodeBase.Installers
         private void BindAssetProvider()
         {
            var assetProvider = new AssetProvider();
+           assetProvider.Initialize();
             Container
                 .Bind<AssetProvider>()
                 .FromInstance(assetProvider)

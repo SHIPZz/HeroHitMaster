@@ -36,7 +36,6 @@ namespace CodeBase.Installers.GameInstaller
             BindGameInit();
             BindCameraFactory();
             BindPlayerFactory();
-            BindGameFactory();
             BindCameraProvider();
             BindPlayerProvider();
             BindWeaponFactory();
@@ -72,10 +71,8 @@ namespace CodeBase.Installers.GameInstaller
                 .Bind<LootStorage>()
                 .AsSingle();
 
-        private void BindTargetMovementStorage()
-        {
+        private void BindTargetMovementStorage() => 
             Container.BindInstance(_targetMovementStorage);
-        }
 
         private void BindStaticDataServices()
         {
@@ -101,10 +98,8 @@ namespace CodeBase.Installers.GameInstaller
             Container.BindInstance(_destroyableObjectPartStorage);
         }
 
-        private void BindEnemyQuantityZonesProvider()
-        {
+        private void BindEnemyQuantityZonesProvider() => 
             Container.BindInstance(_enemyQuantityZonesProvider);
-        }
 
         private void BindBulletMovementStorage() =>
             Container.Bind<BulletMovementStorage>()
@@ -203,11 +198,6 @@ namespace CodeBase.Installers.GameInstaller
         private void BindCameraProvider() =>
             Container
                 .Bind<CameraProvider>().AsSingle();
-
-        private void BindGameFactory() =>
-            Container
-                .Bind<GameFactory>()
-                .AsSingle();
 
         private void BindPlayerFactory() =>
             Container

@@ -1,45 +1,41 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
-using CodeBase.Installers.ScriptableObjects;
-using CodeBase.ScriptableObjects.Enemy;
 using CodeBase.Services.Factories;
+using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Services.Storages.Character
 {
     public class EnemyStorage : IEnemyStorage
     {
-        private readonly Dictionary<EnemyTypeId, Enemy> _enemies = new();
         private readonly EnemyFactory _enemyFactory;
+        private Dictionary<EnemyTypeId, Enemy> _enemies;
 
-        public EnemyStorage(EnemySetting enemySetting, EnemyFactory enemyFactory)
+        private readonly UniTask _initTask;
+
+        public UniTask InitTask => _initTask;
+
+        public EnemyStorage(EnemyFactory enemyFactory)
         {
             _enemyFactory = enemyFactory;
-            FillDictionary(enemySetting.EnemyTypeIds);
+
+            _initTask = FillDictionary();
         }
 
-        public Enemy Get(EnemyTypeId enemyTypeId) =>
-            _enemies[enemyTypeId];
+        public Enemy Get(EnemyTypeId enemyTypeId)
+        {
+            return _enemies[enemyTypeId];
+        }
 
         public List<Enemy> GetAll()
         {
-            var enemies = new List<Enemy>();
+            // await _initTask;
 
-            foreach (Enemy enemy in _enemies.Values)
-            {
-                enemies.Add(enemy);
-            }
-
+            var enemies = new List<Enemy>(_enemies.Values);
             return enemies;
         }
 
-        private void FillDictionary(List<EnemyTypeId> enemySettingEnemyTypeIds)
-        {
-            foreach (var enemyTypeId in enemySettingEnemyTypeIds)
-            {
-                Enemy enemy = _enemyFactory.CreateBy(enemyTypeId);
-                _enemies[enemyTypeId] = enemy;
-            }
-        }
+        private async UniTask FillDictionary() =>
+            _enemies = await _enemyFactory.CreateAll();
     }
 }

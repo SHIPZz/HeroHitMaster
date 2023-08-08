@@ -16,18 +16,35 @@ namespace CodeBase.Gameplay.Spawners
         private IEnemyStorage _enemyStorage;
 
         public event Action Destroyed;
+        public event Action<Enemy, TriggerObserver> Spawned;
         
         [Inject]
         private void Construct(IEnemyStorage enemyStorage) => 
             _enemyStorage = enemyStorage;
 
-        public void Init(Action<Enemy, TriggerObserver> callback)
+        private  void Start()
         {
-            Enemy enemy = _enemyStorage.Get(_enemyTypeId);
+            // Enemy enemy =  _enemyStorage.Get(_enemyTypeId);
+            // enemy.gameObject.transform.position = transform.position;
+            // enemy.Dead += Disable;
+            // Spawned?.Invoke(enemy,_aggroZone);
+        }
+
+        public void Init()
+        {
+            Enemy enemy =  _enemyStorage.Get(_enemyTypeId);
             enemy.gameObject.transform.position = transform.position;
             enemy.Dead += Disable;
-            callback?.Invoke(enemy, _aggroZone);
+            Spawned?.Invoke(enemy,_aggroZone);
         }
+
+        // public async void Init(Action<Enemy, TriggerObserver> callback)
+        // {
+        //     Enemy enemy = await _enemyStorage.Get(_enemyTypeId);
+        //     enemy.gameObject.transform.position = transform.position;
+        //     enemy.Dead += Disable;
+        //     callback?.Invoke(enemy, _aggroZone);
+        // }
 
         private void Disable(Enemy enemy)
         {
