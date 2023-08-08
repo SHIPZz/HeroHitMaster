@@ -4,7 +4,6 @@ using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Storages.Character;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Gameplay.Spawners
 {
@@ -13,38 +12,16 @@ namespace CodeBase.Gameplay.Spawners
         [SerializeField] private EnemyTypeId _enemyTypeId;
         [SerializeField] private TriggerObserver _aggroZone;
 
-        private IEnemyStorage _enemyStorage;
-
         public event Action Destroyed;
         public event Action<Enemy, TriggerObserver> Spawned;
-        
-        [Inject]
-        private void Construct(IEnemyStorage enemyStorage) => 
-            _enemyStorage = enemyStorage;
 
-        private  void Start()
+        public void Init(IEnemyStorage enemyStorage)
         {
-            // Enemy enemy =  _enemyStorage.Get(_enemyTypeId);
-            // enemy.gameObject.transform.position = transform.position;
-            // enemy.Dead += Disable;
-            // Spawned?.Invoke(enemy,_aggroZone);
-        }
-
-        public void Init()
-        {
-            Enemy enemy =  _enemyStorage.Get(_enemyTypeId);
+            Enemy enemy =  enemyStorage.Get(_enemyTypeId);
             enemy.gameObject.transform.position = transform.position;
             enemy.Dead += Disable;
             Spawned?.Invoke(enemy,_aggroZone);
         }
-
-        // public async void Init(Action<Enemy, TriggerObserver> callback)
-        // {
-        //     Enemy enemy = await _enemyStorage.Get(_enemyTypeId);
-        //     enemy.gameObject.transform.position = transform.position;
-        //     enemy.Dead += Disable;
-        //     callback?.Invoke(enemy, _aggroZone);
-        // }
 
         private void Disable(Enemy enemy)
         {

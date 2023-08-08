@@ -1,52 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Services.Data;
-using CodeBase.Services.Storages.Character;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Gameplay.EffectPlaying
 {
-    public class EnemiesDeathEffectOnDestruction : IInitializable
+    public class EnemiesDeathEffectOnDestruction
     {
         private ParticleSystem _dieEffect;
-        private List<Enemy> _enemies;
         private readonly EnemyEffectDataStorage _enemyEffectDataStorage;
         private bool _canPlayEffect = true;
-        private readonly IEnemyStorage _enemyStorage;
 
-        public EnemiesDeathEffectOnDestruction(IEnemyStorage enemyStorage,
-            EnemyEffectDataStorage enemyEffectDataStorage)
-        {
-            _enemyStorage = enemyStorage;
+        public EnemiesDeathEffectOnDestruction(EnemyEffectDataStorage enemyEffectDataStorage) => 
             _enemyEffectDataStorage = enemyEffectDataStorage;
-        }
 
-        public void Init()
+        public void Init(List<Enemy> enemies)
         {
-            _enemies =  _enemyStorage.GetAll();
-            
-            _enemies.ForEach(x =>
+            enemies.ForEach(x =>
             {
                 x.QuickDestroyed += Play;
                 x.GetComponent<DieOnAnimationEvent>().Dead += Play;
                 x.GetComponent<SkinnedMaterialChanger>().Changed += BlockEffect;
             });
-        }
-
-        public  void Initialize()
-        {
-            // _enemies =  _enemyStorage.GetAll();
-            //
-            // _enemies.ForEach(x =>
-            // {
-            //     x.QuickDestroyed += Play;
-            //     x.GetComponent<DieOnAnimationEvent>().Dead += Play;
-            //     x.GetComponent<SkinnedMaterialChanger>().Changed += BlockEffect;
-            // });
         }
 
         private void BlockEffect() =>

@@ -49,8 +49,8 @@ namespace CodeBase.GameInit
         {
             await _enemyStorage.InitTask;
             
-            _enemiesDeathEffectOnDestruction.Init();
-            _enemySpawnersProvider.EnemySpawners.ForEach(x => x.Init());
+            _enemiesDeathEffectOnDestruction.Init(_enemyStorage.GetAll());
+            _enemySpawnersProvider.EnemySpawners.ForEach(x => x.Init(_enemyStorage));
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);

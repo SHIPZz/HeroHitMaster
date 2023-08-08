@@ -14,12 +14,6 @@ namespace CodeBase.Services.Providers.AssetProviders
         public void Initialize() => 
             Addressables.InitializeAsync();
 
-        public T GetAsset<T>(string path)
-        {
-            GameObject prefab = Resources.Load<GameObject>(path);
-            return prefab.GetComponent<T>();
-        }
-        
         public GameObject GetAsset(string path) => 
             Resources.Load<GameObject>(path);
 
@@ -39,6 +33,12 @@ namespace CodeBase.Services.Providers.AssetProviders
 
             return await RunWithCacheOnComplete(
                 Addressables.LoadAssetAsync<T>(address), address);
+        }
+
+        public T GetAsset<T>(string path)
+        {
+            GameObject prefab = Resources.Load<GameObject>(path);
+            return prefab.GetComponent<T>();
         }
 
         public void CleanUp()

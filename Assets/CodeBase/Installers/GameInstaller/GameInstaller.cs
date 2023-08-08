@@ -87,7 +87,7 @@ namespace CodeBase.Installers.GameInstaller
             Container.Bind<WeaponShootEffectStorage>().AsSingle();
 
         private void BindEnemiesDeathEffectOnQuickDestruction() => 
-            Container.BindInterfacesAndSelfTo<EnemiesDeathEffectOnDestruction>().AsSingle();
+            Container.Bind<EnemiesDeathEffectOnDestruction>().AsSingle();
 
         private void BindEnemyEffectDataStorage() => 
             Container.Bind<EnemyEffectDataStorage>().AsSingle();

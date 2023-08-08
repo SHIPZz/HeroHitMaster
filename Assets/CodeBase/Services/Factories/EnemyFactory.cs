@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CodeBase.Constants;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
-using CodeBase.ScriptableObjects.Enemy;
 using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Providers.AssetProviders;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using Zenject;
 
 namespace CodeBase.Services.Factories
