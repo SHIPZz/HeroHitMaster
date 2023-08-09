@@ -8,6 +8,8 @@
         SettingWindow = 3,
         Death,
         Victory,
-        Hud
+        Hud,
+        Play,
+        Loading
     }
 }

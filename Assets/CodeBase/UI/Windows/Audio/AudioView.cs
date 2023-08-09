@@ -6,7 +6,7 @@ namespace CodeBase.UI.Windows.Audio
 {
     public class AudioView : MonoBehaviour
     {
-        [SerializeField] private Slider _slider;
+        [SerializeField] private UnityEngine.UI.Slider _slider;
 
         public event Action<float> ValueChanged;
 

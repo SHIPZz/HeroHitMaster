@@ -1,11 +1,8 @@
 ﻿using CodeBase.Services;
 using CodeBase.Services.Ad;
-using CodeBase.Services.Data;
 using CodeBase.Services.Inputs.InputService;
 using CodeBase.Services.Providers.AssetProviders;
-using CodeBase.Services.Storages;
-using CodeBase.Services.Storages.Bullet;
-using CodeBase.UI;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 

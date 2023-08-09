@@ -17,6 +17,12 @@ namespace CodeBase.Services.Factories
             _assetProvider = assetProvider;
         }
 
+        public Camera Create()
+        {
+            return _diContainer
+                .InstantiatePrefabForComponent<Camera>(_assetProvider.GetAsset(AssetPath.MainCamera));
+        }
+
         public PlayerCameraFollower Create(Vector3 at)
         {
             var camera = _assetProvider.GetAsset(AssetPath.MainCamera);

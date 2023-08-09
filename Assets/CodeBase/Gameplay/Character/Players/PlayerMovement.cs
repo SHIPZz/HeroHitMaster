@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using DG.Tweening;
 using Zenject;
 using CodeBase.Services;
 

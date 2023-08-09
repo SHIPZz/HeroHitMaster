@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CodeBase.Gameplay.BlockInput;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EffectPlaying;
@@ -64,6 +65,20 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemyQuantityZonesProvider();
             BindTargetMovementStorage();
             BindLootStorage();
+            BindActivateEnemiesMovementOnFire();
+            BindBlockInputOnLoading();
+        }
+
+        private void BindBlockInputOnLoading() =>
+            Container
+                .BindInterfacesAndSelfTo<EnableInputOnPlayWindow>()
+                .AsSingle();
+
+        private void BindActivateEnemiesMovementOnFire()
+        {
+            Container
+                .BindInterfacesAndSelfTo<ActivateEnemiesMovementOnFire>()
+                .AsSingle();
         }
 
         private void BindLootStorage() =>

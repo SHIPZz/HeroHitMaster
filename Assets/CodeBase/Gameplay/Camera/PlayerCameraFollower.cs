@@ -16,6 +16,9 @@ namespace CodeBase.Gameplay.Camera
 
         private void LateUpdate()
         {
+            if (_playerProvider.CurrentPlayer is null)
+                return;
+            
             transform.position = _playerProvider.CurrentPlayer.Head.position;
         }
     }

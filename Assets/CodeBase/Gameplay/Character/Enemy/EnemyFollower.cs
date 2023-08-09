@@ -10,10 +10,11 @@ namespace CodeBase.Gameplay.Character.Enemy
     public class EnemyFollower : MonoBehaviour
     {
         private NavMeshAgent _navMeshAgent;
-        private bool _isBlocked = false;
+        private bool _isBlocked = true;
         private TriggerObserver _triggerObserver;
         private Vector3 _target;
         private EnemyAnimator _enemyAnimator;
+        private bool _isInitialized;
 
         [Inject]
         public void Construct(NavMeshAgent navMeshAgent, EnemyTypeId enemyTypeId, EnemyStaticDataService enemyStaticDataService)
@@ -41,6 +42,9 @@ namespace CodeBase.Gameplay.Character.Enemy
             _triggerObserver.Entered += SetTarget;
         }
 
+        public void InitMovement() =>
+            _isInitialized = true;
+
         public void Block()
         {
             if(!_navMeshAgent.isActiveAndEnabled)
@@ -54,6 +58,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         public void Unblock()
         {
             _navMeshAgent.isStopped = false;
+            Debug.Log("unblock");
             _isBlocked = false;
         }
 

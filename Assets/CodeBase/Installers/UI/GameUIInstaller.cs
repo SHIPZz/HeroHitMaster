@@ -2,12 +2,17 @@
 using CodeBase.Gameplay.Character.PlayerSelection;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
+using CodeBase.UI;
+using CodeBase.UI.Slider;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
 using CodeBase.UI.Windows.Death;
+using CodeBase.UI.Windows.Loading;
+using CodeBase.UI.Windows.Play;
 using CodeBase.UI.Windows.Setting;
 using CodeBase.UI.Windows.Shop;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +27,8 @@ namespace CodeBase.Installers.UI
         [SerializeField] private ShopView _shopView;
         [SerializeField] private SettingView _settingView;
         [SerializeField] private DeathView _deathView;
+        [SerializeField] private SliderLoading _sliderLoading;
+        [SerializeField] private TextMeshProUGUI _sliderLoadingText;
 
         public override void InstallBindings()
         {
@@ -35,6 +42,26 @@ namespace CodeBase.Installers.UI
             BindAudioUI();
             BindSettingUi();
             BindDeathUI();
+            BindPlayUI();
+            BindLoadingUI();
+        }
+
+        private void BindLoadingUI()
+        {
+            Container
+                .BindInterfacesAndSelfTo<LoadingWindowPresenter>()
+                .AsSingle();
+
+            Container.BindInterfacesAndSelfTo<SliderLoadingPresenter>().AsSingle();
+            Container.BindInstance(_sliderLoading);
+            Container.BindInstance(_sliderLoadingText);
+        }
+
+        private void BindPlayUI()
+        {
+            Container
+                .BindInterfacesAndSelfTo<PlayWindowPresenter>()
+                .AsSingle();
         }
 
         private void BindDeathUI()

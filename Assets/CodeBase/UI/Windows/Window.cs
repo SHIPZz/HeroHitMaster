@@ -31,18 +31,27 @@ namespace CodeBase.UI.Windows
 
         public void Close(bool withAnimation)
         {
-            if (!withAnimation)
-            {
-                transform.DOScaleX(0, 0);
-                gameObject.SetActive(false);
-            }
-            
+            if (CloseWithoutAnimation(withAnimation)) 
+                return;
+
             DOTween.Sequence().OnComplete(() =>
             {
                 gameObject.SetActive(false);
                 gameObject.transform.DOScaleX(0, _targetCloseDuration)
                     .OnComplete(() => Closed?.Invoke());
             });
+        }
+
+        private bool CloseWithoutAnimation(bool withAnimation)
+        {
+            if (withAnimation) 
+                return false;
+            
+            transform.DOScaleX(0, 0);
+            gameObject.SetActive(false);
+            Closed?.Invoke();
+            return true;
+
         }
     }
 }
