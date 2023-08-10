@@ -57,8 +57,10 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public void Unblock()
         {
+            if(!_navMeshAgent.isActiveAndEnabled)
+                return;
+            
             _navMeshAgent.isStopped = false;
-            Debug.Log("unblock");
             _isBlocked = false;
         }
 

@@ -67,19 +67,23 @@ namespace CodeBase.Installers.GameInstaller
             BindLootStorage();
             BindActivateEnemiesMovementOnFire();
             BindBlockInputOnLoading();
+            BindLootFactory();
         }
+
+        private void BindLootFactory() =>
+            Container
+                .Bind<LootFactory>()
+                .AsSingle();
 
         private void BindBlockInputOnLoading() =>
             Container
                 .BindInterfacesAndSelfTo<EnableInputOnPlayWindow>()
                 .AsSingle();
 
-        private void BindActivateEnemiesMovementOnFire()
-        {
+        private void BindActivateEnemiesMovementOnFire() =>
             Container
                 .BindInterfacesAndSelfTo<ActivateEnemiesMovementOnFire>()
                 .AsSingle();
-        }
 
         private void BindLootStorage() =>
             Container

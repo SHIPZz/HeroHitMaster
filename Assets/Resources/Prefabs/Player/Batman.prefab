@@ -2036,14 +2036,15 @@ GameObject:
   - component: {fileID: 2925378311690347253}
   - component: {fileID: 3031542009027813203}
   - component: {fileID: -1670408599883254313}
-  - component: {fileID: -3799227633192651185}
+  - component: {fileID: 5915890519867323331}
+  - component: {fileID: 1067597184277032185}
   m_Layer: 8
   m_Name: Batman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7651645341826884278
 Transform:
   m_ObjectHideFlags: 0
@@ -2109,6 +2110,7 @@ MonoBehaviour:
   _playerHealth: {fileID: 329928596297951896}
   _shootingOnAnimationEvent: {fileID: 6029221791515933184}
   _playerTypeId: 3
+  _navMeshAgent: {fileID: -1670408599883254313}
 --- !u!114 &6029221791515933184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2232,7 +2234,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-3799227633192651185
+--- !u!114 &5915890519867323331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2241,43 +2243,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5623305037259417953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 236c16fbabde4be2b224d754e4fb2d6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3151f5b7e5684b13b447fd5eec169307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
-  _animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: -0.0027618408
-      inSlope: 1.4679158
-      outSlope: 1.4679158
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.341196
-      value: 0.49808514
-      inSlope: 0.35383955
-      outSlope: 0.35383955
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: -0.0027618408
-      inSlope: -0.7602367
-      outSlope: -0.7602367
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+--- !u!114 &1067597184277032185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5623305037259417953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3465e4d478c4b83947f7f87e546d6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5679752230305372745
 GameObject:
   m_ObjectHideFlags: 0

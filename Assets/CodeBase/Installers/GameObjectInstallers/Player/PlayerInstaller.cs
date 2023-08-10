@@ -19,6 +19,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private ShootingOnAnimationEvent _shootingOnAnimationEvent;
         [SerializeField] private PlayerTypeId _playerTypeId;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
 
         public override void InstallBindings()
         {
@@ -32,7 +33,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
             Container.BindInterfacesAndSelfTo<PlayerShootPresenter>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerShootInput>().AsSingle();
             Container.BindInterfacesAndSelfTo<EffectOnShoot>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerMovementMediator>().AsSingle();
         }
 
         private void BindAsSingle()
@@ -40,7 +40,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
             Container.BindInterfacesTo<WebMovement>().AsSingle();
             Container.Bind<PlayerAnimator>().AsSingle();
             Container.Bind<PlayerShoot>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerMovement>().AsSingle();
+            Container.Bind<PlayerMovement>().FromInstance(GetComponent<PlayerMovement>());
         }
 
         private void BindInstances()
@@ -51,7 +51,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
             Container.BindInstance(_initialShootPosition);
             Container.BindInstance(_animator);
             Container.BindInstance(_playerTypeId);
-            Container.BindInstance(GetComponent<NavMeshAgent>());
+            Container.BindInstance(_navMeshAgent);
             Container.Bind<IHealth>().To<PlayerHealth>().FromInstance(_playerHealth);
         }
     }

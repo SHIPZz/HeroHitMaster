@@ -1,36 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 using CodeBase.Services;
+using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players
 {
-    public class PlayerMovement : ITickable
+    public class PlayerMovement : MonoBehaviour
     {
         private NavMeshAgent _navMeshAgent;
         private ICoroutineStarter _coroutineStarter;
         private TargetMovementStorage _targetMovementStorage;
         private int _currentTarget = -1;
 
-        public PlayerMovement(NavMeshAgent navMeshAgent, ICoroutineStarter coroutineStarter,
+        [Inject]
+        private void Construct(ICoroutineStarter coroutineStarter,
             TargetMovementStorage targetMovementStorage)
         {
             _targetMovementStorage = targetMovementStorage;
-            _navMeshAgent = navMeshAgent;
             _coroutineStarter = coroutineStarter;
         }
 
-        public void Tick()
+        private void Awake()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-                MoveToNextZone();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            Debug.Log(_navMeshAgent);
         }
 
         public void MoveToNextZone()
         {
             _currentTarget++;
-            
+
             Vector3 targetPosition = _targetMovementStorage.Targets[_currentTarget].position;
             Move(targetPosition);
         }

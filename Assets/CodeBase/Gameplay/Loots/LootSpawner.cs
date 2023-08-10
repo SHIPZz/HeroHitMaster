@@ -14,20 +14,14 @@ namespace CodeBase.Gameplay.Loots
         private LootStorage _lootStorage;
 
         [Inject]
-        private void Construct(LootStorage lootStorage)
-        {
+        private void Construct(LootStorage lootStorage) => 
             _lootStorage = lootStorage;
-        }
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _health.ValueZeroReached += Spawn;
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _health.ValueZeroReached -= Spawn;
-        }
 
         private void Spawn()
         {

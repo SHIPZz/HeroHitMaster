@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Enemy;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players
 {
-    public class PlayerMovementMediator : IInitializable, IDisposable
+    public class PlayerMovementMediator : MonoBehaviour
     {
-        private readonly List<EnemyQuantityInZone> _list;
-        private readonly PlayerMovement _playerMovement;
+        private List<EnemyQuantityInZone> _list;
+        private PlayerMovement _playerMovement;
 
-        private PlayerMovementMediator(EnemyQuantityZonesProvider enemyQuantityZonesProvider, PlayerMovement playerMovement)
+        [Inject]
+        private void Construct(EnemyQuantityZonesProvider enemyQuantityZonesProvider, PlayerMovement playerMovement)
         {
             _list =  enemyQuantityZonesProvider.EnemyQuantityInZones;
             _playerMovement = playerMovement;
         }
-        
-        public void Initialize()
-        {
-            _list.ForEach(x => x.ZoneCleared += _playerMovement.MoveToNextZone);
-        }
 
-        public void Dispose()
-        {
+        private void Awake() => 
+            _playerMovement = GetComponent<PlayerMovement>();
+
+        public void OnEnable() => 
+            _list.ForEach(x => x.ZoneCleared += _playerMovement.MoveToNextZone);
+
+        public void OnDisable() => 
             _list.ForEach(x => x.ZoneCleared -= _playerMovement.MoveToNextZone);
-        }
     }
 }

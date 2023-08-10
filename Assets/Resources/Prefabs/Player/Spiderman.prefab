@@ -786,14 +786,14 @@ GameObject:
   - component: {fileID: 6598193491934707509}
   - component: {fileID: 4371423195156132523}
   - component: {fileID: -5723420579542113260}
-  - component: {fileID: -5241927958755114754}
+  - component: {fileID: -7869325863510699671}
   m_Layer: 8
   m_Name: Spiderman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1184051465846184060
 Transform:
   m_ObjectHideFlags: 0
@@ -853,6 +853,7 @@ MonoBehaviour:
   _playerHealth: {fileID: 4371423195156132523}
   _shootingOnAnimationEvent: {fileID: 6598193491934707509}
   _playerTypeId: 0
+  _navMeshAgent: {fileID: -5723420579542113260}
 --- !u!114 &7659068826430442205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,7 +1009,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-5241927958755114754
+--- !u!114 &-7869325863510699671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1017,16 +1018,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2600353082637849150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 236c16fbabde4be2b224d754e4fb2d6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3151f5b7e5684b13b447fd5eec169307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
-  _animationCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &2827847476302856595
 GameObject:
   m_ObjectHideFlags: 0
