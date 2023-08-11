@@ -1,6 +1,5 @@
 ﻿using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Storages;
 using CodeBase.UI.Weapons;
 using UnityEngine;
 using Zenject;
@@ -12,10 +11,10 @@ namespace CodeBase.Gameplay.Weapons
         [SerializeField] private WeaponHolderView weaponHolderView;
         [SerializeField] private ShootingOnAnimationEvent _shootingOnAnimationEvent;
         
-        private WeaponProvider _weaponProvider;
+        private IProvider<Weapon> _weaponProvider;
 
         [Inject]
-        private void Construct(WeaponProvider weaponProvider)
+        private void Construct(IProvider<Weapon> weaponProvider)
         {
             _weaponProvider = weaponProvider;
         }
@@ -33,9 +32,9 @@ namespace CodeBase.Gameplay.Weapons
         }
 
         private void EnableWeaponInHand() => 
-            weaponHolderView.SetLastWeaponViewActive(true, _weaponProvider.CurrentWeapon.WeaponTypeId);
+            weaponHolderView.SetLastWeaponViewActive(true, _weaponProvider.Get().WeaponTypeId);
 
         private void DisableWeaponInHand() => 
-            weaponHolderView.SetLastWeaponViewActive(false, _weaponProvider.CurrentWeapon.WeaponTypeId);
+            weaponHolderView.SetLastWeaponViewActive(false, _weaponProvider.Get().WeaponTypeId);
     }
 }

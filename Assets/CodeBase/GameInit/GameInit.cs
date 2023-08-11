@@ -1,18 +1,14 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Constants;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.Storages.Character;
-using CodeBase.UI;
 using CodeBase.UI.Slider;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows.Loading;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
@@ -23,7 +19,7 @@ namespace CodeBase.GameInit
     {
         private readonly PlayerCameraFactory _playerCameraFactory;
         private readonly LocationProvider _locationProvider;
-        private readonly CameraProvider _cameraProvider;
+        private readonly IProvider<Camera> _cameraProvider;
         private readonly PlayerProvider _playerProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly WeaponSelector _weaponSelector;
@@ -31,22 +27,18 @@ namespace CodeBase.GameInit
         private readonly IEnemyStorage _enemyStorage;
         private readonly EnemiesDeathEffectOnDestruction _enemiesDeathEffectOnDestruction;
         private readonly ActivateEnemiesMovementOnFire _activateEnemiesMovementOnFire;
-        private SliderLoading _sliderLoading;
-        private LoadingWindowPresenter _loadingWindowPresenter;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             LocationProvider locationProvider,
-            CameraProvider cameraProvider,
+            IProvider<Camera> cameraProvider,
             PlayerProvider playerProvider,
             IPlayerStorage playerStorage,
             WeaponSelector weaponSelector,
             EnemySpawnersProvider enemySpawnersProvider,
             IEnemyStorage enemyStorage,
             EnemiesDeathEffectOnDestruction enemiesDeathEffectOnDestruction,
-            ActivateEnemiesMovementOnFire activateEnemiesMovementOnFire,
-            LoadingWindowPresenter loadingWindowPresenter)
+            ActivateEnemiesMovementOnFire activateEnemiesMovementOnFire)
         {
-            _loadingWindowPresenter = loadingWindowPresenter;
             _activateEnemiesMovementOnFire = activateEnemiesMovementOnFire;
             _enemiesDeathEffectOnDestruction = enemiesDeathEffectOnDestruction;
             _enemyStorage = enemyStorage;
@@ -85,7 +77,7 @@ namespace CodeBase.GameInit
         {
             PlayerCameraFollower playerCamera = _playerCameraFactory
                 .Create(_locationProvider.Values[LocationTypeId.CameraSpawnPoint].position);
-            _cameraProvider.Camera = playerCamera.GetComponent<Camera>();
+            _cameraProvider.Set(playerCamera.GetComponent<Camera>());
             return playerCamera;
         }
 

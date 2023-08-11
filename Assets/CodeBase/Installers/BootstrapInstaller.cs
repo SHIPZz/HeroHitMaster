@@ -25,23 +25,15 @@ namespace CodeBase.Installers
             Container.BindInterfacesAndSelfTo<YandexAdService>()
                 .AsSingle();
 
-        private void BindInputService()
-        {
+        private void BindInputService() =>
             Container
-                .Bind<InputActions>()
+                .BindInterfacesAndSelfTo<InputService>()
                 .AsSingle();
-            Container
-                .BindInterfacesTo<InputService>()
-                .AsSingle();
-        }
 
         private void BindAssetProvider()
         {
-           var assetProvider = new AssetProvider();
-           assetProvider.Initialize();
             Container
-                .Bind<AssetProvider>()
-                .FromInstance(assetProvider)
+                .BindInterfacesAndSelfTo<AssetProvider>()
                 .AsSingle();
         }
     }

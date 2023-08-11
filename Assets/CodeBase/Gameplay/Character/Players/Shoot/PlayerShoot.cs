@@ -1,40 +1,37 @@
 ﻿using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace CodeBase.Gameplay.Character.Players.Shoot
 {
     public class PlayerShoot
     {
-        private readonly CameraProvider _cameraProvider;
+        private readonly IProvider<UnityEngine.Camera> _cameraProvider;
         private readonly Transform _startShootPosition;
-        private readonly WeaponProvider _weaponProvider;
+        private readonly IProvider<Weapon> _weaponProvider;
 
         private Weapon _weapon;
         private Vector2 _mousePosition;
 
-        public PlayerShoot(CameraProvider cameraProvider,
-            Transform startShootPosition, WeaponProvider weaponProvider)
+        public PlayerShoot(IProvider<UnityEngine.Camera> cameraProvider,
+            Transform startShootPosition, IProvider<Weapon> weaponProvider)
         {
             _cameraProvider = cameraProvider;
             _startShootPosition = startShootPosition;
             _weaponProvider = weaponProvider;
         }
 
-        public void SetMousePosition(Vector2 mousePosition)
-        {
+        public void SetMousePosition(Vector2 mousePosition) => 
             _mousePosition = mousePosition;
-        }
 
         public void Fire()
         {
-            Weapon weapon = _weaponProvider.CurrentWeapon;
+            Weapon weapon = _weaponProvider.Get();
             
             if (weapon is null)
                 return;
 
-            Ray ray = _cameraProvider.Camera.ScreenPointToRay(_mousePosition);
+            Ray ray = _cameraProvider.Get().ScreenPointToRay(_mousePosition);
 
             Vector3 targetVector;
             

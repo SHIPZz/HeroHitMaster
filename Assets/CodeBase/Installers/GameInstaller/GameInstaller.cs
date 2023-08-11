@@ -6,6 +6,7 @@ using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Spawners;
+using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
@@ -42,7 +43,7 @@ namespace CodeBase.Installers.GameInstaller
             BindWeaponFactory();
             BindWeaponsProvider();
             BindGameObjectPoolProvider();
-            BindBulletFactory();
+            BindBulletStorage();
             BindWeaponSelection();
             BindPlayerStorage();
             BindWeaponStorage();
@@ -70,10 +71,13 @@ namespace CodeBase.Installers.GameInstaller
             BindLootFactory();
         }
 
-        private void BindLootFactory() =>
+        private void BindAsSingle<T>() =>
             Container
-                .Bind<LootFactory>()
+                .Bind<T>()
                 .AsSingle();
+
+        private void BindLootFactory() =>
+            BindAsSingle<LootFactory>();
 
         private void BindBlockInputOnLoading() =>
             Container
@@ -86,30 +90,28 @@ namespace CodeBase.Installers.GameInstaller
                 .AsSingle();
 
         private void BindLootStorage() =>
-            Container
-                .Bind<LootStorage>()
-                .AsSingle();
+            BindAsSingle<LootStorage>();
 
-        private void BindTargetMovementStorage() => 
+        private void BindTargetMovementStorage() =>
             Container.BindInstance(_targetMovementStorage);
 
         private void BindStaticDataServices()
         {
-            Container.Bind<BulletStaticDataService>().AsSingle();
-            Container.Bind<EnemyStaticDataService>().AsSingle();
-            Container.Bind<PlayerStaticDataService>().AsSingle();
-            Container.Bind<WeaponStaticDataService>().AsSingle();
-            Container.Bind<BulletEffectStorage>().AsSingle();
+            BindAsSingle<BulletStaticDataService>();
+            BindAsSingle<EnemyStaticDataService>();
+            BindAsSingle<PlayerStaticDataService>();
+            BindAsSingle<WeaponStaticDataService>();
+            BindAsSingle<BulletEffectStorage>();
         }
 
-        private void BindWeaponShootEffectStorage() => 
-            Container.Bind<WeaponShootEffectStorage>().AsSingle();
+        private void BindWeaponShootEffectStorage() =>
+            BindAsSingle<WeaponShootEffectStorage>();
 
-        private void BindEnemiesDeathEffectOnQuickDestruction() => 
-            Container.Bind<EnemiesDeathEffectOnDestruction>().AsSingle();
+        private void BindEnemiesDeathEffectOnQuickDestruction() =>
+            BindAsSingle<EnemiesDeathEffectOnDestruction>();
 
-        private void BindEnemyEffectDataStorage() => 
-            Container.Bind<EnemyEffectDataStorage>().AsSingle();
+        private void BindEnemyEffectDataStorage() =>
+            BindAsSingle<EnemyEffectDataStorage>();
 
         private void BindDestroyableObjectStorages()
         {
@@ -117,17 +119,16 @@ namespace CodeBase.Installers.GameInstaller
             Container.BindInstance(_destroyableObjectPartStorage);
         }
 
-        private void BindEnemyQuantityZonesProvider() => 
+        private void BindEnemyQuantityZonesProvider() =>
             Container.BindInstance(_enemyQuantityZonesProvider);
 
         private void BindBulletMovementStorage() =>
-            Container.Bind<BulletMovementStorage>()
-                .AsSingle();
+            BindAsSingle<BulletMovementStorage>();
 
-        private void BindSetterWeapon() => 
+        private void BindSetterWeapon() =>
             Container.BindInterfacesAndSelfTo<SetterWeaponToPlayerHand>().AsSingle();
 
-        private void BindMaterialProvider() => 
+        private void BindMaterialProvider() =>
             Container.BindInstance(_materialProvider);
 
         private void BindEnemySpawnerProvider()
@@ -139,7 +140,7 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindEnemyConfiguration()
         {
-            Container.Bind<EnemyConfigurator>().AsSingle();
+            BindAsSingle<EnemyConfigurator>();
             Container.BindInterfacesAndSelfTo<EnemyConfiguratorMediator>().AsSingle();
         }
 
@@ -149,8 +150,8 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindEnemyBodyPartActivation()
         {
-            Container.Bind<EnemyBodyPartActivator>().AsSingle();
-            Container.Bind<EnemyBodyPartPositionSetter>().AsSingle();
+            BindAsSingle<EnemyBodyPartPositionSetter>();
+            BindAsSingle<EnemyBodyPartActivator>();
             Container.BindInterfacesAndSelfTo<EnemyBodyPartMediator>().AsSingle();
         }
 
@@ -189,44 +190,35 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindWeaponSelection()
         {
-            Container.Bind<WeaponSelector>().AsSingle();
+            BindAsSingle<WeaponSelector>();
             Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
         }
 
-        private void BindBulletFactory() =>
-            Container
-                .Bind<BulletStorage>()
-                .AsSingle();
+        private void BindBulletStorage() =>
+            BindAsSingle<BulletStorage>();
 
         private void BindWeaponsProvider() =>
-            Container
-                .Bind<WeaponProvider>().AsSingle();
+            Container.Bind<IProvider<Weapon>>()
+                .To<WeaponProvider>()
+                .AsSingle();
 
         private void BindGameObjectPoolProvider() =>
-            Container
-                .Bind<GameObjectPoolProvider>().AsSingle();
+            BindAsSingle<GameObjectPoolProvider>();
 
         private void BindWeaponFactory() =>
-            Container.Bind<WeaponFactory>().AsSingle();
+            BindAsSingle<WeaponFactory>();
 
         private void BindPlayerProvider() =>
-            Container
-                .Bind<PlayerProvider>()
-                .AsSingle();
+            BindAsSingle<PlayerProvider>();
 
         private void BindCameraProvider() =>
-            Container
-                .Bind<CameraProvider>().AsSingle();
+            BindAsSingle<CameraProvider>();
 
         private void BindPlayerFactory() =>
-            Container
-                .Bind<PlayerFactory>()
-                .AsSingle();
+            BindAsSingle<PlayerFactory>();
 
         private void BindCameraFactory() =>
-            Container
-                .Bind<PlayerCameraFactory>()
-                .AsSingle();
+            BindAsSingle<PlayerCameraFactory>();
 
         private void BindGameInit() =>
             Container

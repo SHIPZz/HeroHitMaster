@@ -2,8 +2,14 @@
 
 namespace CodeBase.Services.Providers
 {
-    public class WeaponProvider
+    public class WeaponProvider : IProvider<Weapon>
     {
-        public Weapon CurrentWeapon { get; set; }
+        private Weapon _weapon;
+
+        public Weapon Get() => 
+            _weapon;
+
+        public void Set(Weapon camera) => 
+            _weapon = camera;
     }
 }

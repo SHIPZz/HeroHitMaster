@@ -2,8 +2,14 @@
 
 namespace CodeBase.Services.Providers
 {
-    public class CameraProvider
+    public class CameraProvider : IProvider<Camera>
     {
-        public Camera Camera { get; set; }
+        private Camera _camera;
+        
+        public Camera Get() => 
+            _camera;
+
+        public void Set(Camera camera) => 
+            _camera = camera;
     }
 }

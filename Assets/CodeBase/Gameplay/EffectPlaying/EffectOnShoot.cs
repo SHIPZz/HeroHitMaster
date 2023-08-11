@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players.Shoot;
+using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Sound;
 using UnityEngine;
@@ -11,11 +12,11 @@ namespace CodeBase.Gameplay.EffectPlaying
     public class EffectOnShoot : IInitializable, IDisposable
     {
         private readonly ShootingOnAnimationEvent _shootingOnAnimationEvent;
-        private readonly WeaponProvider _weaponProvider;
+        private readonly IProvider<Weapon> _weaponProvider;
         private readonly WeaponShootEffectStorage _weaponShootEffectStorage;
         private Transform _initialShootPosition;
 
-        public EffectOnShoot(WeaponProvider weaponProvider, 
+        public EffectOnShoot(IProvider<Weapon> weaponProvider, 
             ShootingOnAnimationEvent shootingOnAnimationEvent, 
             WeaponShootEffectStorage weaponShootEffectStorage, 
             Transform initialShootPosition)
@@ -34,7 +35,7 @@ namespace CodeBase.Gameplay.EffectPlaying
 
         private void PlayEffects()
         {
-            var weaponWeaponTypeId = _weaponProvider.CurrentWeapon.WeaponTypeId;
+            var weaponWeaponTypeId = _weaponProvider.Get().WeaponTypeId;
             AudioSource targetSound = _weaponShootEffectStorage.GetSoundBy(weaponWeaponTypeId);
             targetSound.transform.position = _initialShootPosition.position;
             targetSound.Play();

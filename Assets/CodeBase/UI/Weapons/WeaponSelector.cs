@@ -10,13 +10,13 @@ namespace CodeBase.UI.Weapons
 {
     public class WeaponSelector
     {
-        private readonly WeaponProvider _weaponProvider;
+        private readonly IProvider<Weapon> _weaponProvider;
         private readonly IWeaponStorage _weaponStorage;
 
         public event Action<Weapon> OldWeaponChanged;
         public event Action<WeaponTypeId> NewWeaponChanged;
 
-        public WeaponSelector(WeaponProvider weaponProvider,
+        public WeaponSelector(IProvider<Weapon> weaponProvider,
             IWeaponStorage weaponStorage)
         {
             _weaponProvider = weaponProvider;
@@ -26,7 +26,7 @@ namespace CodeBase.UI.Weapons
         public void Select(WeaponTypeId weaponTypeId)
         {
             var weapon = _weaponStorage.Get(weaponTypeId);
-            _weaponProvider.CurrentWeapon = weapon;
+            _weaponProvider.Set(weapon);
             NewWeaponChanged?.Invoke(weaponTypeId);
         }
     }
