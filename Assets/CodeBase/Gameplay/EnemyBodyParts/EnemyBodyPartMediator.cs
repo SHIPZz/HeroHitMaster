@@ -7,39 +7,37 @@ using Zenject;
 
 namespace CodeBase.Gameplay.EnemyBodyParts
 {
-    public class EnemyBodyPartMediator : IInitializable, IDisposable
+    public class EnemyBodyPartMediator : IDisposable
     {
         private readonly EnemyBodyPartActivator _enemyBodyPartActivator;
-        private List<Enemy> _enemies;
         private readonly EnemyBodyPartPositionSetter _enemyBodyPartPositionSetter;
-        private readonly IEnemyStorage _enemyStorage;
+        private List<Enemy> _enemies;
 
-        public EnemyBodyPartMediator(IEnemyStorage enemyStorage, EnemyBodyPartActivator enemyBodyPartActivator, 
+        public EnemyBodyPartMediator(EnemyBodyPartActivator enemyBodyPartActivator, 
             EnemyBodyPartPositionSetter enemyBodyPartPositionSetter)
         {
             _enemyBodyPartPositionSetter = enemyBodyPartPositionSetter;
             _enemyBodyPartActivator = enemyBodyPartActivator;
-            _enemyStorage = enemyStorage;
         }
 
-        public  void Initialize()
+        public void Init(List<Enemy> enemies)
         {
-            // _enemies =  _enemyStorage.GetAll();
-            //
-            // foreach (var enemy in _enemies)
-            // {
-            //     enemy.Dead += _enemyBodyPartActivator.ActivateWithDisableDelay;
-            //     enemy.Dead += _enemyBodyPartPositionSetter.SetPosition;
-            // }
+            _enemies = enemies;
+            
+            foreach (var enemy in enemies)
+            {
+                enemy.Dead += _enemyBodyPartActivator.ActivateWithDisableDelay;
+                enemy.Dead += _enemyBodyPartPositionSetter.SetPosition;
+            }
         }
 
         public void Dispose()
         {
-            // foreach (var enemy in _enemies)
-            // {
-            //     enemy.Dead -= _enemyBodyPartActivator.ActivateWithDisableDelay;
-            //     enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
-            // }
+            foreach (var enemy in _enemies)
+            {
+                enemy.Dead -= _enemyBodyPartActivator.ActivateWithDisableDelay;
+                enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
+            }
         }
     }
 }

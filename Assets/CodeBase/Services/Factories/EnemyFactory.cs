@@ -13,11 +13,11 @@ namespace CodeBase.Services.Factories
     public class EnemyFactory
     {
         private readonly DiContainer _diContainer;
-        private readonly LocationProvider _locationProvider;
+        private readonly IProvider<LocationTypeId, Transform> _locationProvider;
         private readonly EnemyStaticDataService _enemyStaticDataService;
         private AssetProvider _assetProvider;
 
-        public EnemyFactory(DiContainer diContainer, LocationProvider locationProvider, 
+        public EnemyFactory(DiContainer diContainer, IProvider<LocationTypeId, Transform> locationProvider, 
             EnemyStaticDataService enemyStaticDataService, AssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
@@ -46,7 +46,9 @@ namespace CodeBase.Services.Factories
 
             Enemy enemy = prefab.GetComponent<Enemy>();
             enemy.gameObject.SetActive(false);
-            return _diContainer.InstantiatePrefabForComponent<Enemy>(enemy,_locationProvider.Values[LocationTypeId.EnemyParent]);
+            return _diContainer
+                .InstantiatePrefabForComponent<Enemy>(enemy,
+                _locationProvider.Get(LocationTypeId.EnemyParent));
         }
     }
 }

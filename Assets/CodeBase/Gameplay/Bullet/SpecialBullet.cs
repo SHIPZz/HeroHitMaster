@@ -1,4 +1,5 @@
-﻿using CodeBase.Enums;
+﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Collision;
@@ -20,13 +21,14 @@ namespace CodeBase.Gameplay.Bullet
         private int _damage;
         private Material _material;
         private TriggerObserver TriggerObserver;
-        private GameObject _terrain;
         private float _distance;
 
         [Inject]
-        private void Construct(TriggerObserver triggerObserver, MaterialProvider materialProvider,BulletStaticDataService bulletStaticDataService)
+        private void Construct(TriggerObserver triggerObserver, 
+            IProvider<Dictionary<MaterialTypeId, Material>> materialProvider,
+            BulletStaticDataService bulletStaticDataService)
         {
-            _material = materialProvider.Materials[_materialTypeId];
+            _material = materialProvider.Get()[_materialTypeId];
             _damage = bulletStaticDataService.GetBy(BulletTypeId).Damage;
             TriggerObserver = triggerObserver;
         }

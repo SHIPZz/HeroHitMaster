@@ -7,19 +7,19 @@ namespace CodeBase.Gameplay.Camera
 {
     public class PlayerCameraFollower : MonoBehaviour
     {
-        private PlayerProvider _playerProvider;
+        private IProvider<Player> _playerProvider;
         private Player _player;
 
         [Inject]
-        private void Construct(PlayerProvider playerProvider) => 
+        private void Construct(IProvider<Player> playerProvider) => 
             _playerProvider = playerProvider;
 
         private void LateUpdate()
         {
-            if (_playerProvider.CurrentPlayer is null)
+            if (_playerProvider.Get() is null)
                 return;
             
-            transform.position = _playerProvider.CurrentPlayer.Head.position;
+            transform.position = _playerProvider.Get().Head.position;
         }
     }
 }

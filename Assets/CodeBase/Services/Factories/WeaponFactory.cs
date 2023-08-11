@@ -1,7 +1,9 @@
-﻿using CodeBase.Enums;
+﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Services.Factories
@@ -9,10 +11,10 @@ namespace CodeBase.Services.Factories
     public class WeaponFactory
     {
         private readonly DiContainer _diContainer;
-        private readonly LocationProvider _locationProvider;
+        private readonly IProvider<LocationTypeId, Transform> _locationProvider;
         private readonly WeaponStaticDataService _weaponStaticDataService;
 
-        public WeaponFactory(DiContainer diContainer, LocationProvider locationProvider,
+        public WeaponFactory(DiContainer diContainer, IProvider<LocationTypeId, Transform> locationProvider,
             WeaponStaticDataService weaponStaticDataService)
         {
             _weaponStaticDataService = weaponStaticDataService;
@@ -24,7 +26,7 @@ namespace CodeBase.Services.Factories
         {
             Weapon gunPrefab = _weaponStaticDataService.Get(weaponTypeId).Prefab;
             return _diContainer.InstantiatePrefabForComponent<Weapon>(gunPrefab,
-                _locationProvider.Values[LocationTypeId.WeaponsParent]);
+                _locationProvider.Get(LocationTypeId.WeaponsParent));
         }
     }
 }

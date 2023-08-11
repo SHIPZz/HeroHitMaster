@@ -13,9 +13,9 @@ namespace CodeBase.Services.Data
     {
         private readonly DiContainer _diContainer;
         private readonly Dictionary<EnemyTypeId, ParticleSystem> _deathEnemyEffects = new();
-        private readonly LocationProvider _locationProvider;
+        private readonly IProvider<LocationTypeId, Transform> _locationProvider;
 
-        public EnemyEffectDataStorage(DiContainer diContainer, LocationProvider locationProvider)
+        public EnemyEffectDataStorage(DiContainer diContainer, IProvider<LocationTypeId, Transform> locationProvider)
         {
             _locationProvider = locationProvider;
             _diContainer = diContainer;
@@ -33,7 +33,8 @@ namespace CodeBase.Services.Data
             foreach (DeathEnemyEffect deathEnemyEffect in deathEnemyEffects)
             {
                 var targetEffect = _diContainer
-                    .InstantiatePrefabForComponent<DeathEnemyEffect>(deathEnemyEffect, _locationProvider.Values[LocationTypeId.SoundsParent]);
+                    .InstantiatePrefabForComponent<DeathEnemyEffect>(deathEnemyEffect, 
+                        _locationProvider.Get(LocationTypeId.SoundsParent));
                 _deathEnemyEffects[targetEffect.EnemyTypeId] = targetEffect.DieEffect;
             }
         }

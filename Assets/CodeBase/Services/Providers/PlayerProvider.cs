@@ -2,8 +2,14 @@
 
 namespace CodeBase.Services.Providers
 {
-    public class PlayerProvider
+    public class PlayerProvider : IProvider<Player>
     {
-        public Player CurrentPlayer { get; set; }
+        private Player _player;
+        
+        public Player Get() => 
+            _player;
+
+        public void Set(Player player) => 
+            _player = player;
     }
 }

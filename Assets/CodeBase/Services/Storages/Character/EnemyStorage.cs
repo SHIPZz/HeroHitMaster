@@ -29,8 +29,6 @@ namespace CodeBase.Services.Storages.Character
 
         public List<Enemy> GetAll()
         {
-            // await _initTask;
-
             var enemies = new List<Enemy>(_enemies.Values);
             return enemies;
         }

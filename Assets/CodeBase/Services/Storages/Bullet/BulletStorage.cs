@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Bullet;
-using CodeBase.Installers.ScriptableObjects.Gun;
-using CodeBase.ScriptableObjects.Bullet;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Data;
 using CodeBase.Services.ObjectPool;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Providers.AssetProviders;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -16,14 +12,16 @@ namespace CodeBase.Services.Storages.Bullet
 {
     public class BulletStorage
     {
-        private readonly GameObjectPoolProvider _gameObjectPoolProvider;
+        private readonly  IProvider<Dictionary<BulletTypeId, GameObjectPool>> _gameObjectPoolProvider;
         private readonly DiContainer _diContainer;
-        private readonly PlayerProvider _playerProvider;
-        private readonly LocationProvider _locationProvider;
+        private readonly IProvider<Player> _playerProvider;
+        private readonly IProvider<LocationTypeId, Transform> _locationProvider;
         private readonly BulletStaticDataService _bulletStaticDataService;
 
-        public BulletStorage(GameObjectPoolProvider gameObjectPoolProvider,
-            DiContainer diContainer, PlayerProvider playerProvider, LocationProvider locationProvider,BulletStaticDataService bulletStaticDataService)
+        public BulletStorage(IProvider<Dictionary<BulletTypeId, GameObjectPool>> gameObjectPoolProvider,
+            DiContainer diContainer, IProvider<Player> playerProvider,
+            IProvider<LocationTypeId, Transform> locationProvider,
+            BulletStaticDataService bulletStaticDataService)
         {
             _bulletStaticDataService = bulletStaticDataService;
             _locationProvider = locationProvider;
@@ -35,23 +33,23 @@ namespace CodeBase.Services.Storages.Bullet
         public void CreateBulletsBy(WeaponTypeId weaponTypeId)
         {
             IBullet bulletPrefab = _bulletStaticDataService.GetBy(weaponTypeId).Prefab.GetComponent<IBullet>();
-            Vector3 rightHandPosition = _playerProvider.CurrentPlayer.RightHand.position;
+            Vector3 rightHandPosition = _playerProvider.Get().RightHand.position;
 
             var count = _bulletStaticDataService.GetBy(bulletPrefab.BulletTypeId).Count;
             
-            _gameObjectPoolProvider.BulletPools[bulletPrefab.BulletTypeId] = new GameObjectPool(() =>
+            _gameObjectPoolProvider.Get()[bulletPrefab.BulletTypeId] = new GameObjectPool(() =>
                 _diContainer.InstantiatePrefab(bulletPrefab.GameObject,
                     rightHandPosition, Quaternion.identity, 
-                    _locationProvider.Values[LocationTypeId.BulletParent]), count);
+                    _locationProvider.Get(LocationTypeId.BulletParent)), count);
         }
 
         public IBullet Pop(WeaponTypeId weaponTypeId)
         {
             BulletTypeId targetBulletId = _bulletStaticDataService.GetBy(weaponTypeId).BulletTypeId;
-            return _gameObjectPoolProvider.BulletPools[targetBulletId].Pop().GetComponent<IBullet>();
+            return _gameObjectPoolProvider.Get()[targetBulletId].Pop().GetComponent<IBullet>();
         }
 
         public void Push(IBullet bullet) =>
-            _gameObjectPoolProvider.BulletPools[bullet.BulletTypeId].Push(bullet.GameObject);
+            _gameObjectPoolProvider.Get()[bullet.BulletTypeId].Push(bullet.GameObject);
     }
 }

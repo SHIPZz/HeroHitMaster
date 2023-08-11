@@ -13,24 +13,28 @@ namespace CodeBase.Services.Factories
     {
         private readonly DiContainer _diContainer;
         private readonly AssetProvider _assetProvider;
-        private readonly LocationProvider _locationProvider;
+        private readonly IProvider<LocationTypeId, Transform> _locationProvider;
         private readonly Dictionary<SoundTypeId, string> _sounds;
 
-        public EffectFactory(DiContainer diContainer, AssetProvider assetProvider, 
-            SoundsSettings soundsSettings, LocationProvider locationProvider)
+        public EffectFactory(DiContainer diContainer, AssetProvider assetProvider,
+            SoundsSettings soundsSettings, IProvider<LocationTypeId, Transform> locationProvider)
         {
             _sounds = soundsSettings.SoundPathesByTypeId;
             _locationProvider = locationProvider;
             _assetProvider = assetProvider;
             _diContainer = diContainer;
         }
-        
+
         public AudioSource Create(AudioSource audioSource) =>
-            _diContainer.InstantiatePrefab(audioSource.gameObject, _locationProvider.Values[LocationTypeId.SoundsParent])
+            _diContainer
+                .InstantiatePrefab(audioSource.gameObject,
+                    _locationProvider.Get(LocationTypeId.SoundsParent))
                 .GetComponent<AudioSource>();
 
         public ParticleSystem Create(ParticleSystem particleSystem) =>
-            _diContainer.InstantiatePrefab(particleSystem.gameObject, _locationProvider.Values[LocationTypeId.SoundsParent])
+            _diContainer
+                .InstantiatePrefab(particleSystem.gameObject,
+                    _locationProvider.Get(LocationTypeId.SoundsParent))
                 .GetComponent<ParticleSystem>();
 
         public AudioSource Create(SoundTypeId soundTypeId)
@@ -45,7 +49,8 @@ namespace CodeBase.Services.Factories
         {
             var audioPrefab = _assetProvider.GetAsset(path);
             return _diContainer
-                .InstantiatePrefabForComponent<AudioSource>(audioPrefab, _locationProvider.Values[LocationTypeId.SoundsParent]);
+                .InstantiatePrefabForComponent<AudioSource>(audioPrefab,
+                    _locationProvider.Get(LocationTypeId.SoundsParent));
         }
     }
 }

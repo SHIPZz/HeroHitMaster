@@ -129,13 +129,13 @@ namespace CodeBase.Installers.GameInstaller
             Container.BindInterfacesAndSelfTo<SetterWeaponToPlayerHand>().AsSingle();
 
         private void BindMaterialProvider() =>
-            Container.BindInstance(_materialProvider);
+            Container.BindInterfacesAndSelfTo<MaterialProvider>()
+                .FromInstance(_materialProvider).AsSingle();
 
         private void BindEnemySpawnerProvider()
         {
-            Container
-                .BindInstance(_enemySpawnersProvider);
-            Container.BindInterfacesAndSelfTo<List<EnemySpawner>>().FromInstance(_enemySpawnersProvider.EnemySpawners);
+            Container.BindInterfacesAndSelfTo<EnemySpawnersProvider>()
+                .FromInstance(_enemySpawnersProvider).AsSingle();
         }
 
         private void BindEnemyConfiguration()
@@ -203,16 +203,22 @@ namespace CodeBase.Installers.GameInstaller
                 .AsSingle();
 
         private void BindGameObjectPoolProvider() =>
-            BindAsSingle<GameObjectPoolProvider>();
+            Container.BindInterfacesAndSelfTo<BulletsPoolProvider>()
+                .AsSingle();
 
         private void BindWeaponFactory() =>
             BindAsSingle<WeaponFactory>();
 
         private void BindPlayerProvider() =>
-            BindAsSingle<PlayerProvider>();
+            Container
+                .Bind<IProvider<Player>>()
+                .To<PlayerProvider>()
+                .AsSingle();
 
         private void BindCameraProvider() =>
-            BindAsSingle<CameraProvider>();
+            Container
+                .BindInterfacesAndSelfTo<CameraProvider>()
+                .AsSingle();
 
         private void BindPlayerFactory() =>
             BindAsSingle<PlayerFactory>();
@@ -225,11 +231,10 @@ namespace CodeBase.Installers.GameInstaller
                 .BindInterfacesAndSelfTo<GameInit.GameInit>()
                 .AsSingle();
 
-        private void BindLocationProvider()
-        {
+        private void BindLocationProvider() =>
             Container
-                .BindInstance(_locationProvider)
+                .BindInterfacesTo<LocationProvider>()
+                .FromInstance(_locationProvider)
                 .AsSingle();
-        }
     }
 }

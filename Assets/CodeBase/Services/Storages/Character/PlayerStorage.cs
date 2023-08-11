@@ -10,15 +10,15 @@ namespace CodeBase.Services.Storages.Character
 {
     public class PlayerStorage : IPlayerStorage
     {
-        private readonly PlayerProvider _playerProvider;
+        private readonly IProvider<Player> _playerProvider;
         private readonly PlayerFactory _playerFactory;
-        private readonly LocationProvider _locationProvider;
+        private readonly IProvider<LocationTypeId, Transform> _locationProvider;
         private readonly Dictionary<PlayerTypeId, Player> _players = new();
         private readonly Dictionary<WeaponTypeId, PlayerTypeId> _playerTypeIdsByWeapon;
         
         public PlayerStorage(PlayerFactory playerFactory, 
-            LocationProvider locationProvider, 
-            PlayerProvider playerProvider, PlayerSettings playerSettings)
+            IProvider<LocationTypeId, Transform> locationProvider, 
+            IProvider<Player> playerProvider, PlayerSettings playerSettings)
         {
             _playerProvider = playerProvider;
             _playerFactory = playerFactory;
@@ -31,7 +31,7 @@ namespace CodeBase.Services.Storages.Character
         {
             SetActive(false);
             Enable(playerTypeId);
-            _playerProvider.CurrentPlayer = _players[playerTypeId];
+            _playerProvider.Set(_players[playerTypeId]);
             return _players[playerTypeId];
         }
 
@@ -40,7 +40,7 @@ namespace CodeBase.Services.Storages.Character
             SetActive(false);
             PlayerTypeId playerTypeId = _playerTypeIdsByWeapon[weaponTypeId];
             Enable(playerTypeId);
-            _playerProvider.CurrentPlayer = _players[playerTypeId];
+            _playerProvider.Set(_players[playerTypeId]);
             return _players[playerTypeId];
         }
 
@@ -72,7 +72,7 @@ namespace CodeBase.Services.Storages.Character
             foreach (var player in playerTypeIds)
             {
                 Player createdPlayer = _playerFactory.
-                   Create(player, _locationProvider.Values[LocationTypeId.PlayerSpawnPoint].position);
+                   Create(player, _locationProvider.Get(LocationTypeId.PlayerSpawnPoint).position);
                   _players[createdPlayer.PlayerTypeId] = createdPlayer;
             }
         }

@@ -12,9 +12,9 @@ public class LootFactory
 {
     private readonly DiContainer _diContainer;
     private readonly List<LootData> _lootDatas;
-    private readonly LocationProvider _locationProvider;
+    private readonly IProvider<LocationTypeId, Transform> _locationProvider;
 
-    public LootFactory(DiContainer diContainer, LocationProvider locationProvider)
+    public LootFactory(DiContainer diContainer, IProvider<LocationTypeId, Transform> locationProvider)
     {
         _locationProvider = locationProvider;
         _diContainer = diContainer;
@@ -30,7 +30,7 @@ public class LootFactory
         {
             var loot = _diContainer
                 .InstantiatePrefab(lootData.Prefab,
-                _locationProvider.Values[LocationTypeId.LootParent]);
+                _locationProvider.Get(LocationTypeId.LootParent));
             
             loots[lootData.LootTypeId] = loot;
         }

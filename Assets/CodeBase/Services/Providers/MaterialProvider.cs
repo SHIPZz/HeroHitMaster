@@ -6,8 +6,11 @@ using UnityEngine;
 
 namespace CodeBase.Services.Providers
 {
-    public class MaterialProvider : SerializedMonoBehaviour
+    public class MaterialProvider : SerializedMonoBehaviour, IProvider<MaterialTypeId, Material>
     {
-        [OdinSerialize] public Dictionary<MaterialTypeId, Material> Materials { get; private set; }
+        [OdinSerialize] private Dictionary<MaterialTypeId, Material> _materials;
+
+        public Material Get(MaterialTypeId id) => 
+            _materials[id];
     }
 }

@@ -8,13 +8,9 @@ namespace CodeBase.UI.Windows
     {
         private readonly Dictionary<WindowTypeId, Window> _windows;
         private readonly Dictionary<WindowTypeId, Window> _hudWindows;
-        private readonly List<Window> _allWindows;
 
-        public WindowService(WindowProvider windowProvider)
-        {
+        public WindowService(WindowProvider windowProvider) => 
             _windows = windowProvider.Windows;
-            _allWindows = windowProvider.AllWindows;
-        }
 
         public void Close(WindowTypeId windowTypeId) =>
             _windows[windowTypeId].Close(true);
@@ -24,7 +20,7 @@ namespace CodeBase.UI.Windows
 
         public void CloseAll()
         {
-            foreach (var window in _allWindows) 
+            foreach (var window in _windows.Values) 
                 window.Close(false);
         }
     }

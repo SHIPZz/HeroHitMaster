@@ -10,10 +10,10 @@ namespace CodeBase.Gameplay.Spawners
         private readonly List<EnemySpawner> _enemySpawners;
         private readonly EnemyConfigurator _enemyConfigurator;
 
-        public EnemyConfiguratorMediator(EnemySpawnersProvider enemySpawnersProvider,
+        public EnemyConfiguratorMediator(IProvider<List<EnemySpawner>> enemySpawnersProvider,
             EnemyConfigurator enemyConfigurator)
         {
-            _enemySpawners = enemySpawnersProvider.EnemySpawners;
+            _enemySpawners = enemySpawnersProvider.Get();
             _enemyConfigurator = enemyConfigurator;
         }
 

@@ -6,10 +6,11 @@ using UnityEngine;
 
 namespace CodeBase.Services.Providers
 {
-    public class LocationProvider : SerializedMonoBehaviour
+    public class LocationProvider : SerializedMonoBehaviour, IProvider<LocationTypeId, Transform>
     {
         [OdinSerialize] private Dictionary<LocationTypeId, Transform> _values;
 
-        public Dictionary<LocationTypeId, Transform> Values => _values;
+        public Transform Get(LocationTypeId id) =>
+            _values[id];
     }
 }
