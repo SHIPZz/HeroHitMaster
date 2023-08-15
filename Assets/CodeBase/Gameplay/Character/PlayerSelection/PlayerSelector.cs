@@ -1,7 +1,5 @@
 ﻿using CodeBase.Enums;
-using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Character;
-using UnityEngine;
 
 namespace CodeBase.Gameplay.Character.PlayerSelection
 {

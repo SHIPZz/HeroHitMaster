@@ -10,7 +10,7 @@
         ThrowingIceCreamShooter = 5,
         ThrowingTridentShooter = 6,
         ThrowingHammerShooter = 7,
-        ThrowingDynamiteShooter,
-        FreezeWeapon
+        ThrowingDynamiteShooter = 8,
+        FreezeWeapon = 9,
     }
 }

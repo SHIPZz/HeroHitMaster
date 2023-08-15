@@ -10,6 +10,8 @@
         Victory,
         Hud,
         Play,
-        Loading
+        Loading,
+        Buy,
+        NotEnoughMoney
     }
 }

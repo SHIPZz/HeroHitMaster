@@ -2,7 +2,10 @@
 using CodeBase.Gameplay.Character.PlayerSelection;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
+using CodeBase.UI.ShopScrollRects;
+using CodeBase.UI.ShopScrollRects.ShopScrollUnderlines;
 using CodeBase.UI.Slider;
+using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
@@ -25,8 +28,10 @@ namespace CodeBase.Installers.UI
         [SerializeField] private ShopView _shopView;
         [SerializeField] private SettingView _settingView;
         [SerializeField] private DeathView _deathView;
-        [SerializeField] private SliderLoading _sliderLoading;
-        [SerializeField] private TextMeshProUGUI _sliderLoadingText;
+        [SerializeField] private WalletUI _walletUI;
+        [SerializeField] private ScrollRectProvider _scrollRectProvider;
+        [SerializeField] private ScrollImagesProvider _scrollImageProvider;
+        [SerializeField] private ScrollNameUnderlinesProvider _scrollNameUnderlinesProvider;
 
         public override void InstallBindings()
         {
@@ -41,6 +46,52 @@ namespace CodeBase.Installers.UI
             BindSettingUi();
             BindDeathUI();
             BindPlayUI();
+            BindWallet();
+            BindScrollUI();
+        }
+
+        private void BindScrollUI()
+        {
+            Container
+                .BindInterfacesTo<ScrollRectProvider>()
+                .FromInstance(_scrollRectProvider);
+
+            Container
+                .BindInterfacesAndSelfTo<ScrollRectPresenter>()
+                .AsSingle();
+
+            Container.Bind<ScrollRectChanger>()
+                .AsSingle();
+
+            Container.Bind<ScrollUnderlineChanger>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesTo<ScrollImagesProvider>()
+                .FromInstance(_scrollImageProvider);
+
+            Container
+                .BindInterfacesAndSelfTo<BlockScrollButtonsOnChange>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<ScrollUnderlinePresenter>()
+                .AsSingle();
+
+            Container.BindInterfacesTo<ScrollNameUnderlinesProvider>()
+                .FromInstance(_scrollNameUnderlinesProvider);
+        }
+
+        private void BindWallet()
+        {
+            Container
+                .BindInterfacesAndSelfTo<WalletPresenter>()
+                .AsSingle();
+
+            Container.Bind<Wallet>()
+                .AsSingle();
+
+            Container.BindInstance(_walletUI);
         }
 
         private void BindPlayUI()
@@ -98,7 +149,8 @@ namespace CodeBase.Installers.UI
         private void BindWeaponIconsProvider()
         {
             Container
-                .BindInstance(_weaponIconsProvider);
+                .BindInterfacesAndSelfTo<WeaponIconsProvider>()
+                .FromInstance(_weaponIconsProvider);
         }
 
         private void BindUIFactory()

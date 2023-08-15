@@ -64,6 +64,13 @@ namespace CodeBase.Installers.GameInstaller
             BindLootStorage();
             BindBlockInputOnLoading();
             BindLootFactory();
+            BindBlockInputOnWindowsOpening();
+        }
+
+        private void BindBlockInputOnWindowsOpening()
+        {
+            Container.BindInterfacesAndSelfTo<BlockShootInputOnUI>()
+                .AsSingle();
         }
 
         private void BindAsSingle<T>() =>
@@ -92,6 +99,7 @@ namespace CodeBase.Installers.GameInstaller
             BindAsSingle<PlayerStaticDataService>();
             BindAsSingle<WeaponStaticDataService>();
             BindAsSingle<BulletEffectStorage>();
+            BindAsSingle<WalletStaticDataService>();
         }
 
         private void BindWeaponShootEffectStorage() =>

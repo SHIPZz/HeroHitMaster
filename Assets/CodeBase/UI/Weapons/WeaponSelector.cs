@@ -30,4 +30,11 @@ namespace CodeBase.UI.Weapons
             NewWeaponChanged?.Invoke(weaponTypeId);
         }
     }
+
+    
+
+    public interface IPaySystemService
+    {
+        bool TryPay(int value);
+    }
 }

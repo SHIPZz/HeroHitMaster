@@ -15,46 +15,46 @@ namespace CodeBase.UI.Windows
 
         [field: SerializeField] public WindowTypeId WindowTypeId { get; private set; }
 
+        public event Action StartedToOpen;
         public event Action Opened;
         public event Action Closed;
 
         private void Awake() => 
             transform.DOScaleX(_startScaleX, _startDuration);
 
-        public void Open() =>
-            DOTween.Sequence().OnComplete(() =>
-            {
-                gameObject.SetActive(true);
-                gameObject.transform.DOScaleX(_targetScaleX, _targetOpenDuration)
-                    .OnComplete(() => Opened?.Invoke());
-            });
+        public void Open()
+        {
+            StartedToOpen?.Invoke();
+            
+            gameObject.SetActive(true);
+            gameObject.transform
+                .DOScaleX(_targetScaleX, _targetOpenDuration)
+                .OnComplete(() => Opened?.Invoke()).SetAutoKill(true);
+        }
 
         public void Close(bool withAnimation)
         {
-            if (CloseWithoutAnimation(withAnimation)) 
-                return;
-
-            DOTween.Sequence().OnComplete(() =>
+            if (!withAnimation)
             {
-                gameObject.transform.DOScaleX(0, _targetCloseDuration)
-                    .OnComplete(() =>
-                    {
-                        gameObject.SetActive(false);
-                        Closed?.Invoke();
-                    });
-            });
+                CloseQuickly();
+                return;
+            }
+
+            gameObject.transform
+                .DOScaleX(0, _targetCloseDuration)
+                .OnComplete(() =>
+                {
+                    gameObject.SetActive(false);
+                    Closed?.Invoke();
+                })
+                .SetAutoKill(true);
         }
 
-        private bool CloseWithoutAnimation(bool withAnimation)
+        private void CloseQuickly()
         {
-            if (withAnimation) 
-                return false;
-            
             transform.DOScaleX(0, 0);
             gameObject.SetActive(false);
             Closed?.Invoke();
-            return true;
-
         }
     }
 }

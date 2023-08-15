@@ -42,7 +42,9 @@ namespace CodeBase.Gameplay.EnemyBodyParts
             });
         }
 
-        public void Disable() => 
-            gameObject.SetActive(false);
+        public void Disable()
+        {
+            // gameObject.SetActive(false);
+        }
     }
 }

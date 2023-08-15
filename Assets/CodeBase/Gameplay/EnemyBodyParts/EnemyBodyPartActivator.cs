@@ -17,14 +17,17 @@ namespace CodeBase.Gameplay.EnemyBodyParts
 
         public void Disable() =>
             _canActivate = false;
-        
+
         public void ActivateWithDisableDelay(Enemy enemy)
         {
-            if(!_canActivate)
+            if (!_canActivate)
                 return;
-            
+
             EnemyBodyPart enemyBodyPart = _enemyBodyPartStorage.Get(enemy.EnemyTypeId);
-            enemyBodyPart.Enable();
+            
+            if (enemyBodyPart.isActiveAndEnabled)
+                enemyBodyPart.Enable();
+
             DOTween.Sequence().AppendInterval(DisableDelay).OnComplete(enemyBodyPart.Disable);
         }
     }

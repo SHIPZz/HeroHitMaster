@@ -29,8 +29,7 @@ namespace CodeBase.UI.Windows.Shop
 
         private void Open()
         {
-            _windowService.CloseAll();
-            _windowService.Open(WindowTypeId.Shop);
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Shop));
         }
 
         private void Close() => 

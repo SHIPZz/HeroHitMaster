@@ -21,15 +21,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 
         public void Tick()
         {
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                _inputService.PlayerFire.Disable();
-                return;
-            }
-            
-            _inputService.PlayerFire.Enable();
-            
-            if (!_inputService.PlayerFire.WasPressedThisFrame())
+            if (!_inputService.PlayerFire.WasPressedThisFrame() || EventSystem.current.IsPointerOverGameObject())
                 return;
 
             Vector2 mousePosition = _inputService.MousePosition;

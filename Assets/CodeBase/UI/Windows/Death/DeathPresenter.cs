@@ -53,8 +53,8 @@ namespace CodeBase.UI.Windows.Death
 
         private void ShowDeathWindow()
         {
-            _windowService.CloseAll();
-            _windowService.Open(WindowTypeId.Death);
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Death));
+            // _windowService.Open(WindowTypeId.Death);
         }
     }
 }

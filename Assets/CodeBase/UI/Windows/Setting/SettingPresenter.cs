@@ -29,8 +29,8 @@ namespace CodeBase.UI.Windows.Setting
 
         private void Open()
         {
-            _windowService.CloseAll();
-            _windowService.Open(WindowTypeId.SettingWindow);
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.SettingWindow));
+            // _windowService.Open(WindowTypeId.SettingWindow);
         }
 
         private void Close() => 
