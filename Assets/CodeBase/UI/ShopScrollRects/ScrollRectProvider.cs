@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace CodeBase.UI.ShopScrollRects
 {
     public class ScrollRectProvider : SerializedMonoBehaviour, IProvider<Dictionary<ScrollRectTypeId, ScrollRect>>,
-        IProvider<List<ScrollRectView>>
+        IProvider<List<ScrollRectView>>, IProvider<ScrollRectTypeId, ScrollRect>
     {
         [OdinSerialize] private Dictionary<ScrollRectTypeId, ScrollRect> _scrollRects;
         [SerializeField] private List<ScrollRectView> _scrollRectViews;
@@ -24,5 +24,8 @@ namespace CodeBase.UI.ShopScrollRects
 
         List<ScrollRectView> IProvider<List<ScrollRectView>>.Get() =>
             _scrollRectViews;
+
+        public ScrollRect Get(ScrollRectTypeId id) => 
+            _scrollRects[id];
     }
 }

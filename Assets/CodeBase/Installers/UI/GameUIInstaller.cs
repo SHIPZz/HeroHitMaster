@@ -7,6 +7,7 @@ using CodeBase.UI.ShopScrollRects.ShopScrollUnderlines;
 using CodeBase.UI.Slider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
+using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
 using CodeBase.UI.Windows.Death;
@@ -32,6 +33,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private ScrollRectProvider _scrollRectProvider;
         [SerializeField] private ScrollImagesProvider _scrollImageProvider;
         [SerializeField] private ScrollNameUnderlinesProvider _scrollNameUnderlinesProvider;
+        [SerializeField] private ShopWeaponInfo _shopWeaponInfo;
 
         public override void InstallBindings()
         {
@@ -48,6 +50,19 @@ namespace CodeBase.Installers.UI
             BindPlayUI();
             BindWallet();
             BindScrollUI();
+            BindShopWeaponUI();
+        }
+
+        private void BindShopWeaponUI()
+        {
+            Container
+                .BindInterfacesAndSelfTo<ShopWeaponPresenter>()
+                .AsSingle();
+
+            Container.Bind<ShopWeaponInfoWriter>()
+                .AsSingle();
+            
+            Container.BindInstance(_shopWeaponInfo);
         }
 
         private void BindScrollUI()
