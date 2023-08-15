@@ -24,11 +24,11 @@ namespace CodeBase.Gameplay.Bullet
         private float _distance;
 
         [Inject]
-        private void Construct(TriggerObserver triggerObserver, 
-            IProvider<Dictionary<MaterialTypeId, Material>> materialProvider,
+        private void Construct(TriggerObserver triggerObserver,
+            IProvider<MaterialTypeId, Material> materialProvider,
             BulletStaticDataService bulletStaticDataService)
         {
-            _material = materialProvider.Get()[_materialTypeId];
+            _material = materialProvider.Get(_materialTypeId);
             _damage = bulletStaticDataService.GetBy(BulletTypeId).Damage;
             TriggerObserver = triggerObserver;
         }
@@ -56,7 +56,7 @@ namespace CodeBase.Gameplay.Bullet
 
             if (other.gameObject.TryGetComponent(out Animator animator))
                 animator.enabled = false;
-            
+
             damageable.TakeDamage(_damage);
             this.SetActive(gameObject, false, 0.1f);
         }

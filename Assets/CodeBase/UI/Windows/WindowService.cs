@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Services.Providers;
+using JetBrains.Annotations;
 
 namespace CodeBase.UI.Windows
 {
@@ -12,9 +14,15 @@ namespace CodeBase.UI.Windows
         public WindowService(WindowProvider windowProvider) => 
             _windows = windowProvider.Windows;
 
-        public void Close(WindowTypeId windowTypeId) =>
+        public void Close(WindowTypeId windowTypeId, [CanBeNull] Action callback)
+        {
+            _windows[windowTypeId].Closed += callback;
             _windows[windowTypeId].Close(true);
-    
+        }
+        
+        public void Close(WindowTypeId windowTypeId) => 
+        _windows[windowTypeId].Close(true);
+
         public void Open(WindowTypeId windowTypeId) =>
             _windows[windowTypeId].Open();
 

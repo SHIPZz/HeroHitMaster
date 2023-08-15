@@ -2,9 +2,9 @@
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.MaterialChanger;
+using CodeBase.Gameplay.Spawners;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -34,6 +34,20 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.Bind<EnemyAnimator>().AsSingle();
             Container.Bind<IMaterialChanger>().To<SkinnedMaterialChanger>()
                 .FromComponentOn(gameObject).AsSingle();
+            Container
+                .BindInterfacesAndSelfTo<ActivateEnemyMovementOnFire>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<EnemyBodyPartMediator>()
+                .AsSingle();
+                      
+            Container
+                .BindInterfacesAndSelfTo<EnemyDeathEffectOnDestruction>()
+                .AsSingle();
+
+            Container.Bind<EnemyBodyPartPositionSetter>().AsSingle();
+            Container.Bind<EnemyBodyPartActivator>().AsSingle();
         }
 
         private void BindInstances()

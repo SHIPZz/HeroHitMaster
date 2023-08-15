@@ -2,13 +2,11 @@
 using CodeBase.Gameplay.Character.PlayerSelection;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
-using CodeBase.UI;
 using CodeBase.UI.Slider;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
 using CodeBase.UI.Windows.Death;
-using CodeBase.UI.Windows.Loading;
 using CodeBase.UI.Windows.Play;
 using CodeBase.UI.Windows.Setting;
 using CodeBase.UI.Windows.Shop;
@@ -43,18 +41,6 @@ namespace CodeBase.Installers.UI
             BindSettingUi();
             BindDeathUI();
             BindPlayUI();
-            BindLoadingUI();
-        }
-
-        private void BindLoadingUI()
-        {
-            Container
-                .BindInterfacesAndSelfTo<LoadingWindowPresenter>()
-                .AsSingle();
-
-            Container.BindInterfacesAndSelfTo<SliderLoadingPresenter>().AsSingle();
-            Container.BindInstance(_sliderLoading);
-            Container.BindInstance(_sliderLoadingText);
         }
 
         private void BindPlayUI()

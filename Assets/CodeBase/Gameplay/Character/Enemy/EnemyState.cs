@@ -29,6 +29,9 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private void Update()
         {
+            if (_playerProvider.Get() is null)
+                return;
+            
             if (!(Vector3.Distance(transform.position, _playerProvider.Get().transform.position) <
                   _targetStopDistance))
                 return;

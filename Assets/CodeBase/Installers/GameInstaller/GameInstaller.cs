@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using CodeBase.Gameplay.BlockInput;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
-using CodeBase.Gameplay.EffectPlaying;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.Infrastructure;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
@@ -50,23 +50,18 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemyFactory();
             BindSoundStorage();
             BindSoundFactory();
-            BindEnemyStorage();
-            BindEnemyBodyPartActivation();
             BindEnemyBodyPartStorage();
-            BindEnemyConfiguration();
             BindEnemySpawnerProvider();
             BindMaterialProvider();
             BindSetterWeapon();
             BindBulletMovementStorage();
             BindDestroyableObjectStorages();
             BindEnemyEffectDataStorage();
-            BindEnemiesDeathEffectOnQuickDestruction();
             BindWeaponShootEffectStorage();
             BindStaticDataServices();
             BindEnemyQuantityZonesProvider();
             BindTargetMovementStorage();
             BindLootStorage();
-            BindActivateEnemiesMovementOnFire();
             BindBlockInputOnLoading();
             BindLootFactory();
         }
@@ -82,11 +77,6 @@ namespace CodeBase.Installers.GameInstaller
         private void BindBlockInputOnLoading() =>
             Container
                 .BindInterfacesAndSelfTo<EnableInputOnPlayWindow>()
-                .AsSingle();
-
-        private void BindActivateEnemiesMovementOnFire() =>
-            Container
-                .BindInterfacesAndSelfTo<ActivateEnemiesMovementOnFire>()
                 .AsSingle();
 
         private void BindLootStorage() =>
@@ -106,9 +96,6 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindWeaponShootEffectStorage() =>
             BindAsSingle<WeaponShootEffectStorage>();
-
-        private void BindEnemiesDeathEffectOnQuickDestruction() =>
-            BindAsSingle<EnemiesDeathEffectOnDestruction>();
 
         private void BindEnemyEffectDataStorage() =>
             BindAsSingle<EnemyEffectDataStorage>();
@@ -138,29 +125,9 @@ namespace CodeBase.Installers.GameInstaller
                 .FromInstance(_enemySpawnersProvider).AsSingle();
         }
 
-        private void BindEnemyConfiguration()
-        {
-            BindAsSingle<EnemyConfigurator>();
-            Container.BindInterfacesAndSelfTo<EnemyConfiguratorMediator>().AsSingle();
-        }
-
         private void BindEnemyBodyPartStorage() =>
             Container
                 .BindInstance(_enemyBodyPartStorage);
-
-        private void BindEnemyBodyPartActivation()
-        {
-            BindAsSingle<EnemyBodyPartPositionSetter>();
-            BindAsSingle<EnemyBodyPartActivator>();
-            Container.BindInterfacesAndSelfTo<EnemyBodyPartMediator>().AsSingle();
-        }
-
-        private void BindEnemyStorage()
-        {
-            Container.Bind<IEnemyStorage>()
-                .To<EnemyStorage>()
-                .AsSingle();
-        }
 
         private void BindSoundFactory() =>
             Container.Bind<IEffectFactory>()

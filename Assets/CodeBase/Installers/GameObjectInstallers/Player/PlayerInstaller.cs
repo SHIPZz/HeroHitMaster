@@ -1,9 +1,9 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Bullet.Web;
 using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Character.Players.Shoot;
-using CodeBase.Gameplay.EffectPlaying;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;

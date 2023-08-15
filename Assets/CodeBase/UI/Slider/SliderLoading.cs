@@ -1,5 +1,4 @@
 ﻿using System;
-using DG.Tweening;
 using UnityEngine;
 
 namespace CodeBase.UI.Slider
@@ -14,11 +13,8 @@ namespace CodeBase.UI.Slider
         private void Awake() => 
             _slider = GetComponent<UnityEngine.UI.Slider>();
 
-        private void OnEnable()
-        {
-            _slider.DOValue(_slider.maxValue, 2f).OnComplete(() => Loaded?.Invoke());
+        private void OnEnable() => 
             _slider.onValueChanged.AddListener(OnValueChanged);
-        }
 
         private void OnDisable() =>
             _slider.onValueChanged.RemoveListener(OnValueChanged);

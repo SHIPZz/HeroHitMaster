@@ -27,10 +27,13 @@ namespace CodeBase.UI.Windows.Setting
             _settingView.ClosedButtonClicked -= Close;
         }
 
-        private void Open() => 
+        private void Open()
+        {
+            _windowService.CloseAll();
             _windowService.Open(WindowTypeId.SettingWindow);
+        }
 
         private void Close() => 
-            _windowService.Close(WindowTypeId.SettingWindow);
+        _windowService.Close(WindowTypeId.SettingWindow, () => _windowService.Open(WindowTypeId.Play));
     }
 }

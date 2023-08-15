@@ -16,5 +16,6 @@ namespace CodeBase.ScriptableObjects.Enemy
         public int Damage = 1000;
         public EnemyTypeId EnemyTypeId;
         public AssetReferenceGameObject PrefabReferencee;
+        public GameObject Prefab;
     }
 }

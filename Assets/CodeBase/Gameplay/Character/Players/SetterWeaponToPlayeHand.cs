@@ -12,7 +12,7 @@ namespace CodeBase.Gameplay.Character.Players
     {
         private readonly Dictionary<PlayerTypeId, PlayerWithWeaponInHandTypeId> _playersIdsWithWeaponInHand;
         private readonly List<Player> _playersWithWeaponsInHand = new();
-        private readonly List<WeaponHolderView> _weaponViewStorages = new();
+        private readonly List<WeaponHolderView> _weaponViews = new();
         private readonly WeaponSelector _weaponSelector;
 
         public SetterWeaponToPlayerHand(PlayerSettings playerSettings, WeaponSelector weaponSelector,
@@ -33,7 +33,7 @@ namespace CodeBase.Gameplay.Character.Players
 
         private void SetNewWeapon(WeaponTypeId weaponTypeId)
         {
-            foreach (var weaponViewStorage in _weaponViewStorages)
+            foreach (var weaponViewStorage in _weaponViews)
             {
                 weaponViewStorage.TryShow(weaponTypeId);
             }
@@ -47,7 +47,7 @@ namespace CodeBase.Gameplay.Character.Players
                     continue;
 
                 _playersWithWeaponsInHand.Add(player);
-                _weaponViewStorages.Add(player.GetComponentInChildren<WeaponHolderView>());
+                _weaponViews.Add(player.GetComponentInChildren<WeaponHolderView>());
             }
         }
     }

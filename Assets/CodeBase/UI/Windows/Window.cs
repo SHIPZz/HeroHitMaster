@@ -36,9 +36,12 @@ namespace CodeBase.UI.Windows
 
             DOTween.Sequence().OnComplete(() =>
             {
-                gameObject.SetActive(false);
                 gameObject.transform.DOScaleX(0, _targetCloseDuration)
-                    .OnComplete(() => Closed?.Invoke());
+                    .OnComplete(() =>
+                    {
+                        gameObject.SetActive(false);
+                        Closed?.Invoke();
+                    });
             });
         }
 

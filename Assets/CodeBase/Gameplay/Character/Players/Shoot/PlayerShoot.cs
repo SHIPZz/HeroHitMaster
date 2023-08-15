@@ -36,8 +36,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
             Vector3 targetVector;
             
             targetVector = !Physics.Raycast(ray, out RaycastHit hit) ? ray.GetPoint(70f) : hit.point;
-            
-            
+
             weapon.Shoot(targetVector, _startShootPosition.position);
         }
     }

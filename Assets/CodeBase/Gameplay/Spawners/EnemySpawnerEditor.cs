@@ -10,7 +10,7 @@ namespace CodeBase.Gameplay.Spawners
         public static void RenderCustomGizmo(EnemySpawner spawner, GizmoType gizmoType)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(spawner.transform.position, 0.5f);
+            Gizmos.DrawSphere(spawner.transform.position, 1f);
         }
     }
 }

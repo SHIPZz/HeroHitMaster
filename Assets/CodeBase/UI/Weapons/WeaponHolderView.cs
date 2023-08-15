@@ -20,7 +20,6 @@ namespace CodeBase.UI.Weapons
         {
             if (!_weaponViews.TryGetValue(weaponTypeId, out var weaponViewInHand))
             {
-                Debug.Log("Not found weapons");
                 return false;
             }
 

@@ -42,9 +42,6 @@ namespace CodeBase.Gameplay.Character.Enemy
             _triggerObserver.Entered += SetTarget;
         }
 
-        public void InitMovement() =>
-            _isInitialized = true;
-
         public void Block()
         {
             if(!_navMeshAgent.isActiveAndEnabled)

@@ -51,7 +51,7 @@ namespace CodeBase.Gameplay.Bullet.Web
             {
                 _distanceToFloor = floorHit.distance;
 
-                if (floorHit.collider.gameObject.layer == LayerIdConstant.Floor)
+                if (floorHit.collider.gameObject.layer == LayerId.Floor)
                     _canRotateToFloor = true;
 
                 if (_distanceToFloor < TargetDistanceToFloor && !_isRotating && _canRotateToFloor)
@@ -65,7 +65,7 @@ namespace CodeBase.Gameplay.Bullet.Web
         {
             if (Physics.Raycast(transform.position, target, out RaycastHit wallHit, MaxWallHitDistance))
             {
-                if (wallHit.collider.gameObject.layer == LayerIdConstant.Wall)
+                if (wallHit.collider.gameObject.layer == LayerId.Wall)
                     _canRotateToWall = true;
 
                 _wallDistance = wallHit.distance;

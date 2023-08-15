@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-using CodeBase.Enums;
+﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Character.Enemy;
-using CodeBase.Gameplay.EffectPlaying;
-using CodeBase.Gameplay.EnemyBodyParts;
-using CodeBase.Gameplay.Spawners;
+using CodeBase.Infrastructure;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Character;
-using CodeBase.UI.Slider;
 using CodeBase.UI.Weapons;
-using CodeBase.UI.Windows.Loading;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
@@ -25,29 +19,16 @@ namespace CodeBase.GameInit
         private readonly IProvider<Player> _playerProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly WeaponSelector _weaponSelector;
-        private readonly IProvider<List<EnemySpawner>> _enemySpawnersProvider;
-        private readonly IEnemyStorage _enemyStorage;
-        private readonly EnemiesDeathEffectOnDestruction _enemiesDeathEffectOnDestruction;
-        private readonly ActivateEnemiesMovementOnFire _activateEnemiesMovementOnFire;
-        private EnemyBodyPartMediator _enemyBodyPartMediator;
+        private ILoadingCurtain _loadingCurtain;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
             IProvider<Camera> cameraProvider,
             IProvider<Player> playerProvider,
             IPlayerStorage playerStorage,
-            WeaponSelector weaponSelector,
-            IProvider<List<EnemySpawner>> enemySpawnersProvider,
-            IEnemyStorage enemyStorage,
-            EnemiesDeathEffectOnDestruction enemiesDeathEffectOnDestruction,
-            ActivateEnemiesMovementOnFire activateEnemiesMovementOnFire,
-            EnemyBodyPartMediator enemyBodyPartMediator)
+            WeaponSelector weaponSelector, ILoadingCurtain loadingCurtain)
         {
-            _enemyBodyPartMediator = enemyBodyPartMediator;
-            _activateEnemiesMovementOnFire = activateEnemiesMovementOnFire;
-            _enemiesDeathEffectOnDestruction = enemiesDeathEffectOnDestruction;
-            _enemyStorage = enemyStorage;
-            _enemySpawnersProvider = enemySpawnersProvider;
+            _loadingCurtain = loadingCurtain;
             _weaponSelector = weaponSelector;
             _playerCameraFactory = playerCameraFactory;
             _locationProvider = locationProvider;
@@ -56,24 +37,13 @@ namespace CodeBase.GameInit
             _playerStorage = playerStorage;
         }
 
-        public async void Initialize()
-        { 
-            PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            await _enemyStorage.InitTask;
-
-            List<Enemy> enemies = _enemyStorage.GetAll();
-            InitEnemies(enemies);
-            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
-            InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
-            _playerProvider.Set(player);
-        }
-
-        private void InitEnemies(List<Enemy> enemies)
+        public void Initialize()
         {
-            _enemiesDeathEffectOnDestruction.Init(enemies);
-            _activateEnemiesMovementOnFire.Init(enemies);
-            _enemySpawnersProvider.Get().ForEach(x => x.Init(_enemyStorage));
-            _enemyBodyPartMediator.Init(enemies);
+            _loadingCurtain.Show();
+            PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
+            Player player = InitializeInitialPlayer(PlayerTypeId.Spider);
+            InitializeInitialWeapon(WeaponTypeId.SmudgeWebShooter);
+            _playerProvider.Set(player);
         }
 
         private void InitializeInitialWeapon(WeaponTypeId weaponTypeId) =>

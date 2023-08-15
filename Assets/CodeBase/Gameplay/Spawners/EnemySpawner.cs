@@ -2,8 +2,9 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Services.Storages.Character;
+using CodeBase.Services.Factories;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.Spawners
 {
@@ -12,15 +13,23 @@ namespace CodeBase.Gameplay.Spawners
         [SerializeField] private EnemyTypeId _enemyTypeId;
         [SerializeField] private TriggerObserver _aggroZone;
 
+        private EnemyFactory _enemyFactory;
+
         public event Action Destroyed;
         public event Action<Enemy, TriggerObserver> Spawned;
 
-        public void Init(IEnemyStorage enemyStorage)
+        [Inject]
+        private void Construct(EnemyFactory enemyFactory)
         {
-            Enemy enemy =  enemyStorage.Get(_enemyTypeId);
+            _enemyFactory = enemyFactory;
+        }
+
+        public void Init(Action<Enemy, TriggerObserver> callback)
+        {
+            Enemy enemy = _enemyFactory.CreateBy(_enemyTypeId);
             enemy.gameObject.transform.position = transform.position;
             enemy.Dead += Disable;
-            Spawned?.Invoke(enemy,_aggroZone);
+            callback?.Invoke(enemy, _aggroZone);
         }
 
         private void Disable(Enemy enemy)

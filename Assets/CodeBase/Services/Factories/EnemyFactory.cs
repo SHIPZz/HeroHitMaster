@@ -27,28 +27,37 @@ namespace CodeBase.Services.Factories
             _diContainer = diContainer;
         }
 
-        public async UniTask<Dictionary<EnemyTypeId, Enemy>> CreateAll()
+        public Enemy CreateBy(EnemyTypeId enemyTypeId)
         {
-            var enemies = new Dictionary<EnemyTypeId, Enemy>();
-            
-            foreach (var enemyData in _enemyStaticDataService.GetAll())
-            {
-                Enemy enemy = await CreateBy(enemyData.EnemyTypeId);
-                enemies[enemy.EnemyTypeId] = enemy;
-            }
-
-            return enemies;
-        }
-
-        private async UniTask<Enemy> CreateBy(EnemyTypeId enemyTypeId)
-        {
-            var prefab = await _assetProvider.Load<GameObject>(_enemyStaticDataService.GetEnemyData(enemyTypeId).PrefabReferencee);
-
-            Enemy enemy = prefab.GetComponent<Enemy>();
-            enemy.gameObject.SetActive(false);
+            var enemy = _enemyStaticDataService.GetEnemyData(enemyTypeId)
+                .Prefab.GetComponent<Enemy>();
             return _diContainer
-                .InstantiatePrefabForComponent<Enemy>(enemy,
+                .InstantiatePrefabForComponent<Enemy>(enemy, 
                 _locationProvider.Get(LocationTypeId.EnemyParent));
         }
+
+        // public async UniTask<Dictionary<EnemyTypeId, Enemy>> CreateAll()
+        // {
+        //     var enemies = new Dictionary<EnemyTypeId, Enemy>();
+        //     
+        //     foreach (var enemyData in _enemyStaticDataService.GetAll())
+        //     {
+        //         Enemy enemy = await CreateBy(enemyData.EnemyTypeId);
+        //         enemies[enemy.EnemyTypeId] = enemy;
+        //     }
+        //
+        //     return enemies;
+        // }
+
+        // public async UniTask<Enemy> CreateBy(EnemyTypeId enemyTypeId)
+        // {
+        //     var prefab = await _assetProvider.Load<GameObject>(_enemyStaticDataService.GetEnemyData(enemyTypeId).PrefabReferencee);
+        //
+        //     Enemy enemy = prefab.GetComponent<Enemy>();
+        //     enemy.gameObject.SetActive(false);
+        //     return _diContainer
+        //         .InstantiatePrefabForComponent<Enemy>(enemy,
+        //         _locationProvider.Get(LocationTypeId.EnemyParent));
+        // }
     }
 }

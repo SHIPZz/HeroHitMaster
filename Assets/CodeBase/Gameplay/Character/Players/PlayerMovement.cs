@@ -25,7 +25,6 @@ namespace CodeBase.Gameplay.Character.Players
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            Debug.Log(_navMeshAgent);
         }
 
         public void MoveToNextZone()
