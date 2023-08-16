@@ -27,10 +27,8 @@ namespace CodeBase.UI.Windows.Shop
             _shopView.ClosedButtonClicked -= Close;
         }
 
-        private void Open()
-        {
-            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Shop));
-        }
+        private void Open() => 
+        _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Shop));
 
         private void Close() => 
             _windowService.Close(WindowTypeId.Shop, () => _windowService.Open(WindowTypeId.Play));

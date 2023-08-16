@@ -9,7 +9,6 @@ namespace CodeBase.UI.ShopScrollRects
     public class ScrollRectChanger
     {
         private ScrollRectTypeId _lastScrollRect;
-        private bool _canChange = true;
         private IProvider<ScrollRectTypeId, List<Image>> _scrollImagesProvider;
         private IProvider<ScrollRectTypeId, ScrollRect> _scrollRectsProvider;
 
@@ -28,7 +27,6 @@ namespace CodeBase.UI.ShopScrollRects
             if (scrollRectTypeId == _lastScrollRect)
                 return;
 
-            _canChange = false;
             Changed?.Invoke(true);
 
             DisableAll(_lastScrollRect);
@@ -38,31 +36,25 @@ namespace CodeBase.UI.ShopScrollRects
 
         private void EnableTargetScroll(ScrollRectTypeId scrollRectTypeId)
         {
+            _scrollRectsProvider.Get(scrollRectTypeId).gameObject.SetActive(true);
             _scrollImagesProvider
                 .Get(scrollRectTypeId)
-                .ForEach(x => Enable(x, scrollRectTypeId));
+                .ForEach(Enable);
         }
 
-        private void Enable(Image image, ScrollRectTypeId scrollRectTypeId)
-        {
-            image.gameObject.SetActive(true);
+        private void Enable(Image image) =>
             image.transform
                 .DOScale(1, 0.5f)
                 .SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
-                    _canChange = true;
-                    _scrollRectsProvider.Get(scrollRectTypeId).gameObject.SetActive(true);
                     Changed?.Invoke(false);
                 });
-        }
 
-        private void DisableAll(ScrollRectTypeId scrollRectTypeId)
-        {
+        private void DisableAll(ScrollRectTypeId scrollRectTypeId) =>
             _scrollImagesProvider
                 .Get(scrollRectTypeId)
                 .ForEach(x => x.transform.DOScale(0, 0f)
                     .OnComplete(() => _scrollRectsProvider.Get(scrollRectTypeId).gameObject.SetActive(false)));
-        }
     }
 }

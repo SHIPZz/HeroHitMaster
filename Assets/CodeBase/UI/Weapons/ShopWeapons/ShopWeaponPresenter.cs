@@ -17,12 +17,12 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         public void Initialize()
         {
-            _weaponSelectorViews.ForEach(x => x.Choosed += _shopWeaponInfoWriter.Write);
+            _weaponSelectorViews.ForEach(x => x.Choosed += _shopWeaponInfoWriter.TryWrite);
         }
 
         public void Dispose()
         {
-            _weaponSelectorViews.ForEach(x => x.Choosed -= _shopWeaponInfoWriter.Write);
+            _weaponSelectorViews.ForEach(x => x.Choosed -= _shopWeaponInfoWriter.TryWrite);
         }
     }
 }
