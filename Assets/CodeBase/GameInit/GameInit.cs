@@ -3,8 +3,12 @@ using CodeBase.Gameplay.Camera;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
+using CodeBase.Services.SaveSystems;
+using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Character;
+using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
+using CodeBase.UI.Weapons.ShopWeapons;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
@@ -19,15 +23,24 @@ namespace CodeBase.GameInit
         private readonly IProvider<Player> _playerProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly WeaponSelector _weaponSelector;
-        private ILoadingCurtain _loadingCurtain;
+        private readonly ILoadingCurtain _loadingCurtain;
+        private readonly WalletPresenter _walletPresenter;
+        private readonly ISaveSystem _saveSystem;
+        private ShopWeaponPresenter _shopWeaponPresenter;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
             IProvider<Camera> cameraProvider,
             IProvider<Player> playerProvider,
             IPlayerStorage playerStorage,
-            WeaponSelector weaponSelector, ILoadingCurtain loadingCurtain)
+            WeaponSelector weaponSelector, 
+            ILoadingCurtain loadingCurtain, 
+            WalletPresenter walletPresenter,
+            ISaveSystem saveSystem, ShopWeaponPresenter shopWeaponPresenter)
         {
+            _shopWeaponPresenter = shopWeaponPresenter;
+            _saveSystem = saveSystem;
+            _walletPresenter = walletPresenter;
             _loadingCurtain = loadingCurtain;
             _weaponSelector = weaponSelector;
             _playerCameraFactory = playerCameraFactory;
@@ -37,12 +50,18 @@ namespace CodeBase.GameInit
             _playerStorage = playerStorage;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
             _loadingCurtain.Show();
+            PlayerPrefs.DeleteAll();
+            var playerData = await _saveSystem.Load<PlayerData>();
+            playerData.Money = 1000;
+            _saveSystem.Save(playerData);
+            _walletPresenter.Init(playerData.Money);
+            _shopWeaponPresenter.Init(WeaponTypeId.ThrowingKnifeShooter);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Player player = InitializeInitialPlayer(PlayerTypeId.Spider);
-            InitializeInitialWeapon(WeaponTypeId.SmudgeWebShooter);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
+            InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
             _playerProvider.Set(player);
         }
 

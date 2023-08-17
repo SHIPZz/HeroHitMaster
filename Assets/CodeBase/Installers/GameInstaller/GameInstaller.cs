@@ -7,7 +7,7 @@ using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
-using CodeBase.Services.SaveSystems.Sound;
+using CodeBase.Services.SaveSystems.SaveTriggers;
 using CodeBase.Services.Storages.Bullet;
 using CodeBase.Services.Storages.Character;
 using CodeBase.Services.Storages.ObjectParts;
@@ -63,7 +63,13 @@ namespace CodeBase.Installers.GameInstaller
             BindBlockInputOnLoading();
             BindLootFactory();
             BindBlockInputOnWindowsOpening();
+            BindSaveTriggers();
+        }
+
+        private void BindSaveTriggers()
+        {
             Container.BindInterfacesAndSelfTo<SoundSaveOnTrigger>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PurchasedWeaponsSaveTrigger>().AsSingle();
         }
 
         private void BindBlockInputOnWindowsOpening()

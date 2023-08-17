@@ -1,5 +1,7 @@
 ﻿using System;
 using CodeBase.Enums;
+using CodeBase.Services.SaveSystems;
+using CodeBase.Services.SaveSystems.Data;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Shop
@@ -10,10 +12,12 @@ namespace CodeBase.UI.Windows.Shop
         private readonly WindowService _windowService;
         private readonly ShopMoneyText _shopMoneyText;
         private readonly Wallet.Wallet _wallet;
+        private ISaveSystem _saveSystem;
 
         public ShopPresenter(ShopView shopView, WindowService windowService,
-            ShopMoneyText shopMoneyText, Wallet.Wallet wallet)
+            ShopMoneyText shopMoneyText, Wallet.Wallet wallet, ISaveSystem saveSystem)
         {
+            _saveSystem = saveSystem;
             _wallet = wallet;
             _shopMoneyText = shopMoneyText;
             _shopView = shopView;
@@ -34,9 +38,10 @@ namespace CodeBase.UI.Windows.Shop
             _shopView.ClosedButtonClicked -= Close;
         }
 
-        private void Open()
+        private async void Open()
         {
-            _shopMoneyText.SetMoney(1000);
+            var playerData = await _saveSystem.Load<PlayerData>();
+            _shopMoneyText.SetMoney(playerData.Money);
             _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Shop));
         }
 

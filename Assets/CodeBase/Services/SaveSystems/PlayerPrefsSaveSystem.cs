@@ -6,8 +6,6 @@ namespace CodeBase.Services.SaveSystems
 {
     public class PlayerPrefsSaveSystem : ISaveSystem
     {
-        private const string DataKey = "Data";
-        
         public void Save<T>(T data)
         {
             string jsonData = JsonConvert.SerializeObject(data);

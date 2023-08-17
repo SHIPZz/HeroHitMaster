@@ -5,13 +5,16 @@ namespace CodeBase.UI.Wallet
 {
     public class Wallet
     {
-        private int _money = 1000;
+        private int _money;
         private int _maxMoney;
 
         public event Action<int> MoneyChanged;
 
         public void SetMaxMoney(int maxMoney) =>
             _maxMoney = maxMoney;
+
+        public void SetInitalMoney(int money) =>
+            _money = money;
         
         public void AddMoney(int money)
         {

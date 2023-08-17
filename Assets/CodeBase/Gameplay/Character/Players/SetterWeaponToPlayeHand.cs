@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.PlayerSettings;
+using CodeBase.Services.SaveSystems;
+using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Character;
 using CodeBase.UI.Weapons;
@@ -14,25 +16,32 @@ namespace CodeBase.Gameplay.Character.Players
         private readonly List<Player> _playersWithWeaponsInHand = new();
         private readonly List<WeaponHolderView> _weaponViews = new();
         private readonly WeaponSelector _weaponSelector;
+        private ISaveSystem _saveSystem;
 
         public SetterWeaponToPlayerHand(PlayerSettings playerSettings, WeaponSelector weaponSelector,
-            IPlayerStorage playerStorage)
+            IPlayerStorage playerStorage, ISaveSystem saveSystem)
         {
+            _saveSystem = saveSystem;
             _weaponSelector = weaponSelector;
             _playersIdsWithWeaponInHand = playerSettings.PlayerWithWeaponInHands;
 
             FillLists(playerStorage);
 
-            _weaponSelector.NewWeaponChanged += SetNewWeapon;
+            _weaponSelector.NewWeaponChanged += TrySetNewWeapon;
         }
 
         public void Dispose()
         {
-            _weaponSelector.NewWeaponChanged -= SetNewWeapon;
+            _weaponSelector.NewWeaponChanged -= TrySetNewWeapon;
         }
 
-        private void SetNewWeapon(WeaponTypeId weaponTypeId)
+        private async void TrySetNewWeapon(WeaponTypeId weaponTypeId)
         {
+            var playerData = await _saveSystem.Load<PlayerData>();
+
+            if (!playerData.PurchasedWeapons.Contains(weaponTypeId))
+                return;
+            
             foreach (var weaponViewStorage in _weaponViews)
             {
                 weaponViewStorage.TryShow(weaponTypeId);

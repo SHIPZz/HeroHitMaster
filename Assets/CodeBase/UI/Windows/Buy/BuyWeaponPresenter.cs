@@ -15,6 +15,8 @@ namespace CodeBase.UI.Windows.Buy
         private readonly List<WeaponSelectorView> _selectorViews;
         private WeaponTypeId _weaponId;
 
+        public event Action<WeaponTypeId> Succeeded;
+
         public BuyWeaponPresenter(Wallet.Wallet wallet, BuyButtonView buyButtonView, 
             List<WeaponSelectorView> selectorViews, WeaponStaticDataService weaponStaticDataService)
         {
@@ -42,7 +44,9 @@ namespace CodeBase.UI.Windows.Buy
         private void TryRemoveMoney()
         {
             var cost = _weaponStaticDataService.Get(_weaponId).Price.Value;
-            _wallet.TryRemoveMoney(cost);
+            
+            if(_wallet.TryRemoveMoney(cost))
+                Succeeded?.Invoke(_weaponId);
         }
     }
 }
