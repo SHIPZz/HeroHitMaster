@@ -24,32 +24,6 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             { PriceTypeId.Money, () => false }
         };
 
-        private void SetButtonScale(Button button, bool isInteractable, bool isVisible, bool needAnimation)
-        {
-            button.interactable = isInteractable;
-
-            if (!needAnimation)
-            {
-                button.gameObject.transform.DOScaleX( 0, 0);
-                return;
-            }
-
-            button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay);
-        }
-
-        private void UpdateWeaponInfo(WeaponData weaponData, bool showPrice)
-        {
-            _name.transform.DOScaleX(0, 0f);
-            _name.text = weaponData.Name;
-            _name.transform.DOScaleX(1, 0.2f);
-            SetActivePrice(showPrice);
-
-            if (showPrice)
-            {
-                _price.text = $"<color=#ffdc30> {weaponData.Price.Value.ToString()}</color>";
-            }
-        }
-
         public void DisableBuyButton(WeaponData weaponData)
         {
             if (_priceCheckers[weaponData.Price.PriceTypeId]?.Invoke() == true)
@@ -99,5 +73,31 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         private void SetActivePrice(bool isActive) =>
             _price.transform.parent.gameObject.SetActive(isActive);
+
+        private void SetButtonScale(Button button, bool isInteractable, bool isVisible, bool needAnimation)
+        {
+            button.interactable = isInteractable;
+
+            if (!needAnimation)
+            {
+                button.gameObject.transform.DOScaleX( 0, 0);
+                return;
+            }
+
+            button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay);
+        }
+
+        private void UpdateWeaponInfo(WeaponData weaponData, bool showPrice)
+        {
+            _name.transform.DOScaleX(0, 0f);
+            _name.text = weaponData.Name;
+            _name.transform.DOScaleX(1, 0.2f);
+            SetActivePrice(showPrice);
+
+            if (showPrice)
+            {
+                _price.text = $"<color=#ffdc30> {weaponData.Price.Value.ToString()}</color>";
+            }
+        }
     }
 }
