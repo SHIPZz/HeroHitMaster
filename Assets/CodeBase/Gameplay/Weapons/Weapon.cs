@@ -9,23 +9,23 @@ namespace CodeBase.Gameplay.Weapons
 {
     public class Weapon : MonoBehaviour, IInitializable
     {
-        protected IBulletMovement BulletMovement;
         [field: SerializeField] public WeaponTypeId WeaponTypeId { get; protected set; }
 
+        protected IBulletMovement BulletMovement;
         protected float ReturnBulletDelay = 15f;
         protected BulletStorage _bulletStorage;
-        protected BulletMovementStorage BulletmovementStorage;
+        protected BulletMovementStorage BulletMovementStorage;
         
         [Inject]
         private void Construct(BulletStorage bulletStorage, BulletMovementStorage bulletMovementStorage)
         {
             _bulletStorage = bulletStorage;
-            BulletmovementStorage = bulletMovementStorage;
+            BulletMovementStorage = bulletMovementStorage;
         }
         
         public virtual void Initialize()
         {
-            Init(WeaponTypeId, BulletmovementStorage.GetBulletMovementBy(WeaponTypeId));
+            Init(WeaponTypeId, BulletMovementStorage.GetBulletMovementBy(WeaponTypeId));
         }
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)

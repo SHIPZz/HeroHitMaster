@@ -1,4 +1,7 @@
-﻿public interface IExit
+﻿namespace CodeBase.Infrastructure
 {
-    void Exit();
+    public interface IExit
+    {
+        void Exit();
+    }
 }

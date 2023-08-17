@@ -1,4 +1,7 @@
-﻿public interface IEnter
+﻿namespace CodeBase.Infrastructure
 {
-    void Enter();
+    public interface IEnter
+    {
+        void Enter();
+    }
 }

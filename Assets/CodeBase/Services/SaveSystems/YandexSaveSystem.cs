@@ -1,40 +1,37 @@
 ﻿using Agava.YandexGames;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace CodeBase.Services.SaveSystems
 {
     public class YandexSaveSystem : ISaveSystem
     {
         private bool _isSaveDataReceived;
-        private WorldData _worldData;
+        private object _jsonData;
 
-        public void Save(WorldData worldData)
+        public void Save<T>(T data)
         {
-            string data = JsonUtility.ToJson(worldData);
+            string jsonData = JsonConvert.SerializeObject(data);
 
-            PlayerAccount.SetCloudSaveData(data);
+            PlayerAccount.SetCloudSaveData(jsonData);
         }
 
-        public async UniTask<WorldData> Load()
+        public async UniTask<T> Load<T>() where T : new()
         {
-            PlayerAccount.GetCloudSaveData(OnSuccessCallback);
+            PlayerAccount.GetCloudSaveData(OnSuccessCallback<T>);
 
-            while (_isSaveDataReceived == false)
+            while (!_isSaveDataReceived)
             {
                 await UniTask.Yield();
             }
 
             _isSaveDataReceived = false;
-            return _worldData;
+            return (T)_jsonData;
         }
 
-        private WorldData ConvertJsonToGameData(string data) =>
-            string.IsNullOrEmpty(data) ? new WorldData() : JsonUtility.FromJson<WorldData>(data);
-
-        private void OnSuccessCallback(string data)
+        private void OnSuccessCallback<T>(string data)
         {
-            _worldData = ConvertJsonToGameData(data);
+            _jsonData = JsonConvert.DeserializeObject<T>(data);
             _isSaveDataReceived = true;
         }
     }

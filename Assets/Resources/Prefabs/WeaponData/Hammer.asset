@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   ShootDelay: 0.3
-  Price: 300
+  Price:
+    Value: 300
+    PriceTypeId: 1
   Name: Hammer
   WeaponTypeId: 7
   ShootEffect: {fileID: 0}

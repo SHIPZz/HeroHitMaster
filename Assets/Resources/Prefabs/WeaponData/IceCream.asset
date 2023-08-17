@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: IceCream
   m_EditorClassIdentifier: 
   ShootDelay: 0.3
-  Price: 0
+  Price:
+    Value: 0
+    PriceTypeId: 0
+    AdQuantity: 2
   Name: Ice cream
   WeaponTypeId: 5
   ShootEffect: {fileID: 0}

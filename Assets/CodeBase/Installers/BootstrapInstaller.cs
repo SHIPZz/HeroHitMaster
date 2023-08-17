@@ -1,10 +1,10 @@
-﻿using CodeBase.Infrastructure;
+﻿using Agava.YandexGames;
+using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Inputs.InputService;
 using CodeBase.Services.Providers.AssetProviders;
-using CodeBase.UI.Slider;
-using UnityEngine.UI;
+using CodeBase.Services.SaveSystems;
 using Zenject;
 
 namespace CodeBase.Installers
@@ -20,6 +20,19 @@ namespace CodeBase.Installers
             BindLoadingCurtain();
             BindGameStateMachine();
             BindStateFactory();
+            BindSaveSystem();
+        }
+
+        private void BindSaveSystem()
+        {
+            // if (PlayerAccount.IsAuthorized)
+            //     Container.Bind<ISaveSystem>()
+            //         .To<YandexSaveSystem>()
+            //         .AsSingle();
+            // else
+                Container.Bind<ISaveSystem>()
+                    .To<PlayerPrefsSaveSystem>()
+                    .AsSingle();
         }
 
         private void BindStateFactory() =>
@@ -40,7 +53,7 @@ namespace CodeBase.Installers
                 .FromInstance(GetComponent<LoadingCurtain>())
                 .AsSingle();
 
-        private void BindCoroutineStarter() => 
+        private void BindCoroutineStarter() =>
             Container.BindInstance(GetComponent<ICoroutineStarter>());
 
         private void BindAdService() =>

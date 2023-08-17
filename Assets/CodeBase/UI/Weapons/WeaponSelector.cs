@@ -2,9 +2,7 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Weapon;
-using UnityEngine;
 
 namespace CodeBase.UI.Weapons
 {

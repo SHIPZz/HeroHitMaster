@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.ScriptableObjects;
+using UnityEngine;
 
 namespace CodeBase.Services.Data
 {

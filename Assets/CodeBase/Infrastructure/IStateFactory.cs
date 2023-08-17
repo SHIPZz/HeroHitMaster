@@ -1,4 +1,7 @@
-﻿public interface IStateFactory
+﻿namespace CodeBase.Infrastructure
 {
-    IState Create<T>() where T : class, IState;
+    public interface IStateFactory
+    {
+        IState Create<T>() where T : class, IState;
+    }
 }

@@ -1,15 +1,13 @@
-using System.Collections.Generic;
 using CodeBase.Gameplay.BlockInput;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
-using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.Weapons;
-using CodeBase.Infrastructure;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
+using CodeBase.Services.SaveSystems.Sound;
 using CodeBase.Services.Storages.Bullet;
 using CodeBase.Services.Storages.Character;
 using CodeBase.Services.Storages.ObjectParts;
@@ -65,6 +63,7 @@ namespace CodeBase.Installers.GameInstaller
             BindBlockInputOnLoading();
             BindLootFactory();
             BindBlockInputOnWindowsOpening();
+            Container.BindInterfacesAndSelfTo<SoundSaveOnTrigger>().AsSingle();
         }
 
         private void BindBlockInputOnWindowsOpening()

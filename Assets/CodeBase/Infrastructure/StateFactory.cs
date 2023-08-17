@@ -1,19 +1,22 @@
 ﻿using Zenject;
 
-public class StateFactory : IStateFactory
+namespace CodeBase.Infrastructure
 {
-    private readonly IInstantiator _instantiator;
-
-    public StateFactory(IInstantiator instantiator)
+    public class StateFactory : IStateFactory
     {
-        _instantiator = instantiator;
-    }
+        private readonly IInstantiator _instantiator;
 
-    public IState Create<T>() where
-        T : class, IState
-    {
-        var state = _instantiator.Instantiate(typeof(T));
+        public StateFactory(IInstantiator instantiator)
+        {
+            _instantiator = instantiator;
+        }
 
-        return state as IState;
+        public IState Create<T>() where
+            T : class, IState
+        {
+            var state = _instantiator.Instantiate(typeof(T));
+
+            return state as IState;
+        }
     }
 }

@@ -1,7 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WalletData", menuName = "Gameplay/Wallet Data")]
-public class WalletData : ScriptableObject
+namespace CodeBase.ScriptableObjects
 {
-    [Range(3000, 10000)] public int MaxMoney = 5000;
+    [CreateAssetMenu(fileName = "WalletData", menuName = "Gameplay/Wallet Data")]
+    public class WalletData : ScriptableObject
+    {
+        [Range(3000, 10000)] public int MaxMoney = 5000;
+    }
 }

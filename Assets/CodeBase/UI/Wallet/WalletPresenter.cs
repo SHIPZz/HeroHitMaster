@@ -14,17 +14,21 @@ namespace CodeBase.UI.Wallet
             _walletUI = walletUI;
             _wallet = wallet;
             _wallet.SetMaxMoney(walletStaticDataService.Get().MaxMoney);
-            _walletUI.SetValue(1000);
         }
 
         public void Initialize()
         {
-            _wallet.MoneyChanged += _walletUI.SetValue;
+            _wallet.MoneyChanged += SetMoney;
         }
 
         public void Dispose()
         {
-            _wallet.MoneyChanged -= _walletUI.SetValue;
+            _wallet.MoneyChanged -= SetMoney;
+        }
+
+        private void SetMoney(int money)
+        {
+            _walletUI.SetValue(money);
         }
     }
 }

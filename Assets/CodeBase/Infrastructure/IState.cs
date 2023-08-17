@@ -1,4 +1,7 @@
-﻿public interface IState
+﻿namespace CodeBase.Infrastructure
 {
+    public interface IState
+    {
     
+    }
 }

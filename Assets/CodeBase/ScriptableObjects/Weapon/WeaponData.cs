@@ -1,4 +1,5 @@
 using CodeBase.Enums;
+using CodeBase.Gameplay.Weapons.Price;
 using UnityEngine;
 
 namespace CodeBase.ScriptableObjects.Weapon
@@ -8,8 +9,7 @@ namespace CodeBase.ScriptableObjects.Weapon
     {
         [Range(0.3f, 1)] public float ShootDelay;
 
-        [Range(0,4000)] public int Price;
-
+        public Price Price;
         public string Name;
         public WeaponTypeId WeaponTypeId;
         public ParticleSystem ShootEffect;

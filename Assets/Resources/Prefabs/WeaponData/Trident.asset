@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Trident
   m_EditorClassIdentifier: 
   ShootDelay: 0.3
-  Price: 0
+  Price:
+    Value: 0
+    PriceTypeId: 0
+    AdQuantity: 1
   Name: Trident
   WeaponTypeId: 6
   ShootEffect: {fileID: 0}

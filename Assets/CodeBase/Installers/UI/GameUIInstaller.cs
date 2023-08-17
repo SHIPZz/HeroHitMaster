@@ -4,17 +4,16 @@ using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.UI.ShopScrollRects;
 using CodeBase.UI.ShopScrollRects.ShopScrollUnderlines;
-using CodeBase.UI.Slider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
+using CodeBase.UI.Windows.Buy;
 using CodeBase.UI.Windows.Death;
 using CodeBase.UI.Windows.Play;
 using CodeBase.UI.Windows.Setting;
 using CodeBase.UI.Windows.Shop;
-using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -34,6 +33,8 @@ namespace CodeBase.Installers.UI
         [SerializeField] private ScrollImagesProvider _scrollImageProvider;
         [SerializeField] private ScrollNameUnderlinesProvider _scrollNameUnderlinesProvider;
         [SerializeField] private ShopWeaponInfo _shopWeaponInfo;
+        [SerializeField] private ShopMoneyText _shopMoneyText;
+        [SerializeField] private BuyButtonView _buyButtonView;
 
         public override void InstallBindings()
         {
@@ -51,6 +52,14 @@ namespace CodeBase.Installers.UI
             BindWallet();
             BindScrollUI();
             BindShopWeaponUI();
+            BindBuyWeaponUI();
+        }
+
+        private void BindBuyWeaponUI()
+        {
+            Container.BindInstance(_buyButtonView);
+            Container.BindInterfacesAndSelfTo<BuyWeaponPresenter>()
+                .AsSingle();
         }
 
         private void BindShopWeaponUI()
@@ -59,9 +68,6 @@ namespace CodeBase.Installers.UI
                 .BindInterfacesAndSelfTo<ShopWeaponPresenter>()
                 .AsSingle();
 
-            Container.Bind<ShopWeaponInfoWriter>()
-                .AsSingle();
-            
             Container.BindInstance(_shopWeaponInfo);
         }
 
@@ -159,6 +165,7 @@ namespace CodeBase.Installers.UI
             Container
                 .BindInterfacesAndSelfTo<ShopPresenter>()
                 .AsSingle();
+            Container.BindInstance(_shopMoneyText);
         }
 
         private void BindWeaponIconsProvider()

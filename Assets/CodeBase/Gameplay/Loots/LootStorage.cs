@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Services.Factories;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Loots

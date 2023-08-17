@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Enums;
@@ -8,33 +7,36 @@ using CodeBase.Services.Providers;
 using UnityEngine;
 using Zenject;
 
-public class LootFactory
+namespace CodeBase.Services.Factories
 {
-    private readonly DiContainer _diContainer;
-    private readonly List<LootData> _lootDatas;
-    private readonly IProvider<LocationTypeId, Transform> _locationProvider;
-
-    public LootFactory(DiContainer diContainer, IProvider<LocationTypeId, Transform> locationProvider)
+    public class LootFactory
     {
-        _locationProvider = locationProvider;
-        _diContainer = diContainer;
-        _lootDatas = Resources.LoadAll<LootData>("Prefabs/LootData")
-            .ToList();
-    }
+        private readonly DiContainer _diContainer;
+        private readonly List<LootData> _lootDatas;
+        private readonly IProvider<LocationTypeId, Transform> _locationProvider;
 
-    public void CreateAll(Action<Dictionary<LootTypeId, GameObject>> lootsCreator)
-    {
-        var loots = new Dictionary<LootTypeId, GameObject>();
-        
-        foreach (var lootData in _lootDatas)
+        public LootFactory(DiContainer diContainer, IProvider<LocationTypeId, Transform> locationProvider)
         {
-            var loot = _diContainer
-                .InstantiatePrefab(lootData.Prefab,
-                _locationProvider.Get(LocationTypeId.LootParent));
-            
-            loots[lootData.LootTypeId] = loot;
+            _locationProvider = locationProvider;
+            _diContainer = diContainer;
+            _lootDatas = Resources.LoadAll<LootData>("Prefabs/LootData")
+                .ToList();
         }
 
-        lootsCreator?.Invoke(loots);
+        public void CreateAll(Action<Dictionary<LootTypeId, GameObject>> lootsCreator)
+        {
+            var loots = new Dictionary<LootTypeId, GameObject>();
+        
+            foreach (var lootData in _lootDatas)
+            {
+                var loot = _diContainer
+                    .InstantiatePrefab(lootData.Prefab,
+                        _locationProvider.Get(LocationTypeId.LootParent));
+            
+                loots[lootData.LootTypeId] = loot;
+            }
+
+            lootsCreator?.Invoke(loots);
+        }
     }
 }

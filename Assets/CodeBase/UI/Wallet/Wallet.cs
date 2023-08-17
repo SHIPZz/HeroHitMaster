@@ -1,12 +1,11 @@
 ﻿using System;
-using CodeBase.Services.Data;
 using UnityEngine;
 
 namespace CodeBase.UI.Wallet
 {
     public class Wallet
     {
-        private int _money;
+        private int _money = 1000;
         private int _maxMoney;
 
         public event Action<int> MoneyChanged;
