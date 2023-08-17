@@ -24,9 +24,16 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             { PriceTypeId.Money, () => false }
         };
 
-        private void SetButtonScale(Button button, bool isInteractable, bool isVisible)
+        private void SetButtonScale(Button button, bool isInteractable, bool isVisible, bool needAnimation)
         {
             button.interactable = isInteractable;
+
+            if (!needAnimation)
+            {
+                button.gameObject.transform.DOScaleX( 0, 0);
+                return;
+            }
+
             button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay);
         }
 
@@ -50,43 +57,43 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            SetButtonScale(_buyButton, false, false);
+            SetButtonScale(_buyButton, false, false, true);
             UpdateWeaponInfo(weaponData, true);
         }
 
-        public void DisableBuyInfo(WeaponData weaponData)
+        public void DisableBuyInfo(WeaponData weaponData, bool needAnimation)
         {
             UpdateWeaponInfo(weaponData, false);
-            
+
             if (_priceCheckers[weaponData.Price.PriceTypeId]?.Invoke() == true)
             {
-                SetButtonScale(_adButton, false, false);
+                SetButtonScale(_adButton, false, false,needAnimation);
 
                 return;
             }
 
-            SetButtonScale(_buyButton, false, false);
+            SetButtonScale(_buyButton, false, false,needAnimation);
         }
 
         public void SetWeaponData(WeaponData weaponData)
         {
             if (_priceCheckers[weaponData.Price.PriceTypeId]?.Invoke() == true)
             {
-                SetButtonScale(_buyButton, false, false);
-                SetButtonScale(_adButton, true, true);
+                SetButtonScale(_buyButton, false, false, true);
+                SetButtonScale(_adButton, true, true, true);
 
                 _adButton.transform.DOScaleX(1, ButtonScaleDelay)
-                    .OnComplete(() => SetButtonScale(_adButton, true, true));
+                    .OnComplete(() => SetButtonScale(_adButton, true, true, true));
                 UpdateWeaponInfo(weaponData, false);
 
                 return;
             }
 
-            SetButtonScale(_adButton, false, false);
-            SetButtonScale(_buyButton, false, false);
+            SetButtonScale(_adButton, false, false, true);
+            SetButtonScale(_buyButton, false, false, true);
 
             _buyButton.transform.DOScaleX(1, ButtonScaleDelay)
-                .OnComplete(() => SetButtonScale(_buyButton, true, true));
+                .OnComplete(() => SetButtonScale(_buyButton, true, true, true));
             UpdateWeaponInfo(weaponData, true);
         }
 

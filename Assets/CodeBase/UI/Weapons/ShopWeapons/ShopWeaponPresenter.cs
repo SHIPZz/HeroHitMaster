@@ -21,6 +21,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private readonly IProvider<WeaponTypeId, Image> _provider;
         private Image _lastWeaponIcon;
         private readonly ISaveSystem _saveSystem;
+        private WeaponTypeId _lastWeaponType;
         private BuyWeaponPresenter _buyWeaponPresenter;
 
         public ShopWeaponPresenter(List<WeaponSelectorView> weaponSelectorViews,
@@ -57,23 +58,30 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private void DisablePurchasedWeaponInfo(WeaponTypeId weaponTypeId)
         {
             var weaponData = _weaponStaticDataService.Get(weaponTypeId);
-            _shopWeaponInfo.DisableBuyInfo(weaponData);
+            _shopWeaponInfo.DisableBuyInfo(weaponData, false);
         }
 
         private async void SetWeaponDataToView(WeaponTypeId weaponTypeId)
         {
+            if (SameWeaponChoosed(weaponTypeId))
+                return;
+
             WeaponData weaponData = GetWeaponData(weaponTypeId);
 
             var playerData = await _saveSystem.Load<PlayerData>();
 
+            _lastWeaponType = weaponTypeId;
             if (!HasEnoughMoneyToBuy(playerData, weaponData) && !HasPlayerThisWeapon(playerData, weaponData))
                 return;
-            
-            if (HasPlayerThisWeapon(playerData, weaponData)) 
+
+            if (HasPlayerThisWeapon(playerData, weaponData))
                 return;
 
             _shopWeaponInfo.SetWeaponData(weaponData);
         }
+
+        private bool SameWeaponChoosed(WeaponTypeId weaponTypeId) => 
+            _lastWeaponType == weaponTypeId;
 
         private WeaponData GetWeaponData(WeaponTypeId weaponTypeId)
         {
@@ -94,7 +102,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             if (playerData.PurchasedWeapons.Contains(weaponData.WeaponTypeId))
             {
-                _shopWeaponInfo.DisableBuyInfo(weaponData);
+                _shopWeaponInfo.DisableBuyInfo(weaponData, false);
                 return true;
             }
 
@@ -105,7 +113,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             if (playerData.Money >= weaponData.Price.Value)
                 return true;
-            
+
             _shopWeaponInfo.DisableBuyButton(weaponData);
             return false;
         }
