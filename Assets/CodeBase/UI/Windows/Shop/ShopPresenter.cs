@@ -12,7 +12,7 @@ namespace CodeBase.UI.Windows.Shop
         private readonly WindowService _windowService;
         private readonly ShopMoneyText _shopMoneyText;
         private readonly Wallet.Wallet _wallet;
-        private ISaveSystem _saveSystem;
+        private readonly ISaveSystem _saveSystem;
 
         public ShopPresenter(ShopView shopView, WindowService windowService,
             ShopMoneyText shopMoneyText, Wallet.Wallet wallet, ISaveSystem saveSystem)

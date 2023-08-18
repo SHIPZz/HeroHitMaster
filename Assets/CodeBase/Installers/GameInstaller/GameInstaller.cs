@@ -4,6 +4,7 @@ using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
@@ -64,12 +65,19 @@ namespace CodeBase.Installers.GameInstaller
             BindLootFactory();
             BindBlockInputOnWindowsOpening();
             BindSaveTriggers();
+            BindCheckOutService();
         }
+
+        private void BindCheckOutService() =>
+            Container
+                .Bind<CheckOutService>()
+                .AsSingle();
 
         private void BindSaveTriggers()
         {
             Container.BindInterfacesAndSelfTo<SoundSaveOnTrigger>().AsSingle();
             Container.BindInterfacesAndSelfTo<PurchasedWeaponsSaveTrigger>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PurchasedWeaponsTriggerPresenter>().AsSingle();
         }
 
         private void BindBlockInputOnWindowsOpening()

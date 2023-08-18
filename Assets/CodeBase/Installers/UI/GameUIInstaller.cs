@@ -32,7 +32,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private ScrollRectProvider _scrollRectProvider;
         [SerializeField] private ScrollImagesProvider _scrollImageProvider;
         [SerializeField] private ScrollNameUnderlinesProvider _scrollNameUnderlinesProvider;
-        [SerializeField] private ShopWeaponInfo _shopWeaponInfo;
+        [SerializeField] private ShopWeaponInfoView shopWeaponInfoView;
         [SerializeField] private ShopMoneyText _shopMoneyText;
         [SerializeField] private BuyButtonView _buyButtonView;
 
@@ -68,7 +68,7 @@ namespace CodeBase.Installers.UI
                 .BindInterfacesAndSelfTo<ShopWeaponPresenter>()
                 .AsSingle();
 
-            Container.BindInstance(_shopWeaponInfo);
+            Container.BindInstance(shopWeaponInfoView);
         }
 
         private void BindScrollUI()

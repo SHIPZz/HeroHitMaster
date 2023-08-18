@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
+using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
-using CodeBase.UI.Windows.Buy;
-using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -17,23 +16,23 @@ namespace CodeBase.UI.Weapons.ShopWeapons
     {
         private readonly List<WeaponSelectorView> _weaponSelectorViews;
         private readonly WeaponStaticDataService _weaponStaticDataService;
-        private readonly ShopWeaponInfo _shopWeaponInfo;
+        private readonly ShopWeaponInfoView _shopWeaponInfoView;
         private readonly IProvider<WeaponTypeId, Image> _provider;
+        private readonly CheckOutService _checkOutService;
         private Image _lastWeaponIcon;
         private readonly ISaveSystem _saveSystem;
         private WeaponTypeId _lastWeaponType;
-        private BuyWeaponPresenter _buyWeaponPresenter;
 
         public ShopWeaponPresenter(List<WeaponSelectorView> weaponSelectorViews,
             WeaponStaticDataService weaponStaticDataService,
-            ShopWeaponInfo shopWeaponInfo,
+            ShopWeaponInfoView shopWeaponInfoView,
             IProvider<WeaponTypeId, Image> provider,
-            ISaveSystem saveSystem, BuyWeaponPresenter buyWeaponPresenter)
+            ISaveSystem saveSystem, CheckOutService checkOutService)
         {
-            _buyWeaponPresenter = buyWeaponPresenter;
+            _checkOutService = checkOutService;
             _saveSystem = saveSystem;
             _provider = provider;
-            _shopWeaponInfo = shopWeaponInfo;
+            _shopWeaponInfoView = shopWeaponInfoView;
             _weaponStaticDataService = weaponStaticDataService;
             _weaponSelectorViews = weaponSelectorViews;
         }
@@ -46,19 +45,19 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         public void Initialize()
         {
             _weaponSelectorViews.ForEach(x => x.Choosed += SetWeaponDataToView);
-            _buyWeaponPresenter.Succeeded += DisablePurchasedWeaponInfo;
+            _checkOutService.Succeeded += DisablePurchasedWeaponInfo;
         }
 
         public void Dispose()
         {
             _weaponSelectorViews.ForEach(x => x.Choosed -= SetWeaponDataToView);
-            _buyWeaponPresenter.Succeeded -= DisablePurchasedWeaponInfo;
+            _checkOutService.Succeeded -= DisablePurchasedWeaponInfo;
         }
 
-        private void DisablePurchasedWeaponInfo(WeaponTypeId weaponTypeId)
+        private void DisablePurchasedWeaponInfo()
         {
-            var weaponData = _weaponStaticDataService.Get(weaponTypeId);
-            _shopWeaponInfo.DisableBuyInfo(weaponData, false);
+            WeaponData weaponData = _weaponStaticDataService.Get(_lastWeaponType);
+            _shopWeaponInfoView.DisableBuyInfo(weaponData, false);
         }
 
         private async void SetWeaponDataToView(WeaponTypeId weaponTypeId)
@@ -66,18 +65,19 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             if (SameWeaponChoosed(weaponTypeId))
                 return;
 
+            _lastWeaponType = weaponTypeId;
+            
             WeaponData weaponData = GetWeaponData(weaponTypeId);
 
             var playerData = await _saveSystem.Load<PlayerData>();
 
-            _lastWeaponType = weaponTypeId;
             if (!HasEnoughMoneyToBuy(playerData, weaponData) && !HasPlayerThisWeapon(playerData, weaponData))
                 return;
 
             if (HasPlayerThisWeapon(playerData, weaponData))
                 return;
 
-            _shopWeaponInfo.SetWeaponData(weaponData);
+            _shopWeaponInfoView.SetWeaponData(weaponData);
         }
 
         private bool SameWeaponChoosed(WeaponTypeId weaponTypeId) => 
@@ -102,7 +102,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             if (playerData.PurchasedWeapons.Contains(weaponData.WeaponTypeId))
             {
-                _shopWeaponInfo.DisableBuyInfo(weaponData, false);
+                _shopWeaponInfoView.DisableBuyInfo(weaponData, false);
                 return true;
             }
 
@@ -114,7 +114,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             if (playerData.Money >= weaponData.Price.Value)
                 return true;
 
-            _shopWeaponInfo.DisableBuyButton(weaponData);
+            _shopWeaponInfoView.DisableBuyButton(weaponData);
             return false;
         }
     }

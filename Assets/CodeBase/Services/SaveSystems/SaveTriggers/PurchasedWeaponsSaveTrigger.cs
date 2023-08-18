@@ -1,32 +1,36 @@
 ﻿using System;
 using CodeBase.Enums;
+using CodeBase.Services.CheckOut;
 using CodeBase.Services.SaveSystems.Data;
-using CodeBase.UI.Windows.Buy;
 using Zenject;
 
 namespace CodeBase.Services.SaveSystems.SaveTriggers
 {
     public class PurchasedWeaponsSaveTrigger : IInitializable, IDisposable
     {
-        private readonly BuyWeaponPresenter _buyWeaponPresenter;
+        private readonly CheckOutService _checkOutService;
         private readonly ISaveSystem _saveSystem;
+        private WeaponTypeId _lastWeaponIdSelected;
 
-        public PurchasedWeaponsSaveTrigger(BuyWeaponPresenter buyWeaponPresenter, ISaveSystem saveSystem)
+        public PurchasedWeaponsSaveTrigger(CheckOutService сheckOutService, ISaveSystem saveSystem)
         {
             _saveSystem = saveSystem;
-            _buyWeaponPresenter = buyWeaponPresenter;
+            _checkOutService = сheckOutService;
         }
 
         public void Initialize() => 
-            _buyWeaponPresenter.Succeeded += AddToPlayerData;
+        _checkOutService.Succeeded += AddToPlayerData;
 
         public void Dispose() => 
-            _buyWeaponPresenter.Succeeded -= AddToPlayerData;
+            _checkOutService.Succeeded -= AddToPlayerData;
 
-        private async void AddToPlayerData(WeaponTypeId weaponTypeId)
+        public void SetLastWeaponType(WeaponTypeId weaponTypeId) => 
+            _lastWeaponIdSelected = weaponTypeId;
+
+        private async void AddToPlayerData()
         {
             var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.PurchasedWeapons.Add(weaponTypeId);
+            playerData.PurchasedWeapons.Add(_lastWeaponIdSelected);
             _saveSystem.Save(playerData);
         }
     }
