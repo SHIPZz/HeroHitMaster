@@ -11,13 +11,6 @@ namespace CodeBase.Gameplay.Bullet
     {
         private static readonly Random _random = new();
 
-        private readonly List<Vector3> _rotationVectors = new()
-        {
-            new Vector3(0, 0, 360),
-            // new Vector3(0, 360, 0),
-            // new Vector3(360, 0, 0)
-        };
-
         private BulletStaticDataService _bulletStaticDataService;
 
         [Inject]
@@ -31,21 +24,21 @@ namespace CodeBase.Gameplay.Bullet
             var rotateDuration = _bulletStaticDataService.GetBy(bullet.BulletTypeId).RotateDuration;
             var moveDuration = _bulletStaticDataService.GetBy(bullet.BulletTypeId).MovementDuration;
             
+            Vector3 direction = target - startPosition;
+            bullet.GameObject.transform.forward = direction;
             bullet.GameObject.transform.position = startPosition;
             bullet.GameObject.transform.DOMove(target, moveDuration);
 
-            Vector3 direction = target - startPosition;
-            bullet.GameObject.transform.up = direction;
             
-            Rotate(bullet, rotateDuration);
+            Rotate(bullet);
         }
 
-        private void Rotate(IBullet bullet, float rotateDuration)
+        private void Rotate(IBullet bullet)
         {
-            int randomValue = _random.Next(0, _rotationVectors.Count - 1);
-            Vector3 randomVector = _rotationVectors[randomValue];
-
-            bullet.GameObject.transform.DOLocalRotate(randomVector, rotateDuration).SetRelative(true).SetEase(Ease.Linear);
+            Vector3 targetRotation = new Vector3(104, bullet.GameObject.transform.localEulerAngles.y, bullet.GameObject.transform.localEulerAngles.z);
+            
+            bullet.GameObject.transform
+                .DOLocalRotate(targetRotation, 0f).SetEase(Ease.Linear);
         }
     }
 }

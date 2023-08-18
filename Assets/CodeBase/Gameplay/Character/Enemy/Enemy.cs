@@ -12,11 +12,11 @@ namespace CodeBase.Gameplay.Character.Enemy
         public event Action<Enemy> Dead;
         public event Action<Enemy> QuickDestroyed;
 
-        private void OnDisable() => 
+        private void OnDestroy()
+        {
+            print("asdas");
             Dead?.Invoke(this);
-
-        private void OnDestroy() => 
-            Dead?.Invoke(this);
+        }
 
         public void Destroy()
         {

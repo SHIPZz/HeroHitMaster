@@ -45,7 +45,8 @@ namespace CodeBase.Gameplay.Bullet
                 return;
 
             damageable.TakeDamage(_damage);
-            this.SetActive(gameObject, false, 0.5f);
+            transform.SetParent(other.transform, true);
+            this.SetActive(gameObject, false, 3f);
         }
 
         public void Move(Vector3 target, Vector3 startPosition) => 
