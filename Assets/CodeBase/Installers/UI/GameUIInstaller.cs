@@ -23,7 +23,6 @@ namespace CodeBase.Installers.UI
     {
         [SerializeField] private WindowProvider _windowProvider;
         [SerializeField] private WeaponIconsProvider _weaponIconsProvider;
-        [SerializeField] private List<WeaponSelectorView> _weaponSelectorViews;
         [SerializeField] private AudioView _audioView;
         [SerializeField] private ShopView _shopView;
         [SerializeField] private SettingView _settingView;
@@ -35,6 +34,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private ShopWeaponInfoView shopWeaponInfoView;
         [SerializeField] private ShopMoneyText _shopMoneyText;
         [SerializeField] private BuyButtonView _buyButtonView;
+        [SerializeField] private WeaponSelectorViewsProvider _weaponSelectorViewsProvider;
 
         public override void InstallBindings()
         {
@@ -44,7 +44,6 @@ namespace CodeBase.Installers.UI
             BindWeaponIconsProvider();
             BindShopUI();
             BindPlayerSelector();
-            BindWeaponSelectorViews();
             BindAudioUI();
             BindSettingUi();
             BindDeathUI();
@@ -53,6 +52,14 @@ namespace CodeBase.Installers.UI
             BindScrollUI();
             BindShopWeaponUI();
             BindBuyWeaponUI();
+            BindWeaponSelectorViewsProvider();
+        }
+
+        private void BindWeaponSelectorViewsProvider()
+        {
+            Container
+                .BindInterfacesTo<WeaponSelectorViewsProvider>()
+                .FromInstance(_weaponSelectorViewsProvider);
         }
 
         private void BindBuyWeaponUI()
@@ -140,12 +147,6 @@ namespace CodeBase.Installers.UI
             Container.BindInstance(_audioView);
             Container.BindInterfacesAndSelfTo<AudioPresenter>().AsSingle();
             Container.Bind<AudioChanger>().AsSingle();
-        }
-
-        private void BindWeaponSelectorViews()
-        {
-            Container
-                .BindInstance(_weaponSelectorViews);
         }
 
         private void BindPlayerSelector()

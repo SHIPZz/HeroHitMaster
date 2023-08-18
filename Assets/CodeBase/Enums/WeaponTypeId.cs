@@ -11,6 +11,13 @@
         ThrowingTridentShooter = 6,
         ThrowingHammerShooter = 7,
         ThrowingDynamiteShooter = 8,
-        FreezeWeapon = 9,
+        ThrowMaceShooter = 9,
+        ThrowDaggerShooter = 10,
+        ThrowKitchenKnifeShooter = 11,
+        ThrowAxeShooter = 12,
+        ThrowSawShooter = 13,
+        ThrowSkewerShooter = 14,
+        ThrowBoomerangShoter = 15,
+        FreezeWeapon = 16,
     }
 }

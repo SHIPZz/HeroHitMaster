@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.Character.Players
         private readonly List<Player> _playersWithWeaponsInHand = new();
         private readonly List<WeaponHolderView> _weaponViews = new();
         private readonly WeaponSelector _weaponSelector;
-        private ISaveSystem _saveSystem;
+        private readonly ISaveSystem _saveSystem;
 
         public SetterWeaponToPlayerHand(PlayerSettings playerSettings, WeaponSelector weaponSelector,
             IPlayerStorage playerStorage, ISaveSystem saveSystem)
@@ -39,9 +39,6 @@ namespace CodeBase.Gameplay.Character.Players
         {
             var playerData = await _saveSystem.Load<PlayerData>();
 
-            if (!playerData.PurchasedWeapons.Contains(weaponTypeId))
-                return;
-            
             foreach (var weaponViewStorage in _weaponViews)
             {
                 weaponViewStorage.TryShow(weaponTypeId);

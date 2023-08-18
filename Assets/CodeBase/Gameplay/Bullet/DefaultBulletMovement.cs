@@ -1,14 +1,16 @@
 ﻿using CodeBase.Services.Data;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.Bullet
 {
-    public class DefaultBulletMovement : IBulletMovement
+    public class DefaultBulletMovement : MonoBehaviour, IBulletMovement
     {
-        private readonly BulletStaticDataService _bulletStaticDataService;
+        private BulletStaticDataService _bulletStaticDataService;
 
-        public DefaultBulletMovement(BulletStaticDataService bulletStaticDataService)
+        [Inject]
+        public void Construct(BulletStaticDataService bulletStaticDataService)
         {
             _bulletStaticDataService = bulletStaticDataService;
         }

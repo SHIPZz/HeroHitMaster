@@ -37,7 +37,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
 
         private void BindAsSingle()
         {
-            Container.BindInterfacesTo<WebMovement>().AsSingle();
             Container.Bind<PlayerAnimator>().AsSingle();
             Container.Bind<PlayerShoot>().AsSingle();
             Container.Bind<PlayerMovement>().FromInstance(GetComponent<PlayerMovement>());

@@ -10,7 +10,14 @@
         Hammer = 6,
         IceCream = 7,
         Trident = 8,
-        Dynamite,
-        Freeze
+        Dynamite = 9,
+        Freeze = 10,
+        Skewer = 11,
+        Saw = 12,
+        Mace = 13,
+        KitchenKnife = 14,
+        Dagger = 15,
+        Boomerang = 16,
+        Axe = 17,
     }
 }

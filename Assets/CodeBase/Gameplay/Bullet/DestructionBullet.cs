@@ -16,6 +16,7 @@ namespace CodeBase.Gameplay.Bullet
 
         private int _damage;
         private TriggerObserver _triggerObserver;
+        private IBulletMovement _bulletMovement;
 
         public GameObject GameObject => gameObject;
         public Rigidbody Rigidbody { get; private set; }
@@ -30,6 +31,7 @@ namespace CodeBase.Gameplay.Bullet
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
+            _bulletMovement = GetComponent<IBulletMovement>();
         }
 
         private void OnEnable()
@@ -40,6 +42,11 @@ namespace CodeBase.Gameplay.Bullet
         private void OnDisable()
         {
             _triggerObserver.Entered -= DoDamage;
+        }
+
+        public void Move(Vector3 target,Vector3 startPosition )
+        {
+            _bulletMovement.Move(target,this,startPosition, Rigidbody);
         }
 
         public void DoDamage(Collider other)

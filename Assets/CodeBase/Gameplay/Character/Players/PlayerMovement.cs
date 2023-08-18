@@ -44,6 +44,9 @@ namespace CodeBase.Gameplay.Character.Players
         {
             while (Vector3.Distance(_navMeshAgent.transform.position, target) > 2.2f)
             {
+                if (!_navMeshAgent.isActiveAndEnabled)
+                    break;
+                
                 _navMeshAgent.SetDestination(target);
 
                 yield return null;

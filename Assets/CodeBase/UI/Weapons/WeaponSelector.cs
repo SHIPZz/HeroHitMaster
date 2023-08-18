@@ -3,6 +3,7 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Weapon;
+using UnityEngine;
 
 namespace CodeBase.UI.Weapons
 {
@@ -23,16 +24,10 @@ namespace CodeBase.UI.Weapons
 
         public void Select(WeaponTypeId weaponTypeId)
         {
-            var weapon = _weaponStorage.Get(weaponTypeId);
+            Weapon weapon = _weaponStorage.Get(weaponTypeId);
             _weaponProvider.Set(weapon);
+            Debug.Log(weapon);
             NewWeaponChanged?.Invoke(weaponTypeId);
         }
-    }
-
-    
-
-    public interface IPaySystemService
-    {
-        bool TryPay(int value);
     }
 }

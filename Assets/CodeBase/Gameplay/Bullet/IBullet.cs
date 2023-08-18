@@ -10,5 +10,6 @@ namespace CodeBase.Gameplay.Bullet
 
         BulletTypeId BulletTypeId { get; }
         void DoDamage(Collider other);
+        void Move(Vector3 target, Vector3 startPosition);
     }
 }

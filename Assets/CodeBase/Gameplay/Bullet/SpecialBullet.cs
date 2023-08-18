@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Character;
@@ -22,6 +23,7 @@ namespace CodeBase.Gameplay.Bullet
         private Material _material;
         private TriggerObserver TriggerObserver;
         private float _distance;
+        private IBulletMovement _bulletMovement;
 
         [Inject]
         private void Construct(TriggerObserver triggerObserver,
@@ -33,6 +35,9 @@ namespace CodeBase.Gameplay.Bullet
             TriggerObserver = triggerObserver;
         }
 
+        private void Awake() => 
+            _bulletMovement = GetComponent<IBulletMovement>();
+
         public GameObject GameObject => gameObject;
 
         public Rigidbody Rigidbody => GetComponent<Rigidbody>();
@@ -42,6 +47,12 @@ namespace CodeBase.Gameplay.Bullet
 
         private void OnDisable() =>
             TriggerObserver.Entered -= DoDamage;
+        
+        public void Move(Vector3 target,Vector3 startPosition )
+        {
+            _bulletMovement.Move(target,this,startPosition, Rigidbody);
+        }
+
 
         public void DoDamage(Collider other)
         {

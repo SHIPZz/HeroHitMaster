@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
+using CodeBase.Services.Providers;
 using CodeBase.UI.Weapons;
 using Zenject;
 
@@ -17,11 +18,11 @@ namespace CodeBase.UI.Windows.Buy
         private WeaponTypeId _weaponId;
 
         public BuyWeaponPresenter(BuyButtonView buyButtonView, 
-            List<WeaponSelectorView> selectorViews,
+            IProvider<List<WeaponSelectorView>> weaponSelectorViewsProvider,
             WeaponStaticDataService weaponStaticDataService, CheckOutService checkOutService)
         {
             _checkOutService = checkOutService;
-            _selectorViews = selectorViews;
+            _selectorViews = weaponSelectorViewsProvider.Get();
             _weaponStaticDataService = weaponStaticDataService;
             _buyButtonView = buyButtonView;
         }

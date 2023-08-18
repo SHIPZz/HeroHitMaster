@@ -11,34 +11,29 @@ namespace CodeBase.Gameplay.Weapons
     {
         [field: SerializeField] public WeaponTypeId WeaponTypeId { get; protected set; }
 
-        protected IBulletMovement BulletMovement;
         protected float ReturnBulletDelay = 15f;
         protected BulletStorage _bulletStorage;
-        protected BulletMovementStorage BulletMovementStorage;
         
         [Inject]
-        private void Construct(BulletStorage bulletStorage, BulletMovementStorage bulletMovementStorage)
+        private void Construct(BulletStorage bulletStorage)
         {
             _bulletStorage = bulletStorage;
-            BulletMovementStorage = bulletMovementStorage;
         }
         
         public virtual void Initialize()
         {
-            Init(WeaponTypeId, BulletMovementStorage.GetBulletMovementBy(WeaponTypeId));
+            Init(WeaponTypeId);
         }
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
             IBullet bullet = _bulletStorage.Pop(WeaponTypeId);
-            BulletMovement.Move(target, bullet, initialPosition, bullet.Rigidbody);
+            bullet.Move(target, initialPosition);
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => _bulletStorage.Push(bullet));
         }
 
-        protected void Init(WeaponTypeId weaponTypeId,
-            IBulletMovement bulletMovement)
-        {
-            BulletMovement = bulletMovement;
+        protected void Init(WeaponTypeId weaponTypeId)
+        { ;
             _bulletStorage.CreateBulletsBy(weaponTypeId);
         }
     }

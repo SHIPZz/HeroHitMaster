@@ -1,4 +1,5 @@
-﻿using CodeBase.Enums;
+﻿using System;
+using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Collision;
@@ -16,6 +17,7 @@ namespace CodeBase.Gameplay.Bullet
         private GameObject _terrain;
         private float _distance;
         private int _damage;
+        private IBulletMovement _bulletMovement;
 
         [Inject]
         private void Construct(TriggerObserver triggerObserver, BulletStaticDataService bulletStaticDataService)
@@ -27,6 +29,9 @@ namespace CodeBase.Gameplay.Bullet
         public GameObject GameObject => gameObject;
 
         public Rigidbody Rigidbody => GetComponent<Rigidbody>();
+
+        private void Awake() => 
+            _bulletMovement = GetComponent<IBulletMovement>();
 
         private  void OnEnable() => 
             _triggerObserver.Entered += DoDamage;
@@ -42,5 +47,8 @@ namespace CodeBase.Gameplay.Bullet
             damageable.TakeDamage(_damage);
             this.SetActive(gameObject, false, 0.5f);
         }
+
+        public void Move(Vector3 target, Vector3 startPosition) => 
+            _bulletMovement.Move(target,this,startPosition,Rigidbody);
     }
 }

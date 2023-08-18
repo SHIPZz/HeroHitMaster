@@ -37,7 +37,7 @@ namespace CodeBase.UI.Weapons
         {
             var playerData = await _saveSystem.Load<PlayerData>();
             
-            if(!playerData.PurchasedWeapons.Contains(weaponTypeId))
+            if(playerData.PurchasedWeapons.Contains(weaponTypeId))
                 return;
 
             _weaponSelector.Select(weaponTypeId);

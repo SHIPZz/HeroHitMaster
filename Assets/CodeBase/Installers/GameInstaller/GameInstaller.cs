@@ -53,7 +53,6 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemySpawnerProvider();
             BindMaterialProvider();
             BindSetterWeapon();
-            BindBulletMovementStorage();
             BindDestroyableObjectStorages();
             BindEnemyEffectDataStorage();
             BindWeaponShootEffectStorage();
@@ -129,9 +128,6 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindEnemyQuantityZonesProvider() =>
             Container.BindInstance(_enemyQuantityZonesProvider);
-
-        private void BindBulletMovementStorage() =>
-            BindAsSingle<BulletMovementStorage>();
 
         private void BindSetterWeapon() =>
             Container.BindInterfacesAndSelfTo<SetterWeaponToPlayerHand>().AsSingle();

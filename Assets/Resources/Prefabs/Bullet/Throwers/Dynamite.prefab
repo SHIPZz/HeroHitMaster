@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5376442738813682070}
   - component: {fileID: 4849756173462113157}
   - component: {fileID: 6008633211220340257}
+  - component: {fileID: -4846624717931010111}
   m_Layer: 11
   m_Name: Dynamite
   m_TagString: Untagged
@@ -33,8 +34,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4311373604623348549}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 5.1320477, y: 0.645, z: 10.428447}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -217,5 +218,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0364d9115962ee47bba12ca4af57a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4846624717931010111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311373604623348549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

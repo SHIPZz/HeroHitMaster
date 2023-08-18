@@ -7,6 +7,7 @@ using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -23,7 +24,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private readonly ISaveSystem _saveSystem;
         private WeaponTypeId _lastWeaponType;
 
-        public ShopWeaponPresenter(List<WeaponSelectorView> weaponSelectorViews,
+        public ShopWeaponPresenter(IProvider<List<WeaponSelectorView>> weaponSelectorViewsProvider,
             WeaponStaticDataService weaponStaticDataService,
             ShopWeaponInfoView shopWeaponInfoView,
             IProvider<WeaponTypeId, Image> provider,
@@ -34,7 +35,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _provider = provider;
             _shopWeaponInfoView = shopWeaponInfoView;
             _weaponStaticDataService = weaponStaticDataService;
-            _weaponSelectorViews = weaponSelectorViews;
+            _weaponSelectorViews = weaponSelectorViewsProvider.Get();
         }
 
         public void Init(WeaponTypeId weaponTypeId)
@@ -66,6 +67,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
 
             _lastWeaponType = weaponTypeId;
+            
             
             WeaponData weaponData = GetWeaponData(weaponTypeId);
 

@@ -2,6 +2,7 @@
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects;
 using CodeBase.ScriptableObjects.Weapon;
+using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 
 namespace CodeBase.Services.Storages.Weapon
@@ -11,10 +12,10 @@ namespace CodeBase.Services.Storages.Weapon
         private readonly WeaponFactory _weaponFactory;
         private readonly Dictionary<WeaponTypeId, Gameplay.Weapons.Weapon> _weapons = new();
 
-        public WeaponStorage(WeaponSettings weaponSettings, WeaponFactory weaponFactory)
+        public WeaponStorage(WeaponStaticDataService weaponStaticData, WeaponFactory weaponFactory)
         {
             _weaponFactory = weaponFactory;
-            FillDictionary(weaponSettings.WeaponTypeIds);
+            FillDictionary(weaponStaticData);
             SetActiveAll(false);
         }
 
@@ -36,11 +37,11 @@ namespace CodeBase.Services.Storages.Weapon
             }
         }
 
-        private void FillDictionary(List<WeaponTypeId> weaponTypeIds)
+        private void FillDictionary(WeaponStaticDataService weaponStaticDataService)
         {
-            foreach (var weaponTypeId in weaponTypeIds)
+            foreach (var weaponData in weaponStaticDataService.GetAll())
             {
-                Gameplay.Weapons.Weapon weapon = _weaponFactory.Create(weaponTypeId);
+                Gameplay.Weapons.Weapon weapon = _weaponFactory.Create(weaponData.WeaponTypeId);
                 _weapons[weapon.WeaponTypeId] = weapon;
             }
         }

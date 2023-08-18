@@ -1,26 +1,27 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Services.Data;
-using CodeBase.Services.Storages;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 using Random = System.Random;
 
 namespace CodeBase.Gameplay.Bullet
 {
-    public class KnifeMovement : IBulletMovement
+    public class KnifeMovement : MonoBehaviour, IBulletMovement
     {
         private static readonly Random _random = new();
 
         private readonly List<Vector3> _rotationVectors = new()
         {
             new Vector3(0, 0, 360),
-            new Vector3(0, 360, 0),
-            new Vector3(360, 0, 0)
+            // new Vector3(0, 360, 0),
+            // new Vector3(360, 0, 0)
         };
 
-        private readonly BulletStaticDataService _bulletStaticDataService;
+        private BulletStaticDataService _bulletStaticDataService;
 
-        public KnifeMovement(BulletStaticDataService bulletStaticDataService)
+        [Inject]
+        public void Construct(BulletStaticDataService bulletStaticDataService)
         {
             _bulletStaticDataService = bulletStaticDataService;
         }
