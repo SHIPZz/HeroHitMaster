@@ -26,8 +26,8 @@ namespace CodeBase.Gameplay.EnemyBodyParts
 
         public void Dispose()
         {
-            _skinnedMaterialChanger.Changed -= _enemyBodyPartActivator.Disable;
-            _skinnedMaterialChanger.Changed -= _enemyBodyPartPositionSetter.Disable;
+            // _skinnedMaterialChanger.Changed -= _enemyBodyPartActivator.Disable;
+            // _skinnedMaterialChanger.Changed -= _enemyBodyPartPositionSetter.Disable;
         }
     }
 }

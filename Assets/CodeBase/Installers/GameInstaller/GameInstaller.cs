@@ -62,7 +62,7 @@ namespace CodeBase.Installers.GameInstaller
             BindLootStorage();
             BindBlockInputOnLoading();
             BindLootFactory();
-            BindBlockInputOnWindowsOpening();
+            BindBlockInputOnUi();
             BindSaveTriggers();
             BindCheckOutService();
         }
@@ -79,9 +79,12 @@ namespace CodeBase.Installers.GameInstaller
             Container.BindInterfacesAndSelfTo<PurchasedWeaponsTriggerPresenter>().AsSingle();
         }
 
-        private void BindBlockInputOnWindowsOpening()
+        private void BindBlockInputOnUi()
         {
-            Container.BindInterfacesAndSelfTo<BlockShootInputOnUI>()
+            Container.Bind<BlockShootInput>()
+                .AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<BlockShootInputPresenter>()
                 .AsSingle();
         }
 

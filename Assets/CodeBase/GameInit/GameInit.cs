@@ -65,8 +65,11 @@ namespace CodeBase.GameInit
             _playerProvider.Set(player);
         }
 
-        private void InitializeInitialWeapon(WeaponTypeId weaponTypeId) =>
-            _weaponSelector.Select(weaponTypeId);
+        private void InitializeInitialWeapon(WeaponTypeId weaponTypeId)
+        {
+            _weaponSelector.SetLastWeaponChoosed(weaponTypeId);
+            _weaponSelector.Select();
+        }
 
         private PlayerCameraFollower InitializePlayerCamera()
         {

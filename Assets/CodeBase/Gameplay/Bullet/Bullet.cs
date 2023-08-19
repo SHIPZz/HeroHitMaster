@@ -45,7 +45,8 @@ namespace CodeBase.Gameplay.Bullet
                 return;
 
             damageable.TakeDamage(_damage);
-            transform.SetParent(other.transform, true);
+            var a = other.gameObject.GetComponentInChildren<EnemyPartForKnifeHolder>();
+            transform.SetParent(a.transform, true);
             this.SetActive(gameObject, false, 3f);
         }
 

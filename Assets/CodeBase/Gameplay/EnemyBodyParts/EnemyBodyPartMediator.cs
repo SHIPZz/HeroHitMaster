@@ -26,8 +26,8 @@ namespace CodeBase.Gameplay.EnemyBodyParts
 
         public void Dispose()
         {
-            _enemy.Dead -= _enemyBodyPartActivator.ActivateWithDisableDelay;
-            _enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
+            // _enemy.Dead -= _enemyBodyPartActivator.ActivateWithDisableDelay;
+            // _enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
         }
     }
 }

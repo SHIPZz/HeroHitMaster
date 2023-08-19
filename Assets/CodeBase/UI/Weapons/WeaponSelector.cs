@@ -1,9 +1,14 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.Services.CheckOut;
+using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
+using CodeBase.Services.SaveSystems;
+using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Weapon;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.UI.Weapons
 {
@@ -11,8 +16,8 @@ namespace CodeBase.UI.Weapons
     {
         private readonly IProvider<Weapon> _weaponProvider;
         private readonly IWeaponStorage _weaponStorage;
-
-        public event Action<Weapon> OldWeaponChanged;
+        private WeaponTypeId _lastWeaponId;
+        
         public event Action<WeaponTypeId> NewWeaponChanged;
 
         public WeaponSelector(IProvider<Weapon> weaponProvider,
@@ -22,12 +27,15 @@ namespace CodeBase.UI.Weapons
             _weaponStorage = weaponStorage;
         }
 
-        public void Select(WeaponTypeId weaponTypeId)
+        public void Select()
         {
-            Weapon weapon = _weaponStorage.Get(weaponTypeId);
+            Weapon weapon = _weaponStorage.Get(_lastWeaponId);
             _weaponProvider.Set(weapon);
             Debug.Log(weapon);
-            NewWeaponChanged?.Invoke(weaponTypeId);
+            NewWeaponChanged?.Invoke(_lastWeaponId);
         }
+
+        public void SetLastWeaponChoosed(WeaponTypeId weaponTypeId) => 
+            _lastWeaponId = weaponTypeId;
     }
 }

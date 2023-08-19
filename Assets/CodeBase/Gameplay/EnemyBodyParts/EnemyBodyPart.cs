@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Enums;
 using DG.Tweening;
 using UnityEngine;
@@ -44,6 +45,7 @@ namespace CodeBase.Gameplay.EnemyBodyParts
 
         public void Disable()
         {
+            DOTween.Kill(transform);
             // gameObject.SetActive(false);
         }
     }

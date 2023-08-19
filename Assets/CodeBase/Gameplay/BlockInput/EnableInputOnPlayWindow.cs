@@ -24,8 +24,10 @@ namespace CodeBase.Gameplay.BlockInput
             _inputService.PlayerActions.Disable();
         }
 
-        public void Dispose() => 
+        public void Dispose()
+        {
             _playWindow.Opened -= EnableInput;
+        }
 
         private void EnableInput() => 
             _inputService.PlayerActions.Enable();

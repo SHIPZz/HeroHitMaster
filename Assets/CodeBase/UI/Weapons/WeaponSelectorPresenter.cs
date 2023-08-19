@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Enums;
+using CodeBase.Services.CheckOut;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using Zenject;
@@ -11,12 +12,12 @@ namespace CodeBase.UI.Weapons
     {
         private readonly WeaponSelector _weaponSelector;
         private readonly Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIconClickers;
-        private readonly ISaveSystem _saveSystem;
+        private CheckOutService _checkOutService;
 
         public WeaponSelectorPresenter(WeaponIconsProvider weaponIconsProvider, WeaponSelector weaponSelector,
-            ISaveSystem saveSystem)
+            CheckOutService checkOutService)
         {
-            _saveSystem = saveSystem;
+            _checkOutService = checkOutService;
             _weaponIconClickers = weaponIconsProvider.Icons;
             _weaponSelector = weaponSelector;
         }
@@ -25,22 +26,21 @@ namespace CodeBase.UI.Weapons
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
                 weaponIcon.Choosed += OnWeaponIconChoosed;
+
+            _checkOutService.Succeeded += _weaponSelector.Select;
         }
 
         public void Dispose()
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
                 weaponIcon.Choosed -= OnWeaponIconChoosed;
+                
+            _checkOutService.Succeeded -= _weaponSelector.Select;
         }
 
-        private async void OnWeaponIconChoosed(WeaponTypeId weaponTypeId)
+        private void OnWeaponIconChoosed(WeaponTypeId weaponTypeId)
         {
-            var playerData = await _saveSystem.Load<PlayerData>();
-            
-            if(playerData.PurchasedWeapons.Contains(weaponTypeId))
-                return;
-
-            _weaponSelector.Select(weaponTypeId);
+            _weaponSelector.SetLastWeaponChoosed(weaponTypeId);
         }
     }
 }

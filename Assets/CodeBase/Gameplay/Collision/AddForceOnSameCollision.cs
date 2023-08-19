@@ -15,9 +15,9 @@ namespace CodeBase.Gameplay.Collision
 
         private readonly List<Vector3> _rotationVectors = new()
         {
-            new Vector3(0, 0, 360),
+            // new Vector3(0, 0, 360),
             new Vector3(0, 360, 0),
-            new Vector3(360, 0, 0)
+            // new Vector3(360, 0, 0)
         };
 
         private void Awake()
@@ -35,6 +35,8 @@ namespace CodeBase.Gameplay.Collision
         public void OnDisable()
         {
             _triggerObserver.Entered -= OnTriggerEntered;
+            _rigidbody.isKinematic = true;
+            DOTween.Kill(transform);
         }
 
         private void OnTriggerEntered(Collider obj)
@@ -47,12 +49,6 @@ namespace CodeBase.Gameplay.Collision
             _rigidbody.AddForce(targetDirection * Force, ForceMode.Force);
 
             Rotate();
-
-            DOTween.Sequence().AppendInterval(5f).OnComplete(() =>
-            {
-                _rigidbody.isKinematic = true;
-                DOTween.Kill(transform);
-            });
         }
 
         private void Rotate()
@@ -60,7 +56,7 @@ namespace CodeBase.Gameplay.Collision
             int randomValue = Random.Range(0, _rotationVectors.Count - 1);
             Vector3 randomVector = _rotationVectors[randomValue];
 
-            transform.DOLocalRotate(randomVector, 1f).SetRelative(true).SetLoops(-1).SetEase(Ease.Linear);
+            transform.DOLocalRotate(randomVector, 1f).SetEase(Ease.Linear);
         }
     }
 }
