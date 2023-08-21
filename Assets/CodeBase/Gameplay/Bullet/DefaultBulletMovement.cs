@@ -10,17 +10,15 @@ namespace CodeBase.Gameplay.Bullet
         private BulletStaticDataService _bulletStaticDataService;
 
         [Inject]
-        public void Construct(BulletStaticDataService bulletStaticDataService)
-        {
+        public void Construct(BulletStaticDataService bulletStaticDataService) => 
             _bulletStaticDataService = bulletStaticDataService;
-        }
 
-        public void Move(Vector3 target, IBullet bullet, Vector3 startPosition, Rigidbody rigidbody)
+        public void Move(Vector3 target, Bullet bullet, Vector3 startPosition)
         {
             var moveDuration = _bulletStaticDataService.GetBy(bullet.BulletTypeId).MovementDuration;
             
-            bullet.GameObject.transform.position = startPosition;
-            bullet.GameObject.transform.DOMove(target, moveDuration);
+            bullet.transform.position = startPosition;
+            bullet.transform.DOMove(target, moveDuration);
         }
     }
 }

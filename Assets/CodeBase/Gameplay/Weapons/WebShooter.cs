@@ -1,6 +1,4 @@
-﻿using System;
-using CodeBase.Gameplay.Bullet;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Weapons
@@ -15,11 +13,12 @@ namespace CodeBase.Gameplay.Weapons
 
         public override void Shoot(Vector3 target, Vector3 initialPosition)
         {
-            IBullet bullet = _bulletStorage.Pop(WeaponTypeId);
+            var bullet = _bulletStorage.Pop(WeaponTypeId);
             bullet.Move(target,initialPosition);
+            
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() =>
             {
-                bullet.GameObject.transform.DOLocalRotate(Vector3.zero, 0f);
+                bullet.transform.DOLocalRotate(Vector3.zero, 0f);
                 _bulletStorage.Push(bullet);
             });
             

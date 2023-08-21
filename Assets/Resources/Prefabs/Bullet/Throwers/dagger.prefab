@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8327447317394651420}
   - component: {fileID: 4917599443359463097}
   - component: {fileID: 7195105042889278067}
-  - component: {fileID: -9067401535681956062}
   - component: {fileID: -887627338970754748}
   - component: {fileID: 551796867731557939}
   - component: {fileID: -2302044136134020857}
@@ -19,6 +18,7 @@ GameObject:
   - component: {fileID: -7283056495494679031}
   - component: {fileID: -8911436993277717736}
   - component: {fileID: 171657107920883424}
+  - component: {fileID: 8814604079296864713}
   m_Layer: 11
   m_Name: dagger
   m_TagString: Untagged
@@ -39,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4917599443359463097
 MeshFilter:
@@ -91,19 +91,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-9067401535681956062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8708512087030506406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <BulletTypeId>k__BackingField: 15
 --- !u!114 &-887627338970754748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: -8911436993277717736}
 --- !u!114 &551796867731557939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,3 +205,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8814604079296864713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708512087030506406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4500b0d81d94406eb7f9e7e375746729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BulletTypeId>k__BackingField: 0
+  <BulletModel>k__BackingField: {fileID: 0}

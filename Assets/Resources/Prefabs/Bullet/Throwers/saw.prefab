@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4353218332036403676}
   - component: {fileID: 848478380422635129}
   - component: {fileID: 3180264672139963059}
-  - component: {fileID: 6488633210368559847}
   - component: {fileID: -2942603433879093012}
   - component: {fileID: 5381475449879370764}
   - component: {fileID: -736162705076124054}
@@ -19,6 +18,7 @@ GameObject:
   - component: {fileID: -2406051272720343321}
   - component: {fileID: 5540750534479366307}
   - component: {fileID: 4316155519710456891}
+  - component: {fileID: 5251005922511957327}
   m_Layer: 11
   m_Name: saw
   m_TagString: Untagged
@@ -39,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &848478380422635129
 MeshFilter:
@@ -91,19 +91,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6488633210368559847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3972858418272652134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <BulletTypeId>k__BackingField: 12
 --- !u!114 &-2942603433879093012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: 5540750534479366307}
 --- !u!114 &5381475449879370764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,3 +205,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5251005922511957327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3972858418272652134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4500b0d81d94406eb7f9e7e375746729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BulletTypeId>k__BackingField: 0
+  <BulletModel>k__BackingField: {fileID: 0}

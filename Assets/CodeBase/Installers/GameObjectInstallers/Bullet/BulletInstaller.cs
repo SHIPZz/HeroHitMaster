@@ -1,20 +1,18 @@
-﻿using CodeBase.Gameplay.Bullet;
-using CodeBase.Gameplay.Collision;
-using UnityEngine;
+﻿using CodeBase.Gameplay.Collision;
 using Zenject;
 
 namespace CodeBase.Installers.GameObjectInstallers.Bullet
 {
     public class BulletInstaller : MonoInstaller
     {
-        [SerializeField] private TriggerObserver _triggerObserver;
-
         public override void InstallBindings()
         {
-            Container.BindInstance(_triggerObserver);
+            var triggerObserver =  GetComponent<TriggerObserver>();
+            Container.Bind<TriggerObserver>().FromInstance(triggerObserver)
+                .AsSingle();
 
-            IBullet bullet = GetComponent<IBullet>();
-            Container.Bind<IBullet>().FromInstance(bullet)
+            var bullet = GetComponent<Gameplay.Bullet.Bullet>();
+            Container.Bind<Gameplay.Bullet.Bullet>().FromInstance(bullet)
                 .AsSingle();
 
         }

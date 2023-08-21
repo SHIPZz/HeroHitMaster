@@ -15,7 +15,7 @@ namespace CodeBase.Gameplay.Bullet
 
         [Inject]
         private void Construct(BulletEffectStorage bulletEffectStorage) => 
-            _effect = bulletEffectStorage.Get(GetComponent<IBullet>().BulletTypeId);
+            _effect = bulletEffectStorage.Get(GetComponent<Bullet>().BulletTypeId);
 
         private void Awake() => 
             _triggerObserver = GetComponent<TriggerObserver>();

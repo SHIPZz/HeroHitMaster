@@ -1,55 +1,56 @@
-﻿using System.Collections.Generic;
-using CodeBase.Services.Data;
+﻿using CodeBase.Services.Data;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
-using Random = System.Random;
 
 namespace CodeBase.Gameplay.Bullet
 {
     public class KnifeMovement : MonoBehaviour, IBulletMovement
     {
-        private static readonly Random _random = new();
-
         private BulletStaticDataService _bulletStaticDataService;
 
-        private readonly List<Vector3> _rotationVectors = new()
-        {
-            // new Vector3(0, 0, 360),
-            // new Vector3(0, 360, 0),
-            new Vector3(360, 0, 0)
-        };
-        
         [Inject]
         public void Construct(BulletStaticDataService bulletStaticDataService)
         {
             _bulletStaticDataService = bulletStaticDataService;
         }
 
-        public void Move(Vector3 target, IBullet bullet, Vector3 startPosition, Rigidbody rigidbody)
+        public void Move(Vector3 target, Bullet bullet, Vector3 startPosition)
         {
             var rotateDuration = _bulletStaticDataService.GetBy(bullet.BulletTypeId).RotateDuration;
             var moveDuration = _bulletStaticDataService.GetBy(bullet.BulletTypeId).MovementDuration;
-            
+
             Vector3 direction = target - startPosition;
-            bullet.GameObject.transform.forward = direction;
-            bullet.GameObject.transform.position = startPosition;
-            bullet.GameObject.transform.DOMove(target, moveDuration);
-            Vector3 targetRotation = new Vector3(104, bullet.GameObject.transform.localEulerAngles.y, 
-                bullet.GameObject.transform.localEulerAngles.z);
-            
-            bullet.GameObject.transform
-                .DORotate(targetRotation, 0f);
+
+            SetMove(target, bullet, startPosition, direction, moveDuration);
 
             Rotate(bullet, rotateDuration);
         }
 
-        private void Rotate(IBullet bullet, float rotateDuration)
+        private void SetMove(Vector3 target, Bullet bullet, Vector3 startPosition, Vector3 direction,
+            float moveDuration)
         {
-            Vector3 targetRotation = new Vector3(360, 0, 0);
+            bullet.transform.forward = direction;
+            bullet.transform.position = startPosition;
+            bullet.transform.DOMove(target, moveDuration);
+        }
+
+        private void Rotate(Bullet bullet, float rotateDuration)
+        {
+            var throwBullet = bullet as ThrowingBullet;
             
-            bullet.GameObject.transform
-                .DORotate(targetRotation, rotateDuration).SetRelative(true).SetEase(Ease.Linear);
+            Vector3 startTargetRotation = new Vector3(104, bullet.transform.localEulerAngles.y,
+                bullet.transform.localEulerAngles.z);
+            
+            Vector3 flyRotation = new Vector3(360, 0, 0);
+            
+            throwBullet.BulletModel.DOLocalRotate(new Vector3(0, 95, 0), 0);
+
+            throwBullet.transform
+                .DORotate(startTargetRotation, 0f);
+
+            throwBullet.transform
+                .DORotate(flyRotation, rotateDuration).SetRelative(true).SetEase(Ease.Linear);
         }
     }
 }

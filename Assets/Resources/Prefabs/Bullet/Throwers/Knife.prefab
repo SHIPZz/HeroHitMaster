@@ -41,7 +41,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4893496537501063534}
-  - component: {fileID: 1992501198301504056}
   - component: {fileID: 5315063570748446400}
   - component: {fileID: 1817539379323392124}
   - component: {fileID: 2759715281220666811}
@@ -49,6 +48,7 @@ GameObject:
   - component: {fileID: -5081649180242672200}
   - component: {fileID: 7954436735611641255}
   - component: {fileID: 2577694062383308276}
+  - component: {fileID: 7893437857233058776}
   m_Layer: 11
   m_Name: Knife
   m_TagString: Untagged
@@ -72,19 +72,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1992501198301504056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6412643211829885466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <BulletTypeId>k__BackingField: 5
 --- !u!54 &5315063570748446400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,7 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: 1817539379323392124}
 --- !u!114 &627307980354741232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +186,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.26837254, y: 1.209083, z: 0.10758287}
   m_Center: {x: -0.0011140034, y: 0.10454148, z: -0.0005201772}
+--- !u!114 &7893437857233058776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412643211829885466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4500b0d81d94406eb7f9e7e375746729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BulletTypeId>k__BackingField: 5
+  <BulletModel>k__BackingField: {fileID: 7799738555903372020}
 --- !u!1 &8465452993010180445
 GameObject:
   m_ObjectHideFlags: 0

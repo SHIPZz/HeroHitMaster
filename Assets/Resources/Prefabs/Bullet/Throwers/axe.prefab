@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3733676860261426378}
-  - component: {fileID: -447699393275525892}
   - component: {fileID: 546764024062380316}
   - component: {fileID: 342201207575598792}
   - component: {fileID: 7898542261982991384}
@@ -17,6 +16,7 @@ GameObject:
   - component: {fileID: 2168410977485205851}
   - component: {fileID: 4776921162758656460}
   - component: {fileID: -3537012055230887677}
+  - component: {fileID: 5218360013068180405}
   m_Layer: 11
   m_Name: axe
   m_TagString: Untagged
@@ -41,19 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-447699393275525892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4078994616601951856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <BulletTypeId>k__BackingField: 17
 --- !u!114 &546764024062380316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +53,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: 4776921162758656460}
 --- !u!114 &342201207575598792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +155,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5218360013068180405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078994616601951856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4500b0d81d94406eb7f9e7e375746729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BulletTypeId>k__BackingField: 0
+  <BulletModel>k__BackingField: {fileID: 0}
 --- !u!1 &4155423398800249589
 GameObject:
   m_ObjectHideFlags: 0

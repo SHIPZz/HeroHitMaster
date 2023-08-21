@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4849756173462113157}
   - component: {fileID: 6008633211220340257}
   - component: {fileID: -4846624717931010111}
+  - component: {fileID: -2989094791113284094}
   m_Layer: 11
   m_Name: Dynamite
   m_TagString: Untagged
@@ -104,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: 5376442738813682070}
 --- !u!54 &1317522932434956279
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -232,3 +232,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2989094791113284094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311373604623348549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4500b0d81d94406eb7f9e7e375746729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BulletTypeId>k__BackingField: 0
+  <BulletModel>k__BackingField: {fileID: 0}

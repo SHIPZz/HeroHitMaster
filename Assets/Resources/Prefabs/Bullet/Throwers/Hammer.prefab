@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2822173918956806252}
-  - component: {fileID: 3236847236927064383}
   - component: {fileID: 1334685877508843937}
   - component: {fileID: 2093325467465220459}
   - component: {fileID: 7136497467539929471}
@@ -17,6 +16,7 @@ GameObject:
   - component: {fileID: 5485097549714323735}
   - component: {fileID: -7491266039340248326}
   - component: {fileID: -3060186271657981208}
+  - component: {fileID: -409227897059952420}
   m_Layer: 11
   m_Name: Hammer
   m_TagString: Untagged
@@ -40,19 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3236847236927064383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623147260764886827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <BulletTypeId>k__BackingField: 6
 --- !u!114 &1334685877508843937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: 5485097549714323735}
 --- !u!114 &2093325467465220459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +154,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-409227897059952420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623147260764886827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4500b0d81d94406eb7f9e7e375746729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BulletTypeId>k__BackingField: 0
+  <BulletModel>k__BackingField: {fileID: 0}
 --- !u!1 &651371671439519269
 GameObject:
   m_ObjectHideFlags: 0
