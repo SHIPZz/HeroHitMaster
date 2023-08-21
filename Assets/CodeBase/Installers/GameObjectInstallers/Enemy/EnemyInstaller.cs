@@ -4,7 +4,6 @@ using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.MaterialChanger;
-using CodeBase.Gameplay.Spawners;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;

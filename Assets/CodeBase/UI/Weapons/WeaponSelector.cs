@@ -31,7 +31,6 @@ namespace CodeBase.UI.Weapons
         {
             Weapon weapon = _weaponStorage.Get(_lastWeaponId);
             _weaponProvider.Set(weapon);
-            Debug.Log(weapon);
             NewWeaponChanged?.Invoke(_lastWeaponId);
         }
 

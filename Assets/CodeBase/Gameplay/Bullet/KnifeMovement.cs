@@ -13,6 +13,13 @@ namespace CodeBase.Gameplay.Bullet
 
         private BulletStaticDataService _bulletStaticDataService;
 
+        private readonly List<Vector3> _rotationVectors = new()
+        {
+            // new Vector3(0, 0, 360),
+            // new Vector3(0, 360, 0),
+            new Vector3(360, 0, 0)
+        };
+        
         [Inject]
         public void Construct(BulletStaticDataService bulletStaticDataService)
         {
@@ -28,17 +35,21 @@ namespace CodeBase.Gameplay.Bullet
             bullet.GameObject.transform.forward = direction;
             bullet.GameObject.transform.position = startPosition;
             bullet.GameObject.transform.DOMove(target, moveDuration);
-
-            
-            Rotate(bullet);
-        }
-
-        private void Rotate(IBullet bullet)
-        {
-            Vector3 targetRotation = new Vector3(104, bullet.GameObject.transform.localEulerAngles.y, bullet.GameObject.transform.localEulerAngles.z);
+            Vector3 targetRotation = new Vector3(104, bullet.GameObject.transform.localEulerAngles.y, 
+                bullet.GameObject.transform.localEulerAngles.z);
             
             bullet.GameObject.transform
-                .DOLocalRotate(targetRotation, 0f).SetEase(Ease.Linear);
+                .DORotate(targetRotation, 0f);
+
+            Rotate(bullet, rotateDuration);
+        }
+
+        private void Rotate(IBullet bullet, float rotateDuration)
+        {
+            Vector3 targetRotation = new Vector3(360, 0, 0);
+            
+            bullet.GameObject.transform
+                .DORotate(targetRotation, rotateDuration).SetRelative(true).SetEase(Ease.Linear);
         }
     }
 }
