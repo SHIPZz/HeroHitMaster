@@ -55,13 +55,13 @@ namespace CodeBase.GameInit
             _loadingCurtain.Show();
             PlayerPrefs.DeleteAll();
             var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.Money = 1000;
+            playerData.Money = 2000;
             _saveSystem.Save(playerData);
             _walletPresenter.Init(playerData.Money);
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowingKnifeShooter);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
-            InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
+            InitializeInitialWeapon(WeaponTypeId.ThrowDaggerShooter);
             _playerProvider.Set(player);
         }
 

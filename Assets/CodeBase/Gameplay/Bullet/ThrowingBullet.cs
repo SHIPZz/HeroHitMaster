@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using CodeBase.Gameplay.ObjectBodyPart;
+using DG.Tweening;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.Bullet
 {
@@ -8,9 +10,12 @@ namespace CodeBase.Gameplay.Bullet
 
         protected override void DoDamage(Collider other)
         {
+            if (other.TryGetComponent(out IDestroyable destroyable))
+                destroyable.Destroy();
+
             if (other.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
             {
-                print("1");
+                transform.position = other.transform.position;
                 transform.SetParent(enemyPartForKnifeHolder.transform);
             }
         }

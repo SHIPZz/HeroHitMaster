@@ -16,13 +16,15 @@ namespace CodeBase.UI.Weapons
     {
         private readonly IProvider<Weapon> _weaponProvider;
         private readonly IWeaponStorage _weaponStorage;
+        private readonly ISaveSystem _saveSystem;
         private WeaponTypeId _lastWeaponId;
-        
+
         public event Action<WeaponTypeId> NewWeaponChanged;
 
         public WeaponSelector(IProvider<Weapon> weaponProvider,
-            IWeaponStorage weaponStorage)
+            IWeaponStorage weaponStorage, ISaveSystem saveSystem)
         {
+            _saveSystem = saveSystem;
             _weaponProvider = weaponProvider;
             _weaponStorage = weaponStorage;
         }
@@ -34,7 +36,14 @@ namespace CodeBase.UI.Weapons
             NewWeaponChanged?.Invoke(_lastWeaponId);
         }
 
-        public void SetLastWeaponChoosed(WeaponTypeId weaponTypeId) => 
+        public async void SetLastWeaponChoosed(WeaponTypeId weaponTypeId)
+        {
             _lastWeaponId = weaponTypeId;
+            
+            var playerData = await _saveSystem.Load<PlayerData>();
+
+            if (playerData.PurchasedWeapons.Contains(weaponTypeId))
+                Select();
+        }
     }
 }

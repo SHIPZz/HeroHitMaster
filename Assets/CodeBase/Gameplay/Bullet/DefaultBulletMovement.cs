@@ -5,7 +5,7 @@ using Zenject;
 
 namespace CodeBase.Gameplay.Bullet
 {
-    public class DefaultBulletMovement : MonoBehaviour, IBulletMovement
+    public class DefaultBulletMovement : BulletMovement
     {
         private BulletStaticDataService _bulletStaticDataService;
 
@@ -13,12 +13,22 @@ namespace CodeBase.Gameplay.Bullet
         public void Construct(BulletStaticDataService bulletStaticDataService) => 
             _bulletStaticDataService = bulletStaticDataService;
 
-        public void Move(Vector3 target, Bullet bullet, Vector3 startPosition)
+        public override void Move(Vector3 target, Vector3 startPosition)
         {
-            var moveDuration = _bulletStaticDataService.GetBy(bullet.BulletTypeId).MovementDuration;
+            Vector3 direction = target - startPosition;
+
+            SetMove(target, Bullet, startPosition, direction, MoveDuration);
             
-            bullet.transform.position = startPosition;
-            bullet.transform.DOMove(target, moveDuration);
+            Bullet.transform.DOMove(startPosition, 0f).OnComplete(() =>
+                RigidBody.DOMove(direction, 0.1f));
+        }
+        
+        private void SetMove(Vector3 target, Bullet throwingBullet, Vector3 startPosition, Vector3 direction,
+            float moveDuration)
+        {
+            throwingBullet.transform.forward = direction;
+            throwingBullet.transform.position = startPosition;
+            // throwingBullet.transform.DOMove(target, moveDuration);
         }
     }
 }

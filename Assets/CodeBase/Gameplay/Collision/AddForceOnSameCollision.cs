@@ -35,7 +35,7 @@ namespace CodeBase.Gameplay.Collision
         public void OnDisable()
         {
             _triggerObserver.Entered -= OnTriggerEntered;
-            _rigidbody.isKinematic = true;
+            // _rigidbody.isKinematic = true;
             DOTween.Kill(transform);
         }
 

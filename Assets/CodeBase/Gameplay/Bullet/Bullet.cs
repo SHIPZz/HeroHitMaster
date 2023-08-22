@@ -10,7 +10,7 @@ namespace CodeBase.Gameplay.Bullet
     {
         [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
 
-        protected IBulletMovement BulletMovement;
+        protected BulletMovement BulletMovement;
         protected int Damage;
         private TriggerObserver _triggerObserver;
 
@@ -22,7 +22,7 @@ namespace CodeBase.Gameplay.Bullet
         }
 
         private void Awake() =>
-            BulletMovement = GetComponent<IBulletMovement>();
+            BulletMovement = GetComponent<BulletMovement>();
 
         private void OnEnable() =>
             _triggerObserver.Entered += DoDamage;
@@ -31,7 +31,7 @@ namespace CodeBase.Gameplay.Bullet
             _triggerObserver.Entered -= DoDamage;
 
         public void Move(Vector3 target, Vector3 startPosition) =>
-            BulletMovement.Move(target, this, startPosition);
+            BulletMovement.Move(target, startPosition);
 
         protected abstract void DoDamage(Collider other);
     }

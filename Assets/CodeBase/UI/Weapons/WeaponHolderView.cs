@@ -23,7 +23,6 @@ namespace CodeBase.UI.Weapons
                 return false;
             }
 
-            Debug.Log(weaponTypeId);
             weaponViewInHand.gameObject.SetActive(true);
             SetActiveBy(weaponTypeId);
             return true;

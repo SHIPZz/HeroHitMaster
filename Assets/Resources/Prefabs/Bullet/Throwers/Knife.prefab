@@ -63,7 +63,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6412643211829885466}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5416752, y: 0.45451948, z: 0.5416752, w: 0.45451948}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -71,7 +71,7 @@ Transform:
   - {fileID: 8223424632597270911}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 100}
 --- !u!54 &5315063570748446400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &1817539379323392124
@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletModelRotation: {x: 0, y: 95, z: 0}
 --- !u!65 &2577694062383308276
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -184,8 +185,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.26837254, y: 1.209083, z: 0.10758287}
-  m_Center: {x: -0.0011140034, y: 0.10454148, z: -0.0005201772}
+  m_Size: {x: 0.2440528, y: 1.1863545, z: 0.06837986}
+  m_Center: {x: 0.0057100635, y: 0.12078486, z: 0.0012906082}
 --- !u!114 &7893437857233058776
 MonoBehaviour:
   m_ObjectHideFlags: 0

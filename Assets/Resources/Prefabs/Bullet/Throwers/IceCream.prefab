@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletModelRotation: {x: 0, y: 95, z: 0}
 --- !u!114 &-2941048755921216254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,8 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4500b0d81d94406eb7f9e7e375746729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BulletTypeId>k__BackingField: 0
-  <BulletModel>k__BackingField: {fileID: 0}
+  <BulletTypeId>k__BackingField: 7
+  <BulletModel>k__BackingField: {fileID: 6828003726848700}
 --- !u!1 &6470696844170475938
 GameObject:
   m_ObjectHideFlags: 0
