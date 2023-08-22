@@ -1,5 +1,4 @@
 ﻿using CodeBase.Gameplay.ObjectBodyPart;
-using DG.Tweening;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Bullet
