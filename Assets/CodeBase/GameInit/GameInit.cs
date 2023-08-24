@@ -61,7 +61,7 @@ namespace CodeBase.GameInit
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowingKnifeShooter);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
-            InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
+            InitializeInitialWeapon(WeaponTypeId.ThrowMaceShooter);
             _playerProvider.Set(player);
         }
 

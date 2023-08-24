@@ -1,7 +1,6 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Services.Data;
-using CodeBase.Services.Storages;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +11,12 @@ namespace CodeBase.Gameplay.Character.Enemy
         public int CurrentValue { get; private set; }
         public int MaxValue { get; private set; }
         public GameObject GameObject => gameObject;
+        
+        public bool Enabled
+        {
+            get => enabled;
+            set => enabled = value;
+        }
 
         public event Action<int> ValueChanged;
         public event Action ValueZeroReached;

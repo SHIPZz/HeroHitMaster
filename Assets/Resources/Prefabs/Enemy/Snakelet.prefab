@@ -5036,7 +5036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 8964670725669678881}
+  <EnemyHealth>k__BackingField: {fileID: 1893460232533309701}
 --- !u!136 &3465652808740396784
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5194,7 +5194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 8964670725669678881}
+  <EnemyHealth>k__BackingField: {fileID: 1893460232533309701}
 --- !u!1 &2182850197480382543
 GameObject:
   m_ObjectHideFlags: 0
@@ -5295,7 +5295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 6016704220920630904}
+  <EnemyHealth>k__BackingField: {fileID: 1893460232533309701}
 --- !u!1 &2420918454248527512
 GameObject:
   m_ObjectHideFlags: 0
@@ -5427,7 +5427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 8964670725669678881}
+  <EnemyHealth>k__BackingField: {fileID: 1893460232533309701}
 --- !u!1 &3451529845370655346
 GameObject:
   m_ObjectHideFlags: 0
@@ -5497,7 +5497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 8964670725669678881}
+  <EnemyHealth>k__BackingField: {fileID: 1893460232533309701}
 --- !u!1 &4127645046491958551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5818,7 +5818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 8964670725669678881}
+  <EnemyHealth>k__BackingField: {fileID: 1893460232533309701}
 --- !u!1 &5574209492548253874
 GameObject:
   m_ObjectHideFlags: 0
@@ -5873,6 +5873,7 @@ GameObject:
   - component: {fileID: -7290447800219917953}
   - component: {fileID: 5695942848658647781}
   - component: {fileID: 8286186824420001534}
+  - component: {fileID: 8446414835923344887}
   m_Layer: 9
   m_Name: Snakelet
   m_TagString: Untagged
@@ -6187,6 +6188,18 @@ CapsuleCollider:
   m_Height: 1.0890118
   m_Direction: 1
   m_Center: {x: 0, y: -0.6616973, z: 0.049999997}
+--- !u!114 &8446414835923344887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641366443712269572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5892501550623974776
 GameObject:
   m_ObjectHideFlags: 0
@@ -11145,7 +11158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 8964670725669678881}
+  <EnemyHealth>k__BackingField: {fileID: 1893460232533309701}
 --- !u!1 &6855993936025942869
 GameObject:
   m_ObjectHideFlags: 0
@@ -16134,7 +16147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 8964670725669678881}
+  <EnemyHealth>k__BackingField: {fileID: 1893460232533309701}
 --- !u!1 &7789785257570427657
 GameObject:
   m_ObjectHideFlags: 0

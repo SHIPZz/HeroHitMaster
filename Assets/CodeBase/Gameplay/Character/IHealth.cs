@@ -9,6 +9,7 @@ namespace CodeBase.Gameplay.Character
         GameObject GameObject { get; }
         int CurrentValue { get; }
         int MaxValue { get; }
+        bool Enabled { get; set; }
         
         event Action<int> ValueChanged;
         event Action ValueZeroReached;

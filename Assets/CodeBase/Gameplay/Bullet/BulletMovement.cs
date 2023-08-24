@@ -6,11 +6,12 @@ namespace CodeBase.Gameplay.Bullet
 {
     public abstract class BulletMovement : MonoBehaviour
     {
-        private BulletStaticDataService _bulletStaticDataService;
         protected Rigidbody RigidBody;
         protected float RotateDuration;
         protected float MoveDuration;
         protected Bullet Bullet;
+        
+        private BulletStaticDataService _bulletStaticDataService;
         
         [Inject]
         public void Construct(BulletStaticDataService bulletStaticDataService) =>

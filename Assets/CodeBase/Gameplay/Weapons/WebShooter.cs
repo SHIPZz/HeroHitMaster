@@ -14,7 +14,7 @@ namespace CodeBase.Gameplay.Weapons
         public override void Shoot(Vector3 target, Vector3 initialPosition)
         {
             var bullet = _bulletStorage.Pop(WeaponTypeId);
-            bullet.Move(target,initialPosition);
+            bullet.StartMovement(target,initialPosition);
             
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() =>
             {

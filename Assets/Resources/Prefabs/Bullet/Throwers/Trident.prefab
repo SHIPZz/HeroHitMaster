@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 6202094100552284380}
   - component: {fileID: 3356888868814263739}
   - component: {fileID: 4001794221130040990}
+  - component: {fileID: -4968445971105926707}
   m_Layer: 11
   m_Name: Trident
   m_TagString: Untagged
@@ -274,6 +275,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BulletTypeId>k__BackingField: 8
   <BulletModel>k__BackingField: {fileID: 8719885019659527343}
+--- !u!114 &-4968445971105926707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3748587305882081517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54802cf9c938495894ec6c1c6ccbb0a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletTypeId: 0
 --- !u!1 &7134536102075480069
 GameObject:
   m_ObjectHideFlags: 0

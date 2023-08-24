@@ -18,15 +18,11 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyAnimator = enemyAnimator;
         }
 
-        public void Initialize()
-        {
+        public void Initialize() => 
             _playerHealths.ForEach(x => x.ValueZeroReached += PlayWinAnimation);
-        }
 
-        public void Dispose()
-        {
-            _playerHealths.ForEach(x => x.ValueZeroReached -= PlayWinAnimation);
-        }
+        public void Dispose() => 
+        _playerHealths.ForEach(x => x.ValueZeroReached -= PlayWinAnimation);
 
         private void PlayWinAnimation() => 
             _enemyAnimator.SetVictory();

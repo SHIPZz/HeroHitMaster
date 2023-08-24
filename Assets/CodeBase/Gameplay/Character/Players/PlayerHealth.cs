@@ -9,8 +9,8 @@ namespace CodeBase.Gameplay.Character.Players
     public class PlayerHealth : MonoBehaviour, IHealth, IHealable, IDamageable
     {
         public int CurrentValue { get; private set; }
-
         public int MaxValue { get; private set; }
+        public bool Enabled { get => enabled; set => enabled = value; }
         public GameObject GameObject => gameObject;
 
         public event Action<int> ValueChanged;

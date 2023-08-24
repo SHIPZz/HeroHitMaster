@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!1 &222997669732403877
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!1 &534318485239318261
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!136 &5616334903414384747
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!1 &1157709857920282199
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!1 &1481251821372972690
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,7 +5637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!1 &3070314582540395927
 GameObject:
   m_ObjectHideFlags: 0
@@ -5738,7 +5738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!1 &3385721697044353526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5903,7 +5903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!1 &4755842216569860074
 GameObject:
   m_ObjectHideFlags: 0
@@ -5960,6 +5960,7 @@ GameObject:
   - component: {fileID: 2266939053878707971}
   - component: {fileID: -8225478694915314031}
   - component: {fileID: -2827735281572800229}
+  - component: {fileID: 7711804616597192246}
   m_Layer: 9
   m_Name: Spike
   m_TagString: Untagged
@@ -6219,7 +6220,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.2759432, y: 1.0132089, z: 1.47798}
   m_Center: {x: -0.00000006392003, y: 0.46985698, z: 0.029173046}
@@ -6300,6 +6301,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9638ef251f440098f8399811311bafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7711804616597192246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933907583149028729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colliders:
+  - {fileID: 3704555338810430118}
+  - {fileID: 2287260880108032243}
+  - {fileID: 8993992080408000086}
+  - {fileID: 4252259883087561162}
+  - {fileID: 1201285233200917444}
+  - {fileID: 1608545291027269161}
+  - {fileID: 5538050881400949392}
+  - {fileID: 7132243178330822859}
+  - {fileID: 6716802353627825180}
+  - {fileID: 5616334903414384747}
 --- !u!1 &4995447697217026775
 GameObject:
   m_ObjectHideFlags: 0
@@ -16165,7 +16189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}
 --- !u!1 &6712528765505776499
 GameObject:
   m_ObjectHideFlags: 0
@@ -16521,4 +16545,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 5457232587114873336}

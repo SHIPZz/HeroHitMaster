@@ -2,7 +2,6 @@
 using CodeBase.Enums;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using UnityEngine;
 
 namespace CodeBase.UI.Weapons
 {

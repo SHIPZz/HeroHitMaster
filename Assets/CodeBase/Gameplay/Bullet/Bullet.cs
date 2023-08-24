@@ -1,28 +1,28 @@
 ﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Bullet.DamageDealers;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Services.Data;
 using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Gameplay.Bullet
 {
-    public abstract class Bullet : MonoBehaviour
+    public class Bullet : MonoBehaviour
     {
         [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
 
-        protected BulletMovement BulletMovement;
-        protected int Damage;
+        private BulletMovement _bulletMovement;
         private TriggerObserver _triggerObserver;
+        private DamageDealer _damageDealer;
 
         [Inject]
-        private void Construct(TriggerObserver triggerObserver, BulletStaticDataService bulletStaticDataService)
-        {
+        private void Construct(TriggerObserver triggerObserver) => 
             _triggerObserver = triggerObserver;
-            Damage = bulletStaticDataService.GetBy(BulletTypeId).Damage;
-        }
 
-        private void Awake() =>
-            BulletMovement = GetComponent<BulletMovement>();
+        private void Awake()
+        {
+            _bulletMovement = GetComponent<BulletMovement>();
+            _damageDealer = GetComponent<DamageDealer>();
+        }
 
         private void OnEnable() =>
             _triggerObserver.Entered += DoDamage;
@@ -30,9 +30,10 @@ namespace CodeBase.Gameplay.Bullet
         private void OnDisable() =>
             _triggerObserver.Entered -= DoDamage;
 
-        public void Move(Vector3 target, Vector3 startPosition) =>
-            BulletMovement.Move(target, startPosition);
+        public void StartMovement(Vector3 target, Vector3 startPosition) =>
+            _bulletMovement.Move(target, startPosition);
 
-        protected abstract void DoDamage(Collider other);
+        private void DoDamage(Collider other) =>
+            _damageDealer.DoDamage(other);
     }
 }

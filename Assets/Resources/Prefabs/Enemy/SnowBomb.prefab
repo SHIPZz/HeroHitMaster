@@ -14623,7 +14623,6 @@ GameObject:
   - component: {fileID: 6547005285148908584}
   - component: {fileID: 6388676855675677129}
   - component: {fileID: 8868556048667479627}
-  - component: {fileID: 5893483635357988277}
   - component: {fileID: 2372164304091908240}
   - component: {fileID: 4951588246759515694}
   - component: {fileID: 787439356600107197}
@@ -14632,9 +14631,11 @@ GameObject:
   - component: {fileID: 4565965345988381833}
   - component: {fileID: 5760427383814377844}
   - component: {fileID: 8513813251415474590}
-  - component: {fileID: 7204083755395706502}
   - component: {fileID: -8066877390131506511}
   - component: {fileID: -7881525308177614672}
+  - component: {fileID: 3523561547357385859}
+  - component: {fileID: 2689591134803760708}
+  - component: {fileID: 7947290985443845024}
   m_Layer: 9
   m_Name: SnowBomb
   m_TagString: Untagged
@@ -14754,29 +14755,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.053474218, y: 0.08381258, z: -0.010629058}
     m_Extent: {x: 0.5124991, y: 0.5386587, z: 0.6615752}
   m_DirtyAABB: 0
---- !u!136 &5893483635357988277
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4231067478400966202}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.6615753
-  m_Height: 1.0249982
-  m_Direction: 1
-  m_Center: {x: 0.010629038, y: 0.95041585, z: 0.08381258}
 --- !u!114 &2372164304091908240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14827,9 +14805,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skinnedMeshRenderer: {fileID: 8868556048667479627}
   _animator: {fileID: 6388676855675677129}
-  _collider: {fileID: 5893483635357988277}
+  _collider: {fileID: 3523561547357385859}
   _enemyHealth: {fileID: 810403352175149441}
-  _triggerObserver: {fileID: 7204083755395706502}
+  _triggerObserver: {fileID: 2689591134803760708}
   _hitEffect: {fileID: 606376187802800619}
   _navMeshAgent: {fileID: 4951588246759515694}
   _enemyFollower: {fileID: 2372662492294861164}
@@ -14902,18 +14880,6 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &7204083755395706502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4231067478400966202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f14c611f92e412ab3d6a2f6cbdabab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-8066877390131506511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14936,6 +14902,53 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9638ef251f440098f8399811311bafd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &3523561547357385859
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231067478400966202}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6615753
+  m_Height: 1.0249982
+  m_Direction: 1
+  m_Center: {x: 0.010629038, y: 0.95041585, z: 0.08381258}
+--- !u!114 &2689591134803760708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231067478400966202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f14c611f92e412ab3d6a2f6cbdabab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7947290985443845024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231067478400966202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4245919642720257546
@@ -15045,7 +15058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 810403352175149441}
 --- !u!136 &5964760105517021657
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20061,10 +20074,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3734983
-  m_Height: 0.7469967
+  m_Radius: 0.4330635
+  m_Height: 0.9637512
   m_Direction: 1
-  m_Center: {x: -0.06534816, y: -0.12724057, z: -0.0107994}
+  m_Center: {x: -0.12910129, y: -0.10604888, z: 0.013050084}
 --- !u!114 &2330169900874779125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20077,7 +20090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 810403352175149441}
 --- !u!1 &6946298486437674284
 GameObject:
   m_ObjectHideFlags: 0
@@ -25058,7 +25071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 810403352175149441}
 --- !u!136 &5139704568546765364
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -25161,7 +25174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Head: {fileID: 0}
+  <EnemyHealth>k__BackingField: {fileID: 810403352175149441}
 --- !u!1 &8487424102948622698
 GameObject:
   m_ObjectHideFlags: 0
