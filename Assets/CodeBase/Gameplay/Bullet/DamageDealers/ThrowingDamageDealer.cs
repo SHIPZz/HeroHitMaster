@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.Bullet.DamageDealers
 {
@@ -6,21 +7,22 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
     {
         private Collider _collider;
 
-        private void Awake()
-        {
+        private void Awake() => 
             _collider = GetComponent<Collider>();
-        }
+
+        private void OnEnable() => 
+            _collider.enabled = true;
 
         public override void DoDamage(Collider other)
         {
-            if (other.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
-            {
-                if(!enemyPartForKnifeHolder.EnemyHealth.isActiveAndEnabled)
-                    return;
-                
-                enemyPartForKnifeHolder.EnemyHealth.TakeDamage(Damage);
-                _collider.enabled = false;
-            }
+            if (!other.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
+                return;
+            
+            if (!enemyPartForKnifeHolder.EnemyHealth.isActiveAndEnabled)
+                return;
+
+            enemyPartForKnifeHolder.EnemyHealth.TakeDamage(Damage);
+            _collider.enabled = false;
         }
     }
 }

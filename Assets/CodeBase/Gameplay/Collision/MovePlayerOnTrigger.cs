@@ -29,7 +29,7 @@ namespace CodeBase.Gameplay.Collision
         private void Test(Collider player)
         {
             player.transform.SetParent(transform);
-            GetComponent<Rigidbody>().DOMoveZ(_target.position.z, MoveDuration)
+            transform.DOMoveZ(_target.position.z, MoveDuration)
                 .OnComplete(() => player.transform.SetParent(null));
         }
     }

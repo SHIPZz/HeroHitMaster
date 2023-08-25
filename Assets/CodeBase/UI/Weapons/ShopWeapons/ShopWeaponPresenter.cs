@@ -67,8 +67,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
 
             _lastWeaponType = weaponTypeId;
-            
-            
+
             WeaponData weaponData = GetWeaponData(weaponTypeId);
 
             var playerData = await _saveSystem.Load<PlayerData>();

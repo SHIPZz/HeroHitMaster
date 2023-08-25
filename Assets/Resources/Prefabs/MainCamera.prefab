@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 454544015245643060}
   - component: {fileID: -7209235550273093884}
   - component: {fileID: 997806242165937239}
+  - component: {fileID: 6279304875084251717}
+  - component: {fileID: -6863357308175802227}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -51,9 +53,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -100,8 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99621633b10e1428a5079aa0c88723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _smoothSpeed: 5
-  _offset: {x: 0, y: 3.3, z: -8}
 --- !u!114 &454544015245643060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +174,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+    FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
@@ -256,3 +265,27 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: -5630151704836100654, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &6279304875084251717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151089771358117672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062682c58e44483a86d1cd15d3397cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6863357308175802227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151089771358117672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c53ab77e09e457c949e584f73f6b7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

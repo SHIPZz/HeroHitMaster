@@ -1,5 +1,6 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
@@ -59,9 +60,12 @@ namespace CodeBase.GameInit
             _saveSystem.Save(playerData);
             _walletPresenter.Init(playerData.Money);
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowingKnifeShooter);
+            
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
-            InitializeInitialWeapon(WeaponTypeId.ThrowMaceShooter);
+            playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
+            
+            InitializeInitialWeapon(WeaponTypeId.ThrowSkewerShooter);
             _playerProvider.Set(player);
         }
 

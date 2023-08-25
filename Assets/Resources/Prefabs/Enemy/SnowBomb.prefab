@@ -14921,7 +14921,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.6615753
   m_Height: 1.0249982
@@ -14951,6 +14951,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colliders:
+  - {fileID: 3523561547357385859}
+  - {fileID: 3742410651603575881}
+  - {fileID: 5139704568546765364}
+  - {fileID: 5964760105517021657}
 --- !u!1 &4245919642720257546
 GameObject:
   m_ObjectHideFlags: 0
@@ -20074,10 +20079,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4330635
-  m_Height: 0.9637512
+  m_Radius: 0.37858665
+  m_Height: 0.82737327
   m_Direction: 1
-  m_Center: {x: -0.12910129, y: -0.10604888, z: 0.013050084}
+  m_Center: {x: -0.07462443, y: -0.09916737, z: 0.013050085}
 --- !u!114 &2330169900874779125
 MonoBehaviour:
   m_ObjectHideFlags: 0

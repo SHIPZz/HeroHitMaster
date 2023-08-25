@@ -3409,8 +3409,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7061453313571031707}
   m_LocalRotation: {x: 0.5868299, y: -0.7953095, z: -0.1309578, w: -0.07722449}
-  m_LocalPosition: {x: -0.348, y: 0.341, z: 0.148}
-  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
+  m_LocalPosition: {x: -0.329, y: 0.402, z: 0.165}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5328946574748800211}
@@ -3852,6 +3852,7 @@ GameObject:
   - component: {fileID: 4951380437961296080}
   - component: {fileID: 1547486457549763963}
   - component: {fileID: 7315513095739920567}
+  - component: {fileID: -1363410816882132244}
   m_Layer: 8
   m_Name: Wolverine
   m_TagString: Untagged
@@ -4070,6 +4071,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3465e4d478c4b83947f7f87e546d6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1363410816882132244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8579200577069415324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce96ff141984978a6fe7ed5dea6e50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8642631035792443680

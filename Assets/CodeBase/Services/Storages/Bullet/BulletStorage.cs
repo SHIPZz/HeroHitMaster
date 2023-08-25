@@ -45,10 +45,15 @@ namespace CodeBase.Services.Storages.Bullet
         public Gameplay.Bullet.Bullet Pop(WeaponTypeId weaponTypeId)
         {
             BulletTypeId targetBulletId = _bulletStaticDataService.GetBy(weaponTypeId).BulletTypeId;
-            return _gameObjectPoolProvider.Get()[targetBulletId].Pop().GetComponent<Gameplay.Bullet.Bullet>();
+            var bullet = _gameObjectPoolProvider.Get()[targetBulletId].Pop().GetComponent<Gameplay.Bullet.Bullet>();
+            bullet.transform.position = _playerProvider.Get().RightHand.position;
+            return bullet;
         }
 
-        public void Push(Gameplay.Bullet.Bullet bullet) =>
+        public void Push(Gameplay.Bullet.Bullet bullet)
+        {
+            bullet.transform.SetParent(_locationProvider.Get(LocationTypeId.BulletParent));
             _gameObjectPoolProvider.Get()[bullet.BulletTypeId].Push(bullet.gameObject);
+        }
     }
 }

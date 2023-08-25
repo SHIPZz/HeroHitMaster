@@ -10458,6 +10458,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colliders:
+  - {fileID: 5509823935013229111}
+  - {fileID: 6954603861273790969}
+  - {fileID: 1933231197087588438}
+  - {fileID: 2592508054095871288}
+  - {fileID: 5250555547330518375}
+  - {fileID: 2734542417150267939}
+  - {fileID: 2112510576268046003}
 --- !u!1 &3421763005002276387
 GameObject:
   m_ObjectHideFlags: 0
@@ -10607,10 +10615,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.20319162
-  m_Height: 0.40638334
+  m_Radius: 0.074537754
+  m_Height: 0.19939831
   m_Direction: 1
-  m_Center: {x: 0.03321194, y: 0.026627842, z: -0.02962285}
+  m_Center: {x: 0.03321202, y: 0.034099177, z: 0.0030094218}
 --- !u!114 &5453061537926311453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15486,14 +15494,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.20319162
-  m_Height: 0.40638334
+  m_Radius: 0.079045124
+  m_Height: 0.1819291
   m_Direction: 1
-  m_Center: {x: -0.09, y: 0.026627842, z: -0.02962285}
+  m_Center: {x: -0.090000965, y: 0.0103378445, z: 0.0054582884}
 --- !u!114 &7361860767303972774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15590,10 +15598,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.11526331
-  m_Height: 0.4063834
+  m_Radius: 0.07330957
+  m_Height: 0.2590293
   m_Direction: 1
-  m_Center: {x: -0.031233883, y: 0.12000001, z: 0.008483314}
+  m_Center: {x: 0.0049858377, y: 0.102670655, z: 0.0027492885}
 --- !u!114 &130326420538853088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15814,10 +15822,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2561937
-  m_Height: 0.52463436
+  m_Radius: 0.18830076
+  m_Height: 0.45468044
   m_Direction: 1
-  m_Center: {x: -0.06314955, y: -0.16277412, z: 0.011858508}
+  m_Center: {x: -0.06314976, y: -0.12779643, z: -0.007715066}
 --- !u!114 &3517702499756039139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15915,10 +15923,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.20319162
-  m_Height: 0.40638334
+  m_Radius: 0.08326266
+  m_Height: 0.1723577
   m_Direction: 1
-  m_Center: {x: -0.09, y: 0.026627842, z: -0.02962285}
+  m_Center: {x: -0.090002745, y: 0.00037515408, z: 0.0033769826}
 --- !u!114 &1702899314537786921
 MonoBehaviour:
   m_ObjectHideFlags: 0

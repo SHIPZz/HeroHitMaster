@@ -15,15 +15,11 @@ namespace CodeBase.Gameplay.Weapons
         protected BulletStorage _bulletStorage;
         
         [Inject]
-        private void Construct(BulletStorage bulletStorage)
-        {
+        private void Construct(BulletStorage bulletStorage) => 
             _bulletStorage = bulletStorage;
-        }
-        
-        public virtual void Initialize()
-        {
+
+        public virtual void Initialize() => 
             Init(WeaponTypeId);
-        }
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
@@ -32,9 +28,7 @@ namespace CodeBase.Gameplay.Weapons
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => _bulletStorage.Push(bullet));
         }
 
-        protected void Init(WeaponTypeId weaponTypeId)
-        { ;
-            _bulletStorage.CreateBulletsBy(weaponTypeId);
-        }
+        protected void Init(WeaponTypeId weaponTypeId) => 
+        _bulletStorage.CreateBulletsBy(weaponTypeId);
     }
 }
