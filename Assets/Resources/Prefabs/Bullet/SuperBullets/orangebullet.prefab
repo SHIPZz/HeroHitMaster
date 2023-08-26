@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 56301759723903145}
   - component: {fileID: 8783268584911922842}
   - component: {fileID: 1545678335230780889}
-  m_Layer: 0
+  - component: {fileID: -5593596519468831337}
+  m_Layer: 11
   m_Name: orangebullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 1417883981040411737}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -166,6 +168,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c390495438646f4904944cf8578f133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5593596519468831337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376469699023576455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <WeaponTypeId>k__BackingField: 18
 --- !u!1 &831886709400191358
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +192,7 @@ GameObject:
   - component: {fileID: 5805934655778647194}
   - component: {fileID: 9117920914545719467}
   - component: {fileID: 8494525643054644097}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Digital Projectile(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5020,7 +5035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 601395232863933296}
   - component: {fileID: 3531822617373314118}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ProjTrail2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5166,7 +5181,7 @@ GameObject:
   - component: {fileID: 5781677775828052811}
   - component: {fileID: 7382731532682317661}
   - component: {fileID: 5593018653876937122}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5248,7 +5263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6858153644828304805}
   - component: {fileID: 5467844452458958035}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ProjSmallTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5392,7 +5407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6343703816108918766}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5430,7 +5445,7 @@ GameObject:
   - component: {fileID: 1465801297197333274}
   - component: {fileID: 1132365017573082275}
   - component: {fileID: 1898709418267118026}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ProjectileHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5526,7 +5541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 706655264673982300}
   - component: {fileID: 1898124047470442847}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ProjTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5671,7 +5686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 844420678243962966}
   - component: {fileID: 6992242982749088089}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FadeLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5765,7 +5780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3566097173476102534}
   - component: {fileID: 7606413114664496716}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ProjGlowTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

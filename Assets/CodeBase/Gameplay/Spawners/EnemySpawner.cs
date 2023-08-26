@@ -16,6 +16,8 @@ namespace CodeBase.Gameplay.Spawners
         [SerializeField] private TriggerObserver _aggroZone;
 
         private EnemyFactory _enemyFactory;
+        private float _destroyDelay = 0;
+        private bool _canDestroy = true;
 
         public event Action Destroyed;
         public event Action<Enemy, TriggerObserver> Spawned;
@@ -30,23 +32,33 @@ namespace CodeBase.Gameplay.Spawners
         {
             Enemy enemy = _enemyFactory.CreateBy(_enemyTypeId);
             enemy.gameObject.transform.position = transform.position;
-            enemy.Dead += Disable;
-            enemy.GetComponent<IMaterialChanger>().StartedChanged += DisableWithDelay;
-            enemy.QuickDestroyed += Disable;
+            var materialChanger = enemy.GetComponent<IMaterialChanger>();
+            Subscribe(enemy, materialChanger);
             callback?.Invoke(enemy, _aggroZone);
         }
 
-        private void DisableWithDelay()
+        private void Subscribe(Enemy enemy, IMaterialChanger materialChanger)
         {
-            DOTween.Sequence().AppendInterval(1f).OnComplete(() =>
-            {
-                Destroyed?.Invoke();
-                gameObject.SetActive(false);
-            });
+            enemy.Dead += Disable;
+            materialChanger.StartedChanged += BlockDestruction;
+            materialChanger.Completed += Disable;
+            enemy.QuickDestroyed += Disable;
         }
+
+        private void Disable()
+        {
+            Destroyed?.Invoke();
+            gameObject.SetActive(false);
+        }
+
+        private void BlockDestruction() =>
+            _canDestroy = false;
 
         private void Disable(Enemy enemy)
         {
+            if (!_canDestroy)
+                return;
+            
             Destroyed?.Invoke();
             gameObject.SetActive(false);
         }
