@@ -10,7 +10,7 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
 
         [Inject]
         private void Construct(BulletStaticDataService bulletStaticDataService) => 
-            Damage = bulletStaticDataService.GetBy(GetComponent<Bullet>().BulletTypeId).Damage;
+            Damage = bulletStaticDataService.GetBy(GetComponent<Bullet>().WeaponTypeId).Damage;
 
         public abstract void DoDamage(Collider other);
     }

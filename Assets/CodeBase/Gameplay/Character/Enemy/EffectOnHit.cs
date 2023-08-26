@@ -11,8 +11,8 @@ namespace CodeBase.Gameplay.Character.Enemy
     {
         private readonly IHealth _health;
         private readonly ParticleSystem _hitEffect;
-        private bool _canPlayEffect = true;
         private readonly AudioSource _hitSound;
+        private bool _canPlayEffect = true;
 
         public EffectOnHit(IHealth health, [Inject(Id = ParticleTypeId.HitEffect)] ParticleSystem hitEffect,
             SoundsSettings soundsSettings, ISoundStorage soundStorage, EnemyTypeId enemyTypeId)

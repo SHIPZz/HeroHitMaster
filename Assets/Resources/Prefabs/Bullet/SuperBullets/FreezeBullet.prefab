@@ -5307,12 +5307,13 @@ GameObject:
   - component: {fileID: 7735753679208782539}
   - component: {fileID: 2682109021005537219}
   - component: {fileID: 6076261244309444539}
-  - component: {fileID: 4161882055760505979}
   - component: {fileID: 6368330173031019015}
   - component: {fileID: 912075056933767661}
   - component: {fileID: 2660476340127663239}
   - component: {fileID: 309372810781803094}
-  - component: {fileID: -1951524743001614441}
+  - component: {fileID: 5225786258442989344}
+  - component: {fileID: -4384398281613173495}
+  - component: {fileID: 8193026143669455248}
   m_Layer: 11
   m_Name: FreezeBullet
   m_TagString: Untagged
@@ -5371,21 +5372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: 2660476340127663239}
---- !u!114 &4161882055760505979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2634519650295375025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b911925709a4848a45b7f0db44a93fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _materialTypeId: 0
-  <BulletTypeId>k__BackingField: 10
 --- !u!65 &6368330173031019015
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5458,7 +5444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c390495438646f4904944cf8578f133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1951524743001614441
+--- !u!114 &5225786258442989344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5467,7 +5453,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 2634519650295375025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b218e9efc7db4cb2b62e1ba89bb62252, type: 3}
+  m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <WeaponTypeId>k__BackingField: 17
+--- !u!114 &-4384398281613173495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634519650295375025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347c598a7d9f4aa6adcc0b665df9a183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _materialTypeId: 0
+--- !u!114 &8193026143669455248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634519650295375025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7dcfd0b55d4659964021395c9d8da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3768701779024279364
@@ -10260,7 +10272,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: f9fb8072efc525744bc2c2a6c810ca88, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

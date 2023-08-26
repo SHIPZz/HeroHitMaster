@@ -8,14 +8,14 @@ namespace CodeBase.Services.Storages.Bullet
 {
     public class BulletEffectStorage
     {
-        private readonly Dictionary<BulletTypeId, ParticleSystem> _hitEffects = new();
+        private readonly Dictionary<WeaponTypeId, ParticleSystem> _hitEffects = new();
 
         public BulletEffectStorage(BulletStaticDataService bulletStaticDataService, IEffectFactory effectFactory)
         {
             FillHitEffects(bulletStaticDataService, effectFactory);
         }
 
-        public ParticleSystem Get(BulletTypeId bulletTypeId) =>
+        public ParticleSystem Get(WeaponTypeId bulletTypeId) =>
             !_hitEffects.TryGetValue(bulletTypeId, out var hitEffect) ? 
                 null : 
                 hitEffect;
@@ -27,8 +27,8 @@ namespace CodeBase.Services.Storages.Bullet
                 if (bulletData.HitEffect == null)
                     continue;
 
-                var hitEffect = effectFactory.Create(bulletData.HitEffect);
-                _hitEffects[bulletData.BulletTypeId] = hitEffect;
+                ParticleSystem hitEffect = effectFactory.Create(bulletData.HitEffect);
+                _hitEffects[bulletData.WeaponTypeId] = hitEffect;
             }
         }
     }

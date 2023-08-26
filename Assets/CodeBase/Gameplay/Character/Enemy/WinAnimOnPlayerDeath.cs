@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Character;
+using DG.Tweening;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
@@ -25,6 +26,8 @@ namespace CodeBase.Gameplay.Character.Enemy
         _playerHealths.ForEach(x => x.ValueZeroReached -= PlayWinAnimation);
 
         private void PlayWinAnimation() => 
-            _enemyAnimator.SetVictory();
+            DOTween.Sequence()
+                .AppendInterval(0.5f)
+                .OnComplete(() => _enemyAnimator.SetVictory());
     }
 }

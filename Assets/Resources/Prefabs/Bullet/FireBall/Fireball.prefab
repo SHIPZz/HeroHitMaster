@@ -241,7 +241,6 @@ GameObject:
   - component: {fileID: -876812634479379941}
   - component: {fileID: -7253345956150245499}
   - component: {fileID: -2915578655644368749}
-  - component: {fileID: 412647592033668409}
   - component: {fileID: -6119228306429054744}
   - component: {fileID: -7406708598021362663}
   - component: {fileID: 3405859361221457152}
@@ -309,7 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: -6119228306429054744}
 --- !u!65 &-7253345956150245499
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -358,20 +356,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &412647592033668409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469598082478499575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b911925709a4848a45b7f0db44a93fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _materialTypeId: 0
-  <BulletTypeId>k__BackingField: 4
 --- !u!114 &-6119228306429054744
 MonoBehaviour:
   m_ObjectHideFlags: 0

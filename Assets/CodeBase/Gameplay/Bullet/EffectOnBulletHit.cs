@@ -1,5 +1,4 @@
 ﻿using CodeBase.Gameplay.Collision;
-using CodeBase.Services.Data;
 using CodeBase.Services.Storages.Bullet;
 using DG.Tweening;
 using UnityEngine;
@@ -15,7 +14,7 @@ namespace CodeBase.Gameplay.Bullet
 
         [Inject]
         private void Construct(BulletEffectStorage bulletEffectStorage) => 
-            _effect = bulletEffectStorage.Get(GetComponent<Bullet>().BulletTypeId);
+            _effect = bulletEffectStorage.Get(GetComponent<Bullet>().WeaponTypeId);
 
         private void Awake() => 
             _triggerObserver = GetComponent<TriggerObserver>();

@@ -2,6 +2,7 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.ObjectBodyPart;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {

@@ -4,14 +4,14 @@ using CodeBase.Services.ObjectPool;
 
 namespace CodeBase.Services.Providers
 {
-    public class BulletsPoolProvider : IProvider<Dictionary<BulletTypeId, GameObjectPool>>
+    public class BulletsPoolProvider : IProvider<Dictionary<WeaponTypeId, GameObjectPool>>
     {
-        private Dictionary<BulletTypeId, GameObjectPool> _bulletsPool = new();
+        private Dictionary<WeaponTypeId, GameObjectPool> _bulletsPool = new();
         
-        public Dictionary<BulletTypeId, GameObjectPool> Get() => 
+        public Dictionary<WeaponTypeId, GameObjectPool> Get() => 
             _bulletsPool;
 
-        public void Set(Dictionary<BulletTypeId, GameObjectPool> bulletsPool) => 
+        public void Set(Dictionary<WeaponTypeId, GameObjectPool> bulletsPool) => 
             _bulletsPool = bulletsPool;
     }
 }

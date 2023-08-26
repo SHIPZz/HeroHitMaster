@@ -21,7 +21,13 @@ namespace CodeBase.Installers
             BindGameStateMachine();
             BindStateFactory();
             BindSaveSystem();
+            BindGlobalSlowMotionSystem();
         }
+
+        private void BindGlobalSlowMotionSystem() =>
+            Container
+                .Bind<GlobalSlowMotionSystem>()
+                .AsSingle();
 
         private void BindSaveSystem()
         {

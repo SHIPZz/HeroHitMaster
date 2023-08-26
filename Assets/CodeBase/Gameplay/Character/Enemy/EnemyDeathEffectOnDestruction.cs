@@ -23,14 +23,14 @@ namespace CodeBase.Gameplay.Character.Enemy
         {
             _enemy.QuickDestroyed += Play;
             _enemy.GetComponent<DieOnAnimationEvent>().Dead += Play;
-            _enemy.GetComponent<SkinnedMaterialChanger>().Changed += BlockEffect;
+            _enemy.GetComponent<SkinnedMaterialChanger>().StartedChanged += BlockEffect;
         }
 
         public void Dispose()
         {
             _enemy.QuickDestroyed -= Play;
             _enemy.GetComponent<DieOnAnimationEvent>().Dead -= Play;
-            _enemy.GetComponent<SkinnedMaterialChanger>().Changed -= BlockEffect;
+            _enemy.GetComponent<SkinnedMaterialChanger>().StartedChanged -= BlockEffect;
         }
 
         private void BlockEffect() =>

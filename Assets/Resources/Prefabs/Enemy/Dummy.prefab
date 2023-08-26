@@ -5340,7 +5340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2140aabccea46a1b9b4182e0bd0aeb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetStopDistance: 2
+  _targetStopDistance: 3
 --- !u!114 &5482505976512218691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5389,7 +5389,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.7428224, y: 2.253761, z: 1.1947186}
   m_Center: {x: 0.038777232, y: 1.1017627, z: 0.15922582}
@@ -5463,16 +5463,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colliders:
-  - {fileID: 8001916054457387385}
-  - {fileID: 5011669115220387733}
-  - {fileID: 847571184865904066}
-  - {fileID: 4749132341009036218}
-  - {fileID: 6759361198560714593}
-  - {fileID: 7233012653600867927}
-  - {fileID: 7449917975639392640}
-  - {fileID: 5848015446217480088}
-  - {fileID: 1581821604356189089}
 --- !u!1 &2310695226452586166
 GameObject:
   m_ObjectHideFlags: 0

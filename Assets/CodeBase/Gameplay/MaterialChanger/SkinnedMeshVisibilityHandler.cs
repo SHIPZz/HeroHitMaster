@@ -25,13 +25,13 @@ namespace CodeBase.Gameplay.MaterialChanger
         public void Initialize()
         {
             _health.ValueZeroReached += Disable;
-            _skinnedMaterialChanger.Changed += MaterialChanged;
+            _skinnedMaterialChanger.StartedChanged += MaterialChanged;
         }
 
         public void Dispose()
         {
             _health.ValueZeroReached -= Disable;
-            _skinnedMaterialChanger.Changed -= MaterialChanged;
+            _skinnedMaterialChanger.StartedChanged -= MaterialChanged;
         }
 
         private void MaterialChanged() =>

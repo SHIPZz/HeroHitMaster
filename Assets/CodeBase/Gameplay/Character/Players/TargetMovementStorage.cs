@@ -6,7 +6,5 @@ namespace CodeBase.Gameplay.Character.Players
     public class TargetMovementStorage : MonoBehaviour
     {
         [field: SerializeField] public List<Transform> Targets { get; private set; }
-        
-        
     }
 }

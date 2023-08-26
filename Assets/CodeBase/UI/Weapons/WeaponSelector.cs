@@ -18,12 +18,14 @@ namespace CodeBase.UI.Weapons
         private readonly IWeaponStorage _weaponStorage;
         private readonly ISaveSystem _saveSystem;
         private WeaponTypeId _lastWeaponId;
+        private WeaponStaticDataService _weaponStaticDataService;
 
         public event Action<WeaponTypeId> NewWeaponChanged;
 
         public WeaponSelector(IProvider<Weapon> weaponProvider,
-            IWeaponStorage weaponStorage, ISaveSystem saveSystem)
+            IWeaponStorage weaponStorage, ISaveSystem saveSystem, WeaponStaticDataService weaponStaticDataService)
         {
+            _weaponStaticDataService = weaponStaticDataService;
             _saveSystem = saveSystem;
             _weaponProvider = weaponProvider;
             _weaponStorage = weaponStorage;
@@ -39,7 +41,13 @@ namespace CodeBase.UI.Weapons
         public async void SetLastWeaponChoosed(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;
-            
+
+            if (_weaponStaticDataService.Get(weaponTypeId).Price.PriceTypeId == PriceTypeId.Popup)
+            {
+                Select();
+                return;
+            }
+
             var playerData = await _saveSystem.Load<PlayerData>();
 
             if (playerData.PurchasedWeapons.Contains(weaponTypeId))

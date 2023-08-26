@@ -18,6 +18,8 @@
         ThrowSawShooter = 13,
         ThrowSkewerShooter = 14,
         ThrowBoomerangShoter = 15,
-        FreezeWeapon = 16,
+        GreenWeapon = 16,
+        BlueWeapon = 17,
+        OrangeWeapon = 18,
     }
 }

@@ -3,6 +3,7 @@
     public enum PriceTypeId
     {
         Ad,
-        Money
+        Money,
+        Popup,
     }
 }

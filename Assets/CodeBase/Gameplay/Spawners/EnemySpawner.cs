@@ -2,7 +2,9 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
+using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Services.Factories;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -29,7 +31,18 @@ namespace CodeBase.Gameplay.Spawners
             Enemy enemy = _enemyFactory.CreateBy(_enemyTypeId);
             enemy.gameObject.transform.position = transform.position;
             enemy.Dead += Disable;
+            enemy.GetComponent<IMaterialChanger>().StartedChanged += DisableWithDelay;
+            enemy.QuickDestroyed += Disable;
             callback?.Invoke(enemy, _aggroZone);
+        }
+
+        private void DisableWithDelay()
+        {
+            DOTween.Sequence().AppendInterval(1f).OnComplete(() =>
+            {
+                Destroyed?.Invoke();
+                gameObject.SetActive(false);
+            });
         }
 
         private void Disable(Enemy enemy)

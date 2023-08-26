@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19cf0fb125fe7f0449cd5d3b147c3a93, type: 3}
+  m_Name: BlueWeapon
+  m_EditorClassIdentifier: 
+  ShootDelay: 0.66
+  Price:
+    Value: 0
+    PriceTypeId: 2
+    AdQuantity: 0
+  Name: Blue weapon
+  WeaponTypeId: 17
+  ShootEffect: {fileID: 1739757647185991897, guid: 9914b8b8d14a98646858f05ed172440e, type: 3}
+  ShootSound: {fileID: 5873489349943176883, guid: bf7a3670c3c1b8e4fa7dcbc806d7eed1, type: 3}
+  Prefab: {fileID: -8185969803686549524, guid: 404b36f9ae240b841903f8fbbe4d8012, type: 3}

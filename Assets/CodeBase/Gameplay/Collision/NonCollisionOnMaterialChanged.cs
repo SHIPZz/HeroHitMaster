@@ -17,12 +17,12 @@ namespace CodeBase.Gameplay.Collision
 
         private void OnEnable()
         {
-            _materialChanger.Changed += DisableCollider;
+            _materialChanger.StartedChanged += DisableCollider;
         }
 
         private void OnDisable()
         {
-            _materialChanger.Changed -= DisableCollider;
+            _materialChanger.StartedChanged -= DisableCollider;
         }
 
         private void DisableCollider() =>

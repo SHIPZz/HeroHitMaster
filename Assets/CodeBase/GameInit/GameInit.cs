@@ -1,11 +1,14 @@
-﻿using CodeBase.Enums;
+﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Players;
+using CodeBase.Gameplay.Spawners;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
+using CodeBase.Services.Slowmotion;
 using CodeBase.Services.Storages.Character;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
@@ -28,6 +31,9 @@ namespace CodeBase.GameInit
         private readonly WalletPresenter _walletPresenter;
         private readonly ISaveSystem _saveSystem;
         private ShopWeaponPresenter _shopWeaponPresenter;
+        private readonly List<EnemySpawner> _enemySpawners;
+        private readonly EnemyConfigurator _enemyConfigurator = new();
+        private SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -37,8 +43,12 @@ namespace CodeBase.GameInit
             WeaponSelector weaponSelector, 
             ILoadingCurtain loadingCurtain, 
             WalletPresenter walletPresenter,
-            ISaveSystem saveSystem, ShopWeaponPresenter shopWeaponPresenter)
+            ISaveSystem saveSystem, 
+            ShopWeaponPresenter shopWeaponPresenter,
+            IProvider<List<EnemySpawner>> enemySpawnersProvider, SlowMotionOnEnemyDeath slowMotionOnEnemyDeath)
         {
+            _slowMotionOnEnemyDeath = slowMotionOnEnemyDeath;
+            _enemySpawners = enemySpawnersProvider.Get();
             _shopWeaponPresenter = shopWeaponPresenter;
             _saveSystem = saveSystem;
             _walletPresenter = walletPresenter;
@@ -54,6 +64,12 @@ namespace CodeBase.GameInit
         public async void Initialize()
         {
             _loadingCurtain.Show();
+            _enemySpawners.ForEach(x => x.Init((enemy, aggrozne) =>
+            {
+                _enemyConfigurator.Configure(enemy,aggrozne);
+                _slowMotionOnEnemyDeath.Init(enemy);
+            }));
+            
             PlayerPrefs.DeleteAll();
             var playerData = await _saveSystem.Load<PlayerData>();
             playerData.Money = 2000;
@@ -62,10 +78,10 @@ namespace CodeBase.GameInit
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowingKnifeShooter);
             
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
-            InitializeInitialWeapon(WeaponTypeId.ThrowSkewerShooter);
+            InitializeInitialWeapon(WeaponTypeId.OrangeWeapon);
             _playerProvider.Set(player);
         }
 

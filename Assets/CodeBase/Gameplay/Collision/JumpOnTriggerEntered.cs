@@ -52,10 +52,10 @@ namespace CodeBase.Gameplay.Collision
 
         private void EnableNavMeshWithDuration(NavMeshAgent navMesh)
         {
-            DOTween
-                .Sequence()
-                .AppendInterval(_enableNavMeshDelay)
-                .OnComplete(() => navMesh.enabled = true);
+            // DOTween
+            //     .Sequence()
+            //     .AppendInterval(_enableNavMeshDelay)
+            //     .OnComplete(() => navMesh.enabled = true);
         }
     }
 }

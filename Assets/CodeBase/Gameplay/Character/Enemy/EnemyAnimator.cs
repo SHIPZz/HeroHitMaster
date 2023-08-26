@@ -8,9 +8,9 @@ namespace CodeBase.Gameplay.Character.Enemy
         private static readonly int _isMoved = Animator.StringToHash("IsMoved");
         private static readonly int _isDamaged = Animator.StringToHash("IsDamaged");
         private static readonly int _speed = Animator.StringToHash("Speed");
-        private readonly Animator _animator;
         private static readonly int _die = Animator.StringToHash("Die");
         private static readonly int _win = Animator.StringToHash("Win");
+        private readonly Animator _animator;
 
         public EnemyAnimator(Animator animator) => 
             _animator = animator;

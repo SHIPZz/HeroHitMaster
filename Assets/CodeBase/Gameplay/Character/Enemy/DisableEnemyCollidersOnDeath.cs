@@ -1,17 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
     [RequireComponent(typeof(EnemyHealth))]
     public class DisableEnemyCollidersOnDeath : MonoBehaviour
-    {
-        [SerializeField] private List<Collider> _colliders;
+    { 
+        private List<Collider> _colliders = new();
 
         private IHealth _enemyHealth;
 
-        private void Awake() => 
+        private void Awake()
+        {
             _enemyHealth = GetComponent<IHealth>();
+
+            foreach (var collider in GetComponentsInChildren<Collider>())
+            {
+                _colliders.Add(collider);
+            }
+        }
 
         private void OnEnable() => 
             _enemyHealth.ValueZeroReached += DisableAll;

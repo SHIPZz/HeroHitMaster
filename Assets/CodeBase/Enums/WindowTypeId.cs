@@ -12,6 +12,7 @@
         Play,
         Loading,
         Buy,
-        NotEnoughMoney
+        NotEnoughMoney,
+        Popup
     }
 }

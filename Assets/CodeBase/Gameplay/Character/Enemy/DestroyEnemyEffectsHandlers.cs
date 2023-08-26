@@ -22,13 +22,13 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public void Initialize()
         {
-            _materialChanger.Changed += Destroy;
+            _materialChanger.StartedChanged += Destroy;
             _health.ValueZeroReached += DestroyHitEffect;
         }
 
         public void Dispose()
         {
-            _materialChanger.Changed -= Destroy;
+            _materialChanger.StartedChanged -= Destroy;
             _health.ValueZeroReached -= DestroyHitEffect;
         }
 

@@ -1,14 +1,17 @@
+using System.Collections.Generic;
 using CodeBase.Gameplay.BlockInput;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
+using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.SaveTriggers;
+using CodeBase.Services.Slowmotion;
 using CodeBase.Services.Storages.Bullet;
 using CodeBase.Services.Storages.Character;
 using CodeBase.Services.Storages.ObjectParts;
@@ -65,7 +68,13 @@ namespace CodeBase.Installers.GameInstaller
             BindBlockInputOnUi();
             BindSaveTriggers();
             BindCheckOutService();
+            BindSlowMotion();
         }
+       
+
+        private void BindSlowMotion() =>
+            Container.BindInterfacesAndSelfTo<SlowMotionOnEnemyDeath>()
+                .AsSingle();
 
         private void BindCheckOutService() =>
             Container
@@ -141,7 +150,7 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindEnemySpawnerProvider()
         {
-            Container.BindInterfacesAndSelfTo<EnemySpawnersProvider>()
+            Container.Bind<IProvider<List<EnemySpawner>>>().To<EnemySpawnersProvider>()
                 .FromInstance(_enemySpawnersProvider).AsSingle();
         }
 

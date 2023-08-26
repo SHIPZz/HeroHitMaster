@@ -17,7 +17,9 @@ namespace CodeBase.Gameplay.MaterialChanger
 
         private SkinnedMeshRenderer _skinnedMeshRenderer;
 
-        public event Action Changed;
+        public event Action StartedChanged;
+        public event Action Completed;
+        public bool IsChanging { get; private set; }
 
         [Inject]
         private void Construct(SkinnedMeshRenderer skinnedMeshRenderer)
@@ -30,12 +32,18 @@ namespace CodeBase.Gameplay.MaterialChanger
             SetStartValues(material);
             GetComponent<Collider>().enabled = false;
 
+            IsChanging = true;
+            
             DOTween.To(() => 0, x =>
                     _skinnedMeshRenderer.material.SetFloat(AdvancedDissolveProperties.Cutout.Standard._ids[0].clip, x),
-                _targetValue, _duration).OnComplete(() => { Destroy(gameObject); });
+                _targetValue, _duration).OnComplete(() =>
+            {
+                Completed?.Invoke();
+                Destroy(gameObject);
+            });
             
             
-            Changed?.Invoke();
+            StartedChanged?.Invoke();
         }
 
         private void SetStartValues(Material material)

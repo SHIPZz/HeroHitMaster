@@ -28,7 +28,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         private readonly Dictionary<PriceTypeId, TextMeshProUGUI> _weaponPrices = new();
 
-        private void Awake()
+        public void Init()
         {
             _weaponPrices[PriceTypeId.Ad] = _adPrice;
             _weaponPrices[PriceTypeId.Money] = _price;

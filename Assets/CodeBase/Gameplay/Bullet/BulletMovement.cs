@@ -1,10 +1,12 @@
-﻿using CodeBase.Services.Data;
+﻿using System.Collections;
+using System.Collections.Generic;
+using CodeBase.Services.Data;
 using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Gameplay.Bullet
 {
-    public abstract class BulletMovement : MonoBehaviour
+    public  class BulletMovement : MonoBehaviour
     {
         protected Rigidbody RigidBody;
         protected float RotateDuration;
@@ -12,7 +14,9 @@ namespace CodeBase.Gameplay.Bullet
         protected Bullet Bullet;
         
         private BulletStaticDataService _bulletStaticDataService;
-        
+        protected Vector3 CurrentVelocity;
+        protected Coroutine MoveCoroutine;
+
         [Inject]
         public void Construct(BulletStaticDataService bulletStaticDataService) =>
             _bulletStaticDataService = bulletStaticDataService;
@@ -21,10 +25,30 @@ namespace CodeBase.Gameplay.Bullet
         {
             RigidBody = GetComponent<Rigidbody>();
             Bullet = GetComponent<Bullet>();
-            RotateDuration = _bulletStaticDataService.GetBy(Bullet.BulletTypeId).RotateDuration;
-            MoveDuration = _bulletStaticDataService.GetBy(Bullet.BulletTypeId).MovementDuration;
+            RigidBody.isKinematic = false;
+            RotateDuration = _bulletStaticDataService.GetBy(Bullet.WeaponTypeId).RotateDuration;
+            MoveDuration = _bulletStaticDataService.GetBy(Bullet.WeaponTypeId).MovementDuration;
         }
 
-        public abstract void Move(Vector3 target, Vector3 startPosition);
+        public virtual void Move(Vector3 target, Vector3 startPosition)
+        {
+            Vector3 direction = target - startPosition;
+
+            if(MoveCoroutine != null)
+                StopCoroutine(MoveCoroutine);
+            
+            MoveCoroutine = StartCoroutine(StartMoveCoroutine(direction, 50));
+        }
+        
+        private IEnumerator StartMoveCoroutine(Vector3 target, float speed)
+        {
+            while (Vector3.Distance(transform.position, target) > 0.1)
+            {
+                CurrentVelocity = Vector3.Lerp(CurrentVelocity, target.normalized * speed, Time.deltaTime * 20);
+                RigidBody.velocity = CurrentVelocity;
+
+                yield return new WaitForFixedUpdate();
+            }
+        }
     }
 }

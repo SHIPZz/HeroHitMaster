@@ -16,12 +16,10 @@ namespace CodeBase.Gameplay.Character.Players
         private readonly List<Player> _playersWithWeaponsInHand = new();
         private readonly List<WeaponHolderView> _weaponViews = new();
         private readonly WeaponSelector _weaponSelector;
-        private readonly ISaveSystem _saveSystem;
 
         public SetterWeaponToPlayerHand(PlayerSettings playerSettings, WeaponSelector weaponSelector,
-            IPlayerStorage playerStorage, ISaveSystem saveSystem)
+            IPlayerStorage playerStorage)
         {
-            _saveSystem = saveSystem;
             _weaponSelector = weaponSelector;
             _playersIdsWithWeaponInHand = playerSettings.PlayerWithWeaponInHands;
 
@@ -35,10 +33,8 @@ namespace CodeBase.Gameplay.Character.Players
             _weaponSelector.NewWeaponChanged -= TrySetNewWeapon;
         }
 
-        private async void TrySetNewWeapon(WeaponTypeId weaponTypeId)
+        private void TrySetNewWeapon(WeaponTypeId weaponTypeId)
         {
-            var playerData = await _saveSystem.Load<PlayerData>();
-
             foreach (var weaponViewStorage in _weaponViews)
             {
                 weaponViewStorage.TryShow(weaponTypeId);

@@ -6,9 +6,10 @@ using Zenject;
 
 namespace CodeBase.Gameplay.Bullet
 {
+    [RequireComponent(typeof(DamageDealer))]
     public class Bullet : MonoBehaviour
     {
-        [field: SerializeField] public BulletTypeId BulletTypeId { get; protected set; }
+        [field: SerializeField] public WeaponTypeId WeaponTypeId { get; protected set; }
 
         private BulletMovement _bulletMovement;
         private TriggerObserver _triggerObserver;

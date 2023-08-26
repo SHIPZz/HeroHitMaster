@@ -17,9 +17,9 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         }
         
         public void Initialize() =>
-            _materialChanger.Changed += _destroyableObjectPartsActivator.Disable;
+            _materialChanger.StartedChanged += _destroyableObjectPartsActivator.Disable;
 
         public void Dispose() =>
-            _materialChanger.Changed -= _destroyableObjectPartsActivator.Disable;
+            _materialChanger.StartedChanged -= _destroyableObjectPartsActivator.Disable;
     }
 }

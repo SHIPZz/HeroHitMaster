@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Enums;
 using CodeBase.Services.CheckOut;
+using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
+using CodeBase.UI.Windows.Popup;
 using Zenject;
 
 namespace CodeBase.UI.Weapons
@@ -12,20 +15,23 @@ namespace CodeBase.UI.Weapons
     {
         private readonly WeaponSelector _weaponSelector;
         private readonly Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIconClickers;
-        private CheckOutService _checkOutService;
+        private readonly CheckOutService _checkOutService;
+        private readonly List<WeaponSelectorView> _popupWeaponIcons;
 
         public WeaponSelectorPresenter(WeaponIconsProvider weaponIconsProvider, WeaponSelector weaponSelector,
-            CheckOutService checkOutService)
+            CheckOutService checkOutService, IProvider<WeaponIconsProvider> provider)
         {
+            _popupWeaponIcons = provider.Get().Icons.Values.ToList();
             _checkOutService = checkOutService;
             _weaponIconClickers = weaponIconsProvider.Icons;
             _weaponSelector = weaponSelector;
+            _popupWeaponIcons.ForEach(x => x.Choosed += _weaponSelector.SetLastWeaponChoosed);
         }
 
         public void Initialize()
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosed += OnWeaponIconChoosed;
+                weaponIcon.Choosed +=  _weaponSelector.SetLastWeaponChoosed;
 
             _checkOutService.Succeeded += _weaponSelector.Select;
         }
@@ -33,14 +39,10 @@ namespace CodeBase.UI.Weapons
         public void Dispose()
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosed -= OnWeaponIconChoosed;
+                weaponIcon.Choosed -=  _weaponSelector.SetLastWeaponChoosed;
                 
             _checkOutService.Succeeded -= _weaponSelector.Select;
-        }
-
-        private void OnWeaponIconChoosed(WeaponTypeId weaponTypeId)
-        {
-            _weaponSelector.SetLastWeaponChoosed(weaponTypeId);
+            _popupWeaponIcons.ForEach(x => x.Choosed -= _weaponSelector.SetLastWeaponChoosed);
         }
     }
 }

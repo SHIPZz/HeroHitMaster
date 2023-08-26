@@ -8,12 +8,12 @@ namespace CodeBase.Services.Data
 {
     public class BulletStaticDataService
     {
-        private readonly Dictionary<BulletTypeId, BulletData> _bulletDatas;
+        private readonly Dictionary<WeaponTypeId, BulletData> _bulletDatas;
 
         public BulletStaticDataService()
         {
             _bulletDatas = Resources.LoadAll<BulletData>("Prefabs/BulletData")
-                .ToDictionary(x => x.BulletTypeId, x => x);
+                .ToDictionary(x => x.WeaponTypeId, x => x);
         }
 
         public List<BulletData> GetAll()
@@ -28,11 +28,6 @@ namespace CodeBase.Services.Data
             return bulletDatas;
         }
 
-        public BulletData GetBy(BulletTypeId bulletTypeId) =>
-            !_bulletDatas.TryGetValue(bulletTypeId, out BulletData bulletData) ? 
-                null : 
-                bulletData;
-        
         public BulletData GetBy(WeaponTypeId weaponType) => 
             _bulletDatas.First(x => x.Value.WeaponTypeId == weaponType).Value;
     }
