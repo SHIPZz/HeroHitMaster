@@ -12,6 +12,6 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
         private void Construct(BulletStaticDataService bulletStaticDataService) => 
             Damage = bulletStaticDataService.GetBy(GetComponent<Bullet>().WeaponTypeId).Damage;
 
-        public abstract void DoDamage(Collider other);
+        public abstract void DoDamage(UnityEngine.Collision other);
     }
 }

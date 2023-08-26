@@ -6,15 +6,15 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
 {
     public class DestructionDamageDealer : DamageDealer
     {
-        public override void DoDamage(Collider other)
+        public override void DoDamage(UnityEngine.Collision other)
         {
-            if (other.TryGetComponent(out Animator animator))
+            if (other.gameObject.TryGetComponent(out Animator animator))
                 animator.enabled = false;
             
-            if(other.TryGetComponent(out IDestroyable destroyable))
+            if(other.gameObject.TryGetComponent(out IDestroyable destroyable))
                 destroyable.Destroy();
             
-            if(other.TryGetComponent(out IDamageable damageable))
+            if(other.gameObject.TryGetComponent(out IDamageable damageable))
                 damageable.TakeDamage(Damage);
             
             gameObject.SetActive(false);

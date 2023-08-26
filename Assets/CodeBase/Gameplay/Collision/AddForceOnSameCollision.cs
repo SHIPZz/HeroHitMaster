@@ -24,7 +24,6 @@ namespace CodeBase.Gameplay.Collision
         {
             _rigidbody = GetComponent<Rigidbody>();
             _triggerObserver = GetComponent<TriggerObserver>();
-            GetComponent<Collider>().isTrigger = true;
         }
 
         public void OnEnable()

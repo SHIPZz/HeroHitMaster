@@ -13,9 +13,9 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
         private void OnEnable() => 
             _collider.enabled = true;
 
-        public override void DoDamage(Collider other)
+        public override void DoDamage(UnityEngine.Collision other)
         {
-            if (!other.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
+            if (!other.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
                 return;
             
             if (!enemyPartForKnifeHolder.EnemyHealth.isActiveAndEnabled)

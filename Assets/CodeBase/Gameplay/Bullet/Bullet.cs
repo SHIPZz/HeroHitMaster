@@ -26,15 +26,15 @@ namespace CodeBase.Gameplay.Bullet
         }
 
         private void OnEnable() =>
-            _triggerObserver.Entered += DoDamage;
+            _triggerObserver.CollisionEntered += DoDamage;
 
         private void OnDisable() =>
-            _triggerObserver.Entered -= DoDamage;
+            _triggerObserver.CollisionEntered -= DoDamage;
 
         public void StartMovement(Vector3 target, Vector3 startPosition) =>
             _bulletMovement.Move(target, startPosition);
 
-        private void DoDamage(Collider other) =>
-            _damageDealer.DoDamage(other);
+        private void DoDamage(UnityEngine.Collision collision) =>
+            _damageDealer.DoDamage(collision);
     }
 }
