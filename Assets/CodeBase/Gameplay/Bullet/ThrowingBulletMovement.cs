@@ -1,12 +1,7 @@
-using System;
 using System.Collections;
-using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Services.Providers;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.AI;
-using Zenject;
 
 namespace CodeBase.Gameplay.Bullet
 {
@@ -20,7 +15,6 @@ namespace CodeBase.Gameplay.Bullet
         private bool _isBlocked;
         private Vector3 _angularVelocity;
         private Transform _target;
-        private bool _isSet;
 
         protected override void Awake()
         {
@@ -35,14 +29,7 @@ namespace CodeBase.Gameplay.Bullet
 
         private void OnDisable() =>
             _triggerObserver.Entered -= OnTriggerEntered;
-
-        private void Update()
-        {
-            if (_target is null || !_isSet)
-                return;
-
-        }
-
+        
         public override void Move(Vector3 target, Vector3 startPosition)
         {
             Vector3 moveDirection = target - startPosition;
@@ -73,24 +60,21 @@ namespace CodeBase.Gameplay.Bullet
             Quaternion startRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(target.normalized);
 
-            float elapsedTime = 0f;
-
             while (Vector3.Distance(transform.position, target) > 0.1)
             {
                 if (_isBlocked)
                 {
                     RigidBody.angularVelocity = Vector3.zero;
+                    // DestroyImmediate(RigidBody);
+                    // RigidBody.useGravity = false;
                     RigidBody.isKinematic = true;
-                    RotateToTarget(elapsedTime, startRotation, targetRotation);
+                    // RigidBody.constraints = RigidbodyConstraints.FreezeAll;
+                    // GetComponent<Collider>().enabled = false;
+                    RotateToTarget(startRotation, targetRotation);
                     SetInitialRotation(_throwingBullet);
 
-                    DOTween.Sequence().AppendInterval(0.1f)
-                        .OnComplete(() =>
-                        {
-                            transform.SetParent(_target);
-                            print(_target.name);
-                            _isSet = true;
-                        });
+                    transform.SetParent(_target);
+
                     break;
                 }
 
@@ -103,10 +87,9 @@ namespace CodeBase.Gameplay.Bullet
             }
         }
 
-        private void RotateToTarget(float elapsedTime, Quaternion startRotation, Quaternion targetRotation)
+        private void RotateToTarget(Quaternion startRotation, Quaternion targetRotation)
         {
-            float time = elapsedTime / 0.3f;
-            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, time);
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, 0.5f);
         }
 
         private void SetInitialRotation(ThrowingBullet throwingBullet)
@@ -114,9 +97,9 @@ namespace CodeBase.Gameplay.Bullet
             Vector3 startTargetRotation = new Vector3(104, transform.eulerAngles.y,
                 transform.eulerAngles.z);
 
-            RigidBody.DORotate(startTargetRotation, 0f);
+            transform.rotation = Quaternion.Euler(startTargetRotation);
 
-            throwingBullet.BulletModel.DOLocalRotate(_bulletModelRotation, 0);
+            throwingBullet.BulletModel.localRotation = Quaternion.Euler(_bulletModelRotation);
         }
     }
 }

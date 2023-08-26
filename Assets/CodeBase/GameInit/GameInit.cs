@@ -78,10 +78,10 @@ namespace CodeBase.GameInit
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowingKnifeShooter);
             
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
-            InitializeInitialWeapon(WeaponTypeId.OrangeWeapon);
+            InitializeInitialWeapon(WeaponTypeId.ThrowSkewerShooter);
             _playerProvider.Set(player);
         }
 
