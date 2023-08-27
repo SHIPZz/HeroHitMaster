@@ -31,7 +31,7 @@ namespace CodeBase.Services.Slowmotion
             {
                 enemy.Dead -= StartSlowMotionOnDefaultDeath;
                 enemy.QuickDestroyed -= StartSlowMotionOnQuickDeath;
-                enemy.GetComponent<IMaterialChanger>().StartedChanged -= StartSlowMotionOnMaterialChangedDeath;
+                // enemy.GetComponent<IMaterialChanger>().StartedChanged -= StartSlowMotionOnMaterialChangedDeath;
             });
         }
 

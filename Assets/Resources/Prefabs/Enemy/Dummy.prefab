@@ -41,6 +41,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5401506885027014764}
+  - component: {fileID: 3360810485570970104}
+  - component: {fileID: 8394383904175078073}
+  - component: {fileID: 1057879975746764151}
   m_Layer: 9
   m_Name: RigLLeg1
   m_TagString: Untagged
@@ -64,6 +67,55 @@ Transform:
   m_Father: {fileID: 907011209814281186}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3360810485570970104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43702279161993879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
+--- !u!136 &8394383904175078073
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43702279161993879}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1096261
+  m_Height: 0.48503876
+  m_Direction: 0
+  m_Center: {x: -0.21815789, y: -0.00000022669364, z: -0.0000008288807}
+--- !u!114 &1057879975746764151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43702279161993879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 0}
 --- !u!1 &263637447721578109
 GameObject:
   m_ObjectHideFlags: 0
@@ -4992,8 +5044,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704008699495908296}
-  - component: {fileID: 847571184865904066}
   - component: {fileID: 4450338510097319049}
+  - component: {fileID: 2246646601537277590}
+  - component: {fileID: 5255016680272383592}
   m_Layer: 9
   m_Name: RigRLeg2
   m_TagString: Untagged
@@ -5017,27 +5070,6 @@ Transform:
   m_Father: {fileID: 6301141680376210568}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &847571184865904066
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1746881284501817537}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0774317, y: 0.25568867, z: 0.25568348}
-  m_Center: {x: -0.038715914, y: -0.016971953, z: -0.009832907}
 --- !u!114 &4450338510097319049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5051,6 +5083,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
+--- !u!136 &2246646601537277590
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746881284501817537}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.098549955
+  m_Height: 0.5154383
+  m_Direction: 0
+  m_Center: {x: -0.2387075, y: -0.000000062761394, z: -0.00000054470206}
+--- !u!114 &5255016680272383592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746881284501817537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 0}
 --- !u!1 &1995599939169262546
 GameObject:
   m_ObjectHideFlags: 0
@@ -5060,7 +5128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704157280221802544}
-  - component: {fileID: 7233012653600867927}
   - component: {fileID: 8244236684610543605}
   m_Layer: 9
   m_Name: GameObject
@@ -5077,34 +5144,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995599939169262546}
   m_LocalRotation: {x: -0.00000005195011, y: 0.000000007838509, z: 0.3825209, w: 0.92394686}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.095, y: -0.169, z: -0.055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5621065473681242892}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 44.98}
---- !u!65 &7233012653600867927
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995599939169262546}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.59442, y: 0.5490662, z: 0.6542088}
-  m_Center: {x: -0.20279123, y: 0.14071164, z: 0.000066295725}
 --- !u!114 &8244236684610543605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5387,9 +5433,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.7428224, y: 2.253761, z: 1.1947186}
   m_Center: {x: 0.038777232, y: 1.1017627, z: 0.15922582}
@@ -5472,6 +5518,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 907011209814281186}
+  - component: {fileID: 6825564943556851379}
+  - component: {fileID: 5332779252840002257}
   m_Layer: 9
   m_Name: RigPelvis
   m_TagString: Untagged
@@ -5497,6 +5545,40 @@ Transform:
   m_Father: {fileID: 7738268509986792730}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6825564943556851379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310695226452586166}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.22857636, y: 0.3060546, z: 0.42360306}
+  m_Center: {x: -0.12075159, y: 0.0063281655, z: -0.0006799698}
+--- !u!114 &5332779252840002257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310695226452586166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
 --- !u!1 &2906907493464712623
 GameObject:
   m_ObjectHideFlags: 0
@@ -5647,6 +5729,7 @@ Transform:
   m_Children:
   - {fileID: 2761908915279204385}
   - {fileID: 8652597781203341969}
+  - {fileID: 1484654810209313252}
   m_Father: {fileID: 907011209814281186}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5659,6 +5742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3654892805443882003}
+  - component: {fileID: 6723572141708900141}
   m_Layer: 9
   m_Name: RigRLegAnkle
   m_TagString: Untagged
@@ -5674,14 +5758,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4095255112976605818}
   m_LocalRotation: {x: -0.015682675, y: 0.00031720827, z: -0.10194585, w: 0.9946663}
-  m_LocalPosition: {x: -0.38023886, y: 0.0000000023841857, z: 0.000000009536743}
-  m_LocalScale: {x: 0.99999744, y: 1.0000027, z: 1.0000002}
+  m_LocalPosition: {x: -0.38023886, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9176482004464519745}
+  - {fileID: 6762005679767521164}
   m_Father: {fileID: 704008699495908296}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6723572141708900141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4095255112976605818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
 --- !u!1 &4363933759561675782
 GameObject:
   m_ObjectHideFlags: 0
@@ -5722,8 +5820,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3921606345648274139}
-  - component: {fileID: 5011669115220387733}
   - component: {fileID: 1479893097398218660}
+  - component: {fileID: 313751223912532287}
+  - component: {fileID: 7860123012814814261}
   m_Layer: 9
   m_Name: RigLLeg2
   m_TagString: Untagged
@@ -5746,27 +5845,6 @@ Transform:
   m_Father: {fileID: 5401506885027014764}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5011669115220387733
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5118303291282372893}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.26381797, z: 0.22558884}
-  m_Center: {x: 0.000000011393264, y: -0.054549277, z: -0.004273506}
 --- !u!114 &1479893097398218660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5780,6 +5858,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
+--- !u!136 &313751223912532287
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118303291282372893}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.09866346
+  m_Height: 0.50450593
+  m_Direction: 0
+  m_Center: {x: -0.23335107, y: -0.000000030674084, z: -0.0000025066927}
+--- !u!114 &7860123012814814261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118303291282372893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 0}
 --- !u!1 &5405834161400047218
 GameObject:
   m_ObjectHideFlags: 0
@@ -5851,8 +5965,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7479464392379180686}
-  - component: {fileID: 5848015446217480088}
   - component: {fileID: 1248909199689632731}
+  - component: {fileID: 1106298566369299484}
   m_Layer: 9
   m_Name: RigRArmPalm
   m_TagString: Untagged
@@ -5875,27 +5989,6 @@ Transform:
   m_Father: {fileID: 6050601232030090936}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5848015446217480088
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5542206691796729557}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.508062, y: 0.50028324, z: 0.54450077}
-  m_Center: {x: -0.2459762, y: 0.088512175, z: 0.019187666}
 --- !u!114 &1248909199689632731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5909,6 +6002,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
+--- !u!136 &1106298566369299484
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542206691796729557}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.26087838
+  m_Height: 0.56863457
+  m_Direction: 0
+  m_Center: {x: -0.3366034, y: 0.006223489, z: 0.000000906484}
 --- !u!1 &5633908021117101349
 GameObject:
   m_ObjectHideFlags: 0
@@ -5918,6 +6034,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6301141680376210568}
+  - component: {fileID: 7335717987280555819}
+  - component: {fileID: 616055211676001209}
+  - component: {fileID: 4116531093032894638}
   m_Layer: 9
   m_Name: RigRLeg1
   m_TagString: Untagged
@@ -5941,6 +6060,55 @@ Transform:
   m_Father: {fileID: 907011209814281186}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7335717987280555819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5633908021117101349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
+--- !u!136 &616055211676001209
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5633908021117101349}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.109499946
+  m_Height: 0.48253644
+  m_Direction: 0
+  m_Center: {x: -0.21693534, y: 0.0000004147618, z: -0.00000032687177}
+--- !u!114 &4116531093032894638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5633908021117101349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 0}
 --- !u!1 &5661175694879901565
 GameObject:
   m_ObjectHideFlags: 0
@@ -5950,6 +6118,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5621065473681242892}
+  - component: {fileID: 3976834600336768043}
+  - component: {fileID: 2033152211767369349}
   m_Layer: 9
   m_Name: RigHead
   m_TagString: Untagged
@@ -5973,6 +6143,42 @@ Transform:
   m_Father: {fileID: 7773982571350013911}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &3976834600336768043
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661175694879901565}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.30262202
+  m_Height: 0.66372967
+  m_Direction: 1
+  m_Center: {x: -0.2380717, y: 0.0038718309, z: -0.004444955}
+--- !u!114 &2033152211767369349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661175694879901565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
 --- !u!1 &6058805559423215127
 GameObject:
   m_ObjectHideFlags: 0
@@ -5982,6 +6188,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2761908915279204385}
+  - component: {fileID: 1206046423569694969}
+  - component: {fileID: 1183049830968395238}
   m_Layer: 9
   m_Name: RigSpine2
   m_TagString: Untagged
@@ -6005,6 +6213,40 @@ Transform:
   m_Father: {fileID: 1503987783335900972}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1206046423569694969
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6058805559423215127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.50463283, y: 0.4849846, z: 0.5637154}
+  m_Center: {x: -0.28595427, y: 0.03315482, z: -0.020468375}
+--- !u!114 &1183049830968395238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6058805559423215127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
 --- !u!1 &6287689854806504401
 GameObject:
   m_ObjectHideFlags: 0
@@ -6014,8 +6256,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4614173670476561191}
-  - component: {fileID: 4749132341009036218}
   - component: {fileID: 4107452092806161818}
+  - component: {fileID: 6727600489628233891}
+  - component: {fileID: 1774650771148973605}
   m_Layer: 9
   m_Name: RigLArm1
   m_TagString: Untagged
@@ -6039,8 +6282,21 @@ Transform:
   m_Father: {fileID: 376256114961708373}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4749132341009036218
-BoxCollider:
+--- !u!114 &4107452092806161818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287689854806504401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
+--- !u!136 &6727600489628233891
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6054,13 +6310,15 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0189517, y: 0.44538996, z: 0.45898366}
-  m_Center: {x: -0.35947615, y: 0.022322698, z: 0.028169286}
---- !u!114 &4107452092806161818
+  serializedVersion: 2
+  m_Radius: 0.18660611
+  m_Height: 0.71287733
+  m_Direction: 0
+  m_Center: {x: -0.1883722, y: -0.000000028121327, z: 0.0000007410783}
+--- !u!114 &1774650771148973605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11004,7 +11262,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8652597781203341969}
-  - component: {fileID: 1581821604356189089}
   - component: {fileID: 336295648124253504}
   m_Layer: 9
   m_Name: GameObject
@@ -11021,34 +11278,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7511160740127001864}
   m_LocalRotation: {x: -0.000000047447163, y: -0.000000034595363, z: -0.22863993, w: 0.9735111}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.012, y: -0.024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1503987783335900972}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -26.434}
---- !u!65 &1581821604356189089
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7511160740127001864}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5516212, y: 0.34054723, z: 0.51964545}
-  m_Center: {x: -0.22418879, y: 0.07503206, z: -0.026338115}
 --- !u!114 &336295648124253504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11072,7 +11308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1921045613149044750}
   - component: {fileID: 4636477730844822594}
-  - component: {fileID: 6759361198560714593}
+  - component: {fileID: 8871075544551605120}
   m_Layer: 9
   m_Name: RigLArmPalm
   m_TagString: Untagged
@@ -11108,8 +11344,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
---- !u!65 &6759361198560714593
-BoxCollider:
+--- !u!136 &8871075544551605120
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11123,12 +11359,14 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.508062, y: 0.50028324, z: 0.54450077}
-  m_Center: {x: -0.2459762, y: 0.088512175, z: 0.019187666}
+  serializedVersion: 2
+  m_Radius: 0.26087838
+  m_Height: 0.5662279
+  m_Direction: 0
+  m_Center: {x: -0.33540073, y: 0.00622348, z: 0.0000008980862}
 --- !u!1 &7592084907524606576
 GameObject:
   m_ObjectHideFlags: 0
@@ -11172,6 +11410,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6050601232030090936}
+  - component: {fileID: 5212922469046221436}
+  - component: {fileID: 4822568959137599364}
   m_Layer: 9
   m_Name: RigRArm2
   m_TagString: Untagged
@@ -11195,6 +11435,87 @@ Transform:
   m_Father: {fileID: 8257614250856398013}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5212922469046221436
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693845416098069831}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.11236775
+  m_Height: 0.31445056
+  m_Direction: 0
+  m_Center: {x: -0.09258477, y: -0.005646564, z: -0.0000036886404}
+--- !u!114 &4822568959137599364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693845416098069831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
+--- !u!1 &7762593400604600120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6762005679767521164}
+  - component: {fileID: 3109083288374631933}
+  m_Layer: 0
+  m_Name: Foot Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6762005679767521164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7762593400604600120}
+  m_LocalRotation: {x: -0.0000027278436, y: -0.0000043651085, z: 0.7350118, w: 0.6780544}
+  m_LocalPosition: {x: 0.100448035, y: 0.075494476, z: -0.000022494234}
+  m_LocalScale: {x: 1, y: 1.0000019, z: 0.9999977}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3654892805443882003}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3109083288374631933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7762593400604600120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 0}
 --- !u!1 &7858911044136630083
 GameObject:
   m_ObjectHideFlags: 0
@@ -11204,6 +11525,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8108007411789547112}
+  - component: {fileID: 8638202681273658332}
+  - component: {fileID: 457793896952763911}
   m_Layer: 9
   m_Name: RigLArm2
   m_TagString: Untagged
@@ -11227,6 +11550,87 @@ Transform:
   m_Father: {fileID: 4614173670476561191}
   m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8638202681273658332
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858911044136630083}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.11236775
+  m_Height: 0.31445056
+  m_Direction: 0
+  m_Center: {x: -0.09258477, y: -0.005646564, z: -0.0000036886404}
+--- !u!114 &457793896952763911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858911044136630083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
+--- !u!1 &7898142597112483328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484654810209313252}
+  - component: {fileID: 2524223855616505623}
+  m_Layer: 9
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1484654810209313252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7898142597112483328}
+  m_LocalRotation: {x: -0.000000047447163, y: -0.000000034595363, z: -0.22863993, w: 0.9735111}
+  m_LocalPosition: {x: -0.297, y: 0.105, z: 0}
+  m_LocalScale: {x: 1.1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1503987783335900972}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -26.434}
+--- !u!114 &2524223855616505623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7898142597112483328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
 --- !u!1 &8410990219040715263
 GameObject:
   m_ObjectHideFlags: 0
@@ -11237,7 +11641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8257614250856398013}
   - component: {fileID: 2891920489070285169}
-  - component: {fileID: 7449917975639392640}
+  - component: {fileID: 1326777899095320562}
   m_Layer: 9
   m_Name: RigRArm1
   m_TagString: Untagged
@@ -11274,8 +11678,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <EnemyHealth>k__BackingField: {fileID: 2913198394681895218}
---- !u!65 &7449917975639392640
-BoxCollider:
+--- !u!136 &1326777899095320562
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11292,6 +11696,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5659592, y: 0.44538996, z: 0.45898366}
-  m_Center: {x: -0.6329802, y: 0.022322703, z: 0.028169136}
+  serializedVersion: 2
+  m_Radius: 0.18660603
+  m_Height: 0.7081025
+  m_Direction: 0
+  m_Center: {x: -0.18492197, y: 0.00000036903452, z: -0.0000009250415}

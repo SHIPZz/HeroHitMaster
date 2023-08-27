@@ -2,6 +2,7 @@
 {
     public enum DestroyableObjectTypeId
     {
-        Cube
+        Cube,
+        Glass,
     }
 }

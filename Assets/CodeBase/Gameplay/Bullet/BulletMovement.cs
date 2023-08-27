@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using CodeBase.Services.Data;
 using UnityEngine;
 using Zenject;
