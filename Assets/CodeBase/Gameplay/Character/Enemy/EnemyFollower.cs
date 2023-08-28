@@ -47,7 +47,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             if(!_navMeshAgent.isActiveAndEnabled)
                 return;
             
-            _navMeshAgent.isStopped = true;
+            // _navMeshAgent.isStopped = true;
             _navMeshAgent.velocity = Vector3.zero;
             _isBlocked = true;
         }
@@ -57,7 +57,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             if(!_navMeshAgent.isActiveAndEnabled)
                 return;
             
-            _navMeshAgent.isStopped = false;
+            // _navMeshAgent.isStopped = false;
             _isBlocked = false;
         }
 

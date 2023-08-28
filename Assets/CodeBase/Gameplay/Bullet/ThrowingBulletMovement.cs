@@ -33,27 +33,29 @@ namespace CodeBase.Gameplay.Bullet
 
         public override void Move(Vector3 target, Vector3 startPosition)
         {
-             _moveDirection = target - startPosition;
+            _moveDirection = target - startPosition;
 
             RigidBody.AddForce(_moveDirection.normalized * 35, ForceMode.Impulse);
             // RigidBody.AddTorque(transform.right * 50);
             transform.forward = _moveDirection;
             SetInitialRotation(_throwingBullet);
         }
-        
+
         private void OnCollisionEntered(UnityEngine.Collision target)
         {
             transform.forward = _moveDirection;
             Vector3 startTargetRotation = new Vector3(104, transform.eulerAngles.y,
                 transform.eulerAngles.z);
             // RigidBody.AddTorque(startTargetRotation);
-            print(target.gameObject.name);
             RigidBody.isKinematic = true;
             SetInitialRotation(_throwingBullet);
-            transform.SetParent(target.transform);
+
+            if (target.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
+                transform.SetParent(target.transform);
+
             _isBlocked = true;
         }
-        
+
         private void SetInitialRotation(ThrowingBullet throwingBullet)
         {
             Vector3 startTargetRotation = new Vector3(104, transform.eulerAngles.y,

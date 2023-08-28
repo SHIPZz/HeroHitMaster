@@ -12,13 +12,8 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
 {
     public class EnemyInstaller : MonoInstaller
     {
-        [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
-        [SerializeField] private Animator _animator;
-        [SerializeField] private Collider _collider;
         [SerializeField] private EnemyHealth _enemyHealth;
-        [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private ParticleSystem _hitEffect;
-        [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private EnemyFollower _enemyFollower;
         [SerializeField] private CodeBase.Gameplay.Character.Enemy.Enemy _enemy;
 
@@ -52,13 +47,13 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
         private void BindInstances()
         {
             Container.Bind<IHealth>().To<EnemyHealth>().FromInstance(_enemyHealth).AsSingle();
-            Container.BindInstance(_skinnedMeshRenderer);
-            Container.BindInstance(_triggerObserver);
+            Container.BindInstance(GetComponent<SkinnedMeshRenderer>());
+            Container.BindInstance(GetComponent<TriggerObserver>());
             Container.BindInstance(_enemy);
             Container.BindInstance(_enemy.EnemyTypeId);
-            Container.BindInstance(_animator);
-            Container.BindInstance(_collider);
-            Container.BindInstance(_navMeshAgent);
+            Container.BindInstance(GetComponent<Animator>());
+            Container.BindInstance(GetComponent<Collider>());
+            Container.BindInstance(GetComponent<NavMeshAgent>());
             Container.BindInstance(_enemyFollower);
             Container.BindInstance(GetComponent<DieOnAnimationEvent>());
             Container.Bind<EnemyAttacker>().AsSingle();
