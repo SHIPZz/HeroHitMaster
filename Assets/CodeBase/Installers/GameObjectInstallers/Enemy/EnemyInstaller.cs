@@ -80,7 +80,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
 
         private void BindEffects()
         {
-            Container.BindInstance(_hitEffect).WithId(ParticleTypeId.HitEffect);
+            Container.BindInstance(_hitEffect).WithId(ParticleTypeId.EnemyHitEffect);
         }
     }
 }

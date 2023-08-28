@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CodeBase.Gameplay.Character.PlayerSelection;
+﻿using CodeBase.Gameplay.Character.PlayerSelection;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.UI.ShopScrollRects;
@@ -35,6 +34,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private ShopMoneyText _shopMoneyText;
         [SerializeField] private BuyButtonView _buyButtonView;
         [SerializeField] private WeaponSelectorViewsProvider _weaponSelectorViewsProvider;
+        [SerializeField] private Canvas _mainUI;
 
         public override void InstallBindings()
         {
@@ -53,7 +53,11 @@ namespace CodeBase.Installers.UI
             BindShopWeaponUI();
             BindBuyWeaponUI();
             BindWeaponSelectorViewsProvider();
+            BindMainUI();
         }
+
+        private void BindMainUI() => 
+            Container.BindInstance(_mainUI);
 
         private void BindWeaponSelectorViewsProvider()
         {

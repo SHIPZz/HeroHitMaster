@@ -34,6 +34,7 @@ namespace CodeBase.GameInit
         private readonly List<EnemySpawner> _enemySpawners;
         private readonly EnemyConfigurator _enemyConfigurator = new();
         private SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
+        private Canvas _mainUi;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -45,8 +46,10 @@ namespace CodeBase.GameInit
             WalletPresenter walletPresenter,
             ISaveSystem saveSystem, 
             ShopWeaponPresenter shopWeaponPresenter,
-            IProvider<List<EnemySpawner>> enemySpawnersProvider, SlowMotionOnEnemyDeath slowMotionOnEnemyDeath)
+            IProvider<List<EnemySpawner>> enemySpawnersProvider, 
+            SlowMotionOnEnemyDeath slowMotionOnEnemyDeath, Canvas mainUi)
         {
+            _mainUi = mainUi;
             _slowMotionOnEnemyDeath = slowMotionOnEnemyDeath;
             _enemySpawners = enemySpawnersProvider.Get();
             _shopWeaponPresenter = shopWeaponPresenter;
@@ -78,6 +81,7 @@ namespace CodeBase.GameInit
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowingKnifeShooter);
             
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
+            // _mainUi.worldCamera = playerCameraFollower.GetComponent<Camera>();
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             

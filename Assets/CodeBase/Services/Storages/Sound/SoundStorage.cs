@@ -2,6 +2,7 @@
 using CodeBase.Enums;
 using CodeBase.Installers.ScriptableObjects;
 using CodeBase.ScriptableObjects.Sound;
+using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using UnityEngine;
 using Zenject;
@@ -12,11 +13,11 @@ namespace CodeBase.Services.Storages.Sound
     {
         private readonly Dictionary<SoundTypeId, AudioSource> _sounds = new();
         private readonly IEffectFactory _effectFactory;
-        private readonly List<SoundTypeId> _soundTypeIds;
-        
-        public SoundStorage(IEffectFactory effectFactory, SoundsSettings soundsSettings)
+        private readonly SoundStaticDataService _soundStaticDataService;
+
+        public SoundStorage(IEffectFactory effectFactory, SoundStaticDataService soundStaticDataService)
         {
-            _soundTypeIds = soundsSettings.SoundTypeIds;
+            _soundStaticDataService = soundStaticDataService;
             _effectFactory = effectFactory;
             FillDictionary();
         }
@@ -38,11 +39,11 @@ namespace CodeBase.Services.Storages.Sound
 
         private void FillDictionary()
         {
-            foreach (var soundTypeId in _soundTypeIds)
+            foreach (var soundData in _soundStaticDataService.GetAll().Values)
             {
-                AudioSource audioSource = _effectFactory.Create(soundTypeId);
+                AudioSource audioSource = _effectFactory.Create(soundData.AudioSource);
                 audioSource.playOnAwake = false;
-                _sounds[soundTypeId] = audioSource;
+                _sounds[soundData.SoundTypeId] = audioSource;
             }
         }
 

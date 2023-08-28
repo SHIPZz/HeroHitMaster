@@ -1,13 +1,12 @@
 ﻿using System;
 using CodeBase.Enums;
-using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Storages.Sound;
+using CodeBase.Services.Storages.Weapon;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Gameplay.Character.Enemy
+namespace CodeBase.Gameplay.Character.Players.Shoot
 {
     public class EffectOnShoot : IInitializable, IDisposable
     {

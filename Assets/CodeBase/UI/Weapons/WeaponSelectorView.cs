@@ -9,7 +9,9 @@ namespace CodeBase.UI.Weapons
     {
         [SerializeField] private WeaponTypeId _weaponTypeId;
         [SerializeField] private Button _button;
-        
+
+        public WeaponTypeId WeaponTypeId => _weaponTypeId;
+
         public event Action<WeaponTypeId> Choosed;
 
         private void OnEnable() => 

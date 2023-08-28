@@ -23,6 +23,9 @@
         SnowBombHitSound,
         WolfPupHitSound,
         WerewolfHitSound,
-        SuperWeaponShootSound
+        SuperWeaponShootSound,
+        Explosion,
+        ChooseWeapon,
+        SelectedWeapon
     }
 }

@@ -19,7 +19,7 @@ namespace CodeBase.Services.Data
         public List<BulletData> GetAll()
         {
             var bulletDatas = new List<BulletData>();
-            
+
             foreach (var bulletDat in _bulletDatas.Values)
             {
                 bulletDatas.Add(bulletDat);
@@ -28,7 +28,7 @@ namespace CodeBase.Services.Data
             return bulletDatas;
         }
 
-        public BulletData GetBy(WeaponTypeId weaponType) => 
-            _bulletDatas.First(x => x.Value.WeaponTypeId == weaponType).Value;
+        public BulletData GetBy(WeaponTypeId weaponType) =>
+            _bulletDatas[weaponType];
     }
 }

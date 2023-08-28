@@ -14,6 +14,7 @@ using CodeBase.Services.SaveSystems.SaveTriggers;
 using CodeBase.Services.Slowmotion;
 using CodeBase.Services.Storages.Bullet;
 using CodeBase.Services.Storages.Character;
+using CodeBase.Services.Storages.Effect;
 using CodeBase.Services.Storages.ObjectParts;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.Services.Storages.Weapon;
@@ -33,6 +34,7 @@ namespace CodeBase.Installers.GameInstaller
         [SerializeField] private DestroyableObjectPartStorage _destroyableObjectPartStorage;
         [SerializeField] private EnemyQuantityZonesProvider _enemyQuantityZonesProvider;
         [SerializeField] private TargetMovementStorage _targetMovementStorage;
+        [SerializeField] private EffectsProvider _effectsProvider;
 
         public override void InstallBindings()
         {
@@ -69,8 +71,16 @@ namespace CodeBase.Installers.GameInstaller
             BindSaveTriggers();
             BindCheckOutService();
             BindSlowMotion();
+            BindEffectStorage();
+            BindEffectProvider();
         }
-       
+
+        private void BindEffectProvider() =>
+            Container
+                .BindInstance(_effectsProvider);
+
+        private void BindEffectStorage() => 
+            Container.Bind<IEffectStorage>().To<EffectStorage>().AsSingle();
 
         private void BindSlowMotion() =>
             Container.BindInterfacesAndSelfTo<SlowMotionOnEnemyDeath>()
@@ -124,6 +134,8 @@ namespace CodeBase.Installers.GameInstaller
             BindAsSingle<WeaponStaticDataService>();
             BindAsSingle<BulletEffectStorage>();
             BindAsSingle<WalletStaticDataService>();
+            BindAsSingle<SoundStaticDataService>();
+            BindAsSingle<EffectStaticDataService>();
         }
 
         private void BindWeaponShootEffectStorage() =>

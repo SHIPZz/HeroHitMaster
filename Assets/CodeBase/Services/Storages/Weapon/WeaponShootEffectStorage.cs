@@ -5,7 +5,7 @@ using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using UnityEngine;
 
-namespace CodeBase.Services.Storages.Sound
+namespace CodeBase.Services.Storages.Weapon
 {
     public class WeaponShootEffectStorage
     {

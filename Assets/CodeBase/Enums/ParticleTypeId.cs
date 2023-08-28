@@ -2,7 +2,13 @@
 {
     public enum ParticleTypeId
     {
-        HitEffect = 0,
-        DieEffect = 1,
+        EnemyHitEffect = 0,
+        ConfettiDirectionalGreenYellow,
+        ConfettiDirectionalRed,
+        ConfettiBlastGreenYellow,
+        ConfettiBlastOrangePurple,
+        ConfettiBlastRed,
+        ConfettiBlastBlue,
+        ConfettiBlastOrangeGreen
     }
 }
