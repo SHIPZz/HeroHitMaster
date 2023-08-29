@@ -1,25 +1,23 @@
-﻿using CodeBase.Services.Storages.ObjectParts;
+﻿using CodeBase.Services.Factories;
+using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.ObjectBodyPart
 {
-    public class DestroyableObjectBodyPartPositionSetter
+    public class DestroyableObjectBodyPartPositionSetter : MonoBehaviour
     {
-        private readonly DestroyableObjectPartStorage _destroyableObjectPartStorage;
-        private readonly DestroyableObjectStorage _destroyableObjectStorage;
+        private ObjectPartFactory _objectPartFactory;
 
-        public DestroyableObjectBodyPartPositionSetter(DestroyableObjectPartStorage destroyableObjectPartStorage, 
-            DestroyableObjectStorage destroyableObjectStorage)
+        [Inject]
+        public void Construct(ObjectPartFactory objectPartFactory)
         {
-            _destroyableObjectPartStorage = destroyableObjectPartStorage;
-            _destroyableObjectStorage = destroyableObjectStorage;
+            _objectPartFactory = objectPartFactory;
         }
 
-        public void Set(DestroyableObjectTypeId destroyableObjectTypeId)
+        public void Set(DestroyableObjectTypeId destroyableObjectTypeId, DestroyableObject destroyableObject)
         {
-            DestroyableObjectBodyPart destroyableParts = _destroyableObjectPartStorage.Get(destroyableObjectTypeId);
-            DestroyableObject destroyableObject = _destroyableObjectStorage.GetBy(destroyableObjectTypeId);
-
-            destroyableParts.transform.position = destroyableObject.transform.position;
+            DestroyableObjectBodyPart destroyableParts = _objectPartFactory.CreateBy(destroyableObjectTypeId,destroyableObject.transform.position);
+            destroyableParts.Enable();
         }
     }
 }

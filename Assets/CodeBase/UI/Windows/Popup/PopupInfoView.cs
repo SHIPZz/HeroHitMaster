@@ -61,7 +61,6 @@ namespace CodeBase.UI.Windows.Popup
             }
         }
 
-        [Button]
         public void Show()
         {
             if(_chooseRandomWeaponcoroutine != null)

@@ -14,13 +14,16 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         
         public void Enable()
         {
-            gameObject.SetActive(true);
             _parts.ForEach(x =>
             {
                 x.isKinematic = false;
-                Vector3 randomDirection = new Vector3(Random.Range(-RandomValueForVector, RandomValueForVector),
-                    PositionY,
-                    Random.Range(-RandomValueForVector, RandomValueForVector));
+                
+                Vector3 randomDirection = new Vector3(
+                    Random.Range(-1f, 1f), 
+                    Random.Range(-1f, 1f), 
+                    Random.Range(-1f, 1f)
+                ).normalized;
+
                 x.AddForce(randomDirection * Force, ForceMode.Force);
             });
         }

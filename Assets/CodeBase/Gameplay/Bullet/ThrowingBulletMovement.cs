@@ -1,4 +1,5 @@
 using CodeBase.Gameplay.Collision;
+using DG.Tweening;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -78,7 +79,8 @@ namespace CodeBase.Gameplay.Bullet
             }
 
             Vector3 offset = _hitPosition - _knifeEnd.position;
-            transform.position += offset; 
+            // transform.DOMove(transform.position + offset, 0.1f);
+            RigidBody.position += offset; 
 
             _isHit = true;
         }

@@ -15,7 +15,6 @@ using CodeBase.Services.Slowmotion;
 using CodeBase.Services.Storages.Bullet;
 using CodeBase.Services.Storages.Character;
 using CodeBase.Services.Storages.Effect;
-using CodeBase.Services.Storages.ObjectParts;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.Services.Storages.Weapon;
 using CodeBase.UI.Weapons;
@@ -30,8 +29,6 @@ namespace CodeBase.Installers.GameInstaller
         [SerializeField] private EnemySpawnersProvider _enemySpawnersProvider;
         [SerializeField] private LocationProvider _locationProvider;
         [SerializeField] private MaterialProvider _materialProvider;
-        [SerializeField] private DestroyableObjectStorage _destroyableObjectStorage;
-        [SerializeField] private DestroyableObjectPartStorage _destroyableObjectPartStorage;
         [SerializeField] private EnemyQuantityZonesProvider _enemyQuantityZonesProvider;
         [SerializeField] private TargetMovementStorage _targetMovementStorage;
         [SerializeField] private EffectsProvider _effectsProvider;
@@ -58,7 +55,6 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemySpawnerProvider();
             BindMaterialProvider();
             BindSetterWeapon();
-            BindDestroyableObjectStorages();
             BindEnemyEffectDataStorage();
             BindWeaponShootEffectStorage();
             BindStaticDataServices();
@@ -73,7 +69,11 @@ namespace CodeBase.Installers.GameInstaller
             BindSlowMotion();
             BindEffectStorage();
             BindEffectProvider();
+            BindObjectPartFactory();
         }
+
+        private void BindObjectPartFactory() => 
+            BindAsSingle<ObjectPartFactory>();
 
         private void BindEffectProvider() =>
             Container
@@ -143,12 +143,6 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindEnemyEffectDataStorage() =>
             BindAsSingle<EnemyEffectDataStorage>();
-
-        private void BindDestroyableObjectStorages()
-        {
-            Container.BindInstance(_destroyableObjectStorage);
-            Container.BindInstance(_destroyableObjectPartStorage);
-        }
 
         private void BindEnemyQuantityZonesProvider() =>
             Container.BindInstance(_enemyQuantityZonesProvider);

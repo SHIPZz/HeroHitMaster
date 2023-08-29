@@ -12,14 +12,14 @@ namespace CodeBase.Gameplay.ObjectBodyPart
 
         public void Destroy()
         {
-            Destroy(gameObject);
             Destroyed?.Invoke(DestroyableObjectTypeId);
+            Destroy(gameObject);
         }
 
         public void TakeDamage(int value)
         {
-            Destroy(gameObject);
             Destroyed?.Invoke(DestroyableObjectTypeId);
+            Destroy(gameObject);
         }
     }
 }

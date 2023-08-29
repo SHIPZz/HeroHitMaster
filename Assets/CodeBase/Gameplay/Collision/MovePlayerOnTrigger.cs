@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ namespace CodeBase.Gameplay.Collision
 
         private TriggerObserver _triggerObserver;
 
+        public event Action MovementStarted;
+        public event Action MovementCompleted;
+
         private void Awake() =>
             _triggerObserver = GetComponent<TriggerObserver>();
 
@@ -23,14 +27,19 @@ namespace CodeBase.Gameplay.Collision
 
         private void MovePlayerToTarget(Collider player)
         {
-            DOTween.Sequence().AppendInterval(1.5f).OnComplete(() => Test(player));
+            DOTween.Sequence().AppendInterval(1.5f).OnComplete(() => Move(player));
         }
 
-        private void Test(Collider player)
+        private void Move(Collider player)
         {
             player.transform.SetParent(transform);
+            MovementStarted?.Invoke();
             transform.DOMoveZ(_target.position.z, MoveDuration)
-                .OnComplete(() => player.transform.SetParent(null));
+                .OnComplete(() =>
+                {
+                    player.transform.SetParent(null);
+                    MovementCompleted?.Invoke();
+                });
         }
     }
 }

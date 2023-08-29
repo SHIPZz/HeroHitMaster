@@ -26,6 +26,8 @@
         SuperWeaponShootSound,
         Explosion,
         ChooseWeapon,
-        SelectedWeapon
+        SelectedWeapon,
+        GlassDestruction,
+        River
     }
 }

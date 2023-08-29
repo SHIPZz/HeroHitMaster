@@ -1,42 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using CodeBase.Services.Storages.ObjectParts;
-using Zenject;
+﻿using UnityEngine;
 
 namespace CodeBase.Gameplay.ObjectBodyPart
 {
-    public class DestroyableObjectPartMediator : IInitializable, IDisposable
+    public class DestroyableObjectPartMediator : MonoBehaviour
     {
-        private DestroyableObjectStorage _destroyableObjectStorage;
-        private readonly List<DestroyableObject> _destroyableObjects;
-        private readonly DestroyableObjectPartsActivator _destroyableObjectPartsActivator;
-        private readonly DestroyableObjectBodyPartPositionSetter _destroyableObjectBodyPartPositionSetter;
-
-        public DestroyableObjectPartMediator(DestroyableObjectStorage destroyableObjectStorage, 
-            DestroyableObjectPartsActivator destroyableObjectPartsActivator, 
-            DestroyableObjectBodyPartPositionSetter destroyableObjectBodyPartPositionSetter)
+        [SerializeField] private DestroyableObjectBodyPartPositionSetter _destroyableObjectBodyPartPositionSetter;
+        [SerializeField] private DestroyableObject _destroyableObject;
+        
+        private void OnEnable()
         {
-            _destroyableObjectBodyPartPositionSetter = destroyableObjectBodyPartPositionSetter;
-            _destroyableObjectPartsActivator = destroyableObjectPartsActivator;
-            _destroyableObjects = destroyableObjectStorage.GetAll();
+            _destroyableObject.Destroyed += Set;
         }
 
-        public void Initialize()
+        private void OnDisable()
         {
-            _destroyableObjects.ForEach(x =>
-            {
-                x.Destroyed += _destroyableObjectPartsActivator.ActivateWithDisable;
-                x.Destroyed += _destroyableObjectBodyPartPositionSetter.Set;
-            });
+            _destroyableObject.Destroyed -= Set;
         }
 
-        public void Dispose()
-        {
-            _destroyableObjects.ForEach(x =>
-            {
-                x.Destroyed -= _destroyableObjectPartsActivator.ActivateWithDisable;
-                x.Destroyed -= _destroyableObjectBodyPartPositionSetter.Set;
-            });
-        }
+        private void Set(DestroyableObjectTypeId destroyableObjectTypeId) => 
+            _destroyableObjectBodyPartPositionSetter.Set(destroyableObjectTypeId, _destroyableObject);
     }
 }
