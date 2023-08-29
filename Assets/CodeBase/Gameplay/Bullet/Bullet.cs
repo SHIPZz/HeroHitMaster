@@ -15,14 +15,19 @@ namespace CodeBase.Gameplay.Bullet
         private TriggerObserver _triggerObserver;
         private DamageDealer _damageDealer;
 
+        public Rigidbody Rigidbody { get; protected set; }
+        public Collider Collider { get; protected set; }
+        
         [Inject]
-        private void Construct(TriggerObserver triggerObserver) => 
+        private void Construct(TriggerObserver triggerObserver) =>
             _triggerObserver = triggerObserver;
 
         private void Awake()
         {
             _bulletMovement = GetComponent<BulletMovement>();
             _damageDealer = GetComponent<DamageDealer>();
+            Rigidbody = GetComponent<Rigidbody>();
+            Collider = GetComponent<Collider>();
         }
 
         private void OnEnable() =>

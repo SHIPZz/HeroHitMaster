@@ -4,8 +4,10 @@ using CodeBase.Enums;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.UI.Weapons;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -16,6 +18,8 @@ namespace CodeBase.UI.Windows.Popup
     public class PopupInfoView : SerializedMonoBehaviour
     {
         [OdinSerialize] private Dictionary<WeaponTypeId, Image> _whiteFrames;
+        [SerializeField] private TextMeshProUGUI _mainWeaponText;
+        [SerializeField] private Color _color;
 
         private Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIcons;
         private AudioSource _lastWeaponSelectedSound;
@@ -25,6 +29,7 @@ namespace CodeBase.UI.Windows.Popup
         private int _count;
         private WeaponSelectorView _lastWeaponSelectorView;
         private List<ParticleSystem> _selectedWeaponEffects;
+        private Coroutine _chooseRandomWeaponcoroutine;
 
         [Inject]
         private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage, EffectsProvider effectsProvider)
@@ -37,19 +42,13 @@ namespace CodeBase.UI.Windows.Popup
 
         private void Awake()
         {
-            foreach (var weaponSelector in _weaponIcons.Values)
-            {
-                weaponSelector.gameObject.SetActive(false);
-            }
+            DisableAllGunIcons();
 
-            foreach (var whiteFrame in _whiteFrames.Values)
-            {
-                Color currentColor = whiteFrame.color;
-
-                Color newColor = new Color(currentColor.r, currentColor.g, currentColor.b, 0f);
-
-                whiteFrame.color = newColor;
-            }
+            DisableAllWhiteFrames();
+            
+            _mainWeaponText
+                .DOColor(new Color(_color.r, _color.g, _color.b, _mainWeaponText.color.a), 0.5f)
+                .SetLoops(-1, LoopType.Yoyo);
         }
 
         private void OnEnable()
@@ -65,7 +64,30 @@ namespace CodeBase.UI.Windows.Popup
         [Button]
         public void Show()
         {
-            StartCoroutine(StartChooseRandomWeapon());
+            if(_chooseRandomWeaponcoroutine != null)
+                StopCoroutine(_chooseRandomWeaponcoroutine);
+                
+            _chooseRandomWeaponcoroutine = StartCoroutine(StartChooseRandomWeapon());
+        }
+
+        private void DisableAllWhiteFrames()
+        {
+            foreach (var whiteFrame in _whiteFrames.Values)
+            {
+                Color currentColor = whiteFrame.color;
+
+                Color newColor = new Color(currentColor.r, currentColor.g, currentColor.b, 0f);
+
+                whiteFrame.color = newColor;
+            }
+        }
+
+        private void DisableAllGunIcons()
+        {
+            foreach (var weaponSelector in _weaponIcons.Values)
+            {
+                weaponSelector.gameObject.SetActive(false);
+            }
         }
 
         private IEnumerator StartChooseRandomWeapon()
@@ -106,7 +128,7 @@ namespace CodeBase.UI.Windows.Popup
             if (_lastFrame is not null)
             {
                 Color currentCollor = new Color(_lastFrame.color.r, _lastFrame.color.g, _lastFrame.color.b, 0f);
-                _lastFrame.color = currentCollor;
+                _lastFrame.DOColor(currentCollor, 0.5f);
             }
 
             int randomWeaponId = Random.Range(0, _randomIcons.Count);
@@ -114,7 +136,7 @@ namespace CodeBase.UI.Windows.Popup
             WeaponSelectorView weaponSelectorView = _randomIcons[randomWeaponId];
 
             SetFrameAlpha(weaponSelectorView);
-
+            
             return weaponSelectorView;
         }
 
@@ -125,7 +147,7 @@ namespace CodeBase.UI.Windows.Popup
             Color currentColor = whiteFrame.color;
 
             var newColor = new Color(currentColor.r, currentColor.g, currentColor.b, 1f);
-            whiteFrame.color = newColor;
+            whiteFrame.DOColor(newColor, 0.3f);
             _lastFrame = whiteFrame;
         }
 

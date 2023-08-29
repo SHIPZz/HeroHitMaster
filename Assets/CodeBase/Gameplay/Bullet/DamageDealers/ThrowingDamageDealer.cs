@@ -19,15 +19,19 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
             if (other.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
             {
                 enemyPartForKnifeHolder.EnemyHealth.TakeDamage(Damage);
+                _collider.enabled = false;
             }
 
-            if(other.gameObject.TryGetComponent(out IDamageable damageable))
+            if (other.gameObject.TryGetComponent(out IDamageable damageable))
+            {
                 damageable.TakeDamage(Damage);
-            
+                _collider.enabled = false;
+            }
+
             // if (!enemyPartForKnifeHolder.EnemyHealth.isActiveAndEnabled)
             //     return;
 
-            _collider.enabled = false;
+            // _collider.enabled = false;
         }
     }
 }

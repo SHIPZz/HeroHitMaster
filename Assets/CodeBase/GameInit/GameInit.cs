@@ -78,14 +78,14 @@ namespace CodeBase.GameInit
             playerData.Money = 2000;
             _saveSystem.Save(playerData);
             _walletPresenter.Init(playerData.Money);
-            _shopWeaponPresenter.Init(WeaponTypeId.ThrowingKnifeShooter);
+            _shopWeaponPresenter.Init(WeaponTypeId.ThrowMaceShooter);
             
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             // _mainUi.worldCamera = playerCameraFollower.GetComponent<Camera>();
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
-            InitializeInitialWeapon(WeaponTypeId.ThrowSkewerShooter);
+            InitializeInitialWeapon(WeaponTypeId.ThrowMaceShooter);
             _playerProvider.Set(player);
         }
 

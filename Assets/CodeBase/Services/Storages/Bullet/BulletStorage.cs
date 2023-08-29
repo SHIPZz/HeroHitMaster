@@ -53,7 +53,10 @@ namespace CodeBase.Services.Storages.Bullet
         {
             if (bullet == null)
                 return;
-            
+
+            bullet.Rigidbody.isKinematic = false;
+            bullet.Collider.enabled = true;
+            bullet.transform.position = _playerProvider.Get().RightHand.position;
             bullet.transform.SetParent(_locationProvider.Get(LocationTypeId.BulletParent));
             _gameObjectPoolProvider.Get()[bullet.WeaponTypeId].Push(bullet.gameObject);
         }
