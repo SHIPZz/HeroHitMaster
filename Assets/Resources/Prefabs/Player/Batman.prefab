@@ -2227,6 +2227,7 @@ GameObject:
   - component: {fileID: 5915890519867323331}
   - component: {fileID: 1067597184277032185}
   - component: {fileID: -3320969725233537023}
+  - component: {fileID: -2481790363190385416}
   m_Layer: 8
   m_Name: Batman
   m_TagString: Untagged
@@ -2459,6 +2460,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce96ff141984978a6fe7ed5dea6e50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2481790363190385416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5623305037259417953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96359b023d1d46658aea7cf3996955ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: -1670408599883254313}
 --- !u!1 &5679752230305372745
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,30 +9,30 @@ namespace CodeBase.Gameplay.Character.Players
         private static readonly int IsJumping = Animator.StringToHash("Jumping");
         private readonly Animator _animator;
         private static readonly int IsShooted = Animator.StringToHash("IsShooted");
+        private static readonly int _isIdle = Animator.StringToHash("IsIdle");
+        private static readonly int _isMoved = Animator.StringToHash("IsMoved");
 
         public PlayerAnimator(Animator animator) =>
             _animator = animator;
 
-        public void SetSpeed(float speed) =>
+        public void SetMovement(float speed)
+        {
+            _animator.SetBool(_isMoved, true);
             _animator.SetFloat(Speed, speed);
+        }
+
+        public void StopMovement()
+        {
+            _animator.SetBool(_isMoved, false);
+            // _animator.SetFloat(Speed);
+        }
         
-        public void SetSpeed(float speed, float dampTime, float deltaTime) =>
-            _animator.SetFloat(Speed, speed, dampTime, deltaTime);
 
         public void SetRunning(bool isRunning) => 
             _animator.SetBool(IsRun, isRunning);
 
         public void SetShooting(bool isShooting) =>
             _animator.SetBool(IsShooted, isShooting);
-
-        public void SetJumping(bool isJumping)
-        {
-            _animator.SetTrigger(IsJumping);
-        }
-
-        public void SetLanding()
-        {
-            _animator.SetTrigger("IsLanding");
-        }
+        
     }
 }

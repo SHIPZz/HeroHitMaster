@@ -6,8 +6,8 @@ namespace CodeBase.ScriptableObjects.Bullet
     [CreateAssetMenu(fileName = "BulletData", menuName = "Gameplay/BulletData")]
     public class BulletData : ScriptableObject
     {
-        [Range(0.1f, 1)] public float MovementDuration;
-        [Range(0.1f, 1)] public float RotateDuration = 0.3f;
+        [Range(10f, 100)] public float Speed;
+        [Range(10f, 100)] public float RotationSpeed;
         
         [Range(20, 1000)] public int Damage;
         

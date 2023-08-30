@@ -20,7 +20,7 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         private void OnEnable() =>
             _materialChanger.StartedChanged += Disable;
 
-        private void Disable() =>
+        private void Disable() => 
             _isDisabled = true;
 
         public void Set(DestroyableObjectTypeId destroyableObjectTypeId, DestroyableObject destroyableObject)

@@ -15,9 +15,9 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
         private Material _material;
 
         [Inject]
-        private void Construct(IProvider<MaterialTypeId, Material> materialProvider) => 
+        private void Construct(IProvider<MaterialTypeId, Material> materialProvider) =>
             _material = materialProvider.Get(_materialTypeId);
-        
+
         public override void DoDamage(UnityEngine.Collision other)
         {
             if (other.gameObject.TryGetComponent(out IMaterialChanger materialChanger))
