@@ -5864,6 +5864,8 @@ GameObject:
   - component: {fileID: -5774669301019290413}
   - component: {fileID: -494394902198313325}
   - component: {fileID: 6836760283565297180}
+  - component: {fileID: 3526231615645063501}
+  - component: {fileID: 8530594021328002189}
   m_Layer: 9
   m_Name: Sunflora
   m_TagString: Untagged
@@ -6117,13 +6119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffbb53063cc4085a20ce3162073fb46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skinnedMeshRenderer: {fileID: 1894615297159218720}
-  _animator: {fileID: 4582929677995901070}
-  _collider: {fileID: 0}
   _enemyHealth: {fileID: 3259480186972319827}
-  _triggerObserver: {fileID: 736276658533940244}
   _hitEffect: {fileID: 7076646267299500606}
-  _navMeshAgent: {fileID: 7961944587520941903}
   _enemyFollower: {fileID: 4086771338391145755}
   _enemy: {fileID: 8921564850574388102}
 --- !u!114 &5204974039047518658
@@ -6254,6 +6251,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3526231615645063501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571279183266964834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf537b44584846c893846819b6a0b1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyBodyPartPositionSetter: {fileID: 8530594021328002189}
+  _enemy: {fileID: 8921564850574388102}
+--- !u!114 &8530594021328002189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571279183266964834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5999880532254938687

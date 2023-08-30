@@ -10740,6 +10740,8 @@ GameObject:
   - component: {fileID: -5855498672791202961}
   - component: {fileID: -6566549186341054500}
   - component: {fileID: 5889854438323558711}
+  - component: {fileID: 5271286073596176236}
+  - component: {fileID: 4942579314477148336}
   m_Layer: 9
   m_Name: WolfPup
   m_TagString: Untagged
@@ -11080,6 +11082,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5271286073596176236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3118573744419511053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf537b44584846c893846819b6a0b1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyBodyPartPositionSetter: {fileID: 4942579314477148336}
+  _enemy: {fileID: 4546683612031270215}
+--- !u!114 &4942579314477148336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3118573744419511053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3125778100780711247

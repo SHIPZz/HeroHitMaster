@@ -1,15 +1,24 @@
 ﻿using CodeBase.Gameplay.Character.Enemy;
+using CodeBase.Gameplay.MaterialChanger;
+using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.EnemyBodyParts
 {
-    public class EnemyBodyPartPositionSetter
+    public class EnemyBodyPartPositionSetter : MonoBehaviour
     {
-        private readonly EnemyBodyPartStorage _enemyBodyPartStorage;
         private bool _canSetPosition = true;
+        private EnemyPartFactory _enemyPartFactory;
+        private IMaterialChanger _materialChanger;
 
-        public EnemyBodyPartPositionSetter(EnemyBodyPartStorage enemyBodyPartStorage)
+        [Inject]
+        public void Construct(EnemyPartFactory enemyPartFactory) => 
+        _enemyPartFactory = enemyPartFactory;
+
+        private void Awake()
         {
-            _enemyBodyPartStorage = enemyBodyPartStorage;
+            _materialChanger = GetComponent<IMaterialChanger>();
+            _materialChanger.StartedChanged += Disable;
         }
 
         public void SetPosition(Enemy enemy)
@@ -17,13 +26,13 @@ namespace CodeBase.Gameplay.EnemyBodyParts
             if(!_canSetPosition)
                 return;
             
-            EnemyBodyPart enemyBodyPart = _enemyBodyPartStorage.Get(enemy.EnemyTypeId);
+            EnemyBodyPart enemyBodyPart = _enemyPartFactory.CreateBy(enemy.EnemyTypeId, enemy.transform.position);
 
-            enemyBodyPart.transform.position = enemy.transform.position;
+            enemyBodyPart.Enable();
             enemyBodyPart.SetHeightPosition();
         }
 
-        public void Disable() => 
+        private void Disable() => 
             _canSetPosition = false;
     }
 }

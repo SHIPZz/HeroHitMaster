@@ -14705,6 +14705,8 @@ GameObject:
   - component: {fileID: 3523561547357385859}
   - component: {fileID: 2689591134803760708}
   - component: {fileID: 7947290985443845024}
+  - component: {fileID: 513779880786209211}
+  - component: {fileID: -3158994373840707204}
   m_Layer: 9
   m_Name: SnowBomb
   m_TagString: Untagged
@@ -15013,6 +15015,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &513779880786209211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231067478400966202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf537b44584846c893846819b6a0b1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyBodyPartPositionSetter: {fileID: -3158994373840707204}
+  _enemy: {fileID: 5760427383814377844}
+--- !u!114 &-3158994373840707204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231067478400966202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4245919642720257546

@@ -9,6 +9,7 @@ namespace CodeBase.Gameplay.EnemyBodyParts
 {
     public class EnemyBodyPart : MonoBehaviour
     {
+        private const float AutoDestroyDelay = 10f;
         private const float PositionY = 1;
         private const float Force = 200f;
         private const float RandomValueForVector = 1f;
@@ -29,6 +30,8 @@ namespace CodeBase.Gameplay.EnemyBodyParts
         public void Enable()
         {
             gameObject.SetActive(true);
+
+
             _parts.ForEach(x =>
             {
                 x.isKinematic = false;
@@ -41,12 +44,14 @@ namespace CodeBase.Gameplay.EnemyBodyParts
                 x.transform.DOLocalRotate(randomVector, 1.5f).SetRelative(true).SetEase(Ease.Linear);
                 x.AddForce(randomDirection * Force, ForceMode.Force);
             });
+
+            DOTween.Sequence().AppendInterval(AutoDestroyDelay).OnComplete(Disable);
         }
 
-        public void Disable()
+        private void Disable()
         {
             DOTween.Kill(transform);
-            // gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

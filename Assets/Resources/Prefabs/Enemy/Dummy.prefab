@@ -5188,6 +5188,8 @@ GameObject:
   - component: {fileID: -113165494445711687}
   - component: {fileID: -3588508130203683952}
   - component: {fileID: -6546044916275027638}
+  - component: {fileID: -2882978485167246861}
+  - component: {fileID: 4550825233897796588}
   m_Layer: 9
   m_Name: Dummy
   m_TagString: Untagged
@@ -5268,13 +5270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffbb53063cc4085a20ce3162073fb46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skinnedMeshRenderer: {fileID: 6358217333202742436}
-  _animator: {fileID: 4309867202426247413}
-  _collider: {fileID: 8001916054457387385}
   _enemyHealth: {fileID: 2913198394681895218}
-  _triggerObserver: {fileID: 4066211621907594376}
   _hitEffect: {fileID: 15566811675055793}
-  _navMeshAgent: {fileID: 6183963054665002207}
   _enemyFollower: {fileID: 1901284566086169178}
   _enemy: {fileID: 5482505976512218691}
 --- !u!137 &6358217333202742436
@@ -5507,6 +5504,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2882978485167246861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156611879507474171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf537b44584846c893846819b6a0b1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyBodyPartPositionSetter: {fileID: 4550825233897796588}
+  _enemy: {fileID: 5482505976512218691}
+--- !u!114 &4550825233897796588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156611879507474171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2310695226452586166

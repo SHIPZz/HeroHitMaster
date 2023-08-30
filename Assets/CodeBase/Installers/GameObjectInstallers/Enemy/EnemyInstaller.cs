@@ -33,15 +33,8 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
                 .AsSingle();
 
             Container
-                .BindInterfacesAndSelfTo<EnemyBodyPartMediator>()
-                .AsSingle();
-                      
-            Container
                 .BindInterfacesAndSelfTo<EnemyDeathEffectOnDestruction>()
                 .AsSingle();
-
-            Container.Bind<EnemyBodyPartPositionSetter>().AsSingle();
-            Container.Bind<EnemyBodyPartActivator>().AsSingle();
         }
 
         private void BindInstances()
@@ -70,7 +63,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.BindInterfacesAndSelfTo<AnimOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<WinAnimOnPlayerDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<StopMovementOnHit>().AsSingle();
-            Container.BindInterfacesAndSelfTo<EnemyBodyActivatorDisabler>().AsSingle();
         }
 
         private void BindEffects()

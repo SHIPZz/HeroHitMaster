@@ -25,7 +25,6 @@ namespace CodeBase.Installers.GameInstaller
 {
     public class GameInstaller : MonoInstaller
     {
-        [SerializeField] private EnemyBodyPartStorage _enemyBodyPartStorage;
         [SerializeField] private EnemySpawnersProvider _enemySpawnersProvider;
         [SerializeField] private LocationProvider _locationProvider;
         [SerializeField] private MaterialProvider _materialProvider;
@@ -51,7 +50,6 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemyFactory();
             BindSoundStorage();
             BindSoundFactory();
-            BindEnemyBodyPartStorage();
             BindEnemySpawnerProvider();
             BindMaterialProvider();
             BindSetterWeapon();
@@ -70,16 +68,20 @@ namespace CodeBase.Installers.GameInstaller
             BindEffectStorage();
             BindEffectProvider();
             BindObjectPartFactory();
+            BindEnemyPartFactory();
         }
 
-        private void BindObjectPartFactory() => 
+        private void BindEnemyPartFactory() => 
+            BindAsSingle<EnemyPartFactory>();
+
+        private void BindObjectPartFactory() =>
             BindAsSingle<ObjectPartFactory>();
 
         private void BindEffectProvider() =>
             Container
                 .BindInstance(_effectsProvider);
 
-        private void BindEffectStorage() => 
+        private void BindEffectStorage() =>
             Container.Bind<IEffectStorage>().To<EffectStorage>().AsSingle();
 
         private void BindSlowMotion() =>
@@ -102,7 +104,7 @@ namespace CodeBase.Installers.GameInstaller
         {
             Container.Bind<BlockShootInput>()
                 .AsSingle();
-            
+
             Container.BindInterfacesAndSelfTo<BlockShootInputPresenter>()
                 .AsSingle();
         }
@@ -160,9 +162,6 @@ namespace CodeBase.Installers.GameInstaller
                 .FromInstance(_enemySpawnersProvider).AsSingle();
         }
 
-        private void BindEnemyBodyPartStorage() =>
-            Container
-                .BindInstance(_enemyBodyPartStorage);
 
         private void BindSoundFactory() =>
             Container.Bind<IEffectFactory>()

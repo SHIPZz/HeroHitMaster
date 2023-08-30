@@ -6396,6 +6396,8 @@ GameObject:
   - component: {fileID: 5695942848658647781}
   - component: {fileID: 8286186824420001534}
   - component: {fileID: 8446414835923344887}
+  - component: {fileID: -6443710165158652709}
+  - component: {fileID: 6078688176645044380}
   m_Layer: 9
   m_Name: Snakelet
   m_TagString: Untagged
@@ -6468,13 +6470,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffbb53063cc4085a20ce3162073fb46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skinnedMeshRenderer: {fileID: 615142269620508554}
-  _animator: {fileID: 2842627138421820526}
-  _collider: {fileID: 8286186824420001534}
   _enemyHealth: {fileID: 1893460232533309701}
-  _triggerObserver: {fileID: 1286049981885217354}
   _hitEffect: {fileID: 401575759433536600}
-  _navMeshAgent: {fileID: -3825427877069157911}
   _enemyFollower: {fileID: 5545511684069049637}
   _enemy: {fileID: -2150161942354210392}
 --- !u!114 &6680197194987547436
@@ -6720,6 +6717,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6443710165158652709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641366443712269572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf537b44584846c893846819b6a0b1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyBodyPartPositionSetter: {fileID: 6078688176645044380}
+  _enemy: {fileID: -2150161942354210392}
+--- !u!114 &6078688176645044380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641366443712269572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5892501550623974776
