@@ -27,6 +27,12 @@ namespace CodeBase.UI.Windows
         public void Open(WindowTypeId windowTypeId) => 
             _windows[windowTypeId].Open();
 
+        public void Open(WindowTypeId windowTypeId, Action callback)
+        {
+            _windows[windowTypeId].Open();
+            _windows[windowTypeId].Opened += callback;
+        }
+
         public void CloseAll()
         {
             foreach (var window in _windows.Values) 

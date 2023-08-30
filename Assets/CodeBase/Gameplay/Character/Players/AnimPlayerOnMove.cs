@@ -18,7 +18,7 @@ namespace CodeBase.Gameplay.Character.Players
         {
             if (ShouldMove())
             {
-                _playerAnimator.SetMovement(_navMeshAgent.velocity.magnitude);
+                // _playerAnimator.SetMovement(_navMeshAgent.velocity.magnitude);
                 return;
             }
             

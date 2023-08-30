@@ -48,6 +48,7 @@ namespace CodeBase.Gameplay.Character.Enemy
                 return;
             
             // _navMeshAgent.isStopped = true;
+            _navMeshAgent.SetDestination(transform.position);
             _navMeshAgent.velocity = Vector3.zero;
             _isBlocked = true;
         }

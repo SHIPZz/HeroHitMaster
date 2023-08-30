@@ -9,6 +9,8 @@ namespace CodeBase.Gameplay.Bullet
 {
     public class BulletMovement : MonoBehaviour
     {
+        [SerializeField] private bool _blockRotation;
+
         protected Rigidbody RigidBody;
         protected Bullet Bullet;
 
@@ -46,8 +48,10 @@ namespace CodeBase.Gameplay.Bullet
                 return;
             }
 
+            if (!_blockRotation)
+                RigidBody.angularVelocity = transform.right * 50;
+
             RigidBody.velocity = MoveDirection * 35;
-            RigidBody.angularVelocity = transform.right * 50;
         }
 
         private void OnDisable()

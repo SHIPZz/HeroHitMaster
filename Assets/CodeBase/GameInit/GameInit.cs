@@ -13,6 +13,7 @@ using CodeBase.Services.Storages.Character;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
+using CodeBase.UI.Windows.Victory;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
@@ -35,6 +36,7 @@ namespace CodeBase.GameInit
         private readonly EnemyConfigurator _enemyConfigurator = new();
         private SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
         private Canvas _mainUi;
+        private VictoryInfoPresenter _victoryInfoPresenter;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -47,8 +49,9 @@ namespace CodeBase.GameInit
             ISaveSystem saveSystem, 
             ShopWeaponPresenter shopWeaponPresenter,
             IProvider<List<EnemySpawner>> enemySpawnersProvider, 
-            SlowMotionOnEnemyDeath slowMotionOnEnemyDeath, Canvas mainUi)
+            SlowMotionOnEnemyDeath slowMotionOnEnemyDeath, Canvas mainUi, VictoryInfoPresenter victoryInfoPresenter)
         {
+            _victoryInfoPresenter = victoryInfoPresenter;
             _mainUi = mainUi;
             _slowMotionOnEnemyDeath = slowMotionOnEnemyDeath;
             _enemySpawners = enemySpawnersProvider.Get();
@@ -67,11 +70,14 @@ namespace CodeBase.GameInit
         public async void Initialize()
         {
             _loadingCurtain.Show();
+            
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozne) =>
             {
                 _enemyConfigurator.Configure(enemy,aggrozne);
                 _slowMotionOnEnemyDeath.Init(enemy);
             }));
+            
+            _victoryInfoPresenter.Init(_enemySpawners);
             
             PlayerPrefs.DeleteAll();
             var playerData = await _saveSystem.Load<PlayerData>();
@@ -81,11 +87,10 @@ namespace CodeBase.GameInit
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowMaceShooter);
             
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            // _mainUi.worldCamera = playerCameraFollower.GetComponent<Camera>();
             Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
-            InitializeInitialWeapon(WeaponTypeId.GreenWeapon);
+            InitializeInitialWeapon(WeaponTypeId.OrangeWeapon);
             _playerProvider.Set(player);
         }
 

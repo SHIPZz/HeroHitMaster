@@ -63,6 +63,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.BindInterfacesAndSelfTo<AnimOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<WinAnimOnPlayerDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<StopMovementOnHit>().AsSingle();
+            Container.BindInterfacesAndSelfTo<StopMovementOnMaterialChange>().AsSingle();
         }
 
         private void BindEffects()

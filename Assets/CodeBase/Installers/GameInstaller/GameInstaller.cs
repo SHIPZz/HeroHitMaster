@@ -10,6 +10,7 @@ using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
+using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.SaveTriggers;
 using CodeBase.Services.Slowmotion;
 using CodeBase.Services.Storages.Bullet;
@@ -31,6 +32,7 @@ namespace CodeBase.Installers.GameInstaller
         [SerializeField] private EnemyQuantityZonesProvider _enemyQuantityZonesProvider;
         [SerializeField] private TargetMovementStorage _targetMovementStorage;
         [SerializeField] private EffectsProvider _effectsProvider;
+        [SerializeField] private SaveTriggerOnLevelEnd _saveTriggerOnLevel;
 
         public override void InstallBindings()
         {
@@ -98,6 +100,7 @@ namespace CodeBase.Installers.GameInstaller
             Container.BindInterfacesAndSelfTo<SoundSaveOnTrigger>().AsSingle();
             Container.BindInterfacesAndSelfTo<PurchasedWeaponsSaveTrigger>().AsSingle();
             Container.BindInterfacesAndSelfTo<PurchasedWeaponsTriggerPresenter>().AsSingle();
+            Container.BindInstance(_saveTriggerOnLevel);
         }
 
         private void BindBlockInputOnUi()

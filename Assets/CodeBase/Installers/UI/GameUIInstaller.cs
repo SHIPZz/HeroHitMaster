@@ -13,6 +13,7 @@ using CodeBase.UI.Windows.Death;
 using CodeBase.UI.Windows.Play;
 using CodeBase.UI.Windows.Setting;
 using CodeBase.UI.Windows.Shop;
+using CodeBase.UI.Windows.Victory;
 using UnityEngine;
 using Zenject;
 
@@ -35,6 +36,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private BuyButtonView _buyButtonView;
         [SerializeField] private WeaponSelectorViewsProvider _weaponSelectorViewsProvider;
         [SerializeField] private Canvas _mainUI;
+        [SerializeField] private VictoryInvoView _victoryInvoView;
 
         public override void InstallBindings()
         {
@@ -54,6 +56,13 @@ namespace CodeBase.Installers.UI
             BindBuyWeaponUI();
             BindWeaponSelectorViewsProvider();
             BindMainUI();
+            BindVictoryUI();
+        }
+
+        private void BindVictoryUI()
+        {
+            Container.BindInstance(_victoryInvoView);
+            Container.BindInterfacesAndSelfTo<VictoryInfoPresenter>().AsSingle();
         }
 
         private void BindMainUI() => 

@@ -10,5 +10,8 @@
         B6,
         B7,
         SandDissolve,
+        Fire,
+        Freeze,
+        Grass,
     }
 }
