@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -14,47 +15,53 @@ namespace CodeBase.UI.Windows.Victory
         [SerializeField] private float _buttonWidth = 430;
         [SerializeField] private float _buttonHeight = 150;
         [SerializeField] private TMP_Text _continueText;
+        
+        private bool _textChanged;
 
         private void Awake()
         {
             _deadEnemyQuantity.text = "";
             _earnedMoney.text = "";
-            // _continueButton.interactable = false;
-        }
-
-        public void Show(int targetEnemyCount, int targetMoneyCount)
-        {
-            AnimateTextChange(targetEnemyCount, _deadEnemyQuantity);
-            AnimateTextChange(targetMoneyCount, _earnedMoney);
+            _continueButton.interactable = false;
         }
 
         [Button]
+        public async void Show(int targetEnemyCount, int targetMoneyCount)
+        {
+            AnimateTextChange(targetEnemyCount, _deadEnemyQuantity);
+            AnimateTextChange(targetMoneyCount, _earnedMoney);
+
+            while (!_textChanged)
+            {
+                await UniTask.Yield();
+            }
+            
+            ShowUpContinueButton();
+        }
+
         private void ShowUpContinueButton()
         {
             var rectTransform = _continueButton.GetComponent<RectTransform>();
-            
+
             AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth + 100, 0.5f, () =>
             {
-                AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth, 0.5f);
+                AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth, 0.3f);
                 _continueText.enabled = true;
                 _continueButton.interactable = true;
             });
 
-            AnimateSizeDelta(rectTransform, _buttonHeight + 100, _buttonWidth,.5f, () =>
-            {
-                AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth, 0.5f);
-            });
+            AnimateSizeDelta(rectTransform, _buttonHeight + 100, _buttonWidth, .5f,
+                () => { AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth, 0.3f); });
         }
-        
-        private void AnimateSizeDelta(RectTransform rectTransform, float targetHeight, float targetWidth, float duration, TweenCallback onComplete = null)
+
+        private void AnimateSizeDelta(RectTransform rectTransform, float targetHeight, float targetWidth,
+            float duration, TweenCallback onComplete = null)
         {
-            DOTween.To(() => rectTransform.sizeDelta, size =>
-                {
-                    rectTransform.sizeDelta = size;
-                }, new Vector2(targetWidth, targetHeight), duration)
+            DOTween.To(() => rectTransform.sizeDelta, size => { rectTransform.sizeDelta = size; },
+                    new Vector2(targetWidth, targetHeight), duration)
                 .OnComplete(onComplete);
         }
-        
+
         private void AnimateTextChange(int targetValue, TMP_Text textField)
         {
             int startValue = 0;
@@ -68,7 +75,11 @@ namespace CodeBase.UI.Windows.Victory
 
             DOTween
                 .To(() => textField.fontSize, x => textField.fontSize = x, 65, 2f)
-                .OnComplete(() => DOTween.To(() => textField.fontSize, x => textField.fontSize = x, 45, 1f));
+                .OnComplete(() =>
+                {
+                    DOTween.To(() => textField.fontSize, x => textField.fontSize = x, 45, 1f)
+                        .OnComplete(() => _textChanged = true);
+                });
         }
     }
 }

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17bd342e70d4790a6ca43df1f16dde9, type: 3}
   m_Name: Hammer
   m_EditorClassIdentifier: 
-  MovementDuration: 0.3
-  RotateDuration: 0.3
+  Speed: 50
+  RotationSpeed: 35
   Damage: 34
   Count: 30
-  BulletTypeId: 6
   WeaponTypeId: 7
   Prefab: {fileID: 623147260764886827, guid: 69a1de28fb3f28e48be7424d78eeddaa, type: 3}
+  HitEffect: {fileID: 0}
+  StartEffect: {fileID: 0}

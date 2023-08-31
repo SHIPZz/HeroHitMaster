@@ -7,7 +7,7 @@ namespace CodeBase.ScriptableObjects.Bullet
     public class BulletData : ScriptableObject
     {
         [Range(10f, 100)] public float Speed;
-        [Range(10f, 100)] public float RotationSpeed;
+        [Range(0f, 100)] public float RotationSpeed;
         
         [Range(20, 1000)] public int Damage;
         

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17bd342e70d4790a6ca43df1f16dde9, type: 3}
   m_Name: IceCream
   m_EditorClassIdentifier: 
-  MovementDuration: 0.3
-  RotateDuration: 0.3
+  Speed: 50
+  RotationSpeed: 35
   Damage: 34
   Count: 30
-  BulletTypeId: 7
   WeaponTypeId: 5
   Prefab: {fileID: 6468367542067036611, guid: d7ce1385181f59a429ffab4a449b678f, type: 3}
+  HitEffect: {fileID: 0}
+  StartEffect: {fileID: 0}

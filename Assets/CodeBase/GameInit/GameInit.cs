@@ -93,7 +93,7 @@ namespace CodeBase.GameInit
             Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
-            InitializeInitialWeapon(WeaponTypeId.OrangeWeapon);
+            InitializeInitialWeapon(WeaponTypeId.GreenWeapon);
             _playerProvider.Set(player);
         }
 

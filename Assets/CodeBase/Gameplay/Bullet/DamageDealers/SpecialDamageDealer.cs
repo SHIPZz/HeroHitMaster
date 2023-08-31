@@ -26,6 +26,12 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
                 this.SetActive(gameObject, false, 0.1f);
             }
 
+            if (other.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
+            {
+                enemyPartForKnifeHolder.MaterialChanger.Change(_material);
+                this.SetActive(gameObject, false, 0.1f);
+            }
+
             if (!other.gameObject.TryGetComponent(out IDamageable damageable))
                 return;
 

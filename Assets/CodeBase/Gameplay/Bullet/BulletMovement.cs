@@ -14,20 +14,24 @@ namespace CodeBase.Gameplay.Bullet
         protected Rigidbody RigidBody;
         protected Bullet Bullet;
 
-        private BulletStaticDataService _bulletStaticDataService;
+        protected BulletStaticDataService BulletStaticDataService;
         protected TriggerObserver TriggerObserver;
         protected Vector3 MoveDirection;
+        protected float RotateSpeed;
+        protected float MoveSpeed;
         protected bool IsHit;
 
         [Inject]
-        public void Construct(BulletStaticDataService bulletStaticDataService) =>
-            _bulletStaticDataService = bulletStaticDataService;
+        public void Construct(BulletStaticDataService bulletStaticDataService) => 
+            BulletStaticDataService = bulletStaticDataService;
 
         protected virtual void Awake()
         {
             RigidBody = GetComponent<Rigidbody>();
             Bullet = GetComponent<Bullet>();
             TriggerObserver = GetComponent<TriggerObserver>();
+            RotateSpeed = BulletStaticDataService.GetBy(Bullet.WeaponTypeId).RotationSpeed;
+            MoveSpeed = BulletStaticDataService.GetBy(Bullet.WeaponTypeId).Speed;
             RigidBody.isKinematic = false;
         }
 
@@ -49,9 +53,9 @@ namespace CodeBase.Gameplay.Bullet
             }
 
             if (!_blockRotation)
-                RigidBody.angularVelocity = transform.right * 50;
+                RigidBody.angularVelocity = transform.right * RotateSpeed;
 
-            RigidBody.velocity = MoveDirection * 35;
+            RigidBody.velocity = MoveDirection * MoveSpeed;
         }
 
         private void OnDisable()
@@ -72,6 +76,7 @@ namespace CodeBase.Gameplay.Bullet
 
         public virtual void Move(Vector3 target, Vector3 startPosition)
         {
+            transform.localPosition = startPosition;
             MoveDirection = target - startPosition;
             MoveDirection.Normalize();
         }

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17bd342e70d4790a6ca43df1f16dde9, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  MovementDuration: 0.3
-  RotateDuration: 0.3
+  Speed: 50
+  RotationSpeed: 35
   Damage: 34
   Count: 30
-  BulletTypeId: 5
   WeaponTypeId: 4
   Prefab: {fileID: 6412643211829885466, guid: a8bb243bbe709c544adb056ca594207b, type: 3}
+  HitEffect: {fileID: 0}
+  StartEffect: {fileID: 0}

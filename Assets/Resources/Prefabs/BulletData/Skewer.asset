@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17bd342e70d4790a6ca43df1f16dde9, type: 3}
   m_Name: Skewer
   m_EditorClassIdentifier: 
-  MovementDuration: 0.3
-  RotateDuration: 0.3
+  Speed: 50
+  RotationSpeed: 35
   Damage: 34
   Count: 30
-  BulletTypeId: 11
   WeaponTypeId: 14
   Prefab: {fileID: 4622972933630597093, guid: c9ac1554d8b2dcc40acb79a1824f017c, type: 3}
   HitEffect: {fileID: 0}
