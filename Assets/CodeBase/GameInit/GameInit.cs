@@ -4,12 +4,14 @@ using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Infrastructure;
+using CodeBase.Services;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Slowmotion;
 using CodeBase.Services.Storages.Character;
+using CodeBase.UI.LevelSlider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
@@ -31,12 +33,12 @@ namespace CodeBase.GameInit
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly WalletPresenter _walletPresenter;
         private readonly ISaveSystem _saveSystem;
-        private ShopWeaponPresenter _shopWeaponPresenter;
+        private readonly ShopWeaponPresenter _shopWeaponPresenter;
         private readonly List<EnemySpawner> _enemySpawners;
         private readonly EnemyConfigurator _enemyConfigurator = new();
-        private SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
-        private Canvas _mainUi;
-        private VictoryInfoPresenter _victoryInfoPresenter;
+        private readonly CountEnemiesOnDeath _countEnemiesOnDeath;
+        private readonly SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
+        private LevelSliderPresenter _levelSliderPresenter;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -49,10 +51,11 @@ namespace CodeBase.GameInit
             ISaveSystem saveSystem, 
             ShopWeaponPresenter shopWeaponPresenter,
             IProvider<List<EnemySpawner>> enemySpawnersProvider, 
-            SlowMotionOnEnemyDeath slowMotionOnEnemyDeath, Canvas mainUi, VictoryInfoPresenter victoryInfoPresenter)
+            SlowMotionOnEnemyDeath slowMotionOnEnemyDeath,
+            CountEnemiesOnDeath countEnemiesOnDeath, LevelSliderPresenter levelSliderPresenter)
         {
-            _victoryInfoPresenter = victoryInfoPresenter;
-            _mainUi = mainUi;
+            _levelSliderPresenter = levelSliderPresenter;
+            _countEnemiesOnDeath = countEnemiesOnDeath;
             _slowMotionOnEnemyDeath = slowMotionOnEnemyDeath;
             _enemySpawners = enemySpawnersProvider.Get();
             _shopWeaponPresenter = shopWeaponPresenter;
@@ -75,9 +78,9 @@ namespace CodeBase.GameInit
             {
                 _enemyConfigurator.Configure(enemy,aggrozne);
                 _slowMotionOnEnemyDeath.Init(enemy);
+                _countEnemiesOnDeath.Init(enemy);
+                _levelSliderPresenter.Init(enemy);
             }));
-            
-            _victoryInfoPresenter.Init(_enemySpawners);
             
             PlayerPrefs.DeleteAll();
             var playerData = await _saveSystem.Load<PlayerData>();

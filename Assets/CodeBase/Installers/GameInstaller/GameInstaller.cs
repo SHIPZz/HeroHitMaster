@@ -6,6 +6,7 @@ using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.Services;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
@@ -71,7 +72,12 @@ namespace CodeBase.Installers.GameInstaller
             BindEffectProvider();
             BindObjectPartFactory();
             BindEnemyPartFactory();
+            BindCountEnemiesOnDeath();
         }
+
+        private void BindCountEnemiesOnDeath() =>
+            Container.BindInterfacesAndSelfTo<CountEnemiesOnDeath>()
+                .AsSingle();
 
         private void BindEnemyPartFactory() => 
             BindAsSingle<EnemyPartFactory>();

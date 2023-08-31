@@ -2,7 +2,6 @@
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.MaterialChanger;
 using UnityEngine;
 using UnityEngine.AI;

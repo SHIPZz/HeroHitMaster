@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Spawners;
+using CodeBase.Services;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using UnityEngine;
@@ -15,13 +16,16 @@ namespace CodeBase.UI.Windows.Victory
         private readonly Window _victoryWindow;
         private readonly WindowService _windowService;
         private readonly SaveTriggerOnLevelEnd _saveTriggerOnLevel;
+        private readonly CountEnemiesOnDeath _countEnemiesOnDeath;
         
         private int _deadEnemiesCount;
         private List<EnemySpawner> _enemySpawners;
 
         public VictoryInfoPresenter(VictoryInvoView victoryInvoView, 
-            WindowProvider windowProvider, WindowService windowService, SaveTriggerOnLevelEnd saveTriggerOnLevel)
+            WindowProvider windowProvider, WindowService windowService, 
+            SaveTriggerOnLevelEnd saveTriggerOnLevel, CountEnemiesOnDeath countEnemiesOnDeath)
         {
+            _countEnemiesOnDeath = countEnemiesOnDeath;
             _victoryInvoView = victoryInvoView;
             _windowService = windowService;
             _saveTriggerOnLevel = saveTriggerOnLevel;
@@ -36,15 +40,8 @@ namespace CodeBase.UI.Windows.Victory
 
         public void Dispose()
         {
-            _enemySpawners.ForEach(x => x.Destroyed -= CountDeadEnemies);
             _saveTriggerOnLevel.PlayerEntered -= OpenVictoryWindow;
             _victoryWindow.StartedToOpen -= FillVictoryInfo;
-        }
-
-        public void Init(List<EnemySpawner> enemySpawners)
-        {
-            _enemySpawners = enemySpawners;
-            _enemySpawners.ForEach(x => x.Destroyed += CountDeadEnemies);
         }
 
         private void OpenVictoryWindow()
@@ -55,12 +52,7 @@ namespace CodeBase.UI.Windows.Victory
 
         private void FillVictoryInfo()
         {
-            _victoryInvoView.Show(_deadEnemiesCount, 100);
-        }
-
-        private void CountDeadEnemies()
-        {
-            _deadEnemiesCount++;
+            _victoryInvoView.Show(_countEnemiesOnDeath.Quantity, 100);
         }
     }
 }

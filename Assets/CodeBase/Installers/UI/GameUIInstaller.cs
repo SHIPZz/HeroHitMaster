@@ -1,6 +1,7 @@
 ﻿using CodeBase.Gameplay.Character.PlayerSelection;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
+using CodeBase.UI.LevelSlider;
 using CodeBase.UI.ShopScrollRects;
 using CodeBase.UI.ShopScrollRects.ShopScrollUnderlines;
 using CodeBase.UI.Wallet;
@@ -37,6 +38,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private WeaponSelectorViewsProvider _weaponSelectorViewsProvider;
         [SerializeField] private Canvas _mainUI;
         [SerializeField] private VictoryInvoView _victoryInvoView;
+        [SerializeField] private LevelSliderView _levelSliderView;
 
         public override void InstallBindings()
         {
@@ -57,6 +59,13 @@ namespace CodeBase.Installers.UI
             BindWeaponSelectorViewsProvider();
             BindMainUI();
             BindVictoryUI();
+            BindLevelSliderUI();
+        }
+
+        private void BindLevelSliderUI()
+        {
+            Container.BindInstance(_levelSliderView);
+            Container.BindInterfacesAndSelfTo<LevelSliderPresenter>().AsSingle();
         }
 
         private void BindVictoryUI()
@@ -65,7 +74,7 @@ namespace CodeBase.Installers.UI
             Container.BindInterfacesAndSelfTo<VictoryInfoPresenter>().AsSingle();
         }
 
-        private void BindMainUI() => 
+        private void BindMainUI() =>
             Container.BindInstance(_mainUI);
 
         private void BindWeaponSelectorViewsProvider()
