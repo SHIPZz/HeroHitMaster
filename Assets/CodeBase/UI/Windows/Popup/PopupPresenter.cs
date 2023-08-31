@@ -1,26 +1,25 @@
-﻿using CodeBase.Enums;
+﻿using System;
+using CodeBase.Enums;
+using CodeBase.Services.Ad;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Popup
 {
-    public class PopupPresenter : MonoBehaviour
+    public class PopupPresenter : IInitializable, IDisposable
     {
-        [SerializeField] private Button _adButton;
-        [SerializeField] private PopupInfoView _popupInfoView;
+         private PopupInfoView _popupInfoView;
         
-        private WindowService _windowService;
+        private readonly WindowService _windowService;
+        private IAdService _adService;
 
-        [Inject]
-        private void Construct(WindowService windowService) => 
+        public PopupPresenter(WindowService windowService, PopupInfoView popupInfoView, IAdService adService)
+        {
+            _adService = adService;
+            _popupInfoView = popupInfoView;
             _windowService = windowService;
-
-        private void OnEnable() => 
-            _adButton.onClick.AddListener(ShowAd);
-
-        private void OnDisable() => 
-            _adButton.onClick.RemoveListener(ShowAd);
+        }
 
         public void Init()
         {
@@ -28,7 +27,20 @@ namespace CodeBase.UI.Windows.Popup
             _windowService.Open(WindowTypeId.Popup);
         }
 
-        private void ShowAd() => 
-            _popupInfoView.Show();
+        public void Initialize()
+        {
+            _popupInfoView.AdButtonClicked += ShowAd;
+        }
+
+        public void Dispose()
+        {
+            _popupInfoView.AdButtonClicked -= ShowAd;
+        }
+
+        private void ShowAd()
+        {
+            // _adService.PlayLongAd();
+            // _popupInfoView.Show();
+        }
     }
 }

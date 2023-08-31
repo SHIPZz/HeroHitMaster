@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows.Victory
 {
@@ -9,11 +10,16 @@ namespace CodeBase.UI.Windows.Victory
     {
         [SerializeField] private TextMeshProUGUI _deadEnemyQuantity;
         [SerializeField] private TextMeshProUGUI _earnedMoney;
+        [SerializeField] private Button _continueButton;
+        [SerializeField] private float _buttonWidth = 430;
+        [SerializeField] private float _buttonHeight = 150;
+        [SerializeField] private TMP_Text _continueText;
 
         private void Awake()
         {
             _deadEnemyQuantity.text = "";
             _earnedMoney.text = "";
+            // _continueButton.interactable = false;
         }
 
         public void Show(int targetEnemyCount, int targetMoneyCount)
@@ -22,6 +28,33 @@ namespace CodeBase.UI.Windows.Victory
             AnimateTextChange(targetMoneyCount, _earnedMoney);
         }
 
+        [Button]
+        private void ShowUpContinueButton()
+        {
+            var rectTransform = _continueButton.GetComponent<RectTransform>();
+            
+            AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth + 100, 0.5f, () =>
+            {
+                AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth, 0.5f);
+                _continueText.enabled = true;
+                _continueButton.interactable = true;
+            });
+
+            AnimateSizeDelta(rectTransform, _buttonHeight + 100, _buttonWidth,.5f, () =>
+            {
+                AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth, 0.5f);
+            });
+        }
+        
+        private void AnimateSizeDelta(RectTransform rectTransform, float targetHeight, float targetWidth, float duration, TweenCallback onComplete = null)
+        {
+            DOTween.To(() => rectTransform.sizeDelta, size =>
+                {
+                    rectTransform.sizeDelta = size;
+                }, new Vector2(targetWidth, targetHeight), duration)
+                .OnComplete(onComplete);
+        }
+        
         private void AnimateTextChange(int targetValue, TMP_Text textField)
         {
             int startValue = 0;

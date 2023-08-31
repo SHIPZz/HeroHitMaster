@@ -48,7 +48,7 @@ namespace CodeBase.UI.Windows.Death
         private void DisableDeathWindowWithAd()
         {
             DisableDeathWindow();
-            _adService.PlayLongAd();
+            // _adService.PlayLongAd();
         }
 
         private void ShowDeathWindow()

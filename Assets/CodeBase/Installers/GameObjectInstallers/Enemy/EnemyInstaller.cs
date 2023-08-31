@@ -28,7 +28,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.Bind<IMaterialChanger>().To<SkinnedMaterialChanger>()
                 .FromComponentOn(gameObject).AsSingle();
             Container
-                .BindInterfacesAndSelfTo<ActivateEnemyMovementOnFire>()
+                .BindInterfacesAndSelfTo<ActivateEnemyMovementOnShoot>()
                 .AsSingle();
 
             Container

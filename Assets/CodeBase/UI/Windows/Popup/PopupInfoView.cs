@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.UI.Weapons;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -20,6 +21,8 @@ namespace CodeBase.UI.Windows.Popup
         [OdinSerialize] private Dictionary<WeaponTypeId, Image> _whiteFrames;
         [SerializeField] private TextMeshProUGUI _mainWeaponText;
         [SerializeField] private Color _color;
+        [SerializeField] private int _chooseCycle;
+        [SerializeField] private Button _adButton;
 
         private Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIcons;
         private AudioSource _lastWeaponSelectedSound;
@@ -31,8 +34,11 @@ namespace CodeBase.UI.Windows.Popup
         private List<ParticleSystem> _selectedWeaponEffects;
         private Coroutine _chooseRandomWeaponcoroutine;
 
+        public event Action AdButtonClicked;
+
         [Inject]
-        private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage, EffectsProvider effectsProvider)
+        private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage,
+            EffectsProvider effectsProvider)
         {
             _lastWeaponSelectedSound = soundStorage.Get(SoundTypeId.SelectedWeapon);
             _chooseWeaponSound = soundStorage.Get(SoundTypeId.ChooseWeapon);
@@ -45,7 +51,7 @@ namespace CodeBase.UI.Windows.Popup
             DisableAllGunIcons();
 
             DisableAllWhiteFrames();
-            
+
             _mainWeaponText
                 .DOColor(new Color(_color.r, _color.g, _color.b, _mainWeaponText.color.a), 0.5f)
                 .SetLoops(-1, LoopType.Yoyo);
@@ -53,20 +59,22 @@ namespace CodeBase.UI.Windows.Popup
 
         private void OnEnable()
         {
+            _adButton.onClick.AddListener(OnAdClicked);
+            
             List<WeaponSelectorView> randomIcons = GetRandomWeaponIcons(3);
-
-            foreach (var icon in randomIcons)
-            {
-                icon.gameObject.SetActive(true);
-            }
+            EnableRandomIcons(randomIcons);
         }
 
-        public void Show()
+        private void OnDisable() =>
+            _adButton.onClick.RemoveListener(OnAdClicked);
+
+        private void OnAdClicked() =>
+            AdButtonClicked?.Invoke();
+
+        [Button]
+        public async void Show()
         {
-            if(_chooseRandomWeaponcoroutine != null)
-                StopCoroutine(_chooseRandomWeaponcoroutine);
-                
-            _chooseRandomWeaponcoroutine = StartCoroutine(StartChooseRandomWeapon());
+            await StartChooseRandomWeapon();
         }
 
         private void DisableAllWhiteFrames()
@@ -81,6 +89,14 @@ namespace CodeBase.UI.Windows.Popup
             }
         }
 
+        private void EnableRandomIcons(List<WeaponSelectorView> randomIcons)
+        {
+            foreach (var icon in randomIcons)
+            {
+                icon.gameObject.SetActive(true);
+            }
+        }
+
         private void DisableAllGunIcons()
         {
             foreach (var weaponSelector in _weaponIcons.Values)
@@ -89,27 +105,27 @@ namespace CodeBase.UI.Windows.Popup
             }
         }
 
-        private IEnumerator StartChooseRandomWeapon()
+        private async UniTask StartChooseRandomWeapon()
         {
-            for (int i = 0; i < _randomIcons.Count; i++)
+            for (int i = 0; i < _chooseCycle; i++)
             {
-                WeaponSelectorView currentWeaponView = GetRandomWeaponView();
+                WeaponSelectorView currentWeaponView = await GetRandomWeaponView();
 
                 if (_lastWeaponSelectorView is not null &&
                     _lastWeaponSelectorView.WeaponTypeId == currentWeaponView.WeaponTypeId)
                 {
-                    currentWeaponView = GetRandomWeaponView();
+                    currentWeaponView = await GetRandomWeaponView();
                 }
 
                 _lastWeaponSelectorView = currentWeaponView;
 
-                if (i == _randomIcons.Count - 1)
+                if (i == _chooseCycle - 1)
                 {
                     _lastWeaponSelectedSound.Play();
 
                     var randomParticleId = Random.Range(0, _selectedWeaponEffects.Count - 1);
                     ParticleSystem targetParticle = _selectedWeaponEffects[randomParticleId];
-                    
+
                     targetParticle.transform.position = _lastWeaponSelectorView.transform.position;
                     targetParticle.Play();
                 }
@@ -118,16 +134,25 @@ namespace CodeBase.UI.Windows.Popup
                     _chooseWeaponSound.Play();
                 }
 
-                yield return new WaitForSeconds(2f);
+                await UniTask.WaitForSeconds(1.5f);
             }
         }
 
-        private WeaponSelectorView GetRandomWeaponView()
+        private async UniTask<WeaponSelectorView> GetRandomWeaponView()
         {
+            var lastFrameChanged = false;
+
             if (_lastFrame is not null)
             {
                 Color currentCollor = new Color(_lastFrame.color.r, _lastFrame.color.g, _lastFrame.color.b, 0f);
-                _lastFrame.DOColor(currentCollor, 0.5f);
+                _lastFrame.DOColor(currentCollor, 0.5f).OnComplete(() => lastFrameChanged = true);
+
+                while (lastFrameChanged != true)
+                {
+                    await UniTask.Yield();
+                }
+
+                lastFrameChanged = false;
             }
 
             int randomWeaponId = Random.Range(0, _randomIcons.Count);
@@ -135,7 +160,7 @@ namespace CodeBase.UI.Windows.Popup
             WeaponSelectorView weaponSelectorView = _randomIcons[randomWeaponId];
 
             SetFrameAlpha(weaponSelectorView);
-            
+
             return weaponSelectorView;
         }
 

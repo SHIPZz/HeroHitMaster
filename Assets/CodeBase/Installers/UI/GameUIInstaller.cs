@@ -12,6 +12,7 @@ using CodeBase.UI.Windows.Audio;
 using CodeBase.UI.Windows.Buy;
 using CodeBase.UI.Windows.Death;
 using CodeBase.UI.Windows.Play;
+using CodeBase.UI.Windows.Popup;
 using CodeBase.UI.Windows.Setting;
 using CodeBase.UI.Windows.Shop;
 using CodeBase.UI.Windows.Victory;
@@ -39,6 +40,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private Canvas _mainUI;
         [SerializeField] private VictoryInvoView _victoryInvoView;
         [SerializeField] private LevelSliderView _levelSliderView;
+        [SerializeField] private PopupInfoView _popupInfoView;
 
         public override void InstallBindings()
         {
@@ -60,6 +62,13 @@ namespace CodeBase.Installers.UI
             BindMainUI();
             BindVictoryUI();
             BindLevelSliderUI();
+            BindPopupUI();
+        }
+
+        private void BindPopupUI()
+        {
+            Container.BindInstance(_popupInfoView);
+            Container.BindInterfacesAndSelfTo<PopupPresenter>().AsSingle();
         }
 
         private void BindLevelSliderUI()

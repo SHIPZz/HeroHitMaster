@@ -22,13 +22,13 @@ namespace CodeBase.UI.Windows.Play
 
         public void Initialize()
         {
-            _inputService.PlayerFire.performed += Disable;
+            // _inputService.PlayerFire.performed += Disable;
             _loadingCurtain.Closed += Enable;
         }
 
         public void Dispose()
         {
-            _inputService.PlayerFire.performed -= Disable;
+            // _inputService.PlayerFire.performed -= Disable;
             _loadingCurtain.Closed -= Enable;
         }
 
