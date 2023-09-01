@@ -5,6 +5,7 @@ using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Spawners;
+using CodeBase.Gameplay.WaterSplash;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services;
 using CodeBase.Services.CheckOut;
@@ -73,7 +74,17 @@ namespace CodeBase.Installers.GameInstaller
             BindObjectPartFactory();
             BindEnemyPartFactory();
             BindCountEnemiesOnDeath();
+            BindWaterSplashPoolInitializer();
+            BindEffectsPoolProvider();
         }
+
+        private void BindEffectsPoolProvider() => 
+            Container
+                .BindInterfacesTo<EffectsPoolProvider>()
+                .AsSingle();
+
+        private void BindWaterSplashPoolInitializer() => 
+            BindAsSingle<WaterSplashPoolInitializer>();
 
         private void BindCountEnemiesOnDeath() =>
             Container.BindInterfacesAndSelfTo<CountEnemiesOnDeath>()

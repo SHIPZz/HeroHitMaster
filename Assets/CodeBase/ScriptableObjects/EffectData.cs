@@ -1,7 +1,7 @@
 ﻿using CodeBase.Enums;
 using UnityEngine;
 
-namespace CodeBase.Services.Storages.Effect
+namespace CodeBase.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "EffectData", menuName = "Gameplay/EffectData")]
     public class EffectData : ScriptableObject

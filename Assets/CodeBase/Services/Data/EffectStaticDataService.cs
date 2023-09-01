@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Enums;
+using CodeBase.ScriptableObjects;
 using CodeBase.Services.Storages.Effect;
 using UnityEngine;
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enums;
+using CodeBase.ScriptableObjects;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using UnityEngine;
@@ -8,8 +9,8 @@ namespace CodeBase.Services.Storages.Effect
 {
     public class EffectStorage : IEffectStorage
     {
-        private IEffectFactory _effectFactory;
-        private EffectStaticDataService _effectStaticDataService;
+        private readonly IEffectFactory _effectFactory;
+        private readonly EffectStaticDataService _effectStaticDataService;
         private Dictionary<ParticleTypeId, ParticleSystem> _effects = new();
 
         public EffectStorage(IEffectFactory effectFactory, EffectStaticDataService effectStaticDataService)
@@ -24,7 +25,7 @@ namespace CodeBase.Services.Storages.Effect
 
         private void FillDictionary()
         {
-            foreach (var effectData in _effectStaticDataService.GetAll().Values)
+            foreach (EffectData effectData in _effectStaticDataService.GetAll().Values)
             {
                 ParticleSystem targetEffect = _effectFactory.Create(effectData.ParticleSystem);
                 ParticleSystem.MainModule targetEffectMain = targetEffect.main;

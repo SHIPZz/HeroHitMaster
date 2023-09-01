@@ -3,6 +3,7 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Spawners;
+using CodeBase.Gameplay.WaterSplash;
 using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.Factories;
@@ -15,7 +16,6 @@ using CodeBase.UI.LevelSlider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
-using CodeBase.UI.Windows.Victory;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
@@ -38,7 +38,8 @@ namespace CodeBase.GameInit
         private readonly EnemyConfigurator _enemyConfigurator = new();
         private readonly CountEnemiesOnDeath _countEnemiesOnDeath;
         private readonly SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
-        private LevelSliderPresenter _levelSliderPresenter;
+        private readonly LevelSliderPresenter _levelSliderPresenter;
+        private readonly WaterSplashPoolInitializer _waterSplashPoolInitializer;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -52,8 +53,10 @@ namespace CodeBase.GameInit
             ShopWeaponPresenter shopWeaponPresenter,
             IProvider<List<EnemySpawner>> enemySpawnersProvider, 
             SlowMotionOnEnemyDeath slowMotionOnEnemyDeath,
-            CountEnemiesOnDeath countEnemiesOnDeath, LevelSliderPresenter levelSliderPresenter)
+            CountEnemiesOnDeath countEnemiesOnDeath, 
+            LevelSliderPresenter levelSliderPresenter, WaterSplashPoolInitializer waterSplashPoolInitializer)
         {
+            _waterSplashPoolInitializer = waterSplashPoolInitializer;
             _levelSliderPresenter = levelSliderPresenter;
             _countEnemiesOnDeath = countEnemiesOnDeath;
             _slowMotionOnEnemyDeath = slowMotionOnEnemyDeath;
@@ -90,10 +93,11 @@ namespace CodeBase.GameInit
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowMaceShooter);
             
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Player player = InitializeInitialPlayer(PlayerTypeId.Batman);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
-            InitializeInitialWeapon(WeaponTypeId.GreenWeapon);
+            InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
+            _waterSplashPoolInitializer.Init();
             _playerProvider.Set(player);
         }
 

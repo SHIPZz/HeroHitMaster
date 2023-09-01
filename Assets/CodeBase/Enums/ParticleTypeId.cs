@@ -9,6 +9,7 @@
         ConfettiBlastOrangePurple,
         ConfettiBlastRed,
         ConfettiBlastBlue,
-        ConfettiBlastOrangeGreen
+        ConfettiBlastOrangeGreen,
+        WaterSplash
     }
 }
