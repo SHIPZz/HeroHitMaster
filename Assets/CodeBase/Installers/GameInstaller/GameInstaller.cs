@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CodeBase.Gameplay.BlockInput;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.EnemyBodyParts;
@@ -76,7 +77,11 @@ namespace CodeBase.Installers.GameInstaller
             BindCountEnemiesOnDeath();
             BindWaterSplashPoolInitializer();
             BindEffectsPoolProvider();
+            BindCamerShake();
         }
+
+        private void BindCamerShake() => 
+        BindAsSingle<CameraShakeMediator>();
 
         private void BindEffectsPoolProvider() => 
             Container
@@ -219,8 +224,7 @@ namespace CodeBase.Installers.GameInstaller
             BindAsSingle<BulletStorage>();
 
         private void BindWeaponsProvider() =>
-            Container.Bind<IProvider<Weapon>>()
-                .To<WeaponProvider>()
+            Container.BindInterfacesTo<WeaponProvider>()
                 .AsSingle();
 
         private void BindGameObjectPoolProvider() =>

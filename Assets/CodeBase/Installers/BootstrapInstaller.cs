@@ -3,6 +3,7 @@ using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Inputs.InputService;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.SaveSystems;
 using Zenject;
@@ -22,7 +23,13 @@ namespace CodeBase.Installers
             BindStateFactory();
             BindSaveSystem();
             BindGlobalSlowMotionSystem();
+            BindPauseService();
         }
+
+        private void BindPauseService() =>
+            Container.Bind<IPauseService>()
+                .To<PauseService>()
+                .AsSingle();
 
         private void BindGlobalSlowMotionSystem() =>
             Container

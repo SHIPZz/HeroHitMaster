@@ -25,7 +25,6 @@ namespace CodeBase.UI.Windows.Victory
             _continueButton.interactable = false;
         }
 
-        [Button]
         public async void Show(int targetEnemyCount, int targetMoneyCount)
         {
             AnimateTextChange(targetEnemyCount, _deadEnemyQuantity);
@@ -59,7 +58,7 @@ namespace CodeBase.UI.Windows.Victory
         {
             DOTween.To(() => rectTransform.sizeDelta, size => { rectTransform.sizeDelta = size; },
                     new Vector2(targetWidth, targetHeight), duration)
-                .OnComplete(onComplete);
+                .OnComplete(onComplete).SetUpdate(true);
         }
 
         private void AnimateTextChange(int targetValue, TMP_Text textField)
@@ -71,15 +70,15 @@ namespace CodeBase.UI.Windows.Victory
             {
                 startValue = x;
                 textField.text = startValue.ToString();
-            }, targetValue, animationDuration);
+            }, targetValue, animationDuration).SetUpdate(true);
 
             DOTween
                 .To(() => textField.fontSize, x => textField.fontSize = x, 65, 2f)
                 .OnComplete(() =>
                 {
                     DOTween.To(() => textField.fontSize, x => textField.fontSize = x, 45, 1f)
-                        .OnComplete(() => _textChanged = true);
-                });
+                        .OnComplete(() => _textChanged = true).SetUpdate(true);
+                }).SetUpdate(true);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace CodeBase.Gameplay.EnemyBodyParts
         public void OnEnable()
         {
             _enemy.Dead += _enemyBodyPartPositionSetter.SetPosition;
+            _enemy.QuickDestroyed += _enemyBodyPartPositionSetter.SetPosition;
         }
     }
 }

@@ -2,6 +2,7 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Bullet;
 using CodeBase.Services.Storages.Bullet;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
@@ -15,14 +16,17 @@ namespace CodeBase.Gameplay.Weapons
         protected float ReturnBulletDelay = 15f;
         protected BulletStorage _bulletStorage;
 
+        public bool Initialized { get; private set; }
+        
         public event Action Shooted;
+
         
         [Inject]
         private void Construct(BulletStorage bulletStorage) => 
             _bulletStorage = bulletStorage;
 
-        public virtual void Initialize() => 
-            Init(WeaponTypeId);
+        public virtual async void Initialize() => 
+          await  Init(WeaponTypeId);
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
@@ -32,7 +36,11 @@ namespace CodeBase.Gameplay.Weapons
             Shooted?.Invoke();
         }
 
-        protected void Init(WeaponTypeId weaponTypeId) => 
-        _bulletStorage.CreateBulletsBy(weaponTypeId);
+        protected async UniTask Init(WeaponTypeId weaponTypeId)
+        {
+            await  _bulletStorage.CreateBulletsBy(weaponTypeId);
+
+            Initialized = true;
+        }
     }
 }

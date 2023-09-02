@@ -20,7 +20,7 @@ namespace CodeBase.UI.Windows
         public event Action Closed;
 
         private void Awake() => 
-            transform.DOScaleX(_startScaleX, _startDuration);
+            transform.DOScaleX(_startScaleX, _startDuration).SetUpdate(true);
 
         public void Open()
         {
@@ -29,7 +29,7 @@ namespace CodeBase.UI.Windows
             gameObject.SetActive(true);
             gameObject.transform
                 .DOScaleX(_targetScaleX, _targetOpenDuration)
-                .OnComplete(() => Opened?.Invoke()).SetAutoKill(true);
+                .OnComplete(() => Opened?.Invoke()).SetAutoKill(true).SetUpdate(true);
         }
 
         public void Close(bool withAnimation)
@@ -47,12 +47,13 @@ namespace CodeBase.UI.Windows
                     gameObject.SetActive(false);
                     Closed?.Invoke();
                 })
-                .SetAutoKill(true);
+                .SetAutoKill(true)
+                .SetUpdate(true);
         }
 
         private void CloseQuickly()
         {
-            transform.DOScaleX(0, 0);
+            transform.DOScaleX(0, 0).SetUpdate(true);
             gameObject.SetActive(false);
             Closed?.Invoke();
         }

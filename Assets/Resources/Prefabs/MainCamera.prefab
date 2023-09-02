@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 6279304875084251717}
   - component: {fileID: -6863357308175802227}
   - component: {fileID: 2691478020662548115}
-  - component: {fileID: -318251979285364068}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -145,44 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cd96aadc1746699885e7dc1e13a9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _perlinNoiseTimeScale: 15
-  _perlinNoise:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  _perlinNoiseTimeScale: 5
   _tension: 150
   _damping: 8
   _impulse: 250
---- !u!114 &-318251979285364068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8151089771358117672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c25494a59d74aacb7b8dc96c43a1b7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraShake: {fileID: 2691478020662548115}

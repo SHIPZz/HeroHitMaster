@@ -6,7 +6,7 @@ using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
-    public class Enemy : MonoBehaviour, IDestroyable
+    public class Enemy : MonoBehaviour, IExplodable
     {
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
 
@@ -24,10 +24,10 @@ namespace CodeBase.Gameplay.Character.Enemy
             Application.quitting -= DisableEvents;
         }
 
-        public void Destroy()
+        public void Explode()
         {
-            gameObject.SetActive(false);
             QuickDestroyed?.Invoke(this);
+            gameObject.SetActive(false);
         }
 
         private void DisableEvents()

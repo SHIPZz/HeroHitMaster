@@ -40,6 +40,7 @@ namespace CodeBase.GameInit
         private readonly SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
         private readonly LevelSliderPresenter _levelSliderPresenter;
         private readonly WaterSplashPoolInitializer _waterSplashPoolInitializer;
+        private CameraShakeMediator _cameraShakeMediator;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -54,8 +55,10 @@ namespace CodeBase.GameInit
             IProvider<List<EnemySpawner>> enemySpawnersProvider, 
             SlowMotionOnEnemyDeath slowMotionOnEnemyDeath,
             CountEnemiesOnDeath countEnemiesOnDeath, 
-            LevelSliderPresenter levelSliderPresenter, WaterSplashPoolInitializer waterSplashPoolInitializer)
+            LevelSliderPresenter levelSliderPresenter, 
+            WaterSplashPoolInitializer waterSplashPoolInitializer, CameraShakeMediator cameraShakeMediator)
         {
+            _cameraShakeMediator = cameraShakeMediator;
             _waterSplashPoolInitializer = waterSplashPoolInitializer;
             _levelSliderPresenter = levelSliderPresenter;
             _countEnemiesOnDeath = countEnemiesOnDeath;
@@ -96,8 +99,9 @@ namespace CodeBase.GameInit
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
-            InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
-            playerCameraFollower.GetComponent<CameraShakeMediator>().Init();
+            InitializeInitialWeapon(WeaponTypeId.ThrowingDynamiteShooter);
+            _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());
+            _cameraShakeMediator.Init();
             _waterSplashPoolInitializer.Init();
             _playerProvider.Set(player);
         }

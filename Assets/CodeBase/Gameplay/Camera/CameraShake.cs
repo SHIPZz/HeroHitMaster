@@ -1,6 +1,4 @@
-﻿using System;
-using DG.Tweening;
-using Sirenix.OdinInspector;
+﻿using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +7,6 @@ namespace CodeBase.Gameplay.Camera
     public class CameraShake : MonoBehaviour
     {
         [Header("Noise")] [SerializeField] private float _perlinNoiseTimeScale;
-        [SerializeField] private AnimationCurve _perlinNoise;
 
         [Header("Recoil")] [SerializeField] private float _tension = 10;
         [SerializeField] private float _damping = 10;
@@ -34,14 +31,9 @@ namespace CodeBase.Gameplay.Camera
 
         private void UpdateShake()
         {
-            // if (_shakeTimer > 0)
-            // {
-            //     _shakeTimer -= Time.deltaTime / _duration;
-            // }
-
             if (!_canShake)
             {
-                _shakeAngles = Vector3.Lerp(_shakeAngles, Vector3.zero, 10 * Time.deltaTime);
+                _shakeAngles = Vector3.Lerp(_shakeAngles, Vector3.zero, 3 * Time.deltaTime);
                 return;
             }
 
@@ -51,7 +43,6 @@ namespace CodeBase.Gameplay.Camera
             _shakeAngles.z = Mathf.PerlinNoise(time, time);
 
             _shakeAngles *= _amplitude;
-            // _shakeAngles *= _perlinNoise.Evaluate(Mathf.Clamp01(1 - _shakeTimer));
         }
 
         private void UpdateRecoil()
@@ -69,13 +60,6 @@ namespace CodeBase.Gameplay.Camera
 
         private void DisableShake() => 
         _canShake = false;
-
-        // public void MakeShake(float amplitude, float duration)
-        // {
-        //     _amplitude = amplitude;
-        //     _duration = Mathf.Max(duration, 0.05f);
-        //     _shakeTimer = _duration;
-        // }
 
         public void MakeRecoil()
         {

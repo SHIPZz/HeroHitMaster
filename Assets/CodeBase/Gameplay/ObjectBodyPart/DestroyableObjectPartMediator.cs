@@ -5,19 +5,19 @@ namespace CodeBase.Gameplay.ObjectBodyPart
     public class DestroyableObjectPartMediator : MonoBehaviour
     {
         [SerializeField] private DestroyableObjectBodyPartPositionSetter _destroyableObjectBodyPartPositionSetter;
-        [SerializeField] private DestroyableObject _destroyableObject;
+        [SerializeField] private DestroyableObject destroyableObject;
         
         private void OnEnable()
         {
-            _destroyableObject.Destroyed += Set;
+            destroyableObject.Destroyed += Set;
         }
 
         private void OnDisable()
         {
-            _destroyableObject.Destroyed -= Set;
+            destroyableObject.Destroyed -= Set;
         }
 
         private void Set(DestroyableObjectTypeId destroyableObjectTypeId) => 
-            _destroyableObjectBodyPartPositionSetter.Set(destroyableObjectTypeId, _destroyableObject);
+            _destroyableObjectBodyPartPositionSetter.Set(destroyableObjectTypeId, destroyableObject);
     }
 }

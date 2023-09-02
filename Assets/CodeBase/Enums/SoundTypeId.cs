@@ -29,6 +29,7 @@
         SelectedWeapon,
         GlassDestruction,
         River,
-        WaterSplash
+        WaterSplash,
+        Victory
     }
 }

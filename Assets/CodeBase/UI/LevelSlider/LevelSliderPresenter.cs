@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.MaterialChanger;
+using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
-using CodeBase.UI.Windows;
+using DG.Tweening;
 
 namespace CodeBase.UI.LevelSlider
 {
     public class LevelSliderPresenter :  IDisposable
     {
         private readonly LevelSliderView _levelSliderView;
-        private readonly Window _playWindow;
+        private readonly WeaponProvider _weaponProvider;
         private List<Enemy> _enemies = new();
         private bool _isBlocked;
+        private bool _isFilled;
+        private Weapon _weapon;
 
-        public LevelSliderPresenter(LevelSliderView levelSliderView, WindowProvider windowProvider)
+        public LevelSliderPresenter(LevelSliderView levelSliderView, IProvider<WeaponProvider> weaponProvider)
         {
             _levelSliderView = levelSliderView;
-            _playWindow = windowProvider.Windows[WindowTypeId.Play];
-            _playWindow.Closed += FillSlider;
+            _weaponProvider = weaponProvider.Get();
+            _weaponProvider.Changed += SetWeapon;
         }
 
         public void Init(Enemy enemy)
@@ -30,8 +32,9 @@ namespace CodeBase.UI.LevelSlider
             materialChanger.StartedChanged += DecreaseSlider;
             materialChanger.StartedChanged += BlockAnotherDecrease;
             _enemies.Add(enemy);
+            _levelSliderView.gameObject.SetActive(true);
             _levelSliderView.SetMaxValue(_enemies.Count);
-            _levelSliderView.gameObject.SetActive(false);
+            _levelSliderView.transform.DOScale(0,0);
         }
 
         public void Dispose()
@@ -42,12 +45,22 @@ namespace CodeBase.UI.LevelSlider
                 enemy.QuickDestroyed -= DecreaseSlider;
             }
             
-            _playWindow.Closed -= FillSlider;
+            _weapon.Shooted -= FillSlider;
+        }
+
+        private void SetWeapon(Weapon weapon)
+        {
+            _weapon = weapon;
+            _weapon.Shooted += FillSlider;
         }
 
         private void FillSlider()
         {
-            _levelSliderView.gameObject.SetActive(true);
+            if(_isFilled)
+                return;
+            
+            _isFilled = true;
+            _levelSliderView.transform.DOScale(1,0.3f);
             _levelSliderView.SetValue(_enemies.Count);
         }
 

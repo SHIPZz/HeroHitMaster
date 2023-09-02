@@ -18,7 +18,8 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
         {
             if (other.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
             {
-                enemyPartForKnifeHolder.Enemy.TakeDamage(Damage);
+                enemyPartForKnifeHolder.Enemy.Explode();
+                // enemyPartForKnifeHolder.Enemy.TakeDamage(Damage);
                 _collider.enabled = false;
             }
 

@@ -8,7 +8,7 @@ namespace CodeBase.Gameplay.Collision
 {
     public class PlayGlassDestructionSoundOnHit : MonoBehaviour
     {
-        [SerializeField] private DestroyableObject _destroyableObject;
+        [SerializeField] private DestroyableObject destroyableObject;
         
          private AudioSource _audioSource;
 
@@ -19,10 +19,10 @@ namespace CodeBase.Gameplay.Collision
         }
         
         private void OnEnable() => 
-            _destroyableObject.Destroyed += Play;
+            destroyableObject.Destroyed += Play;
 
         private void OnDisable() => 
-            _destroyableObject.Destroyed -= Play;
+            destroyableObject.Destroyed -= Play;
 
         private void Play(DestroyableObjectTypeId obj) =>
             _audioSource.Play();

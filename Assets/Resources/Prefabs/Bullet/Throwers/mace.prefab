@@ -98,8 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blockRotation: 0
   _bulletModelRotation: {x: 0, y: 95, z: 0}
   _knifeEnd: {fileID: 1444809066386456621}
+  _needSetParent: 0
 --- !u!114 &4193222363730860075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,8 +133,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.13954711, y: 0.23757601, z: 0.15376186}
-  m_Center: {x: 0.0016950369, y: -0.03302951, z: -0.00056040287}
+  m_Size: {x: 0.09208822, y: 0.2292831, z: 0.094519615}
+  m_Center: {x: 0.0020973682, y: -0.028883055, z: -0.002858758}
 --- !u!54 &7056609159934521193
 Rigidbody:
   m_ObjectHideFlags: 0

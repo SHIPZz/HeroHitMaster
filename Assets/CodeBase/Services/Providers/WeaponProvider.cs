@@ -1,15 +1,29 @@
-﻿using CodeBase.Gameplay.Weapons;
+﻿using System;
+using CodeBase.Gameplay.Weapons;
 
 namespace CodeBase.Services.Providers
 {
-    public class WeaponProvider : IProvider<Weapon>
+    public class WeaponProvider : IProvider<Weapon>, IProvider<WeaponProvider>
     {
         private Weapon _weapon;
+
+        public event Action<Weapon> Changed;
 
         public Weapon Get() => 
             _weapon;
 
-        public void Set(Weapon camera) => 
-            _weapon = camera;
+        WeaponProvider IProvider<WeaponProvider>.Get() => 
+        this;
+
+        public void Set(WeaponProvider t)
+        {
+            
+        }
+
+        public void Set(Weapon weapon)
+        {
+            _weapon = weapon;
+            Changed?.Invoke(_weapon);
+        }
     }
 }

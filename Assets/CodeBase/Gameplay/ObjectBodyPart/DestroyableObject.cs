@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.ObjectBodyPart
 {
-    public class DestroyableObject : MonoBehaviour, IDestroyable, IDamageable
+    public class DestroyableObject : MonoBehaviour, IExplodable, IDamageable
     {
         [field: SerializeField] public DestroyableObjectTypeId DestroyableObjectTypeId { get; private set; }
 
@@ -26,7 +26,7 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         private void BlockDestruction() =>
             _canDestroy = false;
 
-        public void Destroy()
+        public void Explode()
         {
             if(!_canDestroy)
                 return;

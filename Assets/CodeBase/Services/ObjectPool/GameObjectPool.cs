@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CodeBase.Services.ObjectPool
@@ -22,6 +23,9 @@ namespace CodeBase.Services.ObjectPool
 
             _count = count;
         }
+
+        public List<GameObject> GetAll() =>
+            _objects.ToList();
 
         public GameObject Pop()
         {
