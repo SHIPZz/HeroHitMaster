@@ -15,7 +15,7 @@ namespace CodeBase.Gameplay.Weapons
         protected float ReturnBulletDelay = 15f;
         protected BulletStorage _bulletStorage;
 
-        public event Action<Vector3, Vector3> Shooted;
+        public event Action Shooted;
         
         [Inject]
         private void Construct(BulletStorage bulletStorage) => 
@@ -29,7 +29,7 @@ namespace CodeBase.Gameplay.Weapons
             var bullet = _bulletStorage.Pop(WeaponTypeId);
             bullet.StartMovement(target, initialPosition);
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => _bulletStorage.Push(bullet));
-            Shooted?.Invoke(initialPosition, target);
+            Shooted?.Invoke();
         }
 
         protected void Init(WeaponTypeId weaponTypeId) => 

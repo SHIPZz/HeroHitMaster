@@ -97,6 +97,7 @@ namespace CodeBase.GameInit
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
             InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
+            playerCameraFollower.GetComponent<CameraShakeMediator>().Init();
             _waterSplashPoolInitializer.Init();
             _playerProvider.Set(player);
         }
