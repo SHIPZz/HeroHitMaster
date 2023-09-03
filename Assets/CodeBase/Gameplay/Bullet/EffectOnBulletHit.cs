@@ -1,4 +1,6 @@
-﻿using CodeBase.Gameplay.Collision;
+﻿using System.Collections.Generic;
+using CodeBase.Constants;
+using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Storages.Bullet;
 using DG.Tweening;
 using UnityEngine;
@@ -12,6 +14,14 @@ namespace CodeBase.Gameplay.Bullet
 
         private ParticleSystem _effect;
 
+        private readonly List<int> _layersToBlockEffect = new()
+        {
+            LayerId.Floor,
+            LayerId.HardCube,
+            LayerId.Wall,
+            LayerId.Water,
+        };
+
         [Inject]
         private void Construct(BulletEffectStorage bulletEffectStorage) => 
             _effect = bulletEffectStorage.Get(GetComponent<Bullet>().WeaponTypeId);
@@ -20,13 +30,16 @@ namespace CodeBase.Gameplay.Bullet
             _triggerObserver = GetComponent<TriggerObserver>();
 
         private void OnEnable() =>
-            _triggerObserver.Entered += Play;
+            _triggerObserver.CollisionEntered += Play;
 
         private void OnDisable() =>
-            _triggerObserver.Entered -= Play;
+            _triggerObserver.CollisionEntered -= Play;
 
-        private void Play(Collider obj)
+        private void Play(UnityEngine.Collision collision)
         {
+            if(_layersToBlockEffect.Contains(collision.gameObject.layer))
+                return;
+            
             _effect.transform.position = transform.position;
             _effect.Play();
             

@@ -20,7 +20,7 @@ namespace CodeBase.Gameplay.Spawners
         private bool _canDestroy = true;
 
         public event Action Destroyed;
-        public event Action<Enemy, TriggerObserver> Spawned;
+        public event Action<Enemy> Spawned;
 
         [Inject]
         private void Construct(EnemyFactory enemyFactory)
@@ -34,6 +34,7 @@ namespace CodeBase.Gameplay.Spawners
             enemy.gameObject.transform.position = transform.position;
             var materialChanger = enemy.GetComponent<IMaterialChanger>();
             Subscribe(enemy, materialChanger);
+            Spawned?.Invoke(enemy);
             callback?.Invoke(enemy, _aggroZone);
         }
 

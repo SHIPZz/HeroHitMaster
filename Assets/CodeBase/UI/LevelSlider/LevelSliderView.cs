@@ -15,46 +15,41 @@ namespace CodeBase.UI.LevelSlider
         [SerializeField] private float _fillDuration = 1f;
 
         private bool _isFilled;
-        private bool _changed = false;
-        private bool _isChanging;
-        private bool _isChangingValue;
-        private Coroutine _changeSliderCoroutine;
+        private bool _isChanging = false;
 
         public void SetMaxValue(int enemyCount) =>
             _slider.maxValue = enemyCount;
 
-        [Button]
         public async void Decrease(int value)
         {
+            while(_isChanging)
+                await UniTask.Yield();
+            
+            _isChanging = true;
+            
             while (!_isFilled)
             {
                 await UniTask.Yield();
             }
 
-            var targetValue = _slider.value - value;
+            float targetValue = _slider.value - value;
 
-            if (_changeSliderCoroutine != null)
-                StopCoroutine(_changeSliderCoroutine);
-
-            _changeSliderCoroutine = StartCoroutine(ChangeSliderValueCoroutine(targetValue));
+            await ChangeSliderValue(targetValue);
+            
+            _isChanging = false;
+            HideIfSliderNull(_slider.value);
         }
 
-        private IEnumerator ChangeSliderValueCoroutine(float targetValue)
+        private async UniTask ChangeSliderValue(float targetValue)
         {
             while (Mathf.Abs(_slider.value - targetValue) > 0.01)
             {
                 _slider.value = Mathf.Lerp(_slider.value, targetValue, 7 * Time.deltaTime);
 
-                yield return null;
+                await UniTask.DelayFrame(1);
             }
 
             _slider.value = targetValue;
-
-            if (_slider.value == 0)
-                transform
-                    .DOScaleX(0, 1f)
-                    .SetEase(Ease.InQuint)
-                    .OnComplete(() => gameObject.SetActive(false));
         }
 
         public void SetValue(int value) =>
@@ -68,6 +63,11 @@ namespace CodeBase.UI.LevelSlider
                 return;
 
             await UniTask.WaitForSeconds(0.5f);
+            
+            transform
+                .DOScaleX(0, 1f)
+                .SetEase(Ease.InQuint)
+                .OnComplete(() => gameObject.SetActive(false));
         }
     }
 }

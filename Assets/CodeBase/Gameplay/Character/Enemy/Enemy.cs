@@ -10,22 +10,30 @@ namespace CodeBase.Gameplay.Character.Enemy
     {
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
 
+        private bool _isExploded;
+        
         public event Action<Enemy> Dead;
         public event Action<Enemy> QuickDestroyed;
 
-        private void Awake()
-        {
+        private void Awake() => 
             Application.quitting += DisableEvents;
-        }
 
         private void OnDestroy()
         {
-            Dead?.Invoke(this);
             Application.quitting -= DisableEvents;
+            
+            if (_isExploded)
+                return;
+            
+            Dead?.Invoke(this);
         }
 
         public void Explode()
         {
+            if (_isExploded)
+                return;
+                
+            _isExploded = true;
             QuickDestroyed?.Invoke(this);
             gameObject.SetActive(false);
         }

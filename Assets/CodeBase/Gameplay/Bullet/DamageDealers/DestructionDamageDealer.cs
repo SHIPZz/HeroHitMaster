@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using CodeBase.Constants;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.ObjectBodyPart;
 using UnityEngine;
@@ -9,6 +11,14 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
     {
         public event Action Done;
 
+        private List<int> _layersToNotDisableObject = new()
+        {
+            LayerId.Floor,
+            LayerId.HardCube,
+            LayerId.Wall,
+            LayerId.Water,
+        };
+
         public override void DoDamage(UnityEngine.Collision other)
         {
             if (other.gameObject.TryGetComponent(out Animator animator))
@@ -18,21 +28,21 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
             {
                 enemyPartForKnifeHolder.Enemy.Explode();
                 Done?.Invoke();
-                gameObject.SetActive(false);
             }
 
             if (other.gameObject.TryGetComponent(out IExplodable destroyable))
             {
                 destroyable.Explode();
                 Done?.Invoke();
-                gameObject.SetActive(false);
             }
 
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage(Damage);
-                gameObject.SetActive(false);
             }
+
+            if (!_layersToNotDisableObject.Contains(other.gameObject.layer))
+                gameObject.SetActive(false);
         }
     }
 }

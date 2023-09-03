@@ -5,6 +5,7 @@ using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using DG.Tweening;
+using UnityEngine;
 
 namespace CodeBase.UI.LevelSlider
 {
@@ -16,6 +17,7 @@ namespace CodeBase.UI.LevelSlider
         private bool _isBlocked;
         private bool _isFilled;
         private Weapon _weapon;
+        private int _enemyCount;
 
         public LevelSliderPresenter(LevelSliderView levelSliderView, IProvider<WeaponProvider> weaponProvider)
         {
@@ -66,6 +68,8 @@ namespace CodeBase.UI.LevelSlider
 
         private void DecreaseSlider(Enemy obj)
         {
+            _enemyCount++;
+            
             if (_isBlocked)
                 return;
 

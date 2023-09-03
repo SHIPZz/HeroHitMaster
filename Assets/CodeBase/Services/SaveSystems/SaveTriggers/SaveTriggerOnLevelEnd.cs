@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Constants;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Pause;
 using UnityEditor;
@@ -15,13 +16,16 @@ namespace CodeBase.Services.SaveSystems
         public event Action PlayerEntered;
 
         [Inject]
-        private void Construct(IPauseService pauseService) => 
+        private void Construct(IPauseService pauseService) =>
             _pauseService = pauseService;
+
+        private void Awake() => 
+            gameObject.layer = LayerId.SaveTrigger;
 
         private void OnEnable() => 
             _triggerObserver.Entered += OnPlayerEntered;
 
-        private void OnDisable() => 
+        private void OnDisable() =>
             _triggerObserver.Entered -= OnPlayerEntered;
 
         private void OnPlayerEntered(Collider obj)
@@ -29,7 +33,7 @@ namespace CodeBase.Services.SaveSystems
             PlayerEntered?.Invoke();
             _pauseService.Pause();
         }
-        
+
         [DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NonSelected)]
         private void OnDrawGizmos()
         {

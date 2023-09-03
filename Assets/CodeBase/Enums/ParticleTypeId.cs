@@ -11,5 +11,6 @@
         ConfettiBlastBlue,
         ConfettiBlastOrangeGreen,
         WaterSplash,
+        BarrelExplosion,
     }
 }
