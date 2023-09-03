@@ -18,18 +18,21 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
             {
                 enemyPartForKnifeHolder.Enemy.Explode();
                 Done?.Invoke();
+                gameObject.SetActive(false);
             }
 
             if (other.gameObject.TryGetComponent(out IExplodable destroyable))
             {
                 destroyable.Explode();
                 Done?.Invoke();
+                gameObject.SetActive(false);
             }
 
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
+            {
                 damageable.TakeDamage(Damage);
-
-            // gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

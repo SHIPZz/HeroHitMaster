@@ -8,7 +8,7 @@ namespace CodeBase.Gameplay.Bullet
     {
         [SerializeField] private Vector3 _bulletModelRotation;
         [SerializeField] private Transform _knifeEnd;
-        [SerializeField] private bool _needSetParent;
+        [SerializeField] private bool _needSetParent = true;
         
         private ThrowingBullet _throwingBullet;
         private bool _blockedRotation;
@@ -28,6 +28,8 @@ namespace CodeBase.Gameplay.Bullet
 
         public override void Move(Vector3 target, Vector3 startPosition)
         {
+            transform.position = startPosition;
+            RigidBody.position = startPosition;
             MoveDirection = target - startPosition;
             MoveDirection.Normalize();
             transform.forward = MoveDirection;
@@ -43,7 +45,7 @@ namespace CodeBase.Gameplay.Bullet
             RigidBody.angularVelocity = Vector3.zero;
             SetInitialRotation(_throwingBullet);
 
-            if (target.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder) || !_needSetParent)
+            if (target.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder) && _needSetParent)
             {
                 RigidBody.interpolation = RigidbodyInterpolation.None;
                 transform.SetParent(target.transform);

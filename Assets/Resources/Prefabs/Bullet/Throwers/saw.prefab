@@ -211,8 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blockRotation: 0
   _bulletModelRotation: {x: 0, y: 95, z: 0}
   _knifeEnd: {fileID: 3504273094952728947}
+  _needSetParent: 1
 --- !u!114 &2133866280994353819
 MonoBehaviour:
   m_ObjectHideFlags: 0

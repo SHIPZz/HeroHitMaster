@@ -52,8 +52,9 @@ namespace CodeBase.Gameplay.Camera
             _recoilVelocity = Vector3.Lerp(_recoilVelocity, Vector3.zero, Time.deltaTime * _damping);
         }
 
-        public void MakeShake()
+        public void MakeShake(float perlinNoiseTimeScale)
         {
+            _perlinNoiseTimeScale = perlinNoiseTimeScale;
             _canShake = true;
             DOTween.Sequence().AppendInterval(1f).OnComplete(DisableShake);
         }

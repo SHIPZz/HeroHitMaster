@@ -56,8 +56,11 @@ namespace CodeBase.Gameplay.Camera
             foreach (GameObject gameObject in bullets)
             {
                 var bullet = gameObject.GetComponent<DestructionDamageDealer>();
-                bullet.Done += _cameraShake.MakeShake;
+                bullet.Done += MakeShake;
             }
         }
+
+        private void MakeShake() => 
+            _cameraShake.MakeShake(2);
     }
 }

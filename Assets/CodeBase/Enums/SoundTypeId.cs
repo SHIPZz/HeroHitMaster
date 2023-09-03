@@ -30,6 +30,7 @@
         GlassDestruction,
         River,
         WaterSplash,
-        Victory
+        Victory,
+        BarrelExplosion
     }
 }
