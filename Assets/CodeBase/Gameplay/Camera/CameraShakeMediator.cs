@@ -31,6 +31,7 @@ namespace CodeBase.Gameplay.Camera
         private Weapon _weapon;
         private List<Enemy> _enemies = new();
         private bool _canShake = true;
+        private CameraZoomer _cameraZoomer;
 
         public CameraShakeMediator(IProvider<WeaponProvider> weaponProvider,
             IProvider<Dictionary<WeaponTypeId, GameObjectPool>> bulletsPoolProvider,
@@ -81,24 +82,17 @@ namespace CodeBase.Gameplay.Camera
 
         private void MakeShakeAfterEnemyDeath(Enemy obj)
         {
-            if (!_canShake)
+            if(!_canShake)
                 return;
             
-            Debug.Log("makeShake");
             MakeShake(0.5f);
         }
 
-        private void MakeHardShake()
-        {
+        private void MakeHardShake() => 
             MakeShake(15);
-            _canShake = false;
-        }
 
-        private void MakeShakeAfterDynamiteBulletKill()
-        {
+        private void MakeShakeAfterDynamiteBulletKill() => 
             MakeShake(3);
-            _canShake = false;
-        }
 
         private void MakeShake(float perlinNoiseTimeScale) =>
             _cameraShake.MakeShake(perlinNoiseTimeScale);

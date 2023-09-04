@@ -36,8 +36,6 @@ namespace CodeBase.Gameplay.Collision
             var navMesh = player.gameObject.GetComponent<NavMeshAgent>();
             navMesh.enabled = false;
 
-            EnableNavMeshWithDuration(navMesh);
-
             DoJump(player);
         }
 
@@ -48,14 +46,6 @@ namespace CodeBase.Gameplay.Collision
                 .OnComplete(() =>
                     obj.transform
                         .DOJump(_nextPosition.position, _jumpPower, 0, _jumpDuration));
-        }
-
-        private void EnableNavMeshWithDuration(NavMeshAgent navMesh)
-        {
-            // DOTween
-            //     .Sequence()
-            //     .AppendInterval(_enableNavMeshDelay)
-            //     .OnComplete(() => navMesh.enabled = true);
         }
     }
 }

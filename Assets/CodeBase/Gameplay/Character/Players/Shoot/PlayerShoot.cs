@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Weapons;
+﻿using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using UnityEngine;
 

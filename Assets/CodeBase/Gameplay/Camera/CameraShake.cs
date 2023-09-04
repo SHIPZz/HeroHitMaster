@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using System;
+using CodeBase.ScriptableObjects.Bullet;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,13 +22,19 @@ namespace CodeBase.Gameplay.Camera
         private float _shakeTimer = -1;
         private float _duration = 5;
         private bool _canShake = false;
+        private Transform _transform;
+
+        private void Awake()
+        {
+            _transform = GetComponent<CameraData>().Camera.transform;
+        }
 
         private void Update()
         {
             UpdateShake();
             UpdateRecoil();
-
-            transform.localEulerAngles = _shakeAngles + _recoilAngles;
+            
+            _transform.localEulerAngles = _shakeAngles + _recoilAngles;
         }
 
         private void UpdateShake()
@@ -54,13 +62,16 @@ namespace CodeBase.Gameplay.Camera
 
         public void MakeShake(float perlinNoiseTimeScale)
         {
+            if (_perlinNoiseTimeScale > perlinNoiseTimeScale && _perlinNoiseTimeScale != 0)
+                return;
+
             _perlinNoiseTimeScale = perlinNoiseTimeScale;
             _canShake = true;
             DOTween.Sequence().AppendInterval(1f).OnComplete(DisableShake);
         }
 
-        private void DisableShake() => 
-        _canShake = false;
+        private void DisableShake() =>
+            _canShake = false;
 
         public void MakeRecoil()
         {

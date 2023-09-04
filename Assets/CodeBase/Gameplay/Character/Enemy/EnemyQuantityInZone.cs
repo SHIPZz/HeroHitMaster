@@ -14,10 +14,8 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public event Action ZoneCleared;
 
-        private void Awake()
-        {
-            _initialCount = _enemySpawners.Count;
-        }
+        private void Awake() => 
+        _initialCount = _enemySpawners.Count;
 
         private void OnEnable() =>
             _enemySpawners.ForEach(x => x.Destroyed += CountDeadEnemies);

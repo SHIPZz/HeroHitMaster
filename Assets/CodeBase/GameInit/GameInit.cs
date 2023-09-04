@@ -117,7 +117,9 @@ namespace CodeBase.GameInit
         {
             PlayerCameraFollower playerCamera = _playerCameraFactory
                 .Create(_locationProvider.Get(LocationTypeId.CameraSpawnPoint).position);
-            _cameraProvider.Set(playerCamera.GetComponent<Camera>());
+            var newCameraProvider = _cameraProvider as IProvider<CameraData>;
+            newCameraProvider.Set(playerCamera.GetComponent<CameraData>());
+            _cameraProvider.Set(playerCamera.GetComponent<CameraData>().Camera);
             return playerCamera;
         }
 

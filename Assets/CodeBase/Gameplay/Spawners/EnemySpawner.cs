@@ -18,9 +18,11 @@ namespace CodeBase.Gameplay.Spawners
         private EnemyFactory _enemyFactory;
         private float _destroyDelay = 0;
         private bool _canDestroy = true;
+        private Enemy _enemy;
 
         public event Action Destroyed;
         public event Action<Enemy> Spawned;
+        public event Action<Enemy> Disabled; 
 
         [Inject]
         private void Construct(EnemyFactory enemyFactory)
@@ -31,6 +33,7 @@ namespace CodeBase.Gameplay.Spawners
         public void Init(Action<Enemy, TriggerObserver> callback)
         {
             Enemy enemy = _enemyFactory.CreateBy(_enemyTypeId);
+            _enemy = enemy;
             enemy.gameObject.transform.position = transform.position;
             var materialChanger = enemy.GetComponent<IMaterialChanger>();
             Subscribe(enemy, materialChanger);
@@ -42,13 +45,14 @@ namespace CodeBase.Gameplay.Spawners
         {
             enemy.Dead += Disable;
             materialChanger.StartedChanged += BlockDestruction;
-            materialChanger.Completed += Disable;
+            materialChanger.StartedChanged += Disable;
             enemy.QuickDestroyed += Disable;
         }
 
         private void Disable()
         {
             Destroyed?.Invoke();
+            Disabled?.Invoke(_enemy);
             gameObject.SetActive(false);
         }
 
@@ -61,6 +65,7 @@ namespace CodeBase.Gameplay.Spawners
                 return;
             
             Destroyed?.Invoke();
+            Disabled?.Invoke(enemy);
             gameObject.SetActive(false);
         }
     }

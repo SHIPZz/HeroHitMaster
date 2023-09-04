@@ -80,6 +80,8 @@ namespace CodeBase.Installers.GameInstaller
             BindEffectsPoolProvider();
             BindCamerShake();
             BindExplosionBarrelsProvider();
+            Container.BindInterfacesAndSelfTo<RotateCameraOnEnemyKill>().AsSingle();
+            BindAsSingle<CameraZoomer>();
         }
 
         private void BindExplosionBarrelsProvider() =>
