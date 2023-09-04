@@ -46,8 +46,15 @@ namespace CodeBase.Gameplay.Camera
         public void SetCamerShake(CameraShake cameraShake) =>
             _cameraShake = cameraShake;
 
-        public void Dispose() =>
+        public void Dispose()
+        {
             _explosionBarrels.ForEach(x => x.Exploded -= MakeHardShake);
+            _enemies.ForEach(x =>
+            {
+                x.Dead -= MakeShakeAfterEnemyDeath;
+                x.QuickDestroyed -= MakeShakeAfterEnemyDeath;
+            });
+        }
 
         public void InitEnemies(Enemy enemy)
         {
