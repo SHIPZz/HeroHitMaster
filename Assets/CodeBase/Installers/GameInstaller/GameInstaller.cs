@@ -36,6 +36,7 @@ namespace CodeBase.Installers.GameInstaller
         [SerializeField] private TargetMovementStorage _targetMovementStorage;
         [SerializeField] private EffectsProvider _effectsProvider;
         [SerializeField] private SaveTriggerOnLevelEnd _saveTriggerOnLevel;
+        [SerializeField] private ExplosionBarrelsProvider _explosionBarrelsProvider;
 
         public override void InstallBindings()
         {
@@ -78,24 +79,30 @@ namespace CodeBase.Installers.GameInstaller
             BindWaterSplashPoolInitializer();
             BindEffectsPoolProvider();
             BindCamerShake();
+            BindExplosionBarrelsProvider();
         }
 
-        private void BindCamerShake() => 
-        BindAsSingle<CameraShakeMediator>();
+        private void BindExplosionBarrelsProvider() =>
+            Container.BindInterfacesAndSelfTo<ExplosionBarrelsProvider>()
+                .FromInstance(_explosionBarrelsProvider).AsSingle();
 
-        private void BindEffectsPoolProvider() => 
+        private void BindCamerShake() =>
+            Container.BindInterfacesAndSelfTo<CameraShakeMediator>()
+                .AsSingle();
+
+        private void BindEffectsPoolProvider() =>
             Container
                 .BindInterfacesTo<EffectsPoolProvider>()
                 .AsSingle();
 
-        private void BindWaterSplashPoolInitializer() => 
+        private void BindWaterSplashPoolInitializer() =>
             BindAsSingle<WaterSplashPoolInitializer>();
 
         private void BindCountEnemiesOnDeath() =>
             Container.BindInterfacesAndSelfTo<CountEnemiesOnDeath>()
                 .AsSingle();
 
-        private void BindEnemyPartFactory() => 
+        private void BindEnemyPartFactory() =>
             BindAsSingle<EnemyPartFactory>();
 
         private void BindObjectPartFactory() =>

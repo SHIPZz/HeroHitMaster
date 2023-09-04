@@ -86,6 +86,7 @@ namespace CodeBase.GameInit
                 _slowMotionOnEnemyDeath.Init(enemy);
                 _countEnemiesOnDeath.Init(enemy);
                 _levelSliderPresenter.Init(enemy);
+                _cameraShakeMediator.InitEnemies(enemy);
             }));
             
             PlayerPrefs.DeleteAll();
