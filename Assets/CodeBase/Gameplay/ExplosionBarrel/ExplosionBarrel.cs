@@ -17,6 +17,7 @@ namespace CodeBase.Gameplay.ExplosionBarrel
         private AudioSource _explosionSound;
 
         public event Action Exploded;
+        public event Action StartedExplode;
 
         [Inject]
         private void Construct(ISoundStorage soundStorage, IEffectStorage effectStorage)
@@ -33,6 +34,7 @@ namespace CodeBase.Gameplay.ExplosionBarrel
 
         private void OnCollisionEntered(UnityEngine.Collision collision)
         {
+            StartedExplode?.Invoke();
             _explosionEffect.transform.position = transform.position;
             _explosionEffect.Play();
             _explosionSound.Play();

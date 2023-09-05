@@ -11,25 +11,28 @@ namespace CodeBase.Gameplay.Character.Players
         private static readonly int IsShooted = Animator.StringToHash("IsShooted");
         private static readonly int _isIdle = Animator.StringToHash("IsIdle");
         private static readonly int _isMoved = Animator.StringToHash("IsMoved");
+        private bool _isIdleBlocked;
 
         public PlayerAnimator(Animator animator) =>
             _animator = animator;
 
         public void SetMovement(float speed)
         {
-            _animator.SetBool(_isMoved, true);
+            _animator.SetBool(IsRun, true);
             _animator.SetFloat(Speed, speed);
         }
 
+        public void NeedBlockIdle(bool enable) => 
+            _isIdleBlocked = enable;
+        
         public void StopMovement()
         {
-            _animator.SetBool(_isMoved, false);
+            if (_isIdleBlocked)
+                return;
+            
+            _animator.SetBool(IsRun, false);
             // _animator.SetFloat(Speed);
         }
-        
-
-        public void SetRunning(bool isRunning) => 
-            _animator.SetBool(IsRun, isRunning);
 
         public void SetShooting(bool isShooting) =>
             _animator.SetBool(IsShooted, isShooting);

@@ -10,29 +10,23 @@ namespace CodeBase.Gameplay.Character.PlayerSelection
     public class PlayerSelectorPresenter : IInitializable, IDisposable
     {
         private readonly PlayerSelector _playerSelector;
-        private readonly Dictionary<WeaponTypeId, WeaponSelectorView> _weaponSelectorViews;
+        private WeaponSelector _weaponSelector;
 
         public PlayerSelectorPresenter(PlayerSelector playerSelector,
-            IProvider<Dictionary<WeaponTypeId, WeaponSelectorView>> weaponSelectorViewsProvider)
+            WeaponSelector weaponSelector)
         {
+            _weaponSelector = weaponSelector;
             _playerSelector = playerSelector;
-            _weaponSelectorViews = weaponSelectorViewsProvider.Get();
         }
 
         public void Initialize()
         {
-            foreach (var weaponSelectorView in _weaponSelectorViews.Values)
-            {
-                weaponSelectorView.Choosed += _playerSelector.Select;
-            }
+            _weaponSelector.NewWeaponChanged += _playerSelector.Select;
         }
 
         public void Dispose()
         {
-            foreach (var weaponSelectorView in _weaponSelectorViews.Values)
-            {
-                weaponSelectorView.Choosed -= _playerSelector.Select;
-            }
+            _weaponSelector.NewWeaponChanged -= _playerSelector.Select;
         }
     }
 }

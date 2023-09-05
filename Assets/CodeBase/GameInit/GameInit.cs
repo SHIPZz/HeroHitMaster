@@ -97,10 +97,10 @@ namespace CodeBase.GameInit
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowMaceShooter);
             
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
+            Player player = InitializeInitialPlayer(PlayerTypeId.Wizard);
             playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
             
-            InitializeInitialWeapon(WeaponTypeId.ThrowingDynamiteShooter);
+            InitializeInitialWeapon(WeaponTypeId.FireBallShooter);
             _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());
             _cameraShakeMediator.Init();
             _waterSplashPoolInitializer.Init();

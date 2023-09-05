@@ -38,14 +38,14 @@ namespace CodeBase.Gameplay.Camera
         {
             _enemySpawners.ForEach(x => x.Disabled += SetLastKilledEnemy);
             _enemyQuantityZones.ForEach(x => x.ZoneCleared += Do);
-            _explosionBarrels.ForEach(x => x.Exploded += BlockRotation);
+            _explosionBarrels.ForEach(x => x.StartedExplode += BlockRotation);
         }
 
         public void Dispose()
         {
             _enemySpawners.ForEach(x => x.Disabled -= SetLastKilledEnemy);
             _enemyQuantityZones.ForEach(x => x.ZoneCleared -= Do);
-            _explosionBarrels.ForEach(x => x.Exploded -= BlockRotation);
+            _explosionBarrels.ForEach(x => x.StartedExplode -= BlockRotation);
         }
 
         private void BlockRotation()
@@ -61,8 +61,6 @@ namespace CodeBase.Gameplay.Camera
                 await UniTask.Yield();
             }
 
-            await UniTask.WaitForSeconds(0.1f);
-            
             if (_blockRotation)
             {
                 _cameraZoomer.Zoom(75, 1f, 0.5f,Ease.Linear);

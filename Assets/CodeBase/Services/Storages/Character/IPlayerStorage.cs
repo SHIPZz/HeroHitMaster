@@ -6,6 +6,7 @@ namespace CodeBase.Services.Storages.Character
 {
     public interface IPlayerStorage
     {
+        Player CurrentPlayer { get; }
         Player GetById(PlayerTypeId playerTypeId);
         Player GetByWeapon(WeaponTypeId weaponTypeId);
         List<Player> GetAll();

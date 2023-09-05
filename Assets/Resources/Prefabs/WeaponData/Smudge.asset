@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Smudge
   m_EditorClassIdentifier: 
   ShootDelay: 0.3
-  Price: 0
+  Price:
+    Value: 0
+    PriceTypeId: 2
+    AdQuantity: 0
   Name: Smudge web
   WeaponTypeId: 1
   ShootEffect: {fileID: 0}
   ShootSound: {fileID: 6578650027290392881, guid: d5e25e841b57f894c8bc09e3fc6044ce, type: 3}
   Prefab: {fileID: 1956703246876421125, guid: 03cdaa68ed0b7b447a717faaa4e61f8e, type: 3}
-  WeaponRankId: 0

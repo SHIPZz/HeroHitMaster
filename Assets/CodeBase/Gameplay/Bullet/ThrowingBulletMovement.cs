@@ -55,21 +55,10 @@ namespace CodeBase.Gameplay.Bullet
 
             Vector3 offset = _hitPosition - _knifeEnd.position;
             RigidBody.position += offset;
-            // StartCoroutine(StartMoveCoroutine(offset));
 
             IsHit = true;
         }
 
-        private IEnumerator StartMoveCoroutine(Vector3 offset)
-        {
-            while (Vector3.Distance(RigidBody.position, offset) > 0.01)
-            {
-                Vector3 newPosition = RigidBody.position + offset;
-                RigidBody.position = Vector3.Lerp(RigidBody.position, newPosition, 10f * Time.deltaTime);
-                yield return new WaitForFixedUpdate();
-            }
-        }
-        
         private void SetInitialRotation(ThrowingBullet throwingBullet)
         {
             Vector3 startTargetRotation = new Vector3(104, transform.eulerAngles.y,
@@ -77,7 +66,7 @@ namespace CodeBase.Gameplay.Bullet
 
             transform.rotation = Quaternion.Euler(startTargetRotation);
 
-            throwingBullet.BulletModel.localRotation = Quaternion.Euler(_bulletModelRotation);
+            // throwingBullet.BulletModel.localRotation = Quaternion.Euler(_bulletModelRotation);
         }
     }
 }

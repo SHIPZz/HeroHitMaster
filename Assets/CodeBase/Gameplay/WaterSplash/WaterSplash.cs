@@ -31,9 +31,6 @@ namespace CodeBase.Gameplay.WaterSplash
 
         private void OnTriggerEntered(Collider other)
         {
-            if (!other.gameObject.TryGetComponent(out Bullet.Bullet bullet)) 
-                return;
-
             var effect = _effectsPool[ParticleTypeId.WaterSplash].Pop().GetComponent<ParticleSystem>();
             var sound = _soundsPool[SoundTypeId.WaterSplash].Pop().GetComponent<AudioSource>();
             

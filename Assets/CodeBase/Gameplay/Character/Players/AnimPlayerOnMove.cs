@@ -4,25 +4,26 @@ using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players
 {
-    public class AnimPlayerOnMove : MonoBehaviour
+    public class AnimPlayerOnMove : ITickable
     {
-        [SerializeField] private NavMeshAgent _navMeshAgent;
-        
-         private PlayerAnimator _playerAnimator;
+        private readonly PlayerAnimator _playerAnimator;
+        private readonly NavMeshAgent _navMeshAgent;
 
-         [Inject]
-         private void Construct(PlayerAnimator playerAnimator) => 
-             _playerAnimator = playerAnimator;
+        public AnimPlayerOnMove(PlayerAnimator playerAnimator, NavMeshAgent navMeshAgent)
+        {
+            _navMeshAgent = navMeshAgent;
+            _playerAnimator = playerAnimator;
+        }
 
-         private void Update()
+        public void Tick()
         {
             if (ShouldMove())
             {
-                // _playerAnimator.SetMovement(_navMeshAgent.velocity.magnitude);
+                _playerAnimator.SetMovement(_navMeshAgent.velocity.magnitude);
                 return;
             }
-            
-            // _playerAnimator.StopMovement();
+
+            _playerAnimator.StopMovement();
         }
 
         private bool ShouldMove() =>

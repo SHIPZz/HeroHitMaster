@@ -17,15 +17,19 @@ namespace CodeBase.UI.Weapons
         private readonly Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIconClickers;
         private readonly CheckOutService _checkOutService;
         private readonly List<WeaponSelectorView> _popupWeaponIcons;
+        private readonly PopupInfoView _popupInfoView;
 
         public WeaponSelectorPresenter(WeaponIconsProvider weaponIconsProvider, WeaponSelector weaponSelector,
-            CheckOutService checkOutService, IProvider<WeaponIconsProvider> provider)
+            CheckOutService checkOutService, 
+            IProvider<WeaponIconsProvider> provider, PopupInfoView popupInfoView)
         {
+            _popupInfoView = popupInfoView;
             _popupWeaponIcons = provider.Get().Icons.Values.ToList();
             _checkOutService = checkOutService;
             _weaponIconClickers = weaponIconsProvider.Icons;
             _weaponSelector = weaponSelector;
             _popupWeaponIcons.ForEach(x => x.Choosed += _weaponSelector.SetLastWeaponChoosed);
+            _popupInfoView.LastWeaponSelected += _weaponSelector.SetLastWeaponChoosed;
         }
 
         public void Initialize()
@@ -42,6 +46,7 @@ namespace CodeBase.UI.Weapons
                 weaponIcon.Choosed -=  _weaponSelector.SetLastWeaponChoosed;
                 
             _checkOutService.Succeeded -= _weaponSelector.Select;
+            _popupInfoView.LastWeaponSelected -= _weaponSelector.SetLastWeaponChoosed;
             _popupWeaponIcons.ForEach(x => x.Choosed -= _weaponSelector.SetLastWeaponChoosed);
         }
     }

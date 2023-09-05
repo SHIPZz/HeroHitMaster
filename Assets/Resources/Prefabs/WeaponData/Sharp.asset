@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Sharp
   m_EditorClassIdentifier: 
   ShootDelay: 0.3
-  Price: 0
+  Price:
+    Value: 0
+    PriceTypeId: 2
+    AdQuantity: 0
   Name: Sharp web
   WeaponTypeId: 2
   ShootEffect: {fileID: 0}
   ShootSound: {fileID: 6578650027290392881, guid: d5e25e841b57f894c8bc09e3fc6044ce, type: 3}
   Prefab: {fileID: 1956703246876421125, guid: d471c38d605ba4449ad424f978d34001, type: 3}
-  WeaponRankId: 0

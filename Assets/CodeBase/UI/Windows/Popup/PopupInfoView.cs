@@ -23,6 +23,9 @@ namespace CodeBase.UI.Windows.Popup
         [SerializeField] private Color _color;
         [SerializeField] private int _chooseCycle;
         [SerializeField] private Button _adButton;
+        [SerializeField] private float _chooseDuration;
+        [SerializeField] private float _closeWhiteFrameDuration;
+        [SerializeField] private float _openWhiteFrameDuration;
 
         private Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIcons;
         private AudioSource _lastWeaponSelectedSound;
@@ -35,6 +38,7 @@ namespace CodeBase.UI.Windows.Popup
         private Coroutine _chooseRandomWeaponcoroutine;
 
         public event Action AdButtonClicked;
+        public event Action<WeaponTypeId> LastWeaponSelected;
 
         [Inject]
         private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage,
@@ -128,13 +132,14 @@ namespace CodeBase.UI.Windows.Popup
 
                     targetParticle.transform.position = _lastWeaponSelectorView.transform.position;
                     targetParticle.Play();
+                    LastWeaponSelected?.Invoke(_lastWeaponSelectorView.WeaponTypeId);
                 }
                 else
                 {
                     _chooseWeaponSound.Play();
                 }
-
-                await UniTask.WaitForSeconds(1.5f);
+                
+                await UniTask.WaitForSeconds(_chooseDuration);
             }
         }
 
@@ -145,9 +150,9 @@ namespace CodeBase.UI.Windows.Popup
             if (_lastFrame is not null)
             {
                 Color currentCollor = new Color(_lastFrame.color.r, _lastFrame.color.g, _lastFrame.color.b, 0f);
-                _lastFrame.DOColor(currentCollor, 0.5f).OnComplete(() => lastFrameChanged = true);
+                _lastFrame.DOColor(currentCollor, _closeWhiteFrameDuration).OnComplete(() => lastFrameChanged = true);
 
-                while (lastFrameChanged != true)
+                while (lastFrameChanged)
                 {
                     await UniTask.Yield();
                 }
@@ -171,7 +176,7 @@ namespace CodeBase.UI.Windows.Popup
             Color currentColor = whiteFrame.color;
 
             var newColor = new Color(currentColor.r, currentColor.g, currentColor.b, 1f);
-            whiteFrame.DOColor(newColor, 0.3f);
+            whiteFrame.DOColor(newColor, _openWhiteFrameDuration);
             _lastFrame = whiteFrame;
         }
 

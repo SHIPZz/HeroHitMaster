@@ -11,6 +11,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         private static readonly int _die = Animator.StringToHash("Die");
         private static readonly int _win = Animator.StringToHash("Win");
         private readonly Animator _animator;
+        private bool _isIdleBlocked;
 
         public EnemyAnimator(Animator animator) => 
             _animator = animator;
@@ -24,7 +25,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             _animator.SetFloat(_speed, speed);
         }
 
-        public void StopMovement() =>
+        public void StopMovement() => 
             _animator.SetBool(_isMoved, false);
 
         public void SetIsDamaged(bool isDamaged) =>

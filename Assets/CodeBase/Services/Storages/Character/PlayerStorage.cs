@@ -27,12 +27,15 @@ namespace CodeBase.Services.Storages.Character
             _playerTypeIdsByWeapon = playerSettings.PlayerTypeIdsByWeapon;
         }
 
+        public Player CurrentPlayer { get; private set; }
+
         public Player GetById(PlayerTypeId playerTypeId)
         {
             SetActive(false);
             Enable(playerTypeId);
             _playerProvider.Set(_players[playerTypeId]);
-            return _players[playerTypeId];
+            CurrentPlayer = _players[playerTypeId];
+            return CurrentPlayer;
         }
 
         public Player GetByWeapon(WeaponTypeId weaponTypeId)
@@ -41,7 +44,8 @@ namespace CodeBase.Services.Storages.Character
             PlayerTypeId playerTypeId = _playerTypeIdsByWeapon[weaponTypeId];
             Enable(playerTypeId);
             _playerProvider.Set(_players[playerTypeId]);
-            return _players[playerTypeId];
+            CurrentPlayer = _players[playerTypeId];
+            return CurrentPlayer;
         }
 
         public List<Player> GetAll()

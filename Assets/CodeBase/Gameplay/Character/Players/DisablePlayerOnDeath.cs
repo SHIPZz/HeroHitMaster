@@ -1,21 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
+using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players
 {
-    public class DisablePlayerOnDeath : MonoBehaviour
+    public class DisablePlayerOnDeath : IInitializable, IDisposable
     {
-        private IHealth _health;
+        private readonly IHealth _health;
 
-        private void Awake() => 
-            _health = GetComponent<IHealth>();
+        public DisablePlayerOnDeath(IHealth health) =>
+            _health = health;
 
-        private void OnEnable() => 
+        public void Initialize() => 
             _health.ValueZeroReached += Disable;
 
-        private void OnDisable() => 
+        public void Dispose() => 
             _health.ValueZeroReached -= Disable;
 
         private void Disable() =>
-            gameObject.SetActive(false);
+            _health.GameObject.SetActive(false);
+        
     }
 }

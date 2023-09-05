@@ -51,7 +51,7 @@ namespace CodeBase.Gameplay.Bullet
                 RigidBody.angularVelocity = Vector3.zero;
                 return;
             }
-
+            
             if (!_blockRotation)
                 RigidBody.angularVelocity = transform.right * RotateSpeed;
 
