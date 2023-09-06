@@ -20,7 +20,8 @@ GameObject:
   - component: {fileID: 8010233923837997559}
   - component: {fileID: -5024909075747845457}
   - component: {fileID: -6138894166826365184}
-  - component: {fileID: -1871021201452776136}
+  - component: {fileID: 352506263018961854}
+  - component: {fileID: 2522080524027629046}
   m_Layer: 11
   m_Name: Spiderweb
   m_TagString: Untagged
@@ -36,8 +37,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2714671991903669213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.975422, y: 0.54658186, z: 16.603611}
-  m_LocalScale: {x: 650, y: 650, z: 650}
+  m_LocalPosition: {x: 12.975422, y: 0.53906745, z: 16.598959}
+  m_LocalScale: {x: 250, y: 250, z: 250}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,12 +109,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0018264538, y: 0.0016837403, z: 0.000018095323}
-  m_Center: {x: -0.000016095175, y: 0.0000009742216, z: -0.0000090476615}
+  m_Size: {x: 0.0008481982, y: 0.0005420636, z: 0.000018095327}
+  m_Center: {x: 0.000020706058, y: 0.00008645743, z: -0.000009047663}
 --- !u!54 &3894634599279539162
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -137,10 +138,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &8532890716993097247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BulletTypeId>k__BackingField: 1
+  <WeaponTypeId>k__BackingField: 0
 --- !u!95 &8914413349907208982
 Animator:
   serializedVersion: 5
@@ -199,7 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: -4838835069748056510}
 --- !u!114 &8010233923837997559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0364d9115962ee47bba12ca4af57a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1871021201452776136
+--- !u!114 &352506263018961854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,6 +251,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2714671991903669213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b218e9efc7db4cb2b62e1ba89bb62252, type: 3}
+  m_Script: {fileID: 11500000, guid: 347c598a7d9f4aa6adcc0b665df9a183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _materialTypeId: 3
+--- !u!114 &2522080524027629046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714671991903669213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7dcfd0b55d4659964021395c9d8da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _needBlockRotation: 1
+  _needDisableGravity: 0

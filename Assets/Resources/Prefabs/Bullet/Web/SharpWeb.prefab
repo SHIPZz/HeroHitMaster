@@ -20,7 +20,8 @@ GameObject:
   - component: {fileID: 8010233923837997559}
   - component: {fileID: -5904069845656566482}
   - component: {fileID: -723910039920197796}
-  - component: {fileID: -5002699321492968297}
+  - component: {fileID: 945318824179770858}
+  - component: {fileID: 4545977919206744404}
   m_Layer: 11
   m_Name: SharpWeb
   m_TagString: Untagged
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582b75bd137d4f8283ac278732456a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BulletTypeId>k__BackingField: 2
+  <WeaponTypeId>k__BackingField: 2
 --- !u!95 &8914413349907208982
 Animator:
   serializedVersion: 5
@@ -199,7 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7037416b15747d994b42c57f81cddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: -4838835069748056510}
 --- !u!114 &8010233923837997559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0364d9115962ee47bba12ca4af57a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5002699321492968297
+--- !u!114 &945318824179770858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,6 +251,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2714671991903669213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b218e9efc7db4cb2b62e1ba89bb62252, type: 3}
+  m_Script: {fileID: 11500000, guid: da7dcfd0b55d4659964021395c9d8da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blockRotation: 1
+--- !u!114 &4545977919206744404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714671991903669213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347c598a7d9f4aa6adcc0b665df9a183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _materialTypeId: 0

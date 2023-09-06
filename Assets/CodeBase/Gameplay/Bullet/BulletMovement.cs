@@ -9,7 +9,8 @@ namespace CodeBase.Gameplay.Bullet
 {
     public class BulletMovement : MonoBehaviour
     {
-        [SerializeField] private bool _blockRotation;
+        [SerializeField] private bool _needBlockRotation;
+        [SerializeField] private bool _needDisableGravity;
 
         protected Rigidbody RigidBody;
         protected Bullet Bullet;
@@ -22,7 +23,7 @@ namespace CodeBase.Gameplay.Bullet
         protected bool IsHit;
 
         [Inject]
-        public void Construct(BulletStaticDataService bulletStaticDataService) => 
+        public void Construct(BulletStaticDataService bulletStaticDataService) =>
             BulletStaticDataService = bulletStaticDataService;
 
         protected virtual void Awake()
@@ -35,10 +36,8 @@ namespace CodeBase.Gameplay.Bullet
             RigidBody.isKinematic = false;
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             TriggerObserver.CollisionEntered += OnCollisionEntered;
-        }
 
         private void FixedUpdate()
         {
@@ -51,8 +50,8 @@ namespace CodeBase.Gameplay.Bullet
                 RigidBody.angularVelocity = Vector3.zero;
                 return;
             }
-            
-            if (!_blockRotation)
+
+            if (_needBlockRotation == false)
                 RigidBody.angularVelocity = transform.right * RotateSpeed;
 
             RigidBody.velocity = MoveDirection * MoveSpeed;
@@ -67,7 +66,10 @@ namespace CodeBase.Gameplay.Bullet
 
         protected virtual void OnCollisionEntered(UnityEngine.Collision collision)
         {
+            Vector3 offset = collision.GetContact(0).point - transform.position;
+            transform.position += offset;
             transform.forward = MoveDirection;
+
             RigidBody.useGravity = false;
             RigidBody.velocity = Vector3.zero;
             RigidBody.angularVelocity = Vector3.zero;
@@ -76,9 +78,9 @@ namespace CodeBase.Gameplay.Bullet
 
         public virtual void Move(Vector3 target, Vector3 startPosition)
         {
-            transform.localPosition = startPosition;
+            RigidBody.position = startPosition;
             MoveDirection = target - startPosition;
-            MoveDirection.Normalize();
+            MoveDirection = MoveDirection.normalized;
         }
     }
 }

@@ -27,8 +27,8 @@ namespace CodeBase.Gameplay.Character.Players
         
         public void StopMovement()
         {
-            if (_isIdleBlocked)
-                return;
+            // if (_isIdleBlocked)
+            //     return;
             
             _animator.SetBool(IsRun, false);
             // _animator.SetFloat(Speed);

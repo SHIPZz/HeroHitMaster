@@ -80,9 +80,23 @@ namespace CodeBase.Installers.GameInstaller
             BindEffectsPoolProvider();
             BindCamerShake();
             BindExplosionBarrelsProvider();
-            Container.BindInterfacesAndSelfTo<RotateCameraOnEnemyKill>().AsSingle();
+            BindRotateCameraOnEnemyKill();
+            BincCameraZoomer();
+            BindRotateCameraPresenter();
+        }
+
+        private void BindRotateCameraPresenter() =>
+            Container
+                .BindInterfacesAndSelfTo<RotateCameraPresenter>()
+                .AsSingle();
+
+        private void BincCameraZoomer()
+        {
             BindAsSingle<CameraZoomer>();
         }
+
+        private void BindRotateCameraOnEnemyKill() => 
+            Container.BindInterfacesAndSelfTo<RotateCameraOnEnemyKill>().AsSingle();
 
         private void BindExplosionBarrelsProvider() =>
             Container.BindInterfacesAndSelfTo<ExplosionBarrelsProvider>()
@@ -245,8 +259,7 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindPlayerProvider() =>
             Container
-                .Bind<IProvider<Player>>()
-                .To<PlayerProvider>()
+                .BindInterfacesTo<PlayerProvider>()
                 .AsSingle();
 
         private void BindCameraProvider() =>

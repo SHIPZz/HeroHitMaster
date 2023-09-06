@@ -41,6 +41,7 @@ namespace CodeBase.GameInit
         private readonly LevelSliderPresenter _levelSliderPresenter;
         private readonly WaterSplashPoolInitializer _waterSplashPoolInitializer;
         private CameraShakeMediator _cameraShakeMediator;
+        private RotateCameraPresenter _rotateCameraPresenter;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -56,8 +57,10 @@ namespace CodeBase.GameInit
             SlowMotionOnEnemyDeath slowMotionOnEnemyDeath,
             CountEnemiesOnDeath countEnemiesOnDeath, 
             LevelSliderPresenter levelSliderPresenter, 
-            WaterSplashPoolInitializer waterSplashPoolInitializer, CameraShakeMediator cameraShakeMediator)
+            WaterSplashPoolInitializer waterSplashPoolInitializer, 
+            CameraShakeMediator cameraShakeMediator, RotateCameraPresenter rotateCameraPresenter)
         {
+            _rotateCameraPresenter = rotateCameraPresenter;
             _cameraShakeMediator = cameraShakeMediator;
             _waterSplashPoolInitializer = waterSplashPoolInitializer;
             _levelSliderPresenter = levelSliderPresenter;
@@ -96,15 +99,16 @@ namespace CodeBase.GameInit
             _walletPresenter.Init(playerData.Money);
             _shopWeaponPresenter.Init(WeaponTypeId.ThrowMaceShooter);
             
+            InitializeInitialWeapon(WeaponTypeId.WebSpiderShooter);
+            // Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
+            // _playerProvider.Set(player);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            Player player = InitializeInitialPlayer(PlayerTypeId.Wizard);
-            playerCameraFollower.GetComponent<RotateCameraPresenter>().Init(player.GetComponent<PlayerHealth>());
+            var rotateCamera = playerCameraFollower.GetComponent<RotateCamera>();
+            _rotateCameraPresenter.Init(rotateCamera);
             
-            InitializeInitialWeapon(WeaponTypeId.FireBallShooter);
             _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());
             _cameraShakeMediator.Init();
             _waterSplashPoolInitializer.Init();
-            _playerProvider.Set(player);
         }
 
         private void InitializeInitialWeapon(WeaponTypeId weaponTypeId)
