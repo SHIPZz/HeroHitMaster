@@ -83,9 +83,9 @@ namespace CodeBase.GameInit
         {
             _loadingCurtain.Show();
             
-            _enemySpawners.ForEach(x => x.Init((enemy, aggrozne) =>
+            _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
-                _enemyConfigurator.Configure(enemy,aggrozne);
+                _enemyConfigurator.Configure(enemy,aggrozone);
                 _slowMotionOnEnemyDeath.Init(enemy);
                 _countEnemiesOnDeath.Init(enemy);
                 _levelSliderPresenter.Init(enemy);
@@ -97,9 +97,9 @@ namespace CodeBase.GameInit
             playerData.Money = 2000;
             _saveSystem.Save(playerData);
             _walletPresenter.Init(playerData.Money);
-            _shopWeaponPresenter.Init(WeaponTypeId.ThrowMaceShooter);
+            _shopWeaponPresenter.Init(WeaponTypeId.GreenWeapon);
             
-            InitializeInitialWeapon(WeaponTypeId.WebSpiderShooter);
+            InitializeInitialWeapon(WeaponTypeId.OrangeWeapon);
             // Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             // _playerProvider.Set(player);
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();

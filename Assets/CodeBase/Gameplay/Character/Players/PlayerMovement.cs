@@ -31,6 +31,7 @@ namespace CodeBase.Gameplay.Character.Players
         {
             _currentTarget++;
 
+            _navMeshAgent.enabled = true;
             Vector3 targetPosition = _targetMovementStorage.Targets[_currentTarget].position;
             Move(targetPosition);
         }

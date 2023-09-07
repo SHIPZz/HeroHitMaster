@@ -10,7 +10,6 @@ namespace CodeBase.Gameplay.Bullet
     public class BulletMovement : MonoBehaviour
     {
         [SerializeField] private bool _needBlockRotation;
-        [SerializeField] private bool _needDisableGravity;
 
         protected Rigidbody RigidBody;
         protected Bullet Bullet;
@@ -79,6 +78,8 @@ namespace CodeBase.Gameplay.Bullet
         public virtual void Move(Vector3 target, Vector3 startPosition)
         {
             RigidBody.position = startPosition;
+            transform.position = startPosition;
+            // transform.localPosition = startPosition;
             MoveDirection = target - startPosition;
             MoveDirection = MoveDirection.normalized;
         }

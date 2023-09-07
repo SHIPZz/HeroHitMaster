@@ -34,11 +34,17 @@ namespace CodeBase.Gameplay.Collision
         {
             player.transform.SetParent(transform);
             MovementStarted?.Invoke();
+
+            transform.DOMoveY(transform.position.y + 0.3f, 0.5f)
+                .OnComplete(() => transform.DOMoveY(transform.position.y - 0.3f, 0.5f))
+                .SetLoops(-1, LoopType.Yoyo);
+            
             transform.DOMoveZ(_target.position.z, MoveDuration)
                 .OnComplete(() =>
                 {
                     player.transform.SetParent(null);
                     MovementCompleted?.Invoke();
+                    DOTween.Kill(transform);
                 });
         }
     }

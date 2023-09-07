@@ -24,7 +24,13 @@ namespace CodeBase.Installers
             BindSaveSystem();
             BindGlobalSlowMotionSystem();
             BindPauseService();
+            BindPauseOnFocusChanged();
         }
+
+        private void BindPauseOnFocusChanged() =>
+            Container
+                .BindInterfacesTo<PauseOnFocusChanged>()
+                .AsSingle();
 
         private void BindPauseService() =>
             Container.Bind<IPauseService>()

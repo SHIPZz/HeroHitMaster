@@ -21,7 +21,9 @@ namespace CodeBase.UI.Weapons
             this;
         
         public Image Get(WeaponTypeId id) => 
-            _shopWeaponIcons[id];
+            !_shopWeaponIcons.TryGetValue(id, out Image image) ? 
+                null : 
+                _shopWeaponIcons[id];
 
         public void Set(Dictionary<WeaponTypeId, WeaponSelectorView> t) => 
             Icons = t;

@@ -40,6 +40,9 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         public void Init(WeaponTypeId weaponTypeId)
         {
+            if(_provider.Get(weaponTypeId) == null)
+                return;
+            
             _shopWeaponInfoView.Init();
             SetWeaponDataToView(weaponTypeId);
         }

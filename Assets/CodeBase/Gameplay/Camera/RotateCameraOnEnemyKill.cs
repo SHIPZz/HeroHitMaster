@@ -51,7 +51,6 @@ namespace CodeBase.Gameplay.Camera
         private void BlockRotation()
         {
             _blockRotation = true;
-            Debug.Log("block rotation");
         }
 
         private async void Do()
@@ -64,7 +63,6 @@ namespace CodeBase.Gameplay.Camera
             if (_blockRotation)
             {
                 _cameraZoomer.Zoom(75, 1f, 0.5f,Ease.Linear);
-                Debug.Log("block rotation");
                 return;
             }
 

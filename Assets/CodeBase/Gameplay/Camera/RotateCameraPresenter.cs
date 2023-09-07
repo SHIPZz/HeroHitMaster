@@ -30,7 +30,6 @@ namespace CodeBase.Gameplay.Camera
         {
             _rotateCamera = rotateCamera;
             Subscribe();
-            Debug.Log(_playerHealth.GameObject.name);
         }
 
         private void Subscribe()

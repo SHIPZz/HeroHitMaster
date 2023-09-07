@@ -31,7 +31,7 @@ namespace CodeBase.Gameplay.Bullet
             transform.position = startPosition;
             RigidBody.position = startPosition;
             MoveDirection = target - startPosition;
-            MoveDirection.Normalize();
+            MoveDirection = MoveDirection.normalized;
             transform.forward = MoveDirection;
             SetInitialRotation(_throwingBullet);
         }
@@ -52,7 +52,7 @@ namespace CodeBase.Gameplay.Bullet
             }
 
             Vector3 offset = _hitPosition - _knifeEnd.position;
-            RigidBody.position += offset;
+            transform.position += offset;
 
             IsHit = true;
         }
