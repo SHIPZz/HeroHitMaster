@@ -3,11 +3,11 @@ using CodeBase.Gameplay.BlockInput;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
+using CodeBase.Gameplay.EffectsData;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
-using CodeBase.Gameplay.Weapons;
 using CodeBase.Services;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
@@ -37,6 +37,7 @@ namespace CodeBase.Installers.GameInstaller
         [SerializeField] private EffectsProvider _effectsProvider;
         [SerializeField] private SaveTriggerOnLevelEnd _saveTriggerOnLevel;
         [SerializeField] private ExplosionBarrelsProvider _explosionBarrelsProvider;
+        [SerializeField] private Level _level;
 
         public override void InstallBindings()
         {
@@ -84,7 +85,17 @@ namespace CodeBase.Installers.GameInstaller
             BindRotateCameraOnEnemyKill();
             BincCameraZoomer();
             BindRotateCameraPresenter();
+            BindLevel();
+            BindPlaySoundOnFocusChanged();
         }
+
+        private void BindPlaySoundOnFocusChanged() =>
+            Container
+                .BindInterfacesAndSelfTo<PlaySoundOnFocusChanged>()
+                .AsSingle();
+
+        private void BindLevel() => 
+            Container.BindInstance(_level);
 
         private void BindAdCheckOutService() => 
             BindAsSingle<AdCheckOutService>();

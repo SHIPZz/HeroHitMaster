@@ -32,6 +32,8 @@
         WaterSplash,
         Victory,
         BarrelExplosion,
-        PurchasedWeapon
+        PurchasedWeapon,
+        PlayerJump,
+        FocusChanged
     }
 }

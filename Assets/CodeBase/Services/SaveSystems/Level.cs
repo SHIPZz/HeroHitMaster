@@ -1,10 +1,9 @@
-﻿using System;
+﻿using UnityEngine;
 
 namespace CodeBase.Services.SaveSystems
 {
-    [Serializable]
-    public class Level
+    public class Level : MonoBehaviour
     {
-        public float Id;
+        [field: SerializeField] public int Reward { get; private set; }
     }
 }

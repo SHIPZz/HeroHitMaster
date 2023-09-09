@@ -38,7 +38,7 @@ namespace CodeBase.Gameplay.WaterSplash
             effect.Play();
             sound.Play();
 
-            DOTween.Sequence().AppendInterval(3f).OnComplete(() =>
+            DOTween.Sequence().AppendInterval(1f).OnComplete(() =>
             {
                 _effectsPool[ParticleTypeId.WaterSplash].Push(effect.gameObject);
                 _soundsPool[SoundTypeId.WaterSplash].Push(sound.gameObject);

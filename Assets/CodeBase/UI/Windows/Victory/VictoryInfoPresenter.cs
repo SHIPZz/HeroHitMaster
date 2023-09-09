@@ -18,14 +18,16 @@ namespace CodeBase.UI.Windows.Victory
         private readonly WindowService _windowService;
         private readonly SaveTriggerOnLevelEnd _saveTriggerOnLevel;
         private readonly CountEnemiesOnDeath _countEnemiesOnDeath;
+        private readonly Level _level;
         
         private int _deadEnemiesCount;
         private List<EnemySpawner> _enemySpawners;
 
         public VictoryInfoPresenter(VictoryInvoView victoryInvoView, 
             WindowProvider windowProvider, WindowService windowService, 
-            SaveTriggerOnLevelEnd saveTriggerOnLevel, CountEnemiesOnDeath countEnemiesOnDeath)
+            SaveTriggerOnLevelEnd saveTriggerOnLevel, CountEnemiesOnDeath countEnemiesOnDeath, Level level)
         {
+            _level = level;
             _countEnemiesOnDeath = countEnemiesOnDeath;
             _victoryInvoView = victoryInvoView;
             _windowService = windowService;
@@ -53,7 +55,7 @@ namespace CodeBase.UI.Windows.Victory
 
         private void FillVictoryInfo()
         {
-            _victoryInvoView.Show(_countEnemiesOnDeath.Quantity, 100);
+            _victoryInvoView.Show(_countEnemiesOnDeath.Quantity, _level.Reward);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using CodeBase.Constants;
 using DG.Tweening;
 using UnityEngine;
@@ -14,9 +14,11 @@ namespace CodeBase.Gameplay.Collision
         [SerializeField] private float _jumpDuration;
         [SerializeField] private float _enableNavMeshDelay = 1.5f;
         [SerializeField] private float _jumpPower;
-
+        
         private TriggerObserver _triggerObserver;
         private bool _isJumped;
+        
+        public event Action Jumped;
 
         private void Awake()
         {
@@ -44,8 +46,11 @@ namespace CodeBase.Gameplay.Collision
             DOTween.Sequence()
                 .AppendInterval(_delayBeforeJump)
                 .OnComplete(() =>
+                {
                     obj.transform
-                        .DOJump(_nextPosition.position, _jumpPower, 0, _jumpDuration));
+                        .DOJump(_nextPosition.position, _jumpPower, 0, _jumpDuration);
+                    Jumped?.Invoke();
+                });
         }
     }
 }

@@ -21,6 +21,7 @@ namespace CodeBase.Gameplay.Camera
 
         private bool _blockRotation;
         private Enemy _enemy;
+        private Vector3 _lastEnemyPosition;
 
         public RotateCameraOnEnemyKill(IProvider<CameraData> cameraProvider,
             IProvider<List<EnemySpawner>> enemySpawnersProvider,
@@ -80,7 +81,7 @@ namespace CodeBase.Gameplay.Camera
                 return;
             }
 
-            float angle = Mathf.Atan2(_cameraProvider.Get().transform.position.x, _enemy.transform.position.z) *
+            float angle = Mathf.Atan2(_cameraProvider.Get().transform.position.x, _lastEnemyPosition.z) *
                           Mathf.Rad2Deg;
 
             _cameraZoomer.Zoom(37, 0.7f, 0.3f, Ease.Flash);
@@ -91,7 +92,10 @@ namespace CodeBase.Gameplay.Camera
                     .SetEase(Ease.Flash));
         }
 
-        private void SetLastKilledEnemy(Enemy enemy) =>
+        private void SetLastKilledEnemy(Enemy enemy)
+        {
+            _lastEnemyPosition = enemy.transform.position;
             _enemy = enemy;
+        }
     }
 }
