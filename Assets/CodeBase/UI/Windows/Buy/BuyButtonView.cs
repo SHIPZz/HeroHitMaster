@@ -8,19 +8,13 @@ namespace CodeBase.UI.Windows.Buy
     {
         [SerializeField] private Button _button;
 
-        public Button Button => _button;
-
         public event Action Clicked;
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _button.onClick.AddListener(OnClicked);
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _button.onClick.RemoveListener(OnClicked);
-        }
 
         private void OnClicked() =>
             Clicked?.Invoke();

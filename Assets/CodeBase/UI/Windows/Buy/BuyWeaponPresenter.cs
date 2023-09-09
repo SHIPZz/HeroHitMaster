@@ -15,12 +15,17 @@ namespace CodeBase.UI.Windows.Buy
         private readonly WeaponStaticDataService _weaponStaticDataService;
         private readonly List<WeaponSelectorView> _selectorViews;
         private readonly CheckOutService _checkOutService;
+        private readonly AdCheckOutService _adCheckOutService;
+        private readonly AdBuyButtonView _adBuyButtonView;
         private WeaponTypeId _weaponId;
 
         public BuyWeaponPresenter(BuyButtonView buyButtonView, 
             IProvider<List<WeaponSelectorView>> weaponSelectorViewsProvider,
-            WeaponStaticDataService weaponStaticDataService, CheckOutService checkOutService)
+            WeaponStaticDataService weaponStaticDataService, CheckOutService checkOutService,
+            AdCheckOutService adCheckOutService, AdBuyButtonView adBuyButtonView)
         {
+            _adBuyButtonView = adBuyButtonView;
+            _adCheckOutService = adCheckOutService;
             _checkOutService = checkOutService;
             _selectorViews = weaponSelectorViewsProvider.Get();
             _weaponStaticDataService = weaponStaticDataService;
@@ -30,13 +35,21 @@ namespace CodeBase.UI.Windows.Buy
         public void Initialize()
         {
             _buyButtonView.Clicked += InvokeCheckOutService;
+            _adBuyButtonView.Clicked += InvokeAdCheckOutService;
             _selectorViews.ForEach(x=> x.Choosed += SetLastChoosedWeapon);
         }
 
         public void Dispose()
         {
             _buyButtonView.Clicked -= InvokeCheckOutService;
+            _adBuyButtonView.Clicked -= InvokeAdCheckOutService;
             _selectorViews.ForEach(x=> x.Choosed -= SetLastChoosedWeapon);
+        }
+
+        private void InvokeAdCheckOutService()
+        {
+            var adCount = _weaponStaticDataService.Get(_weaponId).Price.AdQuantity;
+            _adCheckOutService.Buy(adCount);
         }
 
         private void SetLastChoosedWeapon(WeaponTypeId weaponTypeId) => 

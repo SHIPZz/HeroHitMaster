@@ -23,13 +23,15 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private Image _lastWeaponIcon;
         private readonly ISaveSystem _saveSystem;
         private WeaponTypeId _lastWeaponType;
+        private AdCheckOutService _adCheckOutService;
 
         public ShopWeaponPresenter(IProvider<List<WeaponSelectorView>> weaponSelectorViewsProvider,
             WeaponStaticDataService weaponStaticDataService,
             ShopWeaponInfoView shopWeaponInfoView,
             IProvider<WeaponTypeId, Image> provider,
-            ISaveSystem saveSystem, CheckOutService checkOutService)
+            ISaveSystem saveSystem, CheckOutService checkOutService, AdCheckOutService adCheckOutService)
         {
+            _adCheckOutService = adCheckOutService;
             _checkOutService = checkOutService;
             _saveSystem = saveSystem;
             _provider = provider;
@@ -50,12 +52,14 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             _weaponSelectorViews.ForEach(x => x.Choosed += SetWeaponDataToView);
             _checkOutService.Succeeded += DisablePurchasedWeaponInfo;
+            _adCheckOutService.Succeeded += DisablePurchasedWeaponInfo;
         }
 
         public void Dispose()
         {
             _weaponSelectorViews.ForEach(x => x.Choosed -= SetWeaponDataToView);
             _checkOutService.Succeeded -= DisablePurchasedWeaponInfo;
+            _adCheckOutService.Succeeded -= DisablePurchasedWeaponInfo;
         }
 
         private void DisablePurchasedWeaponInfo()

@@ -70,7 +70,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 _adButton.transform.DOScaleX(1, ButtonScaleDelay)
                     .OnComplete(() => SetButtonScale(_adButton, true, true, true));
 
-                UpdateWeaponInfo(weaponData, true, "Посмотреть рекламу");
+                UpdateWeaponInfo(weaponData, true, $"0/{weaponData.Price.AdQuantity}");
 
                 return;
             }

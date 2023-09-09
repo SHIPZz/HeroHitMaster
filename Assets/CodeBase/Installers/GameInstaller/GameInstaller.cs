@@ -70,6 +70,7 @@ namespace CodeBase.Installers.GameInstaller
             BindBlockInputOnUi();
             BindSaveTriggers();
             BindCheckOutService();
+            BindAdCheckOutService();
             BindSlowMotion();
             BindEffectStorage();
             BindEffectProvider();
@@ -84,6 +85,9 @@ namespace CodeBase.Installers.GameInstaller
             BincCameraZoomer();
             BindRotateCameraPresenter();
         }
+
+        private void BindAdCheckOutService() => 
+            BindAsSingle<AdCheckOutService>();
 
         private void BindRotateCameraPresenter() =>
             Container

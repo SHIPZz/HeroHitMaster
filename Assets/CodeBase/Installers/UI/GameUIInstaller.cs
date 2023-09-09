@@ -41,6 +41,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private VictoryInvoView _victoryInvoView;
         [SerializeField] private LevelSliderView _levelSliderView;
         [SerializeField] private PopupInfoView _popupInfoView;
+        [SerializeField] private AdBuyButtonView _adBuyButtonView;
 
         public override void InstallBindings()
         {
@@ -63,7 +64,11 @@ namespace CodeBase.Installers.UI
             BindVictoryUI();
             BindLevelSliderUI();
             BindPopupUI();
+            BindAdBuyWeaponButtonView();
         }
+
+        private void BindAdBuyWeaponButtonView() => 
+            Container.BindInstance(_adBuyButtonView);
 
         private void BindPopupUI()
         {

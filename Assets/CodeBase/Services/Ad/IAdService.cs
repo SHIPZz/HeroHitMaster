@@ -9,7 +9,7 @@ namespace CodeBase.Services.Ad
         event Action ShortAdClosed;
         event Action ShortAdOpened;
 
-        void PlayShortAd(Action startCallback, Action endCallback);
+        void PlayShortAd(Action startCallback, Action<bool> onCloseCallback);
         void PlayLongAd(Action startCallback, Action endCallback);
     }
 }
