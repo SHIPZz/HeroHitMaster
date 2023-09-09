@@ -1,10 +1,11 @@
+using CodeBase.Gameplay.Spawners;
 using UnityEditor;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.Spawners
+namespace Editor
 {
     [CustomEditor(typeof(EnemySpawner))]
-    public class EnemySpawnerEditor : Editor
+    public class EnemySpawnerEditor : UnityEditor.Editor
     {
         [DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NonSelected)]
         public static void RenderCustomGizmo(EnemySpawner spawner, GizmoType gizmoType)

@@ -1,4 +1,5 @@
 ﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Data;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace CodeBase.Gameplay.Character.Enemy
     {
         private NavMeshAgent _navMeshAgent;
         private bool _isBlocked = true;
-        private TriggerObserver _triggerObserver;
+        private AggroZone _aggroZone;
         private Vector3 _target;
         private EnemyAnimator _enemyAnimator;
         private bool _isInitialized;
@@ -31,15 +32,13 @@ namespace CodeBase.Gameplay.Character.Enemy
             _navMeshAgent.SetDestination(_target);
         }
 
-        private void OnDisable()
-        {
-            _triggerObserver.Entered -= SetTarget;
-        }
+        private void OnDisable() => 
+        _aggroZone.PlayerEntered -= SetTarget;
 
-        public void SetAggroZone(TriggerObserver aggroZone)
+        public void SetAggroZone(AggroZone aggroZone)
         {
-            _triggerObserver = aggroZone;
-            _triggerObserver.Entered += SetTarget;
+            _aggroZone = aggroZone;
+            _aggroZone.PlayerEntered += SetTarget;
         }
 
         public void Block()
@@ -62,12 +61,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             _isBlocked = false;
         }
 
-        private void SetTarget(Collider other)
-        {
-            if (!other.gameObject.TryGetComponent(out Players.Player player))
-                return;
-
+        private void SetTarget(Player player) => 
             _target = player.transform.position;
-        }
     }
 }

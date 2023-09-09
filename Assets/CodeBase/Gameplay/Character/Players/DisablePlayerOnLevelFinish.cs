@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Services.SaveSystems;
+using CodeBase.Services.SaveSystems.SaveTriggers;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players

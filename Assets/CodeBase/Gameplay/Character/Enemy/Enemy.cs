@@ -46,7 +46,6 @@ namespace CodeBase.Gameplay.Character.Enemy
             if (_isExploded)
                 return;
 
-            print("exploded");
             _isExploded = true;
             QuickDestroyed?.Invoke(this);
             gameObject.SetActive(false);

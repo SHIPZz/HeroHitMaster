@@ -1,7 +1,7 @@
 ﻿namespace CodeBase.Infrastructure
 {
-    public interface IPayloadedState<T>
+    public interface IPayloadedState<TPayload> : IExit
     {
-        
+        void Enter(TPayload payload);
     }
 }

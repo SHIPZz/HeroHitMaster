@@ -10,7 +10,7 @@ namespace CodeBase.Gameplay.Collision
     public class PlaySoundOnMoveTrigger : MonoBehaviour
     {
         [SerializeField] private SoundTypeId _soundTypeId;
-        [SerializeField] private MovePlayerOnTrigger _movePlayerOnTrigger;
+        [SerializeField] private BoatMoveOnPlayerTrigger boatMoveOnPlayerTrigger;
 
         private AudioSource _targetSound;
 
@@ -22,14 +22,14 @@ namespace CodeBase.Gameplay.Collision
 
         private void OnEnable()
         {
-            _movePlayerOnTrigger.MovementStarted += Play;
-            _movePlayerOnTrigger.MovementCompleted += Stop;
+            boatMoveOnPlayerTrigger.MovementStarted += Play;
+            boatMoveOnPlayerTrigger.MovementCompleted += Stop;
         }
 
         private void OnDisable()
         {
-            _movePlayerOnTrigger.MovementStarted -= Play;
-            _movePlayerOnTrigger.MovementCompleted -= Stop;
+            boatMoveOnPlayerTrigger.MovementStarted -= Play;
+            boatMoveOnPlayerTrigger.MovementCompleted -= Stop;
         }
 
         private void Stop()

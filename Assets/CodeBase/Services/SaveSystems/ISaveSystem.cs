@@ -7,7 +7,5 @@ namespace CodeBase.Services.SaveSystems
         void Save<T>(T data);
 
         UniTask<T> Load<T>() where T : new();
-        // void Save(WorldData worldData);
-        // UniTask<WorldData> Load();
     }
 }

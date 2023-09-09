@@ -38,14 +38,28 @@ namespace CodeBase.Gameplay.Camera
         {
             _enemySpawners.ForEach(x => x.Disabled += SetLastKilledEnemy);
             _enemyQuantityZones.ForEach(x => x.ZoneCleared += Do);
-            _explosionBarrels.ForEach(x => x.StartedExplode += BlockRotation);
+
+            foreach (var explosionBarrel in _explosionBarrels)
+            {
+                if (explosionBarrel is null)
+                    continue;
+
+                explosionBarrel.Exploded += BlockRotation;
+            }
         }
 
         public void Dispose()
         {
             _enemySpawners.ForEach(x => x.Disabled -= SetLastKilledEnemy);
             _enemyQuantityZones.ForEach(x => x.ZoneCleared -= Do);
-            _explosionBarrels.ForEach(x => x.StartedExplode -= BlockRotation);
+            
+            foreach (var explosionBarrel in _explosionBarrels)
+            {
+                if (explosionBarrel is null)
+                    continue;
+
+                explosionBarrel.Exploded -= BlockRotation;
+            }
         }
 
         private void BlockRotation()
@@ -62,7 +76,7 @@ namespace CodeBase.Gameplay.Camera
 
             if (_blockRotation)
             {
-                _cameraZoomer.Zoom(75, 1f, 0.5f,Ease.Linear);
+                _cameraZoomer.Zoom(75, 1f, 0.5f, Ease.Linear);
                 return;
             }
 
@@ -70,7 +84,7 @@ namespace CodeBase.Gameplay.Camera
                           Mathf.Rad2Deg;
 
             _cameraZoomer.Zoom(37, 0.7f, 0.3f, Ease.Flash);
-            
+
             _cameraProvider.Get().transform.DORotate(new Vector3(0, angle, 0), 0.8f)
                 .SetEase(Ease.Flash)
                 .OnComplete(() => _cameraProvider.Get().transform.DORotate(new Vector3(0, 0, 0), 0.6f)

@@ -1,3 +1,6 @@
+using System.Collections;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -9,7 +12,7 @@ namespace CodeBase.Gameplay.Bullet
         [SerializeField] private Vector3 _bulletModelRotation;
         [SerializeField] private Transform _knifeEnd;
         [SerializeField] private bool _needSetParent = true;
-        
+
         private ThrowingBullet _throwingBullet;
         private bool _blockedRotation;
         private Coroutine _moveCoroutine;
@@ -21,7 +24,6 @@ namespace CodeBase.Gameplay.Bullet
             _throwingBullet = GetComponent<ThrowingBullet>();
             SetInitialRotation(_throwingBullet);
             GetComponent<Collider>().isTrigger = false;
-            RigidBody.isKinematic = false;
             RigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             RigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         }
@@ -45,7 +47,8 @@ namespace CodeBase.Gameplay.Bullet
             RigidBody.angularVelocity = Vector3.zero;
             SetInitialRotation(_throwingBullet);
 
-            if (target.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder) && _needSetParent)
+            if (target.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder) &&
+                _needSetParent)
             {
                 RigidBody.interpolation = RigidbodyInterpolation.None;
                 transform.SetParent(target.transform);
@@ -63,8 +66,6 @@ namespace CodeBase.Gameplay.Bullet
                 transform.eulerAngles.z);
 
             transform.rotation = Quaternion.Euler(startTargetRotation);
-
-            // throwingBullet.BulletModel.localRotation = Quaternion.Euler(_bulletModelRotation);
         }
     }
 }

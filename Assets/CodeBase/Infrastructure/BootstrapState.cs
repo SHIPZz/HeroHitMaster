@@ -1,18 +1,30 @@
-﻿namespace CodeBase.Infrastructure
-{
-    public class BootstrapState : IEnter
-    {
-        private IGameStateMachine _gameStateMachine;
+﻿using CodeBase.Services.SaveSystems;
+using CodeBase.Services.SaveSystems.Data;
+using UnityEngine;
 
-        public BootstrapState(IGameStateMachine gameStateMachine)
+namespace CodeBase.Infrastructure
+{
+    public class BootstrapState : IState, IEnter
+    {
+        private readonly IGameStateMachine _gameStateMachine;
+        private readonly ISaveSystem _saveSystem;
+
+        public BootstrapState(IGameStateMachine gameStateMachine, ISaveSystem saveSystem)
         {
+            _saveSystem = saveSystem;
             _gameStateMachine = gameStateMachine;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            //init sdk
-            _gameStateMachine.ChangeState<LevelLoadState>();
+            // while (!YandexGamesSdk.IsInitialized)
+            // {
+            //     await UniTask.Yield();
+            // }
+
+            var levelData = await _saveSystem.Load<LevelData>();
+
+            _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }
 }

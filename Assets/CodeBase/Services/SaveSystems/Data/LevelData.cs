@@ -5,6 +5,6 @@ namespace CodeBase.Services.SaveSystems.Data
     [Serializable]
     public class LevelData
     {
-        public int Id;
+        public int Id = 1;
     }
 }

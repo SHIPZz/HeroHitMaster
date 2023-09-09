@@ -1,8 +1,8 @@
-﻿using Agava.YandexGames;
-using CodeBase.Infrastructure;
+﻿using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Inputs.InputService;
+using CodeBase.Services.Level;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.SaveSystems;
@@ -10,7 +10,7 @@ using Zenject;
 
 namespace CodeBase.Installers
 {
-    public class BootstrapInstaller : MonoInstaller
+    public class BootstrapInstaller : MonoInstaller, IInitializable
     {
         public override void InstallBindings()
         {
@@ -25,7 +25,20 @@ namespace CodeBase.Installers
             BindGlobalSlowMotionSystem();
             BindPauseService();
             BindPauseOnFocusChanged();
+            BindLevelService();
+            Container.BindInterfacesTo<BootstrapInstaller>()
+                .FromInstance(this).AsSingle();
         }
+
+        public void Initialize()
+        {
+            var gameStateMachine = Container.Resolve<IGameStateMachine>();
+            gameStateMachine.ChangeState<BootstrapState>();
+        }
+
+        private void BindLevelService() =>
+            Container.BindInterfacesTo<LevelService>()
+                .AsSingle();
 
         private void BindPauseOnFocusChanged() =>
             Container
@@ -49,9 +62,9 @@ namespace CodeBase.Installers
             //         .To<YandexSaveSystem>()
             //         .AsSingle();
             // else
-                Container.Bind<ISaveSystem>()
-                    .To<PlayerPrefsSaveSystem>()
-                    .AsSingle();
+            Container.Bind<ISaveSystem>()
+                .To<PlayerPrefsSaveSystem>()
+                .AsSingle();
         }
 
         private void BindStateFactory() =>

@@ -13,7 +13,7 @@ namespace CodeBase.Gameplay.Spawners
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private EnemyTypeId _enemyTypeId;
-        [SerializeField] private TriggerObserver _aggroZone;
+        [SerializeField] private AggroZone _aggroZone;
 
         private EnemyFactory _enemyFactory;
         private float _destroyDelay = 0;
@@ -30,7 +30,7 @@ namespace CodeBase.Gameplay.Spawners
             _enemyFactory = enemyFactory;
         }
 
-        public void Init(Action<Enemy, TriggerObserver> callback)
+        public void Init(Action<Enemy, AggroZone> callback)
         {
             Enemy enemy = _enemyFactory.CreateBy(_enemyTypeId);
             _enemy = enemy;

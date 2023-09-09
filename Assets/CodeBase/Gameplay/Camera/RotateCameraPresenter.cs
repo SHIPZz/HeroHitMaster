@@ -3,7 +3,6 @@ using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Providers;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Gameplay.Camera
 {
@@ -26,9 +25,10 @@ namespace CodeBase.Gameplay.Camera
             _playerProvider.Changed -= SetPlayer;
         }
 
-        public void Init(RotateCamera rotateCamera)
+        public void Init(RotateCamera rotateCamera, Player player)
         {
             _rotateCamera = rotateCamera;
+            SetPlayer(player);
             Subscribe();
         }
 

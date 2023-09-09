@@ -2,6 +2,8 @@
 using System.Collections;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Data;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -32,17 +34,13 @@ namespace CodeBase.Gameplay.Bullet
             TriggerObserver = GetComponent<TriggerObserver>();
             RotateSpeed = BulletStaticDataService.GetBy(Bullet.WeaponTypeId).RotationSpeed;
             MoveSpeed = BulletStaticDataService.GetBy(Bullet.WeaponTypeId).Speed;
-            RigidBody.isKinematic = false;
         }
 
         private void OnEnable() => 
             TriggerObserver.CollisionEntered += OnCollisionEntered;
 
-        private void FixedUpdate()
+        protected void FixedUpdate()
         {
-            if (MoveDirection == Vector3.zero)
-                return;
-
             if (IsHit)
             {
                 RigidBody.velocity = Vector3.zero;
@@ -79,9 +77,9 @@ namespace CodeBase.Gameplay.Bullet
         {
             RigidBody.position = startPosition;
             transform.position = startPosition;
-            // transform.localPosition = startPosition;
             MoveDirection = target - startPosition;
             MoveDirection = MoveDirection.normalized;
+            transform.forward = MoveDirection;
         }
     }
 }

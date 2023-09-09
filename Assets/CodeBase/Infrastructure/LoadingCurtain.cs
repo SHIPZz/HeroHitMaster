@@ -19,11 +19,10 @@ namespace CodeBase.Infrastructure
         private void Awake() => 
             DontDestroyOnLoad(this);
 
-        public void Show()
+        public void Show(float loadSliderDuration)
         {
             _canvasGroup.gameObject.SetActive(true);
-            _loadingSlider.DOValue(_loadingSlider.maxValue, SliderValueDuration).SetEase(Ease.InQuint)
-                .OnComplete(() => Hide(null));
+            _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetEase(Ease.Flash);
             _canvasGroup.alpha = 1;
         }
 

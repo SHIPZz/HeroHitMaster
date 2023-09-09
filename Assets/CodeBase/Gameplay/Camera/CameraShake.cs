@@ -8,15 +8,15 @@ namespace CodeBase.Gameplay.Camera
 {
     public class CameraShake : MonoBehaviour
     {
-        [Header("Noise")] [SerializeField] private float _perlinNoiseTimeScale;
-
         [Header("Recoil")] [SerializeField] private float _tension = 10;
         [SerializeField] private float _damping = 10;
         [SerializeField] private float _impulse = 10;
 
-        private Vector3 _shakeAngles = new();
-        private Vector3 _recoilAngles = new();
-        private Vector3 _recoilVelocity = new();
+        [Header("Noise")] private float _perlinNoiseTimeScale;
+
+        private Vector3 _shakeAngles;
+        private Vector3 _recoilAngles;
+        private Vector3 _recoilVelocity;
 
         private float _amplitude = 5;
         private float _shakeTimer = -1;
@@ -24,16 +24,14 @@ namespace CodeBase.Gameplay.Camera
         private bool _canShake = false;
         private Transform _transform;
 
-        private void Awake()
-        {
-            _transform = GetComponent<CameraData>().Camera.transform;
-        }
+        private void Awake() => 
+        _transform = GetComponent<CameraData>().Camera.transform;
 
         private void Update()
         {
             UpdateShake();
             UpdateRecoil();
-            
+
             _transform.localEulerAngles = _shakeAngles + _recoilAngles;
         }
 
@@ -62,7 +60,7 @@ namespace CodeBase.Gameplay.Camera
 
         public void MakeShake(float perlinNoiseTimeScale)
         {
-            if (_perlinNoiseTimeScale > perlinNoiseTimeScale && _perlinNoiseTimeScale != 0)
+            if (_perlinNoiseTimeScale > perlinNoiseTimeScale)
                 return;
 
             _perlinNoiseTimeScale = perlinNoiseTimeScale;
@@ -70,8 +68,10 @@ namespace CodeBase.Gameplay.Camera
             DOTween.Sequence().AppendInterval(1f).OnComplete(DisableShake);
         }
 
-        private void DisableShake() =>
+        private void DisableShake()
+        {
             _canShake = false;
+        }
 
         public void MakeRecoil()
         {

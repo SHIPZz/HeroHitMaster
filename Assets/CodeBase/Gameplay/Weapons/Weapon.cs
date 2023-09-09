@@ -30,10 +30,20 @@ namespace CodeBase.Gameplay.Weapons
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
-            var bullet = _bulletStorage.Pop(WeaponTypeId);
+            Bullet.Bullet bullet = _bulletStorage.Pop(WeaponTypeId);
+            PrepareBullet(target, initialPosition, bullet);
             bullet.StartMovement(target, initialPosition);
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => _bulletStorage.Push(bullet));
             Shooted?.Invoke();
+        }
+
+        private void PrepareBullet(Vector3 target, Vector3 initialPosition, Bullet.Bullet bullet)
+        {
+            bullet.gameObject.SetActive(false);
+            Vector3 moveDirection = target - initialPosition;
+            moveDirection = moveDirection.normalized;
+            bullet.transform.forward = moveDirection;
+            DOTween.Sequence().AppendInterval(0.010f).OnComplete(() => bullet.gameObject.SetActive(true));
         }
 
         protected async UniTask Init(WeaponTypeId weaponTypeId)

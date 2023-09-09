@@ -1,8 +1,10 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure
 {
-    public class LevelLoadState : IState, IEnter
+    public class LevelLoadState : IState, IPayloadedEnter<int>, IExit
     {
         private IGameStateMachine _gameStateMachine;
         private ILoadingCurtain _loadingCurtain;
@@ -13,13 +15,16 @@ namespace CodeBase.Infrastructure
             _gameStateMachine = gameStateMachine;
         }
 
-        public void Enter()
+        public async void Enter(int payload)
         {
-            _loadingCurtain.Show();
-            DOTween.Sequence().AppendInterval(4f).OnComplete(() =>
-            {
-                _loadingCurtain.Hide(() => _gameStateMachine.ChangeState<GameState>());
-            });
+            _loadingCurtain.Show(1f);
+            await SceneManager.LoadSceneAsync(payload);
+            _loadingCurtain.Hide(null);
+        }
+
+        public void Exit()
+        {
+            
         }
     }
 }

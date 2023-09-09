@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WeaponTypeId>k__BackingField: 10
   <BulletModel>k__BackingField: {fileID: 3028408181343812833}
+  <Rotator>k__BackingField: {fileID: 0}
 --- !u!114 &1229928342717754314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212af915d3d848cdb05fb3f3a43cf399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blockRotation: 0
+  _needBlockRotation: 0
   _bulletModelRotation: {x: 0, y: 95, z: 0}
   _knifeEnd: {fileID: 3494372301916429978}
   _needSetParent: 1
@@ -157,7 +158,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1

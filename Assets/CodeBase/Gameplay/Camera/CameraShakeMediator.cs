@@ -13,11 +13,12 @@ using Zenject;
 
 namespace CodeBase.Gameplay.Camera
 {
-    public class CameraShakeMediator : IDisposable
+    public class CameraShakeMediator : IInitializable, IDisposable
     {
         private readonly IProvider<Dictionary<WeaponTypeId, GameObjectPool>> _bulletsPoolProvider;
         private readonly List<ExplosionBarrel.ExplosionBarrel> _explosionBarrels;
         private readonly WeaponProvider _weaponProvider;
+        private readonly List<Enemy> _enemies = new();
         
         private readonly List<WeaponTypeId> _recoilWeapons = new()
         {
@@ -29,7 +30,6 @@ namespace CodeBase.Gameplay.Camera
         private CameraShake _cameraShake;
         private IProvider<Weapon> _provider;
         private Weapon _weapon;
-        private List<Enemy> _enemies = new();
         private bool _canShake = true;
         private CameraZoomer _cameraZoomer;
 
@@ -41,15 +41,32 @@ namespace CodeBase.Gameplay.Camera
             _weaponProvider = weaponProvider.Get();
             _weaponProvider.Changed += SetWeapon;
             _explosionBarrels = barrelsProvider.Get();
-            _explosionBarrels.ForEach(x => x.Exploded += MakeHardShake);
         }
 
         public void SetCamerShake(CameraShake cameraShake) =>
             _cameraShake = cameraShake;
 
+        public void Initialize()
+        {
+            foreach (var explosionBarrel in _explosionBarrels)
+            {
+                if(explosionBarrel is null)
+                    continue;
+
+                explosionBarrel.Exploded += MakeHardShake;
+            }
+        }
+
         public void Dispose()
         {
-            _explosionBarrels.ForEach(x => x.Exploded -= MakeHardShake);
+            foreach (var explosionBarrel in _explosionBarrels)
+            {
+                if(explosionBarrel is null)
+                    continue;
+
+                explosionBarrel.Exploded -= MakeHardShake;
+            }
+            
             _enemies.ForEach(x =>
             {
                 x.Dead -= MakeShakeAfterEnemyDeath;
@@ -85,7 +102,7 @@ namespace CodeBase.Gameplay.Camera
             if(!_canShake)
                 return;
             
-            MakeShake(0.5f);
+            MakeShake(2f);
         }
 
         private void MakeHardShake() => 
