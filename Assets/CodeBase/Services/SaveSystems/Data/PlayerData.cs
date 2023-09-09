@@ -11,6 +11,6 @@ namespace CodeBase.Services.SaveSystems.Data
         public List<WeaponTypeId> PurchasedWeapons = new() 
             { WeaponTypeId.ThrowingKnifeShooter };
 
-        public WeaponTypeId LastWeaponType;
+        public WeaponTypeId LastWeaponId = WeaponTypeId.ThrowingKnifeShooter;
     }
 }

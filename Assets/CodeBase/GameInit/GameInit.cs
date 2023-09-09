@@ -27,7 +27,6 @@ namespace CodeBase.GameInit
         private readonly PlayerCameraFactory _playerCameraFactory;
         private readonly IProvider<LocationTypeId, Transform> _locationProvider;
         private readonly IProvider<Camera> _cameraProvider;
-        private readonly IProvider<Player> _playerProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly WeaponSelector _weaponSelector;
         private readonly WalletPresenter _walletPresenter;
@@ -39,13 +38,12 @@ namespace CodeBase.GameInit
         private readonly SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
         private readonly LevelSliderPresenter _levelSliderPresenter;
         private readonly WaterSplashPoolInitializer _waterSplashPoolInitializer;
-        private CameraShakeMediator _cameraShakeMediator;
-        private RotateCameraPresenter _rotateCameraPresenter;
+        private readonly CameraShakeMediator _cameraShakeMediator;
+        private readonly RotateCameraPresenter _rotateCameraPresenter;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
             IProvider<Camera> cameraProvider,
-            IProvider<Player> playerProvider,
             IPlayerStorage playerStorage,
             WeaponSelector weaponSelector, 
             WalletPresenter walletPresenter,
@@ -72,7 +70,6 @@ namespace CodeBase.GameInit
             _playerCameraFactory = playerCameraFactory;
             _locationProvider = locationProvider;
             _cameraProvider = cameraProvider;
-            _playerProvider = playerProvider;
             _playerStorage = playerStorage;
         }
 
@@ -88,18 +85,26 @@ namespace CodeBase.GameInit
             }));
             
             var playerData = await _saveSystem.Load<PlayerData>();
-            _walletPresenter.Init(playerData.Money);
-            _shopWeaponPresenter.Init(WeaponTypeId.GreenWeapon);
-            
-            InitializeInitialWeapon(WeaponTypeId.ThrowingKnifeShooter);
+            InitializeUIPresenters(playerData);
+            InitializeInitialWeapon(playerData.LastWeaponId);
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
+            InitializeCamera(player);
+            _waterSplashPoolInitializer.Init();
+        }
+
+        private void InitializeUIPresenters(PlayerData playerData)
+        {
+            _walletPresenter.Init(playerData.Money);
+            _shopWeaponPresenter.Init(playerData.LastWeaponId);
+        }
+
+        private void InitializeCamera(Player player)
+        {
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             var rotateCamera = playerCameraFollower.GetComponent<RotateCamera>();
             _rotateCameraPresenter.Init(rotateCamera, player);
-            
             _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());
             _cameraShakeMediator.Init();
-            _waterSplashPoolInitializer.Init();
         }
 
         private void InitializeInitialWeapon(WeaponTypeId weaponTypeId)

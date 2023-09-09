@@ -7,12 +7,10 @@ namespace CodeBase.Services.CheckOut
     {
         private readonly Wallet _wallet;
 
-        public CheckOutService(Wallet wallet)
-        {
-            _wallet = wallet;
-        }
-
         public event Action Succeeded;
+        
+        public CheckOutService(Wallet wallet) => 
+        _wallet = wallet;
 
         public void Buy(int price)
         {

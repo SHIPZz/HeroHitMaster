@@ -14,6 +14,8 @@ namespace CodeBase.UI.Weapons
         [OdinSerialize] public Dictionary<WeaponTypeId, WeaponSelectorView> PopupIcons { get; private set; }
         [OdinSerialize] private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
 
+        public Dictionary<WeaponTypeId, Image> ShopWeaponIcons => _shopWeaponIcons;
+
         public Dictionary<WeaponTypeId, WeaponSelectorView> Get() => 
             Icons;
 

@@ -7,7 +7,7 @@ namespace CodeBase.Infrastructure
     public class LevelLoadState : IState, IPayloadedEnter<int>, IExit
     {
         private IGameStateMachine _gameStateMachine;
-        private ILoadingCurtain _loadingCurtain;
+        private readonly ILoadingCurtain _loadingCurtain;
 
         public LevelLoadState(IGameStateMachine gameStateMachine, ILoadingCurtain loadingCurtain)
         {

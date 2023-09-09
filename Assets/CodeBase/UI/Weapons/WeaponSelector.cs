@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.CheckOut;
@@ -31,11 +32,20 @@ namespace CodeBase.UI.Weapons
             _weaponStorage = weaponStorage;
         }
 
-        public void Select()
+        public async void Select()
         {
+            await SaveLastSelectedWeapon();
+            
             Weapon weapon = _weaponStorage.Get(_lastWeaponId);
             _weaponProvider.Set(weapon);
             NewWeaponChanged?.Invoke(_lastWeaponId);
+        }
+
+        private async Task SaveLastSelectedWeapon()
+        {
+            var playerData = await _saveSystem.Load<PlayerData>();
+            playerData.LastWeaponId = _lastWeaponId;
+            _saveSystem.Save(playerData);
         }
 
         public async void SetLastWeaponChoosed(WeaponTypeId weaponTypeId)

@@ -31,6 +31,7 @@
         River,
         WaterSplash,
         Victory,
-        BarrelExplosion
+        BarrelExplosion,
+        PurchasedWeapon
     }
 }

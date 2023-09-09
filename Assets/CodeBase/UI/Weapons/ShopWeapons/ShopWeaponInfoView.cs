@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
+using CodeBase.Services.Providers;
+using CodeBase.Services.Storages.Sound;
 using DG.Tweening;
-using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace CodeBase.UI.Weapons.ShopWeapons
 {
@@ -19,6 +20,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         [SerializeField] private TextMeshProUGUI _adPrice;
         [SerializeField] private Button _adButton;
         [SerializeField] private Button _buyButton;
+        [SerializeField] private List<ParticleSystem> _effects;
 
         private readonly Dictionary<PriceTypeId, bool> _priceCheckerForAd = new()
         {
@@ -27,9 +29,14 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         };
 
         private readonly Dictionary<PriceTypeId, TextMeshProUGUI> _weaponPrices = new();
+        private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
+        private AudioSource _purchasedWeaponSound;
 
-        public void Init()
+        [Inject]
+        private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage)
         {
+            _shopWeaponIcons = provider.Get().ShopWeaponIcons;
+            _purchasedWeaponSound = soundStorage.Get(SoundTypeId.PurchasedWeapon);
             _weaponPrices[PriceTypeId.Ad] = _adPrice;
             _weaponPrices[PriceTypeId.Money] = _price;
         }
@@ -80,10 +87,10 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             foreach (var keyValue in _weaponPrices)
             {
-                if(keyValue.Key != pricePriceTypeId)
+                if (keyValue.Key != pricePriceTypeId)
                     keyValue.Value.transform.parent.gameObject.SetActive(false);
             }
-            
+
             _weaponPrices[pricePriceTypeId].transform.parent.gameObject.SetActive(isActive);
         }
 
@@ -107,11 +114,19 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _name.transform.DOScaleX(1, 0.2f);
             SetActivePrice(showPrice, weaponData.Price.PriceTypeId);
 
-            if (showPrice)
-            {
-                TextMeshProUGUI targetPrice = _weaponPrices[weaponData.Price.PriceTypeId];
-                targetPrice.text = $"<color=#ffdc30> {priceText}</color>";
-            }
+            if (!showPrice) 
+                return;
+                
+            TextMeshProUGUI targetPrice = _weaponPrices[weaponData.Price.PriceTypeId];
+            targetPrice.text = $"<color=#ffdc30> {priceText}</color>";
+        }
+
+        public void ShowEffectOnPurchasedWeapon(WeaponTypeId weaponDataWeaponTypeId)
+        {
+            ParticleSystem randomEffect = _effects[Random.Range(0, _effects.Count - 1)];
+            randomEffect.transform.position = _shopWeaponIcons[weaponDataWeaponTypeId].transform.position;
+            randomEffect.Play();
+            _purchasedWeaponSound.Play();
         }
     }
 }

@@ -43,7 +43,6 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             if(_provider.Get(weaponTypeId) == null)
                 return;
             
-            _shopWeaponInfoView.Init();
             SetWeaponDataToView(weaponTypeId);
         }
 
@@ -63,6 +62,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             WeaponData weaponData = _weaponStaticDataService.Get(_lastWeaponType);
             _shopWeaponInfoView.DisableBuyInfo(weaponData, false);
+            _shopWeaponInfoView.ShowEffectOnPurchasedWeapon(weaponData.WeaponTypeId);
         }
 
         private async void SetWeaponDataToView(WeaponTypeId weaponTypeId)
