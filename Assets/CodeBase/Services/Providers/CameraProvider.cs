@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Camera;
+﻿using System;
+using CodeBase.Gameplay.Camera;
 using UnityEngine;
 
 namespace CodeBase.Services.Providers
@@ -7,17 +8,17 @@ namespace CodeBase.Services.Providers
     {
         private Camera _camera;
         private CameraData _cameraData;
-        
-        public Camera Get() => 
+
+        public Camera Get() =>
             _camera;
 
-        public void Set(CameraData cameraData) => 
+        public void Set(CameraData cameraData) =>
             _cameraData = cameraData;
 
         public void Set(Camera camera) => 
             _camera = camera;
 
-        CameraData IProvider<CameraData>.Get() => 
-        _cameraData;
+        CameraData IProvider<CameraData>.Get() =>
+            _cameraData;
     }
 }

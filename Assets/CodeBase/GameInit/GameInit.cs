@@ -54,7 +54,8 @@ namespace CodeBase.GameInit
             CountEnemiesOnDeath countEnemiesOnDeath, 
             LevelSliderPresenter levelSliderPresenter, 
             WaterSplashPoolInitializer waterSplashPoolInitializer, 
-            CameraShakeMediator cameraShakeMediator, RotateCameraPresenter rotateCameraPresenter)
+            CameraShakeMediator cameraShakeMediator, 
+            RotateCameraPresenter rotateCameraPresenter)
         {
             _rotateCameraPresenter = rotateCameraPresenter;
             _cameraShakeMediator = cameraShakeMediator;
@@ -85,6 +86,7 @@ namespace CodeBase.GameInit
             }));
             
             var playerData = await _saveSystem.Load<PlayerData>();
+            playerData.LastWeaponId = WeaponTypeId.ThrowingDynamiteShooter;
             InitializeUIPresenters(playerData);
             InitializeInitialWeapon(playerData.LastWeaponId);
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);

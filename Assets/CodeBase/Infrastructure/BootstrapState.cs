@@ -1,5 +1,6 @@
 ﻿using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
+using DG.Tweening;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
@@ -23,9 +24,8 @@ namespace CodeBase.Infrastructure
             // }
 
             var levelData = await _saveSystem.Load<LevelData>();
-            levelData.Id = 1;
-            _saveSystem.Save(levelData);
-            
+            // levelData.Id = 1;
+            // _saveSystem.Save(levelData);
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }

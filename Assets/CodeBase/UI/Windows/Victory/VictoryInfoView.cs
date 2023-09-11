@@ -2,11 +2,12 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows.Victory
 {
-    public class VictoryInvoView : MonoBehaviour
+    public class VictoryInfoView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _deadEnemyQuantity;
         [SerializeField] private TextMeshProUGUI _earnedMoney;
@@ -14,6 +15,7 @@ namespace CodeBase.UI.Windows.Victory
         [SerializeField] private float _buttonWidth = 430;
         [SerializeField] private float _buttonHeight = 150;
         [SerializeField] private TMP_Text _continueText;
+        [SerializeField] private TextMeshProUGUI _levelText;
         
         private bool _textChanged;
 
@@ -28,6 +30,7 @@ namespace CodeBase.UI.Windows.Victory
         {
             AnimateTextChange(targetEnemyCount, _deadEnemyQuantity);
             AnimateTextChange(targetMoneyCount, _earnedMoney);
+            _levelText.text = SceneManager.GetActiveScene().buildIndex.ToString();
 
             while (!_textChanged)
             {

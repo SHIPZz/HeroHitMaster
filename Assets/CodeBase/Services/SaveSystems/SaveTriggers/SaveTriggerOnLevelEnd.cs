@@ -40,7 +40,6 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         {
             var levelData =  await _saveSystem.Load<LevelData>();
             var playerData = await _saveSystem.Load<PlayerData>();
-            print(SceneManager.GetActiveScene().buildIndex + 0);
             levelData.Id = SceneManager.GetActiveScene().buildIndex + 0;
             levelData.Id++;
             playerData.Money += _level.Reward;

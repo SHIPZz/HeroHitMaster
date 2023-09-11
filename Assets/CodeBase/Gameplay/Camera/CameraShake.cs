@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.ScriptableObjects.Bullet;
+﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -23,9 +22,13 @@ namespace CodeBase.Gameplay.Camera
         private float _duration = 5;
         private bool _canShake = false;
         private Transform _transform;
+        private Vector3 _initalRotation;
 
-        private void Awake() => 
-        _transform = GetComponent<CameraData>().Camera.transform;
+        private void Awake()
+        {
+            _transform = GetComponent<CameraData>().Camera.transform;
+            _initalRotation = transform.eulerAngles;
+        }
 
         private void Update()
         {
@@ -34,12 +37,12 @@ namespace CodeBase.Gameplay.Camera
 
             _transform.localEulerAngles = _shakeAngles + _recoilAngles;
         }
-
+        
         private void UpdateShake()
         {
             if (!_canShake)
             {
-                _shakeAngles = Vector3.Lerp(_shakeAngles, Vector3.zero, 3 * Time.deltaTime);
+                _shakeAngles = Vector3.Lerp(_shakeAngles, _initalRotation, 3 * Time.deltaTime);
                 return;
             }
 

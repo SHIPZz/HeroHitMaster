@@ -34,6 +34,9 @@
         BarrelExplosion,
         PurchasedWeapon,
         PlayerJump,
-        FocusChanged
+        FocusChanged,
+        ButtonClick,
+        ScrollClick,
+        WeaponButtonClick
     }
 }

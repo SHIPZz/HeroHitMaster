@@ -11,19 +11,14 @@ namespace CodeBase.Gameplay.EnemyBodyParts
     {
         private const float AutoDestroyDelay = 10f;
         private const float PositionY = 1;
-        private const float Force = 200f;
+        private const float Force = 400f;
         private const float RandomValueForVector = 1f;
 
         [SerializeField] private float _transformUpPosition;
         [SerializeField] private List<Rigidbody> _parts;
 
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
-
-        private readonly List<Vector3> _rotationVectors = new()
-        {
-            new Vector3(0, 360, 0)
-        };
-
+        
         public void SetHeightPosition() =>
             transform.position += new Vector3(0, _transformUpPosition, 0);
 
@@ -31,17 +26,12 @@ namespace CodeBase.Gameplay.EnemyBodyParts
         {
             gameObject.SetActive(true);
 
-
             _parts.ForEach(x =>
             {
                 x.isKinematic = false;
                 Vector3 randomDirection = new Vector3(Random.Range(-RandomValueForVector, RandomValueForVector),
                     PositionY,
                     Random.Range(-RandomValueForVector, RandomValueForVector));
-
-                int randomValue = Random.Range(0, _rotationVectors.Count - 1);
-                Vector3 randomVector = _rotationVectors[randomValue];
-                x.transform.DOLocalRotate(randomVector, 1.5f).SetRelative(true).SetEase(Ease.Linear);
                 x.AddForce(randomDirection * Force, ForceMode.Force);
             });
 
@@ -50,7 +40,6 @@ namespace CodeBase.Gameplay.EnemyBodyParts
 
         private void Disable()
         {
-            DOTween.Kill(transform);
             gameObject.SetActive(false);
         }
     }

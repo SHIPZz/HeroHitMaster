@@ -1,4 +1,5 @@
 ﻿using CodeBase.Gameplay.Character.PlayerSelection;
+using CodeBase.Gameplay.LoadNextLevel;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.UI.LevelSlider;
@@ -38,11 +39,12 @@ namespace CodeBase.Installers.UI
         [SerializeField] private BuyButtonView _buyButtonView;
         [SerializeField] private WeaponSelectorViewsProvider _weaponSelectorViewsProvider;
         [SerializeField] private Canvas _mainUI;
-        [SerializeField] private VictoryInvoView _victoryInvoView;
+        [SerializeField] private VictoryInfoView victoryInfoView;
         [SerializeField] private LevelSliderView _levelSliderView;
         [SerializeField] private PopupInfoView _popupInfoView;
         [SerializeField] private AdBuyButtonView _adBuyButtonView;
-
+        [SerializeField] private ContinueButtonView _continueButtonView;
+        
         public override void InstallBindings()
         {
             BindWindowProvider();
@@ -65,10 +67,22 @@ namespace CodeBase.Installers.UI
             BindLevelSliderUI();
             BindPopupUI();
             BindAdBuyWeaponButtonView();
+            BindContinueButtonView();
+            BindLoadNextLevelPresenter();
         }
 
+        private void BindLoadNextLevelPresenter() =>
+            Container
+                .BindInterfacesAndSelfTo<LoadNextLevelPresenter>()
+                .AsSingle();
+
+        private void BindContinueButtonView() => 
+            Container
+                .BindInstance(_continueButtonView);
+
         private void BindAdBuyWeaponButtonView() => 
-            Container.BindInstance(_adBuyButtonView);
+            Container
+            .BindInstance(_adBuyButtonView);
 
         private void BindPopupUI()
         {
@@ -84,7 +98,7 @@ namespace CodeBase.Installers.UI
 
         private void BindVictoryUI()
         {
-            Container.BindInstance(_victoryInvoView);
+            Container.BindInstance(victoryInfoView);
             Container.BindInterfacesAndSelfTo<VictoryInfoPresenter>().AsSingle();
         }
 

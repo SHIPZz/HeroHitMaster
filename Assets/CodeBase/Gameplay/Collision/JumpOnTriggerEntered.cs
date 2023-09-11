@@ -30,7 +30,7 @@ namespace CodeBase.Gameplay.Collision
         private void OnEnable() =>
             _triggerObserver.Entered += Jump;
 
-        private void OnDisable() =>
+        private void OnDisable() => 
             _triggerObserver.Entered -= Jump;
 
         private void Jump(Collider player)

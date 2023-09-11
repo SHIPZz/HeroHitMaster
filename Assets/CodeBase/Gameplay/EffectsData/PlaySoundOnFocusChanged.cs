@@ -30,7 +30,7 @@ namespace CodeBase.Gameplay.EffectsData
         {
             if (!onFocusChanged)
             {
-                _audioSource.Play();
+                // _audioSource.Play();
             }
         }
     }
