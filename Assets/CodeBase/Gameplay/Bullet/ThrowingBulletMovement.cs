@@ -1,4 +1,5 @@
 using System.Collections;
+using CodeBase.Gameplay.Character.Enemy;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;

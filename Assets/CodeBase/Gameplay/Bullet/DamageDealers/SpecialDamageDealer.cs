@@ -1,6 +1,7 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Services.Providers;
 using UnityEngine;

@@ -18,7 +18,8 @@ namespace CodeBase.Gameplay.Character.Enemy
         private bool _isInitialized;
 
         [Inject]
-        public void Construct(NavMeshAgent navMeshAgent, EnemyTypeId enemyTypeId, EnemyStaticDataService enemyStaticDataService)
+        public void Construct(NavMeshAgent navMeshAgent, EnemyTypeId enemyTypeId,
+            EnemyStaticDataService enemyStaticDataService)
         {
             _navMeshAgent = navMeshAgent;
             _navMeshAgent.speed = enemyStaticDataService.GetEnemyData(enemyTypeId).Speed;
@@ -28,12 +29,12 @@ namespace CodeBase.Gameplay.Character.Enemy
         {
             if (_target == Vector3.zero || _isBlocked)
                 return;
-            
+
             _navMeshAgent.SetDestination(_target);
         }
 
-        private void OnDisable() => 
-        _aggroZone.PlayerEntered -= SetTarget;
+        private void OnDisable() =>
+            _aggroZone.PlayerEntered -= SetTarget;
 
         public void SetAggroZone(AggroZone aggroZone)
         {
@@ -43,9 +44,9 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public void Block()
         {
-            if(!_navMeshAgent.isActiveAndEnabled)
+            if (!_navMeshAgent.isActiveAndEnabled)
                 return;
-            
+
             // _navMeshAgent.isStopped = true;
             _navMeshAgent.SetDestination(transform.position);
             _navMeshAgent.velocity = Vector3.zero;
@@ -54,14 +55,14 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public void Unblock()
         {
-            if(!_navMeshAgent.isActiveAndEnabled)
+            if (!_navMeshAgent.isActiveAndEnabled)
                 return;
-            
+
             // _navMeshAgent.isStopped = false;
             _isBlocked = false;
         }
 
-        private void SetTarget(Player player) => 
+        private void SetTarget(Player player) =>
             _target = player.transform.position;
     }
 }

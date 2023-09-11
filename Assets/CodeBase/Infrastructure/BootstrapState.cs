@@ -24,8 +24,10 @@ namespace CodeBase.Infrastructure
             // }
 
             var levelData = await _saveSystem.Load<LevelData>();
-            // levelData.Id = 1;
-            // _saveSystem.Save(levelData);
+            levelData.Id = 1;
+            _saveSystem.Save(levelData);
+            DOTween.RestartAll();
+            DOTween.Init();
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }

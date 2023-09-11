@@ -1,5 +1,7 @@
 ﻿using System;
 using CodeBase.Constants;
+using CodeBase.Gameplay.Character.Players;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,10 +16,10 @@ namespace CodeBase.Gameplay.Collision
         [SerializeField] private float _jumpDuration;
         [SerializeField] private float _enableNavMeshDelay = 1.5f;
         [SerializeField] private float _jumpPower;
-        
+
         private TriggerObserver _triggerObserver;
         private bool _isJumped;
-        
+
         public event Action Jumped;
 
         private void Awake()
@@ -30,27 +32,33 @@ namespace CodeBase.Gameplay.Collision
         private void OnEnable() =>
             _triggerObserver.Entered += Jump;
 
-        private void OnDisable() => 
+        private void OnDisable()
+        {
             _triggerObserver.Entered -= Jump;
+            transform.DOKill();
+        }
+
+        private void OnDestroy()
+        {
+            transform.DOKill();
+
+            Jumped = null;
+        }
 
         private void Jump(Collider player)
         {
             var navMesh = player.gameObject.GetComponent<NavMeshAgent>();
             navMesh.enabled = false;
 
-            DoJump(player);
+            DoJump(player.GetComponent<Player>());
         }
 
-        private void DoJump(Collider obj)
+        private async void DoJump(Player player)
         {
-            DOTween.Sequence()
-                .AppendInterval(_delayBeforeJump)
-                .OnComplete(() =>
-                {
-                    obj.transform
-                        .DOJump(_nextPosition.position, _jumpPower, 0, _jumpDuration);
-                    Jumped?.Invoke();
-                });
+            await UniTask.WaitForSeconds(_delayBeforeJump);
+
+            player.gameObject.transform.DOJump(_nextPosition.position, _jumpPower, 0, _jumpDuration);
+            Jumped?.Invoke();
         }
     }
 }

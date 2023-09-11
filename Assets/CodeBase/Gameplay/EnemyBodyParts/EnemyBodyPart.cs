@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Enums;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,7 +23,7 @@ namespace CodeBase.Gameplay.EnemyBodyParts
         public void SetHeightPosition() =>
             transform.position += new Vector3(0, _transformUpPosition, 0);
 
-        public void Enable()
+        public async void Enable()
         {
             gameObject.SetActive(true);
 
@@ -35,12 +36,8 @@ namespace CodeBase.Gameplay.EnemyBodyParts
                 x.AddForce(randomDirection * Force, ForceMode.Force);
             });
 
-            DOTween.Sequence().AppendInterval(AutoDestroyDelay).OnComplete(Disable);
-        }
-
-        private void Disable()
-        {
-            gameObject.SetActive(false);
+            await UniTask.WaitForSeconds(AutoDestroyDelay);
+            _parts.ForEach(x => x.gameObject.SetActive(false));
         }
     }
 }

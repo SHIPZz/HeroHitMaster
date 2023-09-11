@@ -1,5 +1,4 @@
 ﻿using CodeBase.Gameplay.Character.Enemy;
-using CodeBase.Gameplay.Collision;
 using UnityEngine.AI;
 
 namespace CodeBase.Gameplay.Spawners
@@ -11,7 +10,7 @@ namespace CodeBase.Gameplay.Spawners
             var enemyFollower = enemy.GetComponent<EnemyFollower>();
             var navmeshAgent = enemy.GetComponent<NavMeshAgent>();
             navmeshAgent.enabled = true;
-            enemyFollower.gameObject.SetActive(true);
+            // enemyFollower.gameObject.SetActive(true);
             enemyFollower.SetAggroZone(aggroZone);
         }
     }

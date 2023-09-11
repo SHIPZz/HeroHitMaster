@@ -45,16 +45,16 @@ namespace CodeBase.GameInit
             IProvider<LocationTypeId, Transform> locationProvider,
             IProvider<Camera> cameraProvider,
             IPlayerStorage playerStorage,
-            WeaponSelector weaponSelector, 
+            WeaponSelector weaponSelector,
             WalletPresenter walletPresenter,
-            ISaveSystem saveSystem, 
+            ISaveSystem saveSystem,
             ShopWeaponPresenter shopWeaponPresenter,
-            IProvider<List<EnemySpawner>> enemySpawnersProvider, 
+            IProvider<List<EnemySpawner>> enemySpawnersProvider,
             SlowMotionOnEnemyDeath slowMotionOnEnemyDeath,
-            CountEnemiesOnDeath countEnemiesOnDeath, 
-            LevelSliderPresenter levelSliderPresenter, 
-            WaterSplashPoolInitializer waterSplashPoolInitializer, 
-            CameraShakeMediator cameraShakeMediator, 
+            CountEnemiesOnDeath countEnemiesOnDeath,
+            LevelSliderPresenter levelSliderPresenter,
+            WaterSplashPoolInitializer waterSplashPoolInitializer,
+            CameraShakeMediator cameraShakeMediator,
             RotateCameraPresenter rotateCameraPresenter)
         {
             _rotateCameraPresenter = rotateCameraPresenter;
@@ -84,7 +84,7 @@ namespace CodeBase.GameInit
                 _levelSliderPresenter.Init(enemy);
                 _cameraShakeMediator.InitEnemies(enemy);
             }));
-            
+
             var playerData = await _saveSystem.Load<PlayerData>();
             playerData.LastWeaponId = WeaponTypeId.ThrowingDynamiteShooter;
             InitializeUIPresenters(playerData);

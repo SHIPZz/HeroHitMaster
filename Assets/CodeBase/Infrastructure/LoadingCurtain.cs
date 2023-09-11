@@ -17,10 +17,10 @@ namespace CodeBase.Infrastructure
         private Tweener _tweener;
 
         public event Action Closed;
-        
-        private void Awake() => 
+
+        private void Awake() =>
             DontDestroyOnLoad(this);
-        
+
         public void Show(float loadSliderDuration)
         {
             if (_loadingSlider.value != 0)
@@ -37,7 +37,7 @@ namespace CodeBase.Infrastructure
         {
             while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
                 await UniTask.Yield();
-
+            
             _canvasGroup
                 .DOFade(0, CloseDuration)
                 .OnComplete(() =>

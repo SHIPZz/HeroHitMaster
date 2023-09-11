@@ -13,7 +13,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
         private readonly ShootingOnAnimationEvent _shootingOnAnimationEvent;
         private readonly IProvider<Weapon> _weaponProvider;
         private readonly WeaponShootEffectStorage _weaponShootEffectStorage;
-        private Transform _initialShootPosition;
+        private readonly Transform _initialShootPosition;
 
         public EffectOnShoot(IProvider<Weapon> weaponProvider, 
             ShootingOnAnimationEvent shootingOnAnimationEvent, 

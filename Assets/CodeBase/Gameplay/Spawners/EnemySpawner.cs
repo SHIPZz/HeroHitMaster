@@ -22,6 +22,7 @@ namespace CodeBase.Gameplay.Spawners
 
         public event Action Destroyed;
         public event Action<Enemy> Spawned;
+
         public event Action<Enemy> Disabled; 
 
         [Inject]

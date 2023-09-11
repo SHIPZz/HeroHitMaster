@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.Character.Enemy;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Bullet.DamageDealers

@@ -4857,7 +4857,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae1a3dbd66f903438703c13bc2690dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <EnemyHealth>k__BackingField: {fileID: 5509729564572461811}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: <Damageable>k__BackingField
+      Entry: 6
+      Data: 
+    - Name: <MaterialChanger>k__BackingField
+      Entry: 6
+      Data: 
+  <Enemy>k__BackingField: {fileID: 0}
 --- !u!1 &741490598220207358
 GameObject:
   m_ObjectHideFlags: 0

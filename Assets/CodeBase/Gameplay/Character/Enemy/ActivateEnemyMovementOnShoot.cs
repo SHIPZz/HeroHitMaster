@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Services.Storages.Character;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
@@ -19,8 +20,10 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyFollower = enemyFollower;
         }
 
-        public void Initialize() => 
+        public void Initialize()
+        {
             _enemyFollower.Block();
+        }
 
         private void ActivateMovement()
         {

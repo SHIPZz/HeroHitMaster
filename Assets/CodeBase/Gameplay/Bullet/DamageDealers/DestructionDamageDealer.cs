@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Constants;
 using CodeBase.Gameplay.Character;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.ObjectBodyPart;
 using UnityEngine;
 
