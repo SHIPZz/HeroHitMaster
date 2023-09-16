@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.Gameplay.Camera
 {
@@ -16,8 +17,8 @@ namespace CodeBase.Gameplay.Camera
         private readonly List<EnemySpawner> _enemySpawners;
         private readonly List<EnemyQuantityInZone> _enemyQuantityZones;
         private readonly CameraZoomer _cameraZoomer;
-        private readonly IProvider<CameraData> _cameraProvider;
         private readonly List<ExplosionBarrel.ExplosionBarrel> _explosionBarrels;
+        private CameraData _cameraData;
 
         private bool _blockRotation;
         private Enemy _enemy;
@@ -29,11 +30,13 @@ namespace CodeBase.Gameplay.Camera
             CameraZoomer cameraZoomer, IProvider<List<ExplosionBarrel.ExplosionBarrel>> explosionBarrelProvider)
         {
             _cameraZoomer = cameraZoomer;
-            _cameraProvider = cameraProvider;
             _enemySpawners = enemySpawnersProvider.Get();
             _explosionBarrels = explosionBarrelProvider.Get();
             _enemyQuantityZones = enemyQuantityZonesProvider.EnemyQuantityInZones;
         }
+
+        public void Init(CameraData cameraData) =>
+            _cameraData = cameraData;
 
         public void Initialize()
         {
@@ -53,7 +56,7 @@ namespace CodeBase.Gameplay.Camera
         {
             _enemySpawners.ForEach(x => x.Disabled -= SetLastKilledEnemy);
             _enemyQuantityZones.ForEach(x => x.ZoneCleared -= Do);
-            
+
             foreach (var explosionBarrel in _explosionBarrels)
             {
                 if (explosionBarrel is null)
@@ -81,14 +84,13 @@ namespace CodeBase.Gameplay.Camera
                 return;
             }
 
-            float angle = Mathf.Atan2(_cameraProvider.Get().transform.position.x, _lastEnemyPosition.z) *
-                          Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(_cameraData.transform.position.x, _lastEnemyPosition.z);
 
             _cameraZoomer.Zoom(37, 0.7f, 0.3f, Ease.Flash);
 
-            _cameraProvider.Get().transform.DORotate(new Vector3(0, angle, 0), 0.8f)
+            _cameraData.transform.DORotate(new Vector3(0, angle, 0), 0.8f)
                 .SetEase(Ease.Flash)
-                .OnComplete(() => _cameraProvider.Get().transform.DORotate(new Vector3(0, 0, 0), 0.6f)
+                .OnComplete(() => _cameraData.transform.DORotate(Vector3.zero, 0.6f)
                     .SetEase(Ease.Flash));
         }
 

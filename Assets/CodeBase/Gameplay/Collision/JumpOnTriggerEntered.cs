@@ -14,7 +14,6 @@ namespace CodeBase.Gameplay.Collision
         [SerializeField] private Transform _nextPosition;
         [SerializeField] private float _delayBeforeJump;
         [SerializeField] private float _jumpDuration;
-        [SerializeField] private float _enableNavMeshDelay = 1.5f;
         [SerializeField] private float _jumpPower;
 
         private TriggerObserver _triggerObserver;
@@ -31,19 +30,9 @@ namespace CodeBase.Gameplay.Collision
 
         private void OnEnable() =>
             _triggerObserver.Entered += Jump;
-
-        private void OnDisable()
-        {
+        
+        private void OnDisable() => 
             _triggerObserver.Entered -= Jump;
-            transform.DOKill();
-        }
-
-        private void OnDestroy()
-        {
-            transform.DOKill();
-
-            Jumped = null;
-        }
 
         private void Jump(Collider player)
         {

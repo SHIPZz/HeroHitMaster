@@ -6,17 +6,17 @@ namespace CodeBase.Gameplay.Camera
     public class CameraZoomer
     {
         private readonly float _initalFieldOfView = 60;
-        private readonly IProvider<UnityEngine.Camera> _cameraProvider;
+        private readonly IProvider<CameraData> _cameraProvider;
 
-        public CameraZoomer(IProvider<UnityEngine.Camera> cameraProvider) => 
+        public CameraZoomer(IProvider<CameraData> cameraProvider) => 
             _cameraProvider = cameraProvider;
 
         public void Zoom(float targetValue, float targetDuration,float returnDuration, Ease returnEase) =>
             DOTween
-                .To(() => _cameraProvider.Get().fieldOfView, x => _cameraProvider.Get().fieldOfView = x, targetValue, targetDuration)
+                .To(() => _cameraProvider.Get().Camera.fieldOfView, x => _cameraProvider.Get().Camera.fieldOfView = x, targetValue, targetDuration)
                 .OnComplete(() => 
                     DOTween
-                        .To(() => _cameraProvider.Get().fieldOfView, x => _cameraProvider.Get().fieldOfView = x, _initalFieldOfView, returnDuration))
+                        .To(() => _cameraProvider.Get().Camera.fieldOfView, x => _cameraProvider.Get().Camera.fieldOfView = x, _initalFieldOfView, returnDuration))
                 .SetEase(returnEase);
     }
 }

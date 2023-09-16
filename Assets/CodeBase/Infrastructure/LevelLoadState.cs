@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,8 @@ namespace CodeBase.Infrastructure
         public async void Enter(int payload)
         {
             _loadingCurtain.Show(1f);
+            DOTween.Init();
+            DOTween.RestartAll();
             await SceneManager.LoadSceneAsync(payload);
             _loadingCurtain.Hide(null);
         }

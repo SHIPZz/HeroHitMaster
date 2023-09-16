@@ -26,7 +26,6 @@ namespace CodeBase.GameInit
     {
         private readonly PlayerCameraFactory _playerCameraFactory;
         private readonly IProvider<LocationTypeId, Transform> _locationProvider;
-        private readonly IProvider<Camera> _cameraProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly WeaponSelector _weaponSelector;
         private readonly WalletPresenter _walletPresenter;
@@ -40,10 +39,11 @@ namespace CodeBase.GameInit
         private readonly WaterSplashPoolInitializer _waterSplashPoolInitializer;
         private readonly CameraShakeMediator _cameraShakeMediator;
         private readonly RotateCameraPresenter _rotateCameraPresenter;
+        private readonly RotateCameraOnEnemyKill _rotateCameraOnEnemyKill;
+        private readonly IProvider<CameraData> _cameraDataProvider;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
-            IProvider<Camera> cameraProvider,
             IPlayerStorage playerStorage,
             WeaponSelector weaponSelector,
             WalletPresenter walletPresenter,
@@ -55,8 +55,11 @@ namespace CodeBase.GameInit
             LevelSliderPresenter levelSliderPresenter,
             WaterSplashPoolInitializer waterSplashPoolInitializer,
             CameraShakeMediator cameraShakeMediator,
-            RotateCameraPresenter rotateCameraPresenter)
+            RotateCameraPresenter rotateCameraPresenter, 
+            RotateCameraOnEnemyKill rotateCameraOnEnemyKill, IProvider<CameraData> cameraDataProvider)
         {
+            _cameraDataProvider = cameraDataProvider;
+            _rotateCameraOnEnemyKill = rotateCameraOnEnemyKill;
             _rotateCameraPresenter = rotateCameraPresenter;
             _cameraShakeMediator = cameraShakeMediator;
             _waterSplashPoolInitializer = waterSplashPoolInitializer;
@@ -70,7 +73,6 @@ namespace CodeBase.GameInit
             _weaponSelector = weaponSelector;
             _playerCameraFactory = playerCameraFactory;
             _locationProvider = locationProvider;
-            _cameraProvider = cameraProvider;
             _playerStorage = playerStorage;
         }
 
@@ -107,6 +109,7 @@ namespace CodeBase.GameInit
             _rotateCameraPresenter.Init(rotateCamera, player);
             _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());
             _cameraShakeMediator.Init();
+            _rotateCameraOnEnemyKill.Init(rotateCamera.GetComponent<CameraData>());
         }
 
         private void InitializeInitialWeapon(WeaponTypeId weaponTypeId)
@@ -119,9 +122,8 @@ namespace CodeBase.GameInit
         {
             PlayerCameraFollower playerCamera = _playerCameraFactory
                 .Create(_locationProvider.Get(LocationTypeId.CameraSpawnPoint).position);
-            var newCameraProvider = _cameraProvider as IProvider<CameraData>;
-            newCameraProvider.Set(playerCamera.GetComponent<CameraData>());
-            _cameraProvider.Set(playerCamera.GetComponent<CameraData>().Camera);
+            var cameraData = playerCamera.GetComponent<CameraData>();
+            _cameraDataProvider.Set(cameraData);
             return playerCamera;
         }
 

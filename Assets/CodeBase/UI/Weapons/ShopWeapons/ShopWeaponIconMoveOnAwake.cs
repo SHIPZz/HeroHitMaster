@@ -16,5 +16,10 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _rectTransform = GetComponent<RectTransform>();
             _rectTransform.DOAnchorPosY( _rectTransform.anchoredPosition.y + _posY, _duration).SetLoops(-1, LoopType.Yoyo);
         }
+
+        private void OnDisable()
+        {
+            transform.DOKill();
+        }
     }
 }

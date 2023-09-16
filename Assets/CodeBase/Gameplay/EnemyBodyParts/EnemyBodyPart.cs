@@ -37,7 +37,6 @@ namespace CodeBase.Gameplay.EnemyBodyParts
             });
 
             await UniTask.WaitForSeconds(AutoDestroyDelay);
-            _parts.ForEach(x => x.gameObject.SetActive(false));
         }
     }
 }

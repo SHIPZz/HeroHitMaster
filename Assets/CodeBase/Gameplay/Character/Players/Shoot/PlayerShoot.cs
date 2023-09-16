@@ -7,14 +7,14 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 {
     public class PlayerShoot
     {
-        private readonly IProvider<UnityEngine.Camera> _cameraProvider;
+        private readonly IProvider<CameraData> _cameraProvider;
         private readonly Transform _startShootPosition;
         private readonly IProvider<Weapon> _weaponProvider;
 
         private Weapon _weapon;
         private Vector2 _mousePosition;
 
-        public PlayerShoot(IProvider<UnityEngine.Camera> cameraProvider,
+        public PlayerShoot(IProvider<CameraData> cameraProvider,
             Transform startShootPosition, IProvider<Weapon> weaponProvider)
         {
             _cameraProvider = cameraProvider;
@@ -32,7 +32,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
             if (weapon is null)
                 return;
 
-            Ray ray = _cameraProvider.Get().ScreenPointToRay(_mousePosition);
+            Ray ray = _cameraProvider.Get().Camera.ScreenPointToRay(_mousePosition);
 
             Vector3 targetVector;
             

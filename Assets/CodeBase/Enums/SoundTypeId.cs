@@ -37,6 +37,7 @@
         FocusChanged,
         ButtonClick,
         ScrollClick,
-        WeaponButtonClick
+        WeaponButtonClick,
+        AppearEnemy
     }
 }

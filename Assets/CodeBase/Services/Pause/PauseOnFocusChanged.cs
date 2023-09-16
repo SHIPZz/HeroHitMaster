@@ -25,13 +25,13 @@ namespace CodeBase.Services.Pause
 
         private void OnFocusChanged(bool focusChanged)
         {
-            if (!focusChanged)
-            {
-                _pauseService.Pause();
-                return;
-            }
-            
-            _pauseService.UnPause();
+            // if (!focusChanged)
+            // {
+            //     _pauseService.Pause();
+            //     return;
+            // }
+            //
+            // _pauseService.UnPause();
         }
     }
 }

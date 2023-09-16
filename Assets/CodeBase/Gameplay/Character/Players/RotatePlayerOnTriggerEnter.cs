@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Camera;
+﻿using System;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Providers;
 using Cysharp.Threading.Tasks;
@@ -9,11 +10,11 @@ using Zenject;
 namespace CodeBase.Gameplay.Character.Players
 {
     public class RotatePlayerOnTriggerEnter : MonoBehaviour
-    {
-        [SerializeField] private TriggerObserver _triggerObserver;
+    { 
         [SerializeField] private Transform _targetAngleTransform;
 
         private UnityEngine.Camera _camera;
+        private TriggerObserver _triggerObserver;
         private IProvider<CameraData> _cameraProvider;
 
         [Inject]
@@ -21,6 +22,9 @@ namespace CodeBase.Gameplay.Character.Players
         {
             _cameraProvider = cameraProvider;
         }
+
+        private void Awake() => 
+            _triggerObserver = GetComponent<TriggerObserver>();
 
         private void OnEnable() =>
             _triggerObserver.Entered += Rotate;

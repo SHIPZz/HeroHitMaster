@@ -22,12 +22,12 @@ namespace CodeBase.Infrastructure
             // {
             //     await UniTask.Yield();
             // }
+            
+            DOTween.Clear();
 
             var levelData = await _saveSystem.Load<LevelData>();
-            levelData.Id = 1;
-            _saveSystem.Save(levelData);
-            DOTween.RestartAll();
-            DOTween.Init();
+            levelData.Id = 4;
+            // _saveSystem.Save(levelData);
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }

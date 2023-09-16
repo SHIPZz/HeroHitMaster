@@ -22,8 +22,11 @@ namespace CodeBase.Gameplay.Character.Players
             _coroutineStarter = coroutineStarter;
         }
 
-        private void Awake() => 
+        private void Awake()
+        {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _navMeshAgent.updateRotation = false;
+        }
 
         public void MoveToNextZone()
         {
