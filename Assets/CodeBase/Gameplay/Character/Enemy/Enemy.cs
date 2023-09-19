@@ -15,6 +15,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         private bool _isExploded;
         private bool _isDead;
 
+        public Vector3 InitialScale { get; private set; }
         public event Action<Enemy> Dead;
         public event Action<Enemy> QuickDestroyed;
 
@@ -22,12 +23,14 @@ namespace CodeBase.Gameplay.Character.Enemy
         {
             _skinnedMaterialChanger = GetComponent<IMaterialChanger>();
             Application.quitting += DisableEvents;
+            InitialScale = transform.localScale;
+            transform.localScale = Vector3.zero;
         }
 
-        private void OnEnable() => 
+        private void OnEnable() =>
             _skinnedMaterialChanger.StartedChanged += DisableEvents;
 
-        private void OnDisable() => 
+        private void OnDisable() =>
             _skinnedMaterialChanger.StartedChanged -= DisableEvents;
 
         private void OnDestroy()

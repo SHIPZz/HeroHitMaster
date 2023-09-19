@@ -39,14 +39,10 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyAttacker.SetTarget(_playerHealth);
         }
         
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _playerProvider.Get().Changed -= SetPlayer;
-        }
 
-        private void SetPlayer(Player player)
-        {
+        private void SetPlayer(Player player) => 
             _playerHealth = player.GetComponent<PlayerHealth>();
-        }
     }
 }

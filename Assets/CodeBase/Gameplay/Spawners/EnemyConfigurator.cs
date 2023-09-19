@@ -10,7 +10,6 @@ namespace CodeBase.Gameplay.Spawners
             var enemyFollower = enemy.GetComponent<EnemyFollower>();
             var navmeshAgent = enemy.GetComponent<NavMeshAgent>();
             navmeshAgent.enabled = true;
-            // enemyFollower.gameObject.SetActive(true);
             enemyFollower.SetAggroZone(aggroZone);
         }
     }

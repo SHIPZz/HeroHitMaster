@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5063342069704046601}
   - component: {fileID: 606376187802800619}
   - component: {fileID: 3997487761354404484}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: YellowBloodExplosionSpikyAnimated (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4836,7 +4836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3261710000126406628}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigFuse4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4868,7 +4868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2440303823458388517}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigLArm2Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,7 +4899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 580173298819591830}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigFuse1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4933,7 +4933,7 @@ GameObject:
   - component: {fileID: 5088349519630717556}
   - component: {fileID: 885921222499481169}
   - component: {fileID: 5787134526638174761}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9701,7 +9701,7 @@ GameObject:
   - component: {fileID: 6056987035967556287}
   - component: {fileID: 1260119713107540128}
   - component: {fileID: 4899436131814869510}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9785,7 +9785,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6441130671236763629}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigFuse3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9819,7 +9819,7 @@ GameObject:
   - component: {fileID: 8318051341054382556}
   - component: {fileID: 1344784275920359201}
   - component: {fileID: 4398805094659742991}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: BigGore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14644,7 +14644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674294085174288455}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigFuse2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14676,7 +14676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5282047407644837906}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigRArm2Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14724,6 +14724,7 @@ GameObject:
   - component: {fileID: 7947290985443845024}
   - component: {fileID: 513779880786209211}
   - component: {fileID: -3158994373840707204}
+  - component: {fileID: 8272039958781648630}
   m_Layer: 9
   m_Name: SnowBomb
   m_TagString: Untagged
@@ -15004,7 +15005,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.601979
   m_Height: 1.203958
@@ -15060,6 +15061,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &8272039958781648630
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231067478400966202}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4245919642720257546
 GameObject:
   m_ObjectHideFlags: 0
@@ -15069,7 +15097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8808737218468104257}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigLArm1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15100,7 +15128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6436647811730993412}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigJaw DownGizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15133,7 +15161,7 @@ GameObject:
   - component: {fileID: 544049506976881420}
   - component: {fileID: 8445846557571134471}
   - component: {fileID: 5964760105517021657}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15217,7 +15245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2697582844740600849}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigFuse3Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15248,7 +15276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8205220474514728275}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigRArm1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15281,7 +15309,7 @@ GameObject:
   - component: {fileID: 2843685517056637159}
   - component: {fileID: 6554945136528455864}
   - component: {fileID: 5905175461981584722}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15367,7 +15395,7 @@ GameObject:
   - component: {fileID: 7716961226932965106}
   - component: {fileID: 6140259910973212516}
   - component: {fileID: 5413699846387477899}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: FX Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20180,7 +20208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 330219182966937408}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigRArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20212,7 +20240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7544630992370899567}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20243,7 +20271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1361235620249453321}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigJaw Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20274,7 +20302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7457106518281590409}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigFuse2Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20307,7 +20335,7 @@ GameObject:
   - component: {fileID: 7724761889461465885}
   - component: {fileID: 1669181037655697869}
   - component: {fileID: 3173416670957412042}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25082,7 +25110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6493486342825427857}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigRArm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25115,7 +25143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3560290076670333933}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigLArm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25148,7 +25176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2586736894495691898}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigLArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25180,7 +25208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2979368920097335364}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigFuse4Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25213,7 +25241,7 @@ GameObject:
   - component: {fileID: 4798656487121335157}
   - component: {fileID: 955636062639379863}
   - component: {fileID: 5139704568546765364}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25297,7 +25325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 331073893245335950}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigFuse1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25330,7 +25358,7 @@ GameObject:
   - component: {fileID: 4060365523687790799}
   - component: {fileID: 3853707869791692482}
   - component: {fileID: 8866981346573995273}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigHub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25418,7 +25446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5234391699366336233}
-  m_Layer: 9
+  m_Layer: 26
   m_Name: RigHubGizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

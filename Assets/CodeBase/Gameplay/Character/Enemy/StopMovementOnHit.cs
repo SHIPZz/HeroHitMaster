@@ -35,11 +35,11 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyFollower.Block();
         }
 
-        private void BlockMovement(int obj)
+        private void BlockMovement(int health)
         {
             if (_isDead)
                 return;
-            
+
             _enemyFollower.Block();
             DOTween.Sequence().AppendInterval(DelayValues.MovementHitAnimationDelay).OnComplete(_enemyFollower.Unblock);
         }

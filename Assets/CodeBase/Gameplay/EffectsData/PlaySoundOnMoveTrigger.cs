@@ -15,10 +15,8 @@ namespace CodeBase.Gameplay.EffectsData
         private AudioSource _targetSound;
 
         [Inject]
-        private void Construct(ISoundStorage soundStorage)
-        {
+        private void Construct(ISoundStorage soundStorage) => 
             _targetSound = soundStorage.Get(_soundTypeId);
-        }
 
         private void OnEnable()
         {
@@ -32,12 +30,10 @@ namespace CodeBase.Gameplay.EffectsData
             boatMoveOnPlayerTrigger.MovementCompleted -= Stop;
         }
 
-        private void Stop()
-        {
+        private void Stop() =>
             _targetSound.DOFade(0, 1f);
-        }
 
-        private void Play() => 
-        _targetSound.Play();
+        private void Play() =>
+            _targetSound.Play();
     }
 }

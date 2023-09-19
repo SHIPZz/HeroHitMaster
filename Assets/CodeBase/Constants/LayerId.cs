@@ -8,5 +8,6 @@
         public const int HardCube = 6;
         public const int SaveTrigger = 21;
         public const int Water = 4;
+        public const int Trap = 24;
     }
 }

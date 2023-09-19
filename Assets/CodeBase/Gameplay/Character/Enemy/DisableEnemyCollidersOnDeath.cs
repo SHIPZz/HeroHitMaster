@@ -35,8 +35,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             _materialChanger.StartedChanged -= DisableAll;
             _enemyHealth.ValueZeroReached -= DisableAll;
         }
-
-
+        
         private void DisableAll()
         {
             _colliders.ForEach(x => x.enabled = false);

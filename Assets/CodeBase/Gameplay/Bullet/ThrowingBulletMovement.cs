@@ -1,7 +1,4 @@
-using System.Collections;
 using CodeBase.Gameplay.Character.Enemy;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -67,6 +64,7 @@ namespace CodeBase.Gameplay.Bullet
                 transform.eulerAngles.z);
 
             transform.rotation = Quaternion.Euler(startTargetRotation);
+            _throwingBullet.BulletModel.localEulerAngles = _bulletModelRotation;
         }
     }
 }

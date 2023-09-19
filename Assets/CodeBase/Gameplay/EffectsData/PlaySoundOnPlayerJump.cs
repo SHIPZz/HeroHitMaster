@@ -6,15 +6,19 @@ using Zenject;
 
 namespace CodeBase.Gameplay.EffectsData
 {
+    [RequireComponent(typeof(JumpOnTriggerEntered))]
     public class PlaySoundOnPlayerJump : MonoBehaviour
     {
-        [SerializeField] private JumpOnTriggerEntered _jumpOnTriggerEntered;
+        private JumpOnTriggerEntered _jumpOnTriggerEntered;
         
         private AudioSource _jumpSound;
 
         [Inject]
         private void Construct(ISoundStorage soundStorage) => 
             _jumpSound = soundStorage.Get(SoundTypeId.PlayerJump);
+
+        private void Awake() => 
+            _jumpOnTriggerEntered = GetComponent<JumpOnTriggerEntered>();
 
         private void OnEnable() =>
             _jumpOnTriggerEntered.Jumped += Play;

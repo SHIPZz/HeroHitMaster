@@ -55,7 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WeaponTypeId>k__BackingField: 15
   <BulletModel>k__BackingField: {fileID: 7037129079075093926}
-  <Rotator>k__BackingField: {fileID: 0}
+  <Rotator>k__BackingField: {fileID: 5213202815038238685}
 --- !u!114 &716974250766206266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,12 +129,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1616633, y: 0.23221801, z: 0.09413242}
-  m_Center: {x: -0.08658087, y: 0.05355949, z: 0.044084936}
+  m_Size: {x: 0.13012075, y: 0.23221801, z: 0.09413242}
+  m_Center: {x: -0.092143774, y: 0.05355949, z: 0.044084936}
 --- !u!54 &2035309382256247634
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2961708383521459899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.206, y: 0.481, z: -0}
+  m_LocalPosition: {x: 0.011, y: 0.373, z: 0.022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

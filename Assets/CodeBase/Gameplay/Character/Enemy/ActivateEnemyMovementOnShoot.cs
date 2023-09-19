@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Services.Storages.Character;
@@ -7,11 +8,11 @@ using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
-    public class ActivateEnemyMovementOnShoot : IInitializable
+    public class ActivateEnemyMovementOnShoot : IInitializable, IDisposable
     {
         private readonly EnemyFollower _enemyFollower;
         private readonly List<Player> _players;
-        private bool _isShooted;
+        private bool _isShot;
 
         public ActivateEnemyMovementOnShoot(EnemyFollower enemyFollower, IPlayerStorage playerStorage)
         {
@@ -25,13 +26,24 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyFollower.Block();
         }
 
+        public void Dispose()
+        {
+            foreach (var player in _players)
+            {
+                if (player == null || player.gameObject == null || !player.gameObject.activeSelf)
+                    continue;
+
+                player.GetComponent<ShootingOnAnimationEvent>().Shooted -= ActivateMovement;
+            }
+        }
+
         private void ActivateMovement()
         {
-            if (_isShooted)
-                return;
-
-            _isShooted = true;
-            _enemyFollower.Unblock();
+            // if (_isShot)
+            //     return;
+            //
+            // _isShot = true;
+            // _enemyFollower.Unblock();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Character.Enemy;
+﻿using System;
+using CodeBase.Gameplay.Character.Enemy;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.EnemyBodyParts
@@ -12,6 +13,12 @@ namespace CodeBase.Gameplay.EnemyBodyParts
         {
             _enemy.Dead += _enemyBodyPartPositionSetter.SetPosition;
             _enemy.QuickDestroyed += _enemyBodyPartPositionSetter.SetPosition;
+        }
+
+        private void OnDisable()
+        {
+            _enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
+            _enemy.QuickDestroyed -= _enemyBodyPartPositionSetter.SetPosition;
         }
     }
 }

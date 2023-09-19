@@ -11,7 +11,7 @@ namespace CodeBase.ScriptableObjects.Enemy
         public string Name;
         [Range(1, 8)] public float Speed;
 
-        [Range(100, 300)] public int Hp;
+        [Range(100, 1000)] public int Hp;
 
         public int Damage = 1000;
         public EnemyTypeId EnemyTypeId;

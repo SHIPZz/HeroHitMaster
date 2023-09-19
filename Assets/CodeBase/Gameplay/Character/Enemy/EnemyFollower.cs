@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Data;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -27,14 +28,19 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private void Update()
         {
-            if (_target == Vector3.zero || _isBlocked)
+            if (_target == Vector3.zero || _isBlocked || !_navMeshAgent.isActiveAndEnabled)
                 return;
 
             _navMeshAgent.SetDestination(_target);
         }
 
-        private void OnDisable() =>
+        private void OnDisable()
+        {
+            if (_aggroZone is null)
+                return;
+
             _aggroZone.PlayerEntered -= SetTarget;
+        }
 
         public void SetAggroZone(AggroZone aggroZone)
         {
@@ -45,9 +51,12 @@ namespace CodeBase.Gameplay.Character.Enemy
         public void Block()
         {
             if (!_navMeshAgent.isActiveAndEnabled)
+            {
+                _isBlocked = true;
                 return;
+            }
 
-            // _navMeshAgent.isStopped = true;
+            _navMeshAgent.isStopped = true;
             _navMeshAgent.SetDestination(transform.position);
             _navMeshAgent.velocity = Vector3.zero;
             _isBlocked = true;
@@ -58,11 +67,11 @@ namespace CodeBase.Gameplay.Character.Enemy
             if (!_navMeshAgent.isActiveAndEnabled)
                 return;
 
-            // _navMeshAgent.isStopped = false;
+            _navMeshAgent.isStopped = false;
             _isBlocked = false;
         }
 
-        private void SetTarget(Player player) =>
+        private void SetTarget(Player player) => 
             _target = player.transform.position;
     }
 }

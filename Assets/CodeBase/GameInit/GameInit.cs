@@ -88,9 +88,9 @@ namespace CodeBase.GameInit
             }));
 
             var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.LastWeaponId = WeaponTypeId.ThrowingDynamiteShooter;
             InitializeUIPresenters(playerData);
-            InitializeInitialWeapon(playerData.LastWeaponId);
+            playerData.LastWeaponId = WeaponTypeId.ThrowDaggerShooter;
+            InitializeInitialWeapon( playerData.LastWeaponId);
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             InitializeCamera(player);
             _waterSplashPoolInitializer.Init();

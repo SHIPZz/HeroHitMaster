@@ -15,14 +15,14 @@ namespace CodeBase.Gameplay.Character.Enemy
     {
         [SerializeField] private List<EnemySpawner> _enemySpawners;
         [SerializeField] private float _delayActivation = 0.5f;
-    
+
         private List<Enemy> _enemies = new();
         private AggroZone _aggroZone;
         private PlayerProvider _playerProvider;
         private ShootingOnAnimationEvent _shootingOnAnimationEvent;
         private bool _canMove;
 
-        public event Action<Enemy> Activated; 
+        public event Action<Enemy> Activated;
 
         [Inject]
         private void Construct(IProvider<PlayerProvider> provider)
@@ -31,7 +31,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             _playerProvider.Changed += SetPlayer;
         }
 
-        private void Awake() => 
+        private void Awake() =>
             _aggroZone = GetComponent<AggroZone>();
 
         private void OnEnable()
@@ -53,24 +53,20 @@ namespace CodeBase.Gameplay.Character.Enemy
             _shootingOnAnimationEvent.Shooted += SetMove;
         }
 
-        private void SetMove()
-        {
-            _canMove = true;
-        }
+        private void SetMove() => 
+        _canMove = true;
 
         private async void Activate(Player obj)
         {
             await UniTask.WaitForSeconds(_delayActivation);
-            
-            _enemies.ForEach(x =>
+
+            foreach (Enemy enemy in _enemies)
             {
-                var targetScale = x.gameObject.transform.localScale;
-                x.gameObject.transform.DOScale(0, 0f);
-                x.gameObject.SetActive(true);
-                x.gameObject.transform.DOScale(targetScale, 0.5f);
-                Activated?.Invoke(x);
-                TryActivateMovement(x);
-            });
+                enemy.gameObject.SetActive(true);
+                enemy.gameObject.transform.DOScale(enemy.InitialScale, 0.5f);
+                Activated?.Invoke(enemy);
+                TryActivateMovement(enemy);
+            }
         }
 
         private async void TryActivateMovement(Enemy enemy)
@@ -79,16 +75,13 @@ namespace CodeBase.Gameplay.Character.Enemy
             {
                 await UniTask.Yield();
             }
-            
+
             await UniTask.WaitForSeconds(0.1f);
             var enemyFollower = enemy.GetComponent<EnemyFollower>();
             enemyFollower.Unblock();
         }
 
-        private void FillList(Enemy enemy)
-        {
-            enemy.gameObject.SetActive(false);
+        private void FillList(Enemy enemy) => 
             _enemies.Add(enemy);
-        }
     }
 }

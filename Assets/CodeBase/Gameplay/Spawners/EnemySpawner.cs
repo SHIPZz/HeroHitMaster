@@ -1,10 +1,8 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
-using CodeBase.Gameplay.Collision;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Services.Factories;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -16,20 +14,16 @@ namespace CodeBase.Gameplay.Spawners
         [SerializeField] private AggroZone _aggroZone;
 
         private EnemyFactory _enemyFactory;
-        private float _destroyDelay = 0;
         private bool _canDestroy = true;
         private Enemy _enemy;
 
         public event Action Destroyed;
         public event Action<Enemy> Spawned;
-
         public event Action<Enemy> Disabled; 
 
         [Inject]
-        private void Construct(EnemyFactory enemyFactory)
-        {
+        private void Construct(EnemyFactory enemyFactory) => 
             _enemyFactory = enemyFactory;
-        }
 
         public void Init(Action<Enemy, AggroZone> callback)
         {

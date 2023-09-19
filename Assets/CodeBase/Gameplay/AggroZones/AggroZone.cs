@@ -15,6 +15,6 @@ public class AggroZone : MonoBehaviour
     private void OnDisable() => 
         _triggerObserver.Entered -= OnPlayerEntered;
 
-    private void OnPlayerEntered(Collider obj) => 
-        PlayerEntered?.Invoke(obj.GetComponent<Player>());
+    private void OnPlayerEntered(Collider player) => 
+        PlayerEntered?.Invoke(player.GetComponent<Player>());
 }
