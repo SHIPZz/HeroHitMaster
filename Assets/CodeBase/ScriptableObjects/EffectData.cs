@@ -1,4 +1,5 @@
-﻿using CodeBase.Enums;
+﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using UnityEngine;
 
 namespace CodeBase.ScriptableObjects
@@ -8,5 +9,6 @@ namespace CodeBase.ScriptableObjects
     {
         public ParticleTypeId ParticleTypeId;
         public ParticleSystem ParticleSystem;
+        public List<ParticleSystem> ParticleSystems;
     }
 }

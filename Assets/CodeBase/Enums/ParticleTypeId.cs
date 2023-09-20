@@ -12,5 +12,6 @@
         ConfettiBlastOrangeGreen,
         WaterSplash,
         BarrelExplosion,
+        AppearEnemyEmojis
     }
 }

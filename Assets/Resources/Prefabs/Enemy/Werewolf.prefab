@@ -11349,7 +11349,6 @@ GameObject:
   - component: {fileID: 451497380559511954}
   - component: {fileID: 8032994428629425534}
   - component: {fileID: 8061174579238672070}
-  - component: {fileID: 1239333367536270743}
   m_Layer: 9
   m_Name: Werewolf
   m_TagString: Untagged
@@ -11539,8 +11538,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.2561684, y: 2.1339111, z: 1.6298871}
-  m_Center: {x: 0.12819862, y: 1.3802872, z: 0.43842292}
+  m_Size: {x: 2.2561684, y: 2.524517, z: 1.6298871}
+  m_Center: {x: 0.12819862, y: 1.1849842, z: 0.43842292}
 --- !u!114 &8145799481357952527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11722,33 +11721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &1239333367536270743
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3514065291909104020}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &3524536190862698772
 GameObject:
   m_ObjectHideFlags: 0
