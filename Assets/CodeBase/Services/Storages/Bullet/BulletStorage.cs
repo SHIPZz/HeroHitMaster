@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Constants;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Data;
@@ -62,6 +63,7 @@ namespace CodeBase.Services.Storages.Bullet
             
             bullet.transform.position = _playerProvider.Get().RightHand.position;
             bullet.transform.SetParent(_locationProvider.Get(LocationTypeId.BulletParent));
+            bullet.gameObject.layer = LayerId.Bullet;
             _bulletsPoolProvider.Get()[bullet.WeaponTypeId].Push(bullet.gameObject);
         }
     }

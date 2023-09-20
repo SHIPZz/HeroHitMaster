@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Constants;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Character.Enemy;
 using UnityEngine;
@@ -29,10 +30,7 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
                 _collider.enabled = false;
             }
 
-            // if (!enemyPartForKnifeHolder.EnemyHealth.isActiveAndEnabled)
-            //     return;
-
-            // _collider.enabled = false;
+            gameObject.layer = LayerId.HitBullet;
         }
     }
 }

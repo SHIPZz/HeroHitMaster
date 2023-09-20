@@ -52,6 +52,7 @@ namespace CodeBase.Traps.Spring
             {
                 Collider.enabled = false;
                 _animator.SetBool(_isSprung, false);
+                _isKilled = false;
             });
         }
     }

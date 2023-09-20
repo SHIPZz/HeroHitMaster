@@ -1,4 +1,5 @@
-﻿using CodeBase.Enums;
+﻿using CodeBase.Constants;
+using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Character.Enemy;
@@ -40,6 +41,7 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
                 animator.enabled = false;
 
             damageable.TakeDamage(Damage);
+            gameObject.layer = LayerId.HitBullet;
             this.SetActive(gameObject, false, 0.1f);
         }
     }

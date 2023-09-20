@@ -10,15 +10,15 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
 {
     public class DestructionDamageDealer : DamageDealer
     {
-        public event Action Done;
-
-        private List<int> _layersToNotDisableObject = new()
+        private readonly List<int> _layersToNotDisableObject = new()
         {
             LayerId.Floor,
             LayerId.HardCube,
             LayerId.Wall,
             LayerId.Water,
         };
+
+        public event Action Done;
 
         public override void DoDamage(UnityEngine.Collision other)
         {
@@ -38,12 +38,12 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
             }
 
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
-            {
                 damageable.TakeDamage(Damage);
-            }
 
             if (!_layersToNotDisableObject.Contains(other.gameObject.layer))
                 gameObject.SetActive(false);
+
+            gameObject.layer = LayerId.HitBullet;
         }
     }
 }

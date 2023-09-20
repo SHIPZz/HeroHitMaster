@@ -9,5 +9,7 @@
         public const int SaveTrigger = 21;
         public const int Water = 4;
         public const int Trap = 24;
+        public const int HitBullet = 27;
+        public const int Bullet = 11;
     }
 }
