@@ -1,21 +1,27 @@
 ﻿using System;
 using CodeBase.Gameplay.Character.Enemy;
-using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.EnemyBodyParts
 {
-    public class EnemyBodyPartMediator : MonoBehaviour
+    public class EnemyBodyPartMediator : IInitializable, IDisposable
     {
-        [SerializeField] private EnemyBodyPartPositionSetter _enemyBodyPartPositionSetter;
-        [SerializeField] private Enemy _enemy;
+        private readonly EnemyBodyPartPositionSetter _enemyBodyPartPositionSetter;
+        private readonly Enemy _enemy;
 
-        public void OnEnable()
+        public EnemyBodyPartMediator(EnemyBodyPartPositionSetter enemyBodyPartPositionSetter, Enemy enemy)
+        {
+            _enemyBodyPartPositionSetter = enemyBodyPartPositionSetter;
+            _enemy = enemy;
+        }
+
+        public void Initialize()
         {
             _enemy.Dead += _enemyBodyPartPositionSetter.SetPosition;
             _enemy.QuickDestroyed += _enemyBodyPartPositionSetter.SetPosition;
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             _enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
             _enemy.QuickDestroyed -= _enemyBodyPartPositionSetter.SetPosition;

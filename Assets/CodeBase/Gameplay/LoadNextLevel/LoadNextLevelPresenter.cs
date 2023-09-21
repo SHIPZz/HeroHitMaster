@@ -10,29 +10,20 @@ namespace CodeBase.Gameplay.LoadNextLevel
     {
         private readonly ContinueButtonView _continueButtonView;
         private readonly IGameStateMachine _gameStateMachine;
-        private ISaveSystem _saveSystem;
 
-        public LoadNextLevelPresenter(ContinueButtonView continueButtonView, IGameStateMachine gameStateMachine,
-            ISaveSystem saveSystem)
+        public LoadNextLevelPresenter(ContinueButtonView continueButtonView, IGameStateMachine gameStateMachine)
         {
             _continueButtonView = continueButtonView;
             _gameStateMachine = gameStateMachine;
-            _saveSystem = saveSystem;
         }
 
-        public void Initialize()
-        {
+        public void Initialize() =>
             _continueButtonView.Clicked += Load;
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             _continueButtonView.Clicked -= Load;
-        }
 
-        private void Load()
-        {
+        private void Load() =>
             _gameStateMachine.ChangeState<BootstrapState>();
-        }
     }
 }

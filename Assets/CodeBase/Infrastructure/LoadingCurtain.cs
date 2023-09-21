@@ -33,7 +33,7 @@ namespace CodeBase.Infrastructure
             _canvasGroup.alpha = 1;
         }
 
-        public async void Hide(Action callback)
+        public async void Hide()
         {
             while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
                 await UniTask.Yield();
@@ -44,7 +44,6 @@ namespace CodeBase.Infrastructure
                 {
                     _canvasGroup.gameObject.SetActive(false);
                     Closed?.Invoke();
-                    callback?.Invoke();
                 });
         }
     }

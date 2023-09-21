@@ -1,53 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
+using CodeBase.UI.Windows;
 using DG.Tweening;
-using UnityEngine;
 
 namespace CodeBase.UI.LevelSlider
 {
-    public class LevelSliderPresenter :  IDisposable
+    public class LevelSliderPresenter : IDisposable
     {
         private readonly LevelSliderView _levelSliderView;
         private readonly WeaponProvider _weaponProvider;
+        private readonly Window _deathWindow;
+        private Weapon _weapon;
         private List<Enemy> _enemies = new();
         private bool _isBlocked;
         private bool _isFilled;
-        private Weapon _weapon;
-        private int _enemyCount;
 
-        public LevelSliderPresenter(LevelSliderView levelSliderView, IProvider<WeaponProvider> weaponProvider)
+        public LevelSliderPresenter(LevelSliderView levelSliderView, IProvider<WeaponProvider> weaponProvider, WindowProvider windowProvider)
         {
             _levelSliderView = levelSliderView;
+            _deathWindow = windowProvider.Windows[WindowTypeId.Death];
             _weaponProvider = weaponProvider.Get();
             _weaponProvider.Changed += SetWeapon;
         }
 
         public void Init(Enemy enemy)
         {
-            enemy.Dead += DecreaseSlider;
-            enemy.QuickDestroyed += DecreaseSlider;
-            var materialChanger = enemy.GetComponent<IMaterialChanger>();
-            materialChanger.StartedChanged += DecreaseSlider;
-            materialChanger.StartedChanged += BlockAnotherDecrease;
+            SubscribeToEnemyEvents(enemy);
             _enemies.Add(enemy);
+            _deathWindow.StartedToOpen += _levelSliderView.Disable;
             _levelSliderView.gameObject.SetActive(true);
             _levelSliderView.SetMaxValue(_enemies.Count);
-            _levelSliderView.transform.DOScale(0,0);
+            _levelSliderView.transform.DOScale(0, 0);
         }
 
         public void Dispose()
         {
             foreach (var enemy in _enemies)
             {
-                enemy.Dead -= DecreaseSlider;
-                enemy.QuickDestroyed -= DecreaseSlider;
+                UnsubscribeFromEnemyEvents(enemy);
             }
-            
+
             _weapon.Shooted -= FillSlider;
+            _deathWindow.StartedToOpen -= _levelSliderView.Disable;
         }
 
         private void SetWeapon(Weapon weapon)
@@ -56,30 +55,43 @@ namespace CodeBase.UI.LevelSlider
             _weapon.Shooted += FillSlider;
         }
 
+        private void SubscribeToEnemyEvents(Enemy enemy)
+        {
+            enemy.Dead += DecreaseSlider;
+            enemy.QuickDestroyed += DecreaseSlider;
+            var materialChanger = enemy.GetComponent<IMaterialChanger>();
+            materialChanger.StartedChanged += DecreaseSlider;
+            materialChanger.StartedChanged += BlockAnotherDecrease;
+        }
+
+        private void UnsubscribeFromEnemyEvents(Enemy enemy)
+        {
+            enemy.Dead -= DecreaseSlider;
+            enemy.QuickDestroyed -= DecreaseSlider;
+        }
+
         private void FillSlider()
         {
-            if(_isFilled)
+            if (_isFilled)
                 return;
-            
+
             _isFilled = true;
-            _levelSliderView.transform.DOScale(1,0.3f);
+            _levelSliderView.transform.DOScale(1, 0.3f);
             _levelSliderView.SetValue(_enemies.Count);
         }
 
         private void DecreaseSlider(Enemy obj)
         {
-            _enemyCount++;
-            
             if (_isBlocked)
                 return;
 
-            _levelSliderView.Decrease(1);
+            DecreaseSlider();
         }
 
         private void DecreaseSlider() => 
-        _levelSliderView.Decrease(1);
+            _levelSliderView.Decrease(1);
 
-        private void BlockAnotherDecrease() =>
+        private void BlockAnotherDecrease() => 
             _isBlocked = true;
     }
 }

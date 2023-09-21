@@ -5872,15 +5872,12 @@ GameObject:
   - component: {fileID: 8507375802425310005}
   - component: {fileID: 4119965711423137292}
   - component: {fileID: 5204974039047518658}
-  - component: {fileID: 8634967323733782582}
   - component: {fileID: 51552855336487191}
   - component: {fileID: 7802501664415582427}
   - component: {fileID: 736276658533940244}
   - component: {fileID: -5774669301019290413}
   - component: {fileID: -494394902198313325}
   - component: {fileID: 6836760283565297180}
-  - component: {fileID: 3526231615645063501}
-  - component: {fileID: 8530594021328002189}
   m_Layer: 9
   m_Name: Sunflora
   m_TagString: Untagged
@@ -6156,33 +6153,6 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!54 &8634967323733782582
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5571279183266964834}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &51552855336487191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6266,32 +6236,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3526231615645063501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5571279183266964834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf537b44584846c893846819b6a0b1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyBodyPartPositionSetter: {fileID: 8530594021328002189}
-  _enemy: {fileID: 8921564850574388102}
---- !u!114 &8530594021328002189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5571279183266964834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5999880532254938687

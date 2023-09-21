@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CodeBase.Services.Providers.AssetProviders
 {
-    public class AssetProvider : IInitializable
+    public class AssetProvider
     {
         private readonly Dictionary<string, AsyncOperationHandle>  _completedCaches = new();
         private readonly Dictionary<string, List<AsyncOperationHandle>>  _handles = new();

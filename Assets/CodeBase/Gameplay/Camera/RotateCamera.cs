@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Camera
@@ -8,11 +9,13 @@ namespace CodeBase.Gameplay.Camera
         private PlayerCameraFollower _cameraFollower;
         private Vector3 _lastCameraRotation;
 
-        private void Awake() => 
+        private void Awake() =>
             _cameraFollower = GetComponent<PlayerCameraFollower>();
 
-        public void Do()
+        public async void Do()
         {
+            await UniTask.WaitForSeconds(1f);
+            
             _lastCameraRotation = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
             _cameraFollower.transform
                 .DORotate(new Vector3(-100f, transform.rotation.y, transform.rotation.z), 1.5f);

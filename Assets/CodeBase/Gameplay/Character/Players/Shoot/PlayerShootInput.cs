@@ -3,6 +3,7 @@ using CodeBase.Services.Inputs.InputService;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using Zenject;
 using IInitializable = Zenject.IInitializable;
 
@@ -21,12 +22,12 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 
         public void Tick()
         {
-            if (!_inputService.PlayerFire.WasPressedThisFrame() || EventSystem.current.IsPointerOverGameObject())
+            if (!Input.GetMouseButtonDown(0) || EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            Vector2 mousePosition = _inputService.MousePosition;
+            Vector2 mousePosition = Mouse.current.position.value;
 
-            Fired?.Invoke(mousePosition);
+            Fired?.Invoke(Input.mousePosition);
         }
     }
 }

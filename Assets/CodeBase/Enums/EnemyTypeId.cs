@@ -10,6 +10,7 @@
         SnakeNaga = 6,
         Sunflora = 7,
         SnowBomb = 8,
-        Bomb
+        Bomb,
+        PoisonBomb
     }
 }

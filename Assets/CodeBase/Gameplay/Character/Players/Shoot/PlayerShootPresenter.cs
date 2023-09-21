@@ -10,13 +10,13 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 {
     public class PlayerShootPresenter : IInitializable, IDisposable
     {
-        private float _shootDelay;
         private readonly PlayerShootInput _playerShootInput;
         private readonly PlayerShoot _playerShoot;
         private readonly PlayerAnimator _playerAnimator;
         private readonly IProvider<Weapon> _weaponProvider;
         private readonly WeaponStaticDataService _weaponStaticDataService;
         private bool _canShoot = true;
+        private float _shootDelay;
 
         public PlayerShootPresenter(PlayerShootInput playerShootInput, PlayerShoot playerShoot,
             PlayerAnimator playerAnimator,

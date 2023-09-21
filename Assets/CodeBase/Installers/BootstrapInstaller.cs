@@ -1,4 +1,6 @@
-﻿using CodeBase.Infrastructure;
+﻿using System.Collections;
+using Agava.YandexGames;
+using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Inputs.InputService;
@@ -62,9 +64,9 @@ namespace CodeBase.Installers
             //         .To<YandexSaveSystem>()
             //         .AsSingle();
             // else
-            Container.Bind<ISaveSystem>()
-                .To<PlayerPrefsSaveSystem>()
-                .AsSingle();
+                Container.Bind<ISaveSystem>()
+                    .To<PlayerPrefsSaveSystem>()
+                    .AsSingle();
         }
 
         private void BindStateFactory() =>

@@ -55,7 +55,7 @@ namespace CodeBase.GameInit
             LevelSliderPresenter levelSliderPresenter,
             WaterSplashPoolInitializer waterSplashPoolInitializer,
             CameraShakeMediator cameraShakeMediator,
-            RotateCameraPresenter rotateCameraPresenter, 
+            RotateCameraPresenter rotateCameraPresenter,
             RotateCameraOnEnemyKill rotateCameraOnEnemyKill, IProvider<CameraData> cameraDataProvider)
         {
             _cameraDataProvider = cameraDataProvider;
@@ -80,7 +80,7 @@ namespace CodeBase.GameInit
         {
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
-                _enemyConfigurator.Configure(enemy,aggrozone);
+                _enemyConfigurator.Configure(enemy, aggrozone);
                 _slowMotionOnEnemyDeath.Init(enemy);
                 _countEnemiesOnDeath.Init(enemy);
                 _levelSliderPresenter.Init(enemy);
@@ -89,8 +89,7 @@ namespace CodeBase.GameInit
 
             var playerData = await _saveSystem.Load<PlayerData>();
             InitializeUIPresenters(playerData);
-            playerData.LastWeaponId = WeaponTypeId.ThrowDaggerShooter;
-            InitializeInitialWeapon( playerData.LastWeaponId);
+            InitializeInitialWeapon(playerData.LastWeaponId);
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             InitializeCamera(player);
             _waterSplashPoolInitializer.Init();

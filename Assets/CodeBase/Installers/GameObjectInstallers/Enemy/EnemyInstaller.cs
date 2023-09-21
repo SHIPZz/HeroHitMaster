@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
+using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.MaterialChanger;
 using UnityEngine;
 using UnityEngine.AI;
@@ -27,6 +28,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.Bind<EnemyAnimator>().AsSingle();
             Container.Bind<IMaterialChanger>().To<SkinnedMaterialChanger>()
                 .FromComponentOn(gameObject).AsSingle();
+            
             Container
                 .BindInterfacesAndSelfTo<ActivateEnemyMovementOnShoot>()
                 .AsSingle();
@@ -38,6 +40,8 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container
                 .BindInterfacesAndSelfTo<DeathAnimOnMaterialChange>()
                 .AsSingle();
+            
+            
         }
 
         private void BindInstances()
@@ -67,6 +71,8 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.BindInterfacesAndSelfTo<WinAnimOnPlayerDeath>().AsSingle();
             Container.BindInterfacesAndSelfTo<StopMovementOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<StopMovementOnMaterialChange>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyBodyPartPositionSetter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyBodyPartMediator>().AsSingle();
         }
 
         private void BindEffects()

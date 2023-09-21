@@ -7,13 +7,11 @@ namespace CodeBase.Infrastructure
 {
     public class LevelLoadState : IState, IPayloadedEnter<int>, IExit
     {
-        private IGameStateMachine _gameStateMachine;
         private readonly ILoadingCurtain _loadingCurtain;
 
-        public LevelLoadState(IGameStateMachine gameStateMachine, ILoadingCurtain loadingCurtain)
+        public LevelLoadState(ILoadingCurtain loadingCurtain)
         {
             _loadingCurtain = loadingCurtain;
-            _gameStateMachine = gameStateMachine;
         }
 
         public async void Enter(int payload)
@@ -22,7 +20,7 @@ namespace CodeBase.Infrastructure
             DOTween.Init();
             DOTween.RestartAll();
             await SceneManager.LoadSceneAsync(payload);
-            _loadingCurtain.Hide(null);
+            _loadingCurtain.Hide();
         }
 
         public void Exit()

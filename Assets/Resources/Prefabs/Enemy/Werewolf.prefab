@@ -11347,8 +11347,6 @@ GameObject:
   - component: {fileID: 1372400484610476105}
   - component: {fileID: 7283145334061923001}
   - component: {fileID: 451497380559511954}
-  - component: {fileID: 8032994428629425534}
-  - component: {fileID: 8061174579238672070}
   m_Layer: 9
   m_Name: Werewolf
   m_TagString: Untagged
@@ -11693,32 +11691,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52837dd022e94684b8aed29aedfd75a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8032994428629425534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3514065291909104020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf537b44584846c893846819b6a0b1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyBodyPartPositionSetter: {fileID: 8061174579238672070}
-  _enemy: {fileID: 4717912340771138780}
---- !u!114 &8061174579238672070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3514065291909104020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ad39b345c94375be3551d8be600241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3524536190862698772

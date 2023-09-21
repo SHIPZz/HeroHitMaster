@@ -8,25 +8,25 @@ namespace CodeBase.UI.LevelSlider
 {
     public class LevelSliderView : MonoBehaviour
     {
-        private const int LevelFinish = 1;
-
         [SerializeField] private UnityEngine.UI.Slider _slider;
-        [SerializeField] private float _decreaseDuration = 0.5f;
         [SerializeField] private float _fillDuration = 1f;
 
         private bool _isFilled;
-        private bool _isChanging = false;
+        private bool _isChanging;
 
         public void SetMaxValue(int enemyCount) =>
             _slider.maxValue = enemyCount;
 
+        public void Disable() =>
+            gameObject.SetActive(false);
+
         public async void Decrease(int value)
         {
-            while(_isChanging)
+            while (_isChanging)
                 await UniTask.Yield();
-            
+
             _isChanging = true;
-            
+
             while (!_isFilled)
             {
                 await UniTask.Yield();
@@ -35,7 +35,7 @@ namespace CodeBase.UI.LevelSlider
             float targetValue = _slider.value - value;
 
             await ChangeSliderValue(targetValue);
-            
+
             _isChanging = false;
             HideIfSliderNull(_slider.value);
         }
@@ -63,7 +63,7 @@ namespace CodeBase.UI.LevelSlider
                 return;
 
             await UniTask.WaitForSeconds(0.5f);
-            
+
             transform
                 .DOScaleX(0, 1f)
                 .SetEase(Ease.InQuint)
