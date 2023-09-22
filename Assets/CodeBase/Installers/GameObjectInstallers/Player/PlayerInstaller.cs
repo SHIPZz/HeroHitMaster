@@ -30,7 +30,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
 
         private void BindInterfacesAndSelfTo()
         {
-            Container.BindInterfacesAndSelfTo<PlayerShootPresenter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerShootMediator>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerShootInput>().AsSingle();
             Container.BindInterfacesAndSelfTo<EffectOnShoot>().AsSingle();
             Container.BindInterfacesAndSelfTo<DisablePlayerOnLevelFinish>().AsSingle();

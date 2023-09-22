@@ -86,6 +86,7 @@ PlayerSettings:
   hideHomeButton: 0
   submitAnalytics: 1
   usePlayerLog: 1
+  dedicatedServerOptimizations: 0
   bakeCollisionMeshes: 0
   forceSingleInstance: 0
   useFlipModelSwapchain: 1
@@ -125,6 +126,7 @@ PlayerSettings:
   switchNVNMaxPublicTextureIDCount: 0
   switchNVNMaxPublicSamplerIDCount: 0
   switchNVNGraphicsFirmwareMemory: 32
+  switchMaxWorkerMultiple: 8
   stadiaPresentMode: 0
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
@@ -158,6 +160,7 @@ PlayerSettings:
   buildNumber:
     Bratwurst: 0
     Standalone: 0
+    VisionOS: 0
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
@@ -182,8 +185,8 @@ PlayerSettings:
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 13.0
-  bratwurstSdkVersion: 0
-  bratwurstTargetOSVersionString: 16.4
+  VisionOSSdkVersion: 0
+  VisionOSTargetOSVersionString: 1.0
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -231,10 +234,10 @@ PlayerSettings:
   appleDeveloperTeamID: 
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
-  bratwurstManualSigningProvisioningProfileID: 
+  VisionOSManualSigningProvisioningProfileID: 
   iOSManualSigningProvisioningProfileType: 0
   tvOSManualSigningProvisioningProfileType: 0
-  bratwurstManualSigningProvisioningProfileType: 0
+  VisionOSManualSigningProvisioningProfileType: 0
   appleEnableAutomaticSigning: 0
   iOSRequireARKit: 0
   iOSAutomaticallyDetectAndAddCapabilities: 1
@@ -430,7 +433,7 @@ PlayerSettings:
     m_Automatic: 1
   - m_BuildTarget: WebGLSupport
     m_APIs: 0b000000
-    m_Automatic: 0
+    m_Automatic: 1
   m_BuildTargetVRSettings:
   - m_BuildTarget: Standalone
     m_Enabled: 0
@@ -478,7 +481,7 @@ PlayerSettings:
   - m_BuildTarget: Android
     m_Format: 0
   - m_BuildTarget: WebGL
-    m_Format: 5
+    m_Format: 0
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -497,6 +500,7 @@ PlayerSettings:
   switchSocketConcurrencyLimit: 14
   switchScreenResolutionBehavior: 2
   switchUseCPUProfiler: 0
+  switchEnableFileSystemTrace: 0
   switchUseGOLDLinker: 0
   switchLTOSetting: 0
   switchApplicationID: 0x01004b9000490000
@@ -741,14 +745,18 @@ PlayerSettings:
     Android: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     Bratwurst: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
+    GameCoreScarlett: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
+    LinuxHeadlessSimulation: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     PS4: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     PS5: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     QNX: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     Stadia: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     Standalone: INVECTOR_BASIC;INVECTOR_MELEE;INVECTOR_SHOOTER;ODIN_INSPECTOR;ODIN_INSPECTOR_3;UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
+    VisionOS: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     WebGL: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;UNITY_POST_PROCESSING_STACK_V2;TextMeshPro;STARTER_ASSETS_PACKAGES_CHECKED
+    Windows Store Apps: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     XboxOne: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro
     iPhone: TextMeshPro
     tvOS: UNITY_POST_PROCESSING_STACK_V2;TextMeshPro

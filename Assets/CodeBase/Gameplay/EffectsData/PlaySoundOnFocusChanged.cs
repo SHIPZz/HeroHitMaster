@@ -1,5 +1,4 @@
 ﻿using System;
-using Agava.WebUtility;
 using CodeBase.Enums;
 using CodeBase.Services.Storages.Sound;
 using UnityEngine;
@@ -17,13 +16,13 @@ namespace CodeBase.Gameplay.EffectsData
         public void Initialize()
         {
             Application.focusChanged += Play;
-            WebApplication.InBackgroundChangeEvent += Play;
+            // WebApplication.InBackgroundChangeEvent += Play;
         }
 
         public void Dispose()
         {
             Application.focusChanged -= Play;
-            WebApplication.InBackgroundChangeEvent -= Play;
+            // WebApplication.InBackgroundChangeEvent -= Play;
         }
 
         private void Play(bool onFocusChanged)

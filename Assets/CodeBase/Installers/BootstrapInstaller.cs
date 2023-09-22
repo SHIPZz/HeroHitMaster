@@ -8,12 +8,15 @@ using CodeBase.Services.Level;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.SaveSystems;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace CodeBase.Installers
 {
     public class BootstrapInstaller : MonoInstaller, IInitializable
     {
+        private bool _initialized;
+
         public override void InstallBindings()
         {
             BindAssetProvider();
@@ -23,7 +26,6 @@ namespace CodeBase.Installers
             BindLoadingCurtain();
             BindGameStateMachine();
             BindStateFactory();
-            BindSaveSystem();
             BindGlobalSlowMotionSystem();
             BindPauseService();
             BindPauseOnFocusChanged();
@@ -32,10 +34,31 @@ namespace CodeBase.Installers
                 .FromInstance(this).AsSingle();
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
+            var coroutineStarter = Container.Resolve<ICoroutineStarter>();
+            coroutineStarter.StartCoroutine(Init());
+
+            while (!_initialized)
+            {
+                await UniTask.Yield();
+            }
+            
+            BindSaveSystem();
+            
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
             gameStateMachine.ChangeState<BootstrapState>();
+        }
+        
+        private IEnumerator Init()
+        {
+#if !UNITY_WEBGL || UNITY_EDITOR
+            _initialized = true;
+            yield break;
+#endif
+            yield return YandexGamesSdk.Initialize();
+            YandexGamesSdk.CallbackLogging = false;
+            _initialized = true;
         }
 
         private void BindLevelService() =>

@@ -18,12 +18,9 @@ namespace CodeBase.Gameplay.LoadNextLevel
         }
 
         public void Initialize() =>
-            _continueButtonView.Clicked += Load;
+            _continueButtonView.Clicked += _gameStateMachine.ChangeState<BootstrapState>;
 
         public void Dispose() =>
-            _continueButtonView.Clicked -= Load;
-
-        private void Load() =>
-            _gameStateMachine.ChangeState<BootstrapState>();
+            _continueButtonView.Clicked -= _gameStateMachine.ChangeState<BootstrapState>;
     }
 }

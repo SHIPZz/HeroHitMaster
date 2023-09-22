@@ -5,6 +5,6 @@ namespace CodeBase.Services.SaveSystems.Data
     [Serializable]
     public class SettingsData
     {
-        public float Volume;
+        public float Volume = 0.3f;
     }
 }

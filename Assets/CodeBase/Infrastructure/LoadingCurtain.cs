@@ -21,6 +21,9 @@ namespace CodeBase.Infrastructure
         private void Awake() =>
             DontDestroyOnLoad(this);
 
+        private void OnDisable() =>
+            _loadingSlider.value = 0;
+
         public void Show(float loadSliderDuration)
         {
             if (_loadingSlider.value != 0)
@@ -37,7 +40,7 @@ namespace CodeBase.Infrastructure
         {
             while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
                 await UniTask.Yield();
-            
+
             _canvasGroup
                 .DOFade(0, CloseDuration)
                 .OnComplete(() =>

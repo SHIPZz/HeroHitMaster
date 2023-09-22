@@ -157,7 +157,6 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindSaveTriggers()
         {
-            Container.BindInterfacesAndSelfTo<SoundSaveOnTrigger>().AsSingle();
             Container.BindInterfacesAndSelfTo<PurchasedWeaponsSaveTrigger>().AsSingle();
             Container.BindInterfacesAndSelfTo<PurchasedWeaponsTriggerPresenter>().AsSingle();
             Container.BindInstance(_saveTriggerOnLevel);

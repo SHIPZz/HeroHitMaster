@@ -22,12 +22,10 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 
         public void Tick()
         {
-            if (!Input.GetMouseButtonDown(0) || EventSystem.current.IsPointerOverGameObject())
+            if (!_inputService.PlayerFire.WasPressedThisFrame() || EventSystem.current.IsPointerOverGameObject())
                 return;
-
-            Vector2 mousePosition = Mouse.current.position.value;
-
-            Fired?.Invoke(Input.mousePosition);
+            
+            Fired?.Invoke(_inputService.MousePosition);
         }
     }
 }

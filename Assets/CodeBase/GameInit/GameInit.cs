@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Players;
@@ -16,6 +17,7 @@ using CodeBase.UI.LevelSlider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
+using CodeBase.UI.Windows.Audio;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
@@ -41,6 +43,8 @@ namespace CodeBase.GameInit
         private readonly RotateCameraPresenter _rotateCameraPresenter;
         private readonly RotateCameraOnEnemyKill _rotateCameraOnEnemyKill;
         private readonly IProvider<CameraData> _cameraDataProvider;
+        private AudioView _audioView;
+        private AudioChanger _audioChanger;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -56,8 +60,13 @@ namespace CodeBase.GameInit
             WaterSplashPoolInitializer waterSplashPoolInitializer,
             CameraShakeMediator cameraShakeMediator,
             RotateCameraPresenter rotateCameraPresenter,
-            RotateCameraOnEnemyKill rotateCameraOnEnemyKill, IProvider<CameraData> cameraDataProvider)
+            RotateCameraOnEnemyKill rotateCameraOnEnemyKill, 
+            IProvider<CameraData> cameraDataProvider, 
+            AudioView audioView, 
+            AudioChanger audioChanger)
         {
+            _audioChanger = audioChanger;
+            _audioView = audioView;
             _cameraDataProvider = cameraDataProvider;
             _rotateCameraOnEnemyKill = rotateCameraOnEnemyKill;
             _rotateCameraPresenter = rotateCameraPresenter;
@@ -78,6 +87,8 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
+            await InitSound();
+
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
                 _enemyConfigurator.Configure(enemy, aggrozone);
@@ -93,6 +104,13 @@ namespace CodeBase.GameInit
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             InitializeCamera(player);
             _waterSplashPoolInitializer.Init();
+        }
+
+        private async Task InitSound()
+        {
+            var settingsData = await _saveSystem.Load<SettingsData>();
+            _audioView.Slider.value = settingsData.Volume;
+            _audioChanger.Change(settingsData.Volume);
         }
 
         private void InitializeUIPresenters(PlayerData playerData)
