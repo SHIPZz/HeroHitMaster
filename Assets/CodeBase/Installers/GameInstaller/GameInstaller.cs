@@ -22,6 +22,7 @@ using CodeBase.Services.Storages.Effect;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.Services.Storages.Weapon;
 using CodeBase.UI.Weapons;
+using CodeBase.UI.Weapons.ShopWeapons;
 using UnityEngine;
 using Zenject;
 
@@ -71,7 +72,6 @@ namespace CodeBase.Installers.GameInstaller
             BindBlockInputOnUi();
             BindSaveTriggers();
             BindCheckOutService();
-            BindAdCheckOutService();
             BindSlowMotion();
             BindEffectStorage();
             BindEffectProvider();
@@ -87,6 +87,13 @@ namespace CodeBase.Installers.GameInstaller
             BindRotateCameraPresenter();
             BindLevel();
             BindPlaySoundOnFocusChanged();
+            BindAdWatchCounter();
+        }
+
+        private void BindAdWatchCounter()
+        {
+            BindAsSingle<AdWatchCounter>();
+            Container.BindInterfacesAndSelfTo<AdWatchCounterPresenter>().AsSingle();
         }
 
         private void BindPlaySoundOnFocusChanged() =>
@@ -96,9 +103,6 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindLevel() => 
             Container.BindInstance(_level);
-
-        private void BindAdCheckOutService() => 
-            BindAsSingle<AdCheckOutService>();
 
         private void BindRotateCameraPresenter() =>
             Container

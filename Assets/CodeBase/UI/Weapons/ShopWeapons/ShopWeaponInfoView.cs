@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Providers;
@@ -8,6 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.UI.Weapons.ShopWeapons
 {
@@ -32,6 +34,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
         private AudioSource _purchasedWeaponSound;
 
+        public event Action AdButtonClicked;
+
         [Inject]
         private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage)
         {
@@ -40,6 +44,12 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _weaponPrices[PriceTypeId.Ad] = _adPrice;
             _weaponPrices[PriceTypeId.Money] = _price;
         }
+
+        private void OnEnable() =>
+            _adButton.onClick.AddListener(OnAddButtonClicked);
+
+        private void OnDisable() =>
+            _adButton.onClick.RemoveListener(OnAddButtonClicked);
 
         public void DisableBuyButton(WeaponData weaponData)
         {
@@ -58,6 +68,17 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
             SetButtonScale(_adButton, false, false, needAnimation);
             SetButtonScale(_buyButton, false, false, needAnimation);
+        }
+
+        public void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
+        {
+            if (isBought)
+            {
+                UpdateWeaponInfo(weaponData, false, $"{watchedAds}/{weaponData.Price.AdQuantity}");
+                return;
+            }
+
+            UpdateWeaponInfo(weaponData, true, $"{watchedAds}/{weaponData.Price.AdQuantity}");
         }
 
         public void SetWeaponData(WeaponData weaponData)
@@ -80,8 +101,12 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
             _buyButton.transform.DOScaleX(1, ButtonScaleDelay)
                 .OnComplete(() => SetButtonScale(_buyButton, true, true, true));
+            
             UpdateWeaponInfo(weaponData, true, weaponData.Price.Value.ToString());
         }
+
+        private void OnAddButtonClicked() =>
+            AdButtonClicked?.Invoke();
 
         private void SetActivePrice(bool isActive, PriceTypeId pricePriceTypeId)
         {
@@ -114,9 +139,9 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _name.transform.DOScaleX(1, 0.2f);
             SetActivePrice(showPrice, weaponData.Price.PriceTypeId);
 
-            if (!showPrice) 
+            if (!showPrice)
                 return;
-                
+
             TextMeshProUGUI targetPrice = _weaponPrices[weaponData.Price.PriceTypeId];
             targetPrice.text = $"<color=#ffdc30> {priceText}</color>";
         }

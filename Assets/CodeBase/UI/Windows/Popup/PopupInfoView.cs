@@ -75,12 +75,6 @@ namespace CodeBase.UI.Windows.Popup
         private void OnAdClicked() =>
             AdButtonClicked?.Invoke();
 
-        [Button]
-        public async void Show()
-        {
-            await StartChooseRandomWeapon();
-        }
-
         private void DisableAllWhiteFrames()
         {
             foreach (var whiteFrame in _whiteFrames.Values)

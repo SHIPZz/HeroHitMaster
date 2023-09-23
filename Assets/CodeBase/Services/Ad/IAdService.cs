@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace CodeBase.Services.Ad
 {
@@ -10,6 +11,6 @@ namespace CodeBase.Services.Ad
         event Action ShortAdOpened;
 
         void PlayShortAd(Action startCallback, Action<bool> onCloseCallback);
-        void PlayLongAd(Action startCallback, Action endCallback);
+        void PlayLongAd([CanBeNull] Action startCallback, Action endCallback);
     }
 }

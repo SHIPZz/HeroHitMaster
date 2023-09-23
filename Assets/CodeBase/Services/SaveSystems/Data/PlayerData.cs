@@ -12,5 +12,6 @@ namespace CodeBase.Services.SaveSystems.Data
             { WeaponTypeId.ThrowingKnifeShooter };
 
         public WeaponTypeId LastWeaponId = WeaponTypeId.ThrowingKnifeShooter;
+        public WeaponTypeId LastNotPopupWeaponId = WeaponTypeId.ThrowingKnifeShooter;
     }
 }

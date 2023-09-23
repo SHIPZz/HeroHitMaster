@@ -43,13 +43,13 @@ namespace CodeBase.Installers
             {
                 await UniTask.Yield();
             }
-            
+
             BindSaveSystem();
-            
+
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
             gameStateMachine.ChangeState<BootstrapState>();
         }
-        
+
         private IEnumerator Init()
         {
 #if !UNITY_WEBGL || UNITY_EDITOR

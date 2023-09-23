@@ -12,7 +12,7 @@ namespace CodeBase.UI.Weapons
 
         public WeaponTypeId WeaponTypeId => _weaponTypeId;
 
-        public event Action<WeaponTypeId> Choosed;
+        public event Action<WeaponTypeId> Choosen;
 
         private void OnEnable() => 
             _button.onClick.AddListener(OnImageClicked);
@@ -21,6 +21,6 @@ namespace CodeBase.UI.Weapons
             _button.onClick.RemoveListener(OnImageClicked);
 
         private void OnImageClicked() => 
-            Choosed?.Invoke(_weaponTypeId);
+            Choosen?.Invoke(_weaponTypeId);
     }
 }

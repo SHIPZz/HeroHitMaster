@@ -20,12 +20,12 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
 
         public void Initialize()
         {
-            _weaponSelectorViews.ForEach(x => x.Choosed += _purchasedWeaponsSaveTrigger.SetLastWeaponType);
+            _weaponSelectorViews.ForEach(x => x.Choosen += _purchasedWeaponsSaveTrigger.SetLastWeaponType);
         }
 
         public void Dispose()
         {
-            _weaponSelectorViews.ForEach(x => x.Choosed -= _purchasedWeaponsSaveTrigger.SetLastWeaponType);
+            _weaponSelectorViews.ForEach(x => x.Choosen -= _purchasedWeaponsSaveTrigger.SetLastWeaponType);
         }
     }
 }

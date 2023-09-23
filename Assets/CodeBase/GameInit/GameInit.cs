@@ -18,6 +18,7 @@ using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows.Audio;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
@@ -43,8 +44,8 @@ namespace CodeBase.GameInit
         private readonly RotateCameraPresenter _rotateCameraPresenter;
         private readonly RotateCameraOnEnemyKill _rotateCameraOnEnemyKill;
         private readonly IProvider<CameraData> _cameraDataProvider;
-        private AudioView _audioView;
-        private AudioChanger _audioChanger;
+        private readonly AudioView _audioView;
+        private readonly AudioChanger _audioChanger;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -87,8 +88,10 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            await InitSound();
-
+            var settingsData = await _saveSystem.Load<SettingsData>();
+            _audioView.Slider.value = settingsData.Volume;
+            _audioChanger.Change(settingsData.Volume);
+            
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
                 _enemyConfigurator.Configure(enemy, aggrozone);
@@ -100,23 +103,17 @@ namespace CodeBase.GameInit
 
             var playerData = await _saveSystem.Load<PlayerData>();
             InitializeUIPresenters(playerData);
+            playerData.LastWeaponId = WeaponTypeId.ThrowingDynamiteShooter;
             InitializeInitialWeapon(playerData.LastWeaponId);
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             InitializeCamera(player);
             _waterSplashPoolInitializer.Init();
         }
 
-        private async Task InitSound()
-        {
-            var settingsData = await _saveSystem.Load<SettingsData>();
-            _audioView.Slider.value = settingsData.Volume;
-            _audioChanger.Change(settingsData.Volume);
-        }
-
         private void InitializeUIPresenters(PlayerData playerData)
         {
             _walletPresenter.Init(playerData.Money);
-            _shopWeaponPresenter.Init(playerData.LastWeaponId);
+            _shopWeaponPresenter.Init(playerData.LastNotPopupWeaponId);
         }
 
         private void InitializeCamera(Player player)
@@ -131,7 +128,7 @@ namespace CodeBase.GameInit
 
         private void InitializeInitialWeapon(WeaponTypeId weaponTypeId)
         {
-            _weaponSelector.SetLastWeaponChoosed(weaponTypeId);
+            _weaponSelector.SetLastWeaponChoosen(weaponTypeId);
             _weaponSelector.Select();
         }
 

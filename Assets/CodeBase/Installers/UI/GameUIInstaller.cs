@@ -117,6 +117,7 @@ namespace CodeBase.Installers.UI
             Container.BindInstance(_buyButtonView);
             Container.BindInterfacesAndSelfTo<BuyWeaponPresenter>()
                 .AsSingle();
+            Container.Bind<WeaponBuyer>().AsSingle();
         }
 
         private void BindShopWeaponUI()

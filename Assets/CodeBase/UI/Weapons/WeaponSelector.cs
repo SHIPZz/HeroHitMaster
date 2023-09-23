@@ -8,6 +8,7 @@ using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Weapon;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -18,8 +19,10 @@ namespace CodeBase.UI.Weapons
         private readonly IProvider<Weapon> _weaponProvider;
         private readonly IWeaponStorage _weaponStorage;
         private readonly ISaveSystem _saveSystem;
+        private readonly WeaponStaticDataService _weaponStaticDataService;
         private WeaponTypeId _lastWeaponId;
-        private WeaponStaticDataService _weaponStaticDataService;
+
+        public WeaponTypeId LastWeaponId => _lastWeaponId;
 
         public event Action<WeaponTypeId> NewWeaponChanged;
 
@@ -35,22 +38,26 @@ namespace CodeBase.UI.Weapons
         public async void Select()
         {
             await SaveLastSelectedWeapon();
-            
+
             Weapon weapon = _weaponStorage.Get(_lastWeaponId);
             _weaponProvider.Set(weapon);
+
             NewWeaponChanged?.Invoke(_lastWeaponId);
         }
 
-        private async Task SaveLastSelectedWeapon()
+        private async UniTask SaveLastSelectedWeapon()
         {
             var playerData = await _saveSystem.Load<PlayerData>();
             playerData.LastWeaponId = _lastWeaponId;
+
             _saveSystem.Save(playerData);
         }
 
-        public async void SetLastWeaponChoosed(WeaponTypeId weaponTypeId)
+        public async void SetLastWeaponChoosen(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;
+
+            var playerData = await _saveSystem.Load<PlayerData>();
 
             if (_weaponStaticDataService.Get(weaponTypeId).Price.PriceTypeId == PriceTypeId.Popup)
             {
@@ -58,10 +65,11 @@ namespace CodeBase.UI.Weapons
                 return;
             }
 
-            var playerData = await _saveSystem.Load<PlayerData>();
-
-            if (playerData.PurchasedWeapons.Contains(weaponTypeId))
-                Select();
+            if (!playerData.PurchasedWeapons.Contains(weaponTypeId)) 
+                return;
+            
+            playerData.LastNotPopupWeaponId = _lastWeaponId;
+            Select();
         }
     }
 }

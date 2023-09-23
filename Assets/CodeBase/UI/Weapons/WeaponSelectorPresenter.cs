@@ -28,14 +28,15 @@ namespace CodeBase.UI.Weapons
             _checkOutService = checkOutService;
             _weaponIconClickers = weaponIconsProvider.Icons;
             _weaponSelector = weaponSelector;
-            _popupWeaponIcons.ForEach(x => x.Choosed += _weaponSelector.SetLastWeaponChoosed);
-            _popupInfoView.LastWeaponSelected += _weaponSelector.SetLastWeaponChoosed;
         }
 
         public void Initialize()
         {
+            _popupWeaponIcons.ForEach(x => x.Choosen += _weaponSelector.SetLastWeaponChoosen);
+            _popupInfoView.LastWeaponSelected += _weaponSelector.SetLastWeaponChoosen;
+            
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosed +=  _weaponSelector.SetLastWeaponChoosed;
+                weaponIcon.Choosen +=  _weaponSelector.SetLastWeaponChoosen;
 
             _checkOutService.Succeeded += _weaponSelector.Select;
         }
@@ -43,11 +44,11 @@ namespace CodeBase.UI.Weapons
         public void Dispose()
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosed -=  _weaponSelector.SetLastWeaponChoosed;
+                weaponIcon.Choosen -=  _weaponSelector.SetLastWeaponChoosen;
                 
             _checkOutService.Succeeded -= _weaponSelector.Select;
-            _popupInfoView.LastWeaponSelected -= _weaponSelector.SetLastWeaponChoosed;
-            _popupWeaponIcons.ForEach(x => x.Choosed -= _weaponSelector.SetLastWeaponChoosed);
+            _popupInfoView.LastWeaponSelected -= _weaponSelector.SetLastWeaponChoosen;
+            _popupWeaponIcons.ForEach(x => x.Choosen -= _weaponSelector.SetLastWeaponChoosen);
         }
     }
 }

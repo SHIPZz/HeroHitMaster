@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using Agava.YandexGames;
-using CodeBase.Services;
+﻿using CodeBase.Enums;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 
 namespace CodeBase.Infrastructure
@@ -22,11 +19,6 @@ namespace CodeBase.Infrastructure
 
         public async void Enter()
         {
-            // while (!YandexGamesSdk.IsInitialized)
-            // {
-            //     await UniTask.Yield();
-            // }
-
             DOTween.Clear();
 
             var levelData = await _saveSystem.Load<LevelData>();

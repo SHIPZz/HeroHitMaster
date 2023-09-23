@@ -6,9 +6,6 @@ namespace CodeBase.Services.SaveSystems
 {
     public class YandexSaveSystem : ISaveSystem
     {
-        private bool _isSaveDataReceived;
-        private object _jsonData;
-
         public void Save<T>(T data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
@@ -18,21 +15,16 @@ namespace CodeBase.Services.SaveSystems
 
         public async UniTask<T> Load<T>() where T : new()
         {
-            PlayerAccount.GetCloudSaveData(OnSuccessCallback<T>);
+            object jsonData = null;
+            
+            PlayerAccount.GetCloudSaveData((data) => jsonData = JsonConvert.DeserializeObject<T>(data));
 
-            while (!_isSaveDataReceived)
+            while (jsonData is null)
             {
                 await UniTask.Yield();
             }
 
-            _isSaveDataReceived = false;
-            return (T)_jsonData;
-        }
-
-        private void OnSuccessCallback<T>(string data)
-        {
-            _jsonData = JsonConvert.DeserializeObject<T>(data);
-            _isSaveDataReceived = true;
+            return (T)jsonData;
         }
     }
 }

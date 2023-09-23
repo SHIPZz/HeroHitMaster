@@ -18,6 +18,7 @@ namespace CodeBase.Gameplay.EffectsData
         private ActivateEnemiesOnPlayerEnter _activateEnemy;
         private AudioSource _targetSound;
         private IEffectFactory _effectFactory;
+        private bool _effectPlayed;
 
         [Inject]
         private void Construct(ISoundStorage soundStorage, EffectStaticDataService effectStaticDataService, IEffectFactory effectFactory)
@@ -38,6 +39,10 @@ namespace CodeBase.Gameplay.EffectsData
 
         private void Play(Enemy enemy)
         {
+            if (_effectPlayed)
+                return;
+            
+            _effectPlayed = true;
             var randomId = Random.Range(0, _effects.Count - 1);
             ParticleSystem randomEffectPrefab = _effects[randomId];
             ParticleSystem effect = _effectFactory.Create(randomEffectPrefab);

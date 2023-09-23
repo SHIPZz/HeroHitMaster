@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure
 {
-    public class LevelLoadState : IState, IPayloadedEnter<int>, IExit
+    public class LevelLoadState : IState, IPayloadedEnter<int>
     {
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly IPauseService _pauseService;
@@ -24,11 +24,6 @@ namespace CodeBase.Infrastructure
             DOTween.RestartAll();
             await SceneManager.LoadSceneAsync(payload);
             _loadingCurtain.Hide();
-        }
-
-        public void Exit()
-        {
-            
         }
     }
 }
