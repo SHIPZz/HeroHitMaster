@@ -103,7 +103,7 @@ namespace CodeBase.GameInit
 
             var playerData = await _saveSystem.Load<PlayerData>();
             InitializeUIPresenters(playerData);
-            playerData.LastWeaponId = WeaponTypeId.ThrowingDynamiteShooter;
+            // playerData.LastWeaponId = WeaponTypeId.ThrowingDynamiteShooter;
             InitializeInitialWeapon(playerData.LastWeaponId);
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             InitializeCamera(player);
