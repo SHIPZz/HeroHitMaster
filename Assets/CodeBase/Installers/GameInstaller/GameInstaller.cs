@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CodeBase.Gameplay.BlockInput;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
@@ -67,9 +66,7 @@ namespace CodeBase.Installers.GameInstaller
             BindEnemyQuantityZonesProvider();
             BindTargetMovementStorage();
             BindLootStorage();
-            BindBlockInputOnLoading();
             BindLootFactory();
-            BindBlockInputOnUi();
             BindSaveTriggers();
             BindCheckOutService();
             BindSlowMotion();
@@ -166,15 +163,6 @@ namespace CodeBase.Installers.GameInstaller
             Container.BindInstance(_saveTriggerOnLevel);
         }
 
-        private void BindBlockInputOnUi()
-        {
-            Container.Bind<BlockShootInput>()
-                .AsSingle();
-
-            Container.BindInterfacesAndSelfTo<BlockShootInputPresenter>()
-                .AsSingle();
-        }
-
         private void BindAsSingle<T>() =>
             Container
                 .Bind<T>()
@@ -182,11 +170,6 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindLootFactory() =>
             BindAsSingle<LootFactory>();
-
-        private void BindBlockInputOnLoading() =>
-            Container
-                .BindInterfacesAndSelfTo<EnableInputOnPlayWindow>()
-                .AsSingle();
 
         private void BindLootStorage() =>
             BindAsSingle<LootStorage>();

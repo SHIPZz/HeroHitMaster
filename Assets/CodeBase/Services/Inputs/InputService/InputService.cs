@@ -7,8 +7,11 @@ namespace CodeBase.Services.Inputs.InputService
     {
         private readonly InputActions _inputActions;
 
-        public InputService() => 
+        public InputService()
+        {
             _inputActions = new InputActions();
+            _inputActions.Enable();
+        }
 
         public InputActions.PlayerActions PlayerActions =>
             _inputActions.Player;

@@ -1,11 +1,8 @@
 ﻿using System;
 using CodeBase.Services.Inputs.InputService;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using Zenject;
-using IInitializable = Zenject.IInitializable;
 
 namespace CodeBase.Gameplay.Character.Players.Shoot
 {
@@ -13,17 +10,23 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
     {
         private readonly IInputService _inputService;
 
+        private bool _isBlocked = true;
+
         public event Action<Vector2> Fired;
 
-        public PlayerShootInput(IInputService inputService) => 
+        public PlayerShootInput(IInputService inputService) =>
             _inputService = inputService;
 
         public void Tick()
         {
-            if (!_inputService.PlayerFire.WasPressedThisFrame() || EventSystem.current.IsPointerOverGameObject())
+            if (!_inputService.PlayerFire.WasPressedThisFrame() || EventSystem.current.IsPointerOverGameObject() ||
+                _isBlocked)
                 return;
-            
+
             Fired?.Invoke(_inputService.MousePosition);
         }
+
+        public void UnBlock() =>
+            _isBlocked = false;
     }
 }

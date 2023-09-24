@@ -6,6 +6,7 @@ using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using CodeBase.UI.Windows;
+using CodeBase.UI.Windows.Play;
 using DG.Tweening;
 
 namespace CodeBase.UI.LevelSlider
@@ -13,19 +14,18 @@ namespace CodeBase.UI.LevelSlider
     public class LevelSliderPresenter : IDisposable
     {
         private readonly LevelSliderView _levelSliderView;
-        private readonly WeaponProvider _weaponProvider;
         private readonly Window _deathWindow;
         private Weapon _weapon;
         private List<Enemy> _enemies = new();
         private bool _isBlocked;
         private bool _isFilled;
+        private PlayButtonView _playButtonView;
 
-        public LevelSliderPresenter(LevelSliderView levelSliderView, IProvider<WeaponProvider> weaponProvider, WindowProvider windowProvider)
+        public LevelSliderPresenter(LevelSliderView levelSliderView, WindowProvider windowProvider, PlayButtonView playButtonView)
         {
+            _playButtonView = playButtonView;
             _levelSliderView = levelSliderView;
             _deathWindow = windowProvider.Windows[WindowTypeId.Death];
-            _weaponProvider = weaponProvider.Get();
-            _weaponProvider.Changed += SetWeapon;
         }
 
         public void Init(Enemy enemy)
@@ -36,6 +36,7 @@ namespace CodeBase.UI.LevelSlider
             _levelSliderView.gameObject.SetActive(true);
             _levelSliderView.SetMaxValue(_enemies.Count);
             _levelSliderView.transform.DOScale(0, 0);
+            _playButtonView.Clicked += FillSlider;
         }
 
         public void Dispose()
@@ -45,14 +46,8 @@ namespace CodeBase.UI.LevelSlider
                 UnsubscribeFromEnemyEvents(enemy);
             }
 
-            _weapon.Shooted -= FillSlider;
+            _playButtonView.Clicked -= FillSlider;
             _deathWindow.StartedToOpen -= _levelSliderView.Disable;
-        }
-
-        private void SetWeapon(Weapon weapon)
-        {
-            _weapon = weapon;
-            _weapon.Shooted += FillSlider;
         }
 
         private void SubscribeToEnemyEvents(Enemy enemy)

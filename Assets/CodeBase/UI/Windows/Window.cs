@@ -16,6 +16,7 @@ namespace CodeBase.UI.Windows
         [field: SerializeField] public WindowTypeId WindowTypeId { get; private set; }
 
         public event Action StartedToOpen;
+        public event Action StartedToClose;
         public event Action Opened;
         public event Action Closed;
 
@@ -34,6 +35,8 @@ namespace CodeBase.UI.Windows
 
         public void Close(bool withAnimation)
         {
+            StartedToClose?.Invoke();
+            
             if (!withAnimation)
             {
                 CloseQuickly();

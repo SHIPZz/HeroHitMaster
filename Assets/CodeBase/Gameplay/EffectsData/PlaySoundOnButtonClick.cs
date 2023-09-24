@@ -14,11 +14,9 @@ namespace CodeBase.Gameplay.EffectsData
         private AudioSource _targetSound;
 
         [Inject]
-        private void Construct(ISoundStorage soundStorage)
-        {
+        private void Construct(ISoundStorage soundStorage) => 
             _targetSound = soundStorage.Get(_soundTypeId);
-        }
-     
+
         private void Awake() => 
             _button = GetComponent<Button>();
 

@@ -44,6 +44,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private PopupInfoView _popupInfoView;
         [SerializeField] private AdBuyButtonView _adBuyButtonView;
         [SerializeField] private ContinueButtonView _continueButtonView;
+        [SerializeField] private PlayButtonView _playButtonView;
         
         public override void InstallBindings()
         {
@@ -69,7 +70,13 @@ namespace CodeBase.Installers.UI
             BindAdBuyWeaponButtonView();
             BindContinueButtonView();
             BindLoadNextLevelPresenter();
+            BindAllWindowsPresenter();
         }
+
+        private void BindAllWindowsPresenter() =>
+            Container
+                .BindInterfacesAndSelfTo<AllWindowsPresenter>()
+                .AsSingle();
 
         private void BindLoadNextLevelPresenter() =>
             Container
@@ -175,6 +182,7 @@ namespace CodeBase.Installers.UI
 
         private void BindPlayUI()
         {
+            Container.BindInstance(_playButtonView);
             Container
                 .BindInterfacesAndSelfTo<PlayWindowPresenter>()
                 .AsSingle();
