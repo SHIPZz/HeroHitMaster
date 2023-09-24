@@ -13,11 +13,13 @@ namespace CodeBase.Gameplay.BlockInput
     {
         private readonly BlockShootInput _blockShootInput;
         private readonly List<Window> _allWindows;
+        private readonly Window _playWindow;
 
         public BlockShootInputPresenter(WindowProvider windowProvider, BlockShootInput blockShootInput)
         {
             _blockShootInput = blockShootInput;
             _allWindows = windowProvider.Windows.Values.ToList();
+            _playWindow = windowProvider.Windows[WindowTypeId.Play];
         }
 
         public void Initialize()
@@ -27,6 +29,8 @@ namespace CodeBase.Gameplay.BlockInput
                 x.StartedToOpen += _blockShootInput.DisableInput;
                 x.Closed += _blockShootInput.EnableInput;
             });
+
+            _playWindow.Opened += _blockShootInput.EnableInput;
         }
 
         public void Dispose()
@@ -36,6 +40,8 @@ namespace CodeBase.Gameplay.BlockInput
                 x.StartedToOpen -= _blockShootInput.DisableInput;
                 x.Closed -= _blockShootInput.EnableInput;
             });
+            
+            _playWindow.Opened -= _blockShootInput.EnableInput;
         }
     }
 }

@@ -29,7 +29,9 @@ namespace CodeBase.Gameplay.BlockInput
             _playWindow.Opened -= EnableInput;
         }
 
-        private void EnableInput() => 
+        private void EnableInput()
+        {
             _inputService.PlayerActions.Enable();
+        }
     }
 }

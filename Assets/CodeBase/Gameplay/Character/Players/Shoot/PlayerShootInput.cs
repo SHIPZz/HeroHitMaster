@@ -15,10 +15,8 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 
         public event Action<Vector2> Fired;
 
-        public PlayerShootInput(IInputService inputService)
-        {
+        public PlayerShootInput(IInputService inputService) => 
             _inputService = inputService;
-        }
 
         public void Tick()
         {
