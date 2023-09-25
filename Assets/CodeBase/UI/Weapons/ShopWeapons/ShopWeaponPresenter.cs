@@ -130,6 +130,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 adsWeaponData.WatchedAdsToBuyWeapons.TryAdd(weaponTypeId, 0);
                 
                 _shopWeaponInfoView.SetWeaponData(weaponData, adsWeaponData.WatchedAdsToBuyWeapons[weaponData.WeaponTypeId]);
+                return;
             }
             
             _shopWeaponInfoView.SetWeaponData(weaponData, 0);
