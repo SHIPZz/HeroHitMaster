@@ -8,22 +8,24 @@ namespace CodeBase.Gameplay.EnemyBodyParts
     {
         private readonly EnemyBodyPartPositionSetter _enemyBodyPartPositionSetter;
         private readonly Enemy _enemy;
+        private readonly DieOnAnimationEvent _dieOnAnimationEvent;
 
-        public EnemyBodyPartMediator(EnemyBodyPartPositionSetter enemyBodyPartPositionSetter, Enemy enemy)
+        public EnemyBodyPartMediator(EnemyBodyPartPositionSetter enemyBodyPartPositionSetter, Enemy enemy, DieOnAnimationEvent dieOnAnimationEvent)
         {
+            _dieOnAnimationEvent = dieOnAnimationEvent;
             _enemyBodyPartPositionSetter = enemyBodyPartPositionSetter;
             _enemy = enemy;
         }
 
         public void Initialize()
         {
-            _enemy.Dead += _enemyBodyPartPositionSetter.SetPosition;
+            _dieOnAnimationEvent.Dead += _enemyBodyPartPositionSetter.SetPosition;
             _enemy.QuickDestroyed += _enemyBodyPartPositionSetter.SetPosition;
         }
 
         public void Dispose()
         {
-            _enemy.Dead -= _enemyBodyPartPositionSetter.SetPosition;
+            _dieOnAnimationEvent.Dead -= _enemyBodyPartPositionSetter.SetPosition;
             _enemy.QuickDestroyed -= _enemyBodyPartPositionSetter.SetPosition;
         }
     }

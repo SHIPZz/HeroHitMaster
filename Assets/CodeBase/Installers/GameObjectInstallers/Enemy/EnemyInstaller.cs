@@ -30,7 +30,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
                 .FromComponentOn(gameObject).AsSingle();
             
             Container
-                .BindInterfacesAndSelfTo<ActivateEnemyMovementOnShoot>()
+                .BindInterfacesAndSelfTo<ActivateEnemyMovementOnPlayButtonClick>()
                 .AsSingle();
 
             Container

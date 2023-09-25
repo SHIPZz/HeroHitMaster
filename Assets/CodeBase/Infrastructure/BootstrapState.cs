@@ -1,5 +1,4 @@
-﻿using CodeBase.Enums;
-using CodeBase.Services.SaveSystems;
+﻿using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using DG.Tweening;
 
@@ -20,7 +19,7 @@ namespace CodeBase.Infrastructure
         public async void Enter()
         {
             DOTween.Clear();
-            
+
             var levelData = await _saveSystem.Load<LevelData>();
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }

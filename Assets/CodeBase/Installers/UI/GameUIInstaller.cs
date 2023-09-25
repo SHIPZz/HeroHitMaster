@@ -45,6 +45,8 @@ namespace CodeBase.Installers.UI
         [SerializeField] private AdBuyButtonView _adBuyButtonView;
         [SerializeField] private ContinueButtonView _continueButtonView;
         [SerializeField] private PlayButtonView _playButtonView;
+        [SerializeField] private RestartButtonView _restartButtonView;
+        [SerializeField] private ContinueADButtonView _continueADButtonView;
         
         public override void InstallBindings()
         {
@@ -71,6 +73,13 @@ namespace CodeBase.Installers.UI
             BindContinueButtonView();
             BindLoadNextLevelPresenter();
             BindAllWindowsPresenter();
+            BindButtonInDeathWindow();
+        }
+
+        private void BindButtonInDeathWindow()
+        {
+            Container.BindInstance(_restartButtonView);
+            Container.BindInstance(_continueADButtonView);
         }
 
         private void BindAllWindowsPresenter() =>

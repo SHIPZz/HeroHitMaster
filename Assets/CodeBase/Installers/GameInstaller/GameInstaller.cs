@@ -11,6 +11,8 @@ using CodeBase.Services;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
+using CodeBase.Services.GameContinues;
+using CodeBase.Services.GameRestarters;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.SaveTriggers;
@@ -87,6 +89,20 @@ namespace CodeBase.Installers.GameInstaller
             BindPlaySoundOnFocusChanged();
             BindAdWatchCounter();
             BindWeaponSaver();
+            BindGameRestarter();
+            BindGameContinue();
+        }
+
+        private void BindGameContinue()
+        {
+            Container.BindInterfacesAndSelfTo<GameContinuePresenter>().AsSingle();
+            BindAsSingle<GameContinue>();
+        }
+
+        private void BindGameRestarter()
+        {
+            Container.BindInterfacesAndSelfTo<GameRestarterPresenter>().AsSingle();
+            BindAsSingle<GameRestarter>();
         }
 
         private void BindWeaponSaver()

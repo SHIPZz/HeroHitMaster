@@ -16,8 +16,8 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public void OnAnimationDead()
         {
-            Destroy(gameObject, 0.1f);
             Dead?.Invoke(_enemy);
+            gameObject.SetActive(false);
         }
     }
 }

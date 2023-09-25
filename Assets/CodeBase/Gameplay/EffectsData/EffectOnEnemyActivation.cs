@@ -40,7 +40,6 @@ namespace CodeBase.Gameplay.EffectsData
         {
             var randomId = Random.Range(0, _effects.Count - 1);
             ParticleSystem randomEffectPrefab = _effects[randomId];
-            Debug.Log("play" + enemy.gameObject.name);
             ParticleSystem effect = _effectFactory.Create(randomEffectPrefab);
             effect.gameObject.SetActive(true);
             effect.gameObject.transform.position = enemy.transform.position + _offset;

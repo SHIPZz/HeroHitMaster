@@ -3,7 +3,6 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Gameplay.ObjectBodyPart;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
@@ -30,13 +29,11 @@ namespace CodeBase.Gameplay.Character.Enemy
         private void OnEnable() =>
             _skinnedMaterialChanger.StartedChanged += DisableEvents;
 
-        private void OnDisable() =>
-            _skinnedMaterialChanger.StartedChanged -= DisableEvents;
-
-        private void OnDestroy()
+        private void OnDisable()
         {
+            _skinnedMaterialChanger.StartedChanged -= DisableEvents;
             Application.quitting -= DisableEvents;
-
+            
             if (_isExploded || _isDead)
                 return;
 

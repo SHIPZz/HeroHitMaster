@@ -38,6 +38,8 @@
         ButtonClick,
         ScrollClick,
         WeaponButtonClick,
-        AppearEnemy
+        AppearEnemy,
+        PlayButtonClick,
+        ContinueButtonClick
     }
 }
