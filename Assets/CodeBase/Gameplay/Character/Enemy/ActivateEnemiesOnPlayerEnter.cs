@@ -24,6 +24,8 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         public event Action<Enemy> Activated;
 
+        private bool _activated = false;
+
         [Inject]
         private void Construct(IProvider<PlayerProvider> provider)
         {
@@ -58,6 +60,9 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private async void Activate(Player obj)
         {
+            if(_activated)
+                return;
+            
             await UniTask.WaitForSeconds(_delayActivation);
 
             foreach (Enemy enemy in _enemies)
@@ -67,6 +72,8 @@ namespace CodeBase.Gameplay.Character.Enemy
                 Activated?.Invoke(enemy);
                 TryActivateMovement(enemy);
             }
+
+            _activated = true;
         }
 
         private async void TryActivateMovement(Enemy enemy)

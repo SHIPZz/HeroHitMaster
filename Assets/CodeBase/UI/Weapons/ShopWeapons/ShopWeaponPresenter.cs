@@ -31,7 +31,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             WeaponStaticDataService weaponStaticDataService,
             ShopWeaponInfoView shopWeaponInfoView,
             IProvider<WeaponTypeId, Image> provider,
-            ISaveSystem saveSystem, CheckOutService checkOutService, AdWatchCounter adWatchCounter)
+            ISaveSystem saveSystem, CheckOutService checkOutService,
+            AdWatchCounter adWatchCounter)
         {
             _adWatchCounter = adWatchCounter;
             _checkOutService = checkOutService;
@@ -122,21 +123,20 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            // if (IsWeaponPopup(weaponTypeId))
-            // {
-            //     await SetLastNotPopupWeapon();
-            //     Debug.Log(weaponData.Price.PriceTypeId == PriceTypeId.Popup);
-            //     return;
-            // }
+            if (weaponData.Price.PriceTypeId == PriceTypeId.Ad)
+            {
+                var adsWeaponData = await _saveSystem.Load<AdWeaponsData>();
 
-            _shopWeaponInfoView.SetWeaponData(weaponData);
+                adsWeaponData.WatchedAdsToBuyWeapons.TryAdd(weaponTypeId, 0);
+                
+                _shopWeaponInfoView.SetWeaponData(weaponData, adsWeaponData.WatchedAdsToBuyWeapons[weaponData.WeaponTypeId]);
+            }
+            
+            _shopWeaponInfoView.SetWeaponData(weaponData, 0);
         }
 
         private bool SameWeaponChoosed(WeaponTypeId weaponTypeId) =>
             _lastWeaponType == weaponTypeId;
-
-        private bool IsWeaponPopup(WeaponTypeId weaponTypeId) =>
-            _weaponStaticDataService.Get(weaponTypeId).Price.PriceTypeId == PriceTypeId.Popup;
 
         private WeaponData GetWeaponData(WeaponTypeId weaponTypeId)
         {

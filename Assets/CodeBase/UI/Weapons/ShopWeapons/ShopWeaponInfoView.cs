@@ -54,9 +54,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         public void DisableBuyButton(WeaponData weaponData)
         {
             if (_priceCheckerForAd[weaponData.Price.PriceTypeId])
-            {
                 return;
-            }
 
             SetButtonScale(_buyButton, false, false, true);
             UpdateWeaponInfo(weaponData, true, weaponData.Price.Value.ToString());
@@ -69,19 +67,20 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             SetButtonScale(_adButton, false, false, needAnimation);
             SetButtonScale(_buyButton, false, false, needAnimation);
         }
-
+        
         public void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
             if (isBought)
             {
-                UpdateWeaponInfo(weaponData, false, $"{watchedAds}/{weaponData.Price.AdQuantity}");
+                UpdateWeaponInfo(weaponData, true, $"{watchedAds}/{weaponData.Price.AdQuantity}");
+                DisableBuyInfo(weaponData, true);
                 return;
             }
 
             UpdateWeaponInfo(weaponData, true, $"{watchedAds}/{weaponData.Price.AdQuantity}");
         }
 
-        public void SetWeaponData(WeaponData weaponData)
+        public void SetWeaponData(WeaponData weaponData, int watchedAds)
         {
             if (_priceCheckerForAd[weaponData.Price.PriceTypeId])
             {
@@ -91,7 +90,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 _adButton.transform.DOScaleX(1, ButtonScaleDelay)
                     .OnComplete(() => SetButtonScale(_adButton, true, true, true));
 
-                UpdateWeaponInfo(weaponData, true, $"0/{weaponData.Price.AdQuantity}");
+                UpdateWeaponInfo(weaponData, true, $"{watchedAds}/{weaponData.Price.AdQuantity}");
 
                 return;
             }

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Data;
-using CodeBase.Services.Pause;
-using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
-using Zenject;
 
 namespace CodeBase.UI.Weapons.ShopWeapons
 {

@@ -8,15 +8,15 @@ namespace CodeBase.Services.CheckOut
         private readonly Wallet _wallet;
 
         public event Action Succeeded;
-        
-        public CheckOutService(Wallet wallet) => 
-        _wallet = wallet;
+
+        public CheckOutService(Wallet wallet) =>
+            _wallet = wallet;
 
         public void Buy(int price)
         {
-            if (!_wallet.TryRemoveMoney(price)) 
+            if (!_wallet.TryRemoveMoney(price))
                 return;
-            
+
             Succeeded?.Invoke();
         }
     }

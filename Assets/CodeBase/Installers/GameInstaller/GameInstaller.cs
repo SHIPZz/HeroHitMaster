@@ -14,6 +14,7 @@ using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.SaveTriggers;
+using CodeBase.Services.SaveSystems.WeaponSaves;
 using CodeBase.Services.Slowmotion;
 using CodeBase.Services.Storages.Bullet;
 using CodeBase.Services.Storages.Character;
@@ -85,6 +86,13 @@ namespace CodeBase.Installers.GameInstaller
             BindLevel();
             BindPlaySoundOnFocusChanged();
             BindAdWatchCounter();
+            BindWeaponSaver();
+        }
+
+        private void BindWeaponSaver()
+        {
+            Container.BindInterfacesAndSelfTo<WeaponSaverMediator>().AsSingle();
+            BindAsSingle<WeaponSaver>();
         }
 
         private void BindAdWatchCounter()
@@ -158,8 +166,6 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindSaveTriggers()
         {
-            Container.BindInterfacesAndSelfTo<PurchasedWeaponsSaveTrigger>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PurchasedWeaponsTriggerPresenter>().AsSingle();
             Container.BindInstance(_saveTriggerOnLevel);
         }
 
