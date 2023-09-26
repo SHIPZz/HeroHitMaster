@@ -22,10 +22,11 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private readonly ShopWeaponInfoView _shopWeaponInfoView;
         private readonly IProvider<WeaponTypeId, Image> _provider;
         private readonly CheckOutService _checkOutService;
-        private Image _lastWeaponIcon;
+        private readonly AdWatchCounter _adWatchCounter;
         private readonly ISaveSystem _saveSystem;
+        
+        private Image _lastWeaponIcon;
         private WeaponTypeId _lastWeaponType;
-        private AdWatchCounter _adWatchCounter;
 
         public ShopWeaponPresenter(IProvider<List<WeaponSelectorView>> weaponSelectorViewsProvider,
             WeaponStaticDataService weaponStaticDataService,
@@ -43,28 +44,6 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _weaponSelectorViews = weaponSelectorViewsProvider.Get();
         }
 
-        public async void Init(WeaponTypeId weaponTypeId)
-        {
-            WeaponData weaponData;
-            weaponData = _weaponStaticDataService.Get(weaponTypeId);
-
-            if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
-            {
-                await SetLastNotPopupWeapon();
-                return;
-            }
-
-            SetWeaponDataToView(weaponTypeId);
-        }
-
-        private async UniTask SetLastNotPopupWeapon()
-        {
-            WeaponData weaponData;
-            var playerData = await _saveSystem.Load<PlayerData>();
-            weaponData = _weaponStaticDataService.Get(playerData.LastNotPopupWeaponId);
-            SetWeaponDataToView(weaponData.WeaponTypeId);
-        }
-
         public void Initialize()
         {
             _weaponSelectorViews.ForEach(x => x.Choosen += SetWeaponDataToView);
@@ -79,6 +58,34 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _checkOutService.Succeeded -= DisablePurchasedWeaponInfo;
             _adWatchCounter.AdWatched -= SetAdWeaponInfo;
             _adWatchCounter.AllAdWatched -= SetAdWeaponInfo;
+        }
+
+        public async void Init(WeaponTypeId weaponTypeId)
+        {
+            WeaponData weaponData;
+            weaponData = _weaponStaticDataService.Get(weaponTypeId);
+
+            if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
+            {
+                await SetLastNotPopupWeapon();
+                return;
+            }
+
+            SetInitialWeaponDataToView(weaponTypeId);
+        }
+
+        private void SetInitialWeaponDataToView(WeaponTypeId weaponTypeId)
+        {
+            WeaponData weaponData = GetWeaponData(weaponTypeId);
+            _shopWeaponInfoView.SetWeaponData(weaponData, 0);
+        }
+
+        private async UniTask SetLastNotPopupWeapon()
+        {
+            WeaponData weaponData;
+            var playerData = await _saveSystem.Load<PlayerData>();
+            weaponData = _weaponStaticDataService.Get(playerData.LastNotPopupWeaponId);
+            SetWeaponDataToView(weaponData.WeaponTypeId);
         }
 
         private void SetAdWeaponInfo(WeaponTypeId weaponTypeId)
@@ -123,17 +130,24 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            if (weaponData.Price.PriceTypeId == PriceTypeId.Ad)
-            {
-                var adsWeaponData = await _saveSystem.Load<AdWeaponsData>();
-
-                adsWeaponData.WatchedAdsToBuyWeapons.TryAdd(weaponTypeId, 0);
-                
-                _shopWeaponInfoView.SetWeaponData(weaponData, adsWeaponData.WatchedAdsToBuyWeapons[weaponData.WeaponTypeId]);
+            if (await IsWeaponAd(weaponTypeId, weaponData))
                 return;
-            }
-            
+
             _shopWeaponInfoView.SetWeaponData(weaponData, 0);
+        }
+
+        private async UniTask<bool> IsWeaponAd(WeaponTypeId weaponTypeId, WeaponData weaponData)
+        {
+            if (weaponData.Price.PriceTypeId != PriceTypeId.Ad)
+                return false;
+
+            var adsWeaponData = await _saveSystem.Load<AdWeaponsData>();
+
+            adsWeaponData.WatchedAdsToBuyWeapons.TryAdd(weaponTypeId, 0);
+
+            _shopWeaponInfoView.SetWeaponData(weaponData,
+                adsWeaponData.WatchedAdsToBuyWeapons[weaponData.WeaponTypeId]);
+            return true;
         }
 
         private bool SameWeaponChoosed(WeaponTypeId weaponTypeId) =>

@@ -34,10 +34,10 @@ namespace CodeBase.Gameplay.Character.Players
         private void SetWeapon(Weapon obj)
         {
             _weapon = obj;
-            _weapon.Shooted += OnWeaponShooted;
+            _weapon.Shot += OnWeaponShot;
         }
 
-        private void OnWeaponShooted()
+        private void OnWeaponShot()
         {
             _playerAnimator.NeedBlockIdle(_navMeshAgent.velocity.magnitude > 0.1);
             
@@ -47,7 +47,7 @@ namespace CodeBase.Gameplay.Character.Players
 
         public void Dispose()
         {
-            _weapon.Shooted -= OnWeaponShooted;
+            _weapon.Shot -= OnWeaponShot;
         }
     }
 }

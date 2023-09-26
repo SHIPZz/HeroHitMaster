@@ -130,7 +130,7 @@ namespace CodeBase.Gameplay.Camera
         private void TrySubscribeOnRecoilWeaponShoot()
         {
             if (_recoilWeapons.Contains(_weapon.WeaponTypeId))
-                _weapon.Shooted += _cameraShake.MakeRecoil;
+                _weapon.Shot += _cameraShake.MakeRecoil;
         }
 
         private void TrySubscribeOnDestructionBulletKill()

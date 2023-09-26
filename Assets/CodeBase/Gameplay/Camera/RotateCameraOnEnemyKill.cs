@@ -86,8 +86,6 @@ namespace CodeBase.Gameplay.Camera
             var directionToEnemy = _lastEnemyPosition - _cameraData.transform.position;
             directionToEnemy = directionToEnemy.normalized;
             
-            Debug.Log(_lastEnemyPosition);
-
             float angle = Mathf.Atan2(directionToEnemy.x, directionToEnemy.z) * Mathf.Rad2Deg;
             
             _cameraZoomer.Zoom(37, 0.7f, 0.3f, Ease.Flash);

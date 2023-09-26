@@ -17,16 +17,15 @@ namespace CodeBase.Gameplay.Weapons
         protected BulletStorage _bulletStorage;
 
         public bool Initialized { get; private set; }
-        
-        public event Action Shooted;
 
-        
+        public event Action Shot;
+
         [Inject]
-        private void Construct(BulletStorage bulletStorage) => 
+        private void Construct(BulletStorage bulletStorage) =>
             _bulletStorage = bulletStorage;
 
-        public virtual async void Initialize() => 
-          await  Init(WeaponTypeId);
+        public virtual async void Initialize() =>
+            await Init(WeaponTypeId);
 
         public virtual void Shoot(Vector3 target, Vector3 initialPosition)
         {
@@ -34,7 +33,7 @@ namespace CodeBase.Gameplay.Weapons
             PrepareBullet(target, initialPosition, bullet);
             bullet.StartMovement(target, initialPosition);
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => _bulletStorage.Push(bullet));
-            Shooted?.Invoke();
+            Shot?.Invoke();
         }
 
         private void PrepareBullet(Vector3 target, Vector3 initialPosition, Bullet.Bullet bullet)
@@ -48,7 +47,7 @@ namespace CodeBase.Gameplay.Weapons
 
         protected async UniTask Init(WeaponTypeId weaponTypeId)
         {
-            await  _bulletStorage.CreateBulletsBy(weaponTypeId);
+            await _bulletStorage.CreateBulletsBy(weaponTypeId);
 
             Initialized = true;
         }

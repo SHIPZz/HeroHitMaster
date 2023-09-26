@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Enemy;
+using UnityEngine;
 
 namespace CodeBase.Services
 {
@@ -10,9 +11,10 @@ namespace CodeBase.Services
         
         public int Quantity { get; private set; }
 
+        private List<Enemy> _killedEnemies = new();
+
         public void Init(Enemy enemy)
         {
-            enemy.Dead += Count;
             enemy.QuickDestroyed += Count;
             enemy.GetComponent<DieOnAnimationEvent>().Dead += Count;
             _enemies.Add(enemy);
@@ -22,13 +24,18 @@ namespace CodeBase.Services
         {
             _enemies.ForEach(x =>
             {
-                x.Dead -= Count;
                 x.QuickDestroyed -= Count;
                 x.GetComponent<DieOnAnimationEvent>().Dead -= Count;
             });
         }
 
-        private void Count(Enemy obj) => 
+        private void Count(Enemy enemy)
+        {
+            if(_killedEnemies.Contains(enemy))
+                return;
+            
+            _killedEnemies.Add(enemy);
             Quantity++;
+        }
     }
 }
