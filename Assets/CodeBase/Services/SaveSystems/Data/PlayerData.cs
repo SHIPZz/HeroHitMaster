@@ -7,6 +7,7 @@ namespace CodeBase.Services.SaveSystems.Data
     [Serializable]
     public class PlayerData
     {
+        public PlayerTypeId LastPlayerId = PlayerTypeId.Wolverine;
         public int Money;
         public List<WeaponTypeId> PurchasedWeapons = new() 
             { WeaponTypeId.ThrowingKnifeShooter };
