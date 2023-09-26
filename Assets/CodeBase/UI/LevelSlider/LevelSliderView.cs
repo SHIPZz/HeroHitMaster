@@ -17,6 +17,9 @@ namespace CodeBase.UI.LevelSlider
         public void SetMaxValue(int enemyCount) =>
             _slider.maxValue = enemyCount;
 
+        public void Enable(int i) =>
+            gameObject.SetActive(true);
+
         public void Disable() =>
             gameObject.SetActive(false);
 

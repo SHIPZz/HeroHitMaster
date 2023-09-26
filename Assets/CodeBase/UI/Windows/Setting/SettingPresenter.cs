@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Enums;
+using CodeBase.Services.Pause;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Setting
@@ -8,9 +9,11 @@ namespace CodeBase.UI.Windows.Setting
     {
         private readonly SettingView _settingView;
         private readonly WindowService _windowService;
+        private IPauseService _pauseService;
 
-        public SettingPresenter(SettingView settingView, WindowService windowService)
+        public SettingPresenter(SettingView settingView, WindowService windowService, IPauseService pauseService)
         {
+            _pauseService = pauseService;
             _settingView = settingView;
             _windowService = windowService;
         }
@@ -29,11 +32,18 @@ namespace CodeBase.UI.Windows.Setting
 
         private void Open()
         {
-            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.SettingWindow));
-            // _windowService.Open(WindowTypeId.SettingWindow);
+            _windowService.CloseAll(() =>
+            {
+                _windowService.Open(WindowTypeId.SettingWindow);
+                _pauseService.Pause();
+            });
         }
 
         private void Close() => 
-        _windowService.Close(WindowTypeId.SettingWindow, () => _windowService.Open(WindowTypeId.Play));
+        _windowService.Close(WindowTypeId.SettingWindow, () =>
+        {
+            _windowService.Open(WindowTypeId.Play);
+            _pauseService.UnPause();
+        });
     }
 }

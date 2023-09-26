@@ -16,10 +16,14 @@ namespace CodeBase.Gameplay.Character.Enemy
         private PlayerHealth _playerHealth;
 
         [Inject]
-        public void Construct(EnemyAttacker enemyAttacker, EnemyFollower enemyFollower)
+        public void Construct(EnemyAttacker enemyAttacker,
+            EnemyFollower enemyFollower,
+            IProvider<PlayerProvider> playerProvider)
         {
+            _playerProvider = playerProvider;
             _enemyAttacker = enemyAttacker;
             _enemyFollower = enemyFollower;
+            _playerProvider.Get().Changed += SetPlayer;
         }
 
         private void Update()
@@ -34,5 +38,11 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyFollower.Block();
             _enemyAttacker.SetTarget(_playerHealth);
         }
+        
+        private void OnDisable() => 
+            _playerProvider.Get().Changed -= SetPlayer;
+
+        private void SetPlayer(Player player) => 
+            _playerHealth = player.GetComponent<PlayerHealth>();
     }
 }

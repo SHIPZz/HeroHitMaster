@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
-using CodeBase.Services;
 using CodeBase.Services.Ad;
-using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Character;
 using UnityEngine;
 using Zenject;
@@ -18,6 +16,7 @@ namespace CodeBase.UI.Windows.Death
         private readonly IAdService _adService;
         private PlayerHealth _playerHealth;
         private readonly List<PlayerHealth> _playerHealths = new();
+        private bool _isOpened;
 
         public DeathPresenter(WindowService windowService, DeathView deathView, IAdService adService,
             IPlayerStorage playerStorage)
@@ -30,31 +29,46 @@ namespace CodeBase.UI.Windows.Death
 
         public void Initialize()
         {
-            _playerHealths.ForEach(x => x.ValueZeroReached += ShowDeathWindow);
+            _playerHealths.ForEach(x =>
+            {
+                x.ValueZeroReached += ShowDeathWindow;
+                x.Recovered += OnPlayerRecovered;
+            });
+
             _deathView.RestartAdButtonClicked += DisableDeathWindowWithAd;
-            _deathView.RestartButtonClicked += DisableDeathWindow;
         }
 
         public void Dispose()
         {
-            _playerHealths.ForEach(x => x.ValueZeroReached += ShowDeathWindow);
+            _playerHealths.ForEach(x =>
+            {
+                x.ValueZeroReached -= ShowDeathWindow;
+                x.Recovered -= OnPlayerRecovered;
+            });
+
             _deathView.RestartAdButtonClicked -= DisableDeathWindowWithAd;
-            _deathView.RestartButtonClicked -= DisableDeathWindow;
         }
 
-        private void DisableDeathWindow() => 
-            _windowService.Close(WindowTypeId.Death);
+        private void DisableDeathWindowWithAd() => 
+            _windowService.CloseAll();
 
-        private void DisableDeathWindowWithAd()
+        private void OnPlayerRecovered(int i)
         {
-            DisableDeathWindow();
-            // _adService.PlayLongAd();
+            _deathView.DisableAdButton();
+            _isOpened = false;
         }
 
         private void ShowDeathWindow()
         {
-            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Death));
-            // _windowService.Open(WindowTypeId.Death);
+            if (_isOpened)
+                return;
+
+            _isOpened = true;
+            
+            _windowService.CloseAll(() =>
+            {
+                _windowService.Open(WindowTypeId.Death, () => _isOpened = false);
+            });
         }
     }
 }

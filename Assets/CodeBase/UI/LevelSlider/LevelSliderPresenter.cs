@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
@@ -15,17 +16,28 @@ namespace CodeBase.UI.LevelSlider
     {
         private readonly LevelSliderView _levelSliderView;
         private readonly Window _deathWindow;
+        private readonly PlayButtonView _playButtonView;
         private Weapon _weapon;
         private List<Enemy> _enemies = new();
         private bool _isBlocked;
         private bool _isFilled;
-        private PlayButtonView _playButtonView;
+        private PlayerHealth _player;
+        private readonly PlayerProvider _playerProvider;
 
-        public LevelSliderPresenter(LevelSliderView levelSliderView, WindowProvider windowProvider, PlayButtonView playButtonView)
+        public LevelSliderPresenter(LevelSliderView levelSliderView, WindowProvider windowProvider,
+            PlayButtonView playButtonView, IProvider<PlayerProvider> provider)
         {
             _playButtonView = playButtonView;
+            _playerProvider = provider.Get();
+            _playerProvider.Changed += SetPlayer;
             _levelSliderView = levelSliderView;
             _deathWindow = windowProvider.Windows[WindowTypeId.Death];
+        }
+
+        private void SetPlayer(Player player)
+        {
+            _player = player.GetComponent<PlayerHealth>();
+            _player.Recovered += _levelSliderView.Enable;
         }
 
         public void Init(Enemy enemy)
@@ -48,6 +60,8 @@ namespace CodeBase.UI.LevelSlider
 
             _playButtonView.Clicked -= FillSlider;
             _deathWindow.StartedToOpen -= _levelSliderView.Disable;
+            _player.Recovered -= _levelSliderView.Enable;
+            _playerProvider.Changed -= SetPlayer;
         }
 
         private void SubscribeToEnemyEvents(Enemy enemy)

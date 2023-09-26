@@ -29,5 +29,8 @@ namespace CodeBase.UI.Windows.Death
 
         private void OnRestartButtonClicked() => 
             RestartButtonClicked?.Invoke();
+
+        public void DisableAdButton() =>
+            _adRestart.gameObject.SetActive(false);
     }
 }

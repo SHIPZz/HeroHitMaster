@@ -10,37 +10,23 @@ namespace CodeBase.UI.Windows.Play
     public class PlayWindowPresenter : IInitializable, IDisposable
     {
         private readonly WindowService _windowService;
-        private readonly WeaponProvider _weaponProvider;
-        private readonly ILoadingCurtain _loadingCurtain;
-        private Weapon _weapon;
+        private readonly PlayButtonView _playButtonView;
 
-        public PlayWindowPresenter(WindowService windowService, IProvider<WeaponProvider> provider, ILoadingCurtain loadingCurtain)
+        public PlayWindowPresenter(WindowService windowService, PlayButtonView playButtonView)
         {
-            _loadingCurtain = loadingCurtain;
-            _weaponProvider = provider.Get();
-            _weaponProvider.Changed += SetWeapon;
+            _playButtonView = playButtonView;
             _windowService = windowService;
-        }
-
-        private void SetWeapon(Weapon weapon)
-        {
-            _weapon = weapon;
-            _weapon.Shooted += Disable;
         }
 
         public void Initialize()
         {
-            _loadingCurtain.Closed += Enable;
+            _playButtonView.Clicked += Disable;
         }
 
         public void Dispose()
         {
-            _weapon.Shooted -= Disable;
-            _loadingCurtain.Closed -= Enable;
+            _playButtonView.Clicked -= Disable;
         }
-
-        private void Enable() => 
-            _windowService.Open(WindowTypeId.Play);
 
         private void Disable() =>
             _windowService.Close(WindowTypeId.Play);

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using CodeBase.Services;
+using CodeBase.Services.Data;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players
@@ -13,11 +14,13 @@ namespace CodeBase.Gameplay.Character.Players
         private ICoroutineStarter _coroutineStarter;
         private TargetMovementStorage _targetMovementStorage;
         private int _currentTarget = -1;
+        private PlayerStaticDataService _playerStaticDataService;
 
         [Inject]
         private void Construct(ICoroutineStarter coroutineStarter,
-            TargetMovementStorage targetMovementStorage)
+            TargetMovementStorage targetMovementStorage, PlayerStaticDataService playerStaticDataService)
         {
+            _playerStaticDataService = playerStaticDataService;
             _targetMovementStorage = targetMovementStorage;
             _coroutineStarter = coroutineStarter;
         }
@@ -26,6 +29,7 @@ namespace CodeBase.Gameplay.Character.Players
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _navMeshAgent.updateRotation = false;
+            _navMeshAgent.speed = _playerStaticDataService.GetPlayerData(GetComponent<Player>().PlayerTypeId).Speed;
         }
 
         public void MoveToNextZone()

@@ -45,14 +45,16 @@ namespace CodeBase.UI.Weapons
             NewWeaponChanged?.Invoke(_lastWeaponId);
         }
 
-        private async UniTask SaveLastSelectedWeapon()
+        public async void Select(WeaponTypeId weaponTypeId)
         {
-            var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.LastWeaponId = _lastWeaponId;
+            await SaveLastSelectedWeapon();
 
-            _saveSystem.Save(playerData);
+            Weapon weapon = _weaponStorage.Get(weaponTypeId);
+            _weaponProvider.Set(weapon);
+
+            NewWeaponChanged?.Invoke(weaponTypeId);
         }
-
+        
         public async void SetLastWeaponChoosen(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;
@@ -65,11 +67,19 @@ namespace CodeBase.UI.Weapons
                 return;
             }
 
-            if (!playerData.PurchasedWeapons.Contains(weaponTypeId)) 
+            if (!playerData.PurchasedWeapons.Contains(weaponTypeId))
                 return;
-            
+
             playerData.LastNotPopupWeaponId = _lastWeaponId;
             Select();
+        }
+
+        private async UniTask SaveLastSelectedWeapon()
+        {
+            var playerData = await _saveSystem.Load<PlayerData>();
+            playerData.LastWeaponId = _lastWeaponId;
+
+            _saveSystem.Save(playerData);
         }
     }
 }
