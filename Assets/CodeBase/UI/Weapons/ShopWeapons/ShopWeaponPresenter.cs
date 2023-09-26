@@ -77,7 +77,6 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private void SetInitialWeaponDataToView(WeaponTypeId weaponTypeId)
         {
             WeaponData weaponData = GetWeaponData(weaponTypeId);
-            _shopWeaponInfoView.SetWeaponData(weaponData, 0);
             _shopWeaponInfoView.DisableBuyInfo(weaponData, false);
         }
 
