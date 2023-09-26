@@ -23,6 +23,7 @@ namespace CodeBase.UI.Windows.Victory
         {
             _deadEnemyQuantity.text = "";
             _earnedMoney.text = "";
+            _continueText.enabled = false;
             _continueButton.interactable = false;
         }
 

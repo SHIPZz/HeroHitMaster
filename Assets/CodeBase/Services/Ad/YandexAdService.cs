@@ -7,43 +7,47 @@ namespace CodeBase.Services.Ad
     public class YandexAdService : IAdService
     {
         private readonly IPauseService _pauseService;
-        
+
         public event Action LongAdClosed;
         public event Action LongAdOpened;
         public event Action ShortAdClosed;
         public event Action ShortAdOpened;
 
-        public YandexAdService(IPauseService pauseService) => 
+        public YandexAdService(IPauseService pauseService) =>
             _pauseService = pauseService;
 
-        public void PlayShortAd(Action startCallback, Action<bool> onCloseCallback)
+        public void PlayShortAd(Action startCallback, Action<bool> onCloseCallback) => 
+            InterstitialAd.Show(() =>  OnShortAdStartCallback(startCallback), closed => OnShortAdCloseCallback(onCloseCallback, closed));
+
+        private void OnShortAdStartCallback(Action startCallback)
         {
-            InterstitialAd.Show(() =>
-            {
-                startCallback?.Invoke();
-                _pauseService.Pause();
-                ShortAdOpened?.Invoke();
-            },  closed =>
-            {
-                onCloseCallback?.Invoke(closed);
-                _pauseService.UnPause();
-                ShortAdClosed?.Invoke();
-            });
+            startCallback?.Invoke();
+            _pauseService.Pause();
+            ShortAdOpened?.Invoke();
         }
 
-        public void PlayLongAd(Action startCallback, Action endCallback)
+        private void OnShortAdCloseCallback(Action<bool> onCloseCallback, bool closed)
         {
-            VideoAd.Show(() =>
-            {
-                startCallback?.Invoke();
-                _pauseService.Pause();
-                LongAdOpened?.Invoke();
-            },  () =>
-            {
-                endCallback?.Invoke();
-                _pauseService.UnPause();
-                LongAdClosed?.Invoke();
-            });
+            onCloseCallback?.Invoke(closed);
+            _pauseService.UnPause();
+            ShortAdClosed?.Invoke();
+        }
+
+        public void PlayLongAd(Action startCallback, Action endCallback) =>
+            VideoAd.Show(() => OnOpenCallback(startCallback), null, () => OnCloseCallback(endCallback));
+
+        private void OnCloseCallback(Action endCallback)
+        {
+            endCallback?.Invoke();
+            _pauseService.UnPause();
+            LongAdClosed?.Invoke();
+        }
+
+        private void OnOpenCallback(Action startCallback)
+        {
+            startCallback?.Invoke();
+            _pauseService.Pause();
+            LongAdOpened?.Invoke();
         }
     }
 }

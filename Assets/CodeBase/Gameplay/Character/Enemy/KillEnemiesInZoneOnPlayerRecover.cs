@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Players;
-using CodeBase.Gameplay.ObjectBodyPart;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Services.Providers;
-using CodeBase.Services.Storages.Character;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -37,8 +35,13 @@ namespace CodeBase.Gameplay.Character.Enemy
             _playerHealth.Recovered += Kill;
         }
 
-        private void Kill(int obj)
+        private async void Kill(int obj)
         {
+            while (!_playerHealth.gameObject.activeSelf)
+            {
+                await UniTask.Yield();  
+            }
+        
             foreach (Enemy enemy in _enemies)
             {
                 if (enemy.gameObject.activeSelf)

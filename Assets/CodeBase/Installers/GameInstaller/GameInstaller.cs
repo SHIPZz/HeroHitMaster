@@ -95,8 +95,8 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindGameContinue()
         {
-            Container.BindInterfacesAndSelfTo<GameContinuePresenter>().AsSingle();
-            BindAsSingle<GameContinue>();
+            Container.BindInterfacesAndSelfTo<AdRewardPresenter>().AsSingle();
+            BindAsSingle<AdReward>();
         }
 
         private void BindGameRestarter()
