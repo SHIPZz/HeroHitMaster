@@ -12,22 +12,29 @@ namespace CodeBase.Gameplay.Character.Enemy
     {
         private readonly EnemyAnimator _enemyAnimator;
         private readonly List<PlayerHealth> _playerHealths = new();
+        private Enemy _enemy;
 
-        public WinAnimOnPlayerDeath(IPlayerStorage playerStorage, EnemyAnimator enemyAnimator)
+        public WinAnimOnPlayerDeath(IPlayerStorage playerStorage, EnemyAnimator enemyAnimator, Enemy enemy)
         {
+            _enemy = enemy;
             playerStorage.GetAll().ForEach(x => _playerHealths.Add(x.GetComponent<PlayerHealth>()));
             _enemyAnimator = enemyAnimator;
         }
 
-        public void Initialize() => 
+        public void Initialize() =>
             _playerHealths.ForEach(x => x.ValueZeroReached += PlayWinAnimation);
 
-        public void Dispose() => 
-        _playerHealths.ForEach(x => x.ValueZeroReached -= PlayWinAnimation);
+        public void Dispose() =>
+            _playerHealths.ForEach(x => x.ValueZeroReached -= PlayWinAnimation);
 
-        private void PlayWinAnimation() => 
+        private void PlayWinAnimation()
+        {
+            if(!_enemy.gameObject.activeSelf)
+                return;
+            
             DOTween.Sequence()
                 .AppendInterval(0.5f)
                 .OnComplete(() => _enemyAnimator.SetVictory());
+        }
     }
 }
