@@ -78,6 +78,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             WeaponData weaponData = GetWeaponData(weaponTypeId);
             _shopWeaponInfoView.SetWeaponData(weaponData, 0);
+            _shopWeaponInfoView.DisableBuyInfo(weaponData, false);
         }
 
         private async UniTask SetLastNotPopupWeapon()
