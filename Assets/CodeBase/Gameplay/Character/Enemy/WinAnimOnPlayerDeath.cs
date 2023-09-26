@@ -12,7 +12,7 @@ namespace CodeBase.Gameplay.Character.Enemy
     {
         private readonly EnemyAnimator _enemyAnimator;
         private readonly List<PlayerHealth> _playerHealths = new();
-        private Enemy _enemy;
+        private readonly Enemy _enemy;
 
         public WinAnimOnPlayerDeath(IPlayerStorage playerStorage, EnemyAnimator enemyAnimator, Enemy enemy)
         {
