@@ -64,7 +64,7 @@ namespace CodeBase.UI.Windows.Popup
         private void OnEnable()
         {
             _adButton.onClick.AddListener(OnAdClicked);
-            
+
             List<WeaponSelectorView> randomIcons = GetRandomWeaponIcons(3);
             EnableRandomIcons(randomIcons);
         }
@@ -74,6 +74,12 @@ namespace CodeBase.UI.Windows.Popup
 
         private void OnAdClicked() =>
             AdButtonClicked?.Invoke();
+
+        [Button]
+        public async void Show()
+        {
+            await StartChooseRandomWeapon();
+        }
 
         private void DisableAllWhiteFrames()
         {
@@ -132,7 +138,7 @@ namespace CodeBase.UI.Windows.Popup
                 {
                     _chooseWeaponSound.Play();
                 }
-                
+
                 await UniTask.WaitForSeconds(_chooseDuration);
             }
         }

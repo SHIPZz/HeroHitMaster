@@ -14,8 +14,6 @@ namespace CodeBase.Gameplay.Camera
     public class RotateCameraOnEnemyKill : IInitializable, IDisposable
     {
         private readonly UnityEngine.Camera _camera;
-        private readonly List<EnemySpawner> _enemySpawners;
-        private readonly List<EnemyQuantityInZone> _enemyQuantityZones;
         private readonly CameraZoomer _cameraZoomer;
         private readonly List<ExplosionBarrel.ExplosionBarrel> _explosionBarrels;
         private CameraData _cameraData;
@@ -23,26 +21,28 @@ namespace CodeBase.Gameplay.Camera
         private bool _blockRotation;
         private Enemy _enemy;
         private Vector3 _lastEnemyPosition;
+        private List<Enemy> _enemies = new();
 
-        public RotateCameraOnEnemyKill(IProvider<CameraData> cameraProvider,
-            IProvider<List<EnemySpawner>> enemySpawnersProvider,
-            EnemyQuantityZonesProvider enemyQuantityZonesProvider,
-            CameraZoomer cameraZoomer, IProvider<List<ExplosionBarrel.ExplosionBarrel>> explosionBarrelProvider)
+        public RotateCameraOnEnemyKill(CameraZoomer cameraZoomer, IProvider<List<ExplosionBarrel.ExplosionBarrel>> explosionBarrelProvider)
         {
             _cameraZoomer = cameraZoomer;
-            _enemySpawners = enemySpawnersProvider.Get();
             _explosionBarrels = explosionBarrelProvider.Get();
-            _enemyQuantityZones = enemyQuantityZonesProvider.EnemyQuantityInZones;
         }
 
-        public void Init(CameraData cameraData) =>
+        public void Init(CameraData cameraData)
+        {
             _cameraData = cameraData;
+
+            foreach (var enemy in _enemies)
+            {
+                enemy.Dead += Do;
+                enemy.QuickDestroyed += Do;
+                enemy.GetComponent<DieOnAnimationEvent>().Dead += Do;
+            }
+        }
 
         public void Initialize()
         {
-            _enemySpawners.ForEach(x => x.Disabled += SetLastKilledEnemy);
-            _enemyQuantityZones.ForEach(x => x.ZoneCleared += Do);
-
             foreach (var explosionBarrel in _explosionBarrels)
             {
                 if (explosionBarrel is null)
@@ -54,9 +54,6 @@ namespace CodeBase.Gameplay.Camera
 
         public void Dispose()
         {
-            _enemySpawners.ForEach(x => x.Disabled -= SetLastKilledEnemy);
-            _enemyQuantityZones.ForEach(x => x.ZoneCleared -= Do);
-
             foreach (var explosionBarrel in _explosionBarrels)
             {
                 if (explosionBarrel is null)
@@ -66,17 +63,19 @@ namespace CodeBase.Gameplay.Camera
             }
         }
 
+        public void FillList(Enemy enemy)
+        {
+            _enemies.Add(enemy);
+        }
+
         private void BlockRotation()
         {
             _blockRotation = true;
         }
 
-        private async void Do()
+        private void Do(Enemy enemy)
         {
-            while (_enemy is null)
-            {
-                await UniTask.Yield();
-            }
+            _lastEnemyPosition = enemy.transform.position;
 
             if (_blockRotation)
             {
@@ -84,20 +83,19 @@ namespace CodeBase.Gameplay.Camera
                 return;
             }
 
-            float angle = Mathf.Atan2(_cameraData.transform.position.x, _lastEnemyPosition.z);
+            var directionToEnemy = _lastEnemyPosition - _cameraData.transform.position;
+            directionToEnemy = directionToEnemy.normalized;
+            
+            Debug.Log(_lastEnemyPosition);
 
+            float angle = Mathf.Atan2(directionToEnemy.x, directionToEnemy.z) * Mathf.Rad2Deg;
+            
             _cameraZoomer.Zoom(37, 0.7f, 0.3f, Ease.Flash);
 
             _cameraData.transform.DORotate(new Vector3(0, angle, 0), 0.8f)
                 .SetEase(Ease.Flash)
                 .OnComplete(() => _cameraData.transform.DORotate(Vector3.zero, 0.6f)
                     .SetEase(Ease.Flash));
-        }
-
-        private void SetLastKilledEnemy(Enemy enemy)
-        {
-            _lastEnemyPosition = enemy.transform.position;
-            _enemy = enemy;
         }
     }
 }

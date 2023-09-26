@@ -99,12 +99,13 @@ namespace CodeBase.GameInit
                 _countEnemiesOnDeath.Init(enemy);
                 _levelSliderPresenter.Init(enemy);
                 _cameraShakeMediator.InitEnemies(enemy);
+                _rotateCameraOnEnemyKill.FillList(enemy);
             }));
 
             var playerData = await _saveSystem.Load<PlayerData>();
             InitializeUIPresenters(playerData);
             // playerData.LastWeaponId = WeaponTypeId.ThrowingDynamiteShooter;
-            InitializeInitialWeapon(playerData.LastWeaponId);
+            InitializeInitialWeapon(WeaponTypeId.ThrowingDynamiteShooter);
             Player player = InitializeInitialPlayer(PlayerTypeId.Wolverine);
             InitializeCamera(player);
             _waterSplashPoolInitializer.Init();

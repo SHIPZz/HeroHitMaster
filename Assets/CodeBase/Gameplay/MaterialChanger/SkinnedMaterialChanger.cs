@@ -1,15 +1,12 @@
 ﻿using System;
 using AmazingAssets.AdvancedDissolve;
-using CodeBase.Constants;
-using CodeBase.Enums;
-using CodeBase.Gameplay.Character.Enemy;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
-using Random = System.Random;
 
 namespace CodeBase.Gameplay.MaterialChanger
 {
+    [RequireComponent(typeof(SkinnedMeshRenderer))]
     public class SkinnedMaterialChanger : MonoBehaviour, IMaterialChanger
     {
         [SerializeField] private float _duration = 3.5f;
