@@ -103,8 +103,6 @@ namespace CodeBase.GameInit
             }));
 
             var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.Money = 1000;
-            _saveSystem.Save(playerData);
             InitializeUIPresenters(playerData);
             InitializeInitialWeapon(playerData.LastWeaponId);
             Player player = InitializeInitialPlayer(playerData.LastPlayerId);
