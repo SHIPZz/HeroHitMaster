@@ -15,7 +15,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 {
     public class ShopWeaponInfoView : MonoBehaviour
     {
-        private const float ButtonScaleDelay = 0.1f;
+        private const float ButtonScaleDelay = 0.3f;
 
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private TextMeshProUGUI _price;
@@ -23,14 +23,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         [SerializeField] private Button _adButton;
         [SerializeField] private Button _buyButton;
         [SerializeField] private List<ParticleSystem> _effects;
+        [SerializeField] private TextMeshProUGUI _purchasedText;
 
-        private readonly Dictionary<PriceTypeId, bool> _priceCheckerForAd = new()
-        {
-            { PriceTypeId.Ad, true },
-            { PriceTypeId.Money, false }
-        };
-
-        private readonly Dictionary<PriceTypeId, TextMeshProUGUI> _weaponPrices = new();
         private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
         private AudioSource _purchasedWeaponSound;
 
@@ -41,8 +35,6 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             _shopWeaponIcons = provider.Get().ShopWeaponIcons;
             _purchasedWeaponSound = soundStorage.Get(SoundTypeId.PurchasedWeapon);
-            _weaponPrices[PriceTypeId.Ad] = _adPrice;
-            _weaponPrices[PriceTypeId.Money] = _price;
         }
 
         private void OnEnable() =>
@@ -51,72 +43,60 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private void OnDisable() =>
             _adButton.onClick.RemoveListener(OnAddButtonClicked);
 
-        public void DisableBuyButton(WeaponData weaponData)
+        public void DisableBuyButtons()
         {
-            if (_priceCheckerForAd[weaponData.Price.PriceTypeId])
-                return;
-
             SetButtonScale(_buyButton, false, false, true);
-            UpdateWeaponInfo(weaponData, true, weaponData.Price.Value.ToString());
+            SetButtonScale(_adButton, false, false, false);
         }
 
-        public void DisableBuyInfo(WeaponData weaponData, bool needAnimation)
+        public void ShowEffectOnPurchasedWeapon(WeaponTypeId weaponDataWeaponTypeId)
         {
-            UpdateWeaponInfo(weaponData, true, "Куплен");
-
-            SetButtonScale(_adButton, false, false, needAnimation);
-            SetButtonScale(_buyButton, false, false, needAnimation);
+            ParticleSystem randomEffect = _effects[Random.Range(0, _effects.Count - 1)];
+            randomEffect.transform.position = _shopWeaponIcons[weaponDataWeaponTypeId].transform.position;
+            randomEffect.Play();
+            _purchasedWeaponSound.Play();
+            DisableBuyButtons();
         }
-        
+
         public void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
+            _price.gameObject.SetActive(false);
+            _adPrice.gameObject.SetActive(true);
+
+            SetWeaponNameInfo(weaponData);
+            
             if (isBought)
             {
-                UpdateWeaponInfo(weaponData, true, $"{watchedAds}/{weaponData.Price.AdQuantity}");
-                DisableBuyInfo(weaponData, true);
+                DisableBuyButtons();
+                SetAdWeaponPriceInfo(weaponData, true, watchedAds);
                 return;
             }
 
-            UpdateWeaponInfo(weaponData, true, $"{watchedAds}/{weaponData.Price.AdQuantity}");
+            SetAdWeaponPriceInfo(weaponData, false, watchedAds);
+            SetButtonScale(_adButton, true, true, true);
+            SetButtonScale(_buyButton, false, false, true);
         }
 
-        public void SetWeaponData(WeaponData weaponData, int watchedAds)
+        public void SetMoneyWeaponInfo(WeaponData weaponData, bool isBought)
         {
-            if (_priceCheckerForAd[weaponData.Price.PriceTypeId])
+            _adPrice.gameObject.SetActive(false);
+            SetButtonScale(_adButton, false, false, false);
+            _price.gameObject.SetActive(true);
+            SetWeaponNameInfo(weaponData);
+
+            if (isBought)
             {
-                SetButtonScale(_buyButton, false, false, true);
-                SetButtonScale(_adButton, false, false, false);
-
-                _adButton.transform.DOScaleX(1, ButtonScaleDelay)
-                    .OnComplete(() => SetButtonScale(_adButton, true, true, true));
-
-                UpdateWeaponInfo(weaponData, true, $"{watchedAds}/{weaponData.Price.AdQuantity}");
-
+                SetButtonScale(_buyButton, false, false, false);
+                SetMoneyWeaponPriceInfo(weaponData, isBought);
                 return;
             }
 
-            SetButtonScale(_adButton, false, false, true);
-            SetButtonScale(_buyButton, false, false, true);
-
-            _buyButton.transform.DOScaleX(1, ButtonScaleDelay)
-                .OnComplete(() => SetButtonScale(_buyButton, true, true, true));
-            
-            UpdateWeaponInfo(weaponData, true, weaponData.Price.Value.ToString());
+            SetButtonScale(_buyButton, true, true, true);
+            SetMoneyWeaponPriceInfo(weaponData, false);
         }
 
         private void OnAddButtonClicked() =>
             AdButtonClicked?.Invoke();
-
-        private void SetActivePrice(bool isActive, PriceTypeId pricePriceTypeId)
-        {
-            foreach (var keyValue in _weaponPrices)
-            {
-                if (keyValue.Key != pricePriceTypeId)
-                    keyValue.Value.transform.parent.gameObject.SetActive(false);
-            }
-
-            _weaponPrices[pricePriceTypeId].transform.parent.gameObject.SetActive(isActive);
-        }
 
         private void SetButtonScale(Button button, bool isInteractable, bool isVisible, bool needAnimation)
         {
@@ -128,29 +108,43 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
+            if (button.gameObject.transform.localScale.x != 0)
+            {
+                button.gameObject.transform.DOScaleX(0, 0.1f)
+                    .OnComplete(() => button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay));
+                return;
+            }
+
             button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay);
         }
 
-        private void UpdateWeaponInfo(WeaponData weaponData, bool showPrice, string priceText)
+        private void SetWeaponNameInfo(WeaponData weaponData)
         {
             _name.transform.DOScaleX(0, 0f);
             _name.text = weaponData.Name;
             _name.transform.DOScaleX(1, 0.2f);
-            SetActivePrice(showPrice, weaponData.Price.PriceTypeId);
-
-            if (!showPrice)
-                return;
-
-            TextMeshProUGUI targetPrice = _weaponPrices[weaponData.Price.PriceTypeId];
-            targetPrice.text = $"<color=#ffdc30> {priceText}</color>";
         }
 
-        public void ShowEffectOnPurchasedWeapon(WeaponTypeId weaponDataWeaponTypeId)
+        private void SetAdWeaponPriceInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
-            ParticleSystem randomEffect = _effects[Random.Range(0, _effects.Count - 1)];
-            randomEffect.transform.position = _shopWeaponIcons[weaponDataWeaponTypeId].transform.position;
-            randomEffect.Play();
-            _purchasedWeaponSound.Play();
+            if (isBought)
+            {
+                _adPrice.text = $"<color=#ffdc30> {_purchasedText.text}</color>";
+                return;
+            }
+
+            _adPrice.text = $"{watchedAds}/{weaponData.Price.AdQuantity}";
+        }
+
+        private void SetMoneyWeaponPriceInfo(WeaponData weaponData, bool isBought)
+        {
+            if (isBought)
+            {
+                _price.text = $"<color=#ffdc30> {_purchasedText.text}</color>";
+                return;
+            }
+
+            _price.text = $"<color=#ffdc30> {weaponData.Price.Value}</color>";
         }
     }
 }

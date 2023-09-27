@@ -8,7 +8,6 @@ namespace CodeBase.Infrastructure
     {
         private readonly IGameStateMachine _gameStateMachine;
         private readonly ISaveSystem _saveSystem;
-        private bool _gameStarted;
 
         public BootstrapState(IGameStateMachine gameStateMachine, ISaveSystem saveSystem)
         {
@@ -21,7 +20,6 @@ namespace CodeBase.Infrastructure
             DOTween.Clear();
 
             var levelData = await _saveSystem.Load<LevelData>();
-            levelData.Id = 1;
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }
