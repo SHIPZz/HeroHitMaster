@@ -2,17 +2,11 @@
 {
     public enum WindowTypeId
     {
-        WeaponSelectorWindow = 0,
-        PlayerSelectorWindow = 1,
-        Shop = 2,
-        SettingWindow = 3,
+        Shop,
+        SettingWindow,
         Death,
         Victory,
-        Hud,
         Play,
-        Loading,
-        Buy,
-        NotEnoughMoney,
         Popup
     }
 }
