@@ -29,6 +29,6 @@ namespace CodeBase.Services.Inputs.InputService
             PlayerActions.Fire;
 
         public Vector2 MousePosition =>
-            PlayerActions.MousePosition.ReadValue<Vector2>();
+            _inputActions.UI.Point.ReadValue<Vector2>();
     }
 }
