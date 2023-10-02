@@ -1,6 +1,7 @@
 ﻿using CodeBase.Services.Pause;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure
@@ -22,7 +23,12 @@ namespace CodeBase.Infrastructure
             _pauseService.UnPause();
             DOTween.Init();
             DOTween.RestartAll();
-            await SceneManager.LoadSceneAsync(payload);
+
+            AsyncOperation loadSceneAsync =  SceneManager.LoadSceneAsync(payload);
+
+            while (!loadSceneAsync.isDone) 
+                await UniTask.Yield();
+
             _loadingCurtain.Hide();
         }
     }
