@@ -19,10 +19,8 @@ namespace CodeBase.Infrastructure
         public async void Enter()
         {
             DOTween.Clear();
-            
 
             var levelData = await _saveSystem.Load<LevelData>();
-            levelData.Id =1;
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }
