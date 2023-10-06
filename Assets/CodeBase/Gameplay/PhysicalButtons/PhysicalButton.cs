@@ -11,20 +11,14 @@ namespace CodeBase.Gameplay.PhysicalButtons
 
         public event Action Pressed;
 
-        private void Awake()
-        {
+        private void Awake() => 
             _triggerObserver = GetComponent<TriggerObserver>();
-        }
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _triggerObserver.CollisionEntered += Press;
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _triggerObserver.CollisionEntered -= Press;
-        }
 
         private void Press(UnityEngine.Collision obj)
         {

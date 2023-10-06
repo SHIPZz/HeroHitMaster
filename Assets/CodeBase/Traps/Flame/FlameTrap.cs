@@ -16,7 +16,7 @@ namespace CodeBase.Traps.Flame
             Collider.enabled = false;
         }
 
-        public void Fire()
+        public override void Activate()
         {
             _flameEffects.ForEach(x => x.Play());
             Collider.enabled = true;
