@@ -1,6 +1,7 @@
 ﻿using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using DG.Tweening;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
@@ -18,8 +19,10 @@ namespace CodeBase.Infrastructure
         public async void Enter()
         {
             DOTween.Clear();
+            
 
             var levelData = await _saveSystem.Load<LevelData>();
+            Debug.Log(levelData.Id);
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }
