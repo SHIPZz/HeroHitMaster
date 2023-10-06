@@ -24,7 +24,7 @@ namespace CodeBase.Traps.Swing
 
         protected override void Kill(Collider collider)
         {
-            if (!collider.gameObject.TryGetComponent(out Enemy enemy) || _isPushed)
+            if (!collider.gameObject.TryGetComponent(out Enemy enemy))
                 return;
         
             enemy.GetComponent<EnemyFollower>().Block();
@@ -32,7 +32,6 @@ namespace CodeBase.Traps.Swing
             enemy.gameObject.AddComponent<Rigidbody>();
             PushEnemy(enemy, pushDirection);
             DOTween.Sequence().AppendInterval(KillDelay).OnComplete(enemy.Explode);
-            _isPushed = true;
         }
 
         private void PushEnemy(Enemy enemy, Vector3 pushDirection)

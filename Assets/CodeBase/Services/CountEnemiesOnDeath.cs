@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Enemy;
-using UnityEngine;
 
 namespace CodeBase.Services
 {
