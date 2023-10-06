@@ -22,7 +22,7 @@ namespace CodeBase.Infrastructure
             
 
             var levelData = await _saveSystem.Load<LevelData>();
-            Debug.Log(levelData.Id);
+            levelData.Id =1;
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }

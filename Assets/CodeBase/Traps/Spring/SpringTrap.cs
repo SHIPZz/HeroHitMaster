@@ -8,6 +8,8 @@ namespace CodeBase.Traps.Spring
 {
     public class SpringTrap : Trap
     {
+        private const float KillDelay = 0.3f;
+        
         [SerializeField] private float _force = 3f;
 
         private static readonly int _isSprung = Animator.StringToHash("IsSprung");
@@ -20,7 +22,7 @@ namespace CodeBase.Traps.Spring
             _animator = GetComponent<Animator>();
         }
 
-        public void Spring() =>
+        public override void Activate() =>
             Collider.enabled = true;
 
         protected override void Kill(Collider collider)
@@ -43,7 +45,7 @@ namespace CodeBase.Traps.Spring
             enemyRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             enemyRigidbody.isKinematic = false;
             enemyRigidbody.AddForce(Vector3.up * _force, ForceMode.Impulse);
-            DOTween.Sequence().AppendInterval(0.3f).OnComplete(enemy.Explode);
+            DOTween.Sequence().AppendInterval(KillDelay).OnComplete(enemy.Explode);
         }
 
         private void AutoDisable()

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CodeBase.Traps
 {
     [RequireComponent(typeof(TriggerObserver))]
-    public class Trap : MonoBehaviour
+    public abstract class Trap : MonoBehaviour
     {
         protected Collider Collider;
         private TriggerObserver _triggerObserver;
@@ -24,9 +24,9 @@ namespace CodeBase.Traps
         private void OnDisable() => 
             _triggerObserver.Entered -= Kill;
 
-        protected virtual void Kill(Collider collider)
-        {
-            collider.GetComponent<EnemyPartForKnifeHolder>().Enemy.Explode();
-        }
+        public abstract void Activate();
+
+        protected virtual void Kill(Collider collider) => 
+            collider.GetComponent<Enemy>().Explode();
     }
 }
