@@ -42,7 +42,7 @@ namespace CodeBase.GameInit
         private readonly WaterSplashPoolInitializer _waterSplashPoolInitializer;
         private readonly CameraShakeMediator _cameraShakeMediator;
         private readonly RotateCameraPresenter _rotateCameraPresenter;
-        private readonly RotateCameraOnEnemyKill _rotateCameraOnEnemyKill;
+        private readonly RotateCameraOnLastEnemyKilled _rotateCameraOnLastEnemyKilled;
         private readonly IProvider<CameraData> _cameraDataProvider;
         private readonly AudioView _audioView;
         private readonly AudioChanger _audioChanger;
@@ -61,7 +61,7 @@ namespace CodeBase.GameInit
             WaterSplashPoolInitializer waterSplashPoolInitializer,
             CameraShakeMediator cameraShakeMediator,
             RotateCameraPresenter rotateCameraPresenter,
-            RotateCameraOnEnemyKill rotateCameraOnEnemyKill, 
+            RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled, 
             IProvider<CameraData> cameraDataProvider, 
             AudioView audioView, 
             AudioChanger audioChanger)
@@ -69,7 +69,7 @@ namespace CodeBase.GameInit
             _audioChanger = audioChanger;
             _audioView = audioView;
             _cameraDataProvider = cameraDataProvider;
-            _rotateCameraOnEnemyKill = rotateCameraOnEnemyKill;
+            _rotateCameraOnLastEnemyKilled = rotateCameraOnLastEnemyKilled;
             _rotateCameraPresenter = rotateCameraPresenter;
             _cameraShakeMediator = cameraShakeMediator;
             _waterSplashPoolInitializer = waterSplashPoolInitializer;
@@ -99,7 +99,7 @@ namespace CodeBase.GameInit
                 _countEnemiesOnDeath.Init(enemy);
                 _levelSliderPresenter.Init(enemy);
                 _cameraShakeMediator.InitEnemies(enemy);
-                _rotateCameraOnEnemyKill.FillList(enemy);
+                _rotateCameraOnLastEnemyKilled.FillList(enemy);
             }));
 
             var playerData = await _saveSystem.Load<PlayerData>();
@@ -123,7 +123,7 @@ namespace CodeBase.GameInit
             _rotateCameraPresenter.Init(rotateCamera, player);
             _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());
             _cameraShakeMediator.Init();
-            _rotateCameraOnEnemyKill.Init(rotateCamera.GetComponent<CameraData>());
+            _rotateCameraOnLastEnemyKilled.Init(rotateCamera.GetComponent<CameraData>());
         }
 
         private void InitializeInitialWeapon(WeaponTypeId weaponTypeId)

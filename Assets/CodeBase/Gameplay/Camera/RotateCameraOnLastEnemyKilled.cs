@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Enemy;
-using CodeBase.Gameplay.Spawners;
 using CodeBase.Services.Providers;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace CodeBase.Gameplay.Camera
 {
-    public class RotateCameraOnEnemyKill : IInitializable, IDisposable
+    public class RotateCameraOnLastEnemyKilled : IInitializable, IDisposable
     {
         private readonly UnityEngine.Camera _camera;
         private readonly CameraZoomer _cameraZoomer;
@@ -22,10 +19,14 @@ namespace CodeBase.Gameplay.Camera
         private Enemy _enemy;
         private Vector3 _lastEnemyPosition;
         private List<Enemy> _enemies = new();
+        private readonly List<EnemyQuantityInZone> _enemyQuantityZones;
 
-        public RotateCameraOnEnemyKill(CameraZoomer cameraZoomer, IProvider<List<ExplosionBarrel.ExplosionBarrel>> explosionBarrelProvider)
+        public RotateCameraOnLastEnemyKilled(CameraZoomer cameraZoomer,
+            IProvider<List<ExplosionBarrel.ExplosionBarrel>> explosionBarrelProvider,
+            EnemyQuantityZonesProvider enemyQuantityZonesProvider)
         {
             _cameraZoomer = cameraZoomer;
+            _enemyQuantityZones = enemyQuantityZonesProvider.EnemyQuantityInZones;
             _explosionBarrels = explosionBarrelProvider.Get();
         }
 
@@ -35,14 +36,16 @@ namespace CodeBase.Gameplay.Camera
 
             foreach (var enemy in _enemies)
             {
-                enemy.Dead += Do;
-                enemy.QuickDestroyed += Do;
-                enemy.GetComponent<DieOnAnimationEvent>().Dead += Do;
+                enemy.Dead += SetLastKilledEnemy;
+                enemy.QuickDestroyed += SetLastKilledEnemy;
+                enemy.GetComponent<DieOnAnimationEvent>().Dead += SetLastKilledEnemy;
             }
         }
 
         public void Initialize()
         {
+            _enemyQuantityZones.ForEach(x => x.ZoneCleared += Do);
+            
             foreach (var explosionBarrel in _explosionBarrels)
             {
                 if (explosionBarrel is null)
@@ -54,6 +57,8 @@ namespace CodeBase.Gameplay.Camera
 
         public void Dispose()
         {
+            _enemyQuantityZones.ForEach(x => x.ZoneCleared -= Do);
+            
             foreach (var explosionBarrel in _explosionBarrels)
             {
                 if (explosionBarrel is null)
@@ -63,36 +68,34 @@ namespace CodeBase.Gameplay.Camera
             }
         }
 
-        public void FillList(Enemy enemy)
-        {
+        public void FillList(Enemy enemy) => 
             _enemies.Add(enemy);
-        }
 
-        private void BlockRotation()
-        {
-            _blockRotation = true;
-        }
-
-        private void Do(Enemy enemy)
-        {
+        private void SetLastKilledEnemy(Enemy enemy) => 
             _lastEnemyPosition = enemy.transform.position;
 
+        private void BlockRotation() => 
+            _blockRotation = true;
+
+        private void Do()
+        {
             if (_blockRotation)
             {
                 _cameraZoomer.Zoom(75, 1f, 0.5f, Ease.Linear);
                 return;
             }
 
-            var directionToEnemy = _lastEnemyPosition - _cameraData.transform.position;
+            Vector3 directionToEnemy = _lastEnemyPosition - _cameraData.transform.position;
             directionToEnemy = directionToEnemy.normalized;
-            
+
             float angle = Mathf.Atan2(directionToEnemy.x, directionToEnemy.z) * Mathf.Rad2Deg;
-            
+
             _cameraZoomer.Zoom(37, 0.7f, 0.3f, Ease.Flash);
 
-            _cameraData.transform.DORotate(new Vector3(0, angle, 0), 0.8f)
+            Vector3 lastEulerAngles = _cameraData.Rotator.eulerAngles;
+            _cameraData.Rotator.transform.DORotate(new Vector3(0, angle, 0), 0.8f)
                 .SetEase(Ease.Flash)
-                .OnComplete(() => _cameraData.transform.DORotate(Vector3.zero, 0.6f)
+                .OnComplete(() => _cameraData.Rotator.transform.DORotate(lastEulerAngles, 0.6f)
                     .SetEase(Ease.Flash));
         }
     }
