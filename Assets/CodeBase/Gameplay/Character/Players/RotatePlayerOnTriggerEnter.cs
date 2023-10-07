@@ -35,7 +35,7 @@ namespace CodeBase.Gameplay.Character.Players
         private async void Rotate(Collider player)
         {
             Vector3 directionToTarget = _targetAngleTransform.position - player.transform.position;
-
+            
             float angle = Mathf.Atan2(directionToTarget.x, directionToTarget.z) * Mathf.Rad2Deg;
             await UniTask.WaitForSeconds(0.1f);
             player.transform.DORotate(new Vector3(0, angle, 0), 0.3f);

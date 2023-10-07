@@ -40,6 +40,7 @@
         WeaponButtonClick,
         AppearEnemy,
         PlayButtonClick,
-        ContinueButtonClick
+        ContinueButtonClick,
+        Blow
     }
 }

@@ -1,7 +1,6 @@
 ﻿using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using DG.Tweening;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {

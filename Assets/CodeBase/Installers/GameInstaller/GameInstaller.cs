@@ -136,7 +136,7 @@ namespace CodeBase.Installers.GameInstaller
         }
 
         private void BindRotateCameraOnEnemyKill() => 
-            Container.BindInterfacesAndSelfTo<RotateCameraOnEnemyKill>().AsSingle();
+            Container.BindInterfacesAndSelfTo<RotateCameraOnLastEnemyKilled>().AsSingle();
 
         private void BindExplosionBarrelsProvider() =>
             Container.BindInterfacesAndSelfTo<ExplosionBarrelsProvider>()

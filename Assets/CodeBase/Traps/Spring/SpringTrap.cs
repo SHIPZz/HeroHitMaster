@@ -27,14 +27,13 @@ namespace CodeBase.Traps.Spring
 
         protected override void Kill(Collider collider)
         {
-            if (!collider.gameObject.TryGetComponent(out Enemy enemy) || _isKilled)
+            if (!collider.gameObject.TryGetComponent(out Enemy enemy))
                 return;
 
             enemy.gameObject.AddComponent<Rigidbody>();
             ThrowEnemy(enemy);
             _animator.SetBool(_isSprung, true);
             AutoDisable();
-            _isKilled = true;
         }
 
         private void ThrowEnemy(Enemy enemy)
