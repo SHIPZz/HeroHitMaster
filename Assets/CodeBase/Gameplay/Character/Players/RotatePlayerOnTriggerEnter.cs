@@ -16,10 +16,13 @@ namespace CodeBase.Gameplay.Character.Players
         private UnityEngine.Camera _camera;
         private TriggerObserver _triggerObserver;
         private IProvider<CameraData> _cameraProvider;
+        private bool _isBlocked;
+        private RotateCameraOnLastEnemyKilled _rotateCameraOnLastEnemyKilled;
 
         [Inject]
-        private void Construct(IProvider<CameraData> cameraProvider)
+        private void Construct(IProvider<CameraData> cameraProvider, RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled)
         {
+            _rotateCameraOnLastEnemyKilled = rotateCameraOnLastEnemyKilled;
             _cameraProvider = cameraProvider;
         }
 
@@ -38,9 +41,17 @@ namespace CodeBase.Gameplay.Character.Players
             
             float angle = Mathf.Atan2(directionToTarget.x, directionToTarget.z) * Mathf.Rad2Deg;
             await UniTask.WaitForSeconds(0.1f);
+
+            while (_rotateCameraOnLastEnemyKilled.IsRotating)
+            {
+                await UniTask.Yield();
+            }
+            
             player.transform.DORotate(new Vector3(0, angle, 0), 0.3f);
 
-            _cameraProvider.Get().Rotator.transform.DOLocalRotate(new Vector3(0, angle, 0), 0.3f);
+            Transform cameraRotator = _cameraProvider.Get().Rotator;
+            
+            cameraRotator.DOLocalRotate(new Vector3(cameraRotator.eulerAngles.x, angle, cameraRotator.eulerAngles.z), 0.3f);
         }
     }
 }
