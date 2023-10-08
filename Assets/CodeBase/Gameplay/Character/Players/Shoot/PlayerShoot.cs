@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Camera;
+﻿using CodeBase.Constants;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Services.Providers;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 {
     public class PlayerShoot
     {
+        private const float MaxDistance = 70f;
+
         private readonly IProvider<CameraData> _cameraProvider;
         private readonly Transform _startShootPosition;
         private readonly IProvider<Weapon> _weaponProvider;
@@ -36,7 +39,8 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 
             Vector3 targetVector;
             
-            targetVector = !Physics.Raycast(ray, out RaycastHit hit) ? ray.GetPoint(70f) : hit.point;
+            targetVector = !Physics.Raycast(ray, out RaycastHit hit, MaxDistance, LayerId.Bullet, QueryTriggerInteraction.Ignore) 
+                ? ray.GetPoint(MaxDistance) : hit.point;
 
             weapon.Shoot(targetVector, _startShootPosition.position);
         }

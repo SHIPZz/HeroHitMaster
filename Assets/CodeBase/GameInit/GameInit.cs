@@ -104,8 +104,7 @@ namespace CodeBase.GameInit
 
             var playerData = await _saveSystem.Load<PlayerData>();
             InitializeUIPresenters(playerData);
-            // InitializeInitialWeapon(playerData.LastWeaponId);
-            InitializeInitialWeapon(WeaponTypeId.ThrowingDynamiteShooter);
+            InitializeInitialWeapon(playerData.LastWeaponId);
             Player player = InitializeInitialPlayer(playerData.LastPlayerId);
             InitializeCamera(player);
             _waterSplashPoolInitializer.Init();
