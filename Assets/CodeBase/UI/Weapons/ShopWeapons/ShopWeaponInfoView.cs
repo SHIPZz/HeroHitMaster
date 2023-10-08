@@ -4,6 +4,7 @@ using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Sound;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -64,7 +65,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _adPrice.gameObject.SetActive(true);
 
             SetWeaponNameInfo(weaponData);
-            
+
             if (isBought)
             {
                 DisableBuyButtons();
@@ -98,24 +99,20 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private void OnAddButtonClicked() =>
             AdButtonClicked?.Invoke();
 
-        private void SetButtonScale(Button button, bool isInteractable, bool isVisible, bool needAnimation)
+        private async void SetButtonScale(Button button, bool isInteractable, bool isVisible, bool needAnimation)
         {
             button.interactable = isInteractable;
 
-            if (!needAnimation)
-            {
-                button.gameObject.transform.DOScaleX(0, 0);
-                return;
-            }
-
             if (button.gameObject.transform.localScale.x != 0)
             {
-                button.gameObject.transform.DOScaleX(0, 0.1f)
-                    .OnComplete(() => button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay));
+                await button.gameObject.transform.DOScaleX(0, 0.1f).AsyncWaitForCompletion();
+                await button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay)
+                    .AsyncWaitForCompletion();
+
                 return;
             }
 
-            button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay);
+            await button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay).AsyncWaitForCompletion();
         }
 
         private void SetWeaponNameInfo(WeaponData weaponData)

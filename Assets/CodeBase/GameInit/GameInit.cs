@@ -91,7 +91,8 @@ namespace CodeBase.GameInit
             var settingsData = await _saveSystem.Load<SettingsData>();
             _audioView.Slider.value = settingsData.Volume;
             _audioChanger.Change(settingsData.Volume);
-            
+
+
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
                 _enemyConfigurator.Configure(enemy, aggrozone);

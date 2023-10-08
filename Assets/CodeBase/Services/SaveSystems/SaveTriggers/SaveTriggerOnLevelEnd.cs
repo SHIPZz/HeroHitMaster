@@ -36,7 +36,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         private void OnDisable() =>
             _triggerObserver.Entered -= OnPlayerEntered;
 
-        private async void OnPlayerEntered(Collider obj)
+        private async void OnPlayerEntered(Collider player)
         {
             var levelData =  await _saveSystem.Load<LevelData>();
             var playerData = await _saveSystem.Load<PlayerData>();
@@ -44,6 +44,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             levelData.Id++;
             playerData.Money += _level.Reward;
             _saveSystem.Save(levelData);
+            _saveSystem.Save(playerData);
             PlayerEntered?.Invoke();
             _pauseService.Pause();
         }
