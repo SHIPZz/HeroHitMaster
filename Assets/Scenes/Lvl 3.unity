@@ -20459,6 +20459,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 180781528934544554, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 83.06213
+      objectReference: {fileID: 0}
     - target: {fileID: 528010588838037216, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
       propertyPath: m_Name
       value: ---MAINUI----
@@ -21070,6 +21074,10 @@ PrefabInstance:
     - target: {fileID: 5081098982332666680, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5497323442856496690, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 83.06213
       objectReference: {fileID: 0}
     - target: {fileID: 5533495165417290767, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
       propertyPath: serializationData.Prefab
@@ -25336,6 +25344,7 @@ GameObject:
   - component: {fileID: 1342177981}
   - component: {fileID: 1342177980}
   - component: {fileID: 1342177979}
+  - component: {fileID: 1342177982}
   m_Layer: 19
   m_Name: Jump (1)
   m_TagString: Untagged
@@ -25407,6 +25416,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1342177982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342177977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6569cd210f64043a208b748ccdb89f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1343417287
 GameObject:
   m_ObjectHideFlags: 3
@@ -36659,6 +36680,7 @@ GameObject:
   - component: {fileID: 1974642318}
   - component: {fileID: 1974642317}
   - component: {fileID: 1974642320}
+  - component: {fileID: 1974642321}
   m_Layer: 19
   m_Name: Jump
   m_TagString: Untagged
@@ -36743,6 +36765,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateDirection: {x: -360, y: 0, z: 0}
+--- !u!114 &1974642321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974642315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6569cd210f64043a208b748ccdb89f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1979241682
 GameObject:
   m_ObjectHideFlags: 3
