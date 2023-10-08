@@ -112,6 +112,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             WeaponData weaponData = _weaponStaticDataService.Get(_lastWeaponType);
             _shopWeaponInfoView.ShowEffectOnPurchasedWeapon(weaponData.WeaponTypeId);
+            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData, true);
         }
 
         private async void SetWeaponDataToView(WeaponTypeId weaponTypeId)
@@ -131,9 +132,9 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            if (!HasEnoughMoneyToBuy(playerData, weaponData))
+            if (HasPlayerThisWeapon(playerData, weaponData))
             {
-                _shopWeaponInfoView.DisableBuyButtons();
+                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData, true);
                 return;
             }
 
@@ -143,9 +144,9 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            if (HasPlayerThisWeapon(playerData, weaponData))
+            if (!HasEnoughMoneyToBuy(playerData, weaponData))
             {
-                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData, true);
+                _shopWeaponInfoView.DisableBuyButtons();
                 return;
             }
 
