@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CodeBase.UI.Wallet
 {
-    public class WalletPresenter : IInitializable, IDisposable
+    public class WalletPresenter : IInitializable, IDisposable, ITickable
     {
         private readonly WalletUI _walletUI;
         private readonly Wallet _wallet;
@@ -27,16 +27,14 @@ namespace CodeBase.UI.Wallet
             _walletUI.SetValue(money);
             _wallet.SetInitalMoney(money);
         }
+        
+        
 
-        public void Initialize()
-        {
+        public void Initialize() =>
             _wallet.MoneyChanged += SetMoney;
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             _wallet.MoneyChanged -= SetMoney;
-        }
 
         private async void SetMoney(int money)
         {
@@ -44,6 +42,13 @@ namespace CodeBase.UI.Wallet
             var playerData = await _saveSystem.Load<PlayerData>();
             playerData.Money = money;
             _saveSystem.Save(playerData);
+        }
+
+        //test
+        public void Tick()
+        {
+            if(Input.GetKeyDown(KeyCode.F8))
+                _wallet.AddMoney(5000);
         }
     }
 }

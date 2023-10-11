@@ -25,7 +25,7 @@ namespace CodeBase.Services
             {
                 enemy.QuickDestroyed -= Count;
                 
-                if(enemy.gameObject is null || !enemy.gameObject.activeSelf)
+                if(enemy.gameObject == null || !enemy.gameObject.activeSelf)
                     break;
                 
                 enemy.GetComponent<DieOnAnimationEvent>().Dead -= Count;
