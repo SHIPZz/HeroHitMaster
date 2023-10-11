@@ -21,5 +21,10 @@
         GreenWeapon = 16,
         BlueWeapon = 17,
         OrangeWeapon = 18,
+        ThrowButterfly,
+        ThrowBranch,
+        ThrowClub,
+        ThrowBrick,
+        ThrowKunai,
     }
 }

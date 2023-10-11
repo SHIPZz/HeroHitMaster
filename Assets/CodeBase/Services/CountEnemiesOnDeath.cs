@@ -21,11 +21,15 @@ namespace CodeBase.Services
 
         public void Dispose()
         {
-            _enemies.ForEach(x =>
+            foreach (var enemy in _enemies)
             {
-                x.QuickDestroyed -= Count;
-                x.GetComponent<DieOnAnimationEvent>().Dead -= Count;
-            });
+                enemy.QuickDestroyed -= Count;
+                
+                if(enemy.gameObject is null || !enemy.gameObject.activeSelf)
+                    break;
+                
+                enemy.GetComponent<DieOnAnimationEvent>().Dead -= Count;
+            }
         }
 
         private void Count(Enemy enemy)
