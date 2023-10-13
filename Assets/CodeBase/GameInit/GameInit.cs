@@ -95,7 +95,6 @@ namespace CodeBase.GameInit
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
                 _enemyConfigurator.Configure(enemy, aggrozone);
-                _slowMotionOnEnemyDeath.Init(enemy);
                 _countEnemiesOnDeath.Init(enemy);
                 _levelSliderPresenter.Init(enemy);
                 _cameraShakeMediator.InitEnemies(enemy);
