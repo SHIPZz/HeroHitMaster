@@ -1,10 +1,12 @@
 ﻿using System;
+using CodeBase.Constants;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.MaterialChanger;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.ObjectBodyPart
 {
+    [RequireComponent(typeof(IMaterialChanger))]
     public class DestroyableObject : MonoBehaviour, IExplodable, IDamageable
     {
         [field: SerializeField] public DestroyableObjectTypeId DestroyableObjectTypeId { get; private set; }
@@ -14,8 +16,11 @@ namespace CodeBase.Gameplay.ObjectBodyPart
 
         public event Action<DestroyableObjectTypeId> Destroyed;
 
-        private void Awake() =>
+        private void Awake()
+        {
             _materialChanger = GetComponent<IMaterialChanger>();
+            gameObject.layer = LayerId.Enemy;
+        }
 
         private void OnEnable() =>
             _materialChanger.StartedChanged += BlockDestruction;

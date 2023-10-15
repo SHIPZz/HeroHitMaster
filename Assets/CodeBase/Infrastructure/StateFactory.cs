@@ -11,8 +11,7 @@ namespace CodeBase.Infrastructure
             _instantiator = instantiator;
         }
 
-        public IState Create<T>() where
-            T : class, IState
+        public IState Create<T>() where T : class, IState
         {
             var state = _instantiator.Instantiate(typeof(T));
 

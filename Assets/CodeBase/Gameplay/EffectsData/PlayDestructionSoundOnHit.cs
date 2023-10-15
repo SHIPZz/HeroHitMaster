@@ -6,23 +6,22 @@ using Zenject;
 
 namespace CodeBase.Gameplay.EffectsData
 {
-    public class PlayGlassDestructionSoundOnHit : MonoBehaviour
+    public class PlayDestructionSoundOnHit : MonoBehaviour
     {
-        [SerializeField] private DestroyableObject destroyableObject;
+        [SerializeField] private DestroyableObject _destroyableObject;
+        [SerializeField] private SoundTypeId _soundTypeId;
         
          private AudioSource _audioSource;
 
         [Inject]
-        private void Construct(ISoundStorage soundStorage)
-        {
-            _audioSource = soundStorage.Get(SoundTypeId.GlassDestruction);
-        }
-        
+        private void Construct(ISoundStorage soundStorage) => 
+            _audioSource = soundStorage.Get(_soundTypeId);
+
         private void OnEnable() => 
-            destroyableObject.Destroyed += Play;
+            _destroyableObject.Destroyed += Play;
 
         private void OnDisable() => 
-            destroyableObject.Destroyed -= Play;
+            _destroyableObject.Destroyed -= Play;
 
         private void Play(DestroyableObjectTypeId obj) =>
             _audioSource.Play();

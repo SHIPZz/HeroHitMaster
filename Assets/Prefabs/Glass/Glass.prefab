@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8242ff76522e4b07898a81c990b1207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 5661401473729148824}
   _duration: 1.5
   _targetValue: 1
 --- !u!114 &8418740630087442533
@@ -178,7 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e145ef0a1c5c4fb8a00ddf5f5eed4ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyableObject: {fileID: 6412568531767704298}
+  _destroyableObject: {fileID: 6412568531767704298}
+  _soundTypeId: 25
 --- !u!114 &960893846258687264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +191,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8242ff76522e4b07898a81c990b1207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 5661401473729148824}
   _duration: 1.5
   _targetValue: 1

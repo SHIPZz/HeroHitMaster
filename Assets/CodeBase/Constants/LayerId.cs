@@ -11,5 +11,6 @@
         public const int Trap = 24;
         public const int HitBullet = 27;
         public const int Bullet = 11;
+        public const int Enemy = 9;
     }
 }

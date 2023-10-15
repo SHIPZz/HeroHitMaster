@@ -4,5 +4,6 @@
     {
         Cube,
         Glass,
+        Box
     }
 }

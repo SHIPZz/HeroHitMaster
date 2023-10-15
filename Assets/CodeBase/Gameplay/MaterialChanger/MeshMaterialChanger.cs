@@ -5,15 +5,20 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.MaterialChanger
 {
+    [RequireComponent(typeof(MeshRenderer))]
     public class MeshMaterialChanger : MonoBehaviour, IMaterialChanger
     {
-        [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private float _duration = 1.5f;
         [SerializeField] private float _targetValue = 1f;
 
+        private MeshRenderer _meshRenderer;
+        
         public event Action StartedChanged;
         public event Action Completed;
         public bool IsChanging { get; private set; }
+
+        private void Awake() => 
+            _meshRenderer = GetComponent<MeshRenderer>();
 
         public void Change(Material material)
         {
