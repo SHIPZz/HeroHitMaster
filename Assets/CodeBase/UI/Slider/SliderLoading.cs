@@ -8,7 +8,6 @@ namespace CodeBase.UI.Slider
         private UnityEngine.UI.Slider _slider;
 
         public event Action<int> ValueChanged;
-        public event Action Loaded;
 
         private void Awake() => 
             _slider = GetComponent<UnityEngine.UI.Slider>();
