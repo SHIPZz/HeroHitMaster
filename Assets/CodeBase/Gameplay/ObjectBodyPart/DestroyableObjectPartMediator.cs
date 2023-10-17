@@ -1,19 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.ObjectBodyPart
 {
+    [RequireComponent(typeof(DestroyableObjectBodyPartPositionSetter), typeof(DestroyableObject))]
     public class DestroyableObjectPartMediator : MonoBehaviour
     {
-        [SerializeField] private DestroyableObjectBodyPartPositionSetter _destroyableObjectBodyPartPositionSetter;
-        [SerializeField] private DestroyableObject _destroyableObject;
-        
-        private void OnEnable() => 
+        private DestroyableObjectBodyPartPositionSetter _destroyableObjectBodyPartPositionSetter;
+        private DestroyableObject _destroyableObject;
+
+        private void Awake()
+        {
+            _destroyableObjectBodyPartPositionSetter = GetComponent<DestroyableObjectBodyPartPositionSetter>();
+            _destroyableObject = GetComponent<DestroyableObject>();
+        }
+
+        private void OnEnable() =>
             _destroyableObject.Destroyed += Set;
 
-        private void OnDisable() => 
+        private void OnDisable() =>
             _destroyableObject.Destroyed -= Set;
 
-        private void Set(DestroyableObjectTypeId destroyableObjectTypeId) => 
+        private void Set(DestroyableObjectTypeId destroyableObjectTypeId) =>
             _destroyableObjectBodyPartPositionSetter.Set(destroyableObjectTypeId, _destroyableObject);
     }
 }
