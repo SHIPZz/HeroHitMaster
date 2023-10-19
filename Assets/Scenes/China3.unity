@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 540e1a95c9f75054899e138208b2644e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 15a9353829fea6a4799ca7406c017cd0, type: 2}
 --- !u!1 &1026556
 GameObject:
   m_ObjectHideFlags: 3
@@ -8007,6 +8007,10 @@ PrefabInstance:
     - target: {fileID: 1000013145135746, guid: b92964a6addc9c646acb67fe0f735028, type: 3}
       propertyPath: m_Name
       value: StoneBench1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013145135746, guid: b92964a6addc9c646acb67fe0f735028, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4000011671814632, guid: b92964a6addc9c646acb67fe0f735028, type: 3}
       propertyPath: m_LocalScale.x
@@ -34275,10 +34279,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Targets>k__BackingField:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 40190913}
+  - {fileID: 562593277}
+  - {fileID: 1642872187}
+  - {fileID: 782700235}
 --- !u!1 &1690061293
 GameObject:
   m_ObjectHideFlags: 3
@@ -42909,6 +42913,10 @@ PrefabInstance:
     - target: {fileID: 1000013145135746, guid: b92964a6addc9c646acb67fe0f735028, type: 3}
       propertyPath: m_Name
       value: StoneBench1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013145135746, guid: b92964a6addc9c646acb67fe0f735028, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4000011671814632, guid: b92964a6addc9c646acb67fe0f735028, type: 3}
       propertyPath: m_LocalScale.x
