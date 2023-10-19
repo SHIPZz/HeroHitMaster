@@ -1,10 +1,7 @@
-﻿using System;
-using CodeBase.Gameplay.Character.Players;
-using CodeBase.Gameplay.Spawners;
-using CodeBase.Services.Providers;
+﻿using CodeBase.Gameplay.Spawners;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
@@ -24,7 +21,10 @@ namespace CodeBase.Gameplay.Character.Enemy
         private void OnDisable() => 
             _enemySpawner.Spawned -= Set;
 
-        private void Set(Enemy enemy) => 
-            enemy.transform.rotation = Quaternion.Euler(_target.position);
+        private void Set(Enemy enemy)
+        {
+            var angle = Mathf.Atan2(_target.position.z, transform.position.x) * Mathf.Rad2Deg;
+            enemy.transform.rotation = Quaternion.Euler(new Vector3(0, angle,0));
+        }
     }
 }
