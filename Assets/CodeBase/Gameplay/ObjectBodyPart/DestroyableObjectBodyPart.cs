@@ -9,20 +9,21 @@ namespace CodeBase.Gameplay.ObjectBodyPart
 {
     public class DestroyableObjectBodyPart : MonoBehaviour
     {
-        private const float Force = 200f;
         private const float AutoDestroyDelay = 10;
 
         [SerializeField] private List<Rigidbody> _parts;
+        [SerializeField] private float _minimalForce = 300f;
+        [SerializeField] private float _maxForce = 650f;
         
         [field: SerializeField] public DestroyableObjectTypeId DestroyableObjectTypeId { get; private set; }
 
-        private void Awake()
-        {
+        private void Awake() =>
             gameObject.layer = LayerId.DestroyableObjectPart;
-        }
 
         public void Enable()
         {
+            float force = Random.Range(_minimalForce, _maxForce);
+
             _parts.ForEach(x =>
             {
                 x.isKinematic = false;
@@ -33,7 +34,7 @@ namespace CodeBase.Gameplay.ObjectBodyPart
                     Random.Range(-1f, 1f)
                 ).normalized;
 
-                x.AddForce(randomDirection * Force, ForceMode.Force);
+                x.AddForce(randomDirection * force, ForceMode.Force);
             });
 
             DOTween.Sequence().AppendInterval(AutoDestroyDelay).OnComplete(Disable);
