@@ -12,14 +12,14 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         [field: SerializeField] public DestroyableObjectTypeId DestroyableObjectTypeId { get; private set; }
 
         private IMaterialChanger _materialChanger;
-        private bool _canDestroy;
+        private bool _canDestroy = true;
 
         public event Action<DestroyableObjectTypeId> Destroyed;
 
         private void Awake()
         {
             _materialChanger = GetComponent<IMaterialChanger>();
-            gameObject.layer = LayerId.Enemy;
+            gameObject.layer = LayerId.DestroyableObject;
         }
 
         private void OnEnable() =>
@@ -33,18 +33,18 @@ namespace CodeBase.Gameplay.ObjectBodyPart
 
         public void Explode()
         {
-            if(!_canDestroy)
+            if (!_canDestroy)
                 return;
-            
+
             Destroyed?.Invoke(DestroyableObjectTypeId);
             Destroy(gameObject);
         }
 
         public void TakeDamage(int value)
         {
-            if(!_canDestroy)
+            if (!_canDestroy)
                 return;
-            
+
             Destroyed?.Invoke(DestroyableObjectTypeId);
             Destroy(gameObject);
         }

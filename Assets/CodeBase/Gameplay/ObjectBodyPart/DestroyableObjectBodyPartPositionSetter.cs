@@ -9,7 +9,8 @@ namespace CodeBase.Gameplay.ObjectBodyPart
     public class DestroyableObjectBodyPartPositionSetter : MonoBehaviour
     {
         [SerializeField] private MeshMaterialChanger _materialChanger;
-        
+        [SerializeField] private Vector3 _offset;
+
         private ObjectPartFactory _objectPartFactory;
         private bool _isDisabled;
 
@@ -20,7 +21,7 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         private void OnEnable() =>
             _materialChanger.StartedChanged += Disable;
 
-        private void Disable() => 
+        private void Disable() =>
             _isDisabled = true;
 
         public void Set(DestroyableObjectTypeId destroyableObjectTypeId, DestroyableObject destroyableObject)
@@ -28,8 +29,12 @@ namespace CodeBase.Gameplay.ObjectBodyPart
             if (_isDisabled)
                 return;
 
-            DestroyableObjectBodyPart destroyableParts =
-                _objectPartFactory.CreateBy(destroyableObjectTypeId, destroyableObject.transform.position);
+            DestroyableObjectBodyPart destroyableParts = _objectPartFactory
+                .CreateBy(destroyableObjectTypeId, destroyableObject.transform.position);
+
+            if (_offset != Vector3.zero)
+                destroyableParts.transform.position += _offset;
+
             destroyableParts.Enable();
         }
     }

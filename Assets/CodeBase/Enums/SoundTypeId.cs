@@ -41,6 +41,7 @@
         AppearEnemy,
         PlayButtonClick,
         ContinueButtonClick,
-        Blow
+        Blow,
+        BoxDestruction
     }
 }
