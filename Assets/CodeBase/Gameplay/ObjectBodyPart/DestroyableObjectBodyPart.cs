@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using CodeBase.Constants;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Gameplay.ObjectBodyPart
 {
@@ -12,6 +15,11 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         [SerializeField] private List<Rigidbody> _parts;
         
         [field: SerializeField] public DestroyableObjectTypeId DestroyableObjectTypeId { get; private set; }
+
+        private void Awake()
+        {
+            gameObject.layer = LayerId.DestroyableObjectPart;
+        }
 
         public void Enable()
         {

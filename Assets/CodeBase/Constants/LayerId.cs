@@ -13,5 +13,6 @@
         public const int Bullet = 11;
         public const int Enemy = 9;
         public const int DestroyableObject = 28;
+        public const int DestroyableObjectPart = 29;
     }
 }
