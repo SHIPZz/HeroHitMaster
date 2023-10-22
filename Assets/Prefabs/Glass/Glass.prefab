@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6146593362311734635}
   - component: {fileID: 948555657115986448}
   - component: {fileID: 960893846258687264}
-  m_Layer: 9
+  m_Layer: 28
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,8 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8efa35aa7c847bfabdaec2e19b8ba9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyableObjectBodyPartPositionSetter: {fileID: 6146593362311734635}
-  destroyableObject: {fileID: 6412568531767704298}
 --- !u!114 &6146593362311734635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialChanger: {fileID: 960893846258687264}
+  _offset: {x: 0, y: 0.5, z: 0}
 --- !u!114 &948555657115986448
 MonoBehaviour:
   m_ObjectHideFlags: 0
