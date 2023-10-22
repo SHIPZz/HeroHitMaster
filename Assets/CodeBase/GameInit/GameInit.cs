@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
-using CodeBase.Infrastructure;
+using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services;
+using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
@@ -18,7 +17,7 @@ using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows.Audio;
-using Cysharp.Threading.Tasks;
+using I2.Loc;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
@@ -46,6 +45,7 @@ namespace CodeBase.GameInit
         private readonly IProvider<CameraData> _cameraDataProvider;
         private readonly AudioView _audioView;
         private readonly AudioChanger _audioChanger;
+        private readonly WeaponStaticDataService _weaponStaticDataService;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -61,11 +61,13 @@ namespace CodeBase.GameInit
             WaterSplashPoolInitializer waterSplashPoolInitializer,
             CameraShakeMediator cameraShakeMediator,
             RotateCameraPresenter rotateCameraPresenter,
-            RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled, 
-            IProvider<CameraData> cameraDataProvider, 
-            AudioView audioView, 
-            AudioChanger audioChanger)
+            RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled,
+            IProvider<CameraData> cameraDataProvider,
+            AudioView audioView,
+            AudioChanger audioChanger,
+            WeaponStaticDataService weaponStaticDataService)
         {
+            _weaponStaticDataService = weaponStaticDataService;
             _audioChanger = audioChanger;
             _audioView = audioView;
             _cameraDataProvider = cameraDataProvider;
@@ -88,10 +90,12 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
+            LocalizationManager.CurrentLanguage = "Russian";
+            TranslateWeaponNames();
             var settingsData = await _saveSystem.Load<SettingsData>();
             _audioView.Slider.value = settingsData.Volume;
             _audioChanger.Change(settingsData.Volume);
-            
+
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
                 _enemyConfigurator.Configure(enemy, aggrozone);
@@ -107,6 +111,21 @@ namespace CodeBase.GameInit
             Player player = InitializeInitialPlayer(playerData.LastPlayerId);
             InitializeCamera(player);
             _waterSplashPoolInitializer.Init();
+        }
+
+        private async void TranslateWeaponNames()
+        {
+            var weaponNamesData = await _saveSystem.Load<TranslatedWeaponNameData>();
+
+            foreach (WeaponData weaponData in _weaponStaticDataService.GetAll())
+            {
+                GoogleTranslation.Translate(weaponData.Name, "en", LocalizationManager.CurrentLanguageCode,
+                    (translation, _) =>
+                    {
+                        weaponNamesData.Names[weaponData.WeaponTypeId] = translation;
+                        _saveSystem.Save(weaponNamesData);
+                    });
+            }
         }
 
         private void InitializeUIPresenters(PlayerData playerData)

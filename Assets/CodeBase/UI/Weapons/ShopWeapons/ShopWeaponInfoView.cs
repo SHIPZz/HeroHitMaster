@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Providers;
+using CodeBase.Services.SaveSystems;
+using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Sound;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using I2.Loc;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,12 +31,14 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
         private AudioSource _purchasedWeaponSound;
+        private ISaveSystem _saveSystem;
 
         public event Action AdButtonClicked;
 
         [Inject]
-        private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage)
+        private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage, ISaveSystem saveSystem)
         {
+            _saveSystem = saveSystem;
             _shopWeaponIcons = provider.Get().ShopWeaponIcons;
             _purchasedWeaponSound = soundStorage.Get(SoundTypeId.PurchasedWeapon);
         }
@@ -59,12 +64,13 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             DisableBuyButtons();
         }
 
-        public void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
+        public async void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
+            var translatedWeaponNameData = await _saveSystem.Load<TranslatedWeaponNameData>();
             _price.gameObject.SetActive(false);
             _adPrice.gameObject.SetActive(true);
 
-            SetWeaponNameInfo(weaponData);
+            SetWeaponNameInfo(translatedWeaponNameData.Names[weaponData.WeaponTypeId]);
 
             if (isBought)
             {
@@ -78,12 +84,19 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             SetButtonScale(_buyButton, false, false, true);
         }
 
-        public void SetMoneyWeaponInfo(WeaponData weaponData, bool isBought)
+        public async void SetMoneyWeaponInfo(WeaponData weaponData, bool isBought)
         {
+            var translatedWeaponNameData = await _saveSystem.Load<TranslatedWeaponNameData>();
+
+            while (translatedWeaponNameData.Names.Count < 1)
+            {
+                await UniTask.Yield();
+            }
+
             _adPrice.gameObject.SetActive(false);
             SetButtonScale(_adButton, false, false, false);
             _price.gameObject.SetActive(true);
-            SetWeaponNameInfo(weaponData);
+             SetWeaponNameInfo(translatedWeaponNameData.Names[weaponData.WeaponTypeId]);
 
             if (isBought)
             {
@@ -115,10 +128,10 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             await button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay).AsyncWaitForCompletion();
         }
 
-        private void SetWeaponNameInfo(WeaponData weaponData)
+        private void SetWeaponNameInfo(string name)
         {
             _name.transform.DOScaleX(0, 0f);
-            _name.text = weaponData.Name;
+            _name.text = name;
             _name.transform.DOScaleX(1, 0.2f);
         }
 

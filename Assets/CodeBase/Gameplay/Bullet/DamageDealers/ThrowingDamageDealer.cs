@@ -23,12 +23,15 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
                 enemyPartForKnifeHolder.Damageable.TakeDamage(Damage);
                 _collider.enabled = false;
             }
-
+            
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage(Damage);
                 _collider.enabled = false;
             }
+            
+            if(other.gameObject.layer == LayerId.DestroyableObject)
+                gameObject.SetActive(false);
 
             gameObject.layer = LayerId.HitBullet;
         }
