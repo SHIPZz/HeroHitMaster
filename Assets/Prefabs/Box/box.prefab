@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4663914384103483156}
   - component: {fileID: 5822471509807635030}
   - component: {fileID: 4914716874131173728}
+  - component: {fileID: -6907648557737917768}
   m_Layer: 14
   m_Name: box
   m_TagString: Untagged
@@ -177,3 +178,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyableObject: {fileID: 946972639310075167}
   _soundTypeId: 40
+--- !u!54 &-6907648557737917768
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365989986411319336}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0

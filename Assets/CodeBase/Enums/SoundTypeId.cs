@@ -42,6 +42,7 @@
         PlayButtonClick,
         ContinueButtonClick,
         Blow,
-        BoxDestruction
+        BoxDestruction,
+        PhysicalButton
     }
 }
