@@ -15620,6 +15620,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ea686c19ec517b42be2a6439ade4dfa, type: 3}
+--- !u!114 &663049445 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7923731652632636581, guid: 9ea686c19ec517b42be2a6439ade4dfa, type: 3}
+  m_PrefabInstance: {fileID: 663049444}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48794e4772264ebaa6914a59eb6c746b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &663502781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27860,6 +27871,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ea686c19ec517b42be2a6439ade4dfa, type: 3}
+--- !u!114 &1175720243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7923731652632636581, guid: 9ea686c19ec517b42be2a6439ade4dfa, type: 3}
+  m_PrefabInstance: {fileID: 1175720242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48794e4772264ebaa6914a59eb6c746b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1178410659
 GameObject:
   m_ObjectHideFlags: 3
@@ -36131,6 +36153,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1130669861473534244, guid: fe849cee4f83d744fb171e2e497b2918, type: 3}
+      propertyPath: _physicalButton
+      value: 
+      objectReference: {fileID: 663049445}
     - target: {fileID: 3835469660574843863, guid: fe849cee4f83d744fb171e2e497b2918, type: 3}
       propertyPath: m_Name
       value: Spikey Overhead Trap
@@ -38847,63 +38873,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1647275822
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.998355
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.1519337
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 299.80353
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 990158066307004911, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6123448478816634293, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
-      propertyPath: m_Name
-      value: barrel
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2fb2b4f9957a1fd44b84158438881389, type: 3}
 --- !u!1 &1648772851
 GameObject:
   m_ObjectHideFlags: 3
@@ -48709,6 +48678,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1130669861473534244, guid: fe849cee4f83d744fb171e2e497b2918, type: 3}
+      propertyPath: _physicalButton
+      value: 
+      objectReference: {fileID: 1175720243}
     - target: {fileID: 3835469660574843863, guid: fe849cee4f83d744fb171e2e497b2918, type: 3}
       propertyPath: m_Name
       value: Spikey Overhead Trap (1)
@@ -68220,7 +68193,6 @@ SceneRoots:
   - {fileID: 1914792345}
   - {fileID: 490229148}
   - {fileID: 29856258}
-  - {fileID: 1647275822}
   - {fileID: 476774490}
   - {fileID: 1541202481}
   - {fileID: 2056448185}

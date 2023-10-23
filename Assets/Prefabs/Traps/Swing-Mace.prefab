@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 4333926416631776895}
   - component: {fileID: 9191650747777413177}
   - component: {fileID: 5589404641350815003}
-  - component: {fileID: 5495820899156892276}
+  - component: {fileID: 3748522971941379750}
   m_Layer: 24
   m_Name: Obstacle 2.003
   m_TagString: Untagged
@@ -304,7 +304,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5495820899156892276
+--- !u!114 &3748522971941379750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,11 +313,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7480985040252415201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183e2e4a764d401295ad1093a6532812, type: 3}
+  m_Script: {fileID: 11500000, guid: 776de16a4906424283b585e319aeb27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trap: {fileID: 9191650747777413177}
   _physicalButton: {fileID: 0}
-  _swingTrap: {fileID: 9191650747777413177}
 --- !u!1 &7550964655501161007
 GameObject:
   m_ObjectHideFlags: 0
