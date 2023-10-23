@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.5649006, g: 0.6356401, b: 0.7239375, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14495,6 +14495,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2166719152428358789, guid: f3db3e95cbbe1284487ba4c70ea17541, type: 3}
+      propertyPath: _physicalButton
+      value: 
+      objectReference: {fileID: 1237966074}
     - target: {fileID: 5012381889473429687, guid: f3db3e95cbbe1284487ba4c70ea17541, type: 3}
       propertyPath: m_Name
       value: FireTrap
@@ -26136,17 +26140,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    m_RemovedComponents:
-    - {fileID: 1880669289738880313, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-    - {fileID: 4312699926089601908, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-    - {fileID: 54239432456652790, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-    - {fileID: 4051316553990351821, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-    - {fileID: 9083465814692165345, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-    - {fileID: 6903533836602351788, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-    - {fileID: 7266343254635574318, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-    - {fileID: 6642427069126875157, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-=======
     - target: {fileID: 7730007885024353721, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -26160,7 +26153,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
->>>>>>> 8b630240298425150cf9580744ff0e9b10799ef5
     - {fileID: 7707895370574929367, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 5419872672283413402, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 8083462945713266456, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
@@ -26173,8 +26165,6 @@ PrefabInstance:
     - {fileID: 1647896482293023955, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 3298881078910537809, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 1530769044349434986, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
-<<<<<<< HEAD
-=======
     - {fileID: 9083465814692165345, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 6903533836602351788, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 7266343254635574318, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
@@ -26183,7 +26173,6 @@ PrefabInstance:
     - {fileID: 4312699926089601908, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 54239432456652790, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 4051316553990351821, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
->>>>>>> 8b630240298425150cf9580744ff0e9b10799ef5
     - {fileID: 1545790594921861391, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 3797505499541718850, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
     - {fileID: 1128724431583024064, guid: d1bb159f52ca3454c83fb97bbeb0e478, type: 3}
