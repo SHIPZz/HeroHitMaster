@@ -8,7 +8,7 @@ using Zenject;
 
 namespace CodeBase.UI.Windows.Popup
 {
-    public class PopupPresenter : IInitializable, IDisposable
+    public class PopupPresenter : IInitializable, IDisposable, ITickable
     {
          private readonly PopupInfoView _popupInfoView;
         
@@ -24,19 +24,28 @@ namespace CodeBase.UI.Windows.Popup
             _windowService = windowService;
         }
 
-        public void Initialize()
-        {
+        public void Initialize() => 
             _popupInfoView.AdButtonClicked += ShowAd;
-        }
 
-        public void Dispose()
-        {
-            _popupInfoView.AdButtonClicked -= ShowAd;
-        }
+        public void Dispose() => 
+        _popupInfoView.AdButtonClicked -= ShowAd;
 
         private void ShowAd()
         {
-            // _adService.PlayLongAd();
+            _adService.PlayLongAd(null, () =>
+            {
+                _windowService.CloseAll();
+                _windowService.Open(WindowTypeId.Play);
+            });
+        }
+
+        public void Tick()
+        {
+            if (Input.GetKeyDown(KeyCode.F10))
+            {
+                _windowService.CloseAll();
+                _windowService.Open(WindowTypeId.Popup);
+            }
         }
     }
 }

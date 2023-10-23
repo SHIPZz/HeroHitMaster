@@ -43,6 +43,8 @@
         ContinueButtonClick,
         Blow,
         BoxDestruction,
-        PhysicalButton
+        PhysicalButton,
+        TimerTicking,
+        TimerFinished
     }
 }

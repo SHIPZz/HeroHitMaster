@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
@@ -16,6 +17,8 @@ namespace CodeBase.UI.Weapons
 {
     public class WeaponSelector
     {
+        private const int WeaponPopupLvlDuration = 5;
+    
         private readonly IProvider<Weapon> _weaponProvider;
         private readonly IWeaponStorage _weaponStorage;
         private readonly ISaveSystem _saveSystem;
@@ -38,6 +41,19 @@ namespace CodeBase.UI.Weapons
         public async void Select()
         {
             await SaveLastSelectedWeapon();
+
+            WeaponData weaponData = _weaponStaticDataService.Get(_lastWeaponId);
+
+            if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
+            {
+                var levelData = await _saveSystem.Load<LevelData>();
+
+                if (levelData.Id % WeaponPopupLvlDuration == 0)
+                {
+                    var playerData = await _saveSystem.Load<PlayerData>();
+                    _lastWeaponId = playerData.LastNotPopupWeaponId;
+                }
+            }
 
             Weapon weapon = _weaponStorage.Get(_lastWeaponId);
             _weaponProvider.Set(weapon);

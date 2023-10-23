@@ -20,7 +20,6 @@ namespace CodeBase.Infrastructure
             DOTween.Clear();
 
             var levelData = await _saveSystem.Load<LevelData>();
-            levelData.Id = 1;
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
     }
