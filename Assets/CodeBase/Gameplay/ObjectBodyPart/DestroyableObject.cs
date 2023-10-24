@@ -1,5 +1,4 @@
 ﻿using System;
-using CodeBase.Constants;
 using CodeBase.Gameplay.Character;
 using CodeBase.Gameplay.MaterialChanger;
 using UnityEngine;
@@ -10,17 +9,15 @@ namespace CodeBase.Gameplay.ObjectBodyPart
     public class DestroyableObject : MonoBehaviour, IExplodable, IDamageable
     {
         [field: SerializeField] public DestroyableObjectTypeId DestroyableObjectTypeId { get; private set; }
+        [SerializeField] private float _destroyDelay;
 
         private IMaterialChanger _materialChanger;
         private bool _canDestroy = true;
 
         public event Action<DestroyableObjectTypeId> Destroyed;
 
-        private void Awake()
-        {
+        private void Awake() => 
             _materialChanger = GetComponent<IMaterialChanger>();
-            gameObject.layer = LayerId.DestroyableObject;
-        }
 
         private void OnEnable() =>
             _materialChanger.StartedChanged += BlockDestruction;
@@ -37,7 +34,11 @@ namespace CodeBase.Gameplay.ObjectBodyPart
                 return;
 
             Destroyed?.Invoke(DestroyableObjectTypeId);
-            Destroy(gameObject);
+
+            if (_destroyDelay != 0)
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
+            
+            Destroy(gameObject, _destroyDelay);
         }
 
         public void TakeDamage(int value)
@@ -46,7 +47,11 @@ namespace CodeBase.Gameplay.ObjectBodyPart
                 return;
 
             Destroyed?.Invoke(DestroyableObjectTypeId);
-            Destroy(gameObject);
+            
+            if (_destroyDelay != 0)
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
+            
+            Destroy(gameObject, _destroyDelay);
         }
     }
 }
