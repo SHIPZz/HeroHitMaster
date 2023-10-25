@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
 using CodeBase.ScriptableObjects.Weapon;
@@ -46,6 +47,7 @@ namespace CodeBase.GameInit
         private readonly AudioView _audioView;
         private readonly AudioChanger _audioChanger;
         private readonly WeaponStaticDataService _weaponStaticDataService;
+        private KillActiveEnemiesOnPlayerRecover _killActiveEnemiesOnPlayerRecover;
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -65,8 +67,9 @@ namespace CodeBase.GameInit
             IProvider<CameraData> cameraDataProvider,
             AudioView audioView,
             AudioChanger audioChanger,
-            WeaponStaticDataService weaponStaticDataService)
+            WeaponStaticDataService weaponStaticDataService, KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover)
         {
+            _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
             _weaponStaticDataService = weaponStaticDataService;
             _audioChanger = audioChanger;
             _audioView = audioView;
@@ -101,6 +104,7 @@ namespace CodeBase.GameInit
                 _enemyConfigurator.Configure(enemy, aggrozone);
                 _countEnemiesOnDeath.Init(enemy);
                 _levelSliderPresenter.Init(enemy);
+                _killActiveEnemiesOnPlayerRecover.Init(enemy);
                 _cameraShakeMediator.InitEnemies(enemy);
                 _rotateCameraOnLastEnemyKilled.FillList(enemy);
             }));

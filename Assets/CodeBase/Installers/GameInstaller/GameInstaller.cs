@@ -91,7 +91,11 @@ namespace CodeBase.Installers.GameInstaller
             BindWeaponSaver();
             BindGameRestarter();
             BindGameContinue();
+            BindKillActiveEnemiesOnPlayerRecover();
         }
+
+        private void BindKillActiveEnemiesOnPlayerRecover() =>
+            BindAsSingle<KillActiveEnemiesOnPlayerRecover>();
 
         private void BindGameContinue()
         {
