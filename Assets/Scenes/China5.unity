@@ -56143,6 +56143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DestroyableObjectTypeId>k__BackingField: 1
+  _destroyDelay: 0
 --- !u!114 &562835663995585799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56155,7 +56156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559221ef6922472eba4bd7b1d59f01b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialChanger: {fileID: 1682599868703707018}
   _offset: {x: 0, y: 0, z: 0}
 --- !u!4 &639760836781471286
 Transform:
@@ -57363,7 +57363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559221ef6922472eba4bd7b1d59f01b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialChanger: {fileID: 4780532160692606007}
   _offset: {x: 0, y: 0, z: 0}
 --- !u!114 &5547758818494971905
 MonoBehaviour:
@@ -57678,7 +57677,6 @@ MonoBehaviour:
   - {fileID: 331144225}
   - {fileID: 1418050071}
   - {fileID: 465221104}
-  - {fileID: 0}
 --- !u!114 &7172978790567500671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57692,6 +57690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DestroyableObjectTypeId>k__BackingField: 1
+  _destroyDelay: 0
 --- !u!1 &7240179978038290890
 GameObject:
   m_ObjectHideFlags: 0
