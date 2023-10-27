@@ -1,8 +1,6 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
-using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Data;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;

@@ -51,6 +51,7 @@ namespace CodeBase.Gameplay.ObjectBodyPart
                 return;
             
             _lastEnemy.GetComponent<NavMeshAgent>().enabled = false;
+            _lastEnemy.GetComponent<Rigidbody>().isKinematic = false;
             DOTween.Sequence().AppendInterval(2f).OnComplete(_lastEnemy.Explode);
         }
     }

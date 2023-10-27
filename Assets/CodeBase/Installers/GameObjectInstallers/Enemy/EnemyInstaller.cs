@@ -28,7 +28,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.Bind<EnemyAnimator>().AsSingle();
             Container.Bind<IMaterialChanger>().To<SkinnedMaterialChanger>()
                 .FromComponentOn(gameObject).AsSingle();
-            
+
             Container
                 .BindInterfacesAndSelfTo<EnemyMovementPresenter>()
                 .AsSingle();
@@ -36,12 +36,10 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container
                 .BindInterfacesAndSelfTo<EnemyDeathEffectOnDestruction>()
                 .AsSingle();
-            
+
             Container
                 .BindInterfacesAndSelfTo<DeathAnimOnMaterialChange>()
                 .AsSingle();
-            
-            
         }
 
         private void BindInstances()

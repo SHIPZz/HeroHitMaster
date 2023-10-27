@@ -19,7 +19,7 @@ namespace CodeBase.UI.Windows.Play
         private void OnDisable() => 
             _button.onClick.RemoveListener(OnClicked);
 
-        private void OnClicked() =>
+        private void OnClicked() => 
             Clicked?.Invoke();
     }
 }

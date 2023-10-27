@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
+using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
@@ -36,7 +37,9 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         public event Action AdButtonClicked;
 
         [Inject]
-        private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage, ISaveSystem saveSystem)
+        private void Construct(IProvider<WeaponIconsProvider> provider,
+         ISoundStorage soundStorage, 
+            ISaveSystem saveSystem, WeaponStaticDataService weaponStaticDataService)
         {
             _saveSystem = saveSystem;
             _shopWeaponIcons = provider.Get().ShopWeaponIcons;

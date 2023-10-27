@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
+using CodeBase.Gameplay.Weapons;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services;
 using CodeBase.Services.Data;
@@ -11,13 +13,14 @@ using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
-using CodeBase.Services.Slowmotion;
 using CodeBase.Services.Storages.Character;
+using CodeBase.Services.Storages.Weapon;
 using CodeBase.UI.LevelSlider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows.Audio;
+using Cysharp.Threading.Tasks;
 using I2.Loc;
 using UnityEngine;
 using Zenject;
@@ -37,7 +40,6 @@ namespace CodeBase.GameInit
         private readonly List<EnemySpawner> _enemySpawners;
         private readonly EnemyConfigurator _enemyConfigurator = new();
         private readonly CountEnemiesOnDeath _countEnemiesOnDeath;
-        private readonly SlowMotionOnEnemyDeath _slowMotionOnEnemyDeath;
         private readonly LevelSliderPresenter _levelSliderPresenter;
         private readonly WaterSplashPoolInitializer _waterSplashPoolInitializer;
         private readonly CameraShakeMediator _cameraShakeMediator;
@@ -47,7 +49,16 @@ namespace CodeBase.GameInit
         private readonly AudioView _audioView;
         private readonly AudioChanger _audioChanger;
         private readonly WeaponStaticDataService _weaponStaticDataService;
-        private KillActiveEnemiesOnPlayerRecover _killActiveEnemiesOnPlayerRecover;
+        private readonly KillActiveEnemiesOnPlayerRecover _killActiveEnemiesOnPlayerRecover;
+        private readonly IWeaponStorage _weaponStorage;
+
+        private readonly Dictionary<string, Func<WeaponData, string>> _translatedWeaponNames = new()
+        {
+            { "ru", weaponData => weaponData.RusName },
+            { "en", weaponData => weaponData.Name },
+            { "tr", weaponData => weaponData.TurkishName },
+        };
+
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
@@ -57,7 +68,6 @@ namespace CodeBase.GameInit
             ISaveSystem saveSystem,
             ShopWeaponPresenter shopWeaponPresenter,
             IProvider<List<EnemySpawner>> enemySpawnersProvider,
-            SlowMotionOnEnemyDeath slowMotionOnEnemyDeath,
             CountEnemiesOnDeath countEnemiesOnDeath,
             LevelSliderPresenter levelSliderPresenter,
             WaterSplashPoolInitializer waterSplashPoolInitializer,
@@ -67,8 +77,11 @@ namespace CodeBase.GameInit
             IProvider<CameraData> cameraDataProvider,
             AudioView audioView,
             AudioChanger audioChanger,
-            WeaponStaticDataService weaponStaticDataService, KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover)
+            WeaponStaticDataService weaponStaticDataService,
+            KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
+            IWeaponStorage weaponStorage)
         {
+            _weaponStorage = weaponStorage;
             _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
             _weaponStaticDataService = weaponStaticDataService;
             _audioChanger = audioChanger;
@@ -80,7 +93,6 @@ namespace CodeBase.GameInit
             _waterSplashPoolInitializer = waterSplashPoolInitializer;
             _levelSliderPresenter = levelSliderPresenter;
             _countEnemiesOnDeath = countEnemiesOnDeath;
-            _slowMotionOnEnemyDeath = slowMotionOnEnemyDeath;
             _enemySpawners = enemySpawnersProvider.Get();
             _shopWeaponPresenter = shopWeaponPresenter;
             _saveSystem = saveSystem;
@@ -93,12 +105,32 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            LocalizationManager.CurrentLanguage = "Russian";
-            TranslateWeaponNames();
+            LocalizationManager.CurrentLanguage = "en";
             var settingsData = await _saveSystem.Load<SettingsData>();
+            
+            TranslateWeaponNames();
+            
+            InitSound(settingsData);
+
+            InitEnemiesAndObjectsWhoNeedEnemies();
+
+            var playerData = await _saveSystem.Load<PlayerData>();
+            Player player = InitializeInitialPlayer(playerData.LastPlayerId);
+            Weapon weapon = await InitializeInitialWeapon(playerData.LastWeaponId, playerData);
+
+            InitializeUIPresenters(playerData);
+            InitializeCamera(player, weapon);
+            _waterSplashPoolInitializer.Init();
+        }
+
+        private void InitSound(SettingsData settingsData)
+        {
             _audioView.Slider.value = settingsData.Volume;
             _audioChanger.Change(settingsData.Volume);
+        }
 
+        private void InitEnemiesAndObjectsWhoNeedEnemies()
+        {
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
                 _enemyConfigurator.Configure(enemy, aggrozone);
@@ -108,28 +140,23 @@ namespace CodeBase.GameInit
                 _cameraShakeMediator.InitEnemies(enemy);
                 _rotateCameraOnLastEnemyKilled.FillList(enemy);
             }));
-
-            var playerData = await _saveSystem.Load<PlayerData>();
-            InitializeUIPresenters(playerData);
-            InitializeInitialWeapon(WeaponTypeId.ThrowingDynamiteShooter);
-            Player player = InitializeInitialPlayer(playerData.LastPlayerId);
-            InitializeCamera(player);
-            _waterSplashPoolInitializer.Init();
         }
 
         private async void TranslateWeaponNames()
         {
             var weaponNamesData = await _saveSystem.Load<TranslatedWeaponNameData>();
+            List<WeaponData> weaponDatas = _weaponStaticDataService.GetAll();
 
-            foreach (WeaponData weaponData in _weaponStaticDataService.GetAll())
+            if (!_translatedWeaponNames.TryGetValue(LocalizationManager.CurrentLanguage,
+                    out Func<WeaponData, string> namePropertyGetter))
+                return;
+
+            foreach (WeaponData weaponData in weaponDatas)
             {
-                GoogleTranslation.Translate(weaponData.Name, "en", LocalizationManager.CurrentLanguageCode,
-                    (translation, _) =>
-                    {
-                        weaponNamesData.Names[weaponData.WeaponTypeId] = translation;
-                        _saveSystem.Save(weaponNamesData);
-                    });
+                weaponNamesData.Names[weaponData.WeaponTypeId] = namePropertyGetter?.Invoke(weaponData);
             }
+            
+            _saveSystem.Save(weaponNamesData);
         }
 
         private void InitializeUIPresenters(PlayerData playerData)
@@ -138,20 +165,28 @@ namespace CodeBase.GameInit
             _shopWeaponPresenter.Init(playerData.LastNotPopupWeaponId);
         }
 
-        private void InitializeCamera(Player player)
+        private void InitializeCamera(Player player, Weapon weapon)
         {
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             var rotateCamera = playerCameraFollower.GetComponent<RotateCamera>();
             _rotateCameraPresenter.Init(rotateCamera, player);
             _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());
-            _cameraShakeMediator.Init();
+            _cameraShakeMediator.Init(weapon);
             _rotateCameraOnLastEnemyKilled.Init(rotateCamera.GetComponent<CameraData>());
         }
 
-        private void InitializeInitialWeapon(WeaponTypeId weaponTypeId)
+        private async UniTask<Weapon> InitializeInitialWeapon(WeaponTypeId weaponTypeId, PlayerData playerData)
         {
             _weaponSelector.SetLastWeaponChoosen(weaponTypeId);
             _weaponSelector.Select();
+            Weapon weapon = _weaponStorage.Get(playerData.LastWeaponId);
+            
+            while (weapon.BulletsCreated == false)
+            {
+                await UniTask.Yield();
+            }
+
+            return weapon;
         }
 
         private PlayerCameraFollower InitializePlayerCamera()
