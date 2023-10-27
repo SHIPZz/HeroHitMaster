@@ -18,16 +18,13 @@ namespace CodeBase.Services
             enemy.GetComponent<DieOnAnimationEvent>().Dead += Count;
             _enemies.Add(enemy);
         }
-
+        
         public void Dispose()
         {
             foreach (var enemy in _enemies)
             {
                 enemy.QuickDestroyed -= Count;
-                
-                if(enemy.gameObject == null || !enemy.gameObject.activeSelf)
-                    break;
-                
+
                 enemy.GetComponent<DieOnAnimationEvent>().Dead -= Count;
             }
         }

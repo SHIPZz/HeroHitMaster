@@ -45,7 +45,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
         private void BindInstances()
         {
             Container.Bind<IHealth>().To<EnemyHealth>().FromInstance(_enemyHealth).AsSingle();
-            Container.BindInstance(GetComponent<SkinnedMeshRenderer>());
             Container.BindInstance(GetComponent<TriggerObserver>());
             Container.BindInstance(_enemy);
             Container.BindInstance(_enemy.EnemyTypeId);
@@ -62,7 +61,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.BindInterfacesAndSelfTo<EffectOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<DeathSoundOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<NonCollisionOnDeath>().AsSingle();
-            Container.BindInterfacesAndSelfTo<SkinnedMeshVisibilityHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<DestroyEnemyEffectsHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimOnAgentMoving>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimOnHit>().AsSingle();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agava.YandexGames;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
@@ -105,7 +106,7 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            LocalizationManager.CurrentLanguage = "en";
+            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
             var settingsData = await _saveSystem.Load<SettingsData>();
             
             TranslateWeaponNames();

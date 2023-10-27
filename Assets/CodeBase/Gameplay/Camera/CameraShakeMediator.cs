@@ -119,10 +119,17 @@ namespace CodeBase.Gameplay.Camera
             TrySubscribeOnDestructionBulletKill();
         }
 
-        private void TrySubscribeOnRecoilWeaponShoot()
+        private async void TrySubscribeOnRecoilWeaponShoot()
         {
+            while (_cameraShake is null)
+            {
+                await UniTask.Yield();
+            }
+        
             if (_recoilWeapons.Contains(_weapon.WeaponTypeId))
+            {
                 _weapon.Shot += _cameraShake.MakeRecoil;
+            }
         }
 
         private void TrySubscribeOnDestructionBulletKill()

@@ -13,7 +13,6 @@ namespace CodeBase.Gameplay.Character.Enemy
         private bool _isBlocked = true;
         private AggroZone _aggroZone;
         private Vector3 _target;
-        private EnemyAnimator _enemyAnimator;
         private bool _isInitialized;
 
         [Inject]

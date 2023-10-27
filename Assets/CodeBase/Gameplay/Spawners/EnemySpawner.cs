@@ -19,7 +19,6 @@ namespace CodeBase.Gameplay.Spawners
 
         public event Action Destroyed;
         public event Action<Enemy> Spawned;
-        public event Action<Enemy> Disabled; 
 
         [Inject]
         private void Construct(EnemyFactory enemyFactory) => 
@@ -47,7 +46,6 @@ namespace CodeBase.Gameplay.Spawners
         private void Disable()
         {
             Destroyed?.Invoke();
-            Disabled?.Invoke(_enemy);
             gameObject.SetActive(false);
         }
 
@@ -60,7 +58,6 @@ namespace CodeBase.Gameplay.Spawners
                 return;
             
             Destroyed?.Invoke();
-            Disabled?.Invoke(enemy);
             gameObject.SetActive(false);
         }
     }

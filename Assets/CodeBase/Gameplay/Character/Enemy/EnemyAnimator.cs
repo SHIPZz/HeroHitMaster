@@ -34,7 +34,10 @@ namespace CodeBase.Gameplay.Character.Enemy
         public void SetVictory() =>
             _animator.SetTrigger(_win);
 
-        public void SetDeath() =>
+        public void SetDeath()
+        {
+            _animator.enabled = true;
             _animator.SetTrigger(_die);
+        }
     }
 }
