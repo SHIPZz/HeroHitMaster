@@ -5,15 +5,15 @@ namespace CodeBase.Gameplay.Weapons
 {
     public class WebShooter : Weapon
     {
-        public override void Initialize()
+        public override async void Initialize()
         {
             ReturnBulletDelay = 10f;
-            Init(WeaponTypeId);
+           await Init(WeaponTypeId);
         }
 
         public override void Shoot(Vector3 target, Vector3 initialPosition)
         {
-            var bullet = _bulletStorage.Pop(WeaponTypeId);
+            Bullet.Bullet bullet = _bulletStorage.Pop(WeaponTypeId);
             bullet.StartMovement(target,initialPosition);
             
             DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() =>

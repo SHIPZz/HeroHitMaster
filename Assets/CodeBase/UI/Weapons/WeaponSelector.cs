@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.ScriptableObjects.Weapon;
-using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
@@ -11,14 +9,13 @@ using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Weapon;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.UI.Weapons
 {
     public class WeaponSelector
     {
-        private const int WeaponPopupLvlDuration = 5;
-    
+        private const int WeaponPopupLvlDuration = 2;
+
         private readonly IProvider<Weapon> _weaponProvider;
         private readonly IWeaponStorage _weaponStorage;
         private readonly ISaveSystem _saveSystem;
@@ -38,22 +35,36 @@ namespace CodeBase.UI.Weapons
             _weaponStorage = weaponStorage;
         }
 
-        public async void Select()
+        public async UniTask<Weapon> Init(WeaponTypeId lastWeaponId)
         {
-            await SaveLastSelectedWeapon();
-
-            WeaponData weaponData = _weaponStaticDataService.Get(_lastWeaponId);
+            WeaponData weaponData = _weaponStaticDataService.Get(lastWeaponId);
+            Debug.Log(lastWeaponId);
 
             if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
             {
                 var levelData = await _saveSystem.Load<LevelData>();
 
-                if (levelData.Id % WeaponPopupLvlDuration == 0)
+                if (levelData.PopupWeaponId != 0)
                 {
-                    var playerData = await _saveSystem.Load<PlayerData>();
-                    _lastWeaponId = playerData.LastNotPopupWeaponId;
+                    if (levelData.PopupWeaponId % WeaponPopupLvlDuration == 1)
+                    {
+                        var playerData = await _saveSystem.Load<PlayerData>();
+                        _lastWeaponId = playerData.LastNotPopupWeaponId;
+                        playerData.LastWeaponId = _lastWeaponId;
+                        _saveSystem.Save(playerData);
+                    }
                 }
             }
+
+            Weapon weapon = _weaponStorage.Get(_lastWeaponId);
+            _weaponProvider.Set(weapon);
+            NewWeaponChanged?.Invoke(_lastWeaponId);
+            return weapon;
+        }
+
+        public async void Select()
+        {
+            await SaveLastSelectedWeapon();
 
             Weapon weapon = _weaponStorage.Get(_lastWeaponId);
             _weaponProvider.Set(weapon);
@@ -70,7 +81,7 @@ namespace CodeBase.UI.Weapons
 
             NewWeaponChanged?.Invoke(weaponTypeId);
         }
-        
+
         public async void SetLastWeaponChoosen(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;

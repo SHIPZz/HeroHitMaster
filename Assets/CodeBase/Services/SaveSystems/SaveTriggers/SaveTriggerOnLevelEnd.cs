@@ -1,6 +1,9 @@
 ﻿using System;
 using CodeBase.Constants;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Collision;
+using CodeBase.ScriptableObjects.Weapon;
+using CodeBase.Services.Data;
 using CodeBase.Services.Pause;
 using CodeBase.Services.SaveSystems.Data;
 using UnityEngine;
@@ -16,12 +19,14 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         private IPauseService _pauseService;
         private ISaveSystem _saveSystem;
         private Level _level;
+        private WeaponStaticDataService _weaponStaticDataService;
 
         public event Action PlayerEntered;
 
         [Inject]
-        private void Construct(IPauseService pauseService, ISaveSystem saveSystem, Level level)
+        private void Construct(IPauseService pauseService, ISaveSystem saveSystem, Level level, WeaponStaticDataService weaponStaticDataService)
         {
+            _weaponStaticDataService = weaponStaticDataService;
             _level = level;
             _saveSystem = saveSystem;
             _pauseService = pauseService;
@@ -40,8 +45,13 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         {
             var levelData =  await _saveSystem.Load<LevelData>();
             var playerData = await _saveSystem.Load<PlayerData>();
+            WeaponData currentWeapon = _weaponStaticDataService.Get(playerData.LastWeaponId);
             levelData.Id = SceneManager.GetActiveScene().buildIndex + 0;
             levelData.Id++;
+
+            if (currentWeapon.Price.PriceTypeId == PriceTypeId.Popup)
+                levelData.PopupWeaponId ++;
+            
             playerData.Money += _level.Reward;
             _saveSystem.Save(levelData);
             _saveSystem.Save(playerData);

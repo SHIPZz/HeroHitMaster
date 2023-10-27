@@ -5112,7 +5112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpawners:
-  - {fileID: 0}
+  - {fileID: 211837227}
   - {fileID: 1934778455}
   _delayActivation: 1
 --- !u!114 &269382030
@@ -7437,7 +7437,7 @@ Transform:
   m_GameObject: {fileID: 398799531}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0012413139, y: -0.7257156, z: 0.0011767903, w: 0.6879928}
-  m_LocalPosition: {x: 208.7, y: 2.8, z: -69.1}
+  m_LocalPosition: {x: 208.7, y: 1, z: -69.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7469,8 +7469,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpawners:
-  - {fileID: 0}
-  - {fileID: 1934778455}
+  - {fileID: 1261804588}
+  - {fileID: 1941822201}
+  - {fileID: 1142097066}
   _delayActivation: 1
 --- !u!114 &398799535
 MonoBehaviour:
@@ -40827,8 +40828,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpawners:
-  - {fileID: 0}
-  - {fileID: 1934778455}
+  - {fileID: 344899714}
+  - {fileID: 1222949746}
+  - {fileID: 676605694}
   _delayActivation: 1
 --- !u!114 &2056726966
 MonoBehaviour:
@@ -42327,6 +42329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 1.5
   _targetValue: 1
+  _needDisable: 1
 --- !u!108 &168944264060241033
 Light:
   m_ObjectHideFlags: 0
@@ -56833,6 +56836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DestroyableObjectTypeId>k__BackingField: 1
   _destroyDelay: 0
+  _needActiveAfterMaterialChange: 0
 --- !u!114 &562835663995585799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56963,6 +56967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 1.5
   _targetValue: 1
+  _needDisable: 1
 --- !u!1 &1701409930287803339
 GameObject:
   m_ObjectHideFlags: 0
@@ -56991,7 +56996,7 @@ Transform:
   m_GameObject: {fileID: 1701409930287803339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68.54, y: 1.071, z: -28.21}
+  m_LocalPosition: {x: 68.54, y: 1.071, z: -27.769999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57951,6 +57956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 1.5
   _targetValue: 1
+  _needDisable: 1
 --- !u!4 &4849721586587425150
 Transform:
   m_ObjectHideFlags: 0
@@ -58166,6 +58172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 1.5
   _targetValue: 1
+  _needDisable: 1
 --- !u!1 &5663769136286450437
 GameObject:
   m_ObjectHideFlags: 0
@@ -58506,6 +58513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DestroyableObjectTypeId>k__BackingField: 1
   _destroyDelay: 0
+  _needActiveAfterMaterialChange: 0
 --- !u!1 &7240179978038290890
 GameObject:
   m_ObjectHideFlags: 0

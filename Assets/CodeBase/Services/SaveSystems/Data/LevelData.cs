@@ -6,5 +6,6 @@ namespace CodeBase.Services.SaveSystems.Data
     public class LevelData
     {
         public int Id = 1;
+        public int PopupWeaponId;
     }
 }

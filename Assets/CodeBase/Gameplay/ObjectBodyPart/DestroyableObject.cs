@@ -5,87 +5,68 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.ObjectBodyPart
 {
-    [RequireComponent(typeof(IMaterialChanger))]
-    public class DestroyableObject : MonoBehaviour, IExplodable, IDamageable
+    [RequireComponent(typeof(IMaterialChanger), typeof(MeshRenderer), typeof(Collider))]
+    public class DestroyableObject : MonoBehaviour, IDamageable
     {
         [field: SerializeField] public DestroyableObjectTypeId DestroyableObjectTypeId { get; private set; }
-        [SerializeField] private float _destroyDelay;
-        [SerializeField] private bool _needActiveAfterMaterialChange = false;
 
         public bool MaterialChanged { get; private set; }
 
         private IMaterialChanger _materialChanger;
         private bool _canDestroy = true;
+        private MeshRenderer _meshRenderer;
+        private Collider _collider;
+        private bool _isMaterialChanged;
 
         public event Action<DestroyableObjectTypeId> Destroyed;
 
-        private void Awake() =>
+        private void Awake()
+        {
+            _meshRenderer = GetComponent<MeshRenderer>();
+            _collider = GetComponent<Collider>();
             _materialChanger = GetComponent<IMaterialChanger>();
+        }
 
         private void OnEnable()
         {
             _materialChanger.StartedChanged += BlockDestruction;
-            _materialChanger.Completed += SetActive;
-        }
-
-        private void SetActive()
-        {
-            if (!_needActiveAfterMaterialChange)
-                return;
-
-            gameObject.SetActive(true);
-            GetComponent<Collider>().enabled = false;
+            _materialChanger.Completed += OnMaterialChanged;
         }
 
         private void OnDisable()
         {
             _materialChanger.StartedChanged -= BlockDestruction;
-            _materialChanger.Completed -= SetActive;
+            _materialChanger.Completed -= OnMaterialChanged;
+        }
+
+        private void OnMaterialChanged()
+        {
+            Destroyed?.Invoke(DestroyableObjectTypeId);
+            _isMaterialChanged = true;
         }
 
         private void BlockDestruction()
         {
+            _collider.enabled = false;
             MaterialChanged = true;
+            _meshRenderer.enabled = true;
             Destroyed?.Invoke(DestroyableObjectTypeId);
-            _canDestroy = false;
-        }
-
-        public void Explode()
-        {
-            if (!_canDestroy)
-                return;
-
-            Destroyed?.Invoke(DestroyableObjectTypeId);
-
-            if (_destroyDelay != 0)
-            {
-                DisableVisibility();
-                return;
-            }
-
-            Destroy(gameObject, _destroyDelay);
+            _isMaterialChanged = true;
         }
 
         public void TakeDamage(int value)
         {
-            if (!_canDestroy)
+            if (_isMaterialChanged)
                 return;
 
+            DisableVisibility();
             Destroyed?.Invoke(DestroyableObjectTypeId);
-
-            if (_destroyDelay != 0)
-            {
-                DisableVisibility();
-                return;
-            }
-
-            Destroy(gameObject, _destroyDelay);
         }
 
         private void DisableVisibility()
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.transform.localScale = Vector3.zero;
+            _meshRenderer.enabled = false;
+            _collider.enabled = false;
         }
     }
 }

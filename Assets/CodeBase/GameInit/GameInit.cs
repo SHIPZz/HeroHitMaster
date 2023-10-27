@@ -7,6 +7,7 @@ using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.ScriptableObjects.PlayerSettings;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services;
 using CodeBase.Services.Data;
@@ -29,7 +30,7 @@ using Player = CodeBase.Gameplay.Character.Players.Player;
 
 namespace CodeBase.GameInit
 {
-    public class GameInit : IInitializable
+    public class GameInit : IInitializable, ITickable
     {
         private readonly PlayerCameraFactory _playerCameraFactory;
         private readonly IProvider<LocationTypeId, Transform> _locationProvider;
@@ -51,7 +52,7 @@ namespace CodeBase.GameInit
         private readonly AudioChanger _audioChanger;
         private readonly WeaponStaticDataService _weaponStaticDataService;
         private readonly KillActiveEnemiesOnPlayerRecover _killActiveEnemiesOnPlayerRecover;
-        private readonly IWeaponStorage _weaponStorage;
+        private readonly PlayerSettings _playerSettings;
 
         private readonly Dictionary<string, Func<WeaponData, string>> _translatedWeaponNames = new()
         {
@@ -60,7 +61,7 @@ namespace CodeBase.GameInit
             { "tr", weaponData => weaponData.TurkishName },
         };
 
-
+        
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
             IPlayerStorage playerStorage,
@@ -79,10 +80,10 @@ namespace CodeBase.GameInit
             AudioView audioView,
             AudioChanger audioChanger,
             WeaponStaticDataService weaponStaticDataService,
-            KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
-            IWeaponStorage weaponStorage)
+            KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover, 
+            PlayerSettings playerSettings)
         {
-            _weaponStorage = weaponStorage;
+            _playerSettings = playerSettings;
             _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
             _weaponStaticDataService = weaponStaticDataService;
             _audioChanger = audioChanger;
@@ -106,21 +107,19 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
             var settingsData = await _saveSystem.Load<SettingsData>();
-            
+
             TranslateWeaponNames();
-            
+
             InitSound(settingsData);
 
             InitEnemiesAndObjectsWhoNeedEnemies();
 
             var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.LastPlayerId = PlayerTypeId.Spider;
-            playerData.LastWeaponId = WeaponTypeId.SmudgeWebShooter;
-            Player player = InitializeInitialPlayer(playerData.LastPlayerId);
-            Weapon weapon = await InitializeInitialWeapon(playerData.LastWeaponId, playerData);
-
+            PlayerTypeId targetPlayerId = _playerSettings.PlayerTypeIdsByWeapon[playerData.LastWeaponId];
+            Player player = InitializeInitialPlayer(targetPlayerId);
+            Weapon weapon = await InitializeInitialWeapon(playerData.LastWeaponId);
             InitializeUIPresenters(playerData);
             InitializeCamera(player, weapon);
             _waterSplashPoolInitializer.Init();
@@ -158,7 +157,7 @@ namespace CodeBase.GameInit
             {
                 weaponNamesData.Names[weaponData.WeaponTypeId] = namePropertyGetter?.Invoke(weaponData);
             }
-            
+
             _saveSystem.Save(weaponNamesData);
         }
 
@@ -178,11 +177,9 @@ namespace CodeBase.GameInit
             _rotateCameraOnLastEnemyKilled.Init(rotateCamera.GetComponent<CameraData>());
         }
 
-        private async UniTask<Weapon> InitializeInitialWeapon(WeaponTypeId weaponTypeId, PlayerData playerData)
+        private async UniTask<Weapon> InitializeInitialWeapon(WeaponTypeId weaponTypeId)
         {
-            _weaponSelector.SetLastWeaponChoosen(weaponTypeId);
-            _weaponSelector.Select();
-            Weapon weapon = _weaponStorage.Get(playerData.LastWeaponId);
+            Weapon weapon = await _weaponSelector.Init(weaponTypeId);
             
             while (weapon.BulletsCreated == false)
             {
@@ -203,5 +200,22 @@ namespace CodeBase.GameInit
 
         private Player InitializeInitialPlayer(PlayerTypeId playerTypeId) =>
             _playerStorage.GetById(playerTypeId);
+
+        //test
+        public async void Tick()
+        {
+            if (Input.GetKeyDown(KeyCode.F8))
+            {
+                PlayerPrefs.DeleteAll();
+                PlayerPrefs.Save();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                var playerData = await _saveSystem.Load<PlayerData>();
+                playerData.Money += 5000;
+                _saveSystem.Save(playerData);
+            }
+        }
     }
 }

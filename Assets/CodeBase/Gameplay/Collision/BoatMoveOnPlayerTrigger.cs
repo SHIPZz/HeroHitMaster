@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Gameplay.Character.Players;
 using DG.Tweening;
 using UnityEngine;
 
@@ -25,20 +26,22 @@ namespace CodeBase.Gameplay.Collision
         private void OnDisable() =>
             _triggerObserver.Entered -= MovePlayerToTarget;
 
-        private void MovePlayerToTarget(Collider player)
+        private void MovePlayerToTarget(Collider collider)
         {
-            DOTween.Sequence().AppendInterval(1.5f).OnComplete(() => Move(player));
+            if (collider.gameObject.TryGetComponent(out Player player))
+                DOTween.Sequence().AppendInterval(1.5f).OnComplete(() => Move(player));
         }
 
-        private void Move(Collider player)
+        private void Move(Player player)
         {
             player.transform.SetParent(transform);
             MovementStarted?.Invoke();
 
+
             transform.DOMoveY(transform.position.y + 0.5f, 0.5f)
                 .OnComplete(() => transform.DOMoveY(transform.position.y - 0.3f, 0.5f))
                 .SetLoops(-1, LoopType.Yoyo);
-            
+
             transform.DOMoveZ(_target.position.z, MoveDuration)
                 .OnComplete(() =>
                 {

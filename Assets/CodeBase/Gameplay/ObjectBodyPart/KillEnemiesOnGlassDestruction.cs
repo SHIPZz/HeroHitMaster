@@ -13,15 +13,15 @@ namespace CodeBase.Gameplay.ObjectBodyPart
     public class KillEnemiesOnGlassDestruction : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _enemyTrigger;
-        [SerializeField] private float _disableEnemiesDelay = 0.5f;
         [SerializeField] private float _explodeDelay = 2f;
+        [SerializeField] private float _killDelay = 1.5f;
 
         private DestroyableObject _destroyableObject;
         private bool _isDestroyed;
         private List<Enemy> _enemiesOnGlass = new();
         private CancellationTokenSource _cancellationToken;
 
-        private void Awake() => 
+        private void Awake() =>
             _destroyableObject = GetComponent<DestroyableObject>();
 
         private void OnEnable()
@@ -40,27 +40,35 @@ namespace CodeBase.Gameplay.ObjectBodyPart
 
         private void SetDestroyed(DestroyableObjectTypeId obj)
         {
-            GetComponent<Collider>().enabled = false;
             _isDestroyed = true;
         }
 
-        private async void SetEnemy(Collider enemy)
+        private void SetEnemy(Collider collider)
         {
-            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            if (collider.gameObject.TryGetComponent(out Enemy enemy))
+                _enemiesOnGlass.Add(enemy);
 
-            if (enemyComponent != null)
-                _enemiesOnGlass.Add(enemyComponent);
+            if (collider.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder))
+            {
+                if (!_enemiesOnGlass.Contains(enemyPartForKnifeHolder.Enemy))
+                    _enemiesOnGlass.Add(enemyPartForKnifeHolder.Enemy);
+            }
 
-            if (!_isDestroyed)
-                return;
-            
-            await UniTask.WaitForSeconds(_disableEnemiesDelay);
+            if (_isDestroyed)
+                Kill();
+        }
+
+        private async void Kill()
+        {
+            await UniTask.WaitForSeconds(_killDelay);
 
             foreach (Enemy activeEnemy in _enemiesOnGlass)
             {
                 var navmeshAgent = activeEnemy.GetComponent<NavMeshAgent>();
-                var enemyRigidBody = activeEnemy.GetComponent<Rigidbody>();
-                enemyRigidBody.isKinematic = false;
+
+                if (!activeEnemy.gameObject.TryGetComponent(out Rigidbody rigidbody))
+                    activeEnemy.gameObject.AddComponent<Rigidbody>();
+
                 navmeshAgent.updatePosition = false;
                 navmeshAgent.enabled = false;
                 DOTween.Sequence().AppendInterval(_explodeDelay).OnComplete(activeEnemy.Explode);

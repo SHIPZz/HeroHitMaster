@@ -1,7 +1,6 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Services.Factories;
 using CodeBase.Services.Storages.Effect;
 using CodeBase.Services.Storages.Sound;
 using UnityEngine;

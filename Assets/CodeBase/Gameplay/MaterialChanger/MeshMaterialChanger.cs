@@ -37,8 +37,8 @@ namespace CodeBase.Gameplay.MaterialChanger
         {
             Completed?.Invoke();
 
-            if (_needDisable)
-                gameObject.SetActive(false);
+            // if (_needDisable)
+            //     gameObject.SetActive(false);
         }
     }
 }

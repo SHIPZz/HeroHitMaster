@@ -27,7 +27,7 @@ namespace CodeBase.Gameplay.ExplosionBarrel
 
         private void Kill()
         {
-            foreach (var enemy in _enemies)
+            foreach (Enemy enemy in _enemies)
             {
                 enemy.Explode();
             }

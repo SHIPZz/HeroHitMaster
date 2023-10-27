@@ -11,8 +11,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         [field: SerializeField] public EnemyTypeId EnemyTypeId { get; private set; }
 
         private IMaterialChanger _skinnedMaterialChanger;
-        private bool _isExploded;
-        private bool _isDead;
+        public bool IsDead { get; private set; }
 
         public Vector3 InitialScale { get; private set; }
         public event Action<Enemy> Dead;
@@ -34,19 +33,19 @@ namespace CodeBase.Gameplay.Character.Enemy
             _skinnedMaterialChanger.StartedChanged -= DisableEvents;
             Application.quitting -= DisableEvents;
             
-            if (_isExploded || _isDead)
+            if (IsDead)
                 return;
 
-            _isDead = true;
+            IsDead = true;
             Dead?.Invoke(this);
         }
 
         public void Explode()
         {
-            if (_isExploded)
+            if (IsDead)
                 return;
 
-            _isExploded = true;
+            IsDead = true;
             QuickDestroyed?.Invoke(this);
             gameObject.SetActive(false);
         }
