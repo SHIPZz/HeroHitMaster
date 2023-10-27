@@ -25,8 +25,11 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         private void OnDisable() =>
             _materialChanger.StartedChanged -= BlockDestruction;
 
-        private void BlockDestruction() =>
+        private void BlockDestruction()
+        {
+            Destroyed?.Invoke(DestroyableObjectTypeId);
             _canDestroy = false;
+        }
 
         public void Explode()
         {

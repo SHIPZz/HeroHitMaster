@@ -36,13 +36,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2714671991903669213}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.975422, y: 0.53906745, z: 16.598959}
   m_LocalScale: {x: 250, y: 250, z: 250}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2582621386259659912
 MeshFilter:
@@ -113,8 +113,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0008481982, y: 0.0005420636, z: 0.000018095327}
-  m_Center: {x: 0.000020706058, y: 0.00008645743, z: -0.000009047663}
+  m_Size: {x: 0.0007803276, y: 0.00053779664, z: 0.000018095327}
+  m_Center: {x: -0.000012210474, y: 0.00005679387, z: -0.000009047663}
 --- !u!54 &3894634599279539162
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &8532890716993097247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,4 +268,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _needBlockRotation: 1
-  _needDisableGravity: 0

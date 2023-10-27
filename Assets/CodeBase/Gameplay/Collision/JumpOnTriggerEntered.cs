@@ -36,9 +36,13 @@ namespace CodeBase.Gameplay.Collision
 
         private void Jump(Collider player)
         {
+            if (_isJumped)
+                return;
+        
             var navMesh = player.gameObject.GetComponent<NavMeshAgent>();
             navMesh.enabled = false;
 
+            _isJumped = true;
             DoJump(player.GetComponent<Player>());
         }
 

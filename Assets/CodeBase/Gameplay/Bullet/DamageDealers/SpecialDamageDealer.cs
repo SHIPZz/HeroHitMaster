@@ -35,7 +35,10 @@ namespace CodeBase.Gameplay.Bullet.DamageDealers
             }
 
             if (!other.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                gameObject.layer = LayerId.HitBullet;
                 return;
+            }
 
             if (other.gameObject.TryGetComponent(out Animator animator))
                 animator.enabled = false;

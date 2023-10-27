@@ -60,10 +60,10 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private async void Activate(Player obj)
         {
+            await UniTask.WaitForSeconds(_delayActivation);
+            
             if (_activated)
                 return;
-
-            await UniTask.WaitForSeconds(_delayActivation);
 
             foreach (Enemy enemy in _enemies)
             {
