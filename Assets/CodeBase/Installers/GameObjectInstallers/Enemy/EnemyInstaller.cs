@@ -28,7 +28,7 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.Bind<EnemyAnimator>().AsSingle();
             Container.Bind<IMaterialChanger>().To<SkinnedMaterialChanger>()
                 .FromComponentOn(gameObject).AsSingle();
-            
+
             Container
                 .BindInterfacesAndSelfTo<EnemyMovementPresenter>()
                 .AsSingle();
@@ -36,18 +36,15 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container
                 .BindInterfacesAndSelfTo<EnemyDeathEffectOnDestruction>()
                 .AsSingle();
-            
+
             Container
                 .BindInterfacesAndSelfTo<DeathAnimOnMaterialChange>()
                 .AsSingle();
-            
-            
         }
 
         private void BindInstances()
         {
             Container.Bind<IHealth>().To<EnemyHealth>().FromInstance(_enemyHealth).AsSingle();
-            Container.BindInstance(GetComponent<SkinnedMeshRenderer>());
             Container.BindInstance(GetComponent<TriggerObserver>());
             Container.BindInstance(_enemy);
             Container.BindInstance(_enemy.EnemyTypeId);
@@ -64,7 +61,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container.BindInterfacesAndSelfTo<EffectOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<DeathSoundOnHit>().AsSingle();
             Container.BindInterfacesAndSelfTo<NonCollisionOnDeath>().AsSingle();
-            Container.BindInterfacesAndSelfTo<SkinnedMeshVisibilityHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<DestroyEnemyEffectsHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimOnAgentMoving>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimOnHit>().AsSingle();

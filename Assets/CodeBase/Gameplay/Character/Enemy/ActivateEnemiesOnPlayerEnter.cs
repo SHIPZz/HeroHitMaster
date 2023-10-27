@@ -55,14 +55,14 @@ namespace CodeBase.Gameplay.Character.Enemy
             _shootingOnAnimationEvent.Shooted += SetMove;
         }
 
-        private void SetMove() => 
-        _canMove = true;
+        private void SetMove() =>
+            _canMove = true;
 
         private async void Activate(Player obj)
         {
-            if(_activated)
+            if (_activated)
                 return;
-            
+
             await UniTask.WaitForSeconds(_delayActivation);
 
             foreach (Enemy enemy in _enemies)
@@ -88,7 +88,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             enemyFollower.Unblock();
         }
 
-        private void FillList(Enemy enemy) => 
+        private void FillList(Enemy enemy) =>
             _enemies.Add(enemy);
     }
 }

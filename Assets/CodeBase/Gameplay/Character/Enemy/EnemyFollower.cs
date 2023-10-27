@@ -1,8 +1,6 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
-using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Data;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -15,7 +13,6 @@ namespace CodeBase.Gameplay.Character.Enemy
         private bool _isBlocked = true;
         private AggroZone _aggroZone;
         private Vector3 _target;
-        private EnemyAnimator _enemyAnimator;
         private bool _isInitialized;
 
         [Inject]

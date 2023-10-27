@@ -15,15 +15,11 @@ namespace CodeBase.Gameplay.Collision
             _collider = GetComponent<Collider>();
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _materialChanger.StartedChanged += DisableCollider;
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _materialChanger.StartedChanged -= DisableCollider;
-        }
 
         private void DisableCollider() =>
             _collider.enabled = false;

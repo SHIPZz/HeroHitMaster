@@ -8,13 +8,15 @@ namespace CodeBase.Gameplay.Character.Enemy
 {
     public class EnemyDeathEffectOnDestruction : IInitializable, IDisposable
     {
-        private ParticleSystem _dieEffect;
+        private readonly IMaterialChanger _materialChanger;
         private readonly EnemyEffectDataStorage _enemyEffectDataStorage;
-        private bool _canPlayEffect = true;
         private readonly Enemy _enemy;
+        private ParticleSystem _dieEffect;
+        private bool _canPlayEffect = true;
 
-        public EnemyDeathEffectOnDestruction(EnemyEffectDataStorage enemyEffectDataStorage, Enemy enemy)
+        public EnemyDeathEffectOnDestruction(EnemyEffectDataStorage enemyEffectDataStorage, Enemy enemy, IMaterialChanger materialChanger)
         {
+            _materialChanger = materialChanger;
             _enemy = enemy;
             _enemyEffectDataStorage = enemyEffectDataStorage;
         }
@@ -23,14 +25,14 @@ namespace CodeBase.Gameplay.Character.Enemy
         {
             _enemy.QuickDestroyed += Play;
             _enemy.GetComponent<DieOnAnimationEvent>().Dead += Play;
-            _enemy.GetComponent<SkinnedMaterialChanger>().StartedChanged += BlockEffect;
+            _materialChanger.StartedChanged += BlockEffect;
         }
 
         public void Dispose()
         {
             _enemy.QuickDestroyed -= Play;
             _enemy.GetComponent<DieOnAnimationEvent>().Dead -= Play;
-            _enemy.GetComponent<SkinnedMaterialChanger>().StartedChanged -= BlockEffect;
+            _materialChanger.StartedChanged -= BlockEffect;
         }
 
         private void BlockEffect() =>

@@ -11,6 +11,8 @@ namespace CodeBase.ScriptableObjects.Weapon
 
         public Price Price;
         public string Name;
+        public string RusName;
+        public string TurkishName;
         public WeaponTypeId WeaponTypeId;
         public ParticleSystem ShootEffect;
         public AudioSource ShootSound;

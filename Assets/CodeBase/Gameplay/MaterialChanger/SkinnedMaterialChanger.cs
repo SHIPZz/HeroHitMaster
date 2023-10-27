@@ -18,28 +18,28 @@ namespace CodeBase.Gameplay.MaterialChanger
         public event Action Completed;
         public bool IsChanging { get; private set; }
 
-        [Inject]
-        private void Construct(SkinnedMeshRenderer skinnedMeshRenderer)
-        {
-            _skinnedMeshRenderer = skinnedMeshRenderer;
-        }
+        private void Awake() =>
+            _skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
 
         public void Change(Material material)
         {
+            if (IsChanging)
+                return;
+            
             SetStartValues(material);
             GetComponent<Collider>().enabled = false;
 
             IsChanging = true;
-            
+
             DOTween.To(() => 0, x =>
                     _skinnedMeshRenderer.material.SetFloat(AdvancedDissolveProperties.Cutout.Standard._ids[0].clip, x),
                 _targetValue, _duration).OnComplete(() =>
             {
                 Completed?.Invoke();
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             });
-            
-            
+
+
             StartedChanged?.Invoke();
         }
 

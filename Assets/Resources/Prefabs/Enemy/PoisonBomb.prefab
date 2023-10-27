@@ -19770,7 +19770,7 @@ GameObject:
   - component: {fileID: 6106410056736785474}
   - component: {fileID: 3563956775281187118}
   - component: {fileID: 8408074212450237227}
-  - component: {fileID: -1189613594006790819}
+  - component: {fileID: 3195699463977563376}
   m_Layer: 9
   m_Name: PoisonBomb
   m_TagString: Untagged
@@ -20063,7 +20063,7 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.115085125, y: 0.013398781, z: -0.0021613538}
     m_Extent: {x: 0.74432826, y: 0.4862365, z: 0.47079977}
   m_DirtyAABB: 0
---- !u!54 &-1189613594006790819
+--- !u!54 &3195699463977563376
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20071,7 +20071,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7597975854255171098}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -20086,10 +20086,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &7881577986070850558
 GameObject:
   m_ObjectHideFlags: 0

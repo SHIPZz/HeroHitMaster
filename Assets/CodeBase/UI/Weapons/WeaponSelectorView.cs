@@ -1,9 +1,6 @@
 ﻿using System;
 using CodeBase.Enums;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace CodeBase.UI.Weapons

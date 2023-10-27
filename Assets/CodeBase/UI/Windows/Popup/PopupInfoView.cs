@@ -35,7 +35,7 @@ namespace CodeBase.UI.Windows.Popup
         private int _count;
         private WeaponSelectorView _lastWeaponSelectorView;
         private List<ParticleSystem> _selectedWeaponEffects;
-        private Coroutine _chooseRandomWeaponcoroutine;
+        private Coroutine _chooseRandomWeaponCoroutine;
 
         public event Action AdButtonClicked;
         public event Action<WeaponTypeId> LastWeaponSelected;
@@ -75,12 +75,6 @@ namespace CodeBase.UI.Windows.Popup
         private void OnAdClicked() =>
             AdButtonClicked?.Invoke();
 
-        [Button]
-        public async void Show()
-        {
-            await StartChooseRandomWeapon();
-        }
-
         private void DisableAllWhiteFrames()
         {
             foreach (var whiteFrame in _whiteFrames.Values)
@@ -109,7 +103,7 @@ namespace CodeBase.UI.Windows.Popup
             }
         }
 
-        private async UniTask StartChooseRandomWeapon()
+        public async UniTask StartChooseRandomWeapon()
         {
             for (int i = 0; i < _chooseCycle; i++)
             {

@@ -43,14 +43,8 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private void PlayEffect(int obj)
         {
-            // if(!_canPlayEffect)
-            //     return;
-            
             _hitEffect.Play();
             _hitSound.Play();
         }
-
-        private void BlockHitEffect() =>
-            _canPlayEffect = false;
     }
 }

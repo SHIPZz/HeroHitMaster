@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.Weapons
         protected float ReturnBulletDelay = 15f;
         protected BulletStorage _bulletStorage;
 
-        public bool Initialized { get; private set; }
+        public bool BulletsCreated { get; private set; }
 
         public event Action Shot;
 
@@ -49,7 +49,7 @@ namespace CodeBase.Gameplay.Weapons
         {
             await _bulletStorage.CreateBulletsBy(weaponTypeId);
 
-            Initialized = true;
+            BulletsCreated = true;
         }
     }
 }

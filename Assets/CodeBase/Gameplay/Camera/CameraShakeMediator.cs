@@ -82,12 +82,9 @@ namespace CodeBase.Gameplay.Camera
             _enemies.Add(enemy);
         }
 
-        public async void Init()
+        public void Init(Weapon weapon)
         {
-            while (!_weapon.Initialized)
-            {
-                await UniTask.Yield();
-            }
+            _weapon = weapon;
 
             TrySubscribeOnRecoilWeaponShoot();
 
@@ -114,23 +111,25 @@ namespace CodeBase.Gameplay.Camera
         private void MakeShake(float perlinNoiseTimeScale) =>
             _cameraShake.MakeShake(perlinNoiseTimeScale);
 
-        private async void SetWeapon(Weapon weapon)
+        private void SetWeapon(Weapon weapon)
         {
             _weapon = weapon;
-            
-            while (!_weapon.Initialized)
-            {
-                await UniTask.Yield();
-            }
-            
+
             TrySubscribeOnRecoilWeaponShoot();
             TrySubscribeOnDestructionBulletKill();
         }
 
-        private void TrySubscribeOnRecoilWeaponShoot()
+        private async void TrySubscribeOnRecoilWeaponShoot()
         {
+            while (_cameraShake is null)
+            {
+                await UniTask.Yield();
+            }
+        
             if (_recoilWeapons.Contains(_weapon.WeaponTypeId))
+            {
                 _weapon.Shot += _cameraShake.MakeRecoil;
+            }
         }
 
         private void TrySubscribeOnDestructionBulletKill()
