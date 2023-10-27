@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using CodeBase.Gameplay.Collision;
+﻿using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Data;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -37,10 +33,13 @@ namespace CodeBase.Gameplay.Bullet
         }
 
         private void OnEnable() => 
-            TriggerObserver.CollisionEntered += OnCollisionEntered;
+        TriggerObserver.CollisionEntered += OnCollisionEntered;
 
         protected void FixedUpdate()
         {
+            if (RigidBody.isKinematic)
+                return;
+                
             if (IsHit)
             {
                 RigidBody.velocity = Vector3.zero;

@@ -116,6 +116,8 @@ namespace CodeBase.GameInit
             InitEnemiesAndObjectsWhoNeedEnemies();
 
             var playerData = await _saveSystem.Load<PlayerData>();
+            playerData.LastPlayerId = PlayerTypeId.Spider;
+            playerData.LastWeaponId = WeaponTypeId.SmudgeWebShooter;
             Player player = InitializeInitialPlayer(playerData.LastPlayerId);
             Weapon weapon = await InitializeInitialWeapon(playerData.LastWeaponId, playerData);
 

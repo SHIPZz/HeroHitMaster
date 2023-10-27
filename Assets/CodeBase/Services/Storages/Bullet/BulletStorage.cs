@@ -63,6 +63,7 @@ namespace CodeBase.Services.Storages.Bullet
             
             bullet.transform.position = _playerProvider.Get().RightHand.position;
             bullet.transform.SetParent(_locationProvider.Get(LocationTypeId.BulletParent));
+            bullet.GetComponent<Rigidbody>().isKinematic = false;
             bullet.gameObject.layer = LayerId.Bullet;
             _bulletsPoolProvider.Get()[bullet.WeaponTypeId].Push(bullet.gameObject);
         }

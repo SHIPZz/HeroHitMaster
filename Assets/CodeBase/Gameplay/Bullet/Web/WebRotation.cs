@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.Bullet.Web
 {
@@ -8,6 +9,12 @@ namespace CodeBase.Gameplay.Bullet.Web
 
         private void Awake() => 
             _rigidBody = GetComponent<Rigidbody>();
+
+        private void OnEnable() => 
+            _rigidBody.isKinematic = false;
+
+        private void OnDisable() => 
+            _rigidBody.isKinematic = false;
 
         private void OnCollisionEnter(UnityEngine.Collision other)
         {

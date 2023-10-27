@@ -30,11 +30,11 @@ namespace CodeBase.Gameplay.Bullet
             Collider = GetComponent<Collider>();
         }
 
-        private void OnEnable() =>
+        private void OnEnable() => 
             _triggerObserver.CollisionEntered += DoDamage;
 
-        private void OnDisable() =>
-            _triggerObserver.CollisionEntered -= DoDamage;
+        private void OnDisable() => 
+        _triggerObserver.CollisionEntered -= DoDamage;
 
         public void StartMovement(Vector3 target, Vector3 startPosition) =>
             _bulletMovement.Move(target, startPosition);

@@ -1,35 +1,34 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Collision;
-using CodeBase.Gameplay.MaterialChanger;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace CodeBase.Gameplay.ObjectBodyPart
 {
-    [RequireComponent(typeof(TriggerObserver), typeof(DestroyableObject))]
+    [RequireComponent(typeof(DestroyableObject))]
     public class KillEnemiesOnGlassDestruction : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _enemyTrigger;
+        [SerializeField] private float _disableEnemiesDelay = 0.5f;
+        [SerializeField] private float _explodeDelay = 2f;
 
-        private TriggerObserver _triggerObserver;
         private DestroyableObject _destroyableObject;
         private bool _isDestroyed;
         private List<Enemy> _enemiesOnGlass = new();
+        private CancellationTokenSource _cancellationToken;
 
-        private void Awake()
-        {
+        private void Awake() => 
             _destroyableObject = GetComponent<DestroyableObject>();
-            _triggerObserver = GetComponent<TriggerObserver>();
-        }
 
         private void OnEnable()
         {
             _destroyableObject.Destroyed += SetDestroyed;
             _enemyTrigger.Entered += SetEnemy;
-            _enemyTrigger.Exited += RemoveEnemy; 
-            _triggerObserver.CollisionEntered += OnCollisionEntered;
+            _enemyTrigger.Exited += RemoveEnemy;
         }
 
         private void OnDisable()
@@ -37,42 +36,43 @@ namespace CodeBase.Gameplay.ObjectBodyPart
             _enemyTrigger.Entered -= SetEnemy;
             _enemyTrigger.Exited -= RemoveEnemy;
             _destroyableObject.Destroyed -= SetDestroyed;
-            _triggerObserver.CollisionEntered -= OnCollisionEntered;
         }
 
-        private void SetDestroyed(DestroyableObjectTypeId obj) => 
+        private void SetDestroyed(DestroyableObjectTypeId obj)
+        {
+            GetComponent<Collider>().enabled = false;
             _isDestroyed = true;
+        }
 
-        private void SetEnemy(Collider enemy)
+        private async void SetEnemy(Collider enemy)
         {
             Enemy enemyComponent = enemy.GetComponent<Enemy>();
+
             if (enemyComponent != null)
-            {
                 _enemiesOnGlass.Add(enemyComponent);
+
+            if (!_isDestroyed)
+                return;
+            
+            await UniTask.WaitForSeconds(_disableEnemiesDelay);
+
+            foreach (Enemy activeEnemy in _enemiesOnGlass)
+            {
+                var navmeshAgent = activeEnemy.GetComponent<NavMeshAgent>();
+                var enemyRigidBody = activeEnemy.GetComponent<Rigidbody>();
+                enemyRigidBody.isKinematic = false;
+                navmeshAgent.updatePosition = false;
+                navmeshAgent.enabled = false;
+                DOTween.Sequence().AppendInterval(_explodeDelay).OnComplete(activeEnemy.Explode);
             }
         }
 
         private void RemoveEnemy(Collider enemy)
         {
             Enemy enemyComponent = enemy.GetComponent<Enemy>();
-            
-            if (enemyComponent != null)
-            {
-                _enemiesOnGlass.Remove(enemyComponent);
-            }
-        }
 
-        private void OnCollisionEntered(UnityEngine.Collision collision)
-        {
-            if (!_isDestroyed)
-                return;
-            
-            foreach (Enemy enemy in _enemiesOnGlass)
-            {
-                enemy.GetComponent<NavMeshAgent>().enabled = false;
-                enemy.GetComponent<Rigidbody>().isKinematic = false;
-                DOTween.Sequence().AppendInterval(2f).OnComplete(enemy.Explode);
-            }
+            if (enemyComponent != null)
+                _enemiesOnGlass.Remove(enemyComponent);
         }
     }
 }

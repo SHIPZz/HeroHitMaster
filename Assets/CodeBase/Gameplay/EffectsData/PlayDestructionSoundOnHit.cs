@@ -23,7 +23,12 @@ namespace CodeBase.Gameplay.EffectsData
         private void OnDisable() => 
             _destroyableObject.Destroyed -= Play;
 
-        private void Play(DestroyableObjectTypeId obj) => 
+        private void Play(DestroyableObjectTypeId obj)
+        {
+            if(_destroyableObject.MaterialChanged)
+                return;
+                
             _audioSource.Play();
+        }
     }
 }
