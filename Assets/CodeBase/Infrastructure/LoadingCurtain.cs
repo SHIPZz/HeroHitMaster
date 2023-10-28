@@ -9,12 +9,9 @@ namespace CodeBase.Infrastructure
     public class LoadingCurtain : MonoBehaviour, ILoadingCurtain
     {
         private const float CloseDuration = 1f;
-        private const float SliderValueDuration = 1f;
 
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Slider _loadingSlider;
-
-        private Tweener _tweener;
 
         public event Action Closed;
 
@@ -26,10 +23,8 @@ namespace CodeBase.Infrastructure
 
         public void Show(float loadSliderDuration)
         {
-            if (_loadingSlider.value != 0)
-            {
+            if (_loadingSlider.value != 0) 
                 _loadingSlider.value = 0;
-            }
 
             _canvasGroup.gameObject.SetActive(true);
             _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);

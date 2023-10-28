@@ -1,4 +1,5 @@
-﻿using CodeBase.Services.Pause;
+﻿using CodeBase.Services.Ad;
+using CodeBase.Services.Pause;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -10,9 +11,11 @@ namespace CodeBase.Infrastructure
     {
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly IPauseService _pauseService;
+        private readonly IAdInvoker _adInvoker;
 
-        public LevelLoadState(ILoadingCurtain loadingCurtain, IPauseService pauseService)
+        public LevelLoadState(ILoadingCurtain loadingCurtain, IPauseService pauseService, IAdInvoker adInvoker)
         {
+            _adInvoker = adInvoker;
             _pauseService = pauseService;
             _loadingCurtain = loadingCurtain;
         }
@@ -20,7 +23,7 @@ namespace CodeBase.Infrastructure
         public async void Enter(int payload)
         {
             _loadingCurtain.Show(1f);
-            _pauseService.UnPause();
+            _adInvoker.Init();
             DOTween.Init();
             DOTween.RestartAll();
 
@@ -30,6 +33,7 @@ namespace CodeBase.Infrastructure
                 await UniTask.Yield();
 
             _loadingCurtain.Hide();
+            _pauseService.UnPause();
         }
     }
 }

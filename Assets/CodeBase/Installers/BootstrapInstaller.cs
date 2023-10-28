@@ -30,6 +30,7 @@ namespace CodeBase.Installers
             BindPauseService();
             BindPauseOnFocusChanged();
             BindLevelService();
+            BindAdInvoker();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this).AsSingle();
         }
@@ -60,6 +61,12 @@ namespace CodeBase.Installers
             YandexGamesSdk.CallbackLogging = false;
             _initialized = true;
         }
+
+        private void BindAdInvoker() =>
+            Container
+                .Bind<IAdInvoker>()
+                .To<AdInvoker>()
+                .AsSingle();
 
         private void BindLevelService() =>
             Container.BindInterfacesTo<LevelService>()

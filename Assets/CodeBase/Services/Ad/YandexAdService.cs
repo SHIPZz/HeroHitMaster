@@ -22,15 +22,15 @@ namespace CodeBase.Services.Ad
         private void OnShortAdStartCallback(Action startCallback)
         {
             startCallback?.Invoke();
-            _pauseService.Pause();
             ShortAdOpened?.Invoke();
+            _pauseService.Pause();
         }
 
         private void OnShortAdCloseCallback(Action<bool> onCloseCallback, bool closed)
         {
             onCloseCallback?.Invoke(closed);
-            _pauseService.UnPause();
             ShortAdClosed?.Invoke();
+            _pauseService.UnPause();
         }
 
         public void PlayLongAd(Action startCallback, Action endCallback) =>
@@ -39,15 +39,15 @@ namespace CodeBase.Services.Ad
         private void OnCloseCallback(Action endCallback)
         {
             endCallback?.Invoke();
-            _pauseService.UnPause();
             LongAdClosed?.Invoke();
+            _pauseService.UnPause();
         }
 
         private void OnOpenCallback(Action startCallback)
         {
             startCallback?.Invoke();
-            _pauseService.Pause();
             LongAdOpened?.Invoke();
+            _pauseService.Pause();
         }
     }
 }
