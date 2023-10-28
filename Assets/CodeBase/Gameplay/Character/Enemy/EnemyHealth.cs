@@ -34,7 +34,7 @@ namespace CodeBase.Gameplay.Character.Enemy
 
             if (CurrentValue == 0)
                 ValueZeroReached?.Invoke();
-
+            
             ValueChanged?.Invoke(CurrentValue);
         }
     }

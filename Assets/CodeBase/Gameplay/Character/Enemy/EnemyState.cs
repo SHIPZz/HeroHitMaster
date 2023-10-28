@@ -14,6 +14,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         private EnemyFollower _enemyFollower;
         private IProvider<PlayerProvider> _playerProvider;
         private PlayerHealth _playerHealth;
+        private bool _isAttacked;
 
         [Inject]
         public void Construct(EnemyAttacker enemyAttacker,
@@ -34,9 +35,13 @@ namespace CodeBase.Gameplay.Character.Enemy
             if (!(Vector3.Distance(transform.position, _playerHealth.transform.position) <
                   _targetStopDistance)) 
                 return;
-                
+
+            if (_isAttacked)
+                return;
+            
             _enemyFollower.Block();
             _enemyAttacker.SetTarget(_playerHealth);
+            _isAttacked = true;
         }
         
         private void OnDisable() => 

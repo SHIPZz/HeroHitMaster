@@ -1,6 +1,7 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Services.Data;
 using CodeBase.Services.Storages;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
@@ -17,7 +18,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         }
 
         public void Attack() => 
-            _damageable.TakeDamage(_damage);
+        _damageable.TakeDamage(_damage);
 
         public void SetTarget(IDamageable damageable)
         {

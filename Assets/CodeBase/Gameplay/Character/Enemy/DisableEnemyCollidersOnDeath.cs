@@ -18,10 +18,8 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyHealth = GetComponent<IHealth>();
             _materialChanger = GetComponent<IMaterialChanger>();
 
-            foreach (var collider in GetComponentsInChildren<Collider>())
-            {
+            foreach (var collider in GetComponentsInChildren<Collider>()) 
                 _colliders.Add(collider);
-            }
         }
 
         private void OnEnable()

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
