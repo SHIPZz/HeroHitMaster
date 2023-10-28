@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Globalization;
 using CodeBase.Enums;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Storages.Sound;
 using DG.Tweening;
 using TMPro;
@@ -13,6 +14,10 @@ namespace CodeBase.UI.Windows.Popup
 {
     public class DisablePopupTimer : MonoBehaviour
     {
+        private const float FadeDuration = 1f;
+        private const float CountdownInterval = 0.5f;
+        private const float FinishDelay = 0.5f;
+        
         [SerializeField] private TextMeshProUGUI _timerText;
         [SerializeField] private Image _whiteFrame;
         [SerializeField] private Window _playWindow;
@@ -22,69 +27,85 @@ namespace CodeBase.UI.Windows.Popup
         private AudioSource _timerTicking;
         private AudioSource _timerFinished;
         private PopupInfoView _popupInfoView;
+        private IPauseService _pauseService;
 
         [Inject]
-        private void Construct(ISoundStorage soundStorage, PopupInfoView popupInfoView)
+        private void Construct(ISoundStorage soundStorage, PopupInfoView popupInfoView, IPauseService pauseService)
         {
+            _pauseService = pauseService;
             _popupInfoView = popupInfoView;
             _timerTicking = soundStorage.Get(SoundTypeId.TimerTicking);
             _timerFinished = soundStorage.Get(SoundTypeId.TimerFinished);
         }
 
-        private void Awake()
-        {
-            _whiteFrame.DOFade(0, 0f);
-            _timerText.DOFade(0, 0f);
-        }
+        private void Awake() => 
+            FadeInOut(_whiteFrame, _timerText, 0f, false);
 
         private void OnEnable()
         {
             _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
             _popupInfoView.AdButtonClicked += StopTimer;
-            StartCoroutine(nameof(DecreaseStartTimeCoroutine));
+            StartCountdown();
         }
 
-        private void OnDisable() => 
+        private void OnDisable()
+        {
             _popupInfoView.AdButtonClicked -= StopTimer;
+            _pauseService.UnPause();
+            PauseCoroutines();
+        }
 
         private void StopTimer()
         {
-            StopCoroutine(DecreaseStartTimeCoroutine());
+            PauseCoroutines();
             _timerTicking.Stop();
             _timerFinished.Stop();
             gameObject.SetActive(false);
         }
 
-        private IEnumerator DecreaseStartTimeCoroutine()
+        private void StartCountdown() => 
+            StartCoroutine(CountdownCoroutine());
+
+        private IEnumerator CountdownCoroutine()
         {
-            yield return new WaitForSeconds(_startDelay);
-            
+            _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
+            _pauseService.Pause();
+            yield return new WaitForSecondsRealtime(_startDelay);
+
             _timerTicking.Play();
 
             while (_startTime != 0)
             {
-                _whiteFrame.DOFade(1, 1f);
-                _timerText.DOFade(1, 1f);
-                yield return new WaitForSeconds(0.5f);
+                FadeInOut(_whiteFrame, _timerText, FadeDuration, true);
+                yield return new WaitForSecondsRealtime(CountdownInterval);
                 _startTime--;
                 _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
-                yield return new WaitForSeconds(1f);
-                _whiteFrame.DOFade(0, 1f);
-                _timerText.DOFade(0, 1f);
+                yield return new WaitForSecondsRealtime(CountdownInterval);
+                FadeInOut(_whiteFrame, _timerText, FadeDuration, false);
 
                 if (_startTime == 0)
                 {
                     _timerTicking.Stop();
                     _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSecondsRealtime(FinishDelay);
                     _timerFinished.Play();
                     _playWindow.gameObject.SetActive(true);
                     _playWindow.transform.localScale = Vector3.one;
                     _popupInfoView.gameObject.SetActive(false);
+                    _pauseService.UnPause();
                 }
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSecondsRealtime(CountdownInterval);
             }
+        }
+
+        private void PauseCoroutines() => 
+            StopCoroutine(CountdownCoroutine());
+
+        private void FadeInOut(Image image, TextMeshProUGUI text, float duration, bool fadeIn)
+        {
+            image.DOFade(fadeIn ? 1 : 0, duration).SetUpdate(true);
+            text.DOFade(fadeIn ? 1 : 0, duration).SetUpdate(true);
         }
     }
 }

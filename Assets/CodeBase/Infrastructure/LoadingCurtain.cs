@@ -32,7 +32,7 @@ namespace CodeBase.Infrastructure
             }
 
             _canvasGroup.gameObject.SetActive(true);
-            _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration);
+            _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
             _canvasGroup.alpha = 1;
         }
 
@@ -42,7 +42,7 @@ namespace CodeBase.Infrastructure
                 await UniTask.Yield();
 
             _canvasGroup
-                .DOFade(0, CloseDuration)
+                .DOFade(0, CloseDuration).SetUpdate(true)
                 .OnComplete(() =>
                 {
                     _canvasGroup.gameObject.SetActive(false);
