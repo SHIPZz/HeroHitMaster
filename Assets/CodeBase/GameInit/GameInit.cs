@@ -4,6 +4,7 @@ using Agava.YandexGames;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
 using CodeBase.Gameplay.Weapons;
@@ -61,7 +62,9 @@ namespace CodeBase.GameInit
             { "tr", weaponData => weaponData.TurkishName },
         };
 
-        
+        private SetterWeaponToPlayerHand _setterWeaponToPlayerHand;
+
+
         public GameInit(PlayerCameraFactory playerCameraFactory,
             IProvider<LocationTypeId, Transform> locationProvider,
             IPlayerStorage playerStorage,
@@ -81,8 +84,9 @@ namespace CodeBase.GameInit
             AudioChanger audioChanger,
             WeaponStaticDataService weaponStaticDataService,
             KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover, 
-            PlayerSettings playerSettings)
+            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand)
         {
+            _setterWeaponToPlayerHand = setterWeaponToPlayerHand;
             _playerSettings = playerSettings;
             _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
             _weaponStaticDataService = weaponStaticDataService;
@@ -107,7 +111,7 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
             var settingsData = await _saveSystem.Load<SettingsData>();
 
             TranslateWeaponNames();
@@ -123,6 +127,7 @@ namespace CodeBase.GameInit
             InitializeUIPresenters(playerData);
             InitializeCamera(player, weapon);
             _waterSplashPoolInitializer.Init();
+            _setterWeaponToPlayerHand.Init(weapon.WeaponTypeId);
         }
 
         private void InitSound(SettingsData settingsData)
