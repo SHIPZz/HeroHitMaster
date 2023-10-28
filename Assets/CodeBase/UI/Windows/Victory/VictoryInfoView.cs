@@ -44,6 +44,7 @@ namespace CodeBase.UI.Windows.Victory
         private void ShowUpContinueButton()
         {
             var rectTransform = _continueButton.GetComponent<RectTransform>();
+            _continueButton.gameObject.SetActive(true);
 
             AnimateSizeDelta(rectTransform, _buttonHeight, _buttonWidth + 100, 0.5f, () =>
             {
