@@ -1480,6 +1480,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1641,6 +1645,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1931,6 +1939,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (55)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
@@ -3135,6 +3147,10 @@ PrefabInstance:
       value: egypt-stone-block-square (46)
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -3304,6 +3320,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+--- !u!114 &154858539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6054258090531270339, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+  m_PrefabInstance: {fileID: 154858538}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9046a4d19f34799acf5caa4cde78b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &155293836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3315,6 +3342,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3388,6 +3419,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3596,6 +3631,10 @@ PrefabInstance:
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -5257,6 +5296,10 @@ PrefabInstance:
       value: egypt-stone-block-square (65)
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -5505,6 +5548,10 @@ PrefabInstance:
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255503248, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7768,6 +7815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (80)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -9914,6 +9965,10 @@ PrefabInstance:
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255503248, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12385,6 +12440,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (59)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -12541,6 +12600,10 @@ PrefabInstance:
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255503248, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15003,6 +15066,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1967692405255503248, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_LocalPosition.x
       value: 194.12
@@ -16119,6 +16186,10 @@ PrefabInstance:
     - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18127,6 +18198,10 @@ PrefabInstance:
       value: TerrainPatchBrown
       objectReference: {fileID: 0}
     - target: {fileID: 1000011093600516, guid: 01b706293604ec94e972f1977202d666, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011093600516, guid: 01b706293604ec94e972f1977202d666, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 119
       objectReference: {fileID: 0}
@@ -19144,6 +19219,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (79)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -19256,6 +19335,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20133,6 +20216,10 @@ PrefabInstance:
       value: egypt-stone-block-square (63)
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -20192,6 +20279,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20610,6 +20701,10 @@ PrefabInstance:
     - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21832,6 +21927,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22776,6 +22875,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23336,6 +23439,7 @@ GameObject:
   - component: {fileID: 1007377076}
   - component: {fileID: 1007377075}
   - component: {fileID: 1007377074}
+  - component: {fileID: 1007377079}
   m_Layer: 19
   m_Name: Jump (3)
   m_TagString: Untagged
@@ -23432,6 +23536,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1007377079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007377072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc01a37a2d18422e8418bce389528e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isActive: 0
+  _glass: {fileID: 154858539}
 --- !u!1 &1007772429
 GameObject:
   m_ObjectHideFlags: 3
@@ -23831,6 +23949,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (67)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -25667,6 +25789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1967692405255503248, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_LocalPosition.x
       value: 193.01
@@ -26085,6 +26211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26277,6 +26407,10 @@ PrefabInstance:
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -26717,6 +26851,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1967692405255503248, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_LocalPosition.x
       value: 194
@@ -26773,6 +26911,10 @@ PrefabInstance:
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255503248, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27256,6 +27398,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (56)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -27368,6 +27514,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (50)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
@@ -31191,6 +31341,10 @@ PrefabInstance:
       value: egypt-stone-block (28)
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -31294,6 +31448,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (60)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -31922,6 +32080,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (58)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -32091,6 +32253,10 @@ PrefabInstance:
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255503248, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36132,6 +36298,10 @@ PrefabInstance:
       value: egypt-stone-block-square (66)
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -36731,6 +36901,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (41)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
       value: 194.54
@@ -36787,6 +36961,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37524,6 +37702,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
       value: 193.5
@@ -37720,6 +37902,10 @@ PrefabInstance:
     - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39060,6 +39246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
       value: 194.85
@@ -40119,6 +40309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster
       objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40431,6 +40625,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-stone-block-square (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -40587,6 +40785,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (57)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
@@ -41311,6 +41513,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42437,6 +42643,10 @@ PrefabInstance:
     - target: {fileID: 4592381284223074953, guid: d69b7754d9ece8646806693ee061fe2a, type: 3}
       propertyPath: m_Name
       value: pyramid-old
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592381284223074953, guid: d69b7754d9ece8646806693ee061fe2a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45988,6 +46198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46511,6 +46725,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-pillar-lotus-cluster (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7103657879850509889, guid: a2e55e6437201264db3507ae81962b20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46527,6 +46745,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (64)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -46777,6 +46999,10 @@ PrefabInstance:
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1967692405255397808, guid: 25fa77246fbd9154a9e822d7805f4606, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -48651,6 +48877,10 @@ PrefabInstance:
       value: egypt-stone-block-square (62)
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -48710,6 +48940,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (81)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalScale.x
@@ -50431,6 +50665,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012793593, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_LocalPosition.x

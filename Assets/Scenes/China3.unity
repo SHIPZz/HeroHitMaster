@@ -1380,6 +1380,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+--- !u!114 &51826258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6054258090531270339, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+  m_PrefabInstance: {fileID: 51826257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9046a4d19f34799acf5caa4cde78b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &54280459
 GameObject:
   m_ObjectHideFlags: 3
@@ -3019,6 +3030,10 @@ PrefabInstance:
     - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
       propertyPath: m_Name
       value: building-restuarant-china (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25615,6 +25630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building-antique-china (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8077616775804313766, guid: b50f1dc2aa3ccae40878c6bb4d7d527a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41232,7 +41251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isActive: 1
-  _glass: {fileID: 0}
+  _glass: {fileID: 51826258}
 --- !u!1 &1979241682
 GameObject:
   m_ObjectHideFlags: 3
