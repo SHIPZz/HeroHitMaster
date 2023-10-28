@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5649006, g: 0.6356401, b: 0.7239375, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 2718224e5aeef5a4c97056e61323d1df, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &1026556
 GameObject:
   m_ObjectHideFlags: 3
@@ -531,6 +531,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZenGarden_Plain
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012543083020, guid: 553f38e9d88ddb04e93b460ecdfc27e0, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013123310190, guid: 553f38e9d88ddb04e93b460ecdfc27e0, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011981452814, guid: 553f38e9d88ddb04e93b460ecdfc27e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 212.63
@@ -719,6 +727,18 @@ PrefabInstance:
     - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
       propertyPath: m_Name
       value: building-temple-china (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6082497938603645077, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1348,6 +1368,10 @@ PrefabInstance:
     - target: {fileID: 1548952039460904, guid: 1f86afc48fe533742b7787f64d28bda3, type: 3}
       propertyPath: m_Name
       value: TerrainPlaneA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548952039460904, guid: 1f86afc48fe533742b7787f64d28bda3, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1548952039460904, guid: 1f86afc48fe533742b7787f64d28bda3, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2874,6 +2898,18 @@ PrefabInstance:
     - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
       propertyPath: m_Name
       value: building-restuarant-china (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6051,6 +6087,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: building-restuarant-china (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6331,6 +6379,18 @@ PrefabInstance:
     - target: {fileID: 1000012291045140, guid: 3e86e45c21fb88f4aa53026a9ce489eb, type: 3}
       propertyPath: m_Name
       value: Torii
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012291045140, guid: 3e86e45c21fb88f4aa53026a9ce489eb, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012291045140, guid: 3e86e45c21fb88f4aa53026a9ce489eb, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012291045140, guid: 3e86e45c21fb88f4aa53026a9ce489eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 4000011980550880, guid: 3e86e45c21fb88f4aa53026a9ce489eb, type: 3}
       propertyPath: m_LocalScale.x
@@ -11085,6 +11145,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: building-antique-china (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8077616775804313766, guid: b50f1dc2aa3ccae40878c6bb4d7d527a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077616775804313766, guid: b50f1dc2aa3ccae40878c6bb4d7d527a, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077616775804313766, guid: b50f1dc2aa3ccae40878c6bb4d7d527a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11439,6 +11511,18 @@ PrefabInstance:
     - target: {fileID: 6962796342835386131, guid: d67fb1211d1deba41baa4f2a66eed8ba, type: 3}
       propertyPath: m_Name
       value: building-pagoda-china
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962796342835386131, guid: d67fb1211d1deba41baa4f2a66eed8ba, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962796342835386131, guid: d67fb1211d1deba41baa4f2a66eed8ba, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962796342835386131, guid: d67fb1211d1deba41baa4f2a66eed8ba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18407,6 +18491,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuddhaStatue (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000014096054514, guid: 264ffd13253eb674381b7d1b64201614, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012794281286, guid: 264ffd13253eb674381b7d1b64201614, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -21243,6 +21331,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: building-temple-china (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6082497938603645077, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 230.1692
@@ -22033,7 +22133,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.73170733, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -35457,6 +35557,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: building-restuarant-china (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844913831497265743, guid: 36d80795b1f457a45b5b27406147ff61, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37405,6 +37517,18 @@ PrefabInstance:
     - target: {fileID: 8077616775804313766, guid: b50f1dc2aa3ccae40878c6bb4d7d527a, type: 3}
       propertyPath: m_Name
       value: building-antique-china (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077616775804313766, guid: b50f1dc2aa3ccae40878c6bb4d7d527a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077616775804313766, guid: b50f1dc2aa3ccae40878c6bb4d7d527a, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077616775804313766, guid: b50f1dc2aa3ccae40878c6bb4d7d527a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39629,6 +39753,18 @@ PrefabInstance:
     - target: {fileID: 1000010022224630, guid: 7c6fd5b5cb6e08144a08560eda222992, type: 3}
       propertyPath: m_Name
       value: Torii_Basic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010022224630, guid: 7c6fd5b5cb6e08144a08560eda222992, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010022224630, guid: 7c6fd5b5cb6e08144a08560eda222992, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010022224630, guid: 7c6fd5b5cb6e08144a08560eda222992, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 4000011286425618, guid: 7c6fd5b5cb6e08144a08560eda222992, type: 3}
       propertyPath: m_LocalScale.x
@@ -42348,6 +42484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6009239815724467930}
   - component: {fileID: 6009239815724467931}
+  - component: {fileID: 6009239815724467932}
   m_Layer: 0
   m_Name: Level 3
   m_TagString: Untagged
@@ -58299,6 +58436,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Reward>k__BackingField: 40
+--- !u!114 &6009239815724467932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85521699667252176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1342193728
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 88e239c2a3531b142b593d3258d5da3f, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!222 &6028366529791887837
 CanvasRenderer:
   m_ObjectHideFlags: 0
