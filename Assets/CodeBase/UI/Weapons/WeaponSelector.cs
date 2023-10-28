@@ -27,7 +27,8 @@ namespace CodeBase.UI.Weapons
         public event Action<WeaponTypeId> NewWeaponChanged;
 
         public WeaponSelector(IProvider<Weapon> weaponProvider,
-            IWeaponStorage weaponStorage, ISaveSystem saveSystem, WeaponStaticDataService weaponStaticDataService)
+            IWeaponStorage weaponStorage, ISaveSystem saveSystem, 
+            WeaponStaticDataService weaponStaticDataService)
         {
             _weaponStaticDataService = weaponStaticDataService;
             _saveSystem = saveSystem;
@@ -38,7 +39,7 @@ namespace CodeBase.UI.Weapons
         public async UniTask<Weapon> Init(WeaponTypeId lastWeaponId)
         {
             WeaponData weaponData = _weaponStaticDataService.Get(lastWeaponId);
-            Debug.Log(lastWeaponId);
+            _lastWeaponId = lastWeaponId;
 
             if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
             {

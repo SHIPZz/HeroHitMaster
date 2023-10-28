@@ -25,7 +25,7 @@ namespace CodeBase.Services
             {
                 enemy.QuickDestroyed -= Count;
 
-                enemy.GetComponent<DieOnAnimationEvent>().Dead -= Count;
+                enemy.Dead -= Count;
             }
         }
 

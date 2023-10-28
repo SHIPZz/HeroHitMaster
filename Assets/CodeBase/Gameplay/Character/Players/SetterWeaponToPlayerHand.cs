@@ -7,15 +7,16 @@ using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages;
 using CodeBase.Services.Storages.Character;
 using CodeBase.UI.Weapons;
+using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players
 {
-    public class SetterWeaponToPlayerHand : IDisposable
+    public class SetterWeaponToPlayerHand : IInitializable, IDisposable
     {
         private readonly Dictionary<PlayerTypeId, PlayerWithWeaponInHandTypeId> _playersIdsWithWeaponInHand;
         private readonly List<Player> _playersWithWeaponsInHand = new();
         private readonly List<WeaponHolderView> _weaponViews = new();
-        private readonly WeaponSelector _weaponSelector;
+        private WeaponSelector _weaponSelector;
 
         public SetterWeaponToPlayerHand(PlayerSettings playerSettings, WeaponSelector weaponSelector,
             IPlayerStorage playerStorage)
@@ -24,14 +25,16 @@ namespace CodeBase.Gameplay.Character.Players
             _playersIdsWithWeaponInHand = playerSettings.PlayerWithWeaponInHands;
 
             FillLists(playerStorage);
+        }
 
+        public void Init(WeaponTypeId weaponTypeId) =>
+            TrySetNewWeapon(weaponTypeId);
+        
+        public void Initialize() => 
             _weaponSelector.NewWeaponChanged += TrySetNewWeapon;
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() => 
             _weaponSelector.NewWeaponChanged -= TrySetNewWeapon;
-        }
 
         private void TrySetNewWeapon(WeaponTypeId weaponTypeId)
         {

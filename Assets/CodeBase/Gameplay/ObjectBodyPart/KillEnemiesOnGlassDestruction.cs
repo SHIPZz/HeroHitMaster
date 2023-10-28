@@ -43,7 +43,7 @@ namespace CodeBase.Gameplay.ObjectBodyPart
             _isDestroyed = true;
         }
 
-        private void SetEnemy(Collider collider)
+        private async void SetEnemy(Collider collider)
         {
             if (collider.gameObject.TryGetComponent(out Enemy enemy))
                 _enemiesOnGlass.Add(enemy);
@@ -54,8 +54,12 @@ namespace CodeBase.Gameplay.ObjectBodyPart
                     _enemiesOnGlass.Add(enemyPartForKnifeHolder.Enemy);
             }
 
-            if (_isDestroyed)
-                Kill();
+            while (_isDestroyed == false)
+            {
+                await UniTask.Yield();
+            }
+
+            Kill();
         }
 
         private async void Kill()

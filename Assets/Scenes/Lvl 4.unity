@@ -20037,6 +20037,46 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7474997958553036652, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -20339,7 +20379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &1050094779 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3307230742606860873, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3700224440684849355, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
   m_PrefabInstance: {fileID: 1050094775}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -20350,7 +20390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &1050094780 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8654548097180052741, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7632647971540735115, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
   m_PrefabInstance: {fileID: 1050094775}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -20394,7 +20434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &1050094784 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 612968963377379536, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7948399338555716836, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
   m_PrefabInstance: {fileID: 1050094775}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -20505,17 +20545,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc0f700a65af40f48e087e69fb16f65e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1050094795 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4383360431320881777, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
-  m_PrefabInstance: {fileID: 1050094775}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 425cbeeb1e754041b4f2f760473e90db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1050094796 stripped
@@ -25216,6 +25245,17 @@ MonoScript:
   m_ClassName: InputSystemUIInputModule
   m_Namespace: UnityEngine.InputSystem.UI
   m_AssemblyName: Unity.InputSystem
+--- !u!114 &1288398213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 267136866571506185, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+  m_PrefabInstance: {fileID: 1050094775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 425cbeeb1e754041b4f2f760473e90db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1291165320
 GameObject:
   m_ObjectHideFlags: 3
@@ -57046,7 +57086,7 @@ MonoBehaviour:
   _shopView: {fileID: 1050094798}
   _settingView: {fileID: 1050094797}
   _deathView: {fileID: 1050094796}
-  _walletUI: {fileID: 1050094795}
+  _walletUI: {fileID: 1288398213}
   _scrollRectProvider: {fileID: 1050094794}
   _scrollImageProvider: {fileID: 1050094793}
   _scrollNameUnderlinesProvider: {fileID: 1050094792}

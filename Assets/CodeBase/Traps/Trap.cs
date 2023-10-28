@@ -18,15 +18,18 @@ namespace CodeBase.Traps
             Collider = GetComponent<Collider>();
         }
 
-        private void OnEnable() => 
+        private void OnEnable() =>
             _triggerObserver.Entered += Kill;
 
-        private void OnDisable() => 
+        private void OnDisable() =>
             _triggerObserver.Entered -= Kill;
 
         public abstract void Activate();
 
-        protected virtual void Kill(Collider collider) => 
-            collider.GetComponent<Enemy>().Explode();
+        protected virtual void Kill(Collider collider)
+        {
+            if (collider.gameObject.TryGetComponent(out Enemy enemy))
+                enemy.Explode();
+        }
     }
 }

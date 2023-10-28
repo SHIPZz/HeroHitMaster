@@ -2,6 +2,7 @@
 using CodeBase.Enums;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using UnityEngine;
 
 namespace CodeBase.UI.Weapons
 {
@@ -15,16 +16,13 @@ namespace CodeBase.UI.Weapons
             weaponView.gameObject.SetActive(isActive);
         }
                         
-        public bool TryShow(WeaponTypeId weaponTypeId)
+        public void TryShow(WeaponTypeId weaponTypeId)
         {
             if (!_weaponViews.TryGetValue(weaponTypeId, out var weaponViewInHand))
-            {
-                return false;
-            }
-
+                return;
+                
             weaponViewInHand.gameObject.SetActive(true);
             SetActiveBy(weaponTypeId);
-            return true;
         }
 
         private void SetActiveBy(WeaponTypeId weaponTypeId)

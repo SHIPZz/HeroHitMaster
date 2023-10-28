@@ -21853,6 +21853,46 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254663945865509507, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411607572674085435, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7474997958553036652, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -22150,7 +22190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &1151036555 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3307230742606860873, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3700224440684849355, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
   m_PrefabInstance: {fileID: 1151036552}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -22161,7 +22201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &1151036556 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8654548097180052741, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7632647971540735115, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
   m_PrefabInstance: {fileID: 1151036552}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -22205,7 +22245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &1151036560 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 612968963377379536, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7948399338555716836, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
   m_PrefabInstance: {fileID: 1151036552}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -22316,17 +22356,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc0f700a65af40f48e087e69fb16f65e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1151036571 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4383360431320881777, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
-  m_PrefabInstance: {fileID: 1151036552}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 425cbeeb1e754041b4f2f760473e90db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1151036572 stripped
@@ -29844,6 +29873,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1534112852 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 267136866571506185, guid: f0a5e068d1634fc4e9f866d3e1923fc2, type: 3}
+  m_PrefabInstance: {fileID: 1151036552}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 425cbeeb1e754041b4f2f760473e90db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1534179268
 GameObject:
   m_ObjectHideFlags: 3
@@ -40556,6 +40596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 1.5
   _targetValue: 1
+  _needDisable: 1
 --- !u!4 &118988722032246289
 Transform:
   m_ObjectHideFlags: 0
@@ -55190,7 +55231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DestroyableObjectTypeId>k__BackingField: 1
-  _destroyDelay: 0
 --- !u!114 &562835663995585799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55453,6 +55493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 1.5
   _targetValue: 1
+  _needDisable: 1
 --- !u!1 &1701409930287803339
 GameObject:
   m_ObjectHideFlags: 0
@@ -57090,7 +57131,7 @@ MonoBehaviour:
   _shopView: {fileID: 1151036574}
   _settingView: {fileID: 1151036573}
   _deathView: {fileID: 1151036572}
-  _walletUI: {fileID: 1151036571}
+  _walletUI: {fileID: 1534112852}
   _scrollRectProvider: {fileID: 1151036570}
   _scrollImageProvider: {fileID: 1151036569}
   _scrollNameUnderlinesProvider: {fileID: 1151036568}
@@ -57235,6 +57276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 1.5
   _targetValue: 1
+  _needDisable: 1
 --- !u!4 &4849721586587425150
 Transform:
   m_ObjectHideFlags: 0
@@ -57465,6 +57507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 1.5
   _targetValue: 1
+  _needDisable: 1
 --- !u!1 &5663769136286450437
 GameObject:
   m_ObjectHideFlags: 0
@@ -57956,7 +57999,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DestroyableObjectTypeId>k__BackingField: 1
-  _destroyDelay: 0
 --- !u!1 &7240179978038290890
 GameObject:
   m_ObjectHideFlags: 0
