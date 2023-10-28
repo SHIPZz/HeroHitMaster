@@ -1304,6 +1304,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-pillar-proto-doric (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5812486095549486384, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 519.5
@@ -9375,6 +9379,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-egypt-medium (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1549619258373737837, guid: 1dc3b813802c4674ab039f9d5bda5f43, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1549619258374164813, guid: 1dc3b813802c4674ab039f9d5bda5f43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 572.95154
@@ -9893,6 +9901,10 @@ PrefabInstance:
     - target: {fileID: 6758452341967345184, guid: 1ba98b3e447460f45ba077616eec4e20, type: 3}
       propertyPath: m_Name
       value: house-egypt-big (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758452341967345184, guid: 1ba98b3e447460f45ba077616eec4e20, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10470,6 +10482,10 @@ PrefabInstance:
     - target: {fileID: 1549619258373737837, guid: 1dc3b813802c4674ab039f9d5bda5f43, type: 3}
       propertyPath: m_Name
       value: house-egypt-medium (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549619258373737837, guid: 1dc3b813802c4674ab039f9d5bda5f43, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1549619258374164813, guid: 1dc3b813802c4674ab039f9d5bda5f43, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11110,6 +11126,7 @@ GameObject:
   - component: {fileID: 555932876}
   - component: {fileID: 555932875}
   - component: {fileID: 555932874}
+  - component: {fileID: 555932879}
   m_Layer: 19
   m_Name: Jump (5)
   m_TagString: Untagged
@@ -11206,6 +11223,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &555932879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555932872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc01a37a2d18422e8418bce389528e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isActive: 0
+  _glass: {fileID: 1833769653}
 --- !u!1 &556939328
 GameObject:
   m_ObjectHideFlags: 3
@@ -14841,6 +14872,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-obelisk-old (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8542896281475787047, guid: f11d87921bd883c4ea9ffd18626b3a48, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15342,6 +15377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: egypt-obelisk-old (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8542896281475787047, guid: f11d87921bd883c4ea9ffd18626b3a48, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15637,6 +15676,10 @@ PrefabInstance:
       value: egypt-stone-block-square (72)
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -15748,6 +15791,10 @@ PrefabInstance:
     - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_Name
       value: egypt-pillar-proto-doric (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5812486095549486384, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17240,6 +17287,10 @@ PrefabInstance:
       value: TerrainPatchBrown
       objectReference: {fileID: 0}
     - target: {fileID: 1000011093600516, guid: 01b706293604ec94e972f1977202d666, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011093600516, guid: 01b706293604ec94e972f1977202d666, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 127
       objectReference: {fileID: 0}
@@ -17598,6 +17649,10 @@ PrefabInstance:
     - target: {fileID: 6758452341967345184, guid: 1ba98b3e447460f45ba077616eec4e20, type: 3}
       propertyPath: m_Name
       value: house-egypt-big (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758452341967345184, guid: 1ba98b3e447460f45ba077616eec4e20, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20978,6 +21033,10 @@ PrefabInstance:
     - target: {fileID: 8542896281475787047, guid: f11d87921bd883c4ea9ffd18626b3a48, type: 3}
       propertyPath: m_Name
       value: egypt-obelisk-old (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542896281475787047, guid: f11d87921bd883c4ea9ffd18626b3a48, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25306,6 +25365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-egypt-small (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 4768484371184703825, guid: 0e30fd1a6a0b16444884ddcbb0b86223, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27181,6 +27244,10 @@ PrefabInstance:
     - target: {fileID: 6305573143900405980, guid: 985ee24351490c948886a4ddb6ddc7f6, type: 3}
       propertyPath: m_Name
       value: ship-pirate-flags
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305573143900405980, guid: 985ee24351490c948886a4ddb6ddc7f6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6686215906690669158, guid: 985ee24351490c948886a4ddb6ddc7f6, type: 3}
       propertyPath: m_LocalScale.x
@@ -30419,6 +30486,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-egypt-big (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 6758452341967345184, guid: 1ba98b3e447460f45ba077616eec4e20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30475,6 +30546,10 @@ PrefabInstance:
     - target: {fileID: 4768484371184703825, guid: 0e30fd1a6a0b16444884ddcbb0b86223, type: 3}
       propertyPath: m_Name
       value: house-egypt-small (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768484371184703825, guid: 0e30fd1a6a0b16444884ddcbb0b86223, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35305,6 +35380,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-egypt-small (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 4768484371184703825, guid: 0e30fd1a6a0b16444884ddcbb0b86223, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36799,6 +36878,10 @@ PrefabInstance:
     - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_Name
       value: egypt-pillar-proto-doric (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5812486095549486384, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39429,6 +39512,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+--- !u!114 &1833769653 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6054258090531270339, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+  m_PrefabInstance: {fileID: 1833769652}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9046a4d19f34799acf5caa4cde78b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1834072004
 GameObject:
   m_ObjectHideFlags: 3
@@ -40066,6 +40160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-egypt-small (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 4768484371184703825, guid: 0e30fd1a6a0b16444884ddcbb0b86223, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40122,6 +40220,10 @@ PrefabInstance:
     - target: {fileID: 4768484371184703825, guid: 0e30fd1a6a0b16444884ddcbb0b86223, type: 3}
       propertyPath: m_Name
       value: house-egypt-small (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768484371184703825, guid: 0e30fd1a6a0b16444884ddcbb0b86223, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -40183,6 +40285,10 @@ PrefabInstance:
     - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_Name
       value: egypt-pillar-proto-doric (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5812486095549486384, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41084,6 +41190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-egypt-medium (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1549619258373737837, guid: 1dc3b813802c4674ab039f9d5bda5f43, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1549619258374164813, guid: 1dc3b813802c4674ab039f9d5bda5f43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 611.2751
@@ -41454,6 +41564,10 @@ PrefabInstance:
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_Name
       value: egypt-stone-block-square (73)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5672143247012761817, guid: 24e1a9d6308d28f47b04c33f8eaf7687, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -42342,6 +42456,10 @@ PrefabInstance:
     - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_Name
       value: egypt-pillar-proto-doric (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812486095548991760, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5812486095549486384, guid: 8cfdb9d9bc554a541acc872e388d39b9, type: 3}
       propertyPath: m_LocalPosition.x
