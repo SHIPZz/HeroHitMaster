@@ -4694,7 +4694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 4
+  _enemyTypeId: 7
   _aggroZone: {fileID: 7828281610712935646}
 --- !u!1 &205717347
 GameObject:
@@ -9386,7 +9386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 4
+  _enemyTypeId: 7
   _aggroZone: {fileID: 1653108117}
 --- !u!1 &440775787
 GameObject:
@@ -9797,7 +9797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 4
+  _enemyTypeId: 5
   _aggroZone: {fileID: 7828281610712935646}
 --- !u!1 &450521380
 GameObject:
@@ -11218,7 +11218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 4
+  _enemyTypeId: 10
   _aggroZone: {fileID: 1463829892}
 --- !u!1 &526045707
 GameObject:
@@ -17493,7 +17493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 4
+  _enemyTypeId: 5
   _aggroZone: {fileID: 7828281610712935646}
 --- !u!1 &836403743
 GameObject:
@@ -23680,7 +23680,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.73170733, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -24827,6 +24827,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2166719152428358789, guid: f3db3e95cbbe1284487ba4c70ea17541, type: 3}
+      propertyPath: _physicalButton
+      value: 
+      objectReference: {fileID: 155458578}
     - target: {fileID: 5012381889473429687, guid: f3db3e95cbbe1284487ba4c70ea17541, type: 3}
       propertyPath: m_Name
       value: FireTrap
@@ -27492,7 +27496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 4
+  _enemyTypeId: 10
   _aggroZone: {fileID: 1463829892}
 --- !u!1 &1185765397
 GameObject:
@@ -28224,7 +28228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 4
+  _enemyTypeId: 7
   _aggroZone: {fileID: 1463829892}
 --- !u!1 &1220737555
 GameObject:
@@ -32160,7 +32164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 4
+  _enemyTypeId: 7
   _aggroZone: {fileID: 1653108117}
 --- !u!1 &1415379628
 GameObject:
@@ -37476,7 +37480,7 @@ Transform:
   m_GameObject: {fileID: 1653108116}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.037208714, z: -0, w: 0.9993075}
-  m_LocalPosition: {x: -439.91, y: 1.03, z: 112.72}
+  m_LocalPosition: {x: -439.91, y: 0, z: 112.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44856,6 +44860,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2166719152428358789, guid: f3db3e95cbbe1284487ba4c70ea17541, type: 3}
+      propertyPath: _physicalButton
+      value: 
+      objectReference: {fileID: 1467438693}
     - target: {fileID: 5012381889473429687, guid: f3db3e95cbbe1284487ba4c70ea17541, type: 3}
       propertyPath: m_Name
       value: FireTrap (1)
@@ -50009,7 +50017,7 @@ Transform:
   m_GameObject: {fileID: 853703071511886448}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.037208714, z: -0, w: 0.9993075}
-  m_LocalPosition: {x: -405.6, y: 1.03, z: 115.3}
+  m_LocalPosition: {x: -405.6, y: 0, z: 115.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

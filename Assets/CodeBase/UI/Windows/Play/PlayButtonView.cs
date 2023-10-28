@@ -6,26 +6,23 @@ namespace CodeBase.UI.Windows.Play
 {
     public class PlayButtonView : MonoBehaviour
     {
-        private Button _button;
+      [SerializeField]  private Button _button;
 
         public event Action Clicked;
 
-        private void Awake()
-        {
-            _button = GetComponent<Button>();
-            _button.enabled = false;
-        }
-
-        private void OnEnable() => 
+        private void OnEnable() =>
             _button.onClick.AddListener(OnClicked);
 
-        private void OnDisable() => 
+        private void OnDisable() =>
             _button.onClick.RemoveListener(OnClicked);
+
+        public void Disable() =>
+            _button.enabled = false;
 
         public void Enable() =>
             _button.enabled = true;
 
-        private void OnClicked() => 
+        private void OnClicked() =>
             Clicked?.Invoke();
     }
 }

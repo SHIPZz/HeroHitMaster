@@ -24,6 +24,7 @@ namespace CodeBase.UI.Windows.Play
         public void Initialize()
         {
             _loadingCurtain.Closed += _playButtonView.Enable;
+            _playButtonView.Disable();
             _playButtonView.Clicked += Disable;
         }
 
