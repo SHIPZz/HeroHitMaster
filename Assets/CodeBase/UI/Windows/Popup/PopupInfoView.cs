@@ -53,12 +53,10 @@ namespace CodeBase.UI.Windows.Popup
         private void Awake()
         {
             DisableAllGunIcons();
-
+            
             DisableAllWhiteFrames();
-
-            _mainWeaponText
-                .DOColor(new Color(_color.r, _color.g, _color.b, _mainWeaponText.color.a), 0.5f)
-                .SetLoops(-1, LoopType.Yoyo);
+            
+            AnimateMainWeaponText();
         }
 
         private void OnEnable()
@@ -71,6 +69,13 @@ namespace CodeBase.UI.Windows.Popup
 
         private void OnDisable() =>
             _adButton.onClick.RemoveListener(OnAdClicked);
+
+        private void AnimateMainWeaponText()
+        {
+            _mainWeaponText
+                .DOColor(new Color(_color.r, _color.g, _color.b, _mainWeaponText.color.a), 0.5f)
+                .SetLoops(-1, LoopType.Yoyo);
+        }
 
         private void OnAdClicked() =>
             AdButtonClicked?.Invoke();

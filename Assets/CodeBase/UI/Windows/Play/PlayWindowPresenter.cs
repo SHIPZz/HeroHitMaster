@@ -18,15 +18,10 @@ namespace CodeBase.UI.Windows.Play
             _windowService = windowService;
         }
 
-        public void Initialize()
-        {
-            _playButtonView.Clicked += Disable;
-        }
+        public void Initialize() => _playButtonView.Clicked += Disable;
 
-        public void Dispose()
-        {
+        public void Dispose() => 
             _playButtonView.Clicked -= Disable;
-        }
 
         private void Disable() =>
             _windowService.Close(WindowTypeId.Play);
