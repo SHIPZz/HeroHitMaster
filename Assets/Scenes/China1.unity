@@ -13823,6 +13823,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe849cee4f83d744fb171e2e497b2918, type: 3}
+--- !u!4 &745478679 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1179193262726078155, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+  m_PrefabInstance: {fileID: 1123307109}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &746398087
 GameObject:
   m_ObjectHideFlags: 3
@@ -40299,7 +40304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7b70c73367413aaa606c8a5dc2f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextPosition: {fileID: 0}
+  _nextPosition: {fileID: 745478679}
   _delayBeforeJump: 1
   _jumpDuration: 3
   _jumpPower: 12
