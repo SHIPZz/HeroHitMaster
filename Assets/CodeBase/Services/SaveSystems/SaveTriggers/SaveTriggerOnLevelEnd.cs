@@ -56,7 +56,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             playerData.Money += _level.Reward;
             _saveSystem.Save(playerData);
 
-            if (SceneManager.sceneCount < levelData.Id)
+            if (SceneManager.sceneCountInBuildSettings < levelData.Id)
             {
                 levelData.Id = 0;
                 PlayerEntered = null;
