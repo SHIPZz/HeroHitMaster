@@ -215,14 +215,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.73170733, b: 0, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1.44
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -330,6 +330,7 @@ Transform:
   - {fileID: 5480547109176008744}
   - {fileID: 4887373927924349587}
   - {fileID: 2745797814102866032}
+  - {fileID: 2370949404448878637}
   - {fileID: 1858573037452844536}
   - {fileID: 8048753822292590830}
   - {fileID: 4333367758858195279}
@@ -494,7 +495,6 @@ Transform:
   - {fileID: 8995352040107460968}
   - {fileID: 2308745716733028639}
   - {fileID: 8541256784131401557}
-  - {fileID: 2370949404448878637}
   - {fileID: 5392089637394027931}
   - {fileID: 3040494677332855388}
   - {fileID: 1513486910526956101}
@@ -1072,7 +1072,7 @@ GameObject:
   - component: {fileID: 1858573037452844536}
   - component: {fileID: 7581284713609532742}
   m_Layer: 0
-  m_Name: '!!==Spawners==!!'
+  m_Name: '!!==ENEMYSPAWNERS==!!'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1141,7 +1141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8048753822292590830}
+  m_Father: {fileID: 8433130511518029259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8422621554932690560
 GameObject:
@@ -1459,7 +1459,7 @@ GameObject:
   - component: {fileID: 2052741371872174431}
   - component: {fileID: 4287090481117950137}
   m_Layer: 0
-  m_Name: '!==TargetStorage!=='
+  m_Name: '!==TargetMovementPoints!=='
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
