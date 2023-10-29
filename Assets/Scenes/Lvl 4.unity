@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.5649006, g: 0.6356401, b: 0.7239375, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6407,6 +6407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355600844}
   - component: {fileID: 355600845}
+  - component: {fileID: 355600846}
   m_Layer: 19
   m_Name: 1
   m_TagString: Untagged
@@ -6441,8 +6442,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 1
+  _enemyTypeId: 5
   _aggroZone: {fileID: 1980372232}
+--- !u!114 &355600846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355600843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8d660f3e854d68a364593dafd35ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1980372231}
 --- !u!1 &364568225
 GameObject:
   m_ObjectHideFlags: 3
@@ -9534,7 +9548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextPosition: {fileID: 1388468271}
-  _delayBeforeJump: 0.5
+  _delayBeforeJump: 1
   _jumpDuration: 1
   _jumpPower: 5
 --- !u!114 &530707946
@@ -12989,6 +13003,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4333367758858195279, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
   m_PrefabInstance: {fileID: 699042886}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &699042889 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1179193262726078155, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+  m_PrefabInstance: {fileID: 699042886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &700655178
 GameObject:
   m_ObjectHideFlags: 3
@@ -14407,6 +14426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 795035138}
   - component: {fileID: 795035139}
+  - component: {fileID: 795035140}
   m_Layer: 19
   m_Name: 4
   m_TagString: Untagged
@@ -14441,8 +14461,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 5
+  _enemyTypeId: 1
   _aggroZone: {fileID: 212782282}
+--- !u!114 &795035140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795035137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8d660f3e854d68a364593dafd35ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 212782281}
 --- !u!1 &800462908
 GameObject:
   m_ObjectHideFlags: 3
@@ -14667,7 +14700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextPosition: {fileID: 1885927111}
-  _delayBeforeJump: 0.5
+  _delayBeforeJump: 1
   _jumpDuration: 1
   _jumpPower: 5
 --- !u!114 &816567248
@@ -28259,6 +28292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1529791803}
   - component: {fileID: 1529791804}
+  - component: {fileID: 1529791805}
   m_Layer: 19
   m_Name: 2
   m_TagString: Untagged
@@ -28295,6 +28329,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyTypeId: 6
   _aggroZone: {fileID: 414073539}
+--- !u!114 &1529791805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529791802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8d660f3e854d68a364593dafd35ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 414073537}
 --- !u!1 &1531169998
 GameObject:
   m_ObjectHideFlags: 3
@@ -29532,7 +29579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextPosition: {fileID: 212782281}
-  _delayBeforeJump: 0.5
+  _delayBeforeJump: 1
   _jumpDuration: 1
   _jumpPower: 5
 --- !u!114 &1596168161
@@ -31974,7 +32021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextPosition: {fileID: 1417092785}
-  _delayBeforeJump: 0.6
+  _delayBeforeJump: 1
   _jumpDuration: 1
   _jumpPower: 5
 --- !u!114 &1737328719
@@ -35008,6 +35055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1902722460}
   - component: {fileID: 1902722461}
+  - component: {fileID: 1902722462}
   m_Layer: 19
   m_Name: 3
   m_TagString: Untagged
@@ -35044,6 +35092,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyTypeId: 5
   _aggroZone: {fileID: 212782282}
+--- !u!114 &1902722462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902722459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8d660f3e854d68a364593dafd35ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 212782281}
 --- !u!1 &1902998739
 GameObject:
   m_ObjectHideFlags: 3
@@ -36767,7 +36828,7 @@ Transform:
   m_GameObject: {fileID: 1997570890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.81, y: 9.32, z: -15.13}
+  m_LocalPosition: {x: 53.83, y: 9.32, z: -15.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36785,8 +36846,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7b70c73367413aaa606c8a5dc2f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextPosition: {fileID: 0}
-  _delayBeforeJump: 0.2
+  _nextPosition: {fileID: 699042889}
+  _delayBeforeJump: 1
   _jumpDuration: 1
   _jumpPower: 5
 --- !u!114 &1997570893
@@ -38409,7 +38470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextPosition: {fileID: 530707944}
-  _delayBeforeJump: 0.5
+  _delayBeforeJump: 1
   _jumpDuration: 1
   _jumpPower: 5
 --- !u!114 &2096199331

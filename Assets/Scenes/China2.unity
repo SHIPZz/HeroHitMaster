@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5649007, g: 0.6356403, b: 0.72393775, a: 1}
+  m_IndirectSpecularColor: {r: 0.5649006, g: 0.6356401, b: 0.7239375, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8866,7 +8866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 9
+  _enemyTypeId: 5
   _aggroZone: {fileID: 272765297}
 --- !u!114 &319830926
 MonoBehaviour:
@@ -9582,6 +9582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 341589971}
   - component: {fileID: 341589972}
+  - component: {fileID: 341589973}
   m_Layer: 0
   m_Name: 6
   m_TagString: Untagged
@@ -9616,8 +9617,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 9
+  _enemyTypeId: 4
   _aggroZone: {fileID: 1447438579}
+--- !u!114 &341589973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341589970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8d660f3e854d68a364593dafd35ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1447438573}
 --- !u!1 &341690496
 GameObject:
   m_ObjectHideFlags: 3
@@ -17655,7 +17669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 8
+  _enemyTypeId: 10
   _aggroZone: {fileID: 236286996}
 --- !u!114 &708310998
 MonoBehaviour:
@@ -17812,6 +17826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 720952295}
   - component: {fileID: 720952296}
+  - component: {fileID: 720952297}
   m_Layer: 0
   m_Name: 5
   m_TagString: Untagged
@@ -17846,8 +17861,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 8
+  _enemyTypeId: 1
   _aggroZone: {fileID: 1447438579}
+--- !u!114 &720952297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720952294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8d660f3e854d68a364593dafd35ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1447438573}
 --- !u!1 &722303223
 GameObject:
   m_ObjectHideFlags: 3
@@ -51413,6 +51441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2104274901}
   - component: {fileID: 2104274902}
+  - component: {fileID: 2104274903}
   m_Layer: 0
   m_Name: 7
   m_TagString: Untagged
@@ -51447,8 +51476,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 9
+  _enemyTypeId: 4
   _aggroZone: {fileID: 1447438579}
+--- !u!114 &2104274903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104274900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8d660f3e854d68a364593dafd35ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1447438573}
 --- !u!1 &2108119622
 GameObject:
   m_ObjectHideFlags: 3
