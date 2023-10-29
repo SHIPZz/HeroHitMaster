@@ -62,7 +62,7 @@ namespace CodeBase.UI.Windows.Popup
         private void OnEnable()
         {
             _adButton.onClick.AddListener(OnAdClicked);
-
+            _adButton.enabled = true;
             List<WeaponSelectorView> randomIcons = GetRandomWeaponIcons(3);
             EnableRandomIcons(randomIcons);
         }
@@ -77,8 +77,11 @@ namespace CodeBase.UI.Windows.Popup
                 .SetLoops(-1, LoopType.Yoyo);
         }
 
-        private void OnAdClicked() =>
+        private void OnAdClicked()
+        {
+            _adButton.enabled = false;
             AdButtonClicked?.Invoke();
+        }
 
         private void DisableAllWhiteFrames()
         {
