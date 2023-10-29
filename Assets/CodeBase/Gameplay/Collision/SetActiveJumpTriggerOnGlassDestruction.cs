@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Gameplay.ObjectBodyPart;
+﻿using CodeBase.Gameplay.ObjectBodyPart;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Collision

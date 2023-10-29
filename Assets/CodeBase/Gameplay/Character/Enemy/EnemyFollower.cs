@@ -1,6 +1,7 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Data;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -68,7 +69,10 @@ namespace CodeBase.Gameplay.Character.Enemy
             _isBlocked = false;
         }
 
-        private void SetTarget(Player player) => 
+        private void SetTarget(Player player)
+        {
             _target = player.transform.position;
+            transform.DOLookAt(_target, 1f);
+        }
     }
 }

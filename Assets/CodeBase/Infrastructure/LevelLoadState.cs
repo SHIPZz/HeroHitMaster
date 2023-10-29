@@ -24,8 +24,6 @@ namespace CodeBase.Infrastructure
         {
             _loadingCurtain.Show(1f);
             _adInvoker.Init();
-            DOTween.Init();
-            DOTween.RestartAll();
 
             AsyncOperation loadSceneAsync =  SceneManager.LoadSceneAsync(payload);
 

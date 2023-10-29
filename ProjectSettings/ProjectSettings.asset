@@ -482,7 +482,7 @@ PlayerSettings:
   - m_BuildTarget: Android
     m_Format: 0
   - m_BuildTarget: WebGL
-    m_Format: 0
+    m_Format: 3
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -765,7 +765,8 @@ PlayerSettings:
   platformArchitecture: {}
   scriptingBackend:
     Android: 0
-  il2cppCompilerConfiguration: {}
+  il2cppCompilerConfiguration:
+    WebGL: 1
   il2cppCodeGeneration: {}
   managedStrippingLevel:
     Android: 1
@@ -868,11 +869,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: 9b94eda8-b23e-485d-afce-fce287f74067
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: HeroHitMaster
+  organizationId: shipzzzz
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
