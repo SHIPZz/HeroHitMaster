@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Agava.YandexGames;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
@@ -17,7 +16,6 @@ using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Character;
-using CodeBase.Services.Storages.Weapon;
 using CodeBase.UI.LevelSlider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
@@ -121,6 +119,7 @@ namespace CodeBase.GameInit
             InitEnemiesAndObjectsWhoNeedEnemies();
 
             var playerData = await _saveSystem.Load<PlayerData>();
+            playerData.LastWeaponId = WeaponTypeId.ThrowBanana;
             PlayerTypeId targetPlayerId = _playerSettings.PlayerTypeIdsByWeapon[playerData.LastWeaponId];
             Player player = InitializeInitialPlayer(targetPlayerId);
             Weapon weapon = await InitializeInitialWeapon(playerData.LastWeaponId);

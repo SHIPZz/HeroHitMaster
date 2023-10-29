@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2339491045933551287}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -0.24}
+  m_LocalPosition: {x: -0.0029, y: 0.0408, z: -0.0042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -58,8 +58,8 @@ Transform:
   m_GameObject: {fileID: 3808448341447058478}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2622234342202510921}
@@ -150,7 +150,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2622234342202510921}
@@ -174,10 +174,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.48828876, y: 0.044362456, z: 0.22149491}
-  m_Center: {x: 0.01700031, y: 0.016935315, z: 0.015061215}
+  m_Size: {x: 0.015238884, y: 0.015491595, z: 0.0161508}
+  m_Center: {x: -0.0002726488, y: 0.0024998907, z: -0.0019867786}
 --- !u!54 &4889034888735645885
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -202,9 +202,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &4100791007911650489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _needBlockRotation: 0
-  _bulletModelRotation: {x: 0, y: 95, z: 0}
+  _bulletModelRotation: {x: 90, y: 95, z: 90}
   _knifeEnd: {fileID: 7465377821269771596}
   _needSetParent: 1
 --- !u!114 &2323767682895420753
