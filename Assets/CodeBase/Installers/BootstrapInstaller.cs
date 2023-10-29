@@ -4,7 +4,6 @@ using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Inputs.InputService;
-using CodeBase.Services.Level;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.SaveSystems;
@@ -29,7 +28,6 @@ namespace CodeBase.Installers
             BindGlobalSlowMotionSystem();
             BindPauseService();
             BindPauseOnFocusChanged();
-            BindLevelService();
             BindAdInvoker();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this).AsSingle();
@@ -66,10 +64,6 @@ namespace CodeBase.Installers
             Container
                 .Bind<IAdInvoker>()
                 .To<AdInvoker>()
-                .AsSingle();
-
-        private void BindLevelService() =>
-            Container.BindInterfacesTo<LevelService>()
                 .AsSingle();
 
         private void BindPauseOnFocusChanged() =>

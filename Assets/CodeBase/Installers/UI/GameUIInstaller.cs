@@ -12,6 +12,7 @@ using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
 using CodeBase.UI.Windows.Buy;
 using CodeBase.UI.Windows.Death;
+using CodeBase.UI.Windows.Gameover;
 using CodeBase.UI.Windows.Play;
 using CodeBase.UI.Windows.Popup;
 using CodeBase.UI.Windows.Setting;
@@ -47,6 +48,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private PlayButtonView _playButtonView;
         [SerializeField] private RestartButtonView _restartButtonView;
         [SerializeField] private ContinueADButtonView _continueADButtonView;
+        [SerializeField] private GameOverView _gameOverView;
         
         public override void InstallBindings()
         {
@@ -74,6 +76,14 @@ namespace CodeBase.Installers.UI
             BindLoadNextLevelPresenter();
             BindAllWindowsPresenter();
             BindButtonInDeathWindow();
+            BindGameOverUI();
+        }
+
+        private void BindGameOverUI()
+        {
+            Container.BindInstance(_gameOverView);
+            Container.BindInterfacesAndSelfTo<GameOverPresenter>()
+                .AsSingle();
         }
 
         private void BindButtonInDeathWindow()

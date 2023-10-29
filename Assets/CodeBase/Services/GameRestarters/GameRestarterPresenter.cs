@@ -15,14 +15,10 @@ namespace CodeBase.Services.GameRestarters
             _gameRestarter = gameRestarter;
         }
 
-        public void Initialize()
-        {
+        public void Initialize() => 
             _restartButtonView.Clicked += _gameRestarter.Restart;
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() => 
             _restartButtonView.Clicked -= _gameRestarter.Restart;
-        }
     }
 }

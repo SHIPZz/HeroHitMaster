@@ -7,6 +7,7 @@
         Death,
         Victory,
         Play,
-        Popup
+        Popup,
+        GameOver
     }
 }

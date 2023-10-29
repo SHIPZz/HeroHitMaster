@@ -22,6 +22,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         private WeaponStaticDataService _weaponStaticDataService;
 
         public event Action PlayerEntered;
+        public event Action LastLevelAchieved;
 
         [Inject]
         private void Construct(IPauseService pauseService, ISaveSystem saveSystem, Level level, WeaponStaticDataService weaponStaticDataService)
@@ -50,11 +51,19 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             levelData.Id++;
 
             if (currentWeapon.Price.PriceTypeId == PriceTypeId.Popup)
-                levelData.PopupWeaponId ++;
+                levelData.LevelsWithPopupWeapon++;
             
             playerData.Money += _level.Reward;
-            _saveSystem.Save(levelData);
             _saveSystem.Save(playerData);
+
+            if (SceneManager.sceneCount < levelData.Id)
+            {
+                levelData.Id = 0;
+                PlayerEntered = null;
+                LastLevelAchieved?.Invoke();
+            }
+
+            _saveSystem.Save(levelData);
             PlayerEntered?.Invoke();
             _pauseService.Pause();
         }

@@ -45,9 +45,9 @@ namespace CodeBase.UI.Weapons
             {
                 var levelData = await _saveSystem.Load<LevelData>();
 
-                if (levelData.PopupWeaponId != 0)
+                if (levelData.LevelsWithPopupWeapon != 0)
                 {
-                    if (levelData.PopupWeaponId % WeaponPopupLvlDuration == 1)
+                    if (levelData.LevelsWithPopupWeapon % WeaponPopupLvlDuration == 1)
                     {
                         var playerData = await _saveSystem.Load<PlayerData>();
                         _lastWeaponId = playerData.LastNotPopupWeaponId;

@@ -13,7 +13,7 @@ namespace CodeBase.Gameplay
 
         private void Awake()
         {
-            _mainCanvas.gameObject.SetActive(false);
+            _mainCanvas.enabled = false;
             _aggroZone = GetComponent<AggroZone>();
         }
 
@@ -24,6 +24,6 @@ namespace CodeBase.Gameplay
             _aggroZone.PlayerEntered -= Turn;
 
         private void Turn(Player obj) => 
-            _mainCanvas.gameObject.SetActive(true);
+            _mainCanvas.enabled = true;
     }
 }

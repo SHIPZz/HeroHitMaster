@@ -40,7 +40,7 @@ namespace CodeBase.Infrastructure
                 .DOFade(0, CloseDuration).SetUpdate(true)
                 .OnComplete(() =>
                 {
-                    _canvasGroup.gameObject.SetActive(false);
+                    _canvasGroup.GetComponent<Canvas>().enabled = false;
                     Closed?.Invoke();
                 });
         }
