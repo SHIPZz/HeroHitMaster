@@ -8,6 +8,7 @@ using CodeBase.Services.Pause;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.SaveSystems;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Installers
@@ -43,6 +44,7 @@ namespace CodeBase.Installers
                 await UniTask.Yield();
             }
 
+            Debug.Log(YandexGamesSdk.Initialize());
             BindSaveSystem();
 
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
