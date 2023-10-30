@@ -2,7 +2,6 @@
 using CodeBase.Services.SaveSystems.Data;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Unity.Services.Core;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
@@ -25,12 +24,6 @@ namespace CodeBase.Infrastructure
             DOTween.RestartAll();
             
             var levelData = await _saveSystem.Load<LevelData>();
-            await UnityServices.InitializeAsync();
-
-            while (UnityServices.State == ServicesInitializationState.Uninitialized)
-            {
-                await UniTask.Yield();
-            }
             
             _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
         }
