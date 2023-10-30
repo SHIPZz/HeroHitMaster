@@ -12,21 +12,23 @@ namespace CodeBase.Infrastructure
 
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Slider _loadingSlider;
+        private Canvas _canvas;
 
         public event Action Closed;
 
-        private void Awake() =>
+        private void Awake()
+        {
+            _canvas = _canvasGroup.GetComponent<Canvas>();
             DontDestroyOnLoad(this);
+        }
 
         private void OnDisable() =>
             _loadingSlider.value = 0;
 
         public void Show(float loadSliderDuration)
         {
-            if (_loadingSlider.value != 0) 
-                _loadingSlider.value = 0;
-
-            _canvasGroup.gameObject.SetActive(true);
+            _loadingSlider.value = 0;
+            _canvas.enabled = true;
             _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
             _canvasGroup.alpha = 1;
         }
@@ -40,7 +42,7 @@ namespace CodeBase.Infrastructure
                 .DOFade(0, CloseDuration).SetUpdate(true)
                 .OnComplete(() =>
                 {
-                    _canvasGroup.GetComponent<Canvas>().enabled = false;
+                    _canvas.enabled = false;
                     Closed?.Invoke();
                 });
         }
