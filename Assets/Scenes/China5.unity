@@ -21919,7 +21919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2667010247553110585, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -54.814087
+      value: -54.81407
       objectReference: {fileID: 0}
     - target: {fileID: 3889918937692690960, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: <EnemyQuantityInZones>k__BackingField.Array.size
@@ -21937,6 +21937,10 @@ PrefabInstance:
       propertyPath: <EnemyQuantityInZones>k__BackingField.Array.data[2]
       value: 
       objectReference: {fileID: 465221104}
+    - target: {fileID: 4145644177636425758, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -54.717285
+      objectReference: {fileID: 0}
     - target: {fileID: 4287090481117950137, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: <Targets>k__BackingField.Array.size
       value: 3
@@ -28302,8 +28306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpawners:
-  - {fileID: 456629616}
-  - {fileID: 1314270267}
+  - {fileID: 1660340139}
+  - {fileID: 2078210183}
   _delayActivation: 1
 --- !u!114 &1512163889
 MonoBehaviour:
@@ -28791,8 +28795,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpawners:
-  - {fileID: 456629616}
-  - {fileID: 1314270267}
+  - {fileID: 1554370166}
+  - {fileID: 404016952}
+  - {fileID: 1734086635}
   _delayActivation: 1
 --- !u!114 &1534016366
 MonoBehaviour:
