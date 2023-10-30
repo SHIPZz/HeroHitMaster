@@ -119,7 +119,6 @@ namespace CodeBase.GameInit
             InitEnemiesAndObjectsWhoNeedEnemies();
 
             var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.LastWeaponId = WeaponTypeId.ThrowBanana;
             PlayerTypeId targetPlayerId = _playerSettings.PlayerTypeIdsByWeapon[playerData.LastWeaponId];
             Player player = InitializeInitialPlayer(targetPlayerId);
             Weapon weapon = await InitializeInitialWeapon(playerData.LastWeaponId);
