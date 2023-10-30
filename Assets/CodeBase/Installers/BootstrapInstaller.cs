@@ -44,7 +44,7 @@ namespace CodeBase.Installers
                 await UniTask.Yield();
             }
 
-            Debug.Log(YandexGamesSdk.Initialize());
+            // Debug.Log(YandexGamesSdk.Initialize());
             BindSaveSystem();
 
             var gameStateMachine = Container.Resolve<IGameStateMachine>();

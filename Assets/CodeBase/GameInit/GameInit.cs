@@ -62,6 +62,7 @@ namespace CodeBase.GameInit
         };
 
         private SetterWeaponToPlayerHand _setterWeaponToPlayerHand;
+        private Canvas _mainUi;
 
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
@@ -83,8 +84,9 @@ namespace CodeBase.GameInit
             AudioChanger audioChanger,
             WeaponStaticDataService weaponStaticDataService,
             KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover, 
-            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand)
+            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand, Canvas mainUi)
         {
+            _mainUi = mainUi;
             _setterWeaponToPlayerHand = setterWeaponToPlayerHand;
             _playerSettings = playerSettings;
             _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
@@ -112,7 +114,7 @@ namespace CodeBase.GameInit
         {
             // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
             var settingsData = await _saveSystem.Load<SettingsData>();
-
+            _mainUi.transform.SetParent(null);
             TranslateWeaponNames();
 
             InitSound(settingsData);

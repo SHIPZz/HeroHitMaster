@@ -20,7 +20,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private readonly List<WeaponSelectorView> _weaponSelectorViews;
         private readonly WeaponStaticDataService _weaponStaticDataService;
         private readonly ShopWeaponInfoView _shopWeaponInfoView;
-        private readonly IProvider<WeaponTypeId, Image> _provider;
+        private readonly IProvider<WeaponIconsProvider> _weaponIconsProvider;
         private readonly CheckOutService _checkOutService;
         private readonly AdWatchCounter _adWatchCounter;
         private readonly ISaveSystem _saveSystem;
@@ -31,14 +31,14 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         public ShopWeaponPresenter(IProvider<List<WeaponSelectorView>> weaponSelectorViewsProvider,
             WeaponStaticDataService weaponStaticDataService,
             ShopWeaponInfoView shopWeaponInfoView,
-            IProvider<WeaponTypeId, Image> provider,
+            IProvider<WeaponIconsProvider> weaponIconsesProvider,
             ISaveSystem saveSystem, CheckOutService checkOutService,
             AdWatchCounter adWatchCounter)
         {
             _adWatchCounter = adWatchCounter;
             _checkOutService = checkOutService;
             _saveSystem = saveSystem;
-            _provider = provider;
+            _weaponIconsProvider = weaponIconsesProvider;
             _shopWeaponInfoView = shopWeaponInfoView;
             _weaponStaticDataService = weaponStaticDataService;
             _weaponSelectorViews = weaponSelectorViewsProvider.Get();
@@ -71,19 +71,19 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            SetInitialWeaponDataToView(weaponTypeId);
+            _lastWeaponType = weaponTypeId;
+            SetInitialWeaponDataToView(weaponData);
+            SetMainShopWeaponIcon(weaponData.WeaponTypeId);
         }
 
-        private void SetInitialWeaponDataToView(WeaponTypeId weaponTypeId)
+        private void SetInitialWeaponDataToView(WeaponData weaponData)
         {
-            WeaponData weaponData = GetWeaponData(weaponTypeId);
-
             if (weaponData.Price.PriceTypeId == PriceTypeId.Ad)
             {
                 _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, 0);
                 return;
             }
-            
+
             _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData, true);
         }
 
@@ -92,6 +92,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             WeaponData weaponData;
             var playerData = await _saveSystem.Load<PlayerData>();
             weaponData = _weaponStaticDataService.Get(playerData.LastNotPopupWeaponId);
+            Debug.Log(weaponData.WeaponTypeId);
             SetWeaponDataToView(weaponData.WeaponTypeId);
         }
 
@@ -117,12 +118,13 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         private async void SetWeaponDataToView(WeaponTypeId weaponTypeId)
         {
-            WeaponData weaponData = GetWeaponData(weaponTypeId);
-
             if (SameWeaponChoosen(weaponTypeId))
                 return;
 
             _lastWeaponType = weaponTypeId;
+            WeaponData weaponData = GetWeaponData(weaponTypeId);
+
+            SetMainShopWeaponIcon(weaponTypeId);
 
             var playerData = await _saveSystem.Load<PlayerData>();
 
@@ -162,7 +164,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
             if (IsWeaponAdBought(playerData, weaponTypeId))
             {
-                _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, adsWeaponData.WatchedAdsToBuyWeapons[weaponTypeId]);
+                _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true,
+                    adsWeaponData.WatchedAdsToBuyWeapons[weaponTypeId]);
                 return;
             }
 
@@ -178,17 +181,13 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private bool SameWeaponChoosen(WeaponTypeId weaponTypeId) =>
             _lastWeaponType == weaponTypeId;
 
-        private WeaponData GetWeaponData(WeaponTypeId weaponTypeId)
-        {
-            WeaponData weaponData = _weaponStaticDataService.Get(weaponTypeId);
-            SetMainShopWeaponIcon(weaponTypeId);
-            return weaponData;
-        }
+        private WeaponData GetWeaponData(WeaponTypeId weaponTypeId) =>
+            _weaponStaticDataService.Get(weaponTypeId);
 
         private void SetMainShopWeaponIcon(WeaponTypeId weaponTypeId)
         {
             _lastWeaponIcon?.gameObject.SetActive(false);
-            Image weaponIcon = _provider.Get(weaponTypeId);
+            Image weaponIcon = _weaponIconsProvider.Get().ShopWeaponIcons[weaponTypeId];
             weaponIcon.gameObject.SetActive(true);
             _lastWeaponIcon = weaponIcon;
         }
