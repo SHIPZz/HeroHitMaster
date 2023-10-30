@@ -19,11 +19,9 @@ namespace CodeBase.Services.Ad
         public async void Init()
         {
             var levelData = await _saveSystem.Load<LevelData>();
-
-#if UNITY_WEBGL && !UNITY_EDITOR
+            
             if (levelData.Id % TargetAdInvoke == 0)
                 _adService.PlayShortAd(null, null);
-#endif
         }
     }
 }

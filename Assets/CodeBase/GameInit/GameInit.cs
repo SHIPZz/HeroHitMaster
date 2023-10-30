@@ -110,9 +110,8 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
             var settingsData = await _saveSystem.Load<SettingsData>();
-            Debug.Log(_saveSystem + " SAVE SYSTEM");
 
             TranslateWeaponNames();
 
