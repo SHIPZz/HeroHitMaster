@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agava.YandexGames;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
@@ -109,9 +110,7 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-#if UNITY_WEBGL && !UNITY_EDITOR
             LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
-#endif
             var settingsData = await _saveSystem.Load<SettingsData>();
             Debug.Log(_saveSystem + " SAVE SYSTEM");
 
