@@ -15802,7 +15802,7 @@ Transform:
   m_GameObject: {fileID: 730029910}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.99170935, z: -0, w: -0.12850116}
-  m_LocalPosition: {x: 133.2, y: 6, z: 308.5}
+  m_LocalPosition: {x: 130.48, y: 6, z: 307.74}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27176,8 +27176,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpawners:
-  - {fileID: 0}
-  - {fileID: 437732637}
+  - {fileID: 1585126912}
+  - {fileID: 756098025}
+  - {fileID: 730029912}
   _delayActivation: 1
 --- !u!114 &1192936393
 MonoBehaviour:
@@ -36417,7 +36418,7 @@ Transform:
   m_GameObject: {fileID: 1585126910}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.99887323, z: -0, w: 0.047458615}
-  m_LocalPosition: {x: 133, y: 6, z: 298.8}
+  m_LocalPosition: {x: 130.35, y: 6, z: 298.94}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45941,8 +45942,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpawners:
-  - {fileID: 0}
-  - {fileID: 437732637}
+  - {fileID: 603069858}
+  - {fileID: 414144669}
   _delayActivation: 1
 --- !u!114 &1984701827
 MonoBehaviour:
@@ -49943,7 +49944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpawners:
-  - {fileID: 0}
+  - {fileID: 50991841}
   - {fileID: 437732637}
   _delayActivation: 1
 --- !u!114 &8413101694788368547
