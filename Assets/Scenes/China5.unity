@@ -179,6 +179,38 @@ PrefabInstance:
       propertyPath: _physicalButton
       value: 
       objectReference: {fileID: 1293521892}
+    - target: {fileID: 1581198439423871401, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
+      propertyPath: _direction.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581198439423871401, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
+      propertyPath: _direction.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581198439423871401, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
+      propertyPath: _killEnemyDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581198439423871401, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
+      propertyPath: _freezePositionX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581198439423871401, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
+      propertyPath: _freezePositionY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581198439423871401, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
+      propertyPath: _freezePositionZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581198439423871401, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
+      propertyPath: _rotateDirection.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581198439423871401, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
+      propertyPath: _rotateDirection.y
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 4446996774492671446, guid: 60ba825a5ce554e479a4e3952389b82f, type: 3}
       propertyPath: m_Name
       value: Fan
@@ -8281,7 +8313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7b70c73367413aaa606c8a5dc2f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextPosition: {fileID: 0}
+  _nextPosition: {fileID: 1512163886}
   _delayBeforeJump: 0.5
   _jumpDuration: 1.5
   _jumpPower: 9
@@ -16303,6 +16335,7 @@ GameObject:
   - component: {fileID: 926246259}
   - component: {fileID: 926246262}
   - component: {fileID: 926246261}
+  - component: {fileID: 926246266}
   m_Layer: 18
   m_Name: AggroZone (3)
   m_TagString: Untagged
@@ -16406,12 +16439,25 @@ Transform:
   m_GameObject: {fileID: 926246258}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0003036745, y: 0.861462, z: -0.00051514927, w: -0.50782174}
-  m_LocalPosition: {x: 250.88661, y: 3.6300216, z: 92.114845}
+  m_LocalPosition: {x: 250.89, y: 2.66, z: 92.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2086652995326484357}
   m_LocalEulerAnglesHint: {x: 0.069, y: 241.038, z: 0}
+--- !u!114 &926246266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926246258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAngleTransform: {fileID: 1761438785}
 --- !u!1 &926463008
 GameObject:
   m_ObjectHideFlags: 3
@@ -19367,7 +19413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7b70c73367413aaa606c8a5dc2f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextPosition: {fileID: 0}
+  _nextPosition: {fileID: 1342147535}
   _delayBeforeJump: 1
   _jumpDuration: 1.5
   _jumpPower: 9
@@ -24693,7 +24739,7 @@ Transform:
   m_GameObject: {fileID: 1314270265}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.32122266, z: -0, w: 0.9470038}
-  m_LocalPosition: {x: 241.03, y: 3.8, z: 98.25}
+  m_LocalPosition: {x: 242.52, y: 3.8, z: 99.12}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25032,8 +25078,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7b70c73367413aaa606c8a5dc2f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextPosition: {fileID: 0}
-  _delayBeforeJump: 0.5
+  _nextPosition: {fileID: 459332741}
+  _delayBeforeJump: 1
   _jumpDuration: 1.5
   _jumpPower: 9
 --- !u!65 &1342147540
@@ -28207,6 +28253,7 @@ GameObject:
   - component: {fileID: 1512163889}
   - component: {fileID: 1512163888}
   - component: {fileID: 1512163887}
+  - component: {fileID: 1512163893}
   m_Layer: 18
   m_Name: AggroZone (4)
   m_TagString: Untagged
@@ -28316,6 +28363,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.629429, y: 0.66399384, z: 3.3557806}
   m_Center: {x: -0.58729744, y: -0.16800308, z: 0.01813078}
+--- !u!114 &1512163893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512163885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAngleTransform: {fileID: 1766091191}
 --- !u!1 &1512348636
 GameObject:
   m_ObjectHideFlags: 3
@@ -28699,7 +28759,7 @@ Transform:
   m_GameObject: {fileID: 1534016362}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0003036745, y: 0.861462, z: -0.00051514927, w: -0.50782174}
-  m_LocalPosition: {x: 171.7, y: 4.99, z: 217.9}
+  m_LocalPosition: {x: 171.7, y: 4, z: 217.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33356,7 +33416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7b70c73367413aaa606c8a5dc2f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextPosition: {fileID: 0}
+  _nextPosition: {fileID: 1977879173}
   _delayBeforeJump: 1
   _jumpDuration: 1.5
   _jumpPower: 9
@@ -33554,8 +33614,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7b70c73367413aaa606c8a5dc2f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextPosition: {fileID: 0}
-  _delayBeforeJump: 0.5
+  _nextPosition: {fileID: 1708310362}
+  _delayBeforeJump: 1
   _jumpDuration: 1.5
   _jumpPower: 9
 --- !u!65 &1766091196
@@ -37486,7 +37546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7b70c73367413aaa606c8a5dc2f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextPosition: {fileID: 0}
+  _nextPosition: {fileID: 1067961632}
   _delayBeforeJump: 1
   _jumpDuration: 1.5
   _jumpPower: 9

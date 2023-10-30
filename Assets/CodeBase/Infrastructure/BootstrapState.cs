@@ -1,8 +1,6 @@
 ﻿using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {

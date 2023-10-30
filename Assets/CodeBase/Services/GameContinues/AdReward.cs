@@ -15,10 +15,8 @@ namespace CodeBase.Services.GameContinues
             _playerProvider = playerProvider.Get();
         }
 
-        public void Do()
-        {
-            _adService.PlayLongAd(null, RecoverPlayerOnEndAd);
-        }
+        public void Do() => 
+        _adService.PlayLongAd(null, RecoverPlayerOnEndAd);
 
         private void RecoverPlayerOnEndAd()
         {

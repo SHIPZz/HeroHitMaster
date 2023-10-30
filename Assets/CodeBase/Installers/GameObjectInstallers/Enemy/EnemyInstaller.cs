@@ -36,6 +36,10 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
             Container
                 .BindInterfacesAndSelfTo<EnemyDeathEffectOnDestruction>()
                 .AsSingle();
+            
+            Container
+                .BindInterfacesTo<EnemyFollowerMediator>()
+                .AsSingle();
 
             Container
                 .BindInterfacesAndSelfTo<DeathAnimOnMaterialChange>()
