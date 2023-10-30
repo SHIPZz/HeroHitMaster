@@ -6,7 +6,7 @@ namespace CodeBase.Services.Ad
     public class AdInvoker : IAdInvoker
     {
         private const int TargetAdInvoke = 3;
-        
+
         private readonly IAdService _adService;
         private readonly ISaveSystem _saveSystem;
 
@@ -20,8 +20,10 @@ namespace CodeBase.Services.Ad
         {
             var levelData = await _saveSystem.Load<LevelData>();
 
+#if UNITY_WEBGL && !UNITY_EDITOR
             if (levelData.Id % TargetAdInvoke == 0)
                 _adService.PlayShortAd(null, null);
+#endif
         }
     }
 }

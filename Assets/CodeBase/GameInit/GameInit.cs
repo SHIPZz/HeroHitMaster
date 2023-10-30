@@ -109,8 +109,11 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+#if UNITY_WEBGL && !UNITY_EDITOR
+            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+#endif
             var settingsData = await _saveSystem.Load<SettingsData>();
+            Debug.Log(_saveSystem + " SAVE SYSTEM");
 
             TranslateWeaponNames();
 
@@ -119,13 +122,26 @@ namespace CodeBase.GameInit
             InitEnemiesAndObjectsWhoNeedEnemies();
 
             var playerData = await _saveSystem.Load<PlayerData>();
-            PlayerTypeId targetPlayerId = _playerSettings.PlayerTypeIdsByWeapon[playerData.LastWeaponId];
-            Player player = InitializeInitialPlayer(targetPlayerId);
+            InitPlayerBeforeWeaponChoose(playerData);
             Weapon weapon = await InitializeInitialWeapon(playerData.LastWeaponId);
+            Player targetPlayer = InitPlayerAfterWeaponChoose(weapon);
             InitializeUIPresenters(playerData);
-            InitializeCamera(player, weapon);
+            InitializeCamera(targetPlayer, weapon);
             _waterSplashPoolInitializer.Init();
             _setterWeaponToPlayerHand.Init(weapon.WeaponTypeId);
+        }
+
+        private Player InitPlayerAfterWeaponChoose(Weapon weapon)
+        {
+            PlayerTypeId targetPlayerId = _playerSettings.PlayerTypeIdsByWeapon[weapon.WeaponTypeId];
+            Player targetPlayer = GetPlayerFromStorage(targetPlayerId);
+            return targetPlayer;
+        }
+
+        private void InitPlayerBeforeWeaponChoose(PlayerData playerData)
+        {
+            PlayerTypeId initialPlayerId = _playerSettings.PlayerTypeIdsByWeapon[playerData.LastWeaponId];
+            GetPlayerFromStorage(initialPlayerId);
         }
 
         private void InitSound(SettingsData settingsData)
@@ -201,7 +217,7 @@ namespace CodeBase.GameInit
             return playerCamera;
         }
 
-        private Player InitializeInitialPlayer(PlayerTypeId playerTypeId) =>
+        private Player GetPlayerFromStorage(PlayerTypeId playerTypeId) =>
             _playerStorage.GetById(playerTypeId);
 
         //test

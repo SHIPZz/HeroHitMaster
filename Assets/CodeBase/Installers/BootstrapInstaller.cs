@@ -83,14 +83,16 @@ namespace CodeBase.Installers
 
         private void BindSaveSystem()
         {
-            // if (PlayerAccount.IsAuthorized)
-            //     Container.Bind<ISaveSystem>()
-            //         .To<YandexSaveSystem>()
-            //         .AsSingle();
-            // else
+#if UNITY_WEBGL && !UNITY_EDITOR
+            if(PlayerAccount.IsAuthorized)
                 Container.Bind<ISaveSystem>()
-                    .To<PlayerPrefsSaveSystem>()
+                  .To<YandexSaveSystem>()
                     .AsSingle();
+#endif
+            
+            Container.Bind<ISaveSystem>()
+                .To<PlayerPrefsSaveSystem>()
+                .AsSingle();
         }
 
         private void BindStateFactory() =>
