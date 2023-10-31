@@ -4,8 +4,8 @@ namespace CodeBase.Services.SaveSystems
 {
     public interface ISaveSystem
     {
-        void Save<T>(T data);
+        void Save<WorldData>(WorldData data);
 
-        UniTask<T> Load<T>() where T : new();
+        UniTask<WorldData> Load<WorldData>() where WorldData : new();
     }
 }

@@ -40,8 +40,8 @@ namespace CodeBase.UI.Windows.Shop
 
         private async void Open()
         {
-            var playerData = await _saveSystem.Load<PlayerData>();
-            _shopMoneyText.SetMoney(playerData.Money);
+            var worldData = await _saveSystem.Load<WorldData>();
+            _shopMoneyText.SetMoney(worldData.PlayerData.Money);
             _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Shop));
         }
 

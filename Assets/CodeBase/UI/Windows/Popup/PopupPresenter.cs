@@ -29,9 +29,9 @@ namespace CodeBase.UI.Windows.Popup
         {
             _popupInfoView.AdButtonClicked += ShowAd;
 
-            var levelData = await _saveSystem.Load<LevelData>();
+            var worldData = await _saveSystem.Load<WorldData>();
 
-            if (levelData.Id % TargetPopupLevelInvoke != 0)
+            if (worldData.LevelData.Id % TargetPopupLevelInvoke != 0)
                 return;
             
             _windowService.CloseAll();

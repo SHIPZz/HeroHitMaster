@@ -5,7 +5,7 @@ using CodeBase.Enums;
 namespace CodeBase.Services.SaveSystems.Data
 {
     [Serializable]
-    public class PlayerData
+    public class PlayerData 
     {
         public PlayerTypeId LastPlayerId = PlayerTypeId.Wolverine;
         public int Money;

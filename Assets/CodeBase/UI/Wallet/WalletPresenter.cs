@@ -37,9 +37,8 @@ namespace CodeBase.UI.Wallet
         private async void SetMoney(int money)
         {
             _walletUI.SetValue(money);
-            var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.Money = money;
-            _saveSystem.Save(playerData);
+            var worldData = await _saveSystem.Load<WorldData>();
+            worldData.PlayerData.Money = money;
         }
     }
 }

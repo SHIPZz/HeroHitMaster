@@ -22,9 +22,8 @@ namespace CodeBase.UI.Windows.Audio
         public async void Change(float value)
         {
             _allSounds.ForEach(x => x.volume = value);
-            var settingsData = await _saveSystem.Load<SettingsData>();
-            settingsData.Volume = value;
-            _saveSystem.Save(settingsData);
+            var worldData = await _saveSystem.Load<WorldData>();
+            worldData.SettingsData.Volume = value;
         }
     }
 }

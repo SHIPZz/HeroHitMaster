@@ -43,16 +43,14 @@ namespace CodeBase.UI.Weapons
 
             if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
             {
-                var levelData = await _saveSystem.Load<LevelData>();
+                var worldData = await _saveSystem.Load<WorldData>();
 
-                if (levelData.LevelsWithPopupWeapon != 0)
+                if (worldData.LevelData.LevelsWithPopupWeapon != 0)
                 {
-                    if (levelData.LevelsWithPopupWeapon % WeaponPopupLvlDuration == 0)
+                    if (worldData.LevelData.LevelsWithPopupWeapon % WeaponPopupLvlDuration == 0)
                     {
-                        var playerData = await _saveSystem.Load<PlayerData>();
-                        _lastWeaponId = playerData.LastNotPopupWeaponId;
-                        playerData.LastWeaponId = _lastWeaponId;
-                        _saveSystem.Save(playerData);
+                        _lastWeaponId = worldData.PlayerData.LastNotPopupWeaponId;
+                        worldData.PlayerData.LastWeaponId = _lastWeaponId;
                     }
                 }
             }
@@ -65,7 +63,7 @@ namespace CodeBase.UI.Weapons
 
         public async void Select()
         {
-            await SaveLastSelectedWeapon();
+            await SetLastSelectedWeapon();
 
             Weapon weapon = _weaponStorage.Get(_lastWeaponId);
             _weaponProvider.Set(weapon);
@@ -75,7 +73,7 @@ namespace CodeBase.UI.Weapons
 
         public async void Select(WeaponTypeId weaponTypeId)
         {
-            await SaveLastSelectedWeapon();
+            await SetLastSelectedWeapon();
 
             Weapon weapon = _weaponStorage.Get(weaponTypeId);
             _weaponProvider.Set(weapon);
@@ -87,7 +85,7 @@ namespace CodeBase.UI.Weapons
         {
             _lastWeaponId = weaponTypeId;
 
-            var playerData = await _saveSystem.Load<PlayerData>();
+            var worldData = await _saveSystem.Load<WorldData>();
 
             if (_weaponStaticDataService.Get(weaponTypeId).Price.PriceTypeId == PriceTypeId.Popup)
             {
@@ -95,19 +93,17 @@ namespace CodeBase.UI.Weapons
                 return;
             }
 
-            if (!playerData.PurchasedWeapons.Contains(weaponTypeId))
+            if (!worldData.PlayerData.PurchasedWeapons.Contains(weaponTypeId))
                 return;
 
-            playerData.LastNotPopupWeaponId = _lastWeaponId;
+            worldData.PlayerData.LastNotPopupWeaponId = _lastWeaponId;
             Select();
         }
 
-        private async UniTask SaveLastSelectedWeapon()
+        private async UniTask SetLastSelectedWeapon()
         {
-            var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.LastWeaponId = _lastWeaponId;
-
-            _saveSystem.Save(playerData);
+            var worldData = await _saveSystem.Load<WorldData>();
+            worldData.PlayerData.LastWeaponId = _lastWeaponId;
         }
     }
 }

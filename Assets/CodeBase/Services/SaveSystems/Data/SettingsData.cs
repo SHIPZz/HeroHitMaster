@@ -3,7 +3,7 @@
 namespace CodeBase.Services.SaveSystems.Data
 {
     [Serializable]
-    public class SettingsData
+    public class SettingsData 
     {
         public float Volume = 0.3f;
     }

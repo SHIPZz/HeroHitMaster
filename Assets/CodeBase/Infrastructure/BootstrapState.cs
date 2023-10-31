@@ -21,9 +21,9 @@ namespace CodeBase.Infrastructure
             DOTween.Init();
             DOTween.RestartAll();
             
-            var levelData = await _saveSystem.Load<LevelData>();
+            var worldData = await _saveSystem.Load<WorldData>();
             
-            _gameStateMachine.ChangeState<LevelLoadState, int>(levelData.Id);
+            _gameStateMachine.ChangeState<LevelLoadState, int>(worldData.LevelData.Id);
         }
     }
 }

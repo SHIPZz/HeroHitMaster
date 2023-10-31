@@ -5,7 +5,7 @@ using CodeBase.Enums;
 namespace CodeBase.Services.SaveSystems.Data
 {
     [Serializable]
-    public class TranslatedWeaponNameData
+    public class TranslatedWeaponNameData 
     {
         public Dictionary<WeaponTypeId, string> Names = new();
     }

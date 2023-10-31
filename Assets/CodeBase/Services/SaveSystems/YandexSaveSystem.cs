@@ -10,14 +10,14 @@ namespace CodeBase.Services.SaveSystems
         private string _data;
         private bool _isDataReceived;
 
-        public void Save<T>(T data)
+        public void Save<WorldData>(WorldData data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
 
             PlayerAccount.SetCloudSaveData(jsonData);
         }
-        
-        public async UniTask<T> Load<T>() where T : new()
+
+        public async UniTask<WorldData> Load<WorldData>() where WorldData : new()
         {
             PlayerAccount.GetCloudSaveData(OnSuccessCallback);
 
@@ -27,11 +27,11 @@ namespace CodeBase.Services.SaveSystems
             }
 
             if (String.IsNullOrEmpty(_data))
-                return new T();
+                return new WorldData();
             
             _isDataReceived = false;
 
-            return JsonConvert.DeserializeObject<T>(_data);
+            return JsonConvert.DeserializeObject<WorldData>(_data);
         }
 
         private void OnSuccessCallback(string data)

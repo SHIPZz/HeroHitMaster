@@ -72,11 +72,11 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         public async void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
-            var translatedWeaponNameData = await _saveSystem.Load<TranslatedWeaponNameData>();
+            var worldData = await _saveSystem.Load<WorldData>();
             _price.gameObject.SetActive(false);
             _adPrice.gameObject.SetActive(true);
 
-            SetWeaponNameInfo(translatedWeaponNameData.Names[weaponData.WeaponTypeId]);
+            SetWeaponNameInfo(worldData.TranslatedWeaponNameData.Names[weaponData.WeaponTypeId]);
 
             if (isBought)
             {
@@ -100,9 +100,9 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         public async void SetMoneyWeaponInfo(WeaponData weaponData, bool isBought)
         {
-            var translatedWeaponNameData = await _saveSystem.Load<TranslatedWeaponNameData>();
+            var worldData = await _saveSystem.Load<WorldData>();
 
-            while (translatedWeaponNameData.Names.Count < 1)
+            while (worldData.TranslatedWeaponNameData.Names.Count < 1)
             {
                 await UniTask.Yield();
             }
@@ -111,7 +111,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             SetButtonScale(_adButton, false, false);
             _price.gameObject.SetActive(true);
 
-            SetWeaponNameInfo(translatedWeaponNameData.Names[weaponData.WeaponTypeId]);
+            SetWeaponNameInfo(worldData.TranslatedWeaponNameData.Names[weaponData.WeaponTypeId]);
             
             if (isBought)
             {

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Threading.Tasks;
 using Agava.YandexGames;
 using CodeBase.Infrastructure;
 using CodeBase.Services;
@@ -35,6 +36,16 @@ namespace CodeBase.Installers
 
         public async void Initialize()
         {
+            await InitYandexSDK();
+
+            BindSaveSystem();
+
+            var gameStateMachine = Container.Resolve<IGameStateMachine>();
+            gameStateMachine.ChangeState<BootstrapState>();
+        }
+
+        private async UniTask InitYandexSDK()
+        {
             var coroutineStarter = Container.Resolve<ICoroutineStarter>();
             coroutineStarter.StartCoroutine(InitSDK());
 
@@ -42,11 +53,6 @@ namespace CodeBase.Installers
             {
                 await UniTask.Yield();
             }
-
-            BindSaveSystem();
-
-            var gameStateMachine = Container.Resolve<IGameStateMachine>();
-            gameStateMachine.ChangeState<BootstrapState>();
         }
 
         private IEnumerator InitSDK()

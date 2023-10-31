@@ -31,15 +31,15 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         public async void Count()
         {
             WeaponTypeId targetWeaponId = _weaponSelector.LastWeaponId;
-            var adWeaponsData = await _saveSystem.Load<AdWeaponsData>();
+            var worldData = await _saveSystem.Load<WorldData>();
             int watchedAds = 0;
 
-            if (adWeaponsData.WatchedAdsToBuyWeapons.TryGetValue(targetWeaponId, out var alreadyWatchedAds))
+            if (worldData.AdWeaponsData.WatchedAdsToBuyWeapons.TryGetValue(targetWeaponId, out var alreadyWatchedAds))
                 watchedAds = alreadyWatchedAds;
 
             int targetAds = _weaponStaticDataService.Get(targetWeaponId).Price.AdQuantity;
 
-            _adService.PlayLongAd(null, () => OnAdEndedCallback(watchedAds, adWeaponsData, targetWeaponId, targetAds));
+            _adService.PlayLongAd(null, () => OnAdEndedCallback(watchedAds, worldData.AdWeaponsData, targetWeaponId, targetAds));
         }
 
         private void OnAdEndedCallback(int watchedAds, AdWeaponsData adWeaponsData, WeaponTypeId targetWeaponId,
@@ -47,7 +47,6 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             watchedAds++;
             adWeaponsData.WatchedAdsToBuyWeapons[targetWeaponId] = watchedAds;
-            _saveSystem.Save(adWeaponsData);
 
             if (watchedAds == targetAds)
             {

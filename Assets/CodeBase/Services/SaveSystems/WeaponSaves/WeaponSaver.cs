@@ -16,16 +16,15 @@ namespace CodeBase.Services.SaveSystems.WeaponSaves
         }
 
         public void Save() => 
-            SaveToData(_weaponSelector.LastWeaponId);
+            SetToData(_weaponSelector.LastWeaponId);
 
         public void Save(WeaponTypeId weaponTypeId) => 
-            SaveToData(weaponTypeId);
+            SetToData(weaponTypeId);
 
-        private async void SaveToData(WeaponTypeId weaponTypeId)
+        private async void SetToData(WeaponTypeId weaponTypeId)
         {
-            var playerData = await _saveSystem.Load<PlayerData>();
-            playerData.PurchasedWeapons.Add(weaponTypeId);
-            _saveSystem.Save(playerData);
+            var worldData = await _saveSystem.Load<WorldData>();
+            worldData.PlayerData.PurchasedWeapons.Add(weaponTypeId);
         }
     }
 }

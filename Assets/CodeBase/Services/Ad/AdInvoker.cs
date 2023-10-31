@@ -18,9 +18,9 @@ namespace CodeBase.Services.Ad
 
         public async void Init()
         {
-            var levelData = await _saveSystem.Load<LevelData>();
+            var worldData = await _saveSystem.Load<WorldData>();
             
-            if (levelData.Id % TargetAdInvoke == 0)
+            if (worldData.LevelData.Id % TargetAdInvoke == 0)
                 _adService.PlayShortAd(null, null);
         }
     }

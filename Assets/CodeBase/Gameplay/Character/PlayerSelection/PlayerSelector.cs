@@ -21,22 +21,21 @@ namespace CodeBase.Gameplay.Character.PlayerSelection
         public async void Select(WeaponTypeId weaponTypeId)
         {
             Player lastPlayer = _playerStorage.CurrentPlayer;
-            var playerData = await _saveSystem.Load<PlayerData>();
+            var worldData = await _saveSystem.Load<WorldData>();
             
             if (lastPlayer == _playerStorage.GetByWeapon(weaponTypeId))
             {
-                SavePlayer(playerData, lastPlayer);
+                SetPlayerToData(worldData.PlayerData, lastPlayer);
                 return;
             }
 
             Player targetPlayer = _playerStorage.GetByWeapon(weaponTypeId);
-            SavePlayer(playerData, targetPlayer);
+            SetPlayerToData(worldData.PlayerData, targetPlayer);
         }
 
-        private void SavePlayer(PlayerData playerData, Player targetPlayer)
+        private void SetPlayerToData(PlayerData playerData, Player targetPlayer)
         {
             playerData.LastPlayerId = targetPlayer.PlayerTypeId;
-            _saveSystem.Save(playerData);
         }
     }
 }

@@ -44,26 +44,24 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
 
         private async void OnPlayerEntered(Collider player)
         {
-            var levelData =  await _saveSystem.Load<LevelData>();
-            var playerData = await _saveSystem.Load<PlayerData>();
-            WeaponData currentWeapon = _weaponStaticDataService.Get(playerData.LastWeaponId);
-            levelData.Id = SceneManager.GetActiveScene().buildIndex + 0;
-            levelData.Id++;
+            var worldData =  await _saveSystem.Load<WorldData>();
+            WeaponData currentWeapon = _weaponStaticDataService.Get(worldData.PlayerData.LastWeaponId);
+            worldData.LevelData.Id = SceneManager.GetActiveScene().buildIndex + 0;
+            worldData.LevelData.Id++;
 
             if (currentWeapon.Price.PriceTypeId == PriceTypeId.Popup)
-                levelData.LevelsWithPopupWeapon++;
+                worldData.LevelData.LevelsWithPopupWeapon++;
             
-            playerData.Money += _level.Reward;
-            _saveSystem.Save(playerData);
+            worldData.PlayerData.Money += _level.Reward;
 
-            if (SceneManager.sceneCountInBuildSettings < levelData.Id)
+            if (SceneManager.sceneCountInBuildSettings < worldData.LevelData.Id)
             {
-                levelData.Id = 0;
+                worldData.LevelData.Id = 0;
                 PlayerEntered = null;
                 LastLevelAchieved?.Invoke();
             }
 
-            _saveSystem.Save(levelData);
+            _saveSystem.Save(worldData);
             PlayerEntered?.Invoke();
             _pauseService.Pause();
         }

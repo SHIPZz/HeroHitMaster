@@ -6,24 +6,24 @@ namespace CodeBase.Services.SaveSystems
 {
     public class PlayerPrefsSaveSystem : ISaveSystem
     {
-        public void Save<T>(T data)
+        public void Save<WorldData>(WorldData data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
-            PlayerPrefs.SetString(typeof(T).FullName, jsonData);
+            PlayerPrefs.SetString(nameof(Data.WorldData), jsonData);
             PlayerPrefs.Save();
         }
 
-        public async UniTask<T> Load<T>() where T : new()
+        public async UniTask<WorldData> Load<WorldData>() where WorldData : new()
         {
-            if (PlayerPrefs.HasKey(typeof(T).FullName))
+            if (PlayerPrefs.HasKey(nameof(Data.WorldData)))
             {
-                string jsonData = PlayerPrefs.GetString(typeof(T).FullName);
-                return JsonConvert.DeserializeObject<T>(jsonData);
+                string jsonData = PlayerPrefs.GetString(nameof(Data.WorldData));
+                return JsonConvert.DeserializeObject<WorldData>(jsonData);
             }
 
             await UniTask.Yield();
 
-            return new T();
+            return new WorldData();
         }
     }
 }

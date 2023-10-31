@@ -65,7 +65,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             WeaponData weaponData;
             weaponData = _weaponStaticDataService.Get(weaponTypeId);
-            _playerData = await _saveSystem.Load<PlayerData>();
+            var worldData = await _saveSystem.Load<WorldData>();
+            _playerData = worldData.PlayerData;
 
             if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
             {
@@ -149,18 +150,18 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private async void SetAdWeaponInfoToView(WeaponTypeId weaponTypeId, PlayerData playerData,
             WeaponData weaponData)
         {
-            var adsWeaponData = await _saveSystem.Load<AdWeaponsData>();
+            var worldData = await _saveSystem.Load<WorldData>();
 
-            adsWeaponData.WatchedAdsToBuyWeapons.TryAdd(weaponTypeId, 0);
+            worldData.AdWeaponsData.WatchedAdsToBuyWeapons.TryAdd(weaponTypeId, 0);
 
             if (IsWeaponAdBought(playerData, weaponTypeId))
             {
                 _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true,
-                    adsWeaponData.WatchedAdsToBuyWeapons[weaponTypeId]);
+                    worldData.AdWeaponsData.WatchedAdsToBuyWeapons[weaponTypeId]);
                 return;
             }
 
-            _shopWeaponInfoView.SetAdWeaponInfo(weaponData, false, adsWeaponData.WatchedAdsToBuyWeapons[weaponTypeId]);
+            _shopWeaponInfoView.SetAdWeaponInfo(weaponData, false, worldData.AdWeaponsData.WatchedAdsToBuyWeapons[weaponTypeId]);
         }
 
         private bool IsWeaponAd(WeaponData weaponData) =>

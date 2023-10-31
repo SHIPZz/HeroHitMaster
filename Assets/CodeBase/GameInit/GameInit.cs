@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Agava.YandexGames;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
@@ -27,7 +26,6 @@ using I2.Loc;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
-using PlayerPrefs = Agava.YandexGames.PlayerPrefs;
 
 namespace CodeBase.GameInit
 {
@@ -84,7 +82,7 @@ namespace CodeBase.GameInit
             AudioView audioView,
             AudioChanger audioChanger,
             WeaponStaticDataService weaponStaticDataService,
-            KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover, 
+            KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
             PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand, Canvas mainUi)
         {
             _mainUi = mainUi;
@@ -113,21 +111,20 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
-            YandexGamesSdk.GameReady();
-            var settingsData = await _saveSystem.Load<SettingsData>();
+            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            // YandexGamesSdk.GameReady();
+            var worldData = await _saveSystem.Load<WorldData>();
             _mainUi.transform.SetParent(null);
-            TranslateWeaponNames();
+            TranslateWeaponNames(worldData.TranslatedWeaponNameData);
 
-            InitSound(settingsData);
+            InitSound(worldData.SettingsData);
 
             InitEnemiesAndObjectsWhoNeedEnemies();
 
-            var playerData = await _saveSystem.Load<PlayerData>();
-            InitPlayerBeforeWeaponChoose(playerData);
-            Weapon weapon = await InitializeInitialWeapon(playerData.LastWeaponId);
+            InitPlayerBeforeWeaponChoose(worldData.PlayerData);
+            Weapon weapon = await InitializeInitialWeapon(worldData.PlayerData.LastWeaponId);
             Player targetPlayer = InitPlayerAfterWeaponChoose(weapon);
-            InitializeUIPresenters(playerData);
+            InitializeUIPresenters(worldData.PlayerData);
             InitializeCamera(targetPlayer, weapon);
             _waterSplashPoolInitializer.Init();
             _setterWeaponToPlayerHand.Init(weapon.WeaponTypeId);
@@ -165,9 +162,8 @@ namespace CodeBase.GameInit
             }));
         }
 
-        private async void TranslateWeaponNames()
+        private void TranslateWeaponNames(TranslatedWeaponNameData weaponNamesData)
         {
-            var weaponNamesData = await _saveSystem.Load<TranslatedWeaponNameData>();
             List<WeaponData> weaponDatas = _weaponStaticDataService.GetAll();
 
             if (!_translatedWeaponNames.TryGetValue(LocalizationManager.CurrentLanguage,
@@ -178,8 +174,6 @@ namespace CodeBase.GameInit
             {
                 weaponNamesData.Names[weaponData.WeaponTypeId] = namePropertyGetter?.Invoke(weaponData);
             }
-
-            _saveSystem.Save(weaponNamesData);
         }
 
         private void InitializeUIPresenters(PlayerData playerData)
@@ -201,7 +195,7 @@ namespace CodeBase.GameInit
         private async UniTask<Weapon> InitializeInitialWeapon(WeaponTypeId weaponTypeId)
         {
             Weapon weapon = await _weaponSelector.Init(weaponTypeId);
-            
+
             while (weapon.BulletsCreated == false)
             {
                 await UniTask.Yield();
@@ -228,14 +222,13 @@ namespace CodeBase.GameInit
             if (Input.GetKeyDown(KeyCode.F8))
             {
                 UnityEngine.PlayerPrefs.DeleteAll();
-                 UnityEngine.PlayerPrefs.Save();
+                UnityEngine.PlayerPrefs.Save();
             }
 
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                var playerData = await _saveSystem.Load<PlayerData>();
-                playerData.Money += 5000;
-                _saveSystem.Save(playerData);
+                var worldData = await _saveSystem.Load<WorldData>();
+                worldData.PlayerData.Money += 5000;
             }
         }
     }

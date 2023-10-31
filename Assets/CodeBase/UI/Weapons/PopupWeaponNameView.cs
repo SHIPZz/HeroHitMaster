@@ -22,8 +22,8 @@ namespace CodeBase.UI.Weapons
 
         private async void OnEnable()
         {
-            var translatedWeaponNameData = await _saveSystem.Load<TranslatedWeaponNameData>();
-            _nameText.text = translatedWeaponNameData.Names[_weaponSelectorView.WeaponTypeId];
+            var worldData = await _saveSystem.Load<WorldData>();
+            _nameText.text = worldData.TranslatedWeaponNameData.Names[_weaponSelectorView.WeaponTypeId];
         }
     }
 }
