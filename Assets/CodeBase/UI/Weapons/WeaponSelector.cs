@@ -4,7 +4,6 @@ using CodeBase.Gameplay.Weapons;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
-using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Weapon;
 using Cysharp.Threading.Tasks;
@@ -18,8 +17,8 @@ namespace CodeBase.UI.Weapons
 
         private readonly IProvider<Weapon> _weaponProvider;
         private readonly IWeaponStorage _weaponStorage;
-        private readonly ISaveSystem _saveSystem;
         private readonly WeaponStaticDataService _weaponStaticDataService;
+        private readonly IWorldDataService _worldDataService;
         private WeaponTypeId _lastWeaponId;
 
         public WeaponTypeId LastWeaponId => _lastWeaponId;
@@ -27,11 +26,11 @@ namespace CodeBase.UI.Weapons
         public event Action<WeaponTypeId> NewWeaponChanged;
 
         public WeaponSelector(IProvider<Weapon> weaponProvider,
-            IWeaponStorage weaponStorage, ISaveSystem saveSystem, 
+            IWeaponStorage weaponStorage, IWorldDataService worldDataService,
             WeaponStaticDataService weaponStaticDataService)
         {
+            _worldDataService = worldDataService;
             _weaponStaticDataService = weaponStaticDataService;
-            _saveSystem = saveSystem;
             _weaponProvider = weaponProvider;
             _weaponStorage = weaponStorage;
         }
@@ -43,7 +42,7 @@ namespace CodeBase.UI.Weapons
 
             if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
             {
-                var worldData = await _saveSystem.Load<WorldData>();
+                WorldData worldData = _worldDataService.WorldData;
 
                 if (worldData.LevelData.LevelsWithPopupWeapon != 0)
                 {
@@ -61,9 +60,9 @@ namespace CodeBase.UI.Weapons
             return weapon;
         }
 
-        public async void Select()
+        public void SetBoughtMoneyWeapon()
         {
-            await SetLastSelectedWeapon();
+            SetLastWeaponToData();
 
             Weapon weapon = _weaponStorage.Get(_lastWeaponId);
             _weaponProvider.Set(weapon);
@@ -71,9 +70,10 @@ namespace CodeBase.UI.Weapons
             NewWeaponChanged?.Invoke(_lastWeaponId);
         }
 
-        public async void Select(WeaponTypeId weaponTypeId)
+        public void SetBoughtWeaponAdWeapon(WeaponTypeId weaponTypeId)
         {
-            await SetLastSelectedWeapon();
+            _lastWeaponId = weaponTypeId;
+            SetLastWeaponToData();
 
             Weapon weapon = _weaponStorage.Get(weaponTypeId);
             _weaponProvider.Set(weapon);
@@ -81,29 +81,21 @@ namespace CodeBase.UI.Weapons
             NewWeaponChanged?.Invoke(weaponTypeId);
         }
 
-        public async void SetLastWeaponChoosen(WeaponTypeId weaponTypeId)
+        public void SaveLastPopupWeapon(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;
-
-            var worldData = await _saveSystem.Load<WorldData>();
-
-            if (_weaponStaticDataService.Get(weaponTypeId).Price.PriceTypeId == PriceTypeId.Popup)
-            {
-                Select();
-                return;
-            }
-
-            if (!worldData.PlayerData.PurchasedWeapons.Contains(weaponTypeId))
-                return;
-
-            worldData.PlayerData.LastNotPopupWeaponId = _lastWeaponId;
-            Select();
+            WorldData worldData = _worldDataService.WorldData;
+            worldData.PlayerData.LastWeaponId = _lastWeaponId;
         }
 
-        private async UniTask SetLastSelectedWeapon()
+        public void SetLastShopWeaponSelected(WeaponTypeId weaponTypeId) =>
+            _lastWeaponId = weaponTypeId;
+
+        private void SetLastWeaponToData()
         {
-            var worldData = await _saveSystem.Load<WorldData>();
+            WorldData worldData = _worldDataService.WorldData;
             worldData.PlayerData.LastWeaponId = _lastWeaponId;
+            worldData.PlayerData.LastNotPopupWeaponId = _lastWeaponId;
         }
     }
 }

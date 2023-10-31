@@ -1,5 +1,6 @@
 ﻿using System;
 using Agava.YandexGames;
+using CodeBase.Services.SaveSystems.Data;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -10,14 +11,14 @@ namespace CodeBase.Services.SaveSystems
         private string _data;
         private bool _isDataReceived;
 
-        public void Save<WorldData>(WorldData data)
+        public void Save(WorldData data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
 
             PlayerAccount.SetCloudSaveData(jsonData);
         }
 
-        public async UniTask<WorldData> Load<WorldData>() where WorldData : new()
+        public async UniTask<WorldData> Load()
         {
             PlayerAccount.GetCloudSaveData(OnSuccessCallback);
 

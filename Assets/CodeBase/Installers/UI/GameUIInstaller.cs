@@ -54,7 +54,6 @@ namespace CodeBase.Installers.UI
         {
             BindWindowProvider();
             BindWindowService();
-            BindUIFactory();
             BindWeaponIconsProvider();
             BindShopUI();
             BindPlayerSelector();
@@ -253,14 +252,7 @@ namespace CodeBase.Installers.UI
                 .BindInterfacesAndSelfTo<WeaponIconsProvider>()
                 .FromInstance(_weaponIconsProvider);
         }
-
-        private void BindUIFactory()
-        {
-            Container
-                .Bind<UIFactory>()
-                .AsSingle();
-        }
-
+        
         private void BindWindowProvider()
         {
             Container

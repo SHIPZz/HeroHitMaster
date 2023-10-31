@@ -12,12 +12,10 @@ namespace CodeBase.UI.Windows.Shop
         private readonly WindowService _windowService;
         private readonly ShopMoneyText _shopMoneyText;
         private readonly Wallet.Wallet _wallet;
-        private readonly ISaveSystem _saveSystem;
 
         public ShopPresenter(ShopView shopView, WindowService windowService,
-            ShopMoneyText shopMoneyText, Wallet.Wallet wallet, ISaveSystem saveSystem)
+            ShopMoneyText shopMoneyText, Wallet.Wallet wallet)
         {
-            _saveSystem = saveSystem;
             _wallet = wallet;
             _shopMoneyText = shopMoneyText;
             _shopView = shopView;
@@ -38,10 +36,9 @@ namespace CodeBase.UI.Windows.Shop
             _shopView.ClosedButtonClicked -= Close;
         }
 
-        private async void Open()
+        private void Open()
         {
-            var worldData = await _saveSystem.Load<WorldData>();
-            _shopMoneyText.SetMoney(worldData.PlayerData.Money);
+            _shopMoneyText.SetMoney(_wallet.Money);
             _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Shop));
         }
 

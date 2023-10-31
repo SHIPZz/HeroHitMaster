@@ -6,6 +6,7 @@ using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Inputs.InputService;
 using CodeBase.Services.Pause;
+using CodeBase.Services.Providers;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.SaveSystems;
 using Cysharp.Threading.Tasks;
@@ -39,10 +40,17 @@ namespace CodeBase.Installers
             await InitYandexSDK();
 
             BindSaveSystem();
+            BindWorldDataService();
 
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
             gameStateMachine.ChangeState<BootstrapState>();
         }
+
+        private void BindWorldDataService() =>
+            Container
+                .Bind<IWorldDataService>()
+                .To<WorldDataService>()
+                .AsSingle();
 
         private async UniTask InitYandexSDK()
         {

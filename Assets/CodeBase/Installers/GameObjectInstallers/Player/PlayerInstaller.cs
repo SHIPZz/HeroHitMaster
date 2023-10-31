@@ -14,7 +14,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
     {
         [SerializeField] private CodeBase.Gameplay.Character.Players.Player _player;
         [SerializeField] private Animator _animator;
-        [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform _initialShootPosition;
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private ShootingOnAnimationEvent _shootingOnAnimationEvent;
@@ -50,7 +49,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Player
         private void BindInstances()
         {
             Container.BindInstance(_player);
-            Container.BindInstance(_rigidbody);
             Container.BindInstance(_shootingOnAnimationEvent);
             Container.BindInstance(_initialShootPosition);
             Container.BindInstance(_animator);

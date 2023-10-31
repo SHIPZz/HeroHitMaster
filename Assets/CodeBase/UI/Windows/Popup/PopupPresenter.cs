@@ -1,8 +1,7 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Services.Ad;
-using CodeBase.Services.SaveSystems;
-using CodeBase.Services.SaveSystems.Data;
+using CodeBase.Services.Providers;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Popup
@@ -14,24 +13,22 @@ namespace CodeBase.UI.Windows.Popup
         private readonly PopupInfoView _popupInfoView;
         private readonly WindowService _windowService;
         private readonly IAdService _adService;
-        private readonly ISaveSystem _saveSystem;
+        private readonly IWorldDataService _worldDataService;
 
         public PopupPresenter(WindowService windowService, PopupInfoView popupInfoView,
-            IAdService adService, ISaveSystem saveSystem)
+            IAdService adService, IWorldDataService worldDataService)
         {
-            _saveSystem = saveSystem;
+            _worldDataService = worldDataService;
             _adService = adService;
             _popupInfoView = popupInfoView;
             _windowService = windowService;
         }
 
-        public async void Initialize()
+        public void Initialize()
         {
             _popupInfoView.AdButtonClicked += ShowAd;
 
-            var worldData = await _saveSystem.Load<WorldData>();
-
-            if (worldData.LevelData.Id % TargetPopupLevelInvoke != 0)
+            if (_worldDataService.WorldData.LevelData.Id % TargetPopupLevelInvoke != 0)
                 return;
             
             _windowService.CloseAll();

@@ -7,7 +7,6 @@ namespace CodeBase.UI.Windows.Shop
     {
         [SerializeField] private TextMeshProUGUI _text;
 
-
         public void SetMoney(int money) =>
             _text.text = money.ToString();
     }

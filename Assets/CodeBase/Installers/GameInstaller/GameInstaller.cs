@@ -117,7 +117,7 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindAdWatchCounter()
         {
-            BindAsSingle<AdWatchCounter>();
+            BindAsSingle<WeaponAdWatchCounter>();
             Container.BindInterfacesAndSelfTo<AdWatchCounterPresenter>().AsSingle();
         }
 

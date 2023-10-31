@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
-using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
+using CodeBase.UI.Weapons;
+using CodeBase.UI.Weapons.ShopWeapons;
 using UnityEngine.UI;
 using Zenject;
 
-namespace CodeBase.UI.Weapons.ShopWeapons
+namespace CodeBase.UI.Windows.Shop
 {
     public class ShopWeaponPresenter : IInitializable, IDisposable
     {
@@ -22,24 +20,26 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private readonly ShopWeaponInfoView _shopWeaponInfoView;
         private readonly IProvider<WeaponIconsProvider> _weaponIconsProvider;
         private readonly CheckOutService _checkOutService;
-        private readonly AdWatchCounter _adWatchCounter;
-        private readonly ISaveSystem _saveSystem;
+        private readonly WeaponAdWatchCounter _weaponAdWatchCounter;
+        private readonly Wallet.Wallet _wallet;
+        private readonly IWorldDataService _worldDataService;
 
         private Image _lastWeaponIcon;
         private WeaponTypeId _lastWeaponType;
-        private PlayerData _playerData;
 
         public ShopWeaponPresenter(IProvider<List<WeaponSelectorView>> weaponSelectorViewsProvider,
             WeaponStaticDataService weaponStaticDataService,
             ShopWeaponInfoView shopWeaponInfoView,
-            IProvider<WeaponIconsProvider> weaponIconsesProvider,
-            ISaveSystem saveSystem, CheckOutService checkOutService,
-            AdWatchCounter adWatchCounter)
+            IProvider<WeaponIconsProvider> weaponIconsProvider,
+            IWorldDataService worldDataService
+            , CheckOutService checkOutService,
+            WeaponAdWatchCounter weaponAdWatchCounter, Wallet.Wallet wallet)
         {
-            _adWatchCounter = adWatchCounter;
+            _worldDataService = worldDataService;
+            _wallet = wallet;
+            _weaponAdWatchCounter = weaponAdWatchCounter;
             _checkOutService = checkOutService;
-            _saveSystem = saveSystem;
-            _weaponIconsProvider = weaponIconsesProvider;
+            _weaponIconsProvider = weaponIconsProvider;
             _shopWeaponInfoView = shopWeaponInfoView;
             _weaponStaticDataService = weaponStaticDataService;
             _weaponSelectorViews = weaponSelectorViewsProvider.Get();
@@ -49,28 +49,25 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             _weaponSelectorViews.ForEach(x => x.Choosen += SetWeaponDataToView);
             _checkOutService.Succeeded += DisablePurchasedWeaponInfo;
-            _adWatchCounter.AdWatched += SetAdWeaponInfo;
-            _adWatchCounter.AllAdWatched += SetAdWeaponInfo;
+            _weaponAdWatchCounter.AdWatched += SetWeaponAdWeaponInfoAfterWeaponAdWatching;
+            _weaponAdWatchCounter.AllAdWatched += SetWeaponAdWeaponInfoAfterPurchasing;
         }
 
         public void Dispose()
         {
             _weaponSelectorViews.ForEach(x => x.Choosen -= SetWeaponDataToView);
             _checkOutService.Succeeded -= DisablePurchasedWeaponInfo;
-            _adWatchCounter.AdWatched -= SetAdWeaponInfo;
-            _adWatchCounter.AllAdWatched -= SetAdWeaponInfo;
+            _weaponAdWatchCounter.AdWatched -= SetWeaponAdWeaponInfoAfterWeaponAdWatching;
+            _weaponAdWatchCounter.AllAdWatched -= SetWeaponAdWeaponInfoAfterPurchasing;
         }
 
-        public async void Init(WeaponTypeId weaponTypeId)
+        public void Init(WeaponTypeId weaponTypeId)
         {
-            WeaponData weaponData;
-            weaponData = _weaponStaticDataService.Get(weaponTypeId);
-            var worldData = await _saveSystem.Load<WorldData>();
-            _playerData = worldData.PlayerData;
+            WeaponData weaponData = _weaponStaticDataService.Get(weaponTypeId);
 
             if (weaponData.Price.PriceTypeId == PriceTypeId.Popup)
             {
-                await SetLastNotPopupWeapon();
+                SetLastNotPopupWeapon();
                 return;
             }
 
@@ -87,26 +84,25 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData, true);
+            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false);
+            _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
         }
 
-        private async UniTask SetLastNotPopupWeapon()
+        private void SetLastNotPopupWeapon()
         {
-            WeaponData weaponData;
-            var playerData = await _saveSystem.Load<PlayerData>();
-            weaponData = _weaponStaticDataService.Get(playerData.LastNotPopupWeaponId);
-            Debug.Log(weaponData.WeaponTypeId);
+            WorldData worldData = _worldDataService.WorldData;
+            WeaponData weaponData = _weaponStaticDataService.Get(worldData.PlayerData.LastNotPopupWeaponId);
             SetWeaponDataToView(weaponData.WeaponTypeId);
         }
 
-        private void SetAdWeaponInfo(WeaponTypeId weaponTypeId)
+        private void SetWeaponAdWeaponInfoAfterPurchasing(WeaponTypeId weaponTypeId)
         {
             WeaponData weaponData = _weaponStaticDataService.Get(weaponTypeId);
             _shopWeaponInfoView.ShowEffectOnPurchasedWeapon(weaponTypeId);
             _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, weaponData.Price.AdQuantity);
         }
 
-        private void SetAdWeaponInfo(WeaponTypeId weaponTypeId, int watchedAds)
+        private void SetWeaponAdWeaponInfoAfterWeaponAdWatching(WeaponTypeId weaponTypeId, int watchedAds)
         {
             WeaponData weaponData = _weaponStaticDataService.Get(weaponTypeId);
             _shopWeaponInfoView.SetAdWeaponInfo(weaponData, false, watchedAds);
@@ -116,7 +112,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             WeaponData weaponData = _weaponStaticDataService.Get(_lastWeaponType);
             _shopWeaponInfoView.ShowEffectOnPurchasedWeapon(weaponData.WeaponTypeId);
-            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData, true);
+            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false);
+            _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
         }
 
         private void SetWeaponDataToView(WeaponTypeId weaponTypeId)
@@ -125,32 +122,45 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
 
             WeaponData weaponData = GetWeaponData(weaponTypeId);
+            WorldData worldData = _worldDataService.WorldData;
+            PlayerData playerData = worldData.PlayerData;
             _lastWeaponType = weaponTypeId;
             SetMainShopWeaponIcon(weaponTypeId);
 
             if (IsWeaponAd(weaponData))
             {
-                SetAdWeaponInfoToView(weaponTypeId, _playerData, weaponData);
+                SetAdWeaponInfoToView(weaponTypeId, playerData, weaponData);
                 return;
             }
 
-            if (!HasEnoughMoneyToBuy(_playerData, weaponData)) 
-                _shopWeaponInfoView.DisableBuyButtons();
-
-            if (HasPlayerThisWeapon(_playerData, weaponData))
+            if (HasPlayerThisWeapon(playerData, weaponData))
             {
-                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData, true);
+                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false);
+                _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
                 return;
             }
 
-            if (!HasPlayerThisWeapon(_playerData, weaponData))
-                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData, false);
+            if (!HasPlayerThisWeapon(playerData, weaponData))
+            {
+                if (HasEnoughMoneyToBuy(weaponData))
+                {
+                    _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, true);
+                    _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, true);
+                    return;
+                }
+
+                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false);
+                _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, true);
+            }
+
+            if (!HasEnoughMoneyToBuy(weaponData))
+                _shopWeaponInfoView.DisableBuyButtons();
         }
 
-        private async void SetAdWeaponInfoToView(WeaponTypeId weaponTypeId, PlayerData playerData,
+        private void SetAdWeaponInfoToView(WeaponTypeId weaponTypeId, PlayerData playerData,
             WeaponData weaponData)
         {
-            var worldData = await _saveSystem.Load<WorldData>();
+            WorldData worldData = _worldDataService.WorldData;
 
             worldData.AdWeaponsData.WatchedAdsToBuyWeapons.TryAdd(weaponTypeId, 0);
 
@@ -161,7 +171,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            _shopWeaponInfoView.SetAdWeaponInfo(weaponData, false, worldData.AdWeaponsData.WatchedAdsToBuyWeapons[weaponTypeId]);
+            _shopWeaponInfoView.SetAdWeaponInfo(weaponData, false,
+                worldData.AdWeaponsData.WatchedAdsToBuyWeapons[weaponTypeId]);
         }
 
         private bool IsWeaponAd(WeaponData weaponData) =>
@@ -187,7 +198,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         private bool HasPlayerThisWeapon(PlayerData playerData, WeaponData weaponData) =>
             playerData.PurchasedWeapons.Contains(weaponData.WeaponTypeId);
 
-        private bool HasEnoughMoneyToBuy(PlayerData playerData, WeaponData weaponData) =>
-            playerData.Money >= weaponData.Price.Value;
+        private bool HasEnoughMoneyToBuy(WeaponData weaponData) =>
+            _wallet.Money >= weaponData.Price.Value;
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Enums;
-using CodeBase.Services.SaveSystems;
-using CodeBase.Services.SaveSystems.Data;
-using CodeBase.Services.Storages;
+using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Sound;
 using UnityEngine;
 
@@ -11,19 +8,18 @@ namespace CodeBase.UI.Windows.Audio
     public class AudioChanger
     {
         private readonly List<AudioSource> _allSounds;
-        private readonly ISaveSystem _saveSystem;
+        private readonly IWorldDataService _worldDataService;
 
-        public AudioChanger(ISoundStorage soundStorage, ISaveSystem saveSystem)
+        public AudioChanger(ISoundStorage soundStorage, IWorldDataService worldDataService)
         {
-            _saveSystem = saveSystem;
+            _worldDataService = worldDataService;
             _allSounds = soundStorage.GetAll();
         }
 
-        public async void Change(float value)
+        public void Change(float value)
         {
             _allSounds.ForEach(x => x.volume = value);
-            var worldData = await _saveSystem.Load<WorldData>();
-            worldData.SettingsData.Volume = value;
+            _worldDataService.WorldData.SettingsData.Volume = value;
         }
     }
 }

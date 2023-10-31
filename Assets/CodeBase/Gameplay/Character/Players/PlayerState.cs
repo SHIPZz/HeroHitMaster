@@ -23,6 +23,9 @@ namespace CodeBase.Gameplay.Character.Players
             _shootingOnAnimationEvent.Stopped += OnWeaponStoppedShoot;
         }
 
+        public void Dispose() => 
+            _weapon.Shot -= OnWeaponShot;
+
         private void OnWeaponStoppedShoot()
         {
             if (_navMeshAgent.velocity.magnitude > 0.1f)
@@ -37,17 +40,7 @@ namespace CodeBase.Gameplay.Character.Players
             _weapon.Shot += OnWeaponShot;
         }
 
-        private void OnWeaponShot()
-        {
+        private void OnWeaponShot() => 
             _playerAnimator.NeedBlockIdle(_navMeshAgent.velocity.magnitude > 0.1);
-            
-            // if (_navMeshAgent.velocity.magnitude > 0.1f)
-            //     _playerAnimator.SetMovement(1f);
-        }
-
-        public void Dispose()
-        {
-            _weapon.Shot -= OnWeaponShot;
-        }
     }
 }

@@ -1,36 +1,34 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
-using CodeBase.Services.SaveSystems;
+using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Character;
-using UnityEngine;
 
 namespace CodeBase.Gameplay.Character.PlayerSelection
 {
     public class PlayerSelector
     {
         private readonly IPlayerStorage _playerStorage;
-        private readonly ISaveSystem _saveSystem;
+        private readonly IWorldDataService _worldDataService;
 
-        public PlayerSelector(IPlayerStorage playerStorage, ISaveSystem saveSystem)
+        public PlayerSelector(IPlayerStorage playerStorage, IWorldDataService worldDataService)
         {
-            _saveSystem = saveSystem;
+            _worldDataService = worldDataService;
             _playerStorage = playerStorage;
         }
 
         public async void Select(WeaponTypeId weaponTypeId)
         {
             Player lastPlayer = _playerStorage.CurrentPlayer;
-            var worldData = await _saveSystem.Load<WorldData>();
             
             if (lastPlayer == _playerStorage.GetByWeapon(weaponTypeId))
             {
-                SetPlayerToData(worldData.PlayerData, lastPlayer);
+                SetPlayerToData(_worldDataService.WorldData.PlayerData, lastPlayer);
                 return;
             }
 
             Player targetPlayer = _playerStorage.GetByWeapon(weaponTypeId);
-            SetPlayerToData(worldData.PlayerData, targetPlayer);
+            SetPlayerToData(_worldDataService.WorldData.PlayerData, targetPlayer);
         }
 
         private void SetPlayerToData(PlayerData playerData, Player targetPlayer)

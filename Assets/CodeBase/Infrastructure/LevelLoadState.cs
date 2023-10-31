@@ -1,7 +1,6 @@
 ﻿using CodeBase.Services.Ad;
 using CodeBase.Services.Pause;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

@@ -10,25 +10,25 @@ namespace CodeBase.Services.SaveSystems.WeaponSaves
     {
         private readonly WeaponSaver _weaponSaver;
         private readonly CheckOutService _checkOutService;
-        private readonly  AdWatchCounter _adWatchCounter;
+        private readonly  WeaponAdWatchCounter _weaponAdWatchCounter;
 
-        public WeaponSaverMediator(WeaponSaver weaponSaver, CheckOutService checkOutService, AdWatchCounter adWatchCounter)
+        public WeaponSaverMediator(WeaponSaver weaponSaver, CheckOutService checkOutService, WeaponAdWatchCounter weaponAdWatchCounter)
         {
             _weaponSaver = weaponSaver;
             _checkOutService = checkOutService;
-            _adWatchCounter = adWatchCounter;
+            _weaponAdWatchCounter = weaponAdWatchCounter;
         }
 
         public void Initialize()
         {
             _checkOutService.Succeeded += _weaponSaver.Save;
-            _adWatchCounter.AllAdWatched += _weaponSaver.Save;
+            _weaponAdWatchCounter.AllAdWatched += _weaponSaver.Save;
         }
 
         public void Dispose()
         {
             _checkOutService.Succeeded -= _weaponSaver.Save;
-            _adWatchCounter.AllAdWatched -= _weaponSaver.Save;
+            _weaponAdWatchCounter.AllAdWatched -= _weaponSaver.Save;
         }
     }
 }

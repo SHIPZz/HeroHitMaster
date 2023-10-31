@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agava.YandexGames;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
@@ -21,6 +22,7 @@ using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows.Audio;
+using CodeBase.UI.Windows.Shop;
 using Cysharp.Threading.Tasks;
 using I2.Loc;
 using UnityEngine;
@@ -36,7 +38,6 @@ namespace CodeBase.GameInit
         private readonly IPlayerStorage _playerStorage;
         private readonly WeaponSelector _weaponSelector;
         private readonly WalletPresenter _walletPresenter;
-        private readonly ISaveSystem _saveSystem;
         private readonly ShopWeaponPresenter _shopWeaponPresenter;
         private readonly List<EnemySpawner> _enemySpawners;
         private readonly EnemyConfigurator _enemyConfigurator = new();
@@ -60,8 +61,11 @@ namespace CodeBase.GameInit
             { "tr", weaponData => weaponData.TurkishName },
         };
 
-        private SetterWeaponToPlayerHand _setterWeaponToPlayerHand;
-        private Canvas _mainUi;
+        private readonly SetterWeaponToPlayerHand _setterWeaponToPlayerHand;
+        private readonly Canvas _mainUi;
+        private readonly ShopWeaponInfoView _shopWeaponInfoView;
+        private readonly Wallet _wallet;
+        private IWorldDataService _worldDataService;
 
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
@@ -69,7 +73,6 @@ namespace CodeBase.GameInit
             IPlayerStorage playerStorage,
             WeaponSelector weaponSelector,
             WalletPresenter walletPresenter,
-            ISaveSystem saveSystem,
             ShopWeaponPresenter shopWeaponPresenter,
             IProvider<List<EnemySpawner>> enemySpawnersProvider,
             CountEnemiesOnDeath countEnemiesOnDeath,
@@ -83,8 +86,13 @@ namespace CodeBase.GameInit
             AudioChanger audioChanger,
             WeaponStaticDataService weaponStaticDataService,
             KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
-            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand, Canvas mainUi)
+            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand, 
+            Canvas mainUi, ShopWeaponInfoView shopWeaponInfoView, 
+            Wallet wallet, IWorldDataService worldDataService)
         {
+            _worldDataService = worldDataService;
+            _wallet = wallet;
+            _shopWeaponInfoView = shopWeaponInfoView;
             _mainUi = mainUi;
             _setterWeaponToPlayerHand = setterWeaponToPlayerHand;
             _playerSettings = playerSettings;
@@ -101,7 +109,6 @@ namespace CodeBase.GameInit
             _countEnemiesOnDeath = countEnemiesOnDeath;
             _enemySpawners = enemySpawnersProvider.Get();
             _shopWeaponPresenter = shopWeaponPresenter;
-            _saveSystem = saveSystem;
             _walletPresenter = walletPresenter;
             _weaponSelector = weaponSelector;
             _playerCameraFactory = playerCameraFactory;
@@ -111,16 +118,16 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
-            // YandexGamesSdk.GameReady();
-            var worldData = await _saveSystem.Load<WorldData>();
+            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            YandexGamesSdk.GameReady();
+            WorldData worldData = _worldDataService.WorldData;
             _mainUi.transform.SetParent(null);
-            TranslateWeaponNames(worldData.TranslatedWeaponNameData);
+            TranslateWeaponNames(worldData);
 
             InitSound(worldData.SettingsData);
 
+            _shopWeaponInfoView.SetTranslatedNames(worldData.TranslatedWeaponNameData.Names);
             InitEnemiesAndObjectsWhoNeedEnemies();
-
             InitPlayerBeforeWeaponChoose(worldData.PlayerData);
             Weapon weapon = await InitializeInitialWeapon(worldData.PlayerData.LastWeaponId);
             Player targetPlayer = InitPlayerAfterWeaponChoose(weapon);
@@ -162,7 +169,7 @@ namespace CodeBase.GameInit
             }));
         }
 
-        private void TranslateWeaponNames(TranslatedWeaponNameData weaponNamesData)
+        private void TranslateWeaponNames(WorldData worldData)
         {
             List<WeaponData> weaponDatas = _weaponStaticDataService.GetAll();
 
@@ -172,8 +179,11 @@ namespace CodeBase.GameInit
 
             foreach (WeaponData weaponData in weaponDatas)
             {
-                weaponNamesData.Names[weaponData.WeaponTypeId] = namePropertyGetter?.Invoke(weaponData);
+                worldData.TranslatedWeaponNameData.Names[weaponData.WeaponTypeId] =
+                    namePropertyGetter?.Invoke(weaponData);
             }
+
+            _worldDataService.Save();
         }
 
         private void InitializeUIPresenters(PlayerData playerData)
@@ -217,7 +227,7 @@ namespace CodeBase.GameInit
             _playerStorage.GetById(playerTypeId);
 
         //test
-        public async void Tick()
+        public void Tick()
         {
             if (Input.GetKeyDown(KeyCode.F8))
             {
@@ -227,8 +237,13 @@ namespace CodeBase.GameInit
 
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                var worldData = await _saveSystem.Load<WorldData>();
-                worldData.PlayerData.Money += 5000;
+                _wallet.AddMoney(5000);
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                _worldDataService.Save();
+                Debug.Log(_worldDataService.WorldData.PlayerData.Money);
             }
         }
     }

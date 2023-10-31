@@ -5,10 +5,10 @@ namespace CodeBase.Services.SaveSystems.Data
     [Serializable]
     public class WorldData
     {
-        public AdWeaponsData AdWeaponsData;
-        public LevelData LevelData;
-        public PlayerData PlayerData;
-        public SettingsData SettingsData;
-        public TranslatedWeaponNameData TranslatedWeaponNameData;
+        public AdWeaponsData AdWeaponsData = new();
+        public LevelData LevelData = new();
+        public PlayerData PlayerData = new();
+        public SettingsData SettingsData = new();
+        public TranslatedWeaponNameData TranslatedWeaponNameData = new();
     }
 }

@@ -17,17 +17,14 @@ namespace CodeBase.UI.Weapons
         private readonly WeaponSelector _weaponSelector;
         private readonly Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIconClickers;
         private readonly CheckOutService _checkOutService;
-        private readonly List<WeaponSelectorView> _popupWeaponIcons;
         private readonly PopupInfoView _popupInfoView;
-        private readonly AdWatchCounter _adWatchCounter;
+        private readonly WeaponAdWatchCounter _weaponAdWatchCounter;
 
         public WeaponSelectorPresenter(WeaponIconsProvider weaponIconsProvider, WeaponSelector weaponSelector,
-            CheckOutService checkOutService, 
-            IProvider<WeaponIconsProvider> provider, PopupInfoView popupInfoView, AdWatchCounter adWatchCounter)
+            CheckOutService checkOutService,  PopupInfoView popupInfoView, WeaponAdWatchCounter weaponAdWatchCounter)
         {
-            _adWatchCounter = adWatchCounter;
+            _weaponAdWatchCounter = weaponAdWatchCounter;
             _popupInfoView = popupInfoView;
-            _popupWeaponIcons = provider.Get().Icons.Values.ToList();
             _checkOutService = checkOutService;
             _weaponIconClickers = weaponIconsProvider.Icons;
             _weaponSelector = weaponSelector;
@@ -35,25 +32,23 @@ namespace CodeBase.UI.Weapons
 
         public void Initialize()
         {
-            _popupWeaponIcons.ForEach(x => x.Choosen += _weaponSelector.SetLastWeaponChoosen);
-            _popupInfoView.LastWeaponSelected += _weaponSelector.SetLastWeaponChoosen;
-            _adWatchCounter.AllAdWatched += _weaponSelector.Select;
+            _popupInfoView.LastWeaponSelected += _weaponSelector.SaveLastPopupWeapon;
+            _weaponAdWatchCounter.AllAdWatched += _weaponSelector.SetBoughtWeaponAdWeapon;
             
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosen +=  _weaponSelector.SetLastWeaponChoosen;
+                weaponIcon.Choosen +=  _weaponSelector.SetLastShopWeaponSelected;
 
-            _checkOutService.Succeeded += _weaponSelector.Select;
+            _checkOutService.Succeeded += _weaponSelector.SetBoughtMoneyWeapon;
         }
 
         public void Dispose()
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosen -=  _weaponSelector.SetLastWeaponChoosen;
+                weaponIcon.Choosen -=  _weaponSelector.SetLastShopWeaponSelected;
                 
-            _adWatchCounter.AllAdWatched -= _weaponSelector.Select;
-            _checkOutService.Succeeded -= _weaponSelector.Select;
-            _popupInfoView.LastWeaponSelected -= _weaponSelector.SetLastWeaponChoosen;
-            _popupWeaponIcons.ForEach(x => x.Choosen -= _weaponSelector.SetLastWeaponChoosen);
+            _weaponAdWatchCounter.AllAdWatched -= _weaponSelector.SetBoughtWeaponAdWeapon;
+            _checkOutService.Succeeded -= _weaponSelector.SetBoughtMoneyWeapon;
+            _popupInfoView.LastWeaponSelected -= _weaponSelector.SaveLastPopupWeapon;
         }
     }
 }

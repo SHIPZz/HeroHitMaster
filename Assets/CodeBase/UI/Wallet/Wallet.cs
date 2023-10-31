@@ -10,10 +10,12 @@ namespace CodeBase.UI.Wallet
 
         public event Action<int> MoneyChanged;
 
+        public int Money => _money;
+
         public void SetMaxMoney(int maxMoney) =>
             _maxMoney = maxMoney;
 
-        public void SetInitalMoney(int money) =>
+        public void SetInitialMoney(int money) =>
             _money = money;
         
         public void AddMoney(int money)
@@ -28,7 +30,7 @@ namespace CodeBase.UI.Wallet
             if (_money - money < 0)
                 return false;
 
-            _money -= money;
+            _money = Mathf.Clamp(_money - money, 0, _maxMoney);
             
             MoneyChanged?.Invoke(_money);
             return true;

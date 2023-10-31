@@ -1,5 +1,4 @@
-﻿using CodeBase.Services.SaveSystems;
-using CodeBase.Services.SaveSystems.Data;
+﻿using CodeBase.Services.Providers;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -10,20 +9,17 @@ namespace CodeBase.UI.Weapons
     {
         [SerializeField] private TextMeshProUGUI _nameText;
         
-        private ISaveSystem _saveSystem;
+        private IWorldDataService _worldDataService;
         private WeaponSelectorView _weaponSelectorView;
 
         [Inject]
-        private void Construct(ISaveSystem saveSystem) =>
-            _saveSystem = saveSystem;
+        private void Construct(IWorldDataService worldDataService) =>
+            _worldDataService = worldDataService;
 
         private void Awake() => 
             _weaponSelectorView = GetComponent<WeaponSelectorView>();
 
-        private async void OnEnable()
-        {
-            var worldData = await _saveSystem.Load<WorldData>();
-            _nameText.text = worldData.TranslatedWeaponNameData.Names[_weaponSelectorView.WeaponTypeId];
-        }
+        private void OnEnable() => 
+            _nameText.text = _worldDataService.WorldData.TranslatedWeaponNameData.Names[_weaponSelectorView.WeaponTypeId];
     }
 }

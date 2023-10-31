@@ -1,5 +1,4 @@
-﻿using CodeBase.Services.SaveSystems;
-using CodeBase.Services.SaveSystems.Data;
+﻿using CodeBase.Services.Providers;
 
 namespace CodeBase.Services.Ad
 {
@@ -8,19 +7,17 @@ namespace CodeBase.Services.Ad
         private const int TargetAdInvoke = 3;
 
         private readonly IAdService _adService;
-        private readonly ISaveSystem _saveSystem;
+        private readonly IWorldDataService _worldDataService;
 
-        public AdInvoker(IAdService adService, ISaveSystem saveSystem)
+        public AdInvoker(IAdService adService, IWorldDataService worldDataService)
         {
+            _worldDataService = worldDataService;
             _adService = adService;
-            _saveSystem = saveSystem;
         }
 
-        public async void Init()
+        public void Init()
         {
-            var worldData = await _saveSystem.Load<WorldData>();
-            
-            if (worldData.LevelData.Id % TargetAdInvoke == 0)
+            if (_worldDataService.WorldData.LevelData.Id % TargetAdInvoke == 0)
                 _adService.PlayShortAd(null, null);
         }
     }

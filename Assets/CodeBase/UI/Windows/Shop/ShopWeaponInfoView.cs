@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Threading.Tasks;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
-using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Sound;
+using CodeBase.UI.Weapons;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using I2.Loc;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +16,7 @@ using Zenject;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
-namespace CodeBase.UI.Weapons.ShopWeapons
+namespace CodeBase.UI.Windows.Shop
 {
     public class ShopWeaponInfoView : MonoBehaviour
     {
@@ -35,16 +32,19 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
         private AudioSource _purchasedWeaponSound;
-        private ISaveSystem _saveSystem;
 
         public event Action AdButtonClicked;
 
+        private bool _isAnimating;
+        private Dictionary<WeaponTypeId, string> _translatedWeaponNames;
+        private Tween _buttonTween;
+        private Tween _nameTextTween;
+        private Tween _priceTextTween;
+
         [Inject]
         private void Construct(IProvider<WeaponIconsProvider> provider,
-            ISoundStorage soundStorage,
-            ISaveSystem saveSystem, WeaponStaticDataService weaponStaticDataService)
+            ISoundStorage soundStorage)
         {
-            _saveSystem = saveSystem;
             _shopWeaponIcons = provider.Get().ShopWeaponIcons;
             _purchasedWeaponSound = soundStorage.Get(SoundTypeId.PurchasedWeapon);
         }
@@ -54,6 +54,9 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         private void OnDisable() =>
             _adButton.onClick.RemoveListener(OnAddButtonClicked);
+
+        public void SetTranslatedNames(Dictionary<WeaponTypeId, string> translatedWeaponNames) => 
+            _translatedWeaponNames = translatedWeaponNames;
 
         public void DisableBuyButtons()
         {
@@ -70,13 +73,12 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             DisableBuyButtons();
         }
 
-        public async void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
+        public void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
-            var worldData = await _saveSystem.Load<WorldData>();
             _price.gameObject.SetActive(false);
             _adPrice.gameObject.SetActive(true);
-
-            SetWeaponNameInfo(worldData.TranslatedWeaponNameData.Names[weaponData.WeaponTypeId]);
+            SetButtonScale(_buyButton, false, false);
+            SetWeaponNameInfo(_translatedWeaponNames[weaponData.WeaponTypeId]);
 
             if (isBought)
             {
@@ -87,53 +89,49 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
             SetAdWeaponPriceInfo(weaponData, false, watchedAds);
             SetButtonScale(_adButton, true, true);
-            SetButtonScale(_buyButton, false, false);
             SetPriceAnimationText(_adPrice.transform);
         }
 
-        private async void SetPriceAnimationText(Transform targetTransform)
+        private void SetPriceAnimationText(Transform targetTransform)
         {
-            await targetTransform.transform.DOScaleY(0, _scaleIncrease).AsyncWaitForCompletion();
-            await UniTask.WaitForSeconds(_scaleIncreaseDelay);
-            await targetTransform.transform.DOScaleY(1, _scaleIncrease).AsyncWaitForCompletion();
+            _priceTextTween?.Kill(true);
+            _priceTextTween = DOTween
+                .Sequence()
+                .Append(targetTransform.DOScaleY(0 ,0.3f))
+                .AppendInterval(0.05f)
+                .Append(targetTransform.DOScaleY(1 ,0.3f));
+
+            _priceTextTween.Play();
         }
 
-        public async void SetMoneyWeaponInfo(WeaponData weaponData, bool isBought)
+        public void SetMoneyWeaponInfo(WeaponTypeId weaponTypeId, bool isVisible)
         {
-            var worldData = await _saveSystem.Load<WorldData>();
-
-            while (worldData.TranslatedWeaponNameData.Names.Count < 1)
-            {
-                await UniTask.Yield();
-            }
-
             _adPrice.gameObject.SetActive(false);
             SetButtonScale(_adButton, false, false);
             _price.gameObject.SetActive(true);
 
-            SetWeaponNameInfo(worldData.TranslatedWeaponNameData.Names[weaponData.WeaponTypeId]);
+            SetWeaponNameInfo(_translatedWeaponNames[weaponTypeId]);
+
+            SetPriceAnimationText(_price.transform);
             
-            if (isBought)
+            if (!isVisible)
             {
                 SetButtonScale(_buyButton, false, false);
-                SetMoneyWeaponPriceInfo(weaponData, isBought);
                 return;
             }
 
             SetButtonScale(_buyButton, true, true);
-            SetMoneyWeaponPriceInfo(weaponData, false);
             SetPriceAnimationText(_price.transform);
         }
 
         private void OnAddButtonClicked() =>
             AdButtonClicked?.Invoke();
 
-        private bool _isAnimating;
-
-        private async void SetButtonScale(Button button, bool isInteractable, bool isVisible)
+        private  void SetButtonScale(Button button, bool isInteractable, bool isVisible)
         {
             button.interactable = isInteractable;
             button.enabled = isInteractable;
+            _buttonTween?.Kill(true);
 
             if (!isVisible)
             {
@@ -141,20 +139,26 @@ namespace CodeBase.UI.Weapons.ShopWeapons
                 return;
             }
 
-            if (button.transform.localScale != Vector3.zero)
-                await button.transform.DOScale(Vector3.zero, _scaleIncrease).AsyncWaitForCompletion();
+            _buttonTween = DOTween
+                .Sequence()
+                .Append(button.transform.DOScale(Vector3.zero, 0.3f))
+                .AppendInterval(0.05f)
+                .Append(button.transform.DOScale(Vector3.one, 0.3f));
 
-            await UniTask.WaitForSeconds(_scaleIncreaseDelay);
-            await button.transform.DOScale(Vector3.one, _scaleIncrease).AsyncWaitForCompletion();
+            _buttonTween.Play();
         }
 
-        private async void SetWeaponNameInfo(string name)
+        private void SetWeaponNameInfo(string name)
         {
             _name.text = name;
+            _nameTextTween?.Kill(true);
+            _nameTextTween = DOTween
+                .Sequence()
+                .Append(_name.transform.DOScaleY(0 ,0.3f))
+                .AppendInterval(0.05f)
+                .Append(_name.transform.DOScaleY(1 ,0.3f));
 
-            await _name.transform.DOScaleY(0, _scaleIncrease).AsyncWaitForCompletion();
-            await UniTask.WaitForSeconds(_scaleIncreaseDelay);
-            await _name.transform.DOScaleY(1, _scaleIncrease).AsyncWaitForCompletion();
+            _nameTextTween.Play();
         }
 
         private void SetAdWeaponPriceInfo(WeaponData weaponData, bool isBought, int watchedAds)
@@ -168,9 +172,9 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             _adPrice.text = $"{watchedAds}/{weaponData.Price.AdQuantity}";
         }
 
-        private void SetMoneyWeaponPriceInfo(WeaponData weaponData, bool isBought)
+        public void SetMoneyWeaponPriceInfo(WeaponData weaponData, bool isVisible)
         {
-            if (isBought)
+            if (!isVisible)
             {
                 _price.text = $"<color=#ffdc30> {_purchasedText.text}</color>";
                 return;

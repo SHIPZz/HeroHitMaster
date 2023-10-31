@@ -1,11 +1,12 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using CodeBase.Services.SaveSystems.Data;
+using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Services.SaveSystems
 {
     public interface ISaveSystem
     {
-        void Save<WorldData>(WorldData data);
+        void Save(WorldData data);
 
-        UniTask<WorldData> Load<WorldData>() where WorldData : new();
+        UniTask<WorldData> Load();
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using CodeBase.Services.Data;
-using CodeBase.Services.SaveSystems;
-using CodeBase.Services.SaveSystems.Data;
-using UnityEngine;
+using CodeBase.Services.Providers;
 using Zenject;
 
 namespace CodeBase.UI.Wallet
@@ -11,12 +9,12 @@ namespace CodeBase.UI.Wallet
     {
         private readonly WalletUI _walletUI;
         private readonly Wallet _wallet;
-        private readonly ISaveSystem _saveSystem;
+        private readonly IWorldDataService _worldDataService;
 
         public WalletPresenter(WalletUI walletUI, Wallet wallet,
-            WalletStaticDataService walletStaticDataService, ISaveSystem saveSystem)
+            WalletStaticDataService walletStaticDataService, IWorldDataService worldDataService)
         {
-            _saveSystem = saveSystem;
+            _worldDataService = worldDataService;
             _walletUI = walletUI;
             _wallet = wallet;
             _wallet.SetMaxMoney(walletStaticDataService.Get().MaxMoney);
@@ -25,7 +23,7 @@ namespace CodeBase.UI.Wallet
         public void Init(int money)
         {
             _walletUI.SetValue(money);
-            _wallet.SetInitalMoney(money);
+            _wallet.SetInitialMoney(money);
         }
         
         public void Initialize() =>
@@ -34,11 +32,10 @@ namespace CodeBase.UI.Wallet
         public void Dispose() =>
             _wallet.MoneyChanged -= SetMoney;
 
-        private async void SetMoney(int money)
+        private void SetMoney(int money)
         {
             _walletUI.SetValue(money);
-            var worldData = await _saveSystem.Load<WorldData>();
-            worldData.PlayerData.Money = money;
+            _worldDataService.WorldData.PlayerData.Money = money;
         }
     }
 }

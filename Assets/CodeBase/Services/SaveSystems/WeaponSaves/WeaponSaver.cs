@@ -1,4 +1,5 @@
 ﻿using CodeBase.Enums;
+using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.UI.Weapons;
 
@@ -7,12 +8,12 @@ namespace CodeBase.Services.SaveSystems.WeaponSaves
     public class WeaponSaver
     {
         private readonly WeaponSelector _weaponSelector;
-        private readonly ISaveSystem _saveSystem;
+        private readonly IWorldDataService _worldDataService;
 
-        public WeaponSaver(WeaponSelector weaponSelector, ISaveSystem saveSystem)
+        public WeaponSaver(WeaponSelector weaponSelector, IWorldDataService worldDataService)
         {
+            _worldDataService = worldDataService;
             _weaponSelector = weaponSelector;
-            _saveSystem = saveSystem;
         }
 
         public void Save() => 
@@ -21,10 +22,11 @@ namespace CodeBase.Services.SaveSystems.WeaponSaves
         public void Save(WeaponTypeId weaponTypeId) => 
             SetToData(weaponTypeId);
 
-        private async void SetToData(WeaponTypeId weaponTypeId)
+        private void SetToData(WeaponTypeId weaponTypeId)
         {
-            var worldData = await _saveSystem.Load<WorldData>();
+            WorldData worldData = _worldDataService.WorldData;
             worldData.PlayerData.PurchasedWeapons.Add(weaponTypeId);
+            _worldDataService.Save();
         }
     }
 }

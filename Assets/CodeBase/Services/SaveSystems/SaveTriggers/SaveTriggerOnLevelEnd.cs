@@ -5,7 +5,9 @@ using CodeBase.Gameplay.Collision;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Data;
 using CodeBase.Services.Pause;
+using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
+using CodeBase.UI.Wallet;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -17,19 +19,24 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         [SerializeField] private TriggerObserver _triggerObserver;
         
         private IPauseService _pauseService;
-        private ISaveSystem _saveSystem;
         private Level _level;
         private WeaponStaticDataService _weaponStaticDataService;
+        private Wallet _wallet;
+        private IWorldDataService _worldDataService;
 
         public event Action PlayerEntered;
         public event Action LastLevelAchieved;
 
         [Inject]
-        private void Construct(IPauseService pauseService, ISaveSystem saveSystem, Level level, WeaponStaticDataService weaponStaticDataService)
+        private void Construct(IPauseService pauseService, 
+       IWorldDataService worldDataService,
+            Level level,
+            WeaponStaticDataService weaponStaticDataService, Wallet wallet)
         {
+            _worldDataService = worldDataService;
+            _wallet = wallet;
             _weaponStaticDataService = weaponStaticDataService;
             _level = level;
-            _saveSystem = saveSystem;
             _pauseService = pauseService;
         }
 
@@ -40,11 +47,11 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             _triggerObserver.Entered += OnPlayerEntered;
 
         private void OnDisable() =>
-            _triggerObserver.Entered -= OnPlayerEntered;
+            _triggerObserver.Entered -= OnPlayerEntered; 
 
-        private async void OnPlayerEntered(Collider player)
+        private void OnPlayerEntered(Collider player)
         {
-            var worldData =  await _saveSystem.Load<WorldData>();
+            WorldData worldData = _worldDataService.WorldData;
             WeaponData currentWeapon = _weaponStaticDataService.Get(worldData.PlayerData.LastWeaponId);
             worldData.LevelData.Id = SceneManager.GetActiveScene().buildIndex + 0;
             worldData.LevelData.Id++;
@@ -52,7 +59,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             if (currentWeapon.Price.PriceTypeId == PriceTypeId.Popup)
                 worldData.LevelData.LevelsWithPopupWeapon++;
             
-            worldData.PlayerData.Money += _level.Reward;
+            _wallet.AddMoney(_level.Reward);
 
             if (SceneManager.sceneCountInBuildSettings < worldData.LevelData.Id)
             {
@@ -61,7 +68,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
                 LastLevelAchieved?.Invoke();
             }
 
-            _saveSystem.Save(worldData);
+            _worldDataService.Save();
             PlayerEntered?.Invoke();
             _pauseService.Pause();
         }
