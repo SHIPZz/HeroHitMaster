@@ -42,14 +42,14 @@ namespace CodeBase.UI.ShopScrollRects
                 .ForEach(Enable);
         }
 
-        private void Enable(Image image) =>
+        private void Enable(Image image)
+        {
+            image.gameObject.SetActive(true);
             image.transform
                 .DOScale(1, 0.5f)
                 .SetEase(Ease.Linear)
-                .OnComplete(() =>
-                {
-                    Changed?.Invoke(false);
-                });
+                .OnComplete(() => { Changed?.Invoke(false); });
+        }
 
         private void DisableAll(ScrollRectTypeId scrollRectTypeId) =>
             _scrollImagesProvider

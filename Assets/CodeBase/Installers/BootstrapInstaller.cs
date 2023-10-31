@@ -8,7 +8,6 @@ using CodeBase.Services.Pause;
 using CodeBase.Services.Providers.AssetProviders;
 using CodeBase.Services.SaveSystems;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Installers
@@ -37,29 +36,22 @@ namespace CodeBase.Installers
         public async void Initialize()
         {
             var coroutineStarter = Container.Resolve<ICoroutineStarter>();
-            coroutineStarter.StartCoroutine(Init());
+            coroutineStarter.StartCoroutine(InitSDK());
 
             while (!_initialized)
             {
                 await UniTask.Yield();
             }
 
-            // Debug.Log(YandexGamesSdk.Initialize());
             BindSaveSystem();
 
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
             gameStateMachine.ChangeState<BootstrapState>();
         }
 
-        private IEnumerator Init()
+        private IEnumerator InitSDK()
         {
-#if !UNITY_WEBGL || UNITY_EDITOR
-            _initialized = true;
-            yield break;
-#endif
-            yield return YandexGamesSdk.Initialize();
-            YandexGamesSdk.CallbackLogging = false;
-            _initialized = true;
+            yield return YandexGamesSdk.Initialize(() => _initialized = true);
         }
 
         private void BindAdInvoker() =>
@@ -122,14 +114,12 @@ namespace CodeBase.Installers
 
         private void BindInputService() =>
             Container
-                .BindInterfacesAndSelfTo<InputService>()
+                .Bind<IInputService>().To<InputService>()
                 .AsSingle();
 
-        private void BindAssetProvider()
-        {
+        private void BindAssetProvider() =>
             Container
-                .BindInterfacesAndSelfTo<AssetProvider>()
+                .Bind<AssetProvider>()
                 .AsSingle();
-        }
     }
 }

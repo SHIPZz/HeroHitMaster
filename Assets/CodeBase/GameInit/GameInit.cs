@@ -27,6 +27,7 @@ using I2.Loc;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
+using PlayerPrefs = Agava.YandexGames.PlayerPrefs;
 
 namespace CodeBase.GameInit
 {
@@ -112,7 +113,8 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            YandexGamesSdk.GameReady();
             var settingsData = await _saveSystem.Load<SettingsData>();
             _mainUi.transform.SetParent(null);
             TranslateWeaponNames();
@@ -225,8 +227,8 @@ namespace CodeBase.GameInit
         {
             if (Input.GetKeyDown(KeyCode.F8))
             {
-                PlayerPrefs.DeleteAll();
-                PlayerPrefs.Save();
+                UnityEngine.PlayerPrefs.DeleteAll();
+                 UnityEngine.PlayerPrefs.Save();
             }
 
             if (Input.GetKeyDown(KeyCode.Y))

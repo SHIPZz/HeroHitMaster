@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
+using System.Threading.Tasks;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Data;
@@ -15,13 +17,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 
 namespace CodeBase.UI.Weapons.ShopWeapons
 {
     public class ShopWeaponInfoView : MonoBehaviour
     {
-        private const float ButtonScaleDelay = 0.3f;
-
+        [SerializeField] private float _scaleIncrease = 0.1f;
+        [SerializeField] private float _scaleIncreaseDelay = 0.2f;
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private TextMeshProUGUI _price;
         [SerializeField] private TextMeshProUGUI _adPrice;
@@ -38,7 +41,7 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         [Inject]
         private void Construct(IProvider<WeaponIconsProvider> provider,
-         ISoundStorage soundStorage, 
+            ISoundStorage soundStorage,
             ISaveSystem saveSystem, WeaponStaticDataService weaponStaticDataService)
         {
             _saveSystem = saveSystem;
@@ -54,8 +57,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
         public void DisableBuyButtons()
         {
-            SetButtonScale(_buyButton, false, false, true);
-            SetButtonScale(_adButton, false, false, false);
+            SetButtonScale(_buyButton, false, false);
+            SetButtonScale(_adButton, false, false);
         }
 
         public void ShowEffectOnPurchasedWeapon(WeaponTypeId weaponDataWeaponTypeId)
@@ -83,8 +86,16 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             }
 
             SetAdWeaponPriceInfo(weaponData, false, watchedAds);
-            SetButtonScale(_adButton, true, true, true);
-            SetButtonScale(_buyButton, false, false, true);
+            SetButtonScale(_adButton, true, true);
+            SetButtonScale(_buyButton, false, false);
+            SetPriceAnimationText(_adPrice.transform);
+        }
+
+        private async void SetPriceAnimationText(Transform targetTransform)
+        {
+            await targetTransform.transform.DOScaleY(0, _scaleIncrease).AsyncWaitForCompletion();
+            await UniTask.WaitForSeconds(_scaleIncreaseDelay);
+            await targetTransform.transform.DOScaleY(1, _scaleIncrease).AsyncWaitForCompletion();
         }
 
         public async void SetMoneyWeaponInfo(WeaponData weaponData, bool isBought)
@@ -97,45 +108,53 @@ namespace CodeBase.UI.Weapons.ShopWeapons
             }
 
             _adPrice.gameObject.SetActive(false);
-            SetButtonScale(_adButton, false, false, false);
+            SetButtonScale(_adButton, false, false);
             _price.gameObject.SetActive(true);
-             SetWeaponNameInfo(translatedWeaponNameData.Names[weaponData.WeaponTypeId]);
 
+            SetWeaponNameInfo(translatedWeaponNameData.Names[weaponData.WeaponTypeId]);
+            
             if (isBought)
             {
-                SetButtonScale(_buyButton, false, false, false);
+                SetButtonScale(_buyButton, false, false);
                 SetMoneyWeaponPriceInfo(weaponData, isBought);
                 return;
             }
 
-            SetButtonScale(_buyButton, true, true, true);
+            SetButtonScale(_buyButton, true, true);
             SetMoneyWeaponPriceInfo(weaponData, false);
+            SetPriceAnimationText(_price.transform);
         }
 
         private void OnAddButtonClicked() =>
             AdButtonClicked?.Invoke();
 
-        private async void SetButtonScale(Button button, bool isInteractable, bool isVisible, bool needAnimation)
+        private bool _isAnimating;
+
+        private async void SetButtonScale(Button button, bool isInteractable, bool isVisible)
         {
             button.interactable = isInteractable;
+            button.enabled = isInteractable;
 
-            if (button.gameObject.transform.localScale.x != 0)
+            if (!isVisible)
             {
-                await button.gameObject.transform.DOScaleX(0, 0.1f).AsyncWaitForCompletion();
-                await button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay)
-                    .AsyncWaitForCompletion();
-
+                button.transform.localScale = Vector3.zero;
                 return;
             }
 
-            await button.gameObject.transform.DOScaleX(isVisible ? 1 : 0, ButtonScaleDelay).AsyncWaitForCompletion();
+            if (button.transform.localScale != Vector3.zero)
+                await button.transform.DOScale(Vector3.zero, _scaleIncrease).AsyncWaitForCompletion();
+
+            await UniTask.WaitForSeconds(_scaleIncreaseDelay);
+            await button.transform.DOScale(Vector3.one, _scaleIncrease).AsyncWaitForCompletion();
         }
 
-        private void SetWeaponNameInfo(string name)
+        private async void SetWeaponNameInfo(string name)
         {
-            _name.transform.DOScaleX(0, 0f);
             _name.text = name;
-            _name.transform.DOScaleX(1, 0.2f);
+
+            await _name.transform.DOScaleY(0, _scaleIncrease).AsyncWaitForCompletion();
+            await UniTask.WaitForSeconds(_scaleIncreaseDelay);
+            await _name.transform.DOScaleY(1, _scaleIncrease).AsyncWaitForCompletion();
         }
 
         private void SetAdWeaponPriceInfo(WeaponData weaponData, bool isBought, int watchedAds)

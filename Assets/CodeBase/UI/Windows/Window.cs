@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Enums;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace CodeBase.UI.Windows
         [SerializeField] private float _startDuration;
         [SerializeField] private float _targetOpenDuration;
         [SerializeField] private float _targetCloseDuration;
+        private Sequence _tween;
 
         [field: SerializeField] public WindowTypeId WindowTypeId { get; private set; }
 
@@ -19,17 +21,19 @@ namespace CodeBase.UI.Windows
         public event Action Opened;
         public event Action Closed;
 
-        private void Awake() => 
+        private void Awake()
+        {
             transform.DOScaleX(_startScaleX, _startDuration).SetUpdate(true);
+        }
 
         public void Open()
         {
             StartedToOpen?.Invoke();
-            
+
             gameObject.SetActive(true);
             gameObject.transform
-                .DOScaleX(_targetScaleX, _targetOpenDuration)
-                .OnComplete(() => Opened?.Invoke()).SetAutoKill(true).SetUpdate(true);
+                    .DOScaleX(_targetScaleX, _targetOpenDuration)
+                    .OnComplete(() => Opened?.Invoke()).SetAutoKill(true).SetUpdate(true);
         }
 
         public void Close(bool withAnimation)
