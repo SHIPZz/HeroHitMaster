@@ -15,6 +15,9 @@ namespace CodeBase.Gameplay.PhysicalButtons
     public class PhysicalButton : SerializedMonoBehaviour
     {
         [OdinSerialize] private Dictionary<string, Material> _targetMaterials;
+        [SerializeField] private float _targetPositionZ = -0.21f;
+        [SerializeField] private float _increasePositionDuration = 1f;
+        [SerializeField] private float _decreasePositionDuration = 0.5f;
 
         private TriggerObserver _triggerObserver;
 
@@ -52,8 +55,8 @@ namespace CodeBase.Gameplay.PhysicalButtons
             _physicalButtonSound.Play();
             _meshRenderer.material = _targetMaterials["Grey"];
             transform
-                .DOLocalMoveZ(-0.21f, 1f)
-            .OnComplete(() => transform.DOLocalMoveZ(0, 0.5f)
+                .DOLocalMoveZ(_targetPositionZ, _increasePositionDuration)
+            .OnComplete(() => transform.DOLocalMoveZ(0, _decreasePositionDuration)
                 .OnComplete(() =>
                 {
                     _meshRenderer.material = _targetMaterials["Green"];

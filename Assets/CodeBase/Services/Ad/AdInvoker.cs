@@ -1,11 +1,10 @@
-﻿using CodeBase.Services.Providers;
+﻿using System;
+using CodeBase.Services.Providers;
 
 namespace CodeBase.Services.Ad
 {
     public class AdInvoker : IAdInvoker
     {
-        private const int TargetAdInvoke = 3;
-
         private readonly IAdService _adService;
         private readonly IWorldDataService _worldDataService;
 
@@ -15,10 +14,13 @@ namespace CodeBase.Services.Ad
             _adService = adService;
         }
 
-        public void Init()
+        public void Init(Action onStartCallback, Action onCloseCallback)
         {
-            if (_worldDataService.WorldData.LevelData.Id % TargetAdInvoke == 0)
-                _adService.PlayShortAd(null, null);
+            _adService.PlayShortAd(() => onStartCallback?.Invoke(), (closed) =>
+            {
+                if (closed)
+                    onCloseCallback?.Invoke();
+            });
         }
     }
 }

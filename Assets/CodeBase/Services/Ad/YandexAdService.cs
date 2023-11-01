@@ -21,9 +21,9 @@ namespace CodeBase.Services.Ad
 
         private void OnShortAdStartCallback(Action startCallback)
         {
+            _pauseService.Pause();
             startCallback?.Invoke();
             ShortAdOpened?.Invoke();
-            _pauseService.Pause();
         }
 
         private void OnShortAdCloseCallback(Action<bool> onCloseCallback, bool closed)

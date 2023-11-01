@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Character.Players;
+﻿using System;
+using CodeBase.Gameplay.Character.Players;
 using CodeBase.Services.Providers;
 using UnityEngine;
 using Zenject;
@@ -14,6 +15,7 @@ namespace CodeBase.Gameplay.Character.Enemy
         private IProvider<PlayerProvider> _playerProvider;
         private PlayerHealth _playerHealth;
         private bool _isAttacked;
+        private DisableEnemyColliders _disableEnemyCollider;
 
         [Inject]
         public void Construct(EnemyAttacker enemyAttacker,
@@ -24,6 +26,11 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyAttacker = enemyAttacker;
             _enemyFollower = enemyFollower;
             _playerProvider.Get().Changed += SetPlayer;
+        }
+
+        private void Awake()
+        {
+            _disableEnemyCollider = GetComponent<DisableEnemyColliders>();
         }
 
         private void Update()
@@ -38,6 +45,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             if (_isAttacked)
                 return;
             
+            _disableEnemyCollider.DisableAll();
             _enemyFollower.Block();
             _enemyAttacker.SetTarget(_playerHealth);
             _isAttacked = true;

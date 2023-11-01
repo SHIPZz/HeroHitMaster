@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CodeBase.Gameplay.Character.Enemy
 {
     [RequireComponent(typeof(EnemyHealth))]
-    public class DisableEnemyCollidersOnDeath : MonoBehaviour
+    public class DisableEnemyColliders : MonoBehaviour
     {
         private List<Collider> _colliders = new();
 
@@ -34,7 +34,7 @@ namespace CodeBase.Gameplay.Character.Enemy
             _enemyHealth.ValueZeroReached -= DisableAll;
         }
         
-        private void DisableAll()
+        public void DisableAll()
         {
             _colliders.ForEach(x => x.enabled = false);
             _enemyHealth.Enabled = false;

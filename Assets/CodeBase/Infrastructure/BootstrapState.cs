@@ -1,4 +1,5 @@
 ﻿using CodeBase.Services.Providers;
+using CodeBase.Services.SaveSystems.Data;
 using DG.Tweening;
 
 namespace CodeBase.Infrastructure
@@ -21,8 +22,7 @@ namespace CodeBase.Infrastructure
             DOTween.RestartAll();
             
             await _worldDataService.Load();
-            
-            _gameStateMachine.ChangeState<LevelLoadState, int>(_worldDataService.WorldData.LevelData.Id);
+            _gameStateMachine.ChangeState<LevelLoadState, WorldData>(_worldDataService.WorldData);
         }
     }
 }

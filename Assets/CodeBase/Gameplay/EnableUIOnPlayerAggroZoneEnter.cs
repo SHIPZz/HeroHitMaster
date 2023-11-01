@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Gameplay.Character.Players;
+﻿using CodeBase.Gameplay.Character.Players;
 using UnityEngine;
 
 namespace CodeBase.Gameplay

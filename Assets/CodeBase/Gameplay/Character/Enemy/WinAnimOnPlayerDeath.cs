@@ -14,6 +14,8 @@ namespace CodeBase.Gameplay.Character.Enemy
         private readonly List<PlayerHealth> _playerHealths = new();
         private readonly Enemy _enemy;
 
+        private bool _isPlayed;
+
         public WinAnimOnPlayerDeath(IPlayerStorage playerStorage, EnemyAnimator enemyAnimator, Enemy enemy)
         {
             _enemy = enemy;
@@ -29,12 +31,13 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private void PlayWinAnimation()
         {
-            if(!_enemy.gameObject.activeSelf)
+            if(!_enemy.gameObject.activeSelf || _isPlayed)
                 return;
             
             DOTween.Sequence()
                 .AppendInterval(0.5f)
                 .OnComplete(() => _enemyAnimator.SetVictory());
+            _isPlayed = true;
         }
     }
 }

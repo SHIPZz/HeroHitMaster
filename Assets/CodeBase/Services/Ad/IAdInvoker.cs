@@ -1,7 +1,9 @@
-﻿namespace CodeBase.Services.Ad
+﻿using System;
+
+namespace CodeBase.Services.Ad
 {
     public interface IAdInvoker
     {
-        void Init();
+        void Init(Action onStartCallback, Action onCloseCallback);
     }
 }

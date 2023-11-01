@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
-using CodeBase.Services.Data;
 using CodeBase.Services.Providers;
-using CodeBase.Services.SaveSystems;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.UI.Weapons;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -20,8 +17,6 @@ namespace CodeBase.UI.Windows.Shop
 {
     public class ShopWeaponInfoView : MonoBehaviour
     {
-        [SerializeField] private float _scaleIncrease = 0.1f;
-        [SerializeField] private float _scaleIncreaseDelay = 0.2f;
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private TextMeshProUGUI _price;
         [SerializeField] private TextMeshProUGUI _adPrice;
@@ -29,6 +24,8 @@ namespace CodeBase.UI.Windows.Shop
         [SerializeField] private Button _buyButton;
         [SerializeField] private List<ParticleSystem> _effects;
         [SerializeField] private TextMeshProUGUI _purchasedText;
+        [SerializeField] private float _targetScaleY = 1f;
+        [SerializeField] private float _targetScaleDuration = 0.3f;
 
         private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
         private AudioSource _purchasedWeaponSound;
@@ -49,13 +46,19 @@ namespace CodeBase.UI.Windows.Shop
             _purchasedWeaponSound = soundStorage.Get(SoundTypeId.PurchasedWeapon);
         }
 
-        private void OnEnable() =>
+        private void OnEnable()
+        {
             _adButton.onClick.AddListener(OnAddButtonClicked);
+            _buyButton.onClick.AddListener(OnBuyButtonClicked);
+        }
 
-        private void OnDisable() =>
+        private void OnDisable()
+        {
             _adButton.onClick.RemoveListener(OnAddButtonClicked);
+            _buyButton.onClick.RemoveListener(OnBuyButtonClicked);
+        }
 
-        public void SetTranslatedNames(Dictionary<WeaponTypeId, string> translatedWeaponNames) => 
+        public void SetTranslatedNames(Dictionary<WeaponTypeId, string> translatedWeaponNames) =>
             _translatedWeaponNames = translatedWeaponNames;
 
         public void DisableBuyButtons()
@@ -92,18 +95,6 @@ namespace CodeBase.UI.Windows.Shop
             SetPriceAnimationText(_adPrice.transform);
         }
 
-        private void SetPriceAnimationText(Transform targetTransform)
-        {
-            _priceTextTween?.Kill(true);
-            _priceTextTween = DOTween
-                .Sequence()
-                .Append(targetTransform.DOScaleY(0 ,0.3f))
-                .AppendInterval(0.05f)
-                .Append(targetTransform.DOScaleY(1 ,0.3f));
-
-            _priceTextTween.Play();
-        }
-
         public void SetMoneyWeaponInfo(WeaponTypeId weaponTypeId, bool isVisible)
         {
             _adPrice.gameObject.SetActive(false);
@@ -113,7 +104,7 @@ namespace CodeBase.UI.Windows.Shop
             SetWeaponNameInfo(_translatedWeaponNames[weaponTypeId]);
 
             SetPriceAnimationText(_price.transform);
-            
+
             if (!isVisible)
             {
                 SetButtonScale(_buyButton, false, false);
@@ -124,10 +115,28 @@ namespace CodeBase.UI.Windows.Shop
             SetPriceAnimationText(_price.transform);
         }
 
-        private void OnAddButtonClicked() =>
-            AdButtonClicked?.Invoke();
+        private void SetPriceAnimationText(Transform targetTransform)
+        {
+            _priceTextTween?.Kill(true);
+            _priceTextTween = DOTween
+                .Sequence()
+                .Append(targetTransform.DOScaleY(0, _targetScaleDuration))
+                .AppendInterval(0.05f)
+                .Append(targetTransform.DOScaleY(_targetScaleY, _targetScaleDuration));
 
-        private  void SetButtonScale(Button button, bool isInteractable, bool isVisible)
+            _priceTextTween.Play();
+        }
+
+        private void OnBuyButtonClicked() => 
+            _buyButton.enabled = false;
+
+        private void OnAddButtonClicked()
+        {
+            _adButton.enabled = false;
+            AdButtonClicked?.Invoke();
+        }
+
+        private void SetButtonScale(Button button, bool isInteractable, bool isVisible)
         {
             button.interactable = isInteractable;
             button.enabled = isInteractable;
@@ -141,9 +150,9 @@ namespace CodeBase.UI.Windows.Shop
 
             _buttonTween = DOTween
                 .Sequence()
-                .Append(button.transform.DOScale(Vector3.zero, 0.3f))
+                .Append(button.transform.DOScale(Vector3.zero, _targetScaleDuration))
                 .AppendInterval(0.05f)
-                .Append(button.transform.DOScale(Vector3.one, 0.3f));
+                .Append(button.transform.DOScale(Vector3.one, _targetScaleDuration));
 
             _buttonTween.Play();
         }
@@ -154,9 +163,9 @@ namespace CodeBase.UI.Windows.Shop
             _nameTextTween?.Kill(true);
             _nameTextTween = DOTween
                 .Sequence()
-                .Append(_name.transform.DOScaleY(0 ,0.3f))
+                .Append(_name.transform.DOScaleY(0, _targetScaleDuration))
                 .AppendInterval(0.05f)
-                .Append(_name.transform.DOScaleY(1 ,0.3f));
+                .Append(_name.transform.DOScaleY(_targetScaleY, _targetScaleDuration));
 
             _nameTextTween.Play();
         }
