@@ -43,7 +43,6 @@ namespace CodeBase.Installers.UI
         [SerializeField] private VictoryInfoView victoryInfoView;
         [SerializeField] private LevelSliderView _levelSliderView;
         [SerializeField] private PopupInfoView _popupInfoView;
-        [SerializeField] private AdBuyButtonView _adBuyButtonView;
         [SerializeField] private ContinueButtonView _continueButtonView;
         [SerializeField] private PlayButtonView _playButtonView;
         [SerializeField] private RestartButtonView _restartButtonView;
@@ -70,7 +69,6 @@ namespace CodeBase.Installers.UI
             BindVictoryUI();
             BindLevelSliderUI();
             BindPopupUI();
-            BindAdBuyWeaponButtonView();
             BindContinueButtonView();
             BindLoadNextLevelPresenter();
             BindAllWindowsPresenter();
@@ -104,10 +102,6 @@ namespace CodeBase.Installers.UI
         private void BindContinueButtonView() => 
             Container
                 .BindInstance(_continueButtonView);
-
-        private void BindAdBuyWeaponButtonView() => 
-            Container
-            .BindInstance(_adBuyButtonView);
 
         private void BindPopupUI()
         {

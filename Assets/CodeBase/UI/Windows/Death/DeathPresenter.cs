@@ -13,16 +13,13 @@ namespace CodeBase.UI.Windows.Death
     {
         private readonly WindowService _windowService;
         private readonly DeathView _deathView;
-        private readonly IAdService _adService;
         private PlayerHealth _playerHealth;
         private readonly List<PlayerHealth> _playerHealths = new();
         private bool _isOpened;
 
-        public DeathPresenter(WindowService windowService, DeathView deathView, IAdService adService,
-            IPlayerStorage playerStorage)
+        public DeathPresenter(WindowService windowService, DeathView deathView, IPlayerStorage playerStorage)
         {
             playerStorage.GetAll().ForEach(x => _playerHealths.Add(x.GetComponent<PlayerHealth>()));
-            _adService = adService;
             _windowService = windowService;
             _deathView = deathView;
         }

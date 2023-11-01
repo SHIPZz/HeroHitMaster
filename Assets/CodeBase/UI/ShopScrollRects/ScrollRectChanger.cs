@@ -8,9 +8,9 @@ namespace CodeBase.UI.ShopScrollRects
 {
     public class ScrollRectChanger
     {
+        private readonly IProvider<ScrollRectTypeId, List<Image>> _scrollImagesProvider;
+        private readonly IProvider<ScrollRectTypeId, ScrollRect> _scrollRectsProvider;
         private ScrollRectTypeId _lastScrollRect;
-        private IProvider<ScrollRectTypeId, List<Image>> _scrollImagesProvider;
-        private IProvider<ScrollRectTypeId, ScrollRect> _scrollRectsProvider;
 
         public event Action<bool> Changed;
 

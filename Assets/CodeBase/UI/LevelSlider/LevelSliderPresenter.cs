@@ -18,15 +18,17 @@ namespace CodeBase.UI.LevelSlider
         private readonly LevelSliderView _levelSliderView;
         private readonly Window _deathWindow;
         private readonly PlayButtonView _playButtonView;
+        private readonly PlayerProvider _playerProvider;
+        private readonly Window _victoryWindow;
         private Weapon _weapon;
         private List<Enemy> _enemies = new();
         private bool _isFilled;
         private PlayerHealth _player;
-        private readonly PlayerProvider _playerProvider;
-        private readonly Window _victoryWindow;
 
-        public LevelSliderPresenter(LevelSliderView levelSliderView, WindowProvider windowProvider,
-            PlayButtonView playButtonView, IProvider<PlayerProvider> provider)
+        public LevelSliderPresenter(LevelSliderView levelSliderView, 
+            WindowProvider windowProvider,
+            PlayButtonView playButtonView, 
+            IProvider<PlayerProvider> provider)
         {
             _playButtonView = playButtonView;
             _playerProvider = provider.Get();
@@ -36,22 +38,14 @@ namespace CodeBase.UI.LevelSlider
             _victoryWindow = windowProvider.Windows[WindowTypeId.Victory];
         }
 
-        private void SetPlayer(Player player)
-        {
-            _player = player.GetComponent<PlayerHealth>();
-            _player.Recovered += _levelSliderView.Enable;
-        }
-
         public void Init(Enemy enemy)
         {
             SubscribeToEnemyEvents(enemy);
             _enemies.Add(enemy);
             _deathWindow.StartedToOpen += _levelSliderView.Disable;
-            _levelSliderView.gameObject.SetActive(true);
-            _levelSliderView.SetMaxValue(_enemies.Count);
-            _levelSliderView.transform.DOScale(0, 0);
             _playButtonView.Clicked += ActivateSlider;
             _victoryWindow.StartedToOpen += _levelSliderView.Disable;
+            InitView();
         }
 
         public void Dispose()
@@ -66,6 +60,19 @@ namespace CodeBase.UI.LevelSlider
             _player.Recovered -= _levelSliderView.Enable;
             _playerProvider.Changed -= SetPlayer;
             _victoryWindow.StartedToOpen -= _levelSliderView.Disable;
+        }
+
+        private void InitView()
+        {
+            _levelSliderView.gameObject.SetActive(true);
+            _levelSliderView.SetMaxValue(_enemies.Count);
+            _levelSliderView.transform.DOScale(0, 0);
+        }
+
+        private void SetPlayer(Player player)
+        {
+            _player = player.GetComponent<PlayerHealth>();
+            _player.Recovered += _levelSliderView.Enable;
         }
 
         private void SubscribeToEnemyEvents(Enemy enemy)
