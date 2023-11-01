@@ -6589,10 +6589,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4213917258355242860, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+<<<<<<< HEAD
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4213917258355242860, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+=======
+>>>>>>> addLinksAgroZones
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -7189,6 +7192,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7913436638790574486, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+<<<<<<< HEAD
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
@@ -7204,6 +7208,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+=======
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>> addLinksAgroZones
     - target: {fileID: 8065997485622874239, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16948,6 +16957,7 @@ GameObject:
   - component: {fileID: 758650558}
   - component: {fileID: 758650557}
   - component: {fileID: 758650556}
+  - component: {fileID: 758650562}
   m_Layer: 18
   m_Name: AggroZone (4)
   m_TagString: Untagged
@@ -17058,6 +17068,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.629429, y: 0.66399384, z: 3.3557806}
   m_Center: {x: -0.58729744, y: -0.16800308, z: 0.01813078}
+--- !u!114 &758650562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758650554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAngleTransform: {fileID: 1680953160}
 --- !u!1001 &760807080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45047,6 +45070,7 @@ GameObject:
   - component: {fileID: 2119595132}
   - component: {fileID: 2119595131}
   - component: {fileID: 2119595130}
+  - component: {fileID: 2119595136}
   m_Layer: 18
   m_Name: AggroZone (3)
   m_TagString: Untagged
@@ -45157,6 +45181,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.629429, y: 0.66399384, z: 3.3557806}
   m_Center: {x: -0.58729744, y: -0.16800308, z: 0.01813078}
+--- !u!114 &2119595136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119595128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAngleTransform: {fileID: 1685400946}
 --- !u!1001 &2121282504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46712,7 +46749,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _targetAngleTransform: {fileID: 555932873}
+=======
+  _targetAngleTransform: {fileID: 806420636}
+>>>>>>> addLinksAgroZones
 --- !u!33 &8509096039549999644
 MeshFilter:
   m_ObjectHideFlags: 0

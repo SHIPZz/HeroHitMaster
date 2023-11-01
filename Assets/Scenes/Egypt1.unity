@@ -33279,6 +33279,7 @@ GameObject:
   - component: {fileID: 1463829892}
   - component: {fileID: 1463829891}
   - component: {fileID: 1463829890}
+  - component: {fileID: 1463829896}
   m_Layer: 18
   m_Name: AggroZone (3)
   m_TagString: Untagged
@@ -33389,6 +33390,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.629429, y: 0.66399384, z: 3.3557806}
   m_Center: {x: -0.58729744, y: -0.16800308, z: 0.01813078}
+--- !u!114 &1463829896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463829888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAngleTransform: {fileID: 1220455568}
 --- !u!1 &1465167594
 GameObject:
   m_ObjectHideFlags: 3
@@ -47687,6 +47701,7 @@ GameObject:
   - component: {fileID: 7828281610712935646}
   - component: {fileID: 8413101694788368546}
   - component: {fileID: 8413101694788368547}
+  - component: {fileID: 8413101694788368548}
   m_Layer: 18
   m_Name: AggroZone (1)
   m_TagString: Untagged
@@ -48440,6 +48455,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offset: {x: 0, y: 3, z: 0}
+--- !u!114 &8413101694788368548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853703071511886448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAngleTransform: {fileID: 205296686}
 --- !u!33 &8509096039549999644
 MeshFilter:
   m_ObjectHideFlags: 0

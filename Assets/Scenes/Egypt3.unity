@@ -19366,10 +19366,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 302.58
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 2420955215720235406, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> addLinksAgroZones
     - target: {fileID: 2682593587846237164, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -19495,10 +19498,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 465221104}
     - target: {fileID: 4213917258355242860, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+<<<<<<< HEAD
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4213917258355242860, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+=======
+>>>>>>> addLinksAgroZones
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -19722,10 +19728,13 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 6773480333432415074, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+<<<<<<< HEAD
     - target: {fileID: 7205395638185206888, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> addLinksAgroZones
     - target: {fileID: 7374311436088382317, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -19843,6 +19852,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7913436638790574486, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+<<<<<<< HEAD
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
@@ -19858,6 +19868,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+=======
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>> addLinksAgroZones
     - target: {fileID: 8255622184173520044, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -19937,6 +19952,30 @@ PrefabInstance:
     - target: {fileID: 8733053270654128091, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -183.1829
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823605475669041766, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823605475669041766, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823605475669041766, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823605475669041766, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823605475669041766, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823605475669041766, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8823605475669041766, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchorMax.y
@@ -27814,6 +27853,7 @@ GameObject:
   - component: {fileID: 1192936389}
   - component: {fileID: 1192936392}
   - component: {fileID: 1192936391}
+  - component: {fileID: 1192936396}
   m_Layer: 18
   m_Name: AggroZone (4)
   m_TagString: Untagged
@@ -27924,6 +27964,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2086652995326484357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1192936396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192936388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAngleTransform: {fileID: 1272982972}
 --- !u!1 &1196194895
 GameObject:
   m_ObjectHideFlags: 3
@@ -46590,6 +46643,7 @@ GameObject:
   - component: {fileID: 1984701827}
   - component: {fileID: 1984701826}
   - component: {fileID: 1984701825}
+  - component: {fileID: 1984701831}
   m_Layer: 18
   m_Name: AggroZone (3)
   m_TagString: Untagged
@@ -46699,6 +46753,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.629429, y: 0.66399384, z: 3.3557806}
   m_Center: {x: -0.58729744, y: -0.16800308, z: 0.01813078}
+--- !u!114 &1984701831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984701823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2b4e1932094ac1a6ae26ce99540de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAngleTransform: {fileID: 806420636}
 --- !u!1001 &1991974355
 PrefabInstance:
   m_ObjectHideFlags: 0
