@@ -8,7 +8,8 @@ namespace CodeBase.UI.LevelSlider
     public class LevelSliderView : MonoBehaviour
     {
         [SerializeField] private UnityEngine.UI.Slider _slider;
-        [SerializeField] private float _fillDuration = 1f;
+        [SerializeField] private float _increaseScaleXDuration = 1f;
+        [SerializeField] private float _increaseSliderValueDuration = 1f;
 
         private bool _isChanging;
 
@@ -30,13 +31,13 @@ namespace CodeBase.UI.LevelSlider
 
             float targetValue = _slider.value + value;
 
-            await _slider.DOValue(targetValue, 1f).AsyncWaitForCompletion();
+            await _slider.DOValue(targetValue, _increaseSliderValueDuration).AsyncWaitForCompletion();
 
             _isChanging = false;
             
             if(_slider.value == _slider.maxValue)
                 transform
-                    .DOScaleX(0, 1f)
+                    .DOScaleX(0, _increaseScaleXDuration)
                     .SetEase(Ease.InQuint)
                     .OnComplete(() => gameObject.SetActive(false));
         }

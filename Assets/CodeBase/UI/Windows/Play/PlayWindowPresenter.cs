@@ -33,8 +33,7 @@ namespace CodeBase.UI.Windows.Play
             _loadingCurtain.Closed -= _playButtonView.Enable;
             _playButtonView.Clicked -= Disable;
         }
-
-
+        
         private void Disable() =>
             _windowService.Close(WindowTypeId.Play);
     }
