@@ -53,9 +53,7 @@ namespace CodeBase.UI.Windows.Victory
             _windowService.Open(WindowTypeId.Victory);
         }
 
-        private void FillVictoryInfo()
-        {
+        private void FillVictoryInfo() => 
             _victoryInfoView.Show(_countEnemiesOnDeath.Quantity, _level.Reward);
-        }
     }
 }

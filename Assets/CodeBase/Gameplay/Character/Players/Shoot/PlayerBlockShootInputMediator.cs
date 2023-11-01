@@ -9,23 +9,17 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
     {
         private readonly PlayerShootInput _playerShootInput;
         private readonly PlayButtonView _playButtonView;
-        private ILoadingCurtain _loadingCurtain;
 
-        public PlayerBlockShootInputMediator(PlayerShootInput playerShootInput, PlayButtonView playButtonView, ILoadingCurtain loadingCurtain)
+        public PlayerBlockShootInputMediator(PlayerShootInput playerShootInput, PlayButtonView playButtonView)
         {
-            _loadingCurtain = loadingCurtain;
             _playButtonView = playButtonView;
             _playerShootInput = playerShootInput;
         }
 
-        public void Initialize()
-        {
+        public void Initialize() =>
             _playButtonView.Clicked += _playerShootInput.UnBlock;
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             _playButtonView.Clicked -= _playerShootInput.UnBlock;
-        }
     }
 }

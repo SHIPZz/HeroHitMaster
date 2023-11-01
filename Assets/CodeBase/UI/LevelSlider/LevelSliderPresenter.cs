@@ -20,9 +20,7 @@ namespace CodeBase.UI.LevelSlider
         private readonly PlayButtonView _playButtonView;
         private readonly PlayerProvider _playerProvider;
         private readonly Window _victoryWindow;
-        private Weapon _weapon;
         private List<Enemy> _enemies = new();
-        private bool _isFilled;
         private PlayerHealth _player;
 
         public LevelSliderPresenter(LevelSliderView levelSliderView, 
