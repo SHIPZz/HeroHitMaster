@@ -12,6 +12,6 @@ namespace CodeBase.Services.SaveSystems.Data
         public List<WeaponTypeId> PurchasedWeapons = new() { WeaponTypeId.ThrowingKnifeShooter };
         public WeaponTypeId LastWeaponId = WeaponTypeId.ThrowingKnifeShooter;
         public WeaponTypeId LastNotPopupWeaponId = WeaponTypeId.ThrowingKnifeShooter;
-        // public int ShootAccuracy;
+        public int ShootAccuracy;
     }
 }

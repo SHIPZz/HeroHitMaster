@@ -16,6 +16,7 @@ namespace CodeBase.UI.Windows.Leaderboards
         [SerializeField] private List<TextMeshProUGUI> _nameTexts;
         [SerializeField] private List<TextMeshProUGUI> _scoreTexts;
         [SerializeField] private List<TextMeshProUGUI> _rankTexts;
+        [SerializeField] private TMP_Text _nameText;
         [SerializeField] private Button _closeLeaderboardButton;
         [OdinSerialize] private Dictionary<WeaponTypeId, Image> _icons;
 
@@ -30,24 +31,27 @@ namespace CodeBase.UI.Windows.Leaderboards
 
         private void OnEnable() => 
             _closeLeaderboardButton.onClick.AddListener(OnCloseClicked);
-
-        private void Start()
-        {
-            _icons[WeaponTypeId.ThrowButterfly].gameObject.SetActive(true);
-        }
-
+        
         private void OnDisable() => 
             _closeLeaderboardButton.onClick.RemoveListener(OnCloseClicked);
 
         private void OnCloseClicked() => 
             Closed?.Invoke();
 
-        public void SetScore(int score, string weaponName, WeaponTypeId targetWeaponType)
+        public void SetInfo(int score, string weaponName, WeaponTypeId targetWeaponType)
         {
-            Leaderboard.GetPlayerEntry(nameof(AccuracyLeaderboard), _ =>
+            // Leaderboard.GetPlayerEntry(nameof(AccuracyLeaderboard), _ =>
+            // {
+            //     Leaderboard.SetScore(nameof(AccuracyLeaderboard), score);
+            // });
+
+            foreach (Image icon in _icons.Values)
             {
-                Leaderboard.SetScore(nameof(AccuracyLeaderboard), score);
-            });
+                icon.gameObject.SetActive(false);
+            }
+
+            _nameText.text = weaponName;
+            _icons[targetWeaponType].gameObject.SetActive(true);
         }
 
         public void Fill()
