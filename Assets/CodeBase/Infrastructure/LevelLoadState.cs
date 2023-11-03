@@ -27,13 +27,13 @@ namespace CodeBase.Infrastructure
         {
             _loadingCurtain.Show(1f);
 
-            if (payload.LevelData.Id % TargetAdInvoke == 0)
-                _adInvoker.Init(() => _canContinue = false, () => _canContinue = true);
-
-            while (!_canContinue)
-            {
-                await UniTask.Yield();
-            }
+            // if (payload.LevelData.Id % TargetAdInvoke == 0)
+            //     _adInvoker.Init(() => _canContinue = false, () => _canContinue = true);
+            //
+            // while (!_canContinue)
+            // {
+            //     await UniTask.Yield();
+            // }
 
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(payload.LevelData.Id);
 

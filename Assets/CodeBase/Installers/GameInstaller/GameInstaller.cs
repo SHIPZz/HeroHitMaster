@@ -8,6 +8,7 @@ using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
 using CodeBase.Services;
+using CodeBase.Services.AccuracyCounters;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
@@ -92,7 +93,22 @@ namespace CodeBase.Installers.GameInstaller
             BindGameRestarter();
             BindGameContinue();
             BindKillActiveEnemiesOnPlayerRecover();
+            BindEnemyProvider();
+            BindAccuracyCounter();
         }
+
+        private void BindAccuracyCounter()
+        {
+            Container
+                .BindInterfacesAndSelfTo<AccuracyCounter>()
+                .AsSingle();
+        }
+
+        private void BindEnemyProvider() =>
+            Container
+            .Bind<IEnemyProvider>()
+                .To<EnemyProvider>()
+                .AsSingle();
 
         private void BindKillActiveEnemiesOnPlayerRecover() =>
             BindAsSingle<KillActiveEnemiesOnPlayerRecover>();
@@ -103,11 +119,8 @@ namespace CodeBase.Installers.GameInstaller
             BindAsSingle<AdReward>();
         }
 
-        private void BindGameRestarter()
-        {
-            Container.BindInterfacesAndSelfTo<GameRestarterPresenter>().AsSingle();
-            BindAsSingle<GameRestarter>();
-        }
+        private void BindGameRestarter() => 
+            Container.BindInterfacesAndSelfTo<GameRestarterMediator>().AsSingle();
 
         private void BindWeaponSaver()
         {

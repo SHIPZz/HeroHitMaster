@@ -8,7 +8,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
     {
         private PlayerShoot _playerShoot;
 
-        public event Action Shooted;
+        public event Action Shot;
         public event Action Stopped;
 
         [Inject]
@@ -18,7 +18,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
         public void OnAnimationShoot()
         {
             _playerShoot.Fire();
-            Shooted?.Invoke();
+            Shot?.Invoke();
         }
 
         public void OnAnimationStoppedShoot() =>

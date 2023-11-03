@@ -45,14 +45,14 @@ namespace CodeBase.Gameplay.Character.Enemy
         private void OnDisable()
         {
             _enemySpawners.ForEach(x => x.Spawned -= FillList);
-            _shootingOnAnimationEvent.Shooted -= SetMove;
+            _shootingOnAnimationEvent.Shot -= SetMove;
             _aggroZone.PlayerEntered -= Activate;
         }
 
         private void SetPlayer(Player player)
         {
             _shootingOnAnimationEvent = player.GetComponent<ShootingOnAnimationEvent>();
-            _shootingOnAnimationEvent.Shooted += SetMove;
+            _shootingOnAnimationEvent.Shot += SetMove;
         }
 
         private void SetMove() =>

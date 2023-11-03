@@ -13,10 +13,8 @@ namespace CodeBase.UI.Windows
         [SerializeField] private float _startDuration;
         [SerializeField] private float _targetOpenDuration;
         [SerializeField] private float _targetCloseDuration;
-        private Sequence _tween;
-
         [field: SerializeField] public WindowTypeId WindowTypeId { get; private set; }
-
+        
         public event Action StartedToOpen;
         public event Action Opened;
         public event Action Closed;
@@ -32,8 +30,10 @@ namespace CodeBase.UI.Windows
 
             gameObject.SetActive(true);
             gameObject.transform
-                    .DOScaleX(_targetScaleX, _targetOpenDuration)
-                    .OnComplete(() => Opened?.Invoke()).SetAutoKill(true).SetUpdate(true);
+                .DOScaleX(_targetScaleX, _targetOpenDuration)
+                .OnComplete(() => Opened?.Invoke()).SetUpdate(true);
+            
+            print("open" + WindowTypeId);
         }
 
         public void Close(bool withAnimation)
@@ -51,7 +51,6 @@ namespace CodeBase.UI.Windows
                     gameObject.SetActive(false);
                     Closed?.Invoke();
                 })
-                .SetAutoKill(true)
                 .SetUpdate(true);
         }
 

@@ -2,14 +2,24 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Iceblock
   m_Shader: {fileID: 4800000, guid: 8f9613a893761904b8187b63493ed36c, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _CHROMATIC_ABERRATION _DETAIL_TEXTURED _EMISSION_TEXTURED
-    _GLITTER _TRANSLUCENCY _WETNESS_NONE
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ALPHAPREMULTIPLY_ON
+  - _CHROMATIC_ABERRATION
+  - _DETAIL_TEXTURED
+  - _EMISSION_TEXTURED
+  - _GLITTER
+  - _TRANSLUCENCY
+  - _WETNESS_NONE
+  m_InvalidKeywords: []
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -17,6 +27,7 @@ Material:
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -116,6 +127,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BendNormalsFreq: 4
     - _BendNormalsStrength: 0.05
@@ -168,6 +180,7 @@ Material:
     - _Mode: 3
     - _OcclusionStrength: 1
     - _OcclusionStrength2: 0
+    - _Occlusion_from_albedo_alpha: 0
     - _POM: 0
     - _POMCurvatureType: 0
     - _POMPrecomputedFlag: 1
@@ -202,6 +215,7 @@ Material:
     - _ShadowCull: 1
     - _ShadowMIPbias: 0
     - _ShadowStrength: 1
+    - _Smoothness_from_albedo_alpha: 0
     - _Snow: 0
     - _SnowBumpMacro: 0.107
     - _SnowBumpMicro: 0.2
@@ -296,5 +310,6 @@ Material:
     - _WetnessColor: {r: 0, g: 0, b: 0, a: 0}
     - _WetnessSpecGloss: {r: 0, g: 0, b: 0, a: 1}
     - bumpMap2TexelSize: {r: 1, g: 1, b: 1, a: 1}
-    - bumpMapTexelSize: {r: 0.00048828125, g: 0.00048828125, b: 2048, a: 2048}
+    - bumpMapTexelSize: {r: 0.0009765625, g: 0.0009765625, b: 1024, a: 1024}
     - heightMapTexelSize: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

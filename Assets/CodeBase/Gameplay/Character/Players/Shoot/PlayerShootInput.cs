@@ -1,9 +1,7 @@
 ﻿using System;
-using Agava.WebUtility;
 using CodeBase.Services.Inputs.InputService;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players.Shoot

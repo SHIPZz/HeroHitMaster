@@ -11,6 +11,7 @@ using CodeBase.Gameplay.Weapons;
 using CodeBase.ScriptableObjects.PlayerSettings;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services;
+using CodeBase.Services.AccuracyCounters;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
@@ -66,6 +67,8 @@ namespace CodeBase.GameInit
         private readonly ShopWeaponInfoView _shopWeaponInfoView;
         private readonly Wallet _wallet;
         private IWorldDataService _worldDataService;
+        private IEnemyProvider _enemyProvider;
+        private AccuracyCounter _accuracyCounter;
 
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
@@ -86,10 +89,13 @@ namespace CodeBase.GameInit
             AudioChanger audioChanger,
             WeaponStaticDataService weaponStaticDataService,
             KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
-            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand, 
-            Canvas mainUi, ShopWeaponInfoView shopWeaponInfoView, 
-            Wallet wallet, IWorldDataService worldDataService)
+            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand,
+            Canvas mainUi, ShopWeaponInfoView shopWeaponInfoView,
+            Wallet wallet, IWorldDataService worldDataService, 
+            IEnemyProvider enemyProvider, AccuracyCounter accuracyCounter)
         {
+            _accuracyCounter = accuracyCounter;
+            _enemyProvider = enemyProvider;
             _worldDataService = worldDataService;
             _wallet = wallet;
             _shopWeaponInfoView = shopWeaponInfoView;
@@ -118,8 +124,8 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
-            YandexGamesSdk.GameReady();
+            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            // YandexGamesSdk.GameReady();
             WorldData worldData = _worldDataService.WorldData;
             _mainUi.transform.SetParent(null);
             TranslateWeaponNames(worldData);
@@ -160,13 +166,16 @@ namespace CodeBase.GameInit
         {
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
+                _enemyProvider.Enemies.Add(enemy);
                 _enemyConfigurator.Configure(enemy, aggrozone);
-                _countEnemiesOnDeath.Init(enemy);
-                _levelSliderPresenter.Init(enemy);
-                _killActiveEnemiesOnPlayerRecover.Init(enemy);
-                _cameraShakeMediator.InitEnemies(enemy);
-                _rotateCameraOnLastEnemyKilled.FillList(enemy);
             }));
+
+            _countEnemiesOnDeath.Init(_enemyProvider.Enemies);
+            _levelSliderPresenter.Init(_enemyProvider.Enemies);
+            _killActiveEnemiesOnPlayerRecover.Init(_enemyProvider.Enemies);
+            _cameraShakeMediator.InitEnemies(_enemyProvider.Enemies);
+            _rotateCameraOnLastEnemyKilled.Init(_enemyProvider.Enemies);
+            _accuracyCounter.Init(_enemyProvider.Enemies);
         }
 
         private void TranslateWeaponNames(WorldData worldData)

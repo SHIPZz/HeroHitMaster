@@ -17,11 +17,11 @@ namespace CodeBase.UI.ShopScrollRects
             provider.Get().ForEach(x => _buttons.Add(x.Button));
         }
 
-        public void Initialize() => 
+        public void Initialize() =>
             _scrollRectChanger.Changed += SetActive;
 
-        public void Dispose() => 
-        _scrollRectChanger.Changed -= SetActive;
+        public void Dispose() =>
+            _scrollRectChanger.Changed -= SetActive;
 
         private void SetActive(bool isChanged)
         {

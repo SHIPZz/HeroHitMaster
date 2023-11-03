@@ -23,9 +23,9 @@ namespace CodeBase.UI.LevelSlider
         private List<Enemy> _enemies = new();
         private PlayerHealth _player;
 
-        public LevelSliderPresenter(LevelSliderView levelSliderView, 
+        public LevelSliderPresenter(LevelSliderView levelSliderView,
             WindowProvider windowProvider,
-            PlayButtonView playButtonView, 
+            PlayButtonView playButtonView,
             IProvider<PlayerProvider> provider)
         {
             _playButtonView = playButtonView;
@@ -36,10 +36,10 @@ namespace CodeBase.UI.LevelSlider
             _victoryWindow = windowProvider.Windows[WindowTypeId.Victory];
         }
 
-        public void Init(Enemy enemy)
+        public void Init(List<Enemy> enemies)
         {
-            SubscribeToEnemyEvents(enemy);
-            _enemies.Add(enemy);
+            _enemies = enemies;
+            SubscribeToEnemyEvents();
             _deathWindow.StartedToOpen += _levelSliderView.Disable;
             _playButtonView.Clicked += ActivateSlider;
             _victoryWindow.StartedToOpen += _levelSliderView.Disable;
@@ -48,11 +48,7 @@ namespace CodeBase.UI.LevelSlider
 
         public void Dispose()
         {
-            foreach (var enemy in _enemies)
-            {
-                UnsubscribeFromEnemyEvents(enemy);
-            }
-
+            UnsubscribeFromEnemyEvents();
             _playButtonView.Clicked -= ActivateSlider;
             _deathWindow.StartedToOpen -= _levelSliderView.Disable;
             _player.Recovered -= _levelSliderView.Enable;
@@ -73,27 +69,33 @@ namespace CodeBase.UI.LevelSlider
             _player.Recovered += _levelSliderView.Enable;
         }
 
-        private void SubscribeToEnemyEvents(Enemy enemy)
+        private void SubscribeToEnemyEvents()
         {
-            enemy.Dead += IncreaseSlider;
-            enemy.QuickDestroyed += IncreaseSlider;
-            var materialChanger = enemy.GetComponent<IMaterialChanger>();
-            materialChanger.StartedChanged += IncreaseSlider;
+            foreach (Enemy enemy in _enemies)
+            {
+                enemy.Dead += IncreaseSlider;
+                enemy.QuickDestroyed += IncreaseSlider;
+                var materialChanger = enemy.GetComponent<IMaterialChanger>();
+                materialChanger.StartedChanged += IncreaseSlider;
+            }
         }
 
-        private void UnsubscribeFromEnemyEvents(Enemy enemy)
+        private void UnsubscribeFromEnemyEvents()
         {
-            enemy.Dead -= IncreaseSlider;
-            enemy.QuickDestroyed -= IncreaseSlider;
+            foreach (Enemy enemy in _enemies)
+            {
+                enemy.Dead -= IncreaseSlider;
+                enemy.QuickDestroyed -= IncreaseSlider;
+            }
         }
 
-        private void ActivateSlider() => 
+        private void ActivateSlider() =>
             _levelSliderView.transform.DOScale(1, 1f);
 
-        private void IncreaseSlider(Enemy obj) => 
+        private void IncreaseSlider(Enemy obj) =>
             _levelSliderView.Increase(1);
 
-        private void IncreaseSlider() => 
+        private void IncreaseSlider() =>
             _levelSliderView.Increase(1);
     }
 }

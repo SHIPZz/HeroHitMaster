@@ -43,6 +43,6 @@ namespace CodeBase.UI.Windows.Shop
         }
 
         private void Close() => 
-            _windowService.Close(WindowTypeId.Shop, () => _windowService.Open(WindowTypeId.Play));
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Play));
     }
 }

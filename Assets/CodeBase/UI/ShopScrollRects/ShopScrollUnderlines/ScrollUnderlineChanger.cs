@@ -19,9 +19,9 @@ namespace CodeBase.UI.ShopScrollRects.ShopScrollUnderlines
             if(_lastUnderline == _provider.Get(id))
                 return;
             
-            _lastUnderline.Image.transform.DOScaleX(0, 0.3f);
+            _lastUnderline.Image.transform.DOScaleX(0, 0.3f).SetUpdate(true);
             ScrollNameUnderline targetUnderline = _provider.Get(id);
-            targetUnderline.Image.transform.DOScaleX(1, 0.5f);
+            targetUnderline.Image.transform.DOScaleX(1, 0.5f).SetUpdate(true);
             _lastUnderline = targetUnderline;
         }
     }

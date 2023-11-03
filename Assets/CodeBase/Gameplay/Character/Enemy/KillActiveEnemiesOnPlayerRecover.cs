@@ -7,8 +7,8 @@ namespace CodeBase.Gameplay.Character.Enemy
 {
     public class KillActiveEnemiesOnPlayerRecover
     {
-        private List<Enemy> _enemies = new();
-        private PlayerProvider _playerProvider;
+        private readonly PlayerProvider _playerProvider;
+        private List<Enemy> _enemies;
         private PlayerHealth _playerHealth;
 
         public KillActiveEnemiesOnPlayerRecover(IProvider<PlayerProvider> provider)
@@ -17,8 +17,8 @@ namespace CodeBase.Gameplay.Character.Enemy
             _playerProvider.Changed += SetPlayer;
         }
 
-        public void Init(Enemy enemy) =>
-            _enemies.Add(enemy);
+        public void Init(List<Enemy> enemies) =>
+            _enemies = enemies;
 
         private void SetPlayer(Player player)
         {
