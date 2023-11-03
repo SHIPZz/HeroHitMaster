@@ -8,5 +8,6 @@ namespace CodeBase.Services.Storages.Sound
     {
         AudioSource Get(SoundTypeId soundTypeId);
         List<AudioSource> GetAll();
+        AudioSource Get(MusicTypeId musicTypeId);
     }
 }

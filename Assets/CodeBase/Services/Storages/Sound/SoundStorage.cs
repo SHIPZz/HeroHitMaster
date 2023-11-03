@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enums;
-using CodeBase.Installers.ScriptableObjects;
 using CodeBase.ScriptableObjects.Sound;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
@@ -14,6 +13,7 @@ namespace CodeBase.Services.Storages.Sound
         private readonly Dictionary<SoundTypeId, AudioSource> _sounds = new();
         private readonly IEffectFactory _effectFactory;
         private readonly SoundStaticDataService _soundStaticDataService;
+        private readonly Dictionary<MusicTypeId, AudioSource> _musics = new();
 
         public SoundStorage(IEffectFactory effectFactory, SoundStaticDataService soundStaticDataService)
         {
@@ -21,15 +21,18 @@ namespace CodeBase.Services.Storages.Sound
             _effectFactory = effectFactory;
             FillDictionary();
         }
-        
+
         public AudioSource Get(SoundTypeId soundTypeId) =>
             _sounds[soundTypeId];
+
+        public AudioSource Get(MusicTypeId musicTypeId) =>
+            _musics[musicTypeId];
 
         public List<AudioSource> GetAll()
         {
             var audioSources = new List<AudioSource>();
 
-            foreach (var audioSource in _sounds.Values)
+            foreach (AudioSource audioSource in _sounds.Values)
             {
                 audioSources.Add(audioSource);
             }
@@ -39,17 +42,19 @@ namespace CodeBase.Services.Storages.Sound
 
         private void FillDictionary()
         {
-            foreach (var soundData in _soundStaticDataService.GetAll().Values)
+            foreach (SoundData soundData in _soundStaticDataService.GetAll().Values)
             {
                 AudioSource audioSource = _effectFactory.Create(soundData.AudioSource);
                 audioSource.playOnAwake = false;
-                _sounds[soundData.SoundTypeId] = audioSource;
+
+                if (soundData.SoundTypeId != SoundTypeId.Music)
+                    _sounds[soundData.SoundTypeId] = audioSource;
+                else
+                    _musics[soundData.MusicTypeId] = audioSource;
+
             }
         }
 
-        public void Initialize()
-        {
-            
-        }
+        public void Initialize() { }
     }
 }

@@ -13,6 +13,8 @@ namespace CodeBase.UI.Windows.Leaderboards
 {
     public class AccuracyLeaderboard : SerializedMonoBehaviour
     {
+        private const string Name = "Leaderboard";
+
         [SerializeField] private List<TextMeshProUGUI> _nameTexts;
         [SerializeField] private List<TextMeshProUGUI> _scoreTexts;
         [SerializeField] private List<TextMeshProUGUI> _rankTexts;
@@ -22,29 +24,36 @@ namespace CodeBase.UI.Windows.Leaderboards
 
         private readonly Dictionary<string, string> _anonimTexts = new()
         {
-            {"en","Anonymous"},
-            {"ru", "Анонимный"},
-            {"tr", "Anonim"},
+            { "en", "Anonymous" },
+            { "ru", "Анонимный" },
+            { "tr", "Anonim" },
         };
 
         public event Action Closed;
 
-        private void OnEnable() => 
+        private void Awake() =>
+            _scoreTexts.ForEach(x => x.text = 0.ToString());
+
+        private void OnEnable() =>
             _closeLeaderboardButton.onClick.AddListener(OnCloseClicked);
-        
-        private void OnDisable() => 
+
+        private void OnDisable() =>
             _closeLeaderboardButton.onClick.RemoveListener(OnCloseClicked);
 
-        private void OnCloseClicked() => 
+        private void OnCloseClicked() =>
             Closed?.Invoke();
 
-        public void SetInfo(int score, string weaponName, WeaponTypeId targetWeaponType)
+        public void SetScore(int score)
         {
-            // Leaderboard.GetPlayerEntry(nameof(AccuracyLeaderboard), _ =>
-            // {
-            //     Leaderboard.SetScore(nameof(AccuracyLeaderboard), score);
-            // });
+            if (!PlayerAccount.IsAuthorized)
+                return;
 
+            Leaderboard.GetPlayerEntry(Name,
+                _ => { Leaderboard.SetScore(nameof(AccuracyLeaderboard), score, () => Debug.Log("SUCCCESSSSS")); });
+        }
+
+        public void SetInfo(string weaponName, WeaponTypeId targetWeaponType)
+        {
             foreach (Image icon in _icons.Values)
             {
                 icon.gameObject.SetActive(false);
@@ -52,11 +61,28 @@ namespace CodeBase.UI.Windows.Leaderboards
 
             _nameText.text = weaponName;
             _icons[targetWeaponType].gameObject.SetActive(true);
+
+            // Fill();
         }
 
-        public void Fill()
+        private void Fill()
         {
-            Leaderboard.GetEntries(nameof(AccuracyLeaderboard), result =>
+            if (!PlayerAccount.IsAuthorized)
+                PlayerAccount.Authorize();
+
+            PlayerAccount.RequestPersonalProfileDataPermission();
+
+            if (!PlayerAccount.HasPersonalProfileDataPermission)
+            {
+                for (int i = 0; i < _nameTexts.Count; i++)
+                {
+                    _nameTexts[i].text = _anonimTexts[LocalizationManager.CurrentLanguageCode];
+                }
+
+                return;
+            }
+            
+            Leaderboard.GetEntries(Name, result =>
             {
                 for (int i = 0; i < result.entries.Length; i++)
                 {

@@ -76,7 +76,7 @@ namespace CodeBase.Installers
 
         private void BindPauseOnFocusChanged() =>
             Container
-                .BindInterfacesTo<PauseOnFocusChanged>()
+                .BindInterfacesTo<FocusObserver>()
                 .AsSingle();
 
         private void BindPauseService() =>

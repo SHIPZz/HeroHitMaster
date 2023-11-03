@@ -30,15 +30,11 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
             _weaponStaticDataService = weaponStaticDataService;
         }
 
-        public void Initialize()
-        {
+        public void Initialize() => 
             _playerShootInput.Fired += Shoot;
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() => 
             _playerShootInput.Fired -= Shoot;
-        }
 
         private void Shoot(Vector2 mousePosition)
         {

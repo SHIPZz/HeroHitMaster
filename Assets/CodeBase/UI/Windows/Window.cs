@@ -1,6 +1,5 @@
 using System;
 using CodeBase.Enums;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -27,13 +26,10 @@ namespace CodeBase.UI.Windows
         public void Open()
         {
             StartedToOpen?.Invoke();
-
             gameObject.SetActive(true);
             gameObject.transform
                 .DOScaleX(_targetScaleX, _targetOpenDuration)
                 .OnComplete(() => Opened?.Invoke()).SetUpdate(true);
-            
-            print("open" + WindowTypeId);
         }
 
         public void Close(bool withAnimation)

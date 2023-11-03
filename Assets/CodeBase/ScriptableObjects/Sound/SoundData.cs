@@ -8,5 +8,6 @@ namespace CodeBase.ScriptableObjects.Sound
     {
         public SoundTypeId SoundTypeId;
         public AudioSource AudioSource;
+        public MusicTypeId MusicTypeId;
     }
 }

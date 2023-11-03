@@ -49,8 +49,7 @@ namespace CodeBase.GameInit
         private readonly RotateCameraPresenter _rotateCameraPresenter;
         private readonly RotateCameraOnLastEnemyKilled _rotateCameraOnLastEnemyKilled;
         private readonly IProvider<CameraData> _cameraDataProvider;
-        private readonly AudioView _audioView;
-        private readonly AudioChanger _audioChanger;
+        private readonly AudioVolumeChanger _audioVolumeChanger;
         private readonly WeaponStaticDataService _weaponStaticDataService;
         private readonly KillActiveEnemiesOnPlayerRecover _killActiveEnemiesOnPlayerRecover;
         private readonly PlayerSettings _playerSettings;
@@ -66,9 +65,9 @@ namespace CodeBase.GameInit
         private readonly Canvas _mainUi;
         private readonly ShopWeaponInfoView _shopWeaponInfoView;
         private readonly Wallet _wallet;
-        private IWorldDataService _worldDataService;
-        private IEnemyProvider _enemyProvider;
-        private AccuracyCounter _accuracyCounter;
+        private readonly IWorldDataService _worldDataService;
+        private readonly IEnemyProvider _enemyProvider;
+        private readonly AccuracyCounter _accuracyCounter;
 
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
@@ -85,8 +84,7 @@ namespace CodeBase.GameInit
             RotateCameraPresenter rotateCameraPresenter,
             RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled,
             IProvider<CameraData> cameraDataProvider,
-            AudioView audioView,
-            AudioChanger audioChanger,
+            AudioVolumeChanger audioVolumeChanger,
             WeaponStaticDataService weaponStaticDataService,
             KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
             PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand,
@@ -104,8 +102,7 @@ namespace CodeBase.GameInit
             _playerSettings = playerSettings;
             _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
             _weaponStaticDataService = weaponStaticDataService;
-            _audioChanger = audioChanger;
-            _audioView = audioView;
+            _audioVolumeChanger = audioVolumeChanger;
             _cameraDataProvider = cameraDataProvider;
             _rotateCameraOnLastEnemyKilled = rotateCameraOnLastEnemyKilled;
             _rotateCameraPresenter = rotateCameraPresenter;
@@ -130,8 +127,6 @@ namespace CodeBase.GameInit
             _mainUi.transform.SetParent(null);
             TranslateWeaponNames(worldData);
 
-            InitSound(worldData.SettingsData);
-
             _shopWeaponInfoView.SetTranslatedNames(worldData.TranslatedWeaponNameData.Names);
             InitEnemiesAndObjectsWhoNeedEnemies();
             InitPlayerBeforeWeaponChoose(worldData.PlayerData);
@@ -154,12 +149,6 @@ namespace CodeBase.GameInit
         {
             PlayerTypeId initialPlayerId = _playerSettings.PlayerTypeIdsByWeapon[playerData.LastWeaponId];
             GetPlayerFromStorage(initialPlayerId);
-        }
-
-        private void InitSound(SettingsData settingsData)
-        {
-            _audioView.Slider.value = settingsData.Volume;
-            _audioChanger.Change(settingsData.Volume);
         }
 
         private void InitEnemiesAndObjectsWhoNeedEnemies()

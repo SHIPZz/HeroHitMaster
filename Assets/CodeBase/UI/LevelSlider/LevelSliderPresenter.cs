@@ -5,6 +5,7 @@ using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.Infrastructure;
 using CodeBase.Services.Providers;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Play;
@@ -13,11 +14,10 @@ using UnityEngine;
 
 namespace CodeBase.UI.LevelSlider
 {
-    public class LevelSliderPresenter : IDisposable
+    public class LevelSliderPresenter : IDisposable, IGameplayRunnable
     {
         private readonly LevelSliderView _levelSliderView;
         private readonly Window _deathWindow;
-        private readonly PlayButtonView _playButtonView;
         private readonly PlayerProvider _playerProvider;
         private readonly Window _victoryWindow;
         private List<Enemy> _enemies = new();
@@ -25,10 +25,8 @@ namespace CodeBase.UI.LevelSlider
 
         public LevelSliderPresenter(LevelSliderView levelSliderView,
             WindowProvider windowProvider,
-            PlayButtonView playButtonView,
             IProvider<PlayerProvider> provider)
         {
-            _playButtonView = playButtonView;
             _playerProvider = provider.Get();
             _playerProvider.Changed += SetPlayer;
             _levelSliderView = levelSliderView;
@@ -41,7 +39,6 @@ namespace CodeBase.UI.LevelSlider
             _enemies = enemies;
             SubscribeToEnemyEvents();
             _deathWindow.StartedToOpen += _levelSliderView.Disable;
-            _playButtonView.Clicked += ActivateSlider;
             _victoryWindow.StartedToOpen += _levelSliderView.Disable;
             InitView();
         }
@@ -49,7 +46,6 @@ namespace CodeBase.UI.LevelSlider
         public void Dispose()
         {
             UnsubscribeFromEnemyEvents();
-            _playButtonView.Clicked -= ActivateSlider;
             _deathWindow.StartedToOpen -= _levelSliderView.Disable;
             _player.Recovered -= _levelSliderView.Enable;
             _playerProvider.Changed -= SetPlayer;
@@ -89,13 +85,13 @@ namespace CodeBase.UI.LevelSlider
             }
         }
 
-        private void ActivateSlider() =>
-            _levelSliderView.transform.DOScale(1, 1f);
-
         private void IncreaseSlider(Enemy obj) =>
             _levelSliderView.Increase(1);
 
         private void IncreaseSlider() =>
             _levelSliderView.Increase(1);
+
+        public void Run() =>
+            _levelSliderView.transform.DOScale(1, 1f);
     }
 }

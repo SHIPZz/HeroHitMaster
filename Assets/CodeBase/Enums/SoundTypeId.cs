@@ -45,6 +45,7 @@
         BoxDestruction,
         PhysicalButton,
         TimerTicking,
-        TimerFinished
+        TimerFinished,
+        Music
     }
 }

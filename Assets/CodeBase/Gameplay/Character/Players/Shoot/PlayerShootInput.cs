@@ -6,18 +6,19 @@ using Zenject;
 
 namespace CodeBase.Gameplay.Character.Players.Shoot
 {
-    public class PlayerShootInput : ITickable
+    public class PlayerShootInput : MonoBehaviour
     {
-        private readonly IInputService _inputService;
+        private IInputService _inputService;
 
         private bool _isBlocked = true;
 
         public event Action<Vector2> Fired;
 
-        public PlayerShootInput(IInputService inputService) =>
+        [Inject]
+        private void Construct(IInputService inputService) =>
             _inputService = inputService;
 
-        public void Tick()
+        private void Update()
         {
             if (!_inputService.PlayerFire.WasPressedThisFrame() || EventSystem.current.IsPointerOverGameObject() ||
                 _isBlocked)

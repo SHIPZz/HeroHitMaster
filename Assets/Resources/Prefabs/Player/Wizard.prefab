@@ -1328,6 +1328,7 @@ GameObject:
   - component: {fileID: 4813944322349840536}
   - component: {fileID: 5587218318042831582}
   - component: {fileID: 8432551566384998338}
+  - component: {fileID: -5276828889314050385}
   m_Layer: 8
   m_Name: Wizard
   m_TagString: Untagged
@@ -1368,7 +1369,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 5587218318042831582}
   _animator: {fileID: 5820164051039371825}
-  _rigidbody: {fileID: 8432551566384998338}
   _initialShootPosition: {fileID: 7054173472134704079}
   _playerHealth: {fileID: 4813944322349840536}
   _shootingOnAnimationEvent: {fileID: 1055858781077924955}
@@ -1548,6 +1548,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5276828889314050385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006823814153809577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2856e92173fe4cec9dca22a8cdec2652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4089786982859296201
 GameObject:
   m_ObjectHideFlags: 0
