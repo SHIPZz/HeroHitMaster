@@ -39,6 +39,7 @@ namespace CodeBase.UI.Windows.Popup
 
         public event Action AdButtonClicked;
         public event Action<WeaponTypeId> LastWeaponSelected;
+        public event Action<bool> Enabled;
 
         [Inject]
         private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage,
@@ -61,14 +62,18 @@ namespace CodeBase.UI.Windows.Popup
 
         private void OnEnable()
         {
+            Enabled?.Invoke(true);
             _adButton.onClick.AddListener(OnAdClicked);
             _adButton.enabled = true;
             List<WeaponSelectorView> randomIcons = GetRandomWeaponIcons(3);
             EnableRandomIcons(randomIcons);
         }
 
-        private void OnDisable() =>
+        private void OnDisable()
+        {
+            Enabled?.Invoke(false);
             _adButton.onClick.RemoveListener(OnAdClicked);
+        }
 
         private void AnimateMainWeaponText()
         {

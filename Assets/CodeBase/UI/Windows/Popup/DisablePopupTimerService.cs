@@ -11,7 +11,7 @@ using Zenject;
 
 namespace CodeBase.UI.Windows.Popup
 {
-    public class DisablePopupTimer : MonoBehaviour
+    public class DisablePopupTimerService : MonoBehaviour
     {
         private const float FadeDuration = 1f;
         private const float CountdownInterval = 0.5f;
@@ -19,7 +19,6 @@ namespace CodeBase.UI.Windows.Popup
         
         [SerializeField] private TextMeshProUGUI _timerText;
         [SerializeField] private Image _whiteFrame;
-        [SerializeField] private Window _playWindow;
         [SerializeField] private float _startTime = 3f;
         [SerializeField] private float _startDelay = 2f;
 
@@ -88,8 +87,6 @@ namespace CodeBase.UI.Windows.Popup
                     _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
                     yield return new WaitForSecondsRealtime(FinishDelay);
                     _timerFinished.Play();
-                    _playWindow.gameObject.SetActive(true);
-                    _playWindow.transform.localScale = Vector3.one;
                     _popupInfoView.gameObject.SetActive(false);
                     _pauseService.UnPause();
                 }

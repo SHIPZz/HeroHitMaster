@@ -28,13 +28,10 @@ namespace CodeBase.Infrastructure
         {
             _loadingCurtain.Show(1f);
 
-            // if (payload.LevelData.Id % TargetAdInvoke == 0)
-            //     _adInvoker.Init(() => _canContinue = false, () => _canContinue = true);
-            // else
-            //     _canContinue = true;
-            //
-            // while (!_canContinue) 
-            //     await UniTask.Yield();
+            TryInvokeAd(payload);
+            
+            while (!_canContinue) 
+                await UniTask.Yield();
 
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(payload.LevelData.Id);
 
@@ -43,6 +40,14 @@ namespace CodeBase.Infrastructure
 
             _loadingCurtain.Hide();
             _pauseService.UnPause();
+        }
+
+        private void TryInvokeAd(WorldData payload)
+        {
+            if (payload.LevelData.Id % TargetAdInvoke == 0)
+                _adInvoker.Init(() => _canContinue = false, () => _canContinue = true);
+            else
+                _canContinue = true;
         }
     }
 }

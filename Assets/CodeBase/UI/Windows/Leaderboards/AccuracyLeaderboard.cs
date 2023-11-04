@@ -49,7 +49,7 @@ namespace CodeBase.UI.Windows.Leaderboards
                 return;
 
             Leaderboard.GetPlayerEntry(Name,
-                _ => { Leaderboard.SetScore(nameof(AccuracyLeaderboard), score, () => Debug.Log("SUCCCESSSSS")); });
+                _ => { Leaderboard.SetScore(Name, score, () => Debug.Log("SUCCCESSSSS")); });
         }
 
         public void SetInfo(string weaponName, WeaponTypeId targetWeaponType)
@@ -62,7 +62,7 @@ namespace CodeBase.UI.Windows.Leaderboards
             _nameText.text = weaponName;
             _icons[targetWeaponType].gameObject.SetActive(true);
 
-            // Fill();
+            Fill();
         }
 
         private void Fill()
@@ -74,9 +74,9 @@ namespace CodeBase.UI.Windows.Leaderboards
 
             if (!PlayerAccount.HasPersonalProfileDataPermission)
             {
-                for (int i = 0; i < _nameTexts.Count; i++)
+                foreach (TextMeshProUGUI text in _nameTexts)
                 {
-                    _nameTexts[i].text = _anonimTexts[LocalizationManager.CurrentLanguageCode];
+                    text.text = _anonimTexts[LocalizationManager.CurrentLanguageCode];
                 }
 
                 return;

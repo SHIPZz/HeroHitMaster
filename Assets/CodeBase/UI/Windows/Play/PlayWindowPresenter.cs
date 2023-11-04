@@ -3,6 +3,7 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Providers;
+using CodeBase.UI.Windows.Popup;
 using Cysharp.Threading.Tasks;
 using Zenject;
 
@@ -10,13 +11,13 @@ namespace CodeBase.UI.Windows.Play
 {
     public class PlayWindowPresenter : IInitializable, IDisposable, IGameplayRunnable
     {
-        private const float OpenDelay = 1f;
-        
         private readonly WindowService _windowService;
         private readonly ILoadingCurtain _loadingCurtain;
+        private readonly PopupInfoView _popupInfoView;
 
-        public PlayWindowPresenter(WindowService windowService, ILoadingCurtain loadingCurtain)
+        public PlayWindowPresenter(WindowService windowService, ILoadingCurtain loadingCurtain, PopupInfoView popupInfoView)
         {
+            _popupInfoView = popupInfoView;
             _loadingCurtain = loadingCurtain;
             _windowService = windowService;
         }
@@ -32,7 +33,9 @@ namespace CodeBase.UI.Windows.Play
 
         private async void OnLoadingCurtainOnClosed()
         {
-            await UniTask.WaitForSeconds(OpenDelay);
+            while (_popupInfoView.isActiveAndEnabled)
+                await UniTask.Yield();
+                
             _windowService.Open(WindowTypeId.Play);
         }
     }

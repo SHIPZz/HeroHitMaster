@@ -121,8 +121,8 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
-            // LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
-            // YandexGamesSdk.GameReady();
+            LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            YandexGamesSdk.GameReady();
             WorldData worldData = _worldDataService.WorldData;
             _mainUi.transform.SetParent(null);
             TranslateWeaponNames(worldData);
@@ -241,7 +241,6 @@ namespace CodeBase.GameInit
             if (Input.GetKeyDown(KeyCode.K))
             {
                 _worldDataService.Save();
-                Debug.Log(_worldDataService.WorldData.PlayerData.Money);
             }
         }
     }

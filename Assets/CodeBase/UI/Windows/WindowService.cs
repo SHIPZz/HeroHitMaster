@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Services.Providers;
-using JetBrains.Annotations;
-using UnityEngine;
 
 namespace CodeBase.UI.Windows
 {
@@ -17,6 +15,7 @@ namespace CodeBase.UI.Windows
 
         public void Close(WindowTypeId windowTypeId) => 
         _windows[windowTypeId].Close(true);
+        
 
         public void Open(WindowTypeId windowTypeId) => 
             _windows[windowTypeId].Open();

@@ -8,11 +8,9 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
     {
         private readonly List<Player> _players;
 
-        public PlayerShootInputInitializer(IPlayerStorage playerStorage)
-        {
+        public PlayerShootInputInitializer(IPlayerStorage playerStorage) => 
             _players = playerStorage.GetAll();
-        }
-        
+
         public void Run() => 
             _players.ForEach(x=>x.GetComponent<PlayerShootInput>().UnBlock());
     }

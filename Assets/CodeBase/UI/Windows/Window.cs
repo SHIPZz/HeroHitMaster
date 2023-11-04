@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Enums;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace CodeBase.UI.Windows
         [SerializeField] private float _targetOpenDuration;
         [SerializeField] private float _targetCloseDuration;
         [field: SerializeField] public WindowTypeId WindowTypeId { get; private set; }
-        
+
         public event Action StartedToOpen;
         public event Action Opened;
         public event Action Closed;
@@ -27,9 +28,10 @@ namespace CodeBase.UI.Windows
         {
             StartedToOpen?.Invoke();
             gameObject.SetActive(true);
+
             gameObject.transform
                 .DOScaleX(_targetScaleX, _targetOpenDuration)
-                .OnComplete(() => Opened?.Invoke()).SetUpdate(true);
+                .OnComplete(() => Opened?.Invoke()).SetUpdate(true).SetAutoKill(true);
         }
 
         public void Close(bool withAnimation)
@@ -47,12 +49,12 @@ namespace CodeBase.UI.Windows
                     gameObject.SetActive(false);
                     Closed?.Invoke();
                 })
-                .SetUpdate(true);
+                .SetUpdate(true).SetAutoKill(true);
         }
 
         private void CloseQuickly()
         {
-            transform.DOScaleX(0, 0).SetUpdate(true);
+            transform.DOScaleX(0, 0).SetUpdate(true).SetAutoKill(true);
             gameObject.SetActive(false);
             Closed?.Invoke();
         }
