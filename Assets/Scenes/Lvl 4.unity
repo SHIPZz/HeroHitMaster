@@ -4408,7 +4408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6095075634261736615, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.7
+      value: -4.44
       objectReference: {fileID: 0}
     - target: {fileID: 6095075634261736615, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4441,6 +4441,30 @@ PrefabInstance:
     - target: {fileID: 6095075634261736615, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730172180674808787, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.706142
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730172180674808787, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.706142
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730172180674808787, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.036925603
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730172180674808787, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.03692558
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730172180674808787, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730172180674808787, guid: f5bc8987705df9b4e8b925bc33ed143c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -5.987
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4727,7 +4751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1125627564434336661, guid: 0090b87d6b2e12245b57ba8075a90e14, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.52
+      value: -4.38
       objectReference: {fileID: 0}
     - target: {fileID: 1125627564434336661, guid: 0090b87d6b2e12245b57ba8075a90e14, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6522,7 +6546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c420e843f04139bf95f3a60f7784fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTypeId: 5
+  _enemyTypeId: 1
   _aggroZone: {fileID: 1980372232}
 --- !u!114 &355600846
 MonoBehaviour:

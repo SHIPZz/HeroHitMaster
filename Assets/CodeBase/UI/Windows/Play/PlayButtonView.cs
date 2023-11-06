@@ -16,12 +16,6 @@ namespace CodeBase.UI.Windows.Play
         private void OnDisable() =>
             _button.onClick.RemoveListener(OnClicked);
 
-        public void Disable() =>
-            _button.enabled = false;
-
-        public void Enable() =>
-            _button.enabled = true;
-
         private void OnClicked() =>
             Clicked?.Invoke();
     }

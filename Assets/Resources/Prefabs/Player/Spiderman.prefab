@@ -1349,6 +1349,7 @@ GameObject:
   - component: {fileID: 1236176306159419325}
   - component: {fileID: 6224117026159501327}
   - component: {fileID: 5729733742847892257}
+  - component: {fileID: -4677876531293163921}
   m_Layer: 8
   m_Name: Spiderman
   m_TagString: Untagged
@@ -1409,7 +1410,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 434673577274358252}
   _animator: {fileID: 169986755048795277}
-  _rigidbody: {fileID: 8897378275194354550}
   _initialShootPosition: {fileID: 6149461264496095874}
   _playerHealth: {fileID: 7063785409097701353}
   _shootingOnAnimationEvent: {fileID: 5563729641147856434}
@@ -1592,6 +1592,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3465e4d478c4b83947f7f87e546d6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4677876531293163921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3478335646511121591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2856e92173fe4cec9dca22a8cdec2652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3578280363473416374

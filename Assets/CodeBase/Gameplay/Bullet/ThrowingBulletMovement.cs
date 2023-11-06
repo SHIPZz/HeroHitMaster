@@ -20,7 +20,7 @@ namespace CodeBase.Gameplay.Bullet
         {
             base.Awake();
             _throwingBullet = GetComponent<ThrowingBullet>();
-            SetInitialRotation(_throwingBullet);
+            SetInitialRotation();
             GetComponent<Collider>().isTrigger = false;
             RigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             RigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
@@ -33,7 +33,7 @@ namespace CodeBase.Gameplay.Bullet
             MoveDirection = target - startPosition;
             MoveDirection = MoveDirection.normalized;
             transform.forward = MoveDirection;
-            SetInitialRotation(_throwingBullet);
+            SetInitialRotation();
         }
 
         protected override void OnCollisionEntered(UnityEngine.Collision target)
@@ -43,7 +43,7 @@ namespace CodeBase.Gameplay.Bullet
             RigidBody.useGravity = false;
             RigidBody.velocity = Vector3.zero;
             RigidBody.angularVelocity = Vector3.zero;
-            SetInitialRotation(_throwingBullet);
+            SetInitialRotation();
 
             if (target.gameObject.TryGetComponent(out EnemyPartForKnifeHolder enemyPartForKnifeHolder) &&
                 _needSetParent)
@@ -58,7 +58,7 @@ namespace CodeBase.Gameplay.Bullet
             IsHit = true;
         }
 
-        private void SetInitialRotation(ThrowingBullet throwingBullet)
+        private void SetInitialRotation()
         {
             Vector3 startTargetRotation = new Vector3(104, transform.eulerAngles.y,
                 transform.eulerAngles.z);

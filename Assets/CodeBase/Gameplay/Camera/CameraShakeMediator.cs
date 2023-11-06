@@ -18,7 +18,7 @@ namespace CodeBase.Gameplay.Camera
         private readonly IProvider<Dictionary<WeaponTypeId, GameObjectPool>> _bulletsPoolProvider;
         private readonly List<ExplosionBarrel.ExplosionBarrel> _explosionBarrels;
         private readonly WeaponProvider _weaponProvider;
-        private readonly List<Enemy> _enemies = new();
+        private List<Enemy> _enemies = new();
         
         private readonly List<WeaponTypeId> _recoilWeapons = new()
         {
@@ -74,12 +74,17 @@ namespace CodeBase.Gameplay.Camera
             });
         }
 
-        public void InitEnemies(Enemy enemy)
+        public void InitEnemies(List<Enemy> enemies)
         {
-            enemy.Dead += MakeShakeAfterEnemyDeath;
-            enemy.QuickDestroyed += MakeShakeAfterEnemyDeath;
-            enemy.GetComponent<IMaterialChanger>().StartedChanged += BlockShake;
-            _enemies.Add(enemy);
+            _enemies = enemies;
+            
+            foreach (var enemy in _enemies)
+            {
+                enemy.Dead += MakeShakeAfterEnemyDeath;
+                enemy.QuickDestroyed += MakeShakeAfterEnemyDeath;
+                enemy.GetComponent<IMaterialChanger>().StartedChanged += BlockShake;
+                
+            }
         }
 
         public void Init(Weapon weapon)

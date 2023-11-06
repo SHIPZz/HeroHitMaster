@@ -32,18 +32,10 @@ namespace CodeBase.UI.Windows.Setting
 
         private void Open()
         {
-            _windowService.CloseAll(() =>
-            {
-                _windowService.Open(WindowTypeId.SettingWindow);
-                _pauseService.Pause();
-            });
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.SettingWindow));
         }
 
         private void Close() => 
-        _windowService.Close(WindowTypeId.SettingWindow, () =>
-        {
-            _windowService.Open(WindowTypeId.Play);
-            _pauseService.UnPause();
-        });
+        _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Play));
     }
 }

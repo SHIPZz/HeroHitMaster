@@ -61,9 +61,9 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             
             _wallet.AddMoney(_level.Reward);
 
-            if (SceneManager.sceneCountInBuildSettings < worldData.LevelData.Id)
+            if (SceneManager.sceneCountInBuildSettings <= worldData.LevelData.Id)
             {
-                worldData.LevelData.Id = 0;
+                worldData.LevelData.Id = 1;
                 PlayerEntered = null;
                 LastLevelAchieved?.Invoke();
             }

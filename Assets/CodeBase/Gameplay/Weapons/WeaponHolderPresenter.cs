@@ -21,13 +21,13 @@ namespace CodeBase.Gameplay.Weapons
 
         private void OnEnable()
         {
-            _shootingOnAnimationEvent.Shooted += DisableWeaponInHand;
+            _shootingOnAnimationEvent.Shot += DisableWeaponInHand;
             _shootingOnAnimationEvent.Stopped += EnableWeaponInHand;
         }
 
         private void OnDisable()
         {
-            _shootingOnAnimationEvent.Shooted -= DisableWeaponInHand;
+            _shootingOnAnimationEvent.Shot -= DisableWeaponInHand;
             _shootingOnAnimationEvent.Stopped -= EnableWeaponInHand;
         }
 

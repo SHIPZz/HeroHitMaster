@@ -5,9 +5,9 @@ namespace CodeBase.Services.Pause
     public class PauseService : IPauseService
     {
         public void Pause() => 
-        Time.timeScale = 0f;
+            Time.timeScale = 0f;
 
-        public void UnPause() =>
+        public void UnPause() => 
             Time.timeScale = 1;
     }
 }

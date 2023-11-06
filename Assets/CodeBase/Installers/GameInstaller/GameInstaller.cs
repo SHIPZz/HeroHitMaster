@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
+using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Gameplay.EffectsData;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
+using CodeBase.Infrastructure;
 using CodeBase.Services;
+using CodeBase.Services.AccuracyCounters;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
@@ -23,8 +26,11 @@ using CodeBase.Services.Storages.Character;
 using CodeBase.Services.Storages.Effect;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.Services.Storages.Weapon;
+using CodeBase.UI;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
+using CodeBase.UI.Windows;
+using CodeBase.UI.Windows.Play;
 using UnityEngine;
 using Zenject;
 
@@ -92,7 +98,35 @@ namespace CodeBase.Installers.GameInstaller
             BindGameRestarter();
             BindGameContinue();
             BindKillActiveEnemiesOnPlayerRecover();
+            BindEnemyProvider();
+            BindAccuracyCounter();
+            BindGameplayRunner();
+            BindGamePartsInitializers();
         }
+
+        private void BindGamePartsInitializers()
+        {
+            Container.BindInterfacesTo<EnemiesMovementInitializer>().AsSingle();
+            Container.BindInterfacesTo<PlayerShootInputInitializer>().AsSingle();
+        }
+
+        private void BindGameplayRunner()
+        {
+            Container.BindInterfacesAndSelfTo<GameplayRunner>().AsSingle();
+        }
+
+        private void BindAccuracyCounter()
+        {
+            Container
+                .BindInterfacesAndSelfTo<AccuracyCounter>()
+                .AsSingle();
+        }
+
+        private void BindEnemyProvider() =>
+            Container
+            .Bind<IEnemyProvider>()
+                .To<EnemyProvider>()
+                .AsSingle();
 
         private void BindKillActiveEnemiesOnPlayerRecover() =>
             BindAsSingle<KillActiveEnemiesOnPlayerRecover>();
@@ -103,11 +137,8 @@ namespace CodeBase.Installers.GameInstaller
             BindAsSingle<AdReward>();
         }
 
-        private void BindGameRestarter()
-        {
-            Container.BindInterfacesAndSelfTo<GameRestarterPresenter>().AsSingle();
-            BindAsSingle<GameRestarter>();
-        }
+        private void BindGameRestarter() => 
+            Container.BindInterfacesAndSelfTo<GameRestarterMediator>().AsSingle();
 
         private void BindWeaponSaver()
         {

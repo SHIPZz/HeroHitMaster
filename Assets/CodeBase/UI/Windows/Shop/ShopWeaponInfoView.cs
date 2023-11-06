@@ -122,7 +122,8 @@ namespace CodeBase.UI.Windows.Shop
                 .Sequence()
                 .Append(targetTransform.DOScaleY(0, _targetScaleDuration))
                 .AppendInterval(0.05f)
-                .Append(targetTransform.DOScaleY(_targetScaleY, _targetScaleDuration));
+                .Append(targetTransform.DOScaleY(_targetScaleY, _targetScaleDuration))
+                .SetUpdate(true);
 
             _priceTextTween.Play();
         }
@@ -152,7 +153,8 @@ namespace CodeBase.UI.Windows.Shop
                 .Sequence()
                 .Append(button.transform.DOScale(Vector3.zero, _targetScaleDuration))
                 .AppendInterval(0.05f)
-                .Append(button.transform.DOScale(Vector3.one, _targetScaleDuration));
+                .Append(button.transform.DOScale(Vector3.one, _targetScaleDuration))
+                .SetUpdate(true);
 
             _buttonTween.Play();
         }
@@ -165,7 +167,8 @@ namespace CodeBase.UI.Windows.Shop
                 .Sequence()
                 .Append(_name.transform.DOScaleY(0, _targetScaleDuration))
                 .AppendInterval(0.05f)
-                .Append(_name.transform.DOScaleY(_targetScaleY, _targetScaleDuration));
+                .Append(_name.transform.DOScaleY(_targetScaleY, _targetScaleDuration))
+                .SetUpdate(true);
 
             _nameTextTween.Play();
         }

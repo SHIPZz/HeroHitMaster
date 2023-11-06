@@ -30,10 +30,6 @@ namespace CodeBase.Installers.GameObjectInstallers.Enemy
                 .FromComponentOn(gameObject).AsSingle();
 
             Container
-                .BindInterfacesAndSelfTo<EnemyMovementPresenter>()
-                .AsSingle();
-
-            Container
                 .BindInterfacesAndSelfTo<EnemyDeathEffectOnDestruction>()
                 .AsSingle();
             

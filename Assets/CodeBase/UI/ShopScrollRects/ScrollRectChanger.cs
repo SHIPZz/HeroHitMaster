@@ -48,13 +48,14 @@ namespace CodeBase.UI.ShopScrollRects
             image.transform
                 .DOScale(1, 0.5f)
                 .SetEase(Ease.Linear)
-                .OnComplete(() => { Changed?.Invoke(false); });
+                .OnComplete(() => Changed?.Invoke(false))
+                .SetUpdate(true);
         }
 
         private void DisableAll(ScrollRectTypeId scrollRectTypeId) =>
             _scrollImagesProvider
                 .Get(scrollRectTypeId)
                 .ForEach(x => x.transform.DOScale(0, 0f)
-                    .OnComplete(() => _scrollRectsProvider.Get(scrollRectTypeId).gameObject.SetActive(false)));
+                    .OnComplete(() => _scrollRectsProvider.Get(scrollRectTypeId).gameObject.SetActive(false)).SetUpdate(true));
     }
 }

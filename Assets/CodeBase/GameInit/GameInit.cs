@@ -11,6 +11,7 @@ using CodeBase.Gameplay.Weapons;
 using CodeBase.ScriptableObjects.PlayerSettings;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services;
+using CodeBase.Services.AccuracyCounters;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
@@ -48,8 +49,6 @@ namespace CodeBase.GameInit
         private readonly RotateCameraPresenter _rotateCameraPresenter;
         private readonly RotateCameraOnLastEnemyKilled _rotateCameraOnLastEnemyKilled;
         private readonly IProvider<CameraData> _cameraDataProvider;
-        private readonly AudioView _audioView;
-        private readonly AudioChanger _audioChanger;
         private readonly WeaponStaticDataService _weaponStaticDataService;
         private readonly KillActiveEnemiesOnPlayerRecover _killActiveEnemiesOnPlayerRecover;
         private readonly PlayerSettings _playerSettings;
@@ -65,11 +64,14 @@ namespace CodeBase.GameInit
         private readonly Canvas _mainUi;
         private readonly ShopWeaponInfoView _shopWeaponInfoView;
         private readonly Wallet _wallet;
-        private IWorldDataService _worldDataService;
+        private readonly IWorldDataService _worldDataService;
+        private readonly IEnemyProvider _enemyProvider;
+        private readonly AccuracyCounter _accuracyCounter;
 
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
-            IProvider<LocationTypeId, Transform> locationProvider,
+            IProvider<LocationTypeId, 
+                Transform> locationProvider,
             IPlayerStorage playerStorage,
             WeaponSelector weaponSelector,
             WalletPresenter walletPresenter,
@@ -82,14 +84,19 @@ namespace CodeBase.GameInit
             RotateCameraPresenter rotateCameraPresenter,
             RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled,
             IProvider<CameraData> cameraDataProvider,
-            AudioView audioView,
-            AudioChanger audioChanger,
             WeaponStaticDataService weaponStaticDataService,
             KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
-            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand, 
-            Canvas mainUi, ShopWeaponInfoView shopWeaponInfoView, 
-            Wallet wallet, IWorldDataService worldDataService)
+            PlayerSettings playerSettings,
+            SetterWeaponToPlayerHand setterWeaponToPlayerHand,
+            Canvas mainUi,
+            ShopWeaponInfoView shopWeaponInfoView,
+            Wallet wallet,
+            IWorldDataService worldDataService,
+            IEnemyProvider enemyProvider,
+            AccuracyCounter accuracyCounter)
         {
+            _accuracyCounter = accuracyCounter;
+            _enemyProvider = enemyProvider;
             _worldDataService = worldDataService;
             _wallet = wallet;
             _shopWeaponInfoView = shopWeaponInfoView;
@@ -98,8 +105,6 @@ namespace CodeBase.GameInit
             _playerSettings = playerSettings;
             _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
             _weaponStaticDataService = weaponStaticDataService;
-            _audioChanger = audioChanger;
-            _audioView = audioView;
             _cameraDataProvider = cameraDataProvider;
             _rotateCameraOnLastEnemyKilled = rotateCameraOnLastEnemyKilled;
             _rotateCameraPresenter = rotateCameraPresenter;
@@ -123,8 +128,6 @@ namespace CodeBase.GameInit
             WorldData worldData = _worldDataService.WorldData;
             _mainUi.transform.SetParent(null);
             TranslateWeaponNames(worldData);
-
-            InitSound(worldData.SettingsData);
 
             _shopWeaponInfoView.SetTranslatedNames(worldData.TranslatedWeaponNameData.Names);
             InitEnemiesAndObjectsWhoNeedEnemies();
@@ -150,23 +153,20 @@ namespace CodeBase.GameInit
             GetPlayerFromStorage(initialPlayerId);
         }
 
-        private void InitSound(SettingsData settingsData)
-        {
-            _audioView.Slider.value = settingsData.Volume;
-            _audioChanger.Change(settingsData.Volume);
-        }
-
         private void InitEnemiesAndObjectsWhoNeedEnemies()
         {
             _enemySpawners.ForEach(x => x.Init((enemy, aggrozone) =>
             {
+                _enemyProvider.Enemies.Add(enemy);
                 _enemyConfigurator.Configure(enemy, aggrozone);
-                _countEnemiesOnDeath.Init(enemy);
-                _levelSliderPresenter.Init(enemy);
-                _killActiveEnemiesOnPlayerRecover.Init(enemy);
-                _cameraShakeMediator.InitEnemies(enemy);
-                _rotateCameraOnLastEnemyKilled.FillList(enemy);
             }));
+
+            _countEnemiesOnDeath.Init(_enemyProvider.Enemies);
+            _levelSliderPresenter.Init(_enemyProvider.Enemies);
+            _killActiveEnemiesOnPlayerRecover.Init(_enemyProvider.Enemies);
+            _cameraShakeMediator.InitEnemies(_enemyProvider.Enemies);
+            _rotateCameraOnLastEnemyKilled.Init(_enemyProvider.Enemies);
+            _accuracyCounter.Init(_enemyProvider.Enemies);
         }
 
         private void TranslateWeaponNames(WorldData worldData)
@@ -243,7 +243,6 @@ namespace CodeBase.GameInit
             if (Input.GetKeyDown(KeyCode.K))
             {
                 _worldDataService.Save();
-                Debug.Log(_worldDataService.WorldData.PlayerData.Money);
             }
         }
     }

@@ -1,7 +1,10 @@
-﻿using CodeBase.Gameplay.Character.PlayerSelection;
+﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Character.PlayerSelection;
 using CodeBase.Gameplay.LoadNextLevel;
 using CodeBase.Services.Factories;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
+using CodeBase.UI;
 using CodeBase.UI.LevelSlider;
 using CodeBase.UI.ShopScrollRects;
 using CodeBase.UI.ShopScrollRects.ShopScrollUnderlines;
@@ -10,9 +13,11 @@ using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
+using CodeBase.UI.Windows.Authorize;
 using CodeBase.UI.Windows.Buy;
 using CodeBase.UI.Windows.Death;
 using CodeBase.UI.Windows.Gameover;
+using CodeBase.UI.Windows.Leaderboards;
 using CodeBase.UI.Windows.Play;
 using CodeBase.UI.Windows.Popup;
 using CodeBase.UI.Windows.Setting;
@@ -27,7 +32,7 @@ namespace CodeBase.Installers.UI
     {
         [SerializeField] private WindowProvider _windowProvider;
         [SerializeField] private WeaponIconsProvider _weaponIconsProvider;
-        [SerializeField] private AudioView _audioView;
+        [SerializeField] private List<AudioSliderView> _audioSliderViews;
         [SerializeField] private ShopView _shopView;
         [SerializeField] private SettingView _settingView;
         [SerializeField] private DeathView _deathView;
@@ -40,7 +45,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private BuyButtonView _buyButtonView;
         [SerializeField] private WeaponSelectorViewsProvider _weaponSelectorViewsProvider;
         [SerializeField] private Canvas _mainUI;
-        [SerializeField] private VictoryInfoView victoryInfoView;
+        [SerializeField] private VictoryInfoView _victoryInfoView;
         [SerializeField] private LevelSliderView _levelSliderView;
         [SerializeField] private PopupInfoView _popupInfoView;
         [SerializeField] private ContinueButtonView _continueButtonView;
@@ -48,6 +53,9 @@ namespace CodeBase.Installers.UI
         [SerializeField] private RestartButtonView _restartButtonView;
         [SerializeField] private ContinueADButtonView _continueADButtonView;
         [SerializeField] private GameOverView _gameOverView;
+        [SerializeField] private AuthorizeWindowView _authorizeWindowView;
+        [SerializeField] private AccuracyLeaderboard _accuracyLeaderboard;
+        [SerializeField] private AccuracyLeaderboardOpenerButton _accuracyLeaderboardOpenerButton;
         
         public override void InstallBindings()
         {
@@ -71,9 +79,34 @@ namespace CodeBase.Installers.UI
             BindPopupUI();
             BindContinueButtonView();
             BindLoadNextLevelPresenter();
-            BindAllWindowsPresenter();
             BindButtonInDeathWindow();
             BindGameOverUI();
+            BindLeaderboardUI();
+            BindPauseOnWindows();
+            BindPlayMusicPresenter();
+            BindAuthorizeUI();
+        }
+
+        private void BindAuthorizeUI()
+        {
+            Container.BindInstance(_authorizeWindowView);
+            Container.BindInterfacesAndSelfTo<AuthorizeWindowPresenter>().AsSingle();
+        }
+
+        private void BindPlayMusicPresenter() => 
+            Container
+            .BindInterfacesAndSelfTo<PlayMusicPresenter>()
+            .AsSingle();
+
+        private void BindPauseOnWindows() => 
+            Container
+                .BindInterfacesAndSelfTo<PauseOnWindows>()
+                .AsSingle();
+
+        private void BindLeaderboardUI()
+        {
+            Container.BindInstances(_accuracyLeaderboard, _accuracyLeaderboardOpenerButton);
+            Container.BindInterfacesTo<AccuracyLeaderboardPresenter>().AsSingle();
         }
 
         private void BindGameOverUI()
@@ -88,11 +121,6 @@ namespace CodeBase.Installers.UI
             Container.BindInstance(_restartButtonView);
             Container.BindInstance(_continueADButtonView);
         }
-
-        private void BindAllWindowsPresenter() =>
-            Container
-                .BindInterfacesAndSelfTo<AllWindowsPresenter>()
-                .AsSingle();
 
         private void BindLoadNextLevelPresenter() =>
             Container
@@ -117,7 +145,7 @@ namespace CodeBase.Installers.UI
 
         private void BindVictoryUI()
         {
-            Container.BindInstance(victoryInfoView);
+            Container.BindInstance(_victoryInfoView);
             Container.BindInterfacesAndSelfTo<VictoryInfoPresenter>().AsSingle();
         }
 
@@ -196,7 +224,7 @@ namespace CodeBase.Installers.UI
         {
             Container.BindInstance(_playButtonView);
             Container
-                .BindInterfacesAndSelfTo<PlayWindowPresenter>()
+                .BindInterfacesTo<PlayWindowPresenter>()
                 .AsSingle();
         }
 
@@ -215,9 +243,9 @@ namespace CodeBase.Installers.UI
 
         private void BindAudioUI()
         {
-            Container.BindInstance(_audioView);
+            Container.BindInstance(_audioSliderViews);
             Container.BindInterfacesAndSelfTo<AudioPresenter>().AsSingle();
-            Container.Bind<AudioChanger>().AsSingle();
+            Container.Bind<AudioVolumeChanger>().AsSingle();
         }
 
         private void BindPlayerSelector()
@@ -235,7 +263,7 @@ namespace CodeBase.Installers.UI
         {
             Container.BindInstance(_shopView);
             Container
-                .BindInterfacesAndSelfTo<ShopPresenter>()
+                .BindInterfacesAndSelfTo<ShopWindowPresenter>()
                 .AsSingle();
             Container.BindInstance(_shopMoneyText);
         }

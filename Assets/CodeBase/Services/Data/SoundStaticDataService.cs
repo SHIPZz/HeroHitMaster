@@ -18,8 +18,5 @@ namespace CodeBase.Services.Data
 
         public Dictionary<SoundTypeId, SoundData> GetAll() =>
             _soundDatas;
-        
-        public SoundData Get(SoundTypeId soundTypeId) =>
-            _soundDatas[soundTypeId];
     }
 }

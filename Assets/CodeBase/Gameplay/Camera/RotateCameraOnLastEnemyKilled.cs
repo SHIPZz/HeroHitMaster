@@ -18,7 +18,7 @@ namespace CodeBase.Gameplay.Camera
         private bool _blockRotation;
         private Enemy _enemy;
         private Vector3 _lastEnemyPosition;
-        private List<Enemy> _enemies = new();
+        private List<Enemy> _enemies;
         private readonly List<EnemyQuantityInZone> _enemyQuantityZones;
         public bool IsRotating { get; private set; }
 
@@ -70,8 +70,8 @@ namespace CodeBase.Gameplay.Camera
             }
         }
 
-        public void FillList(Enemy enemy) =>
-            _enemies.Add(enemy);
+        public void Init(List<Enemy> enemies) =>
+            _enemies = enemies;
 
         private void SetLastKilledEnemy(Enemy enemy)
         {

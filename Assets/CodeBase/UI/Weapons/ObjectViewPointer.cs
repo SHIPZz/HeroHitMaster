@@ -40,7 +40,7 @@ namespace CodeBase.UI.Weapons
 
             while (elapsed < duration)
             {
-                elapsed += Time.deltaTime;
+                elapsed += Time.unscaledDeltaTime;
                 float t = elapsed / duration;
                 _rectTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
                 yield return null;

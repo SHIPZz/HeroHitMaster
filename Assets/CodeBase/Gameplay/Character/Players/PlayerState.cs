@@ -10,21 +10,27 @@ namespace CodeBase.Gameplay.Character.Players
     {
         private readonly NavMeshAgent _navMeshAgent;
         private readonly PlayerAnimator _playerAnimator;
+        private readonly ShootingOnAnimationEvent _shootingOnAnimationEvent;
         private Weapon _weapon;
-        private ShootingOnAnimationEvent _shootingOnAnimationEvent;
+        private readonly WeaponProvider _weaponProvider;
 
         public PlayerState(NavMeshAgent navMeshAgent, IProvider<WeaponProvider> weaponProvider,
             PlayerAnimator playerAnimator, ShootingOnAnimationEvent shootingOnAnimationEvent)
         {
             _shootingOnAnimationEvent = shootingOnAnimationEvent;
             _playerAnimator = playerAnimator;
-            weaponProvider.Get().Changed += SetWeapon;
+            _weaponProvider = weaponProvider.Get();
             _navMeshAgent = navMeshAgent;
+            _weaponProvider.Changed += SetWeapon;
             _shootingOnAnimationEvent.Stopped += OnWeaponStoppedShoot;
         }
 
-        public void Dispose() => 
+        public void Dispose()
+        {
             _weapon.Shot -= OnWeaponShot;
+            _weaponProvider.Changed -= SetWeapon;
+            _shootingOnAnimationEvent.Stopped -= OnWeaponStoppedShoot;
+        }
 
         private void OnWeaponStoppedShoot()
         {

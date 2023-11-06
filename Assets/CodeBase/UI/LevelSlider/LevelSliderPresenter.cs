@@ -5,6 +5,7 @@ using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.Infrastructure;
 using CodeBase.Services.Providers;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Play;
@@ -13,22 +14,19 @@ using UnityEngine;
 
 namespace CodeBase.UI.LevelSlider
 {
-    public class LevelSliderPresenter : IDisposable
+    public class LevelSliderPresenter : IDisposable, IGameplayRunnable
     {
         private readonly LevelSliderView _levelSliderView;
         private readonly Window _deathWindow;
-        private readonly PlayButtonView _playButtonView;
         private readonly PlayerProvider _playerProvider;
         private readonly Window _victoryWindow;
         private List<Enemy> _enemies = new();
         private PlayerHealth _player;
 
-        public LevelSliderPresenter(LevelSliderView levelSliderView, 
+        public LevelSliderPresenter(LevelSliderView levelSliderView,
             WindowProvider windowProvider,
-            PlayButtonView playButtonView, 
             IProvider<PlayerProvider> provider)
         {
-            _playButtonView = playButtonView;
             _playerProvider = provider.Get();
             _playerProvider.Changed += SetPlayer;
             _levelSliderView = levelSliderView;
@@ -36,24 +34,18 @@ namespace CodeBase.UI.LevelSlider
             _victoryWindow = windowProvider.Windows[WindowTypeId.Victory];
         }
 
-        public void Init(Enemy enemy)
+        public void Init(List<Enemy> enemies)
         {
-            SubscribeToEnemyEvents(enemy);
-            _enemies.Add(enemy);
+            _enemies = enemies;
+            SubscribeToEnemyEvents();
             _deathWindow.StartedToOpen += _levelSliderView.Disable;
-            _playButtonView.Clicked += ActivateSlider;
             _victoryWindow.StartedToOpen += _levelSliderView.Disable;
             InitView();
         }
 
         public void Dispose()
         {
-            foreach (var enemy in _enemies)
-            {
-                UnsubscribeFromEnemyEvents(enemy);
-            }
-
-            _playButtonView.Clicked -= ActivateSlider;
+            UnsubscribeFromEnemyEvents();
             _deathWindow.StartedToOpen -= _levelSliderView.Disable;
             _player.Recovered -= _levelSliderView.Enable;
             _playerProvider.Changed -= SetPlayer;
@@ -73,27 +65,33 @@ namespace CodeBase.UI.LevelSlider
             _player.Recovered += _levelSliderView.Enable;
         }
 
-        private void SubscribeToEnemyEvents(Enemy enemy)
+        private void SubscribeToEnemyEvents()
         {
-            enemy.Dead += IncreaseSlider;
-            enemy.QuickDestroyed += IncreaseSlider;
-            var materialChanger = enemy.GetComponent<IMaterialChanger>();
-            materialChanger.StartedChanged += IncreaseSlider;
+            foreach (Enemy enemy in _enemies)
+            {
+                enemy.Dead += IncreaseSlider;
+                enemy.QuickDestroyed += IncreaseSlider;
+                var materialChanger = enemy.GetComponent<IMaterialChanger>();
+                materialChanger.StartedChanged += IncreaseSlider;
+            }
         }
 
-        private void UnsubscribeFromEnemyEvents(Enemy enemy)
+        private void UnsubscribeFromEnemyEvents()
         {
-            enemy.Dead -= IncreaseSlider;
-            enemy.QuickDestroyed -= IncreaseSlider;
+            foreach (Enemy enemy in _enemies)
+            {
+                enemy.Dead -= IncreaseSlider;
+                enemy.QuickDestroyed -= IncreaseSlider;
+            }
         }
 
-        private void ActivateSlider() => 
+        private void IncreaseSlider(Enemy obj) =>
+            _levelSliderView.Increase(1);
+
+        private void IncreaseSlider() =>
+            _levelSliderView.Increase(1);
+
+        public void Run() =>
             _levelSliderView.transform.DOScale(1, 1f);
-
-        private void IncreaseSlider(Enemy obj) => 
-            _levelSliderView.Increase(1);
-
-        private void IncreaseSlider() => 
-            _levelSliderView.Increase(1);
     }
 }

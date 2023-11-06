@@ -8,6 +8,8 @@
         Victory,
         Play,
         Popup,
-        GameOver
+        GameOver,
+        Leaderboard,
+        Authorize
     }
 }

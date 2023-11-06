@@ -27,10 +27,10 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
         }
 
         public void Initialize() => 
-            _shootingOnAnimationEvent.Shooted += PlayEffects;
+            _shootingOnAnimationEvent.Shot += PlayEffects;
 
         public void Dispose() => 
-            _shootingOnAnimationEvent.Shooted -= PlayEffects;
+            _shootingOnAnimationEvent.Shot -= PlayEffects;
 
         private void PlayEffects()
         {
