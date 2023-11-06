@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Services.Storages.Sound;
@@ -28,6 +29,7 @@ namespace CodeBase.Traps.Fan
         private Coroutine _rotateCoroutine;
         private Coroutine _moveCoroutine;
         private AudioSource _blowSound;
+        private List<Enemy> _killedEnemies = new();
 
         [Inject]
         private void Construct(ISoundStorage soundStorage)
@@ -54,9 +56,13 @@ namespace CodeBase.Traps.Fan
         {
             if (!collider.gameObject.TryGetComponent(out Enemy enemy))
                 return;
+            
+            if (_killedEnemies.Contains(enemy))
+                return;
 
             _animator.SetBool(_isFanned, true);
             _blowSound.Play();
+            _killedEnemies.Add(enemy);
             BlowEnemy(enemy);
             DOTween.Sequence().AppendInterval(_killEnemyDelay).OnComplete(enemy.Explode);
             AutoDisable();

@@ -16,6 +16,7 @@ namespace CodeBase.UI.Windows.Authorize
         {
             _authorizeButton.onClick.AddListener(OnAuthorizeClicked);
             _closeButton.onClick.AddListener(OnCloseClicked);
+            _authorizeButton.gameObject.SetActive(true);
         }
 
         private void OnDisable()

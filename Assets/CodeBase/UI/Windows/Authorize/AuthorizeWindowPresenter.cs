@@ -11,10 +11,10 @@ namespace CodeBase.UI.Windows.Authorize
         private readonly AuthorizeWindowView _authorizeWindowView;
         private readonly WindowService _windowService;
         private readonly AccuracyLeaderboardOpenerButton _accuracyLeaderboardOpenerButton;
-        private bool _isShown;
 
         public AuthorizeWindowPresenter(AuthorizeWindowView authorizeWindowView,
-            WindowService windowService, AccuracyLeaderboardOpenerButton accuracyLeaderboardOpenerButton)
+            WindowService windowService,
+            AccuracyLeaderboardOpenerButton accuracyLeaderboardOpenerButton)
         {
             _accuracyLeaderboardOpenerButton = accuracyLeaderboardOpenerButton;
             _windowService = windowService;
@@ -57,13 +57,9 @@ namespace CodeBase.UI.Windows.Authorize
                 _windowService.Open(WindowTypeId.Leaderboard);
                 return;
             }
-        
-            if (_isShown)
-                return;
-                
+
             _windowService.CloseAll();
             _windowService.Open(WindowTypeId.Authorize);
-            _isShown = true;
         }
     }
 }

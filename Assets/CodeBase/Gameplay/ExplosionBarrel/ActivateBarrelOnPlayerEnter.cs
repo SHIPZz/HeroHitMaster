@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Gameplay.Character.Players;
+﻿using CodeBase.Gameplay.Character.Players;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.ExplosionBarrel
@@ -8,22 +7,23 @@ namespace CodeBase.Gameplay.ExplosionBarrel
     public class ActivateBarrelOnPlayerEnter : MonoBehaviour
     {
         [SerializeField] private AggroZone _aggroZone;
-        
+
         private ExplosionBarrel _explosionBarrel;
+        private Collider _collider;
 
         private void Awake()
         {
-            _explosionBarrel = GetComponent<ExplosionBarrel>();
-            _explosionBarrel.GetComponent<Collider>().enabled = false;
+            _collider = GetComponent<Collider>();
+            _collider.enabled = false;
         }
 
-        private void OnEnable() => 
+        private void OnEnable() =>
             _aggroZone.PlayerEntered += Activate;
 
-        private void OnDisable() => 
-        _aggroZone.PlayerEntered -= Activate;
+        private void OnDisable() =>
+            _aggroZone.PlayerEntered -= Activate;
 
-        private void Activate(Player obj) => 
-            _explosionBarrel.GetComponent<Collider>().enabled = true;
+        private void Activate(Player obj) =>
+            _collider.enabled = true;
     }
 }
