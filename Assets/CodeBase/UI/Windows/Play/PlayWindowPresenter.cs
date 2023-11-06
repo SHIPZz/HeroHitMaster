@@ -15,7 +15,9 @@ namespace CodeBase.UI.Windows.Play
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly PopupInfoView _popupInfoView;
 
-        public PlayWindowPresenter(WindowService windowService, ILoadingCurtain loadingCurtain, PopupInfoView popupInfoView)
+        public PlayWindowPresenter(WindowService windowService, 
+            ILoadingCurtain loadingCurtain, 
+            PopupInfoView popupInfoView)
         {
             _popupInfoView = popupInfoView;
             _loadingCurtain = loadingCurtain;

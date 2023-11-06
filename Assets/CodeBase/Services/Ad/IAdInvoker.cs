@@ -1,9 +1,10 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace CodeBase.Services.Ad
 {
     public interface IAdInvoker
     {
-        void Init(Action onStartCallback, Action onCloseCallback);
+        void Init([CanBeNull] Action onStartCallback,[CanBeNull] Action onCloseCallback);
     }
 }

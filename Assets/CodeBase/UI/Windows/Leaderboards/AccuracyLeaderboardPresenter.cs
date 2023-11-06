@@ -33,11 +33,6 @@ namespace CodeBase.UI.Windows.Leaderboards
             _accuracyLeaderboardOpener.Opened += OnOpenedClicked;
             _accuracyLeaderboard.Closed += OnClosed;
             _saveTriggerOnLevelEnd.PlayerEntered += OnLevelFinished;
-
-            TranslatedWeaponNameData translatedWeaponNamesData = _worldDataService.WorldData.TranslatedWeaponNameData;
-            PlayerData playerData = _worldDataService.WorldData.PlayerData;
-            
-            _accuracyLeaderboard.SetInfo(translatedWeaponNamesData.Names[playerData.LastNotPopupWeaponId],playerData.LastNotPopupWeaponId);
         }
 
         public void Dispose()

@@ -14,6 +14,7 @@ namespace CodeBase.Traps.Flame
         {
             base.Awake();
             Collider.enabled = false;
+            
         }
 
         public override void Activate()

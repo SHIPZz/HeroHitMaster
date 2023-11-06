@@ -1,11 +1,9 @@
 ﻿using System.Collections;
-using System.Threading.Tasks;
 using Agava.YandexGames;
 using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Inputs.InputService;
-using CodeBase.Services.Leaderboard;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Providers.AssetProviders;
@@ -31,21 +29,18 @@ namespace CodeBase.Installers
             BindGlobalSlowMotionSystem();
             BindPauseService();
             BindPauseOnFocusChanged();
-            BindAdInvoker();
-            BindYandexAuthorizeService();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this).AsSingle();
         }
 
-        private void BindYandexAuthorizeService() => 
-            Container.Bind<YandexAuthorizeService>().AsSingle();
-
         public async void Initialize()
         {
-            await InitYandexSDK();
+            // await InitYandexSDK();
+            // YandexGamesSdk.CallbackLogging = true;
 
             BindSaveSystem();
             BindWorldDataService();
+            BindAdInvoker();
 
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
             gameStateMachine.ChangeState<BootstrapState>();
@@ -73,11 +68,14 @@ namespace CodeBase.Installers
             yield return YandexGamesSdk.Initialize(() => _initialized = true);
         }
 
-        private void BindAdInvoker() =>
+        private void BindAdInvoker()
+        {
+            Container.BindInterfacesAndSelfTo<AdInvokerMediator>().AsSingle();
             Container
                 .Bind<IAdInvoker>()
                 .To<AdInvoker>()
                 .AsSingle();
+        }
 
         private void BindPauseOnFocusChanged() =>
             Container
@@ -96,11 +94,11 @@ namespace CodeBase.Installers
 
         private void BindSaveSystem()
         {
-            if (PlayerAccount.IsAuthorized)
-                Container.Bind<ISaveSystem>()
-                    .To<YandexSaveSystem>()
-                    .AsSingle();
-            else
+            // if (PlayerAccount.IsAuthorized)
+            //     Container.Bind<ISaveSystem>()
+            //         .To<YandexSaveSystem>()
+            //         .AsSingle();
+            // else
                 Container.Bind<ISaveSystem>()
                     .To<PlayerPrefsSaveSystem>()
                     .AsSingle();

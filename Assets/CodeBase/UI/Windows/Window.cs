@@ -22,9 +22,6 @@ namespace CodeBase.UI.Windows
         private void Awake()
         {
             transform.DOScaleX(_startScaleX, _startDuration).SetUpdate(true);
-            
-            if(_startScaleX == 0)
-                gameObject.SetActive(false);
         }
 
         public void Open()

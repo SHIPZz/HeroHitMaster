@@ -1,7 +1,6 @@
 ﻿using System;
 using Agava.YandexGames;
 using CodeBase.Enums;
-using CodeBase.Services.Leaderboard;
 using CodeBase.UI.Windows.Leaderboards;
 using Zenject;
 
@@ -10,19 +9,16 @@ namespace CodeBase.UI.Windows.Authorize
     public class AuthorizeWindowPresenter : IInitializable, IDisposable
     {
         private readonly AuthorizeWindowView _authorizeWindowView;
-        private readonly YandexAuthorizeService _yandexAuthorizeService;
         private readonly WindowService _windowService;
         private readonly AccuracyLeaderboardOpenerButton _accuracyLeaderboardOpenerButton;
         private bool _isShown;
 
         public AuthorizeWindowPresenter(AuthorizeWindowView authorizeWindowView,
-            YandexAuthorizeService yandexAuthorizeService,
             WindowService windowService, AccuracyLeaderboardOpenerButton accuracyLeaderboardOpenerButton)
         {
             _accuracyLeaderboardOpenerButton = accuracyLeaderboardOpenerButton;
             _windowService = windowService;
             _authorizeWindowView = authorizeWindowView;
-            _yandexAuthorizeService = yandexAuthorizeService;
         }
 
         public void Initialize()
@@ -34,7 +30,7 @@ namespace CodeBase.UI.Windows.Authorize
 
         private void OnAuthorizedClicked()
         {
-            _yandexAuthorizeService.RequestAccess(() =>
+            PlayerAccount.Authorize(() =>
             {
                 _windowService.CloseAll();
                 _windowService.Open(WindowTypeId.Leaderboard);

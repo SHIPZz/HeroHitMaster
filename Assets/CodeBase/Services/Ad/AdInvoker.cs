@@ -5,6 +5,7 @@ namespace CodeBase.Services.Ad
 {
     public class AdInvoker : IAdInvoker
     {
+        private const int TargetAdInvoke = 3;
         private readonly IAdService _adService;
         private readonly IWorldDataService _worldDataService;
 
@@ -16,11 +17,12 @@ namespace CodeBase.Services.Ad
 
         public void Init(Action onStartCallback, Action onCloseCallback)
         {
-            _adService.PlayShortAd(() => onStartCallback?.Invoke(), (closed) =>
-            {
-                if (closed)
-                    onCloseCallback?.Invoke();
-            });
+            if (_worldDataService.WorldData.LevelData.Id % TargetAdInvoke == 0)
+                _adService.PlayShortAd(() => onStartCallback?.Invoke(), (closed) =>
+                {
+                    if (closed)
+                        onCloseCallback?.Invoke();
+                });
         }
     }
 }
