@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5628664, g: 0.6331327, b: 0.7247877, a: 1}
+  m_IndirectSpecularColor: {r: 0.56492084, g: 0.63428533, b: 0.7135504, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -50323,6 +50323,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7080230317892256495, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7189860804108314094, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: _explosionBarrels.Array.size
       value: 1
@@ -50749,19 +50753,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8985677406316965806, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.75978047
+      value: 0.6105299
       objectReference: {fileID: 0}
     - target: {fileID: 8985677406316965806, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.63416606
+      value: 0.18782352
       objectReference: {fileID: 0}
     - target: {fileID: 8985677406316965806, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.11009985
+      value: 0.73538667
       objectReference: {fileID: 0}
     - target: {fileID: 8985677406316965806, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.09189701
+      value: -0.22623448
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985677406316965806, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 34.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985677406316965806, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 100.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985677406316965806, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9057670504949665895, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchorMax.y
