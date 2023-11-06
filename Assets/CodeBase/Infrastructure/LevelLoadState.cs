@@ -27,7 +27,7 @@ namespace CodeBase.Infrastructure
         public async void Enter(WorldData payload)
         {
             _loadingCurtain.Show(1f);
-
+            
             TryInvokeAd(payload);
             
             while (!_canContinue) 

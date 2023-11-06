@@ -49,7 +49,6 @@ namespace CodeBase.GameInit
         private readonly RotateCameraPresenter _rotateCameraPresenter;
         private readonly RotateCameraOnLastEnemyKilled _rotateCameraOnLastEnemyKilled;
         private readonly IProvider<CameraData> _cameraDataProvider;
-        private readonly AudioVolumeChanger _audioVolumeChanger;
         private readonly WeaponStaticDataService _weaponStaticDataService;
         private readonly KillActiveEnemiesOnPlayerRecover _killActiveEnemiesOnPlayerRecover;
         private readonly PlayerSettings _playerSettings;
@@ -71,7 +70,8 @@ namespace CodeBase.GameInit
 
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
-            IProvider<LocationTypeId, Transform> locationProvider,
+            IProvider<LocationTypeId, 
+                Transform> locationProvider,
             IPlayerStorage playerStorage,
             WeaponSelector weaponSelector,
             WalletPresenter walletPresenter,
@@ -84,13 +84,16 @@ namespace CodeBase.GameInit
             RotateCameraPresenter rotateCameraPresenter,
             RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled,
             IProvider<CameraData> cameraDataProvider,
-            AudioVolumeChanger audioVolumeChanger,
             WeaponStaticDataService weaponStaticDataService,
             KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
-            PlayerSettings playerSettings, SetterWeaponToPlayerHand setterWeaponToPlayerHand,
-            Canvas mainUi, ShopWeaponInfoView shopWeaponInfoView,
-            Wallet wallet, IWorldDataService worldDataService, 
-            IEnemyProvider enemyProvider, AccuracyCounter accuracyCounter)
+            PlayerSettings playerSettings,
+            SetterWeaponToPlayerHand setterWeaponToPlayerHand,
+            Canvas mainUi,
+            ShopWeaponInfoView shopWeaponInfoView,
+            Wallet wallet,
+            IWorldDataService worldDataService,
+            IEnemyProvider enemyProvider,
+            AccuracyCounter accuracyCounter)
         {
             _accuracyCounter = accuracyCounter;
             _enemyProvider = enemyProvider;
@@ -102,7 +105,6 @@ namespace CodeBase.GameInit
             _playerSettings = playerSettings;
             _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
             _weaponStaticDataService = weaponStaticDataService;
-            _audioVolumeChanger = audioVolumeChanger;
             _cameraDataProvider = cameraDataProvider;
             _rotateCameraOnLastEnemyKilled = rotateCameraOnLastEnemyKilled;
             _rotateCameraPresenter = rotateCameraPresenter;

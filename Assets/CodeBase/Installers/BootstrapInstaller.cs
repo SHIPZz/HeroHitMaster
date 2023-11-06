@@ -5,6 +5,7 @@ using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Inputs.InputService;
+using CodeBase.Services.Leaderboard;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Providers.AssetProviders;
@@ -31,9 +32,13 @@ namespace CodeBase.Installers
             BindPauseService();
             BindPauseOnFocusChanged();
             BindAdInvoker();
+            BindYandexAuthorizeService();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this).AsSingle();
         }
+
+        private void BindYandexAuthorizeService() => 
+            Container.Bind<YandexAuthorizeService>().AsSingle();
 
         public async void Initialize()
         {

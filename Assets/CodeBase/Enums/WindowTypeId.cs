@@ -9,6 +9,7 @@
         Play,
         Popup,
         GameOver,
-        Leaderboard
+        Leaderboard,
+        Authorize
     }
 }

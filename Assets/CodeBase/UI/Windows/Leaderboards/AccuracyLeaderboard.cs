@@ -68,7 +68,7 @@ namespace CodeBase.UI.Windows.Leaderboards
         private void Fill()
         {
             if (!PlayerAccount.IsAuthorized)
-                PlayerAccount.Authorize();
+                return;
 
             PlayerAccount.RequestPersonalProfileDataPermission();
 

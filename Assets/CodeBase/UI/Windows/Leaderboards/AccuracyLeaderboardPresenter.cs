@@ -30,7 +30,7 @@ namespace CodeBase.UI.Windows.Leaderboards
 
         public void Initialize()
         {
-            _accuracyLeaderboardOpener.Opened += OnOpened;
+            _accuracyLeaderboardOpener.Opened += OnOpenedClicked;
             _accuracyLeaderboard.Closed += OnClosed;
             _saveTriggerOnLevelEnd.PlayerEntered += OnLevelFinished;
 
@@ -42,7 +42,7 @@ namespace CodeBase.UI.Windows.Leaderboards
 
         public void Dispose()
         {
-            _accuracyLeaderboardOpener.Opened -= OnOpened;
+            _accuracyLeaderboardOpener.Opened -= OnOpenedClicked;
             _accuracyLeaderboard.Closed -= OnClosed;
             _saveTriggerOnLevelEnd.PlayerEntered -= OnLevelFinished;
         }
@@ -50,22 +50,16 @@ namespace CodeBase.UI.Windows.Leaderboards
         private void OnLevelFinished() => 
             _accuracyLeaderboard.SetScore(_worldDataService.WorldData.PlayerData.ShootAccuracy);
 
-        private void OnOpened()
+        private void OnOpenedClicked()
         {
-            _windowService.CloseAll();
-
             WorldData worldData = _worldDataService.WorldData;
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
 
             _accuracyLeaderboard.SetInfo(worldData.TranslatedWeaponNameData.Names[playerData.LastNotPopupWeaponId],
                 playerData.LastNotPopupWeaponId);
-            
-            _windowService.Open(WindowTypeId.Leaderboard);
         }
 
-        private void OnClosed()
-        {
+        private void OnClosed() => 
             _windowService.CloseAll(() => _windowService.Open(WindowTypeId.SettingWindow));
-        }
     }
 }

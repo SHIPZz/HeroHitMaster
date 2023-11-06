@@ -13,6 +13,7 @@ using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
+using CodeBase.UI.Windows.Authorize;
 using CodeBase.UI.Windows.Buy;
 using CodeBase.UI.Windows.Death;
 using CodeBase.UI.Windows.Gameover;
@@ -52,6 +53,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private RestartButtonView _restartButtonView;
         [SerializeField] private ContinueADButtonView _continueADButtonView;
         [SerializeField] private GameOverView _gameOverView;
+        [SerializeField] private AuthorizeWindowView _authorizeWindowView;
         [SerializeField] private AccuracyLeaderboard _accuracyLeaderboard;
         [SerializeField] private AccuracyLeaderboardOpenerButton _accuracyLeaderboardOpenerButton;
         
@@ -82,6 +84,13 @@ namespace CodeBase.Installers.UI
             BindLeaderboardUI();
             BindPauseOnWindows();
             BindPlayMusicPresenter();
+            BindAuthorizeUI();
+        }
+
+        private void BindAuthorizeUI()
+        {
+            Container.BindInstance(_authorizeWindowView);
+            Container.BindInterfacesAndSelfTo<AuthorizeWindowPresenter>().AsSingle();
         }
 
         private void BindPlayMusicPresenter() => 
