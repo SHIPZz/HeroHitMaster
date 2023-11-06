@@ -1,4 +1,5 @@
 ﻿using System;
+using Agava.YandexGames;
 using CodeBase.Enums;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
@@ -47,6 +48,9 @@ namespace CodeBase.UI.Windows.Leaderboards
 
         private void OnOpenedClicked()
         {
+            if(PlayerAccount.IsAuthorized)
+                _windowService.Open(WindowTypeId.Leaderboard);
+            
             WorldData worldData = _worldDataService.WorldData;
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
 

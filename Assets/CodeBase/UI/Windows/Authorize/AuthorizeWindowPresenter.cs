@@ -53,10 +53,7 @@ namespace CodeBase.UI.Windows.Authorize
         private void OnLeaderboardOpenerButtonClicked()
         {
             if (PlayerAccount.IsAuthorized)
-            {
-                _windowService.Open(WindowTypeId.Leaderboard);
                 return;
-            }
 
             _windowService.CloseAll();
             _windowService.Open(WindowTypeId.Authorize);
