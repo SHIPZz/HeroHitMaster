@@ -1,5 +1,4 @@
-﻿using CodeBase.Gameplay.Character;
-using CodeBase.Gameplay.Character.Enemy;
+﻿using CodeBase.Gameplay.Character.Enemy;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
@@ -49,7 +48,7 @@ namespace CodeBase.Traps.Spring
 
         private void AutoDisable()
         {
-            DOTween.Sequence().AppendInterval(1.5f).OnComplete(() =>
+            DOTween.Sequence().AppendInterval(DisableDelay).OnComplete(() =>
             {
                 Collider.enabled = false;
                 _animator.SetBool(_isSprung, false);

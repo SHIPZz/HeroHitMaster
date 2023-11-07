@@ -31,9 +31,6 @@ namespace CodeBase.UI.Windows.Leaderboards
 
         public event Action Closed;
 
-        private void Awake() =>
-            _scoreTexts.ForEach(x => x.text = 0.ToString());
-
         private void OnEnable() =>
             _closeLeaderboardButton.onClick.AddListener(OnCloseClicked);
 
@@ -92,6 +89,10 @@ namespace CodeBase.UI.Windows.Leaderboards
 
                     if (String.IsNullOrEmpty(_nameTexts[i].text))
                         _nameTexts[i].text = _anonimTexts[LocalizationManager.CurrentLanguageCode];
+                    
+                    _scoreTexts[i].gameObject.SetActive(true);
+                    _nameTexts[i].gameObject.SetActive(true);
+                    _nameTexts[i].gameObject.SetActive(true);
                 }
             });
         }

@@ -10,17 +10,30 @@ namespace CodeBase.UI.LevelSlider
         [SerializeField] private UnityEngine.UI.Slider _slider;
         [SerializeField] private float _increaseScaleXDuration = 1f;
         [SerializeField] private float _increaseSliderValueDuration = 1f;
-
+        [SerializeField] private float _targetScaleX = 1f;
+        
         private bool _isChanging;
 
         public void SetMaxValue(int enemyCount) =>
             _slider.maxValue = enemyCount;
 
-        public void Enable(int i) =>
+        public void Enable(int i)
+        {
             gameObject.SetActive(true);
+            transform.DOScale(_targetScaleX, _increaseScaleXDuration).SetUpdate(true);
+        }
 
-        public void Disable() =>
+        public void Enable()
+        {
+            gameObject.SetActive(true);
+            transform.DOScale(_targetScaleX, _increaseScaleXDuration).SetUpdate(true);
+        }
+
+        public void Disable()
+        {
             gameObject.SetActive(false);
+            transform.DOScale(0, 0).SetUpdate(true);
+        }
 
         public async void Increase(int value)
         {
@@ -31,15 +44,15 @@ namespace CodeBase.UI.LevelSlider
 
             float targetValue = _slider.value + value;
 
-            await _slider.DOValue(targetValue, _increaseSliderValueDuration).AsyncWaitForCompletion();
+            await _slider.DOValue(targetValue, _increaseSliderValueDuration).SetUpdate(true).AsyncWaitForCompletion();
 
             _isChanging = false;
-            
-            if(_slider.value == _slider.maxValue)
+
+            if (_slider.value == _slider.maxValue)
                 transform
                     .DOScaleX(0, _increaseScaleXDuration)
                     .SetEase(Ease.InQuint)
-                    .OnComplete(() => gameObject.SetActive(false));
+                    .OnComplete(() => gameObject.SetActive(false)).SetUpdate(true);
         }
     }
 }

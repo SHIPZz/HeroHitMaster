@@ -13,8 +13,8 @@ namespace CodeBase.Gameplay.Character.Enemy
 {
     public class ActivateEnemiesOnPlayerEnter : MonoBehaviour
     {
+        private const float DelayActivation = 1.5f;
         [SerializeField] private List<EnemySpawner> _enemySpawners;
-        [SerializeField] private float _delayActivation = 0.5f;
 
         private List<Enemy> _enemies = new();
         private AggroZone _aggroZone;
@@ -60,8 +60,8 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private async void Activate(Player obj)
         {
-            await UniTask.WaitForSeconds(_delayActivation);
-            
+            await UniTask.WaitForSeconds(DelayActivation);
+
             if (_activated)
                 return;
 

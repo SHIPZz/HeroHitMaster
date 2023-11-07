@@ -43,6 +43,7 @@ namespace CodeBase.Gameplay.EffectsData
             ParticleSystem effect = _effectFactory.Create(randomEffectPrefab);
             effect.gameObject.SetActive(true);
             effect.gameObject.transform.position = enemy.transform.position + _offset;
+            
             effect.Play();
             _targetSound.Play();
         }

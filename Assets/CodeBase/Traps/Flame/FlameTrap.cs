@@ -6,29 +6,26 @@ namespace CodeBase.Traps.Flame
 {
     public class FlameTrap : Trap
     {
-        private const float DisableInterval = 1.5f;
-
         [SerializeField] private List<ParticleSystem> _flameEffects;
 
         protected override void Awake()
         {
             base.Awake();
             Collider.enabled = false;
-            
         }
 
         public override void Activate()
         {
             _flameEffects.ForEach(x => x.Play());
             Collider.enabled = true;
-            
+
             AutoDisable();
         }
 
         private void AutoDisable()
         {
             DOTween.Sequence()
-                .AppendInterval(DisableInterval)
+                .AppendInterval(DisableDelay)
                 .OnComplete(() =>
                 {
                     Collider.enabled = false;

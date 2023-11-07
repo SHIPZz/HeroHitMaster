@@ -1,5 +1,4 @@
-﻿using CodeBase.Services.Ad;
-using CodeBase.Services.Pause;
+﻿using CodeBase.Services.Pause;
 using CodeBase.Services.SaveSystems.Data;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

@@ -35,7 +35,7 @@ namespace CodeBase.UI.Windows.Play
 
         private async void OnLoadingCurtainOnClosed()
         {
-            while (_popupInfoView.isActiveAndEnabled)
+            while ( _popupInfoView.isActiveAndEnabled)
                 await UniTask.Yield();
                 
             _windowService.Open(WindowTypeId.Play);

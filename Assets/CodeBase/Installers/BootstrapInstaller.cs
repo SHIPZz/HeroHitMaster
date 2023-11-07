@@ -28,15 +28,14 @@ namespace CodeBase.Installers
             BindStateFactory();
             BindGlobalSlowMotionSystem();
             BindPauseService();
-            BindPauseOnFocusChanged();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this).AsSingle();
         }
 
         public async void Initialize()
         {
-            await InitYandexSDK();
-            YandexGamesSdk.CallbackLogging = true;
+            // await InitYandexSDK();
+            // YandexGamesSdk.CallbackLogging = true;
 
             BindSaveSystem();
             BindWorldDataService();
@@ -77,11 +76,6 @@ namespace CodeBase.Installers
                 .AsSingle();
         }
 
-        private void BindPauseOnFocusChanged() =>
-            Container
-                .BindInterfacesTo<FocusObserver>()
-                .AsSingle();
-
         private void BindPauseService() =>
             Container.Bind<IPauseService>()
                 .To<PauseService>()
@@ -94,11 +88,11 @@ namespace CodeBase.Installers
 
         private void BindSaveSystem()
         {
-            if (PlayerAccount.IsAuthorized)
-                Container.Bind<ISaveSystem>()
-                    .To<YandexSaveSystem>()
-                    .AsSingle();
-            else
+            // if (PlayerAccount.IsAuthorized)
+            //     Container.Bind<ISaveSystem>()
+            //         .To<YandexSaveSystem>()
+            //         .AsSingle();
+            // else
                 Container.Bind<ISaveSystem>()
                     .To<PlayerPrefsSaveSystem>()
                     .AsSingle();

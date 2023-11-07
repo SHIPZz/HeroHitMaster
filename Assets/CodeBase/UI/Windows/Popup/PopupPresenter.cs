@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Services.Ad;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using UnityEngine;
 using Zenject;
@@ -15,10 +16,13 @@ namespace CodeBase.UI.Windows.Popup
         private readonly WindowService _windowService;
         private readonly IAdService _adService;
         private readonly IWorldDataService _worldDataService;
+        private readonly IPauseService _pauseService;
 
         public PopupPresenter(WindowService windowService, PopupInfoView popupInfoView,
-            IAdService adService, IWorldDataService worldDataService)
+            IAdService adService,
+            IWorldDataService worldDataService, IPauseService pauseService)
         {
+            _pauseService = pauseService;
             _worldDataService = worldDataService;
             _adService = adService;
             _popupInfoView = popupInfoView;
@@ -32,7 +36,8 @@ namespace CodeBase.UI.Windows.Popup
             if (_worldDataService.WorldData.LevelData.Id % TargetPopupLevelInvoke != 0)
                 return;
             
-            _windowService.CloseAll();
+            _pauseService.Pause();
+            _windowService.Close(WindowTypeId.Play);
             _windowService.Open(WindowTypeId.Popup);
         }
 

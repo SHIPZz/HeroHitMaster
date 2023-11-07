@@ -4,13 +4,10 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.MaterialChanger;
-using CodeBase.Gameplay.Weapons;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Providers;
 using CodeBase.UI.Windows;
-using CodeBase.UI.Windows.Play;
 using DG.Tweening;
-using UnityEngine;
 
 namespace CodeBase.UI.LevelSlider
 {
@@ -22,6 +19,7 @@ namespace CodeBase.UI.LevelSlider
         private readonly Window _victoryWindow;
         private List<Enemy> _enemies = new();
         private PlayerHealth _player;
+        private readonly Window _pauseWindow;
 
         public LevelSliderPresenter(LevelSliderView levelSliderView,
             WindowProvider windowProvider,
@@ -32,6 +30,7 @@ namespace CodeBase.UI.LevelSlider
             _levelSliderView = levelSliderView;
             _deathWindow = windowProvider.Windows[WindowTypeId.Death];
             _victoryWindow = windowProvider.Windows[WindowTypeId.Victory];
+            _pauseWindow = windowProvider.Windows[WindowTypeId.Pause];
         }
 
         public void Init(List<Enemy> enemies)
@@ -40,6 +39,8 @@ namespace CodeBase.UI.LevelSlider
             SubscribeToEnemyEvents();
             _deathWindow.StartedToOpen += _levelSliderView.Disable;
             _victoryWindow.StartedToOpen += _levelSliderView.Disable;
+            _pauseWindow.StartedToOpen += _levelSliderView.Disable;
+            _pauseWindow.Closed += _levelSliderView.Enable;
             InitView();
         }
 
@@ -49,6 +50,8 @@ namespace CodeBase.UI.LevelSlider
             _deathWindow.StartedToOpen -= _levelSliderView.Disable;
             _player.Recovered -= _levelSliderView.Enable;
             _playerProvider.Changed -= SetPlayer;
+            _pauseWindow.Closed -= _levelSliderView.Enable;
+            _pauseWindow.StartedToOpen -= _levelSliderView.Disable;
             _victoryWindow.StartedToOpen -= _levelSliderView.Disable;
         }
 
@@ -64,6 +67,9 @@ namespace CodeBase.UI.LevelSlider
             _player = player.GetComponent<PlayerHealth>();
             _player.Recovered += _levelSliderView.Enable;
         }
+
+        public void Run() =>
+            _levelSliderView.transform.DOScale(1, 1f).SetUpdate(true);
 
         private void SubscribeToEnemyEvents()
         {
@@ -90,8 +96,5 @@ namespace CodeBase.UI.LevelSlider
 
         private void IncreaseSlider() =>
             _levelSliderView.Increase(1);
-
-        public void Run() =>
-            _levelSliderView.transform.DOScale(1, 1f);
     }
 }

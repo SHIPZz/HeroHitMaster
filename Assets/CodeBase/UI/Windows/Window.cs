@@ -1,6 +1,5 @@
 using System;
 using CodeBase.Enums;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -56,7 +55,6 @@ namespace CodeBase.UI.Windows
         {
             transform.DOScaleX(0, 0).SetUpdate(true).SetAutoKill(true);
             gameObject.SetActive(false);
-            Closed?.Invoke();
         }
     }
 }

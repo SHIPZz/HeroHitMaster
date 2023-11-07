@@ -74,7 +74,7 @@ namespace CodeBase.UI.Windows.Popup
         {
             _mainWeaponText
                 .DOColor(new Color(_color.r, _color.g, _color.b, _mainWeaponText.color.a), 0.5f)
-                .SetLoops(-1, LoopType.Yoyo);
+                .SetLoops(-1, LoopType.Yoyo).SetUpdate(true);
         }
 
         private void OnAdClicked()
@@ -152,7 +152,8 @@ namespace CodeBase.UI.Windows.Popup
             if (_lastFrame is not null)
             {
                 Color currentCollor = new Color(_lastFrame.color.r, _lastFrame.color.g, _lastFrame.color.b, 0f);
-                _lastFrame.DOColor(currentCollor, _closeWhiteFrameDuration).OnComplete(() => lastFrameChanged = true);
+                _lastFrame.DOColor(currentCollor, _closeWhiteFrameDuration).OnComplete(() => lastFrameChanged = true)
+                    .SetUpdate(true);
 
                 while (lastFrameChanged)
                 {
@@ -178,7 +179,7 @@ namespace CodeBase.UI.Windows.Popup
             Color currentColor = whiteFrame.color;
 
             var newColor = new Color(currentColor.r, currentColor.g, currentColor.b, 1f);
-            whiteFrame.DOColor(newColor, _openWhiteFrameDuration);
+            whiteFrame.DOColor(newColor, _openWhiteFrameDuration).SetUpdate(true);
             _lastFrame = whiteFrame;
         }
 

@@ -12,20 +12,21 @@ namespace CodeBase.UI.Windows.RectTransformAnimations
         [SerializeField] private float _targetWidth;
         [SerializeField] private float _targetHeight;
         [SerializeField] private float _duration;
+        [SerializeField] private bool _setUpdate = true;
 
         private void Start()
         {
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(_rectTransform.DOSizeDelta(new Vector2(_targetWidth, _targetHeight), _duration)
-                .SetEase(Ease.OutQuad)); 
+                .SetEase(Ease.OutQuad)).SetUpdate(_setUpdate); 
 
             sequence.Append(_rectTransform.DOSizeDelta(new Vector2(_startWidth, _startHeight), _duration)
-                .SetEase(Ease.OutQuad)); 
+                .SetEase(Ease.OutQuad)).SetUpdate(_setUpdate); 
 
-            sequence.SetLoops(-1);
+            sequence.SetLoops(-1).SetUpdate(_setUpdate);
 
-            sequence.Play();
+            sequence.Play().SetUpdate(_setUpdate);
         }
     }
 }

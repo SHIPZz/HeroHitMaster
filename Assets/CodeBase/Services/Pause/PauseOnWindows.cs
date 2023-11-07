@@ -23,28 +23,28 @@ namespace CodeBase.Services.Pause
 
         public void Initialize()
         {
-            _playWindow.Opened += _pauseService.UnPause;
-            
-            foreach (Window window in _allWindows)
-            {
-                if(window.WindowTypeId == WindowTypeId.Play)
-                    continue;
-                    
-                window.StartedToOpen += _pauseService.Pause;
-            }
+            // _playWindow.Opened += _pauseService.UnPause;
+            //
+            // foreach (Window window in _allWindows)
+            // {
+            //     if(window.WindowTypeId == WindowTypeId.Play)
+            //         continue;
+            //         
+            //     window.StartedToOpen += _pauseService.Pause;
+            // }
         }
 
         public void Dispose()
         {
-            _playWindow.Opened -= _pauseService.UnPause;
-            
-            foreach (Window window in _allWindows)
-            {    
-                if(window.WindowTypeId == WindowTypeId.Play)
-                    continue;
-                
-                window.StartedToOpen -= _pauseService.Pause;
-            }
+            // _playWindow.Opened -= _pauseService.UnPause;
+            //
+            // foreach (Window window in _allWindows)
+            // {    
+            //     if(window.WindowTypeId == WindowTypeId.Play)
+            //         continue;
+            //     
+            //     window.StartedToOpen -= _pauseService.Pause;
+            // }
         }
     }
 }

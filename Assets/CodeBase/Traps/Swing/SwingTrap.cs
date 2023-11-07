@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Gameplay.Character.Enemy;
+﻿using CodeBase.Gameplay.Character.Enemy;
 using DG.Tweening;
 using UnityEngine;
 
@@ -10,16 +9,15 @@ namespace CodeBase.Traps.Swing
         private const float KillDelay = 0.3f;
         
         [SerializeField] private Animator _animator;
-        [SerializeField] private float _disableDelay = 4f;
         [SerializeField] private float _force = 20f;
         
         private static readonly int _isSwung = Animator.StringToHash("IsSwung");
         private bool _isPushed;
-        
+
         public override void Activate()
         {
             _animator.SetBool(_isSwung, true);
-            DOTween.Sequence().AppendInterval(_disableDelay).OnComplete(() => _animator.SetBool(_isSwung, false));
+            DOTween.Sequence().AppendInterval(DisableDelay).OnComplete(() => _animator.SetBool(_isSwung, false));
         }
 
         protected override void Kill(Collider collider)

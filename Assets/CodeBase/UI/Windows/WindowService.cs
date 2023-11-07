@@ -8,16 +8,20 @@ namespace CodeBase.UI.Windows
     public class WindowService
     {
         private readonly Dictionary<WindowTypeId, Window> _windows;
-        private readonly Dictionary<WindowTypeId, Window> _hudWindows;
 
-        public WindowService(WindowProvider windowProvider) => 
+        public WindowService(WindowProvider windowProvider) =>
             _windows = windowProvider.Windows;
 
-        public void Close(WindowTypeId windowTypeId) => 
-        _windows[windowTypeId].Close(true);
-        
+        public void Close(WindowTypeId windowTypeId) =>
+            _windows[windowTypeId].Close(true);
 
-        public void Open(WindowTypeId windowTypeId) => 
+        public void Close(WindowTypeId windowTypeId, Action onCloseCallback)
+        {
+            _windows[windowTypeId].Close(true);
+            _windows[windowTypeId].Closed += onCloseCallback;
+        }
+
+        public void Open(WindowTypeId windowTypeId) =>
             _windows[windowTypeId].Open();
 
         public void Open(WindowTypeId windowTypeId, Action callback)
@@ -28,15 +32,15 @@ namespace CodeBase.UI.Windows
 
         public void CloseAll()
         {
-            foreach (var window in _windows.Values) 
+            foreach (var window in _windows.Values)
                 window.Close(false);
         }
-        
+
         public void CloseAll(Action callback)
         {
-            foreach (var window in _windows.Values) 
+            foreach (var window in _windows.Values)
                 window.Close(false);
-            
+
             callback?.Invoke();
         }
     }

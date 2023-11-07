@@ -16,7 +16,6 @@ namespace CodeBase.Traps.Fan
         [SerializeField] private float _killEnemyDelay = 1f;
         [SerializeField] private float _force = 5;
         [SerializeField] private float _rotationForce = 4f;
-        [SerializeField] private float _disableDelay = 4f;
         [SerializeField] private Animator _animator;
         [SerializeField] private Vector3 _direction;
         [SerializeField] private Vector3 _rotateDirection;
@@ -30,6 +29,7 @@ namespace CodeBase.Traps.Fan
         private Coroutine _moveCoroutine;
         private AudioSource _blowSound;
         private List<Enemy> _killedEnemies = new();
+
 
         [Inject]
         private void Construct(ISoundStorage soundStorage)
@@ -127,7 +127,7 @@ namespace CodeBase.Traps.Fan
             enemyRigidbody.constraints = rigidbodyConstraints;
 
         private void AutoDisable() =>
-            DOTween.Sequence().AppendInterval(_disableDelay).OnComplete(() =>
+            DOTween.Sequence().AppendInterval(DisableDelay).OnComplete(() =>
             {
                 Collider.enabled = false;
                 _animator.SetBool(_isFanned, false);

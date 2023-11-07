@@ -8,6 +8,7 @@ namespace CodeBase.Traps
     [RequireComponent(typeof(TriggerObserver))]
     public abstract class Trap : MonoBehaviour
     {
+        [field: SerializeField] public float DisableDelay { get; protected set; }
         protected Collider Collider;
         private TriggerObserver _triggerObserver;
 

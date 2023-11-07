@@ -1366,6 +1366,18 @@ PrefabInstance:
       propertyPath: _physicalButton
       value: 
       objectReference: {fileID: 112671157}
+    - target: {fileID: 4110243271732588215, guid: 904803cd13100034a9531936ae6d3009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.0000047280537
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110243271732588215, guid: 904803cd13100034a9531936ae6d3009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.0000038292073
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110243271732588215, guid: 904803cd13100034a9531936ae6d3009, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 15.877753
+      objectReference: {fileID: 0}
     - target: {fileID: 4197804175013277735, guid: 904803cd13100034a9531936ae6d3009, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -1417,6 +1429,10 @@ PrefabInstance:
     - target: {fileID: 4197804175013277735, guid: 904803cd13100034a9531936ae6d3009, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191650747777413177, guid: 904803cd13100034a9531936ae6d3009, type: 3}
+      propertyPath: _disableDelay
+      value: 4.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16698,7 +16714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2667010247553110585, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -54.814087
+      value: -54.81407
       objectReference: {fileID: 0}
     - target: {fileID: 2682593587846237164, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.x

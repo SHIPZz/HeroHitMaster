@@ -10,6 +10,8 @@
         Popup,
         GameOver,
         Leaderboard,
-        Authorize
+        Authorize,
+        Hud,
+        Pause
     }
 }

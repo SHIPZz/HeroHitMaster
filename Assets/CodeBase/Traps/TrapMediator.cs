@@ -8,8 +8,11 @@ namespace CodeBase.Traps
         [SerializeField] private Trap _trap;
         [SerializeField] private PhysicalButton _physicalButton;
 
-        private void OnEnable() => 
+        private void OnEnable()
+        {
+            _physicalButton.SetEnablingDelay(_trap.DisableDelay);
             _physicalButton.Pressed += _trap.Activate;
+        }
 
         private void OnDisable() => 
             _physicalButton.Pressed -= _trap.Activate;

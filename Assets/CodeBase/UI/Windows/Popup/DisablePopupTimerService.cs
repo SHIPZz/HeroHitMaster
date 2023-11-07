@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using System.Globalization;
+using System.Threading;
 using CodeBase.Enums;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Storages.Sound;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -15,8 +17,7 @@ namespace CodeBase.UI.Windows.Popup
     {
         private const float FadeDuration = 1f;
         private const float CountdownInterval = 0.5f;
-        private const float FinishDelay = 0.5f;
-        
+
         [SerializeField] private TextMeshProUGUI _timerText;
         [SerializeField] private Image _whiteFrame;
         [SerializeField] private float _startTime = 3f;
@@ -26,6 +27,8 @@ namespace CodeBase.UI.Windows.Popup
         private AudioSource _timerFinished;
         private PopupInfoView _popupInfoView;
         private IPauseService _pauseService;
+        private bool _ignoreTimeScale;
+        private bool _hasFocus;
 
         [Inject]
         private void Construct(ISoundStorage soundStorage, PopupInfoView popupInfoView, IPauseService pauseService)
@@ -36,67 +39,71 @@ namespace CodeBase.UI.Windows.Popup
             _timerFinished = soundStorage.Get(SoundTypeId.TimerFinished);
         }
 
-        private void Awake() => 
+        private void Awake() =>
             FadeInOut(_whiteFrame, _timerText, 0f, false);
 
-        private void OnEnable()
+        private async void OnEnable()
         {
             _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
             _popupInfoView.AdButtonClicked += StopTimer;
-            StartCountdown();
+            Application.focusChanged += OnFocusChanged;
+
+            await Init();
+        }
+
+        private void OnFocusChanged(bool hasFocus)
+        {
+            _hasFocus = hasFocus;
         }
 
         private void OnDisable()
         {
+            Application.focusChanged -= OnFocusChanged;
             _popupInfoView.AdButtonClicked -= StopTimer;
             _pauseService.UnPause();
-            PauseCoroutines();
         }
 
-        private void StopTimer()
-        {
-            PauseCoroutines();
-            _timerTicking.Stop();
-            _timerFinished.Stop();
-            gameObject.SetActive(false);
-        }
-
-        private void StartCountdown() => 
-            StartCoroutine(CountdownCoroutine());
-
-        private IEnumerator CountdownCoroutine()
+        private async UniTask Init()
         {
             _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
             _pauseService.Pause();
-            yield return new WaitForSecondsRealtime(_startDelay);
-
             _timerTicking.Play();
 
             while (_startTime != 0)
             {
+                while (!_hasFocus)
+                {
+                    FadeInOut(_whiteFrame, _timerText, 0f, true);
+                    await UniTask.Yield();
+                }
+
                 FadeInOut(_whiteFrame, _timerText, FadeDuration, true);
-                yield return new WaitForSecondsRealtime(CountdownInterval);
+                await UniTask.Delay(TimeSpan.FromSeconds(CountdownInterval), true);
                 _startTime--;
                 _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
-                yield return new WaitForSecondsRealtime(CountdownInterval);
+                await UniTask.Delay(TimeSpan.FromSeconds(CountdownInterval), true);
                 FadeInOut(_whiteFrame, _timerText, FadeDuration, false);
 
                 if (_startTime == 0)
                 {
                     _timerTicking.Stop();
                     _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
-                    yield return new WaitForSecondsRealtime(FinishDelay);
+                    await UniTask.Delay(TimeSpan.FromSeconds(CountdownInterval), true);
                     _timerFinished.Play();
                     _popupInfoView.gameObject.SetActive(false);
                     _pauseService.UnPause();
                 }
 
-                yield return new WaitForSecondsRealtime(CountdownInterval);
+                await UniTask.Delay(TimeSpan.FromSeconds(CountdownInterval), true);
             }
         }
 
-        private void PauseCoroutines() => 
-            StopCoroutine(CountdownCoroutine());
+        private void StopTimer()
+        {
+            _timerTicking.Stop();
+            _timerFinished.Stop();
+            gameObject.SetActive(false);
+        }
 
         private void FadeInOut(Image image, TextMeshProUGUI text, float duration, bool fadeIn)
         {

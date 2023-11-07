@@ -17,7 +17,9 @@ using CodeBase.UI.Windows.Authorize;
 using CodeBase.UI.Windows.Buy;
 using CodeBase.UI.Windows.Death;
 using CodeBase.UI.Windows.Gameover;
+using CodeBase.UI.Windows.Hud;
 using CodeBase.UI.Windows.Leaderboards;
+using CodeBase.UI.Windows.Pause;
 using CodeBase.UI.Windows.Play;
 using CodeBase.UI.Windows.Popup;
 using CodeBase.UI.Windows.Setting;
@@ -56,6 +58,9 @@ namespace CodeBase.Installers.UI
         [SerializeField] private AuthorizeWindowView _authorizeWindowView;
         [SerializeField] private AccuracyLeaderboard _accuracyLeaderboard;
         [SerializeField] private AccuracyLeaderboardOpenerButton _accuracyLeaderboardOpenerButton;
+        [SerializeField] private HudView _hudView;
+        [SerializeField] private PauseWindowView _pauseWindowView;
+        
         
         public override void InstallBindings()
         {
@@ -85,6 +90,20 @@ namespace CodeBase.Installers.UI
             BindPauseOnWindows();
             BindPlayMusicPresenter();
             BindAuthorizeUI();
+            BindHudUI();
+            BindPauseUI();
+        }
+
+        private void BindPauseUI()
+        {
+            Container.BindInstance(_pauseWindowView);
+            Container.BindInterfacesAndSelfTo<PauseWindowPresenter>().AsSingle();
+        }
+
+        private void BindHudUI()
+        {
+            Container.BindInstance(_hudView);
+            Container.BindInterfacesAndSelfTo<HudPresenter>().AsSingle();
         }
 
         private void BindAuthorizeUI()

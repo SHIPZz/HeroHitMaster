@@ -24,11 +24,12 @@ namespace CodeBase.Gameplay.PhysicalButtons
         private bool _isPressing;
         private AudioSource _physicalButtonSound;
         private MeshRenderer _meshRenderer;
+        private float _enablePressingDelay;
 
         public event Action Pressed;
 
         [Inject]
-        private void Construct(ISoundStorage soundStorage) => 
+        private void Construct(ISoundStorage soundStorage) =>
             _physicalButtonSound = soundStorage.Get(SoundTypeId.PhysicalButton);
 
         private void Awake()
@@ -43,6 +44,9 @@ namespace CodeBase.Gameplay.PhysicalButtons
         private void OnDisable() =>
             _triggerObserver.CollisionEntered -= Press;
 
+        public void SetEnablingDelay(float delay) =>
+            _enablePressingDelay = delay;
+
         private void Press(UnityEngine.Collision obj)
         {
             if (_isPressing)
@@ -56,13 +60,14 @@ namespace CodeBase.Gameplay.PhysicalButtons
             _meshRenderer.material = _targetMaterials["Grey"];
             transform
                 .DOLocalMoveZ(_targetPositionZ, _increasePositionDuration)
-            .OnComplete(() => transform.DOLocalMoveZ(0, _decreasePositionDuration)
-                .OnComplete(() =>
-                {
-                    _meshRenderer.material = _targetMaterials["Green"];
-                    _isPressing = false;
-                }));
-            
+                .OnComplete(() => transform.DOLocalMoveZ(0, _decreasePositionDuration));
+
+            DOTween.Sequence().AppendInterval(_enablePressingDelay).OnComplete(() =>
+            {
+                _meshRenderer.material = _targetMaterials["Green"];
+                _isPressing = false;
+            });
+
             Pressed?.Invoke();
         }
     }

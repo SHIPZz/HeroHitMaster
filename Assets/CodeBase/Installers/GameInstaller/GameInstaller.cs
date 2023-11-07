@@ -6,6 +6,7 @@ using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Gameplay.EffectsData;
 using CodeBase.Gameplay.EnemyBodyParts;
 using CodeBase.Gameplay.Loots;
+using CodeBase.Gameplay.MusicHandlerSystem;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
 using CodeBase.Infrastructure;
@@ -16,6 +17,7 @@ using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.GameContinues;
 using CodeBase.Services.GameRestarters;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.SaveTriggers;
@@ -102,7 +104,21 @@ namespace CodeBase.Installers.GameInstaller
             BindAccuracyCounter();
             BindGameplayRunner();
             BindGamePartsInitializers();
+            BindFocusService();
+            BindMusicHandler();
         }
+
+        private void BindMusicHandler()
+        {
+            Container
+                .BindInterfacesAndSelfTo<MusicHandler>()
+                .AsSingle();
+        }
+
+        private void BindFocusService() =>
+            Container
+                .BindInterfacesTo<FocusService>()
+                .AsSingle();
 
         private void BindGamePartsInitializers()
         {
@@ -124,7 +140,7 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindEnemyProvider() =>
             Container
-            .Bind<IEnemyProvider>()
+                .Bind<IEnemyProvider>()
                 .To<EnemyProvider>()
                 .AsSingle();
 
@@ -137,7 +153,7 @@ namespace CodeBase.Installers.GameInstaller
             BindAsSingle<AdReward>();
         }
 
-        private void BindGameRestarter() => 
+        private void BindGameRestarter() =>
             Container.BindInterfacesAndSelfTo<GameRestarterMediator>().AsSingle();
 
         private void BindWeaponSaver()
@@ -157,7 +173,7 @@ namespace CodeBase.Installers.GameInstaller
                 .BindInterfacesAndSelfTo<PlaySoundOnFocusChanged>()
                 .AsSingle();
 
-        private void BindLevel() => 
+        private void BindLevel() =>
             Container.BindInstance(_level);
 
         private void BindRotateCameraPresenter() =>
@@ -170,7 +186,7 @@ namespace CodeBase.Installers.GameInstaller
             BindAsSingle<CameraZoomer>();
         }
 
-        private void BindRotateCameraOnEnemyKill() => 
+        private void BindRotateCameraOnEnemyKill() =>
             Container.BindInterfacesAndSelfTo<RotateCameraOnLastEnemyKilled>().AsSingle();
 
         private void BindExplosionBarrelsProvider() =>

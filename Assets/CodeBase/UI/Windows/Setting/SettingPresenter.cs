@@ -9,7 +9,7 @@ namespace CodeBase.UI.Windows.Setting
     {
         private readonly SettingView _settingView;
         private readonly WindowService _windowService;
-        private IPauseService _pauseService;
+        private readonly IPauseService _pauseService;
 
         public SettingPresenter(SettingView settingView, WindowService windowService, IPauseService pauseService)
         {
@@ -32,10 +32,11 @@ namespace CodeBase.UI.Windows.Setting
 
         private void Open()
         {
+            _pauseService.Pause();
             _windowService.CloseAll(() => _windowService.Open(WindowTypeId.SettingWindow));
         }
 
-        private void Close() => 
-        _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Play));
+        private void Close() =>
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Play, () => _pauseService.UnPause()));
     }
 }
