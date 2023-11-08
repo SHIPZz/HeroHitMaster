@@ -14,11 +14,21 @@ namespace CodeBase.UI.Weapons
 
         public event Action<WeaponTypeId> Choosen;
 
-        private void OnEnable() => 
+        private void OnEnable()
+        {
+            if (_button == null)
+                return;
+            
             _button.onClick.AddListener(OnImageClicked);
+        }
 
-        private void OnDisable() => 
+        private void OnDisable()
+        {
+            if (_button == null)
+                return;
+            
             _button.onClick.RemoveListener(OnImageClicked);
+        }
 
         private void OnImageClicked() => 
             Choosen?.Invoke(_weaponTypeId);

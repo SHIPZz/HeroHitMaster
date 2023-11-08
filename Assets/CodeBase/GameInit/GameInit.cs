@@ -204,7 +204,7 @@ namespace CodeBase.GameInit
 
         private async UniTask<Weapon> InitializeInitialWeapon(WeaponTypeId weaponTypeId)
         {
-            Weapon weapon = await _weaponSelector.Init(weaponTypeId);
+            Weapon weapon =  _weaponSelector.Init(weaponTypeId);
 
             while (weapon.BulletsCreated == false)
             {

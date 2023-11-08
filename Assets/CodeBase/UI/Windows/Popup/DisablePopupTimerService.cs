@@ -46,6 +46,8 @@ namespace CodeBase.UI.Windows.Popup
         {
             _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
             _popupInfoView.AdButtonClicked += StopTimer;
+            _hasFocus = Application.isFocused;
+            _pauseService.Pause();
             Application.focusChanged += OnFocusChanged;
 
             await Init();
@@ -71,6 +73,8 @@ namespace CodeBase.UI.Windows.Popup
 
             while (_startTime != 0)
             {
+                _pauseService.Pause();
+                
                 while (!_hasFocus)
                 {
                     FadeInOut(_whiteFrame, _timerText, 0f, true);

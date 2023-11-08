@@ -13,9 +13,16 @@ namespace CodeBase.UI.Windows.RectTransformAnimations
         [SerializeField] private float _targetHeight;
         [SerializeField] private float _duration;
         [SerializeField] private bool _setUpdate = true;
+        [SerializeField] private bool _takeValuesFromTransform;
 
         private void Start()
         {
+            if (_takeValuesFromTransform)
+            {
+                _startWidth = _rectTransform.rect.width;
+                _startHeight = _rectTransform.rect.height;
+            }
+            
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(_rectTransform.DOSizeDelta(new Vector2(_targetWidth, _targetHeight), _duration)

@@ -23,7 +23,10 @@ namespace CodeBase.UI.Weapons
 
         public WeaponTypeId LastWeaponId => _lastWeaponId;
 
+        public bool Initialized = false;
+
         public event Action<WeaponTypeId> NewWeaponChanged;
+        
 
         public WeaponSelector(IProvider<Weapon> weaponProvider,
             IWeaponStorage weaponStorage, IWorldDataService worldDataService,
@@ -35,7 +38,7 @@ namespace CodeBase.UI.Weapons
             _weaponStorage = weaponStorage;
         }
 
-        public async UniTask<Weapon> Init(WeaponTypeId lastWeaponId)
+        public Weapon Init(WeaponTypeId lastWeaponId)
         {
             WeaponData weaponData = _weaponStaticDataService.Get(lastWeaponId);
             _lastWeaponId = lastWeaponId;
@@ -93,9 +96,12 @@ namespace CodeBase.UI.Weapons
         public void SetLastShopWeaponSelected(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;
-            
-            if(_worldDataService.WorldData.PlayerData.PurchasedWeapons.Contains(_lastWeaponId))
+
+            if (_worldDataService.WorldData.PlayerData.PurchasedWeapons.Contains(_lastWeaponId))
+            {
                 SetLastNotPopupWeaponToData();
+                SetWeaponToProvider(weaponTypeId);
+            }
         }
 
         private void SetLastNotPopupWeaponToData()

@@ -7,6 +7,8 @@ namespace CodeBase.Services.Providers
     {
         private Weapon _weapon;
 
+        public bool Initialized = false;
+        
         public event Action<Weapon> Changed;
 
         public Weapon Get() => 
@@ -24,6 +26,7 @@ namespace CodeBase.Services.Providers
         {
             _weapon = weapon;
             Changed?.Invoke(_weapon);
+            Initialized = true;
         }
     }
 }

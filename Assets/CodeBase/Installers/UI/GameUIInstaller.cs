@@ -60,6 +60,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private AccuracyLeaderboardOpenerButton _accuracyLeaderboardOpenerButton;
         [SerializeField] private HudView _hudView;
         [SerializeField] private PauseWindowView _pauseWindowView;
+        [SerializeField] private PlayWindowView _playWindowView;
         
         
         public override void InstallBindings()
@@ -242,6 +243,7 @@ namespace CodeBase.Installers.UI
         private void BindPlayUI()
         {
             Container.BindInstance(_playButtonView);
+            Container.BindInstance(_playWindowView);
             Container
                 .BindInterfacesTo<PlayWindowPresenter>()
                 .AsSingle();

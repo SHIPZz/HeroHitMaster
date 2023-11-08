@@ -3,6 +3,7 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Providers;
+using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows.Popup;
 using Cysharp.Threading.Tasks;
 using Zenject;
@@ -14,31 +15,54 @@ namespace CodeBase.UI.Windows.Play
         private readonly WindowService _windowService;
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly PopupInfoView _popupInfoView;
+        private readonly PlayWindowView _playWindowView;
+        private readonly WeaponProvider _weaponProvider;
 
-        public PlayWindowPresenter(WindowService windowService, 
-            ILoadingCurtain loadingCurtain, 
-            PopupInfoView popupInfoView)
+        public PlayWindowPresenter(WindowService windowService,
+            ILoadingCurtain loadingCurtain,
+            PopupInfoView popupInfoView, IProvider<WeaponProvider> provider, PlayWindowView playWindowView)
         {
+            _playWindowView = playWindowView;
+            _weaponProvider = provider.Get();
             _popupInfoView = popupInfoView;
             _loadingCurtain = loadingCurtain;
             _windowService = windowService;
         }
 
-        public void Initialize() => 
+        public async void Initialize()
+        {
             _loadingCurtain.Closed += OnLoadingCurtainOnClosed;
 
-        public void Dispose() => 
-            _loadingCurtain.Closed -= OnLoadingCurtainOnClosed;
+            while (_weaponProvider.Initialized == false)
+            {
+                await UniTask.Yield();
+            }
 
-        public void Run() => 
+            _weaponProvider.Changed += OnWeaponChanged;
+            _playWindowView.SetCurrentWeapon(_weaponProvider.Get().WeaponTypeId);
+        }
+
+        private void OnWeaponChanged(Weapon weapon)
+        {
+            _playWindowView.SetCurrentWeapon(weapon.WeaponTypeId);
+        }
+
+        public void Dispose()
+        {
+            _loadingCurtain.Closed -= OnLoadingCurtainOnClosed;
+            // _weaponSelector.NewWeaponChanged -= _playWindowView.SetCurrentWeapon;
+        }
+
+        public void Run() =>
             _windowService.Close(WindowTypeId.Play);
 
         private async void OnLoadingCurtainOnClosed()
         {
-            while ( _popupInfoView.isActiveAndEnabled)
+            while (_popupInfoView != null && _popupInfoView.isActiveAndEnabled)
                 await UniTask.Yield();
-                
-            _windowService.Open(WindowTypeId.Play);
+
+            if (_popupInfoView != null)
+                _windowService.Open(WindowTypeId.Play);
         }
     }
 }
