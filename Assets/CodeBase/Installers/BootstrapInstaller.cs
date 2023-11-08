@@ -34,8 +34,8 @@ namespace CodeBase.Installers
 
         public async void Initialize()
         {
-            // await InitYandexSDK();
-            // YandexGamesSdk.CallbackLogging = true;
+            await InitYandexSDK();
+            YandexGamesSdk.CallbackLogging = true;
 
             BindSaveSystem();
             BindWorldDataService();
@@ -88,11 +88,11 @@ namespace CodeBase.Installers
 
         private void BindSaveSystem()
         {
-            // if (PlayerAccount.IsAuthorized)
-            //     Container.Bind<ISaveSystem>()
-            //         .To<YandexSaveSystem>()
-            //         .AsSingle();
-            // else
+            if (PlayerAccount.IsAuthorized)
+                Container.Bind<ISaveSystem>()
+                    .To<YandexSaveSystem>()
+                    .AsSingle();
+            else
                 Container.Bind<ISaveSystem>()
                     .To<PlayerPrefsSaveSystem>()
                     .AsSingle();
