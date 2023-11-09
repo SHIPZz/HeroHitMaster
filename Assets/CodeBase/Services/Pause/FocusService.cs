@@ -42,7 +42,7 @@ namespace CodeBase.Services.Pause
                 return;
             }
 
-            foreach (var window in _allWindows)
+            foreach (Window window in _allWindows)
             {
                 if (window.WindowTypeId == WindowTypeId.Play)
                 {

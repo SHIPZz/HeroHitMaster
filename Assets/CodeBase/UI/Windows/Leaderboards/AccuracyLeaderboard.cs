@@ -90,9 +90,7 @@ namespace CodeBase.UI.Windows.Leaderboards
                     if (String.IsNullOrEmpty(_nameTexts[i].text))
                         _nameTexts[i].text = _anonimTexts[LocalizationManager.CurrentLanguageCode];
                     
-                    _scoreTexts[i].gameObject.SetActive(true);
-                    _nameTexts[i].gameObject.SetActive(true);
-                    _nameTexts[i].gameObject.SetActive(true);
+                    _nameTexts[i].transform.parent.gameObject.SetActive(true);
                 }
             });
         }
