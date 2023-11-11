@@ -193,7 +193,11 @@ namespace CodeBase.UI.Windows.Shop
 
         private void SetMainShopWeaponIcon(WeaponTypeId weaponTypeId)
         {
+            if (!_weaponIconsProvider.Get().ShopWeaponIcons.ContainsKey(weaponTypeId))
+                return;
+
             _lastWeaponIcon?.gameObject.SetActive(false);
+
             Image weaponIcon = _weaponIconsProvider.Get().ShopWeaponIcons[weaponTypeId];
             weaponIcon.gameObject.SetActive(true);
             _lastWeaponIcon = weaponIcon;

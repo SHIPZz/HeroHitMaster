@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Gameplay.Camera;
+﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Collision;
 using CodeBase.Services.Providers;
 using Cysharp.Threading.Tasks;
