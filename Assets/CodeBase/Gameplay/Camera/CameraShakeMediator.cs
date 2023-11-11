@@ -137,10 +137,17 @@ namespace CodeBase.Gameplay.Camera
             }
         }
 
-        private void TrySubscribeOnDestructionBulletKill()
+        private async void TrySubscribeOnDestructionBulletKill()
         {
             if (_weapon.WeaponTypeId != WeaponTypeId.ThrowingDynamiteShooter)
                 return;
+
+            Dictionary<WeaponTypeId, GameObjectPool> bulletsPool = _bulletsPoolProvider.Get();
+
+            while (!bulletsPool.ContainsKey(_weapon.WeaponTypeId))
+            {
+                await UniTask.Yield();
+            }
 
             List<GameObject> bullets = _bulletsPoolProvider.Get()[_weapon.WeaponTypeId].GetAll();
 

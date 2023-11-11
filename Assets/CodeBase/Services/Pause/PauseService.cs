@@ -8,6 +8,6 @@ namespace CodeBase.Services.Pause
             Time.timeScale = 0f;
 
         public void UnPause() => 
-            Time.timeScale = 1;
+        Time.timeScale = 1;
     }
 }

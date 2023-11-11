@@ -44,8 +44,10 @@ namespace CodeBase.UI.Windows.Popup
         public void Dispose() => 
             _popupInfoView.AdButtonClicked -= ShowAd;
 
-        private void ShowAd() => 
+        private void ShowAd()
+        {
             _adService.PlayLongAd(null, EndCallback);
+        }
 
         private async void EndCallback()
         {

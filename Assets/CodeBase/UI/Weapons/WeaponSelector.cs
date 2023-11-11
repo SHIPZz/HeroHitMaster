@@ -26,7 +26,7 @@ namespace CodeBase.UI.Weapons
         public bool Initialized = false;
 
         public event Action<WeaponTypeId> NewWeaponChanged;
-        
+
 
         public WeaponSelector(IProvider<Weapon> weaponProvider,
             IWeaponStorage weaponStorage, IWorldDataService worldDataService,
@@ -66,22 +66,12 @@ namespace CodeBase.UI.Weapons
         public void SetBoughtMoneyWeapon()
         {
             SetLastNotPopupWeaponToData();
-
-            SetWeaponToProvider(_lastWeaponId);
         }
 
         public void SetBoughtWeaponAdWeapon(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;
             SetLastNotPopupWeaponToData();
-
-            SetWeaponToProvider(weaponTypeId);
-        }
-
-        private void SetWeaponToProvider(WeaponTypeId weaponTypeId)
-        {
-            Weapon weapon = _weaponStorage.Get(weaponTypeId);
-            _weaponProvider.Set(weapon);
         }
 
         public void SetLastPopupWeapon(WeaponTypeId weaponTypeId)
@@ -89,27 +79,36 @@ namespace CodeBase.UI.Weapons
             _lastWeaponId = weaponTypeId;
             WorldData worldData = _worldDataService.WorldData;
             worldData.PlayerData.LastWeaponId = _lastWeaponId;
-            SetWeaponToProvider(weaponTypeId);
+            SetWeapon(weaponTypeId);
             NewWeaponChanged?.Invoke(_lastWeaponId);
         }
 
-        public void SetLastShopWeaponSelected(WeaponTypeId weaponTypeId)
-        {
+        public void SetLastShopWeaponIdSelected(WeaponTypeId weaponTypeId) => 
             _lastWeaponId = weaponTypeId;
 
+        public void SetLastShopWeaponSelected()
+        {
             if (_worldDataService.WorldData.PlayerData.PurchasedWeapons.Contains(_lastWeaponId))
             {
                 SetLastNotPopupWeaponToData();
-                SetWeaponToProvider(weaponTypeId);
+                SetWeapon(_lastWeaponId);
             }
+        }
+
+        private void SetWeapon(WeaponTypeId weaponTypeId)
+        {
+            Weapon weapon = _weaponStorage.Get(weaponTypeId);
+            WorldData worldData = _worldDataService.WorldData;
+            worldData.PlayerData.LastWeaponId = weaponTypeId;
+            worldData.PlayerData.LastNotPopupWeaponId = weaponTypeId;
+            _weaponProvider.Set(weapon);
+            NewWeaponChanged?.Invoke(weapon.WeaponTypeId);
         }
 
         private void SetLastNotPopupWeaponToData()
         {
             WorldData worldData = _worldDataService.WorldData;
-            worldData.PlayerData.LastWeaponId = _lastWeaponId;
-            worldData.PlayerData.LastNotPopupWeaponId = _lastWeaponId;
-            NewWeaponChanged?.Invoke(_lastWeaponId);
+            worldData.PlayerData.PurchasedWeapons.Add(_lastWeaponId);
         }
     }
 }

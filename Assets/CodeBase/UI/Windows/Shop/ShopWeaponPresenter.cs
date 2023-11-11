@@ -33,7 +33,8 @@ namespace CodeBase.UI.Windows.Shop
             IProvider<WeaponIconsProvider> weaponIconsProvider,
             IWorldDataService worldDataService
             , CheckOutService checkOutService,
-            WeaponAdWatchCounter weaponAdWatchCounter, Wallet.Wallet wallet)
+            WeaponAdWatchCounter weaponAdWatchCounter,
+            Wallet.Wallet wallet)
         {
             _worldDataService = worldDataService;
             _wallet = wallet;
@@ -81,11 +82,14 @@ namespace CodeBase.UI.Windows.Shop
             if (weaponData.Price.PriceTypeId == PriceTypeId.Ad)
             {
                 _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, 0);
+                _shopWeaponInfoView.SetActiveAcceptWeaponButton(false);
                 return;
             }
 
-            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false);
+            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true);
             _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
+            _shopWeaponInfoView.DisableBuyButtons();
+            _shopWeaponInfoView.SetActiveAcceptWeaponButton(false);
         }
 
         private void SetLastNotPopupWeapon()
@@ -98,7 +102,7 @@ namespace CodeBase.UI.Windows.Shop
         private void SetWeaponAdWeaponInfoAfterPurchasing(WeaponTypeId weaponTypeId)
         {
             WeaponData weaponData = _weaponStaticDataService.Get(weaponTypeId);
-            _shopWeaponInfoView.ShowEffectOnPurchasedWeapon(weaponTypeId);
+            _shopWeaponInfoView.ShowEffects();
             _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, weaponData.Price.AdQuantity);
         }
 
@@ -111,8 +115,8 @@ namespace CodeBase.UI.Windows.Shop
         private void DisablePurchasedWeaponInfo()
         {
             WeaponData weaponData = _weaponStaticDataService.Get(_lastWeaponType);
-            _shopWeaponInfoView.ShowEffectOnPurchasedWeapon(weaponData.WeaponTypeId);
-            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false);
+            _shopWeaponInfoView.ShowEffects();
+            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true);
             _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
         }
 
@@ -135,7 +139,7 @@ namespace CodeBase.UI.Windows.Shop
 
             if (HasPlayerThisWeapon(playerData, weaponData))
             {
-                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false);
+                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true);
                 _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
                 return;
             }
@@ -144,12 +148,12 @@ namespace CodeBase.UI.Windows.Shop
             {
                 if (HasEnoughMoneyToBuy(weaponData))
                 {
-                    _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, true);
+                    _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, true, false);
                     _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, true);
                     return;
                 }
 
-                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false);
+                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, false);
                 _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, true);
             }
 

@@ -44,17 +44,30 @@ namespace CodeBase.Services.Pause
 
             foreach (Window window in _allWindows)
             {
+                if (!window.gameObject.activeSelf)
+                    continue;
+
+                if (window.WindowTypeId == WindowTypeId.Popup)
+                {
+                    MuteAudio(false);
+                    return;
+                }
+
                 if (window.WindowTypeId == WindowTypeId.Play)
                 {
                     MuteAudio(false);
+                    _pauseService.UnPause();
                     continue;
                 }
 
                 if (window.WindowTypeId == WindowTypeId.Hud)
                     continue;
 
-                if(window.gameObject.activeSelf)
+                if (window.WindowTypeId == WindowTypeId.Pause)
+                {
+                    MuteAudio(false);
                     return;
+                }
             }
 
             _pauseService.UnPause();

@@ -29,6 +29,7 @@ namespace CodeBase.UI.Windows.Popup
         private IPauseService _pauseService;
         private bool _ignoreTimeScale;
         private bool _hasFocus;
+        private bool _isDisabled;
 
         [Inject]
         private void Construct(ISoundStorage soundStorage, PopupInfoView popupInfoView, IPauseService pauseService)
@@ -71,7 +72,7 @@ namespace CodeBase.UI.Windows.Popup
             _pauseService.Pause();
             _timerTicking.Play();
 
-            while (_startTime != 0)
+            while (_startTime != 0 && !_isDisabled)
             {
                 _pauseService.Pause();
                 
@@ -104,8 +105,10 @@ namespace CodeBase.UI.Windows.Popup
 
         private void StopTimer()
         {
+            Init().Forget();
             _timerTicking.Stop();
             _timerFinished.Stop();
+            _isDisabled = true;
             gameObject.SetActive(false);
         }
 

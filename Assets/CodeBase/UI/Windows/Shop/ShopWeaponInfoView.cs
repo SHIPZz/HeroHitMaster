@@ -22,15 +22,18 @@ namespace CodeBase.UI.Windows.Shop
         [SerializeField] private TextMeshProUGUI _adPrice;
         [SerializeField] private Button _adButton;
         [SerializeField] private Button _buyButton;
+        [SerializeField] private Button _acceptBoughtWeaponButton;
         [SerializeField] private List<ParticleSystem> _effects;
         [SerializeField] private TextMeshProUGUI _purchasedText;
         [SerializeField] private float _targetScaleY = 1f;
         [SerializeField] private float _targetScaleDuration = 0.3f;
+        [SerializeField] private Transform _effectPosition;
 
         private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
         private AudioSource _purchasedWeaponSound;
 
         public event Action AdButtonClicked;
+        public event Action AcceptWeaponButtonClicked;
 
         private bool _isAnimating;
         private Dictionary<WeaponTypeId, string> _translatedWeaponNames;
@@ -50,10 +53,12 @@ namespace CodeBase.UI.Windows.Shop
         {
             _adButton.onClick.AddListener(OnAddButtonClicked);
             _buyButton.onClick.AddListener(OnBuyButtonClicked);
+            _acceptBoughtWeaponButton.onClick.AddListener(OnAcceptBoughtWeaponClicked);
         }
 
         private void OnDisable()
         {
+            _acceptBoughtWeaponButton.onClick.RemoveListener(OnAcceptBoughtWeaponClicked);
             _adButton.onClick.RemoveListener(OnAddButtonClicked);
             _buyButton.onClick.RemoveListener(OnBuyButtonClicked);
         }
@@ -63,14 +68,14 @@ namespace CodeBase.UI.Windows.Shop
 
         public void DisableBuyButtons()
         {
-            SetButtonScale(_buyButton, false, false);
-            SetButtonScale(_adButton, false, false);
+            SetButtonScale(_buyButton, false);
+            SetButtonScale(_adButton, false);
         }
 
-        public void ShowEffectOnPurchasedWeapon(WeaponTypeId weaponDataWeaponTypeId)
+        public void ShowEffects()
         {
             ParticleSystem randomEffect = _effects[Random.Range(0, _effects.Count - 1)];
-            randomEffect.transform.position = _shopWeaponIcons[weaponDataWeaponTypeId].transform.position;
+            randomEffect.transform.position = _effectPosition.position;
             randomEffect.Play();
             _purchasedWeaponSound.Play();
             DisableBuyButtons();
@@ -80,39 +85,58 @@ namespace CodeBase.UI.Windows.Shop
         {
             _price.gameObject.SetActive(false);
             _adPrice.gameObject.SetActive(true);
-            SetButtonScale(_buyButton, false, false);
+            SetButtonScale(_buyButton, false);
+            SetButtonScale(_acceptBoughtWeaponButton, false);
             SetWeaponNameInfo(_translatedWeaponNames[weaponData.WeaponTypeId]);
 
             if (isBought)
             {
                 DisableBuyButtons();
                 SetAdWeaponPriceInfo(weaponData, true, watchedAds);
+                SetButtonScale(_acceptBoughtWeaponButton, true);
                 return;
             }
 
             SetAdWeaponPriceInfo(weaponData, false, watchedAds);
-            SetButtonScale(_adButton, true, true);
+            SetButtonScale(_adButton, true);
             SetPriceAnimationText(_adPrice.transform);
         }
 
-        public void SetMoneyWeaponInfo(WeaponTypeId weaponTypeId, bool isVisible)
+        public void SetMoneyWeaponInfo(WeaponTypeId weaponTypeId, bool isVisible, bool isBought)
         {
             _adPrice.gameObject.SetActive(false);
-            SetButtonScale(_adButton, false, false);
+            SetButtonScale(_adButton, false);
             _price.gameObject.SetActive(true);
 
             SetWeaponNameInfo(_translatedWeaponNames[weaponTypeId]);
 
+            SetButtonScale(_acceptBoughtWeaponButton, false);
             SetPriceAnimationText(_price.transform);
 
-            if (!isVisible)
+            if (isBought)
             {
-                SetButtonScale(_buyButton, false, false);
+                SetButtonScale(_acceptBoughtWeaponButton, true);
                 return;
             }
 
-            SetButtonScale(_buyButton, true, true);
+            if (!isVisible)
+            {
+                SetButtonScale(_buyButton, false);
+                return;
+            }
+
+            SetButtonScale(_buyButton, true);
             SetPriceAnimationText(_price.transform);
+        }
+
+        public void SetActiveAcceptWeaponButton(bool isActive) =>
+            SetButtonScale(_acceptBoughtWeaponButton,isActive);
+
+        private void OnAcceptBoughtWeaponClicked()
+        {
+            ShowEffects();
+            SetButtonScale(_acceptBoughtWeaponButton, false);
+            AcceptWeaponButtonClicked?.Invoke();
         }
 
         private void SetPriceAnimationText(Transform targetTransform)
@@ -128,7 +152,7 @@ namespace CodeBase.UI.Windows.Shop
             _priceTextTween.Play();
         }
 
-        private void OnBuyButtonClicked() => 
+        private void OnBuyButtonClicked() =>
             _buyButton.enabled = false;
 
         private void OnAddButtonClicked()
@@ -137,10 +161,10 @@ namespace CodeBase.UI.Windows.Shop
             AdButtonClicked?.Invoke();
         }
 
-        private void SetButtonScale(Button button, bool isInteractable, bool isVisible)
+        private void SetButtonScale(Button button, bool isVisible)
         {
-            button.interactable = isInteractable;
-            button.enabled = isInteractable;
+            button.interactable = isVisible;
+            button.enabled = isVisible;
             _buttonTween?.Kill(true);
 
             if (!isVisible)

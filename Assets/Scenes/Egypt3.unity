@@ -3296,6 +3296,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glass 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _explodeDelay
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28590,7 +28594,6 @@ MonoBehaviour:
   - {fileID: 1585126912}
   - {fileID: 756098025}
   - {fileID: 730029912}
-  _delayActivation: 1
 --- !u!114 &1192936393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47369,7 +47372,6 @@ MonoBehaviour:
   _enemySpawners:
   - {fileID: 603069858}
   - {fileID: 414144669}
-  _delayActivation: 1
 --- !u!114 &1984701827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51278,7 +51280,6 @@ MonoBehaviour:
   _enemySpawners:
   - {fileID: 50991841}
   - {fileID: 437732637}
-  _delayActivation: 1
 --- !u!114 &8413101694788368547
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Services.Pause;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Pause
@@ -29,7 +30,10 @@ namespace CodeBase.UI.Windows.Pause
         {
             _windowService.Close(WindowTypeId.Pause, 
                 () => _windowService.Open(WindowTypeId.Hud, 
-                    () => _pauseService.UnPause()));
+                    () =>
+                    {
+                        _pauseService.UnPause();
+                    }));
         }
     }
 }

@@ -8,6 +8,7 @@ using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows.Popup;
+using CodeBase.UI.Windows.Shop;
 using Zenject;
 
 namespace CodeBase.UI.Weapons
@@ -19,10 +20,16 @@ namespace CodeBase.UI.Weapons
         private readonly CheckOutService _checkOutService;
         private readonly PopupInfoView _popupInfoView;
         private readonly WeaponAdWatchCounter _weaponAdWatchCounter;
+        private ShopWeaponInfoView _shopWeaponInfoView;
 
-        public WeaponSelectorPresenter(WeaponIconsProvider weaponIconsProvider, WeaponSelector weaponSelector,
-            CheckOutService checkOutService,  PopupInfoView popupInfoView, WeaponAdWatchCounter weaponAdWatchCounter)
+        public WeaponSelectorPresenter(WeaponIconsProvider weaponIconsProvider, 
+            WeaponSelector weaponSelector,
+            CheckOutService checkOutService,  
+            PopupInfoView popupInfoView,
+            WeaponAdWatchCounter weaponAdWatchCounter,
+            ShopWeaponInfoView shopWeaponInfoView)
         {
+            _shopWeaponInfoView = shopWeaponInfoView;
             _weaponAdWatchCounter = weaponAdWatchCounter;
             _popupInfoView = popupInfoView;
             _checkOutService = checkOutService;
@@ -36,16 +43,18 @@ namespace CodeBase.UI.Weapons
             _weaponAdWatchCounter.AllAdWatched += _weaponSelector.SetBoughtWeaponAdWeapon;
             
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosen +=  _weaponSelector.SetLastShopWeaponSelected;
+                weaponIcon.Choosen +=  _weaponSelector.SetLastShopWeaponIdSelected;
 
             _checkOutService.Succeeded += _weaponSelector.SetBoughtMoneyWeapon;
+            _shopWeaponInfoView.AcceptWeaponButtonClicked += _weaponSelector.SetLastShopWeaponSelected;
         }
 
         public void Dispose()
         {
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
-                weaponIcon.Choosen -=  _weaponSelector.SetLastShopWeaponSelected;
+                weaponIcon.Choosen -=  _weaponSelector.SetLastShopWeaponIdSelected;
                 
+            _shopWeaponInfoView.AcceptWeaponButtonClicked -= _weaponSelector.SetLastShopWeaponSelected;
             _weaponAdWatchCounter.AllAdWatched -= _weaponSelector.SetBoughtWeaponAdWeapon;
             _checkOutService.Succeeded -= _weaponSelector.SetBoughtMoneyWeapon;
             _popupInfoView.LastWeaponSelected -= _weaponSelector.SetLastPopupWeapon;

@@ -1,4 +1,5 @@
-﻿using CodeBase.Services.Providers;
+﻿using CodeBase.Enums;
+using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using DG.Tweening;
 

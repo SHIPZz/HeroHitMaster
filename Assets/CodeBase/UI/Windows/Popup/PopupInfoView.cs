@@ -36,6 +36,7 @@ namespace CodeBase.UI.Windows.Popup
         private WeaponSelectorView _lastWeaponSelectorView;
         private List<ParticleSystem> _selectedWeaponEffects;
         private Coroutine _chooseRandomWeaponCoroutine;
+        private bool _lastWeaponSelected;
 
         public event Action AdButtonClicked;
         public event Action<WeaponTypeId> LastWeaponSelected;
@@ -67,8 +68,11 @@ namespace CodeBase.UI.Windows.Popup
             EnableRandomIcons(randomIcons);
         }
 
-        private void OnDisable() => 
+        private void OnDisable()
+        {
             _adButton.onClick.RemoveListener(OnAdClicked);
+            StartChooseRandomWeapon().Forget();
+        }
 
         private void AnimateMainWeaponText()
         {
@@ -115,6 +119,9 @@ namespace CodeBase.UI.Windows.Popup
         {
             for (int i = 0; i < _chooseCycle; i++)
             {
+                if(_lastWeaponSelected || !gameObject.activeSelf)
+                    break;
+                
                 WeaponSelectorView currentWeaponView = await GetRandomWeaponView();
 
                 if (_lastWeaponSelectorView is not null &&
@@ -135,11 +142,10 @@ namespace CodeBase.UI.Windows.Popup
                     targetParticle.transform.position = _lastWeaponSelectorView.transform.position;
                     targetParticle.Play();
                     LastWeaponSelected?.Invoke(_lastWeaponSelectorView.WeaponTypeId);
+                    _lastWeaponSelected = true;
                 }
-                else
-                {
-                    _chooseWeaponSound.Play();
-                }
+
+                _chooseWeaponSound.Play();
 
                 await UniTask.WaitForSeconds(_chooseDuration);
             }

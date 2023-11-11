@@ -88,7 +88,6 @@ namespace CodeBase.Installers.UI
             BindButtonInDeathWindow();
             BindGameOverUI();
             BindLeaderboardUI();
-            BindPauseOnWindows();
             BindPlayMusicPresenter();
             BindAuthorizeUI();
             BindHudUI();
@@ -117,11 +116,6 @@ namespace CodeBase.Installers.UI
             Container
             .BindInterfacesAndSelfTo<PlayMusicPresenter>()
             .AsSingle();
-
-        private void BindPauseOnWindows() => 
-            Container
-                .BindInterfacesAndSelfTo<PauseOnWindows>()
-                .AsSingle();
 
         private void BindLeaderboardUI()
         {
