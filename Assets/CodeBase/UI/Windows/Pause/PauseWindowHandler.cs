@@ -1,6 +1,7 @@
 ﻿using System;
 using Agava.WebUtility;
 using CodeBase.Enums;
+using CodeBase.Gameplay.MusicHandlerSystem;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using UnityEngine;
@@ -15,10 +16,12 @@ namespace CodeBase.UI.Windows.Pause
         private readonly WindowService _windowService;
         private readonly Window _hud;
         private bool _isOpened;
+        private MusicHandler _musicHandler;
 
         public PauseWindowHandler(PauseWindowView pauseWindowView, IPauseService pauseService,
-            WindowService windowService, WindowProvider windowProvider)
+            WindowService windowService, WindowProvider windowProvider, MusicHandler musicHandler)
         {
+            _musicHandler = musicHandler;
             _hud = windowProvider.Windows[WindowTypeId.Hud];
             _pauseWindowView = pauseWindowView;
             _pauseService = pauseService;
@@ -56,6 +59,7 @@ namespace CodeBase.UI.Windows.Pause
         {
             _windowService.CloseAll(() =>_windowService.OpenQuickly(WindowTypeId.Hud) );
             _pauseService.UnPause();
+            _musicHandler.Play();
             _isOpened = false;
         }
     }

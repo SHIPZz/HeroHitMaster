@@ -15,21 +15,17 @@ using CodeBase.Services.AccuracyCounters;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
-using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Character;
 using CodeBase.UI.LevelSlider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
-using CodeBase.UI.Weapons.ShopWeapons;
-using CodeBase.UI.Windows.Audio;
 using CodeBase.UI.Windows.Shop;
 using Cysharp.Threading.Tasks;
 using I2.Loc;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
-using PlayerPrefs = UnityEngine.PlayerPrefs;
 
 namespace CodeBase.GameInit
 {

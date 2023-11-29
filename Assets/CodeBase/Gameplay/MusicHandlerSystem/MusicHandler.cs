@@ -34,5 +34,8 @@ namespace CodeBase.Gameplay.MusicHandlerSystem
             _gameOverWindow.StartedToOpen -= _music.Stop;
             _pauseWindow.Closed -= _music.Play;
         }
+
+        public void Play() =>
+            _music.Play();
     }
 }
