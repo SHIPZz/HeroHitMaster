@@ -64,6 +64,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             if (SceneManager.sceneCountInBuildSettings <= worldData.LevelData.Id)
             {
                 worldData.LevelData.Id = 1;
+                _worldDataService.Save();
                 PlayerEntered = null;
                 LastLevelAchieved?.Invoke();
             }

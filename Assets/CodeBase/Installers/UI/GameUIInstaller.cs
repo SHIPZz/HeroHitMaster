@@ -97,7 +97,7 @@ namespace CodeBase.Installers.UI
         private void BindPauseUI()
         {
             Container.BindInstance(_pauseWindowView);
-            Container.BindInterfacesAndSelfTo<PauseWindowPresenter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PauseWindowHandler>().AsSingle();
         }
 
         private void BindHudUI()

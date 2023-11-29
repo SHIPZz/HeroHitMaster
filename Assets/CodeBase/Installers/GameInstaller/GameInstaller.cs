@@ -314,7 +314,7 @@ namespace CodeBase.Installers.GameInstaller
         private void BindWeaponSelection()
         {
             BindAsSingle<WeaponSelector>();
-            Container.BindInterfacesAndSelfTo<WeaponSelectorPresenter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<WeaponSelectorMediator>().AsSingle();
         }
 
         private void BindBulletStorage() =>

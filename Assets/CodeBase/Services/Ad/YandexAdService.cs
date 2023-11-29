@@ -8,11 +8,6 @@ namespace CodeBase.Services.Ad
     {
         private readonly IPauseService _pauseService;
 
-        public event Action LongAdClosed;
-        public event Action LongAdOpened;
-        public event Action ShortAdClosed;
-        public event Action ShortAdOpened;
-
         public YandexAdService(IPauseService pauseService) =>
             _pauseService = pauseService;
 
@@ -21,15 +16,13 @@ namespace CodeBase.Services.Ad
 
         private void OnShortAdStartCallback(Action startCallback)
         {
-            _pauseService.Pause();
             startCallback?.Invoke();
-            ShortAdOpened?.Invoke();
+            _pauseService.Pause();
         }
 
         private void OnShortAdCloseCallback(Action<bool> onCloseCallback, bool closed)
         {
             onCloseCallback?.Invoke(closed);
-            ShortAdClosed?.Invoke();
             _pauseService.UnPause();
         }
 
@@ -39,14 +32,12 @@ namespace CodeBase.Services.Ad
         private void OnCloseCallback(Action endCallback)
         {
             endCallback?.Invoke();
-            LongAdClosed?.Invoke();
             _pauseService.UnPause();
         }
 
         private void OnOpenCallback(Action startCallback)
         {
             startCallback?.Invoke();
-            LongAdOpened?.Invoke();
             _pauseService.Pause();
         }
     }

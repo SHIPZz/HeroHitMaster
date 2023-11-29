@@ -1,9 +1,9 @@
 ﻿using System;
 using CodeBase.Enums;
+using CodeBase.Infrastructure;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Popup
@@ -17,11 +17,14 @@ namespace CodeBase.UI.Windows.Popup
         private readonly IAdService _adService;
         private readonly IWorldDataService _worldDataService;
         private readonly IPauseService _pauseService;
+        private readonly ILoadingCurtain _loadingCurtain;
 
         public PopupPresenter(WindowService windowService, PopupInfoView popupInfoView,
             IAdService adService,
-            IWorldDataService worldDataService, IPauseService pauseService)
+            IWorldDataService worldDataService, 
+            IPauseService pauseService, ILoadingCurtain loadingCurtain)
         {
+            _loadingCurtain = loadingCurtain;
             _pauseService = pauseService;
             _worldDataService = worldDataService;
             _adService = adService;
@@ -36,13 +39,21 @@ namespace CodeBase.UI.Windows.Popup
             if (_worldDataService.WorldData.LevelData.Id % TargetPopupLevelInvoke != 0)
                 return;
             
+            _loadingCurtain.Closed += OnLoadingCurtainClosed;
+        }
+
+        public void Dispose()
+        {
+            _popupInfoView.AdButtonClicked -= ShowAd;
+            _loadingCurtain.Closed -= OnLoadingCurtainClosed;
+        }
+
+        private void OnLoadingCurtainClosed()
+        {
             _pauseService.Pause();
             _windowService.Close(WindowTypeId.Play);
             _windowService.Open(WindowTypeId.Popup);
         }
-
-        public void Dispose() => 
-            _popupInfoView.AdButtonClicked -= ShowAd;
 
         private void ShowAd()
         {

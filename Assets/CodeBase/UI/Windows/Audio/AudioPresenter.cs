@@ -38,6 +38,7 @@ namespace CodeBase.UI.Windows.Audio
 
             SetInitialDataToView(_worldDataService.WorldData.SettingsData.Volume, 
             _worldDataService.WorldData.SettingsData.MusicVolume);
+            _audioVolumeChanger.InitInitialValues();
         }
 
         public void Dispose()

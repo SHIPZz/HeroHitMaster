@@ -1,6 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +10,13 @@ namespace CodeBase.Infrastructure
 {
     public class LoadingCurtain : MonoBehaviour, ILoadingCurtain
     {
-        private const float CloseDuration = 1f;
+        private const float CloseDuration = 2f;
 
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Slider _loadingSlider;
+        
         private Canvas _canvas;
+        private Tween _tween;
 
         public event Action Closed;
 
@@ -29,20 +33,23 @@ namespace CodeBase.Infrastructure
         {
             _loadingSlider.value = 0;
             _canvas.enabled = true;
-            _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
+            _tween?.Kill();
+            _tween = _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
             _canvasGroup.alpha = 1;
         }
 
-        public async void Hide()
+        public async void Hide(Action callback)
         {
             while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
                 await UniTask.Yield();
 
-            _canvasGroup
+            _tween?.Kill();
+            _tween = _canvasGroup
                 .DOFade(0, CloseDuration).SetUpdate(true)
                 .OnComplete(() =>
                 {
                     _canvas.enabled = false;
+                    callback?.Invoke();
                     Closed?.Invoke();
                 });
         }

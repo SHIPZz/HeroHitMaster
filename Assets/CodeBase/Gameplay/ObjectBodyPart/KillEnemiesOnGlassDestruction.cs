@@ -20,6 +20,7 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         private bool _isDestroyed;
         private List<Enemy> _enemiesOnGlass = new();
         private CancellationTokenSource _cancellationToken;
+        private bool _isExploded;
 
         private void Awake() =>
             _destroyableObject = GetComponent<DestroyableObject>();
@@ -75,8 +76,13 @@ namespace CodeBase.Gameplay.ObjectBodyPart
 
                 navmeshAgent.updatePosition = false;
                 navmeshAgent.enabled = false;
-                DOTween.Sequence().AppendInterval(_explodeDelay).OnComplete(activeEnemy.Explode);
             }
+
+            if (_isExploded)
+                return;
+
+            _isExploded = true;
+            DOTween.Sequence().AppendInterval(_explodeDelay).OnComplete(()=> _enemiesOnGlass.ForEach(x=>x.Explode()));
         }
 
         private void RemoveEnemy(Collider enemy)

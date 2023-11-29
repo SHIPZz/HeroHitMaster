@@ -44,7 +44,7 @@ namespace CodeBase.UI.Windows.Leaderboards
         {
             if (!PlayerAccount.IsAuthorized)
                 return;
-
+            
             Leaderboard.GetPlayerEntry(Name,
                 _ => { Leaderboard.SetScore(Name, score, () => Debug.Log("SUCCCESSSSS")); });
         }

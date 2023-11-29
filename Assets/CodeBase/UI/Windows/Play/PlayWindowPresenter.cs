@@ -2,6 +2,7 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Infrastructure;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows.Popup;
@@ -17,11 +18,16 @@ namespace CodeBase.UI.Windows.Play
         private readonly PopupInfoView _popupInfoView;
         private readonly PlayWindowView _playWindowView;
         private readonly WeaponProvider _weaponProvider;
+        private readonly IPauseService _pauseService;
 
         public PlayWindowPresenter(WindowService windowService,
             ILoadingCurtain loadingCurtain,
-            PopupInfoView popupInfoView, IProvider<WeaponProvider> provider, PlayWindowView playWindowView)
+            PopupInfoView popupInfoView,
+            IProvider<WeaponProvider> provider,
+            PlayWindowView playWindowView,
+            IPauseService pauseService)
         {
+            _pauseService = pauseService;
             _playWindowView = playWindowView;
             _weaponProvider = provider.Get();
             _popupInfoView = popupInfoView;
@@ -42,15 +48,13 @@ namespace CodeBase.UI.Windows.Play
             _playWindowView.SetCurrentWeapon(_weaponProvider.Get().WeaponTypeId);
         }
 
-        private void OnWeaponChanged(Weapon weapon)
-        {
+        private void OnWeaponChanged(Weapon weapon) => 
             _playWindowView.SetCurrentWeapon(weapon.WeaponTypeId);
-        }
 
         public void Dispose()
         {
             _loadingCurtain.Closed -= OnLoadingCurtainOnClosed;
-            // _weaponSelector.NewWeaponChanged -= _playWindowView.SetCurrentWeapon;
+            _weaponProvider.Changed -= OnWeaponChanged;
         }
 
         public void Run() =>
@@ -62,7 +66,10 @@ namespace CodeBase.UI.Windows.Play
                 await UniTask.Yield();
 
             if (_popupInfoView != null)
+            {
                 _windowService.Open(WindowTypeId.Play);
+                _pauseService.UnPause();
+            }
         }
     }
 }

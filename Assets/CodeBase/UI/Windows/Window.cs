@@ -14,6 +14,8 @@ namespace CodeBase.UI.Windows
         [SerializeField] private float _targetCloseDuration;
         [field: SerializeField] public WindowTypeId WindowTypeId { get; private set; }
 
+        private Tween _tween;
+
         public event Action StartedToOpen;
         public event Action Opened;
         public event Action Closed;
@@ -23,25 +25,41 @@ namespace CodeBase.UI.Windows
             transform.DOScaleX(_startScaleX, _startDuration).SetUpdate(true);
         }
 
+        public void OpenQuickly()
+        {
+            StartedToOpen?.Invoke();
+
+            gameObject.SetActive(true);
+
+            _tween?.Kill();
+            _tween = gameObject.transform
+                .DOScaleX(_targetScaleX, 0)
+                .OnComplete(() => Opened?.Invoke()).SetUpdate(true).SetAutoKill(true);
+        }
+
         public void Open()
         {
             StartedToOpen?.Invoke();
+
             gameObject.SetActive(true);
 
-            gameObject.transform
+            _tween?.Kill();
+            _tween = gameObject.transform
                 .DOScaleX(_targetScaleX, _targetOpenDuration)
                 .OnComplete(() => Opened?.Invoke()).SetUpdate(true).SetAutoKill(true);
         }
 
         public void Close(bool withAnimation)
         {
+            _tween?.Kill();
+            
             if (!withAnimation)
             {
                 CloseQuickly();
                 return;
             }
 
-            gameObject.transform
+            _tween = gameObject.transform
                 .DOScaleX(0, _targetCloseDuration)
                 .OnComplete(() =>
                 {
@@ -53,7 +71,7 @@ namespace CodeBase.UI.Windows
 
         private void CloseQuickly()
         {
-            transform.DOScaleX(0, 0).SetUpdate(true).SetAutoKill(true);
+          _tween =  transform.DOScaleX(0, 0).SetUpdate(true).SetAutoKill(true);
             gameObject.SetActive(false);
         }
     }

@@ -6,6 +6,6 @@ namespace CodeBase.Infrastructure
     {
         event Action Closed;
         void Show(float sliderDuration);
-        void Hide();
+        void Hide(Action callback);
     }
 }

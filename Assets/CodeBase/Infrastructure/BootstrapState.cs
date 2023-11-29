@@ -1,5 +1,4 @@
-﻿using CodeBase.Enums;
-using CodeBase.Services.Providers;
+﻿using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using DG.Tweening;
 
@@ -18,9 +17,9 @@ namespace CodeBase.Infrastructure
 
         public async void Enter()
         {
+            DOTween.KillAll();
             DOTween.Clear();
             DOTween.Init();
-            DOTween.RestartAll();
             
             await _worldDataService.Load();
             _gameStateMachine.ChangeState<LevelLoadState, WorldData>(_worldDataService.WorldData);

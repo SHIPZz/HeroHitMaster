@@ -12,22 +12,26 @@ namespace CodeBase.Gameplay.MusicHandlerSystem
     {
         private readonly Window _pauseWindow;
         private readonly AudioSource _music;
+        private readonly Window _gameOverWindow;
 
         public MusicHandler(WindowProvider windowProvider, ISoundStorage soundStorage)
         {
             _pauseWindow = windowProvider.Windows[WindowTypeId.Pause];
+            _gameOverWindow = windowProvider.Windows[WindowTypeId.GameOver];
             _music = soundStorage.Get(MusicTypeId.Hotline);
         }
 
         public void Initialize()
         {
             _pauseWindow.StartedToOpen += _music.Stop;
+            _gameOverWindow.StartedToOpen += _music.Stop;
             _pauseWindow.Closed += _music.Play;
         }
 
         public void Dispose()
         {
             _pauseWindow.StartedToOpen -= _music.Stop;
+            _gameOverWindow.StartedToOpen -= _music.Stop;
             _pauseWindow.Closed -= _music.Play;
         }
     }

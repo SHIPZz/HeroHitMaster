@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1167081503044433247}
   - component: {fileID: 3102209934656517540}
   - component: {fileID: 4174969758296875181}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Flame Thrower (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4822,7 +4822,7 @@ GameObject:
   - component: {fileID: 1367579758199242878}
   - component: {fileID: 584251695571916924}
   - component: {fileID: 902085485586001979}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9617,7 +9617,7 @@ GameObject:
   - component: {fileID: 8738132044453323714}
   - component: {fileID: 5478945465714700537}
   - component: {fileID: 208322344427322254}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Flame Thrower (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14428,7 +14428,7 @@ GameObject:
   - component: {fileID: 2851266630857330426}
   - component: {fileID: 6137870639349069921}
   - component: {fileID: 8663061471587617119}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19223,7 +19223,7 @@ GameObject:
   - component: {fileID: 8952054759072233081}
   - component: {fileID: 8605792275401543909}
   - component: {fileID: 2453935874868449501}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Flame Thrower (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24033,7 +24033,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5246312559437923565}
   - component: {fileID: 7847180639204520344}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24128,7 +24128,7 @@ GameObject:
   - component: {fileID: 5690194358003796742}
   - component: {fileID: 6563598525937337929}
   - component: {fileID: 7108686127040500671}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28935,7 +28935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8869241964283617502}
   - component: {fileID: 5417691366286269101}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29029,7 +29029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3776951454473557876}
   - component: {fileID: 1448148362835821239}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29124,7 +29124,7 @@ GameObject:
   - component: {fileID: 2826621412930748412}
   - component: {fileID: 7714508844348945884}
   - component: {fileID: 3843558200745422496}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33932,7 +33932,7 @@ GameObject:
   - component: {fileID: 5547508931271355552}
   - component: {fileID: 1915879266442223805}
   - component: {fileID: 6314225043502602871}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38739,7 +38739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4175354639687227033}
   - component: {fileID: 1957197562783120563}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38834,7 +38834,7 @@ GameObject:
   - component: {fileID: 5258066362227956445}
   - component: {fileID: 2938732695140490810}
   - component: {fileID: 2707103984445315321}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43647,7 +43647,7 @@ GameObject:
   - component: {fileID: 7138705626417057988}
   - component: {fileID: 9052322713451848135}
   - component: {fileID: 2166719152428358789}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: FireTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43748,8 +43748,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0643764, y: 2.102436, z: 1.0643764}
-  m_Center: {x: 0, y: 1.051218, z: 0}
+  m_Size: {x: 1.3527514, y: 2.6974497, z: 1.0643764}
+  m_Center: {x: -0.14418888, y: 1.3487248, z: 0}
 --- !u!114 &8286426195672909903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43788,7 +43788,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &9052322713451848135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43802,7 +43802,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DisableDelay>k__BackingField: 1.5
-  _disableInterval: 1.5
   _flameEffects:
   - {fileID: 5478945465714700537}
   - {fileID: 3342745383624180903}
@@ -43837,7 +43836,7 @@ GameObject:
   - component: {fileID: 3207255294021727594}
   - component: {fileID: 1253966102937485876}
   - component: {fileID: 5160508407173230566}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48631,7 +48630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2011950778757662802}
   - component: {fileID: 6265055087381731124}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48726,7 +48725,7 @@ GameObject:
   - component: {fileID: 2234519448004804488}
   - component: {fileID: 7700987489705142113}
   - component: {fileID: 3801594988614364028}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53534,7 +53533,7 @@ GameObject:
   - component: {fileID: 6385422774749340728}
   - component: {fileID: 5833863946116424615}
   - component: {fileID: 5005422644284536608}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Flame Thrower (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58345,7 +58344,7 @@ GameObject:
   - component: {fileID: 7475491173418466998}
   - component: {fileID: 5846199523793223951}
   - component: {fileID: 2154244341707541221}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63153,7 +63152,7 @@ GameObject:
   - component: {fileID: 3254169853671360799}
   - component: {fileID: 3889401729698735725}
   - component: {fileID: 1827159895542482998}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67947,7 +67946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5213088276239032331}
   - component: {fileID: 6833562300472756535}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68041,7 +68040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4287822932714118889}
   - component: {fileID: 7193910981985781155}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68136,7 +68135,7 @@ GameObject:
   - component: {fileID: 1920607535675347720}
   - component: {fileID: 4985464821737800468}
   - component: {fileID: 1640159599531134701}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72943,7 +72942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5895844581478200136}
   - component: {fileID: 7266805543374003858}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73038,7 +73037,7 @@ GameObject:
   - component: {fileID: 5750320777211981553}
   - component: {fileID: 962612036235080032}
   - component: {fileID: 4568025446002414535}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Flame Thrower (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77849,7 +77848,7 @@ GameObject:
   - component: {fileID: 222005344082736041}
   - component: {fileID: 3342745383624180903}
   - component: {fileID: 729515545251698137}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Flame Thrower (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82660,7 +82659,7 @@ GameObject:
   - component: {fileID: 2981729195587777285}
   - component: {fileID: 1079112730981188538}
   - component: {fileID: 5370772873506147214}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87455,7 +87454,7 @@ GameObject:
   - component: {fileID: 6032056511279169309}
   - component: {fileID: 7904763013838737786}
   - component: {fileID: 5277762068405215403}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92250,7 +92249,7 @@ GameObject:
   - component: {fileID: 1906692764361590995}
   - component: {fileID: 6943319741954492597}
   - component: {fileID: 7825771187937947872}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97058,7 +97057,7 @@ GameObject:
   - component: {fileID: 7561203663564739178}
   - component: {fileID: 4356222640403454716}
   - component: {fileID: 6968704809820672648}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101853,7 +101852,7 @@ GameObject:
   - component: {fileID: 8884575547368229500}
   - component: {fileID: 5771943694050764076}
   - component: {fileID: 5036224013817090639}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Flame Thrower (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106664,7 +106663,7 @@ GameObject:
   - component: {fileID: 9157331059930251321}
   - component: {fileID: 1788604354002831619}
   - component: {fileID: 4429776150310650048}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111459,7 +111458,7 @@ GameObject:
   - component: {fileID: 8144641518821777699}
   - component: {fileID: 8973437730552623648}
   - component: {fileID: 1259063241208611498}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Flame Thrower (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5628664, g: 0.6331327, b: 0.7247877, a: 1}
+  m_IndirectSpecularColor: {r: 0.56286645, g: 0.6331327, b: 0.72478795, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6298,7 +6298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2370949404448878637, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 496.22
+      value: 500.05
       objectReference: {fileID: 0}
     - target: {fileID: 2370949404448878637, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6707,7 +6707,7 @@ PrefabInstance:
     - target: {fileID: 4287090481117950137, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: <Targets>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 555932873}
+      objectReference: {fileID: 806420636}
     - target: {fileID: 4287090481117950137, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: <Targets>k__BackingField.Array.data[1]
       value: 
@@ -39732,11 +39732,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
       propertyPath: _killDelay
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
       propertyPath: _explodeDelay
-      value: 2
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127344542739599379, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: m_Size.z
+      value: 0.8581446
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127344542739599379, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: m_Center.x
+      value: 7.333401e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127344542739599379, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: m_Center.z
+      value: -0.053234544
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46945,7 +46957,7 @@ Transform:
   m_GameObject: {fileID: 853703071511886448}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 497.2, y: 6.23, z: 107.06}
+  m_LocalPosition: {x: 499.7, y: 6.23, z: 107.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

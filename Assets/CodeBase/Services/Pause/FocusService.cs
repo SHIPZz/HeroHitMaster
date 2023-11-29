@@ -53,6 +53,12 @@ namespace CodeBase.Services.Pause
                     return;
                 }
 
+                if (window.WindowTypeId == WindowTypeId.SettingWindow)
+                {
+                    MuteAudio(false);
+                    return;
+                }
+
                 if (window.WindowTypeId == WindowTypeId.Play)
                 {
                     MuteAudio(false);
@@ -60,8 +66,17 @@ namespace CodeBase.Services.Pause
                     continue;
                 }
 
+                if (window.WindowTypeId == WindowTypeId.GameOver)
+                {
+                    MuteAudio(false);
+                    return;
+                }
+
                 if (window.WindowTypeId == WindowTypeId.Hud)
-                    continue;
+                {
+                    MuteAudio(false);
+                    return;
+                }
 
                 if (window.WindowTypeId == WindowTypeId.Pause)
                 {

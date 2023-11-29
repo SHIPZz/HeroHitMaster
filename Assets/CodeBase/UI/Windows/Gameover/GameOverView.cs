@@ -18,12 +18,13 @@ namespace CodeBase.UI.Windows.Gameover
         
         public void Init()
         {
-            _background.DOFade(_targetAlpha, _showUpDuration);
-            _gameFinishText.DOFade(_targetAlpha, _showUpDuration);
+            _background.DOFade(_targetAlpha, _showUpDuration).SetUpdate(true);
+            _gameFinishText.DOFade(_targetAlpha, _showUpDuration).SetUpdate(true);
+            
             DOTween
                 .Sequence()
                 .AppendInterval(_disableDelay)
-                .OnComplete(() => Disabled?.Invoke());
+                .OnComplete(() => Disabled?.Invoke()).SetUpdate(true);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CodeBase.Services.Pause;
+﻿using CodeBase.Services.Ad;
+using CodeBase.Services.Pause;
 using CodeBase.Services.SaveSystems.Data;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,24 +11,25 @@ namespace CodeBase.Infrastructure
     {
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly IPauseService _pauseService;
+        private readonly IAdInvokerService _adInvokerService;
 
-        public LevelLoadState(ILoadingCurtain loadingCurtain, IPauseService pauseService)
+        public LevelLoadState(ILoadingCurtain loadingCurtain, IPauseService pauseService, IAdInvokerService adInvokerService)
         {
+            _adInvokerService = adInvokerService;
             _pauseService = pauseService;
             _loadingCurtain = loadingCurtain;
         }
 
         public async void Enter(WorldData payload)
         {
-            _loadingCurtain.Show(1f);
+            _loadingCurtain.Show(2f);
 
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(payload.LevelData.Id);
 
             while (!loadSceneAsync.isDone)
                 await UniTask.Yield();
 
-            _loadingCurtain.Hide();
-            _pauseService.UnPause();
+            _loadingCurtain.Hide(() => _adInvokerService.Invoke(_pauseService.UnPause));
         }
     }
 }

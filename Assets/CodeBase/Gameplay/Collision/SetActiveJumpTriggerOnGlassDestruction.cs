@@ -14,13 +14,16 @@ namespace CodeBase.Gameplay.Collision
         private void Awake() => 
             _jumpOnTriggerEnetered = GetComponent<JumpOnTriggerEntered>();
 
-        private void OnEnable() => 
+        private void OnEnable()
+        {
+            _jumpOnTriggerEnetered.enabled = false;
             _glass.Destroyed += SetActive;
+        }
 
         private void OnDisable() => 
             _glass.Destroyed -= SetActive;
 
         private void SetActive(DestroyableObjectTypeId obj) => 
-            _jumpOnTriggerEnetered.enabled = _isActive;
+            _jumpOnTriggerEnetered.enabled = true;
     }
 }

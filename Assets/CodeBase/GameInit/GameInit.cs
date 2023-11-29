@@ -29,6 +29,7 @@ using I2.Loc;
 using UnityEngine;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
+using PlayerPrefs = UnityEngine.PlayerPrefs;
 
 namespace CodeBase.GameInit
 {

@@ -69,11 +69,7 @@ namespace CodeBase.Installers
 
         private void BindAdInvoker()
         {
-            Container.BindInterfacesAndSelfTo<AdInvokerMediator>().AsSingle();
-            Container
-                .Bind<IAdInvoker>()
-                .To<AdInvoker>()
-                .AsSingle();
+            Container.Bind<IAdInvokerService>().To<AdInvokerService>().AsSingle();
         }
 
         private void BindPauseService() =>

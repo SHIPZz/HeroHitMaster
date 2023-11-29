@@ -14,7 +14,8 @@ namespace CodeBase.UI.Windows.Gameover
         private readonly IGameStateMachine _gameStateMachine;
         private readonly WindowService _windowService;
 
-        public GameOverPresenter(SaveTriggerOnLevelEnd saveTriggerOnLevelEnd, GameOverView gameOverView, IGameStateMachine gameStateMachine, WindowService windowService)
+        public GameOverPresenter(SaveTriggerOnLevelEnd saveTriggerOnLevelEnd, GameOverView gameOverView,
+            IGameStateMachine gameStateMachine, WindowService windowService)
         {
             _windowService = windowService;
             _saveTriggerOnLevelEnd = saveTriggerOnLevelEnd;
@@ -30,14 +31,14 @@ namespace CodeBase.UI.Windows.Gameover
 
         public void Dispose()
         {
-            _saveTriggerOnLevelEnd.LastLevelAchieved -= _gameOverView.Init;
+            _saveTriggerOnLevelEnd.LastLevelAchieved -= OpenGameOverView;
             _gameOverView.Disabled -= _gameStateMachine.ChangeState<BootstrapState>;
         }
 
         private void OpenGameOverView()
         {
-            _windowService.CloseAll();
-            _windowService.Open(WindowTypeId.GameOver);
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.GameOver));
+            _gameOverView.Init();
         }
     }
 }

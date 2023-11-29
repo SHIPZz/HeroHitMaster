@@ -24,6 +24,9 @@ namespace CodeBase.UI.Windows
         public void Open(WindowTypeId windowTypeId) =>
             _windows[windowTypeId].Open();
 
+        public void OpenQuickly(WindowTypeId windowTypeId) => 
+        _windows[windowTypeId].OpenQuickly();
+
         public void Open(WindowTypeId windowTypeId, Action callback)
         {
             _windows[windowTypeId].Open();

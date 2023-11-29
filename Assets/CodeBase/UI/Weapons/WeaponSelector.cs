@@ -47,6 +47,7 @@ namespace CodeBase.UI.Weapons
             {
                 WorldData worldData = _worldDataService.WorldData;
 
+                Debug.Log(worldData.LevelData.LevelsWithPopupWeapon);
                 if (worldData.LevelData.LevelsWithPopupWeapon != 0)
                 {
                     if (worldData.LevelData.LevelsWithPopupWeapon % WeaponPopupLvlDuration == 0)
@@ -79,11 +80,11 @@ namespace CodeBase.UI.Weapons
             _lastWeaponId = weaponTypeId;
             WorldData worldData = _worldDataService.WorldData;
             worldData.PlayerData.LastWeaponId = _lastWeaponId;
-            SetWeapon(weaponTypeId);
+            SetWeapon(weaponTypeId,true);
             NewWeaponChanged?.Invoke(_lastWeaponId);
         }
 
-        public void SetLastShopWeaponIdSelected(WeaponTypeId weaponTypeId) => 
+        public void SetLastShopWeaponIdSelected(WeaponTypeId weaponTypeId) =>
             _lastWeaponId = weaponTypeId;
 
         public void SetLastShopWeaponSelected()
@@ -91,16 +92,19 @@ namespace CodeBase.UI.Weapons
             if (_worldDataService.WorldData.PlayerData.PurchasedWeapons.Contains(_lastWeaponId))
             {
                 SetLastNotPopupWeaponToData();
-                SetWeapon(_lastWeaponId);
+                SetWeapon(_lastWeaponId, false);
             }
         }
 
-        private void SetWeapon(WeaponTypeId weaponTypeId)
+        private void SetWeapon(WeaponTypeId weaponTypeId, bool isPopup)
         {
             Weapon weapon = _weaponStorage.Get(weaponTypeId);
             WorldData worldData = _worldDataService.WorldData;
             worldData.PlayerData.LastWeaponId = weaponTypeId;
-            worldData.PlayerData.LastNotPopupWeaponId = weaponTypeId;
+
+            if (!isPopup)
+                worldData.PlayerData.LastNotPopupWeaponId = weaponTypeId;
+
             _weaponProvider.Set(weapon);
             NewWeaponChanged?.Invoke(weapon.WeaponTypeId);
         }

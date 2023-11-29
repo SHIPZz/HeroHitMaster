@@ -31,5 +31,11 @@ namespace CodeBase.UI.Windows.Audio
             _allSounds.ForEach(x => x.volume = value);
             _worldDataService.WorldData.SettingsData.Volume = value;
         }
+
+        public void InitInitialValues()
+        {
+            Change(_worldDataService.WorldData.SettingsData.Volume);
+            ChangeMusic(_worldDataService.WorldData.SettingsData.MusicVolume);
+        }
     }
 }
