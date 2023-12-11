@@ -39,7 +39,7 @@ namespace CodeBase.UI.Weapons
 
         public void Initialize()
         {
-            _popupInfoView.LastWeaponSelected += _weaponSelector.SetLastPopupWeapon;
+            _popupInfoView.LastWeaponSelected += _weaponSelector.SetPopupWeapon;
             _weaponAdWatchCounter.AllAdWatched += _weaponSelector.SetBoughtWeaponAdWeapon;
             
             foreach (WeaponSelectorView weaponIcon in _weaponIconClickers.Values)
@@ -57,7 +57,7 @@ namespace CodeBase.UI.Weapons
             _shopWeaponInfoView.AcceptWeaponButtonClicked -= _weaponSelector.SetLastShopWeaponSelected;
             _weaponAdWatchCounter.AllAdWatched -= _weaponSelector.SetBoughtWeaponAdWeapon;
             _checkOutService.Succeeded -= _weaponSelector.SetBoughtMoneyWeapon;
-            _popupInfoView.LastWeaponSelected -= _weaponSelector.SetLastPopupWeapon;
+            _popupInfoView.LastWeaponSelected -= _weaponSelector.SetPopupWeapon;
         }
     }
 }

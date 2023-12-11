@@ -29,7 +29,7 @@ using Player = CodeBase.Gameplay.Character.Players.Player;
 
 namespace CodeBase.GameInit
 {
-    public class GameInit : IInitializable, ITickable
+    public class GameInit : IInitializable
     {
         private readonly PlayerCameraFactory _playerCameraFactory;
         private readonly IProvider<LocationTypeId, Transform> _locationProvider;
@@ -222,25 +222,5 @@ namespace CodeBase.GameInit
 
         private Player GetPlayerFromStorage(PlayerTypeId playerTypeId) =>
             _playerStorage.GetById(playerTypeId);
-
-        //test
-        public void Tick()
-        {
-            if (Input.GetKeyDown(KeyCode.F8))
-            {
-                UnityEngine.PlayerPrefs.DeleteAll();
-                UnityEngine.PlayerPrefs.Save();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                _wallet.AddMoney(5000);
-            }
-
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                _worldDataService.Save();
-            }
-        }
     }
 }

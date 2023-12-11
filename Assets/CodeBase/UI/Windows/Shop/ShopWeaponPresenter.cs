@@ -8,6 +8,7 @@ using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Weapons.ShopWeapons;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -96,6 +97,7 @@ namespace CodeBase.UI.Windows.Shop
         {
             WorldData worldData = _worldDataService.WorldData;
             WeaponData weaponData = _weaponStaticDataService.Get(worldData.PlayerData.LastNotPopupWeaponId);
+            Debug.Log(worldData.PlayerData.LastNotPopupWeaponId);
             SetWeaponDataToView(weaponData.WeaponTypeId);
         }
 

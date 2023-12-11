@@ -75,7 +75,7 @@ namespace CodeBase.UI.Weapons
             SetLastNotPopupWeaponToData();
         }
 
-        public void SetLastPopupWeapon(WeaponTypeId weaponTypeId)
+        public void SetPopupWeapon(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;
             WorldData worldData = _worldDataService.WorldData;
@@ -89,11 +89,11 @@ namespace CodeBase.UI.Weapons
 
         public void SetLastShopWeaponSelected()
         {
-            if (_worldDataService.WorldData.PlayerData.PurchasedWeapons.Contains(_lastWeaponId))
-            {
-                SetLastNotPopupWeaponToData();
-                SetWeapon(_lastWeaponId, false);
-            }
+            if (!_worldDataService.WorldData.PlayerData.PurchasedWeapons.Contains(_lastWeaponId)) 
+                return;
+                
+            SetLastNotPopupWeaponToData();
+            SetWeapon(_lastWeaponId, false);
         }
 
         private void SetWeapon(WeaponTypeId weaponTypeId, bool isPopup)
@@ -113,6 +113,7 @@ namespace CodeBase.UI.Weapons
         {
             WorldData worldData = _worldDataService.WorldData;
             worldData.PlayerData.PurchasedWeapons.Add(_lastWeaponId);
+            _worldDataService.Save();
         }
     }
 }

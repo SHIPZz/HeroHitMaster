@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Character.Players.Shoot;
+using CodeBase.Gameplay.EffectsData;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Services.Providers;
 using Cysharp.Threading.Tasks;
@@ -11,6 +12,7 @@ using Zenject;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
+    [RequireComponent(typeof(EffectOnEnemyActivation))]
     public class ActivateEnemiesOnPlayerEnter : MonoBehaviour
     {
         private const float DelayActivation = 1.5f;
@@ -21,8 +23,8 @@ namespace CodeBase.Gameplay.Character.Enemy
         private PlayerProvider _playerProvider;
         private ShootingOnAnimationEvent _shootingOnAnimationEvent;
         private bool _canMove;
+        private EffectOnEnemyActivation _effectOnEnemyActivation;
 
-        public event Action<Enemy> Activated;
 
         private bool _activated = false;
 
@@ -33,8 +35,11 @@ namespace CodeBase.Gameplay.Character.Enemy
             _playerProvider.Changed += SetPlayer;
         }
 
-        private void Awake() =>
+        private void Awake()
+        {
             _aggroZone = GetComponent<AggroZone>();
+            _effectOnEnemyActivation = GetComponent<EffectOnEnemyActivation>();
+        }
 
         private void OnEnable()
         {
@@ -68,8 +73,8 @@ namespace CodeBase.Gameplay.Character.Enemy
             foreach (Enemy enemy in _enemies)
             {
                 enemy.gameObject.SetActive(true);
-                enemy.gameObject.transform.DOScale(enemy.InitialScale, 0.5f);
-                Activated?.Invoke(enemy);
+                enemy.gameObject.transform.DOScale(enemy.InitialScale, 0.5f)
+                    .OnComplete(() => _effectOnEnemyActivation.Play(enemy));
                 TryActivateMovement(enemy);
             }
 

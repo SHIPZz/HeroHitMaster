@@ -1,4 +1,5 @@
 ﻿using System;
+using Agava.WebUtility;
 using CodeBase.Enums;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Sound;
@@ -23,16 +24,26 @@ namespace CodeBase.Gameplay.MusicHandlerSystem
 
         public void Initialize()
         {
-            _pauseWindow.StartedToOpen += _music.Stop;
-            _gameOverWindow.StartedToOpen += _music.Stop;
+            _pauseWindow.StartedToOpen += _music.Pause;
+            _gameOverWindow.StartedToOpen += _music.Pause;
             _pauseWindow.Closed += _music.Play;
+            Application.focusChanged += OnFocusChanged;
+            WebApplication.InBackgroundChangeEvent += OnFocusChanged;
         }
 
         public void Dispose()
         {
-            _pauseWindow.StartedToOpen -= _music.Stop;
-            _gameOverWindow.StartedToOpen -= _music.Stop;
+            _pauseWindow.StartedToOpen -= _music.Pause;
+            _gameOverWindow.StartedToOpen -= _music.Pause;
             _pauseWindow.Closed -= _music.Play;
+            Application.focusChanged -= OnFocusChanged;
+            WebApplication.InBackgroundChangeEvent -= OnFocusChanged;
+        }
+
+        private void OnFocusChanged(bool hasFocus)
+        {
+            if(!hasFocus)
+                _music.Pause();
         }
 
         public void Play() =>

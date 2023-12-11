@@ -27,16 +27,7 @@ namespace CodeBase.Gameplay.EffectsData
             _targetSound = soundStorage.Get(SoundTypeId.AppearEnemy);
         }
 
-        private void Awake() =>
-            _activateEnemy = GetComponent<ActivateEnemiesOnPlayerEnter>();
-
-        private void OnEnable() =>
-            _activateEnemy.Activated += Play;
-
-        private void OnDisable() =>
-            _activateEnemy.Activated -= Play;
-
-        private void Play(Enemy enemy)
+        public void Play(Enemy enemy)
         {
             var randomId = Random.Range(0, _effects.Count - 1);
             ParticleSystem randomEffectPrefab = _effects[randomId];
@@ -45,7 +36,7 @@ namespace CodeBase.Gameplay.EffectsData
             effect.gameObject.transform.position = enemy.transform.position + _offset;
             
             effect.Play();
-            _targetSound.Play();
+            // _targetSound.Play();
         }
     }
 }

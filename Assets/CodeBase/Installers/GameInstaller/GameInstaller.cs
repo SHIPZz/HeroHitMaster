@@ -12,6 +12,7 @@ using CodeBase.Gameplay.WaterSplash;
 using CodeBase.Infrastructure;
 using CodeBase.Services;
 using CodeBase.Services.AccuracyCounters;
+using CodeBase.Services.Cheats;
 using CodeBase.Services.CheckOut;
 using CodeBase.Services.Data;
 using CodeBase.Services.Factories;
@@ -106,6 +107,7 @@ namespace CodeBase.Installers.GameInstaller
             BindGamePartsInitializers();
             BindFocusService();
             BindMusicHandler();
+            Container.BindInterfacesAndSelfTo<CheatService>().AsSingle();
         }
 
         private void BindMusicHandler()

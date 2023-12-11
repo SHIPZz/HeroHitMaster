@@ -21,7 +21,6 @@ namespace CodeBase.UI.Windows.Popup
         [SerializeField] private TextMeshProUGUI _timerText;
         [SerializeField] private Image _whiteFrame;
         [SerializeField] private float _startTime = 3f;
-        [SerializeField] private float _startDelay = 2f;
 
         private AudioSource _timerTicking;
         private AudioSource _timerFinished;
@@ -30,10 +29,13 @@ namespace CodeBase.UI.Windows.Popup
         private bool _ignoreTimeScale;
         private bool _hasFocus;
         private bool _isDisabled;
+        private WindowService _windowService;
 
         [Inject]
-        private void Construct(ISoundStorage soundStorage, PopupInfoView popupInfoView, IPauseService pauseService)
+        private void Construct(ISoundStorage soundStorage, PopupInfoView popupInfoView, 
+            IPauseService pauseService, WindowService windowService)
         {
+            _windowService = windowService;
             _pauseService = pauseService;
             _popupInfoView = popupInfoView;
             _timerTicking = soundStorage.Get(SoundTypeId.TimerTicking);
@@ -96,6 +98,7 @@ namespace CodeBase.UI.Windows.Popup
                     await UniTask.Delay(TimeSpan.FromSeconds(CountdownInterval), true);
                     _timerFinished.Play();
                     _popupInfoView.gameObject.SetActive(false);
+                    _windowService.Open(WindowTypeId.Play);
                     _pauseService.UnPause();
                 }
 

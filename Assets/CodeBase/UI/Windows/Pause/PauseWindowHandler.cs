@@ -15,8 +15,8 @@ namespace CodeBase.UI.Windows.Pause
         private readonly IPauseService _pauseService;
         private readonly WindowService _windowService;
         private readonly Window _hud;
+        private readonly MusicHandler _musicHandler;
         private bool _isOpened;
-        private MusicHandler _musicHandler;
 
         public PauseWindowHandler(PauseWindowView pauseWindowView, IPauseService pauseService,
             WindowService windowService, WindowProvider windowProvider, MusicHandler musicHandler)

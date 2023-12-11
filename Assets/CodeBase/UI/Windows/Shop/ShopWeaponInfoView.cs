@@ -28,12 +28,9 @@ namespace CodeBase.UI.Windows.Shop
         [SerializeField] private float _targetScaleY = 1f;
         [SerializeField] private float _targetScaleDuration = 0.3f;
         [SerializeField] private Transform _effectPosition;
+        [SerializeField] private I2.Loc.Localize _purchasedTextLocalize;
 
-        private Dictionary<WeaponTypeId, Image> _shopWeaponIcons;
         private AudioSource _purchasedWeaponSound;
-
-        public event Action AdButtonClicked;
-        public event Action AcceptWeaponButtonClicked;
 
         private bool _isAnimating;
         private Dictionary<WeaponTypeId, string> _translatedWeaponNames;
@@ -41,11 +38,12 @@ namespace CodeBase.UI.Windows.Shop
         private Tween _nameTextTween;
         private Tween _priceTextTween;
 
+        public event Action AdButtonClicked;
+        public event Action AcceptWeaponButtonClicked;
+
         [Inject]
-        private void Construct(IProvider<WeaponIconsProvider> provider,
-            ISoundStorage soundStorage)
+        private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage)
         {
-            _shopWeaponIcons = provider.Get().ShopWeaponIcons;
             _purchasedWeaponSound = soundStorage.Get(SoundTypeId.PurchasedWeapon);
         }
 
@@ -130,7 +128,20 @@ namespace CodeBase.UI.Windows.Shop
         }
 
         public void SetActiveAcceptWeaponButton(bool isActive) =>
-            SetButtonScale(_acceptBoughtWeaponButton,isActive);
+            SetButtonScale(_acceptBoughtWeaponButton, isActive);
+
+        public void SetMoneyWeaponPriceInfo(WeaponData weaponData, bool isVisible)
+        {
+            _purchasedTextLocalize.OnLocalize(true);
+            
+            if (!isVisible)
+            {
+                _price.text = $"<color=#ffdc30> {_purchasedText.text}</color>";
+                return;
+            }
+
+            _price.text = $"<color=#ffdc30> {weaponData.Price.Value}</color>";
+        }
 
         private void OnAcceptBoughtWeaponClicked()
         {
@@ -199,6 +210,8 @@ namespace CodeBase.UI.Windows.Shop
 
         private void SetAdWeaponPriceInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
+            _purchasedTextLocalize.OnLocalize(true);
+            
             if (isBought)
             {
                 _adPrice.text = $"<color=#ffdc30> {_purchasedText.text}</color>";
@@ -206,17 +219,6 @@ namespace CodeBase.UI.Windows.Shop
             }
 
             _adPrice.text = $"{watchedAds}/{weaponData.Price.AdQuantity}";
-        }
-
-        public void SetMoneyWeaponPriceInfo(WeaponData weaponData, bool isVisible)
-        {
-            if (!isVisible)
-            {
-                _price.text = $"<color=#ffdc30> {_purchasedText.text}</color>";
-                return;
-            }
-
-            _price.text = $"<color=#ffdc30> {weaponData.Price.Value}</color>";
         }
     }
 }

@@ -12,13 +12,16 @@ namespace CodeBase.Services.Pause
 {
     public class FocusService : IInitializable, IDisposable
     {
+        private const float AudioMuteVolume = 0f;
+        private const float AudioUnmuteVolume = 1f;
+        
         private readonly IPauseService _pauseService;
         private readonly List<Window> _allWindows;
-
+        
         public FocusService(IPauseService pauseService, WindowProvider windowProvider)
         {
-            _allWindows = windowProvider.Windows.Values.ToList();
             _pauseService = pauseService;
+            _allWindows = windowProvider.Windows.Values.ToList();
         }
 
         public void Initialize()
@@ -36,63 +39,44 @@ namespace CodeBase.Services.Pause
         private void OnFocusChanged(bool hasFocus)
         {
             if (!hasFocus)
+                HandleFocusLost();
+            else
+                HandleFocusGained();
+        }
+
+        private void HandleFocusLost()
+        {
+            _pauseService.Pause();
+            MuteAudio(true);
+        }
+
+        private void HandleFocusGained()
+        {
+            foreach (Window window in _allWindows.Where(window => window.gameObject.activeSelf))
             {
-                _pauseService.Pause();
-                MuteAudio(true);
-                return;
+                HandleWindowType(window.WindowTypeId);
             }
+        }
 
-            foreach (Window window in _allWindows)
+        private void HandleWindowType(WindowTypeId windowTypeId)
+        {
+            switch (windowTypeId)
             {
-                if (!window.gameObject.activeSelf)
-                    continue;
-
-                if (window.WindowTypeId == WindowTypeId.Popup)
-                {
+                case WindowTypeId.Pause:
                     MuteAudio(false);
-                    return;
-                }
-
-                if (window.WindowTypeId == WindowTypeId.SettingWindow)
-                {
-                    MuteAudio(false);
-                    return;
-                }
-
-                if (window.WindowTypeId == WindowTypeId.Play)
-                {
+                    break;
+                
+                case WindowTypeId.Play:
                     MuteAudio(false);
                     _pauseService.UnPause();
-                    continue;
-                }
-
-                if (window.WindowTypeId == WindowTypeId.GameOver)
-                {
-                    MuteAudio(false);
-                    return;
-                }
-
-                if (window.WindowTypeId == WindowTypeId.Hud)
-                {
-                    MuteAudio(false);
-                    return;
-                }
-
-                if (window.WindowTypeId == WindowTypeId.Pause)
-                {
-                    MuteAudio(false);
-                    return;
-                }
+                    break;
             }
-
-            _pauseService.UnPause();
-            MuteAudio(false);
         }
 
         private void MuteAudio(bool value)
         {
             AudioListener.pause = value;
-            AudioListener.volume = value ? 0 : 1;
+            AudioListener.volume = value ? AudioMuteVolume : AudioUnmuteVolume;
         }
     }
 }
