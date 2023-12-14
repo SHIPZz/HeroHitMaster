@@ -12,7 +12,9 @@ namespace CodeBase.UI.Windows.Hud
         private readonly HudView _hudView;
         private readonly IPauseService _pauseService;
 
-        public HudPresenter(WindowService windowService, HudView hudView, IPauseService pauseService)
+        public HudPresenter(WindowService windowService,
+            HudView hudView,
+            IPauseService pauseService)
         {
             _pauseService = pauseService;
             _windowService = windowService;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.5649007, g: 0.6356403, b: 0.72393775, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6231,7 +6231,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpawners:
   - {fileID: 175860080}
-  _delayActivation: 0.5
 --- !u!114 &369691678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6244,7 +6243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd6f83a5e548c6a60bd5a11e2bb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 5, z: 0}
+  _offset: {x: 0, y: 3, z: 0}
 --- !u!1 &374938992
 GameObject:
   m_ObjectHideFlags: 3
@@ -21456,7 +21455,6 @@ MonoBehaviour:
   - {fileID: 903956347}
   - {fileID: 1247359207}
   - {fileID: 1514978600}
-  _delayActivation: 0.5
 --- !u!114 &1207657157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32221,6 +32219,10 @@ PrefabInstance:
       propertyPath: <EnemyQuantityInZones>k__BackingField.Array.data[2]
       value: 
       objectReference: {fileID: 1523072437}
+    - target: {fileID: 4073852287277213591, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4213917258355242860, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -56473,7 +56475,6 @@ MonoBehaviour:
   _enemySpawners:
   - {fileID: 357881900}
   - {fileID: 716279672}
-  _delayActivation: 0.5
 --- !u!114 &8413101694788368547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56486,7 +56487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd6f83a5e548c6a60bd5a11e2bb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 2.3, z: 0}
+  _offset: {x: 0, y: 3, z: 0}
 --- !u!33 &8509096039549999644
 MeshFilter:
   m_ObjectHideFlags: 0

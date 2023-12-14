@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Enums;
+using CodeBase.Services.Pause;
 using CodeBase.Services.SaveSystems;
 using CodeBase.Services.SaveSystems.Data;
 using Zenject;
@@ -12,10 +13,13 @@ namespace CodeBase.UI.Windows.Shop
         private readonly WindowService _windowService;
         private readonly ShopMoneyText _shopMoneyText;
         private readonly Wallet.Wallet _wallet;
+        private readonly IPauseService _pauseService;
 
         public ShopWindowPresenter(ShopView shopView, WindowService windowService,
-            ShopMoneyText shopMoneyText, Wallet.Wallet wallet)
+            ShopMoneyText shopMoneyText, Wallet.Wallet wallet,
+            IPauseService pauseService)
         {
+            _pauseService = pauseService;
             _wallet = wallet;
             _shopMoneyText = shopMoneyText;
             _shopView = shopView;
@@ -43,6 +47,6 @@ namespace CodeBase.UI.Windows.Shop
         }
 
         private void Close() => 
-            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Play));
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Play,_pauseService.UnPause));
     }
 }

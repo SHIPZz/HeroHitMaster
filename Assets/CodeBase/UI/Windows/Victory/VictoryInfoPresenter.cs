@@ -54,6 +54,6 @@ namespace CodeBase.UI.Windows.Victory
         }
 
         private void FillVictoryInfo() => 
-            _victoryInfoView.Show(_countEnemiesOnDeath.Quantity, _level.Reward);
+            _victoryInfoView.Show(_countEnemiesOnDeath.AllEnemyCount, _level.Reward);
     }
 }

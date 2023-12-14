@@ -124,8 +124,8 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindGamePartsInitializers()
         {
-            Container.BindInterfacesTo<EnemiesMovementInitializer>().AsSingle();
-            Container.BindInterfacesTo<PlayerShootInputInitializer>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemiesMovementInitializer>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerShootInputMediator>().AsSingle();
         }
 
         private void BindGameplayRunner()

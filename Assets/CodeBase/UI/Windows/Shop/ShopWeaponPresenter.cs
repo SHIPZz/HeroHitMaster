@@ -82,12 +82,12 @@ namespace CodeBase.UI.Windows.Shop
         {
             if (weaponData.Price.PriceTypeId == PriceTypeId.Ad)
             {
-                _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, 0);
+                _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, 0, true);
                 _shopWeaponInfoView.SetActiveAcceptWeaponButton(false);
                 return;
             }
 
-            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true);
+            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true, true);
             _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
             _shopWeaponInfoView.DisableBuyButtons();
             _shopWeaponInfoView.SetActiveAcceptWeaponButton(false);
@@ -105,26 +105,26 @@ namespace CodeBase.UI.Windows.Shop
         {
             WeaponData weaponData = _weaponStaticDataService.Get(weaponTypeId);
             _shopWeaponInfoView.ShowEffects();
-            _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, weaponData.Price.AdQuantity);
+            _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true, weaponData.Price.AdQuantity, true);
         }
 
         private void SetWeaponAdWeaponInfoAfterWeaponAdWatching(WeaponTypeId weaponTypeId, int watchedAds)
         {
             WeaponData weaponData = _weaponStaticDataService.Get(weaponTypeId);
-            _shopWeaponInfoView.SetAdWeaponInfo(weaponData, false, watchedAds);
+            _shopWeaponInfoView.SetAdWeaponInfo(weaponData, false, watchedAds, false);
         }
 
         private void DisablePurchasedWeaponInfo()
         {
             WeaponData weaponData = _weaponStaticDataService.Get(_lastWeaponType);
             _shopWeaponInfoView.ShowEffects();
-            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true);
+            _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true, true);
             _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
         }
 
         private void SetWeaponDataToView(WeaponTypeId weaponTypeId)
         {
-            if (SameWeaponChoosen(weaponTypeId))
+            if (SameWeaponChosen(weaponTypeId))
                 return;
 
             WeaponData weaponData = GetWeaponData(weaponTypeId);
@@ -141,8 +141,10 @@ namespace CodeBase.UI.Windows.Shop
 
             if (HasPlayerThisWeapon(playerData, weaponData))
             {
-                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true);
-                _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false);
+                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, true,
+                    playerData.LastNotPopupWeaponId == weaponData.WeaponTypeId);
+
+                _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, false); 
                 return;
             }
 
@@ -150,12 +152,12 @@ namespace CodeBase.UI.Windows.Shop
             {
                 if (HasEnoughMoneyToBuy(weaponData))
                 {
-                    _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, true, false);
+                    _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, true, false, false);
                     _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, true);
                     return;
                 }
 
-                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, false);
+                _shopWeaponInfoView.SetMoneyWeaponInfo(weaponData.WeaponTypeId, false, false, false);
                 _shopWeaponInfoView.SetMoneyWeaponPriceInfo(weaponData, true);
             }
 
@@ -163,8 +165,7 @@ namespace CodeBase.UI.Windows.Shop
                 _shopWeaponInfoView.DisableBuyButtons();
         }
 
-        private void SetAdWeaponInfoToView(WeaponTypeId weaponTypeId, PlayerData playerData,
-            WeaponData weaponData)
+        private void SetAdWeaponInfoToView(WeaponTypeId weaponTypeId, PlayerData playerData, WeaponData weaponData)
         {
             WorldData worldData = _worldDataService.WorldData;
 
@@ -173,12 +174,14 @@ namespace CodeBase.UI.Windows.Shop
             if (IsWeaponAdBought(playerData, weaponTypeId))
             {
                 _shopWeaponInfoView.SetAdWeaponInfo(weaponData, true,
-                    worldData.AdWeaponsData.WatchedAdsToBuyWeapons[weaponTypeId]);
+                    worldData.AdWeaponsData.WatchedAdsToBuyWeapons[weaponTypeId],
+                    playerData.LastNotPopupWeaponId == weaponData.WeaponTypeId);
+
                 return;
             }
 
             _shopWeaponInfoView.SetAdWeaponInfo(weaponData, false,
-                worldData.AdWeaponsData.WatchedAdsToBuyWeapons[weaponTypeId]);
+                worldData.AdWeaponsData.WatchedAdsToBuyWeapons[weaponTypeId], false);
         }
 
         private bool IsWeaponAd(WeaponData weaponData) =>
@@ -187,7 +190,7 @@ namespace CodeBase.UI.Windows.Shop
         private bool IsWeaponAdBought(PlayerData playerData, WeaponTypeId weaponTypeId) =>
             playerData.PurchasedWeapons.Contains(weaponTypeId);
 
-        private bool SameWeaponChoosen(WeaponTypeId weaponTypeId) =>
+        private bool SameWeaponChosen(WeaponTypeId weaponTypeId) =>
             _lastWeaponType == weaponTypeId;
 
         private WeaponData GetWeaponData(WeaponTypeId weaponTypeId) =>

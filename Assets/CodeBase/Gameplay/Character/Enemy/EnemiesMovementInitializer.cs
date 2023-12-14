@@ -1,5 +1,7 @@
 ﻿using CodeBase.Infrastructure;
 using CodeBase.Services.Providers;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.Character.Enemy
 {
@@ -7,10 +9,20 @@ namespace CodeBase.Gameplay.Character.Enemy
     {
         private readonly IEnemyProvider _enemyProvider;
 
-        public EnemiesMovementInitializer(IEnemyProvider enemyProvider) => 
+        private bool _allEnemiesInitialized;
+
+        public EnemiesMovementInitializer(IEnemyProvider enemyProvider) =>
             _enemyProvider = enemyProvider;
 
-        public void Run() => 
-            _enemyProvider.Enemies.ForEach(x =>x.GetComponent<EnemyFollower>().Unblock());
+        public async void Run()
+        {
+            while (!_allEnemiesInitialized)
+                await UniTask.Yield();
+
+            _enemyProvider.Enemies.ForEach(x => x.GetComponent<EnemyFollower>().Unblock());
+        }
+
+        public void Init() =>
+            _allEnemiesInitialized = true;
     }
 }

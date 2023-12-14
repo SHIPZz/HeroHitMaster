@@ -3167,6 +3167,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4073852287277213591, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4213917258355242860, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -5709,7 +5713,6 @@ MonoBehaviour:
   _enemySpawners:
   - {fileID: 380989129}
   - {fileID: 708310997}
-  _delayActivation: 0.2
 --- !u!114 &236286996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5780,7 +5783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd6f83a5e548c6a60bd5a11e2bb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 2.5, z: 0}
+  _offset: {x: 0, y: 3, z: 0}
 --- !u!1 &239566025
 GameObject:
   m_ObjectHideFlags: 3
@@ -6451,7 +6454,6 @@ MonoBehaviour:
   - {fileID: 720952296}
   - {fileID: 341589972}
   - {fileID: 2104274902}
-  _delayActivation: 0.5
 --- !u!114 &272765299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57237,7 +57239,6 @@ MonoBehaviour:
   _enemySpawners:
   - {fileID: 1414469117}
   - {fileID: 437732637}
-  _delayActivation: 1
 --- !u!114 &8413101694788368547
 MonoBehaviour:
   m_ObjectHideFlags: 0

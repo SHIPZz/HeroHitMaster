@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Agava.YandexGames;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
@@ -22,6 +23,7 @@ using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows.Shop;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using I2.Loc;
 using UnityEngine;
 using Zenject;
@@ -64,10 +66,11 @@ namespace CodeBase.GameInit
         private readonly IWorldDataService _worldDataService;
         private readonly IEnemyProvider _enemyProvider;
         private readonly AccuracyCounter _accuracyCounter;
+        private readonly EnemiesMovementInitializer _enemiesMovementInitializer;
 
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
-            IProvider<LocationTypeId, 
+            IProvider<LocationTypeId,
                 Transform> locationProvider,
             IPlayerStorage playerStorage,
             WeaponSelector weaponSelector,
@@ -90,8 +93,10 @@ namespace CodeBase.GameInit
             Wallet wallet,
             IWorldDataService worldDataService,
             IEnemyProvider enemyProvider,
-            AccuracyCounter accuracyCounter)
+            AccuracyCounter accuracyCounter,
+            EnemiesMovementInitializer enemiesMovementInitializer)
         {
+            _enemiesMovementInitializer = enemiesMovementInitializer;
             _accuracyCounter = accuracyCounter;
             _enemyProvider = enemyProvider;
             _worldDataService = worldDataService;
@@ -122,6 +127,7 @@ namespace CodeBase.GameInit
         {
             LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
             YandexGamesSdk.GameReady();
+
             WorldData worldData = _worldDataService.WorldData;
             _mainUi.transform.SetParent(null);
             TranslateWeaponNames(worldData);
@@ -132,9 +138,20 @@ namespace CodeBase.GameInit
             Weapon weapon = await InitializeInitialWeapon(worldData.PlayerData.LastWeaponId);
             Player targetPlayer = InitPlayerAfterWeaponChoose(weapon);
             InitializeUIPresenters(worldData.PlayerData);
+            InitMainCanvas();
             InitializeCamera(targetPlayer, weapon);
             _waterSplashPoolInitializer.Init();
             _setterWeaponToPlayerHand.Init(weapon.WeaponTypeId);
+        }
+
+        private async void InitMainCanvas()
+        {
+            while (_enemyProvider.Enemies.Count(x => x.gameObject.activeSelf) == 0)
+            {
+                await UniTask.Yield();
+            }
+
+            _mainUi.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
         }
 
         private Player InitPlayerAfterWeaponChoose(Weapon weapon)
@@ -158,6 +175,7 @@ namespace CodeBase.GameInit
                 _enemyConfigurator.Configure(enemy, aggrozone);
             }));
 
+            _enemiesMovementInitializer.Init();
             _countEnemiesOnDeath.Init(_enemyProvider.Enemies);
             _levelSliderPresenter.Init(_enemyProvider.Enemies);
             _killActiveEnemiesOnPlayerRecover.Init(_enemyProvider.Enemies);
@@ -201,7 +219,7 @@ namespace CodeBase.GameInit
 
         private async UniTask<Weapon> InitializeInitialWeapon(WeaponTypeId weaponTypeId)
         {
-            Weapon weapon =  _weaponSelector.Init(weaponTypeId);
+            Weapon weapon = _weaponSelector.Init(weaponTypeId);
 
             while (weapon.BulletsCreated == false)
             {

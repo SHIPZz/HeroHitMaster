@@ -1,6 +1,7 @@
 ﻿using System;
 using Agava.YandexGames;
 using CodeBase.Services.Pause;
+using UnityEngine;
 
 namespace CodeBase.Services.Ad
 {
@@ -11,6 +12,8 @@ namespace CodeBase.Services.Ad
         public YandexAdService(IPauseService pauseService) =>
             _pauseService = pauseService;
 
+        public bool IsAdEnabled { get; private set; }
+
         public void PlayShortAd(Action startCallback, Action<bool> onCloseCallback) => 
             InterstitialAd.Show(() =>  OnShortAdStartCallback(startCallback), closed => OnShortAdCloseCallback(onCloseCallback, closed));
 
@@ -18,11 +21,13 @@ namespace CodeBase.Services.Ad
         {
             startCallback?.Invoke();
             _pauseService.Pause();
+            IsAdEnabled = true;
         }
 
         private void OnShortAdCloseCallback(Action<bool> onCloseCallback, bool closed)
         {
             onCloseCallback?.Invoke(closed);
+            IsAdEnabled = false;
             _pauseService.UnPause();
         }
 
@@ -32,13 +37,17 @@ namespace CodeBase.Services.Ad
         private void OnCloseCallback(Action endCallback)
         {
             endCallback?.Invoke();
+            AudioListener.volume = 1f;
+            IsAdEnabled = false;
             _pauseService.UnPause();
         }
 
         private void OnOpenCallback(Action startCallback)
         {
+            IsAdEnabled = true;
             startCallback?.Invoke();
             _pauseService.Pause();
+            AudioListener.volume = 0f;
         }
     }
 }

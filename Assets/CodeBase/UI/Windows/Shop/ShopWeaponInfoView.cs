@@ -79,13 +79,22 @@ namespace CodeBase.UI.Windows.Shop
             DisableBuyButtons();
         }
 
-        public void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds)
+        public void SetAdWeaponInfo(WeaponData weaponData, bool isBought, int watchedAds, bool isInHand)
         {
             _price.gameObject.SetActive(false);
             _adPrice.gameObject.SetActive(true);
             SetButtonScale(_buyButton, false);
+            SetButtonScale(_adButton, false);
             SetButtonScale(_acceptBoughtWeaponButton, false);
             SetWeaponNameInfo(_translatedWeaponNames[weaponData.WeaponTypeId]);
+
+            if (isInHand)
+            {
+                DisableBuyButtons();
+                SetAdWeaponPriceInfo(weaponData, true, watchedAds);
+                SetButtonScale(_acceptBoughtWeaponButton, false);
+                return;
+            }
 
             if (isBought)
             {
@@ -100,16 +109,20 @@ namespace CodeBase.UI.Windows.Shop
             SetPriceAnimationText(_adPrice.transform);
         }
 
-        public void SetMoneyWeaponInfo(WeaponTypeId weaponTypeId, bool isVisible, bool isBought)
+        public void SetMoneyWeaponInfo(WeaponTypeId weaponTypeId, bool isVisible, bool isBought, bool isInHand)
         {
             _adPrice.gameObject.SetActive(false);
-            SetButtonScale(_adButton, false);
             _price.gameObject.SetActive(true);
+            SetButtonScale(_adButton, false);
+            SetButtonScale(_buyButton, false);
+            SetButtonScale(_acceptBoughtWeaponButton, false);
 
             SetWeaponNameInfo(_translatedWeaponNames[weaponTypeId]);
 
-            SetButtonScale(_acceptBoughtWeaponButton, false);
             SetPriceAnimationText(_price.transform);
+
+            if (isInHand)
+                return;
 
             if (isBought)
             {
@@ -133,7 +146,7 @@ namespace CodeBase.UI.Windows.Shop
         public void SetMoneyWeaponPriceInfo(WeaponData weaponData, bool isVisible)
         {
             _purchasedTextLocalize.OnLocalize(true);
-            
+
             if (!isVisible)
             {
                 _price.text = $"<color=#ffdc30> {_purchasedText.text}</color>";
@@ -211,7 +224,7 @@ namespace CodeBase.UI.Windows.Shop
         private void SetAdWeaponPriceInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
             _purchasedTextLocalize.OnLocalize(true);
-            
+
             if (isBought)
             {
                 _adPrice.text = $"<color=#ffdc30> {_purchasedText.text}</color>";

@@ -15,13 +15,11 @@ namespace CodeBase.UI.Windows.Pause
         private readonly IPauseService _pauseService;
         private readonly WindowService _windowService;
         private readonly Window _hud;
-        private readonly MusicHandler _musicHandler;
         private bool _isOpened;
 
         public PauseWindowHandler(PauseWindowView pauseWindowView, IPauseService pauseService,
-            WindowService windowService, WindowProvider windowProvider, MusicHandler musicHandler)
+            WindowService windowService, WindowProvider windowProvider)
         {
-            _musicHandler = musicHandler;
             _hud = windowProvider.Windows[WindowTypeId.Hud];
             _pauseWindowView = pauseWindowView;
             _pauseService = pauseService;
@@ -58,8 +56,9 @@ namespace CodeBase.UI.Windows.Pause
         private void OnReturned()
         {
             _windowService.CloseAll(() =>_windowService.OpenQuickly(WindowTypeId.Hud) );
+            AudioListener.pause = false;
+            AudioListener.volume = 1f;
             _pauseService.UnPause();
-            _musicHandler.Play();
             _isOpened = false;
         }
     }

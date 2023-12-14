@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.5649007, g: 0.6356403, b: 0.72393775, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3791,7 +3791,6 @@ MonoBehaviour:
   _enemySpawners:
   - {fileID: 1902722461}
   - {fileID: 795035139}
-  _delayActivation: 0.5
 --- !u!114 &212782286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3804,7 +3803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd6f83a5e548c6a60bd5a11e2bb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 4, z: 0}
+  _offset: {x: 0, y: 3.5, z: 0}
 --- !u!114 &212782287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7757,7 +7756,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpawners:
   - {fileID: 1529791804}
-  _delayActivation: 0.5
 --- !u!114 &414073542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7770,7 +7768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd6f83a5e548c6a60bd5a11e2bb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 5, z: 0}
+  _offset: {x: 0, y: 3.5, z: 0}
 --- !u!1 &418371989
 GameObject:
   m_ObjectHideFlags: 3
@@ -13251,6 +13249,10 @@ PrefabInstance:
       propertyPath: <EnemyQuantityInZones>k__BackingField.Array.data[2]
       value: 
       objectReference: {fileID: 386778308}
+    - target: {fileID: 4073852287277213591, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4213917258355242860, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -37284,7 +37286,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpawners:
   - {fileID: 355600845}
-  _delayActivation: 0.5
 --- !u!114 &1980372236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37297,7 +37298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd6f83a5e548c6a60bd5a11e2bb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 4, z: 0}
+  _offset: {x: 0, y: 3.5, z: 0}
 --- !u!1 &1984132085
 GameObject:
   m_ObjectHideFlags: 3

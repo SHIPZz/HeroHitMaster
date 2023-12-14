@@ -72,6 +72,7 @@ namespace CodeBase.UI.Weapons
         public void SetBoughtWeaponAdWeapon(WeaponTypeId weaponTypeId)
         {
             _lastWeaponId = weaponTypeId;
+            SetWeapon(_lastWeaponId, false);
             SetLastNotPopupWeaponToData();
         }
 

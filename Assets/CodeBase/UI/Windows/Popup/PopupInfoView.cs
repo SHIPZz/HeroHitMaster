@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agava.WebUtility;
 using CodeBase.Enums;
+using CodeBase.Services.Ad;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.UI.Weapons;
@@ -9,7 +12,6 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -27,6 +29,11 @@ namespace CodeBase.UI.Windows.Popup
         [SerializeField] private float _chooseDuration;
         [SerializeField] private float _closeWhiteFrameDuration;
         [SerializeField] private float _openWhiteFrameDuration;
+        [SerializeField] private float _canvasFadeDuration = 0.5f;
+        [SerializeField] private float _canvasNonFadeDuration = 0.25f;
+        [SerializeField] private Canvas _canvas;
+        [SerializeField] private CanvasGroup _canvasGroup;
+        [SerializeField] private PopupTimerService _popupTimerService;
 
         private Dictionary<WeaponTypeId, WeaponSelectorView> _weaponIcons;
         private AudioSource _lastWeaponSelectedSound;
@@ -38,14 +45,20 @@ namespace CodeBase.UI.Windows.Popup
         private List<ParticleSystem> _selectedWeaponEffects;
         private Coroutine _chooseRandomWeaponCoroutine;
         private bool _lastWeaponSelected;
+        private IPauseService _pauseService;
+        private bool _hasFocus;
+        private IAdService _adService;
 
         public event Action AdButtonClicked;
         public event Action<WeaponTypeId> LastWeaponSelected;
 
         [Inject]
         private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage,
-            EffectsProvider effectsProvider)
+            EffectsProvider effectsProvider, IPauseService pauseService,
+            IAdService adService)
         {
+            _adService = adService;
+            _pauseService = pauseService;
             _lastWeaponSelectedSound = soundStorage.Get(SoundTypeId.SelectedWeapon);
             _chooseWeaponSound = soundStorage.Get(SoundTypeId.ChooseWeapon);
             _weaponIcons = provider.Get().PopupIcons;
@@ -55,30 +68,59 @@ namespace CodeBase.UI.Windows.Popup
         private void Awake()
         {
             DisableAllGunIcons();
-            
+
             DisableAllWhiteFrames();
-            
+
             AnimateMainWeaponText();
         }
 
         private void OnEnable()
         {
+            WebApplication.InBackgroundChangeEvent += OnFocusChanged;
+            Application.focusChanged += OnFocusChanged;
             _adButton.onClick.AddListener(OnAdClicked);
-            _adButton.enabled = true;
             List<WeaponSelectorView> randomIcons = GetRandomWeaponIcons(3);
             EnableRandomIcons(randomIcons);
+            _adButton.enabled = true;
+            _hasFocus = Application.isFocused;
+            _canvas.enabled = true;
+            _adButton.image.DOFade(0, 0).SetUpdate(true);
+            _canvasGroup.DOFade(1f, _canvasFadeDuration)
+                .OnComplete(InitTimer).SetUpdate(true);
         }
 
         private void OnDisable()
         {
+            Application.focusChanged -= OnFocusChanged;
+            WebApplication.InBackgroundChangeEvent -= OnFocusChanged;
             _adButton.onClick.RemoveListener(OnAdClicked);
+            _canvasGroup.DOFade(0f, _canvasNonFadeDuration)
+                .OnComplete(() =>
+                {
+                    _pauseService.UnPause();
+                    _canvas.enabled = false;
+                })
+                .SetUpdate(true);
+            
             StartChooseRandomWeapon().Forget();
+        }
+
+        private void OnFocusChanged(bool hasFocus)
+        {
+            _hasFocus = hasFocus;
+        }
+
+        private async void InitTimer()
+        {
+            _adButton.image.DOFade(1, 0.5f).SetUpdate(true);
+            await _popupTimerService.Init();
         }
 
         private void AnimateMainWeaponText()
         {
+            var targetColor = new Color(_color.r, _color.g, _color.b, _mainWeaponText.color.a);
             _mainWeaponText
-                .DOColor(new Color(_color.r, _color.g, _color.b, _mainWeaponText.color.a), 0.5f)
+                .DOColor(targetColor, 0.5f)
                 .SetLoops(-1, LoopType.Yoyo).SetUpdate(true);
         }
 
@@ -120,9 +162,14 @@ namespace CodeBase.UI.Windows.Popup
         {
             for (int i = 0; i < _chooseCycle; i++)
             {
-                if(_lastWeaponSelected || !gameObject.activeSelf)
-                    break;
+                while (_adService.IsAdEnabled || !_hasFocus)
+                {
+                    await UniTask.Yield();
+                }
                 
+                if (_lastWeaponSelected || !gameObject.activeSelf)
+                    break;
+
                 WeaponSelectorView currentWeaponView = await GetRandomWeaponView();
 
                 if (_lastWeaponSelectorView is not null &&
@@ -148,7 +195,7 @@ namespace CodeBase.UI.Windows.Popup
 
                 _chooseWeaponSound.Play();
 
-                await UniTask.WaitForSeconds(_chooseDuration);
+                await UniTask.WaitForSeconds(_chooseDuration, true);
             }
         }
 

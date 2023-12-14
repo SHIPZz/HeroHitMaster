@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Character.Players.Shoot;

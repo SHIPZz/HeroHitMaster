@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
-using CodeBase.Services.Ad;
 using CodeBase.Services.Storages.Character;
 using UnityEngine;
 using Zenject;
@@ -13,11 +12,13 @@ namespace CodeBase.UI.Windows.Death
     {
         private readonly WindowService _windowService;
         private readonly DeathView _deathView;
-        private PlayerHealth _playerHealth;
         private readonly List<PlayerHealth> _playerHealths = new();
+        private PlayerHealth _playerHealth;
         private bool _isOpened;
 
-        public DeathPresenter(WindowService windowService, DeathView deathView, IPlayerStorage playerStorage)
+        public DeathPresenter(WindowService windowService, 
+            DeathView deathView, 
+            IPlayerStorage playerStorage)
         {
             playerStorage.GetAll().ForEach(x => _playerHealths.Add(x.GetComponent<PlayerHealth>()));
             _windowService = windowService;
@@ -52,6 +53,7 @@ namespace CodeBase.UI.Windows.Death
         private void OnPlayerRecovered(int i)
         {
             _deathView.DisableAdButton();
+            _windowService.OpenQuickly(WindowTypeId.Hud);
             _isOpened = false;
         }
 
@@ -62,10 +64,7 @@ namespace CodeBase.UI.Windows.Death
 
             _isOpened = true;
             
-            _windowService.CloseAll(() =>
-            {
-                _windowService.Open(WindowTypeId.Death, () => _isOpened = false);
-            });
+            _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Death, () => _isOpened = false));
         }
     }
 }

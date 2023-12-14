@@ -45,13 +45,13 @@ namespace CodeBase.Infrastructure
 
             _tween?.Kill();
             _tween = _canvasGroup
-                .DOFade(0, CloseDuration).SetUpdate(true)
+                .DOFade(0, CloseDuration)
                 .OnComplete(() =>
                 {
                     _canvas.enabled = false;
                     callback?.Invoke();
                     Closed?.Invoke();
-                });
+                }).SetUpdate(true);
         }
     }
 }

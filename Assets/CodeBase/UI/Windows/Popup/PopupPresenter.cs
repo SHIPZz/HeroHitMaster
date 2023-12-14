@@ -52,11 +52,13 @@ namespace CodeBase.UI.Windows.Popup
         {
             _pauseService.Pause();
             _windowService.Close(WindowTypeId.Play);
-            _windowService.Open(WindowTypeId.Popup);
+            _windowService.OpenQuickly(WindowTypeId.Popup);
         }
 
         private void ShowAd()
         {
+            _pauseService.Pause();
+            
             _adService.PlayLongAd(null, EndCallback);
         }
 
@@ -64,6 +66,7 @@ namespace CodeBase.UI.Windows.Popup
         {
             await _popupInfoView.StartChooseRandomWeapon();
             _windowService.CloseAll();
+            _pauseService.UnPause();
             _windowService.Open(WindowTypeId.Play);
         }
     }

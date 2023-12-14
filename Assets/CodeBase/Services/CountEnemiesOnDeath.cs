@@ -10,12 +10,13 @@ namespace CodeBase.Services
         private List<Enemy> _enemies = new();
 
         public int Quantity { get; private set; }
-
-        private List<Enemy> _killedEnemies = new();
+        
+        public int AllEnemyCount { get; private set; }
 
         public void Init(List<Enemy> enemies)
         {
             _enemies = enemies;
+            AllEnemyCount = _enemies.Count;
             
             foreach (Enemy enemy in _enemies)
             {
@@ -37,10 +38,6 @@ namespace CodeBase.Services
 
         private void Count(Enemy enemy)
         {
-            if (_killedEnemies.Contains(enemy))
-                return;
-
-            _killedEnemies.Add(enemy);
             Quantity++;
         }
     }

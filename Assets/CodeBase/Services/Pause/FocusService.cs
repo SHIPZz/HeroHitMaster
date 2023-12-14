@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Agava.WebUtility;
 using CodeBase.Enums;
+using CodeBase.Services.Ad;
 using CodeBase.Services.Providers;
 using CodeBase.UI.Windows;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -17,9 +19,11 @@ namespace CodeBase.Services.Pause
         
         private readonly IPauseService _pauseService;
         private readonly List<Window> _allWindows;
-        
-        public FocusService(IPauseService pauseService, WindowProvider windowProvider)
+        private readonly IAdService _adService;
+
+        public FocusService(IPauseService pauseService, WindowProvider windowProvider, IAdService adService)
         {
+            _adService = adService;
             _pauseService = pauseService;
             _allWindows = windowProvider.Windows.Values.ToList();
         }
@@ -28,6 +32,8 @@ namespace CodeBase.Services.Pause
         {
             Application.focusChanged += OnFocusChanged;
             WebApplication.InBackgroundChangeEvent += OnFocusChanged;
+            AudioListener.pause = false;
+            AudioListener.volume = AudioUnmuteVolume;
         }
 
         public void Dispose()
@@ -36,8 +42,11 @@ namespace CodeBase.Services.Pause
             WebApplication.InBackgroundChangeEvent -= OnFocusChanged;
         }
 
-        private void OnFocusChanged(bool hasFocus)
+        private async void OnFocusChanged(bool hasFocus)
         {
+            while (_adService.IsAdEnabled) 
+                await UniTask.Yield();
+
             if (!hasFocus)
                 HandleFocusLost();
             else
@@ -64,6 +73,20 @@ namespace CodeBase.Services.Pause
             {
                 case WindowTypeId.Pause:
                     MuteAudio(false);
+                    break;
+                
+                case WindowTypeId.Shop:
+                    MuteAudio(false);
+                    break;
+                
+                case WindowTypeId.Popup:
+                    MuteAudio(false);
+                    _pauseService.Pause();
+                    break;
+
+                case WindowTypeId.Hud:
+                    MuteAudio(false);
+                    _pauseService.UnPause();
                     break;
                 
                 case WindowTypeId.Play:

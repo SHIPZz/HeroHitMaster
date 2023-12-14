@@ -67,10 +67,8 @@ namespace CodeBase.Installers
             yield return YandexGamesSdk.Initialize(() => _initialized = true);
         }
 
-        private void BindAdInvoker()
-        {
+        private void BindAdInvoker() =>
             Container.Bind<IAdInvokerService>().To<AdInvokerService>().AsSingle();
-        }
 
         private void BindPauseService() =>
             Container.Bind<IPauseService>()
@@ -85,14 +83,11 @@ namespace CodeBase.Installers
         private void BindSaveSystem()
         {
             if (PlayerAccount.IsAuthorized)
-                Container.Bind<ISaveSystem>()
-                    .To<YandexSaveSystem>()
-                    .AsSingle();
+                Container.Bind<ISaveSystem>().To<YandexSaveSystem>().AsSingle();
             else
-                Container.Bind<ISaveSystem>()
-                    .To<PlayerPrefsSaveSystem>()
-                    .AsSingle();
+                Container.Bind<ISaveSystem>().To<PlayerPrefsSaveSystem>().AsSingle();
         }
+
 
         private void BindStateFactory() =>
             Container

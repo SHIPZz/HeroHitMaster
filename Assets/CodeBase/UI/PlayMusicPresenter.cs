@@ -24,17 +24,19 @@ namespace CodeBase.UI
         
         public void Initialize()
         {
-            _deathWindow.StartedToOpen += _music.Stop;
+            _deathWindow.StartedToOpen += _music.Pause;
             _victoryWindow.StartedToOpen += _music.Stop;
         }
 
         public void Dispose()
         {
-            _deathWindow.StartedToOpen -= _music.Stop;
+            _deathWindow.StartedToOpen -= _music.Pause;
             _victoryWindow.StartedToOpen -= _music.Stop;
         }
 
-        public void Run() => 
-            _music.Play();
+        public void Run()
+        {
+            // _music.Play();
+        }
     }
 }
