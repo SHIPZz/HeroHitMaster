@@ -7,6 +7,7 @@ using CodeBase.Gameplay.MaterialChanger;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Providers;
 using CodeBase.UI.Windows;
+using CodeBase.UI.Windows.Popup;
 using DG.Tweening;
 
 namespace CodeBase.UI.LevelSlider
@@ -20,11 +21,14 @@ namespace CodeBase.UI.LevelSlider
         private List<Enemy> _enemies = new();
         private PlayerHealth _player;
         private readonly Window _pauseWindow;
+        private readonly PopupTimerService _popupTimerService;
 
         public LevelSliderPresenter(LevelSliderView levelSliderView,
             WindowProvider windowProvider,
-            IProvider<PlayerProvider> provider)
+            IProvider<PlayerProvider> provider,
+            PopupTimerService popupTimerService)
         {
+            _popupTimerService = popupTimerService;
             _playerProvider = provider.Get();
             _playerProvider.Changed += SetPlayer;
             _levelSliderView = levelSliderView;
@@ -37,6 +41,7 @@ namespace CodeBase.UI.LevelSlider
         {
             _enemies = enemies;
             SubscribeToEnemyEvents();
+            _popupTimerService.Initialized += _levelSliderView.Disable;
             _deathWindow.StartedToOpen += _levelSliderView.Disable;
             _victoryWindow.StartedToOpen += _levelSliderView.Disable;
             _pauseWindow.StartedToOpen += _levelSliderView.Disable;
@@ -48,6 +53,7 @@ namespace CodeBase.UI.LevelSlider
         {
             UnsubscribeFromEnemyEvents();
             _deathWindow.StartedToOpen -= _levelSliderView.Disable;
+            _popupTimerService.Initialized -= _levelSliderView.Disable;
             _player.Recovered -= _levelSliderView.Enable;
             _playerProvider.Changed -= SetPlayer;
             _pauseWindow.Closed -= _levelSliderView.Enable;

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.Character.PlayerSelection;
 using CodeBase.Gameplay.LoadNextLevel;
-using CodeBase.Services.Factories;
-using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.UI;
 using CodeBase.UI.LevelSlider;
@@ -10,7 +8,6 @@ using CodeBase.UI.ShopScrollRects;
 using CodeBase.UI.ShopScrollRects.ShopScrollUnderlines;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
-using CodeBase.UI.Weapons.ShopWeapons;
 using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Audio;
 using CodeBase.UI.Windows.Authorize;
@@ -61,6 +58,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private HudView _hudView;
         [SerializeField] private PauseWindowView _pauseWindowView;
         [SerializeField] private PlayWindowView _playWindowView;
+        [SerializeField] private PopupTimerService _popupTimerService;
         
         
         public override void InstallBindings()
@@ -149,6 +147,7 @@ namespace CodeBase.Installers.UI
         {
             Container.BindInstance(_popupInfoView);
             Container.BindInterfacesAndSelfTo<PopupPresenter>().AsSingle();
+            Container.BindInstance(_popupTimerService);
         }
 
         private void BindLevelSliderUI()
