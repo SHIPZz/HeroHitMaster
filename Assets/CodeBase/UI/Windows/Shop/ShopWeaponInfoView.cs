@@ -6,6 +6,8 @@ using CodeBase.Services.Providers;
 using CodeBase.Services.Storages.Sound;
 using CodeBase.UI.Weapons;
 using DG.Tweening;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +17,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace CodeBase.UI.Windows.Shop
 {
-    public class ShopWeaponInfoView : MonoBehaviour
+    public class ShopWeaponInfoView : SerializedMonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private TextMeshProUGUI _price;
@@ -29,6 +31,7 @@ namespace CodeBase.UI.Windows.Shop
         [SerializeField] private float _targetScaleDuration = 0.3f;
         [SerializeField] private Transform _effectPosition;
         [SerializeField] private I2.Loc.Localize _purchasedTextLocalize;
+        [OdinSerialize] private Dictionary<TextMeshProUGUI, Image> _priceImages;
 
         private AudioSource _purchasedWeaponSound;
 
@@ -146,6 +149,8 @@ namespace CodeBase.UI.Windows.Shop
         public void SetMoneyWeaponPriceInfo(WeaponData weaponData, bool isVisible)
         {
             _purchasedTextLocalize.OnLocalize(true);
+            _priceImages[_adPrice].gameObject.SetActive(false);
+            _priceImages[_price].gameObject.SetActive(true);
 
             if (!isVisible)
             {
@@ -224,6 +229,8 @@ namespace CodeBase.UI.Windows.Shop
         private void SetAdWeaponPriceInfo(WeaponData weaponData, bool isBought, int watchedAds)
         {
             _purchasedTextLocalize.OnLocalize(true);
+            _priceImages[_price].gameObject.SetActive(false);
+            _priceImages[_adPrice].gameObject.SetActive(true);
 
             if (isBought)
             {
