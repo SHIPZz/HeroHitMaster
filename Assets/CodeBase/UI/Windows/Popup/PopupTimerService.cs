@@ -31,8 +31,6 @@ namespace CodeBase.UI.Windows.Popup
         private bool _isDisabled;
         private WindowService _windowService;
 
-        public event Action Initialized;
-
         [Inject]
         private void Construct(ISoundStorage soundStorage, PopupInfoView popupInfoView, 
             IPauseService pauseService, WindowService windowService)
@@ -49,7 +47,6 @@ namespace CodeBase.UI.Windows.Popup
 
         private void OnEnable()
         {
-            Initialized?.Invoke();
             _timerText.text = _startTime.ToString(CultureInfo.InvariantCulture);
             _popupInfoView.AdButtonClicked += StopTimer;
             _hasFocus = Application.isFocused;
