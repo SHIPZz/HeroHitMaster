@@ -37,6 +37,12 @@ namespace CodeBase.UI.LevelSlider
             _pauseWindow = windowProvider.Windows[WindowTypeId.Pause];
         }
 
+        public void Run()
+        {
+            _levelSliderView.gameObject.SetActive(true);
+            _levelSliderView.transform.DOScale(1, 1f).SetUpdate(true);
+        }
+
         public void Init(List<Enemy> enemies)
         {
             _enemies = enemies;
@@ -63,9 +69,9 @@ namespace CodeBase.UI.LevelSlider
 
         private void InitView()
         {
-            _levelSliderView.gameObject.SetActive(true);
             _levelSliderView.SetMaxValue(_enemies.Count);
             _levelSliderView.transform.DOScale(0, 0);
+            _levelSliderView.gameObject.SetActive(false);
         }
 
         private void SetPlayer(Player player)
@@ -73,9 +79,6 @@ namespace CodeBase.UI.LevelSlider
             _player = player.GetComponent<PlayerHealth>();
             _player.Recovered += _levelSliderView.Enable;
         }
-
-        public void Run() =>
-            _levelSliderView.transform.DOScale(1, 1f).SetUpdate(true);
 
         private void SubscribeToEnemyEvents()
         {

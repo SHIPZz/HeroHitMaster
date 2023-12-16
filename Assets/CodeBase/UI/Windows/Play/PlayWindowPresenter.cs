@@ -65,11 +65,11 @@ namespace CodeBase.UI.Windows.Play
             while (_popupInfoView != null && _popupInfoView.isActiveAndEnabled)
                 await UniTask.Yield();
 
-            if (_popupInfoView != null)
-            {
-                _windowService.Open(WindowTypeId.Play);
-                _pauseService.UnPause();
-            }
+            if (_popupInfoView == null)
+                return;
+            
+            _windowService.Open(WindowTypeId.Play);
+            _pauseService.UnPause();
         }
     }
 }

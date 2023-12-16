@@ -51,7 +51,6 @@ namespace CodeBase.Installers.UI
         [SerializeField] private PlayButtonView _playButtonView;
         [SerializeField] private RestartButtonView _restartButtonView;
         [SerializeField] private ContinueADButtonView _continueADButtonView;
-        [SerializeField] private GameOverView _gameOverView;
         [SerializeField] private AuthorizeWindowView _authorizeWindowView;
         [SerializeField] private AccuracyLeaderboard _accuracyLeaderboard;
         [SerializeField] private AccuracyLeaderboardOpenerButton _accuracyLeaderboardOpenerButton;
@@ -59,6 +58,7 @@ namespace CodeBase.Installers.UI
         [SerializeField] private PauseWindowView _pauseWindowView;
         [SerializeField] private PlayWindowView _playWindowView;
         [SerializeField] private PopupTimerService _popupTimerService;
+        [SerializeField] private GameOverView _gameOverView;
         
         
         public override void InstallBindings()

@@ -8,6 +8,7 @@ using CodeBase.Services.Storages.Character;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Windows;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace CodeBase.Services.Cheats
@@ -51,6 +52,11 @@ namespace CodeBase.Services.Cheats
             if (Input.GetKeyDown(KeyCode.F9))
             {
                 _adService.PlayShortAd(StartCallback, OnEndCallback);
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                SceneManager.LoadScene(15);
             }
 
             if (Input.GetKeyDown(KeyCode.F10))
