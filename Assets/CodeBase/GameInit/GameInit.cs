@@ -146,7 +146,7 @@ namespace CodeBase.GameInit
 
         private async void InitMainCanvas()
         {
-            while (_enemyProvider.Enemies.Count(x => x.gameObject.activeSelf) == 0)
+            while (_enemyProvider.Enemies.Count(x => x != null && x.gameObject.activeSelf) == 0)
             {
                 await UniTask.Yield();
             }
