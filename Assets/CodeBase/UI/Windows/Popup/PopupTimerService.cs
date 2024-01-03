@@ -90,6 +90,9 @@ namespace CodeBase.UI.Windows.Popup
                 await UniTask.Delay(TimeSpan.FromSeconds(CountdownInterval), true);
                 FadeInOut(_whiteFrame, _timerText, FadeDuration, false);
 
+                if(_isDisabled)
+                    break;
+                
                 if (_startTime == 0)
                 {
                     _timerTicking.Stop();
@@ -101,6 +104,7 @@ namespace CodeBase.UI.Windows.Popup
                     _pauseService.UnPause();
                 }
 
+                
                 await UniTask.Delay(TimeSpan.FromSeconds(CountdownInterval), true);
             }
         }

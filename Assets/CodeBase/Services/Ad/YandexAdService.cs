@@ -42,14 +42,12 @@ namespace CodeBase.Services.Ad
             AudioListener.volume = 1f;
             AdFinished?.Invoke();
             IsAdEnabled = false;
-            _pauseService.UnPause();
         }
 
         private void OnOpenCallback(Action startCallback)
         {
             IsAdEnabled = true;
             startCallback?.Invoke();
-            _pauseService.Pause();
             AudioListener.volume = 0f;
         }
     }
