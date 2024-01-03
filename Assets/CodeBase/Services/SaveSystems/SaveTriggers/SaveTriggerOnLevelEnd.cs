@@ -3,6 +3,7 @@ using CodeBase.Constants;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Collision;
 using CodeBase.ScriptableObjects.Weapon;
+using CodeBase.Services.Ad;
 using CodeBase.Services.Data;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
@@ -23,6 +24,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         private WeaponStaticDataService _weaponStaticDataService;
         private Wallet _wallet;
         private IWorldDataService _worldDataService;
+        private IAdInvokerService _invokerService;
 
         public event Action PlayerEntered;
         public event Action LastLevelAchieved;
@@ -31,8 +33,11 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         private void Construct(IPauseService pauseService, 
        IWorldDataService worldDataService,
             Level level,
-            WeaponStaticDataService weaponStaticDataService, Wallet wallet)
+            WeaponStaticDataService weaponStaticDataService, 
+       Wallet wallet,
+       IAdInvokerService invokerService)
         {
+            _invokerService = invokerService;
             _worldDataService = worldDataService;
             _wallet = wallet;
             _weaponStaticDataService = weaponStaticDataService;
@@ -70,6 +75,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             }
 
             _worldDataService.Save();
+            _invokerService.Invoke();
             PlayerEntered?.Invoke();
             _pauseService.Pause();
         }

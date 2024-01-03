@@ -8,12 +8,14 @@ using Zenject;
 
 namespace CodeBase.Gameplay.ExplosionBarrel
 {
+    [RequireComponent(typeof(KillAllEnemiesOnExlposionBarrel))]
     public class ExplosionBarrel : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _triggerObserver;
 
         private ParticleSystem _explosionEffect;
         private AudioSource _explosionSound;
+        private KillAllEnemiesOnExlposionBarrel _killAllEnemiesOnExlposion;
 
         public event Action Exploded;
         public event Action StartedExplode;
@@ -25,6 +27,9 @@ namespace CodeBase.Gameplay.ExplosionBarrel
             _explosionSound = soundStorage.Get(SoundTypeId.BarrelExplosion);
         }
 
+        private void Awake() => 
+            _killAllEnemiesOnExlposion = GetComponent<KillAllEnemiesOnExlposionBarrel>();
+
         private void OnEnable() =>
             _triggerObserver.CollisionEntered += OnCollisionEntered;
 
@@ -33,6 +38,9 @@ namespace CodeBase.Gameplay.ExplosionBarrel
 
         private void OnCollisionEntered(UnityEngine.Collision collision)
         {
+            if (_killAllEnemiesOnExlposion.HasInactiveEnemies)
+                return;
+
             StartedExplode?.Invoke();
             _explosionEffect.transform.position = transform.position;
             _explosionEffect.Play();

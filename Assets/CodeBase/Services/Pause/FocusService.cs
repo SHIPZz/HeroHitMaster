@@ -32,6 +32,7 @@ namespace CodeBase.Services.Pause
         {
             Application.focusChanged += OnFocusChanged;
             WebApplication.InBackgroundChangeEvent += OnFocusChanged;
+            _adService.AdFinished += HandleFocusGained;
             AudioListener.pause = false;
             AudioListener.volume = AudioUnmuteVolume;
         }
@@ -39,6 +40,7 @@ namespace CodeBase.Services.Pause
         public void Dispose()
         {
             Application.focusChanged -= OnFocusChanged;
+            _adService.AdFinished -= HandleFocusGained;
             WebApplication.InBackgroundChangeEvent -= OnFocusChanged;
         }
 
@@ -59,7 +61,7 @@ namespace CodeBase.Services.Pause
             MuteAudio(true);
         }
 
-        private void HandleFocusGained()
+        public void HandleFocusGained()
         {
             foreach (Window window in _allWindows.Where(window => window.gameObject.activeSelf))
             {
@@ -92,6 +94,10 @@ namespace CodeBase.Services.Pause
                 case WindowTypeId.Play:
                     MuteAudio(false);
                     _pauseService.UnPause();
+                    break;
+                
+                default:
+                    MuteAudio(false);
                     break;
             }
         }

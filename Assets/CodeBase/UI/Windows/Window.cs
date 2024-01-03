@@ -31,7 +31,7 @@ namespace CodeBase.UI.Windows
 
             gameObject.SetActive(true);
 
-            _tween?.Kill();
+            _tween?.Kill(true);
             _tween = gameObject.transform
                 .DOScaleX(_targetScaleX, 0)
                 .OnComplete(() => Opened?.Invoke()).SetUpdate(true).SetAutoKill(true);
@@ -43,7 +43,7 @@ namespace CodeBase.UI.Windows
 
             gameObject.SetActive(true);
 
-            _tween?.Kill();
+            _tween?.Kill(true);
             _tween = gameObject.transform
                 .DOScaleX(_targetScaleX, _targetOpenDuration)
                 .OnComplete(() => Opened?.Invoke()).SetUpdate(true).SetAutoKill(true);
@@ -51,7 +51,7 @@ namespace CodeBase.UI.Windows
 
         public void Close(bool withAnimation)
         {
-            _tween?.Kill();
+            _tween?.Kill(true);
             
             if (!withAnimation)
             {

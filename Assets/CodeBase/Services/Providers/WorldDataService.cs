@@ -22,7 +22,6 @@ namespace CodeBase.Services.Providers
 
         public async UniTask Load()
         {
-            Debug.Log(_saveSystem.GetType().Name + " SAVE SYSTEM");
             WorldData = await _saveSystem.Load();
         }
 

@@ -119,7 +119,7 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindFocusService() =>
             Container
-                .BindInterfacesTo<FocusService>()
+                .BindInterfacesAndSelfTo<FocusService>()
                 .AsSingle();
 
         private void BindGamePartsInitializers()

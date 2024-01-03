@@ -66,6 +66,7 @@ namespace CodeBase.UI.Weapons
 
         public void SetBoughtMoneyWeapon()
         {
+            SetWeapon(_lastWeaponId, false);
             SetLastNotPopupWeaponToData();
         }
 

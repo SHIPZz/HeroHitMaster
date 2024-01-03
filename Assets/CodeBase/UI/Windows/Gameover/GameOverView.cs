@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -15,16 +16,15 @@ namespace CodeBase.UI.Windows.Gameover
         [SerializeField] private float _disableDelay = 5f;
 
         public event Action Disabled;
-        
-        public void Init()
+
+        public async void Init()
         {
             _background.DOFade(_targetAlpha, _showUpDuration).SetUpdate(true);
             _gameFinishText.DOFade(_targetAlpha, _showUpDuration).SetUpdate(true);
-            
-            DOTween
-                .Sequence()
-                .AppendInterval(_disableDelay)
-                .OnComplete(() => Disabled?.Invoke()).SetUpdate(true);
+
+            await UniTask.WaitForSeconds(_disableDelay);
+
+            Disabled?.Invoke();
         }
     }
 }

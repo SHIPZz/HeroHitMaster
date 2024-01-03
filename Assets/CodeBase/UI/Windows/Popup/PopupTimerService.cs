@@ -63,6 +63,7 @@ namespace CodeBase.UI.Windows.Popup
             Application.focusChanged -= OnFocusChanged;
             WebApplication.InBackgroundChangeEvent -= OnFocusChanged;
             _popupInfoView.AdButtonClicked -= StopTimer;
+            _isDisabled = true;
         }
 
         public async UniTask Init()
@@ -72,7 +73,7 @@ namespace CodeBase.UI.Windows.Popup
             _pauseService.Pause();
             _timerTicking.Play();
 
-            while (_startTime != 0 && !_isDisabled)
+            while (_startTime != 0 || !_isDisabled)
             {
                 _pauseService.Pause();
                 

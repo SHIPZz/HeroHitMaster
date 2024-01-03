@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Services.Providers;
+using UnityEngine;
 
 namespace CodeBase.UI.Windows
 {
@@ -41,6 +42,7 @@ namespace CodeBase.UI.Windows
 
         public void CloseAll(Action callback)
         {
+            
             foreach (var window in _windows.Values)
                 window.Close(false);
 

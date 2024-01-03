@@ -38,7 +38,7 @@ namespace CodeBase.Infrastructure
             _canvasGroup.alpha = 1;
         }
 
-        public async void Hide(Action callback)
+        public async void Hide(Action callback = null)
         {
             while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
                 await UniTask.Yield();

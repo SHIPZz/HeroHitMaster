@@ -26,7 +26,7 @@ namespace CodeBase.Traps.Swing
                 return;
         
             enemy.GetComponent<EnemyFollower>().Block();
-            Vector3 pushDirection = (enemy.transform.position - transform.position).normalized;
+            Vector3 pushDirection = (enemy.transform.position - transform.localPosition).normalized;
             enemy.gameObject.AddComponent<Rigidbody>();
             PushEnemy(enemy, pushDirection);
             DOTween.Sequence().AppendInterval(KillDelay).OnComplete(enemy.Explode);

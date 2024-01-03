@@ -11,6 +11,7 @@ namespace CodeBase.Gameplay.Character.Players
     public class RotatePlayerOnTriggerEnter : MonoBehaviour
     {
         [SerializeField] private Transform _targetAngleTransform;
+        [SerializeField] private float _rotateTime = 0.3f;
 
         private UnityEngine.Camera _camera;
         private TriggerObserver _triggerObserver;
@@ -50,12 +51,11 @@ namespace CodeBase.Gameplay.Character.Players
                 await UniTask.Yield();
             }
 
-            player.transform.DORotate(new Vector3(0, angle, 0), 0.3f);
-
+            player.transform.DORotate(new Vector3(0, angle, 0), _rotateTime).SetUpdate(true);
             Transform cameraRotator = _cameraProvider.Get().Rotator;
 
             cameraRotator.DOLocalRotate(new Vector3(cameraRotator.eulerAngles.x, angle, cameraRotator.eulerAngles.z),
-                0.3f);
+                _rotateTime).SetUpdate(true);
         }
     }
 }

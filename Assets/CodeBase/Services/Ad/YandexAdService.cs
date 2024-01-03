@@ -13,6 +13,7 @@ namespace CodeBase.Services.Ad
             _pauseService = pauseService;
 
         public bool IsAdEnabled { get; private set; }
+        public event Action AdFinished;
 
         public void PlayShortAd(Action startCallback, Action<bool> onCloseCallback) => 
             InterstitialAd.Show(() =>  OnShortAdStartCallback(startCallback), closed => OnShortAdCloseCallback(onCloseCallback, closed));
@@ -28,6 +29,7 @@ namespace CodeBase.Services.Ad
         {
             onCloseCallback?.Invoke(closed);
             IsAdEnabled = false;
+            AdFinished?.Invoke();
             _pauseService.UnPause();
         }
 
@@ -38,6 +40,7 @@ namespace CodeBase.Services.Ad
         {
             endCallback?.Invoke();
             AudioListener.volume = 1f;
+            AdFinished?.Invoke();
             IsAdEnabled = false;
             _pauseService.UnPause();
         }

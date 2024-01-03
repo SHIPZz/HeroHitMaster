@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Character;
+using CodeBase.Infrastructure;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
@@ -21,11 +22,13 @@ namespace CodeBase.Services.Cheats
         private readonly IPauseService _pauseService;
         private readonly IPlayerStorage _playerStorage;
         private readonly WindowService _windowService;
+        private readonly  IGameStateMachine _gameStateMachine;
 
         public CheatService(IAdService adService, Wallet wallet, IWorldDataService worldDataService,
             IPauseService pauseService, IPlayerStorage playerStorage,
-            WindowService windowService)
+            WindowService windowService, IGameStateMachine gameStateMachine)
         {
+            _gameStateMachine = gameStateMachine;
             _windowService = windowService;
             _playerStorage = playerStorage;
             _pauseService = pauseService;
@@ -42,6 +45,13 @@ namespace CodeBase.Services.Cheats
                 UnityEngine.PlayerPrefs.DeleteAll();
                 UnityEngine.PlayerPrefs.Save();
                 
+            }
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                _worldDataService.WorldData.LevelData.Id++;
+                _worldDataService.Save();
+                _gameStateMachine.ChangeState<BootstrapState>();
             }
 
             if (Input.GetKeyDown(KeyCode.F4))

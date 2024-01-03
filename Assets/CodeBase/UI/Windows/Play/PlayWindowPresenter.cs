@@ -7,6 +7,7 @@ using CodeBase.Services.Providers;
 using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows.Popup;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Play
@@ -65,9 +66,6 @@ namespace CodeBase.UI.Windows.Play
             while (_popupInfoView != null && _popupInfoView.isActiveAndEnabled)
                 await UniTask.Yield();
 
-            if (_popupInfoView == null)
-                return;
-            
             _windowService.Open(WindowTypeId.Play);
             _pauseService.UnPause();
         }

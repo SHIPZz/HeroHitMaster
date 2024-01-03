@@ -21,7 +21,7 @@ namespace CodeBase.Services.Ad
             _adService = adService;
         }
         
-        public void Invoke(Action onCloseCallback)
+        public void Invoke(Action onCloseCallback = null)
         {
             if (_worldDataService.WorldData.LevelData.Id % TargetAdInvoke == 0)
             {
