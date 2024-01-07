@@ -14,17 +14,23 @@ namespace CodeBase.UI.Windows.Gameover
         [SerializeField] private float _targetAlpha = 1f;
         [SerializeField] private float _showUpDuration = 1.5f;
         [SerializeField] private float _disableDelay = 5f;
+        [SerializeField] private Button _continueButton;
 
         public event Action Disabled;
 
-        public async void Init()
+        private void OnEnable() =>
+            _continueButton.onClick.AddListener(Disable);
+
+        private void OnDisable() =>
+            _continueButton.onClick.RemoveListener(Disable);
+
+        public void Init()
         {
             _background.DOFade(_targetAlpha, _showUpDuration).SetUpdate(true);
             _gameFinishText.DOFade(_targetAlpha, _showUpDuration).SetUpdate(true);
-
-            await UniTask.WaitForSeconds(_disableDelay);
-
-            Disabled?.Invoke();
         }
+
+        private void Disable() =>
+            Disabled?.Invoke();
     }
 }

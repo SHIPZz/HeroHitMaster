@@ -10,7 +10,7 @@ namespace CodeBase.UI.Windows.Popup
 {
     public class PopupPresenter : IInitializable, IDisposable
     {
-        private const int TargetPopupLevelInvoke = 5;
+        private const int TargetPopupLevelInvoke = 4;
 
         private readonly PopupInfoView _popupInfoView;
         private readonly WindowService _windowService;

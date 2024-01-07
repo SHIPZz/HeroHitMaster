@@ -31,16 +31,17 @@ namespace CodeBase.Gameplay.ExplosionBarrel
             _killAllEnemiesOnExlposion = GetComponent<KillAllEnemiesOnExlposionBarrel>();
 
         private void OnEnable() =>
-            _triggerObserver.CollisionEntered += OnCollisionEntered;
+            _triggerObserver.CollisionEntered += OnKnifeEntered;
 
         private void OnDisable() =>
-            _triggerObserver.CollisionEntered -= OnCollisionEntered;
+            _triggerObserver.CollisionEntered -= OnKnifeEntered;
 
-        private void OnCollisionEntered(UnityEngine.Collision collision)
+        private void OnKnifeEntered(UnityEngine.Collision knife)
         {
             if (_killAllEnemiesOnExlposion.HasInactiveEnemies)
                 return;
 
+            knife.gameObject.SetActive(false);
             StartedExplode?.Invoke();
             _explosionEffect.transform.position = transform.position;
             _explosionEffect.Play();

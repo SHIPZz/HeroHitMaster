@@ -93,7 +93,6 @@ namespace CodeBase.Installers.GameInstaller
             BindExplosionBarrelsProvider();
             BindRotateCameraOnEnemyKill();
             BincCameraZoomer();
-            BindRotateCameraPresenter();
             BindLevel();
             BindPlaySoundOnFocusChanged();
             BindAdWatchCounter();
@@ -177,12 +176,7 @@ namespace CodeBase.Installers.GameInstaller
 
         private void BindLevel() =>
             Container.BindInstance(_level);
-
-        private void BindRotateCameraPresenter() =>
-            Container
-                .BindInterfacesAndSelfTo<RotateCameraPresenter>()
-                .AsSingle();
-
+        
         private void BincCameraZoomer()
         {
             BindAsSingle<CameraZoomer>();

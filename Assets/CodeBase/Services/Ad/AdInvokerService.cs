@@ -1,9 +1,7 @@
 ﻿using System;
-using CodeBase.Infrastructure;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Services.Ad
 {
@@ -13,6 +11,8 @@ namespace CodeBase.Services.Ad
         private readonly IAdService _adService;
         private readonly IWorldDataService _worldDataService;
         private readonly IPauseService _pauseService;
+        
+        public bool AdEnabled { get; private set; }
 
         public AdInvokerService(IWorldDataService worldDataService, IAdService adService, IPauseService pauseService)
         {
@@ -25,6 +25,7 @@ namespace CodeBase.Services.Ad
         {
             if (_worldDataService.WorldData.LevelData.Id % TargetAdInvoke == 0)
             {
+                AdEnabled = true;
                 _adService.PlayShortAd(StartCallback, closed => OnEndCallback(onCloseCallback, closed));
             }
         }
@@ -36,6 +37,7 @@ namespace CodeBase.Services.Ad
             
             _pauseService.UnPause();
             onCloseCallback?.Invoke();
+            AdEnabled = false;
             AudioListener.volume = 1;
         }
 

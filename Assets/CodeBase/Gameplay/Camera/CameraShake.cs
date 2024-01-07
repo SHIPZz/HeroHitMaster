@@ -10,6 +10,7 @@ namespace CodeBase.Gameplay.Camera
         [Header("Recoil")] [SerializeField] private float _tension = 10;
         [SerializeField] private float _damping = 10;
         [SerializeField] private float _impulse = 10;
+        [SerializeField] private float _resetSpeed = 7f;
 
         [Header("Noise")] private float _perlinNoiseTimeScale;
 
@@ -36,6 +37,8 @@ namespace CodeBase.Gameplay.Camera
             UpdateRecoil();
 
             _transform.localEulerAngles = _shakeAngles + _recoilAngles;
+            _shakeAngles = Vector3.Lerp(_shakeAngles, Vector3.zero,_resetSpeed * Time.deltaTime);
+            _recoilAngles = Vector3.Lerp(_recoilAngles, Vector3.zero,_resetSpeed * Time.deltaTime);
         }
         
         private void UpdateShake()

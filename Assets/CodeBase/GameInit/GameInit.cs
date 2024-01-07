@@ -18,6 +18,7 @@ using CodeBase.Services.Factories;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Character;
+using CodeBase.Services.UI;
 using CodeBase.UI.LevelSlider;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Weapons;
@@ -37,15 +38,12 @@ namespace CodeBase.GameInit
         private readonly IProvider<LocationTypeId, Transform> _locationProvider;
         private readonly IPlayerStorage _playerStorage;
         private readonly WeaponSelector _weaponSelector;
-        private readonly WalletPresenter _walletPresenter;
-        private readonly ShopWeaponPresenter _shopWeaponPresenter;
         private readonly List<EnemySpawner> _enemySpawners;
         private readonly EnemyConfigurator _enemyConfigurator = new();
         private readonly CountEnemiesOnDeath _countEnemiesOnDeath;
         private readonly LevelSliderPresenter _levelSliderPresenter;
         private readonly WaterSplashPoolInitializer _waterSplashPoolInitializer;
         private readonly CameraShakeMediator _cameraShakeMediator;
-        private readonly RotateCameraPresenter _rotateCameraPresenter;
         private readonly RotateCameraOnLastEnemyKilled _rotateCameraOnLastEnemyKilled;
         private readonly IProvider<CameraData> _cameraDataProvider;
         private readonly WeaponStaticDataService _weaponStaticDataService;
@@ -60,13 +58,11 @@ namespace CodeBase.GameInit
         };
 
         private readonly SetterWeaponToPlayerHand _setterWeaponToPlayerHand;
-        private readonly Canvas _mainUi;
-        private readonly ShopWeaponInfoView _shopWeaponInfoView;
-        private readonly Wallet _wallet;
         private readonly IWorldDataService _worldDataService;
         private readonly IEnemyProvider _enemyProvider;
         private readonly AccuracyCounter _accuracyCounter;
         private readonly EnemiesMovementInitializer _enemiesMovementInitializer;
+        private UIService _uiService;
 
 
         public GameInit(PlayerCameraFactory playerCameraFactory,
@@ -74,49 +70,39 @@ namespace CodeBase.GameInit
                 Transform> locationProvider,
             IPlayerStorage playerStorage,
             WeaponSelector weaponSelector,
-            WalletPresenter walletPresenter,
-            ShopWeaponPresenter shopWeaponPresenter,
             IProvider<List<EnemySpawner>> enemySpawnersProvider,
             CountEnemiesOnDeath countEnemiesOnDeath,
             LevelSliderPresenter levelSliderPresenter,
             WaterSplashPoolInitializer waterSplashPoolInitializer,
             CameraShakeMediator cameraShakeMediator,
-            RotateCameraPresenter rotateCameraPresenter,
             RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled,
             IProvider<CameraData> cameraDataProvider,
             WeaponStaticDataService weaponStaticDataService,
             KillActiveEnemiesOnPlayerRecover killActiveEnemiesOnPlayerRecover,
             PlayerSettings playerSettings,
             SetterWeaponToPlayerHand setterWeaponToPlayerHand,
-            Canvas mainUi,
-            ShopWeaponInfoView shopWeaponInfoView,
-            Wallet wallet,
             IWorldDataService worldDataService,
             IEnemyProvider enemyProvider,
             AccuracyCounter accuracyCounter,
-            EnemiesMovementInitializer enemiesMovementInitializer)
+            EnemiesMovementInitializer enemiesMovementInitializer,
+            UIService uiService)
         {
+            _uiService = uiService;
             _enemiesMovementInitializer = enemiesMovementInitializer;
             _accuracyCounter = accuracyCounter;
             _enemyProvider = enemyProvider;
             _worldDataService = worldDataService;
-            _wallet = wallet;
-            _shopWeaponInfoView = shopWeaponInfoView;
-            _mainUi = mainUi;
             _setterWeaponToPlayerHand = setterWeaponToPlayerHand;
             _playerSettings = playerSettings;
             _killActiveEnemiesOnPlayerRecover = killActiveEnemiesOnPlayerRecover;
             _weaponStaticDataService = weaponStaticDataService;
             _cameraDataProvider = cameraDataProvider;
             _rotateCameraOnLastEnemyKilled = rotateCameraOnLastEnemyKilled;
-            _rotateCameraPresenter = rotateCameraPresenter;
             _cameraShakeMediator = cameraShakeMediator;
             _waterSplashPoolInitializer = waterSplashPoolInitializer;
             _levelSliderPresenter = levelSliderPresenter;
             _countEnemiesOnDeath = countEnemiesOnDeath;
             _enemySpawners = enemySpawnersProvider.Get();
-            _shopWeaponPresenter = shopWeaponPresenter;
-            _walletPresenter = walletPresenter;
             _weaponSelector = weaponSelector;
             _playerCameraFactory = playerCameraFactory;
             _locationProvider = locationProvider;
@@ -127,22 +113,23 @@ namespace CodeBase.GameInit
         {
             LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
             YandexGamesSdk.GameReady();
+            YandexGamesSdk.CallbackLogging = false;
 
             WorldData worldData = _worldDataService.WorldData;
-            _mainUi.transform.SetParent(null);
             TranslateWeaponNames(worldData);
-
-            _shopWeaponInfoView.SetTranslatedNames(worldData.TranslatedWeaponNameData.Names);
             InitEnemiesAndObjectsWhoNeedEnemies();
             InitPlayerBeforeWeaponChoose(worldData.PlayerData);
+            InitUIService(worldData);
             Weapon weapon = await InitializeInitialWeapon(worldData.PlayerData.LastWeaponId);
             Player targetPlayer = InitPlayerAfterWeaponChoose(weapon);
-            InitializeUIPresenters(worldData.PlayerData);
             InitMainCanvas();
             InitializeCamera(targetPlayer, weapon);
             _waterSplashPoolInitializer.Init();
             _setterWeaponToPlayerHand.Init(weapon.WeaponTypeId);
         }
+
+        private void InitUIService(WorldData worldData) => 
+            _uiService.Init(worldData);
 
         private async void InitMainCanvas()
         {
@@ -151,7 +138,7 @@ namespace CodeBase.GameInit
                 await UniTask.Yield();
             }
 
-            _mainUi.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
+            _uiService.EnableMainUI();
         }
 
         private Player InitPlayerAfterWeaponChoose(Weapon weapon)
@@ -201,20 +188,12 @@ namespace CodeBase.GameInit
             _worldDataService.Save();
         }
 
-        private void InitializeUIPresenters(PlayerData playerData)
-        {
-            _walletPresenter.Init(playerData.Money);
-            _shopWeaponPresenter.Init(playerData.LastNotPopupWeaponId);
-        }
-
         private void InitializeCamera(Player player, Weapon weapon)
         {
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
-            var rotateCamera = playerCameraFollower.GetComponent<RotateCamera>();
-            _rotateCameraPresenter.Init(rotateCamera, player);
             _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());
             _cameraShakeMediator.Init(weapon);
-            _rotateCameraOnLastEnemyKilled.Init(rotateCamera.GetComponent<CameraData>());
+            _rotateCameraOnLastEnemyKilled.Init(playerCameraFollower.GetComponent<CameraData>());
         }
 
         private async UniTask<Weapon> InitializeInitialWeapon(WeaponTypeId weaponTypeId)

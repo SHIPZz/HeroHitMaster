@@ -13,16 +13,16 @@ namespace CodeBase.Gameplay.Camera
         private readonly UnityEngine.Camera _camera;
         private readonly CameraZoomer _cameraZoomer;
         private readonly List<ExplosionBarrel.ExplosionBarrel> _explosionBarrels;
-        private CameraData _cameraData;
 
         private bool _blockRotation;
         private Enemy _enemy;
         private Vector3 _lastEnemyPosition;
         private List<Enemy> _enemies;
+        private CameraData _cameraData;
         private readonly List<EnemyQuantityInZone> _enemyQuantityZones;
+        
         public bool IsRotating { get; private set; }
-
-
+        
         public RotateCameraOnLastEnemyKilled(CameraZoomer cameraZoomer,
             IProvider<List<ExplosionBarrel.ExplosionBarrel>> explosionBarrelProvider,
             EnemyQuantityZonesProvider enemyQuantityZonesProvider)
@@ -101,7 +101,7 @@ namespace CodeBase.Gameplay.Camera
             
             _cameraData.Camera.transform.DOLocalRotate(new Vector3(lastEulerAngles.x, angle, lastEulerAngles.z), 0.8f)
                 .SetEase(Ease.Flash)
-                .OnComplete(() => _cameraData.Camera.transform.DOLocalRotate(lastEulerAngles, 0.6f)
+                .OnComplete(() => _cameraData.Camera.transform.DOLocalRotate(Vector3.zero, 0.6f)
                     .OnComplete(() => IsRotating = false)
                     .SetEase(Ease.Flash));
         }

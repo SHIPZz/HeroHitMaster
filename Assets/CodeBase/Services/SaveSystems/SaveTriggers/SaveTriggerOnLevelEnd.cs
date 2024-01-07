@@ -9,6 +9,7 @@ using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.UI.Wallet;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -18,26 +19,23 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
     public class SaveTriggerOnLevelEnd : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _triggerObserver;
-        
+
         private IPauseService _pauseService;
         private Level _level;
         private WeaponStaticDataService _weaponStaticDataService;
         private Wallet _wallet;
         private IWorldDataService _worldDataService;
-        private IAdInvokerService _invokerService;
 
         public event Action PlayerEntered;
         public event Action LastLevelAchieved;
 
         [Inject]
-        private void Construct(IPauseService pauseService, 
-       IWorldDataService worldDataService,
+        private void Construct(IPauseService pauseService,
+            IWorldDataService worldDataService,
             Level level,
-            WeaponStaticDataService weaponStaticDataService, 
-       Wallet wallet,
-       IAdInvokerService invokerService)
+            WeaponStaticDataService weaponStaticDataService,
+            Wallet wallet)
         {
-            _invokerService = invokerService;
             _worldDataService = worldDataService;
             _wallet = wallet;
             _weaponStaticDataService = weaponStaticDataService;
@@ -45,14 +43,14 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             _pauseService = pauseService;
         }
 
-        private void Awake() => 
+        private void Awake() =>
             gameObject.layer = LayerId.SaveTrigger;
 
-        private void OnEnable() => 
+        private void OnEnable() =>
             _triggerObserver.Entered += OnPlayerEntered;
 
         private void OnDisable() =>
-            _triggerObserver.Entered -= OnPlayerEntered; 
+            _triggerObserver.Entered -= OnPlayerEntered;
 
         private void OnPlayerEntered(Collider player)
         {
@@ -63,7 +61,7 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
 
             if (currentWeapon.Price.PriceTypeId == PriceTypeId.Popup)
                 worldData.LevelData.LevelsWithPopupWeapon++;
-            
+
             _wallet.AddMoney(_level.Reward);
 
             if (SceneManager.sceneCountInBuildSettings <= worldData.LevelData.Id)
@@ -72,10 +70,10 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
                 _worldDataService.Save();
                 PlayerEntered = null;
                 LastLevelAchieved?.Invoke();
+                return;
             }
 
             _worldDataService.Save();
-            _invokerService.Invoke();
             PlayerEntered?.Invoke();
             _pauseService.Pause();
         }

@@ -13,7 +13,8 @@ namespace CodeBase.Infrastructure
         private readonly IPauseService _pauseService;
         private readonly IAdInvokerService _adInvokerService;
 
-        public LevelLoadState(ILoadingCurtain loadingCurtain, IPauseService pauseService, IAdInvokerService adInvokerService)
+        public LevelLoadState(ILoadingCurtain loadingCurtain, IPauseService pauseService,
+            IAdInvokerService adInvokerService)
         {
             _adInvokerService = adInvokerService;
             _pauseService = pauseService;
@@ -23,13 +24,19 @@ namespace CodeBase.Infrastructure
         public async void Enter(WorldData payload)
         {
             _loadingCurtain.Show(2f);
+            _adInvokerService.Invoke();
 
+            while (_adInvokerService.AdEnabled)
+                await UniTask.Yield();
+
+            payload.LevelData.Id = Mathf.Clamp(payload.LevelData.Id, 1, SceneManager.sceneCountInBuildSettings - 1);
+            
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(payload.LevelData.Id);
 
             while (!loadSceneAsync.isDone)
                 await UniTask.Yield();
 
-            _loadingCurtain.Hide();
+            _loadingCurtain.Hide(_pauseService.UnPause);
         }
     }
 }

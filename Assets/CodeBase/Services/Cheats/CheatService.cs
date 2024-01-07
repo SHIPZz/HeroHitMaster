@@ -5,6 +5,7 @@ using CodeBase.Infrastructure;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
+using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Character;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Windows;
@@ -22,7 +23,7 @@ namespace CodeBase.Services.Cheats
         private readonly IPauseService _pauseService;
         private readonly IPlayerStorage _playerStorage;
         private readonly WindowService _windowService;
-        private readonly  IGameStateMachine _gameStateMachine;
+        private readonly IGameStateMachine _gameStateMachine;
 
         public CheatService(IAdService adService, Wallet wallet, IWorldDataService worldDataService,
             IPauseService pauseService, IPlayerStorage playerStorage,
@@ -39,56 +40,56 @@ namespace CodeBase.Services.Cheats
 
         public void Tick()
         {
-            if (Input.GetKeyDown(KeyCode.F8))
-            {
-                _worldDataService.Reset();
-                UnityEngine.PlayerPrefs.DeleteAll();
-                UnityEngine.PlayerPrefs.Save();
-                
-            }
-
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                _worldDataService.WorldData.LevelData.Id++;
-                _worldDataService.Save();
-                _gameStateMachine.ChangeState<BootstrapState>();
-            }
-
-            if (Input.GetKeyDown(KeyCode.F4))
-            {
-                _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Popup));
-            }
-
-            if (Input.GetKeyDown(KeyCode.F9))
-            {
-                _adService.PlayShortAd(StartCallback, OnEndCallback);
-            }
-
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                SceneManager.LoadScene(15);
-            }
-
-            if (Input.GetKeyDown(KeyCode.F10))
-            {
-                _adService.PlayLongAd(StartCallback, OnEndCallback);
-            }
-
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                _playerStorage.CurrentPlayer.GetComponent<IDamageable>().TakeDamage(10000);
-            }
-            
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                _wallet.AddMoney(5000);
-            }
-
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                _worldDataService.Save();
-            }
+            // if (Input.GetKeyDown(KeyCode.F8))
+            // {
+            //     _worldDataService.Reset();
+            //     UnityEngine.PlayerPrefs.DeleteAll();
+            //     UnityEngine.PlayerPrefs.Save();
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.F))
+            // {
+            //     LevelData levelData = _worldDataService.WorldData.LevelData;
+            //     levelData.Id = Mathf.Clamp(levelData.Id++, 1, SceneManager.sceneCountInBuildSettings);
+            //     _worldDataService.Save();
+            //     _gameStateMachine.ChangeState<BootstrapState>(); 
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.F4))
+            // {
+            //     _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Popup));
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.F9))
+            // {
+            //     _adService.PlayShortAd(StartCallback, OnEndCallback);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.G))
+            // {
+            //     SceneManager.LoadScene(15);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.F10))
+            // {
+            //     _adService.PlayLongAd(StartCallback, OnEndCallback);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.K))
+            // {
+            //     _playerStorage.CurrentPlayer.GetComponent<IDamageable>().TakeDamage(10000);
+            // }
+            //
+            //
+            // if (Input.GetKeyDown(KeyCode.Y))
+            // {
+            //     _wallet.AddMoney(5000);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.K))
+            // {
+            //     _worldDataService.Save();
+            // }
         }
 
         private void OnEndCallback()

@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.Character.PlayerSelection;
 using CodeBase.Gameplay.LoadNextLevel;
 using CodeBase.Services.Providers;
+using CodeBase.Services.UI;
 using CodeBase.UI;
 using CodeBase.UI.LevelSlider;
 using CodeBase.UI.ShopScrollRects;
@@ -90,6 +91,12 @@ namespace CodeBase.Installers.UI
             BindAuthorizeUI();
             BindHudUI();
             BindPauseUI();
+            BindUIService();
+        }
+
+        private void BindUIService()
+        {
+            Container.Bind<UIService>().AsSingle();
         }
 
         private void BindPauseUI()

@@ -22,6 +22,7 @@ namespace CodeBase.UI.LevelSlider
         private PlayerHealth _player;
         private readonly Window _pauseWindow;
         private readonly PopupTimerService _popupTimerService;
+        private readonly Window _hudWindow;
 
         public LevelSliderPresenter(LevelSliderView levelSliderView,
             WindowProvider windowProvider,
@@ -35,6 +36,7 @@ namespace CodeBase.UI.LevelSlider
             _deathWindow = windowProvider.Windows[WindowTypeId.Death];
             _victoryWindow = windowProvider.Windows[WindowTypeId.Victory];
             _pauseWindow = windowProvider.Windows[WindowTypeId.Pause];
+            _hudWindow = windowProvider.Windows[WindowTypeId.Hud];
         }
 
         public void Run()
@@ -52,6 +54,7 @@ namespace CodeBase.UI.LevelSlider
             _victoryWindow.StartedToOpen += _levelSliderView.Disable;
             _pauseWindow.StartedToOpen += _levelSliderView.Disable;
             _pauseWindow.Closed += _levelSliderView.Enable;
+            _hudWindow.Opened += _levelSliderView.Enable;
             InitView();
         }
 
@@ -60,6 +63,7 @@ namespace CodeBase.UI.LevelSlider
             UnsubscribeFromEnemyEvents();
             _deathWindow.StartedToOpen -= _levelSliderView.Disable;
             _popupTimerService.Initialized -= _levelSliderView.Disable;
+            _hudWindow.Opened -= _levelSliderView.Enable;
             _player.Recovered -= _levelSliderView.Enable;
             _playerProvider.Changed -= SetPlayer;
             _pauseWindow.Closed -= _levelSliderView.Enable;
