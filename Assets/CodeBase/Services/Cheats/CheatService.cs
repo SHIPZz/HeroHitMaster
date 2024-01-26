@@ -40,12 +40,13 @@ namespace CodeBase.Services.Cheats
 
         public void Tick()
         {
-            // if (Input.GetKeyDown(KeyCode.F8))
-            // {
-            //     _worldDataService.Reset();
-            //     UnityEngine.PlayerPrefs.DeleteAll();
-            //     UnityEngine.PlayerPrefs.Save();
-            // }
+            if (Input.GetKeyDown(KeyCode.F8))
+            {
+                _worldDataService.Reset();
+                PlayerPrefs.DeleteAll();
+                PlayerPrefs.Save();
+            }
+            
             //
             // if (Input.GetKeyDown(KeyCode.F))
             // {

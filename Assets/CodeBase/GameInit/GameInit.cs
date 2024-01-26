@@ -145,6 +145,13 @@ namespace CodeBase.GameInit
         {
             PlayerTypeId targetPlayerId = _playerSettings.PlayerTypeIdsByWeapon[weapon.WeaponTypeId];
             Player targetPlayer = GetPlayerFromStorage(targetPlayerId);
+
+            foreach (Enemy enemy in _enemyProvider.Enemies.Where(enemy => Vector3.Distance(targetPlayer.transform.position, enemy.transform.position) <= 5f))
+            {
+                targetPlayer.transform.rotation = Quaternion.LookRotation(enemy.transform.forward);
+                return targetPlayer;
+            }
+            
             return targetPlayer;
         }
 

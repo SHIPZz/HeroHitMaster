@@ -27,8 +27,10 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
             Fired?.Invoke(_inputService.MousePosition);
         }
 
-        public void Block() =>
+        public void Block()
+        {
             _isBlocked = true;
+        }
 
         public void UnBlock() =>
             _isBlocked = false;

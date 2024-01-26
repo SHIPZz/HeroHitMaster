@@ -3075,6 +3075,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3346546093513028014, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3346546093513028014, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3662947020446384518, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -3287,6 +3295,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4841727718272158277, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: serializationData.Prefab
       value: 
@@ -3325,6 +3353,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4972331121382179875, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5333232423867466238, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
@@ -5698,6 +5746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 708310996}
+  _rotateTime: 0.3
 --- !u!114 &236286995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18949,6 +18998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 854270287}
+  _rotateTime: 0.3
 --- !u!114 &963837576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26782,6 +26832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 854270287}
+  _rotateTime: 0.3
 --- !u!114 &1354751589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30171,6 +30222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 236286993}
+  _rotateTime: 0.3
 --- !u!114 &1536213333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39067,6 +39119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 150237856}
+  _rotateTime: 0.3
 --- !u!114 &2057278713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57251,7 +57304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd6f83a5e548c6a60bd5a11e2bb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 3, z: 0}
+  _offset: {x: 0, y: 3.5, z: 0}
 --- !u!33 &8509096039549999644
 MeshFilter:
   m_ObjectHideFlags: 0

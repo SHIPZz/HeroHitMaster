@@ -33,7 +33,6 @@ namespace CodeBase.Infrastructure
         {
             _loadingSlider.value = 0;
             _canvas.enabled = true;
-            _tween?.Kill();
             _tween = _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
             _canvasGroup.alpha = 1;
         }
@@ -43,7 +42,6 @@ namespace CodeBase.Infrastructure
             while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
                 await UniTask.Yield();
 
-            _tween?.Kill();
             _tween = _canvasGroup
                 .DOFade(0, CloseDuration)
                 .OnComplete(() =>

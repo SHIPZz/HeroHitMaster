@@ -2,6 +2,7 @@
 using CodeBase.Enums;
 using CodeBase.Gameplay.Weapons;
 using CodeBase.Infrastructure;
+using CodeBase.Services.Ad;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.UI.Weapons;
@@ -20,14 +21,16 @@ namespace CodeBase.UI.Windows.Play
         private readonly PlayWindowView _playWindowView;
         private readonly WeaponProvider _weaponProvider;
         private readonly IPauseService _pauseService;
+        private readonly IAdInvokerService _adInvokerService;
 
         public PlayWindowPresenter(WindowService windowService,
             ILoadingCurtain loadingCurtain,
             PopupInfoView popupInfoView,
             IProvider<WeaponProvider> provider,
             PlayWindowView playWindowView,
-            IPauseService pauseService)
+            IPauseService pauseService,IAdInvokerService adInvokerService)
         {
+            _adInvokerService = adInvokerService;
             _pauseService = pauseService;
             _playWindowView = playWindowView;
             _weaponProvider = provider.Get();
@@ -63,10 +66,15 @@ namespace CodeBase.UI.Windows.Play
 
         private async void OnLoadingCurtainOnClosed()
         {
+            _adInvokerService.Invoke();
+
+            while (_adInvokerService.AdEnabled) 
+                await UniTask.Yield();
+
             while (_popupInfoView != null && _popupInfoView.isActiveAndEnabled)
                 await UniTask.Yield();
 
-            _windowService.Open(WindowTypeId.Play);
+            _windowService.Open(WindowTypeId.Play, _pauseService.UnPause);
             _pauseService.UnPause();
         }
     }

@@ -8,20 +8,15 @@ namespace CodeBase.Gameplay.Weapons
         public override async void Initialize()
         {
             ReturnBulletDelay = 10f;
-           await Init(WeaponTypeId);
+            await Init(WeaponTypeId);
         }
 
         public override void Shoot(Vector3 target, Vector3 initialPosition)
         {
             Bullet.Bullet bullet = _bulletStorage.Pop(WeaponTypeId);
-            bullet.StartMovement(target,initialPosition);
-            
-            DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() =>
-            {
-                bullet.transform.DOLocalRotate(Vector3.zero, 0f);
-                _bulletStorage.Push(bullet);
-            });
-            
+            bullet.StartMovement(target, initialPosition);
+
+            DOTween.Sequence().AppendInterval(ReturnBulletDelay).OnComplete(() => _bulletStorage.Push(bullet));
         }
     }
 }

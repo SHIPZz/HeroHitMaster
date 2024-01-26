@@ -5,13 +5,17 @@ namespace CodeBase.Gameplay.Bullet.Web
 {
     public class WebRotation : MonoBehaviour
     {
+        [SerializeField] private Vector3 _initialRotation = new Vector3(0, -90, 0);
         private Rigidbody _rigidBody;
 
         private void Awake() => 
             _rigidBody = GetComponent<Rigidbody>();
 
-        private void OnEnable() => 
+        private void OnEnable()
+        {
+            transform.localEulerAngles = _initialRotation;
             _rigidBody.isKinematic = false;
+        }
 
         private void OnDisable() => 
             _rigidBody.isKinematic = false;

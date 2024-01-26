@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5628664, g: 0.6331327, b: 0.7247877, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17536,7 +17536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7080230317892256495, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_Intensity
-      value: 1
+      value: 1.33
       objectReference: {fileID: 0}
     - target: {fileID: 7189860804108314094, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: _explosionBarrels.Array.size

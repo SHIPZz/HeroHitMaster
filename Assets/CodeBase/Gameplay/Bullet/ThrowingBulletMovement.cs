@@ -10,6 +10,7 @@ namespace CodeBase.Gameplay.Bullet
         [SerializeField] private Vector3 _bulletModelRotation;
         [SerializeField] private Transform _knifeEnd;
         [SerializeField] private bool _needSetParent = true;
+        [SerializeField] private float _targetRotationX = 104f;
 
         private ThrowingBullet _throwingBullet;
         private bool _blockedRotation;
@@ -60,7 +61,7 @@ namespace CodeBase.Gameplay.Bullet
 
         private void SetInitialRotation()
         {
-            Vector3 startTargetRotation = new Vector3(104, transform.eulerAngles.y,
+            Vector3 startTargetRotation = new Vector3(_targetRotationX, transform.eulerAngles.y,
                 transform.eulerAngles.z);
 
             transform.rotation = Quaternion.Euler(startTargetRotation);

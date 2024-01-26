@@ -27,7 +27,11 @@ namespace CodeBase.Services.Ad
             {
                 AdEnabled = true;
                 _adService.PlayShortAd(StartCallback, closed => OnEndCallback(onCloseCallback, closed));
+                return;
             }
+
+            AdEnabled = false;
+            onCloseCallback?.Invoke();
         }
 
         private void OnEndCallback(Action onCloseCallback, bool closed)
