@@ -24,7 +24,7 @@ namespace CodeBase.Infrastructure
 
         private void Do()
         {
-            foreach (var gameplayRunnable in _gameplayRunnables)
+            foreach (IGameplayRunnable gameplayRunnable in _gameplayRunnables)
             {
                 gameplayRunnable.Run();
             }

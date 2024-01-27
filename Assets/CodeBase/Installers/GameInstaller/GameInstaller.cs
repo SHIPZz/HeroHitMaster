@@ -106,7 +106,7 @@ namespace CodeBase.Installers.GameInstaller
             BindGamePartsInitializers();
             BindFocusService();
             BindMusicHandler();
-            // Container.BindInterfacesAndSelfTo<CheatService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CheatService>().AsSingle();
         }
 
         private void BindMusicHandler()

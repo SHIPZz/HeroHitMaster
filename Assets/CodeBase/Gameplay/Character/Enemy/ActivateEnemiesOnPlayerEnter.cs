@@ -64,7 +64,7 @@ namespace CodeBase.Gameplay.Character.Enemy
 
         private async void Activate(Player obj)
         {
-            await UniTask.WaitForSeconds(DelayActivation);
+            // await UniTask.WaitForSeconds(DelayActivation);
 
             if (_activated)
                 return;

@@ -13,6 +13,7 @@ namespace CodeBase.Services.Providers
 
         public void Reset()
         {
+            WorldData = null;
             WorldData = new WorldData();
             Save();
         }

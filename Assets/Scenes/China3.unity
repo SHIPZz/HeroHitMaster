@@ -1265,6 +1265,18 @@ PrefabInstance:
       propertyPath: _killDelay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 121948759}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.data[1]
+      value: 
+      objectReference: {fileID: 2050484284}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

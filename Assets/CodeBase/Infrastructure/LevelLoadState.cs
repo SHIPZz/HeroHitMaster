@@ -29,7 +29,7 @@ namespace CodeBase.Infrastructure
             while (!loadSceneAsync.isDone)
                 await UniTask.Yield();
 
-            _loadingCurtain.Hide(_pauseService.UnPause);
+            // _loadingCurtain.Hide(_pauseService.UnPause);
         }
     }
 }

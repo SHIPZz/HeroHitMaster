@@ -36,7 +36,7 @@ namespace CodeBase.UI.Windows.Popup
         {
             _popupInfoView.AdButtonClicked += ShowAd;
 
-            if (_worldDataService.WorldData.LevelData.Id % TargetPopupLevelInvoke != 0)
+            if (_worldDataService.WorldData.LevelData.Id % TargetPopupLevelInvoke != 0 || _worldDataService.WorldData.LevelData.Id % 3 == 0)
                 return;
             
             _loadingCurtain.Closed += OnLoadingCurtainClosed;

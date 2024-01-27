@@ -48,28 +48,29 @@ namespace CodeBase.Services.Cheats
             }
             
             //
-            // if (Input.GetKeyDown(KeyCode.F))
-            // {
-            //     LevelData levelData = _worldDataService.WorldData.LevelData;
-            //     levelData.Id = Mathf.Clamp(levelData.Id++, 1, SceneManager.sceneCountInBuildSettings);
-            //     _worldDataService.Save();
-            //     _gameStateMachine.ChangeState<BootstrapState>(); 
-            // }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                _worldDataService.WorldData.LevelData.Id = Mathf.Clamp( _worldDataService.WorldData.LevelData.Id + 1, 1, SceneManager.sceneCountInBuildSettings -1);
+                _worldDataService.Save();
+                _gameStateMachine.ChangeState<LevelLoadState>(); 
+            }
             //
-            // if (Input.GetKeyDown(KeyCode.F4))
-            // {
-            //     _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Popup));
-            // }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Popup));
+            }
             //
-            // if (Input.GetKeyDown(KeyCode.F9))
-            // {
-            //     _adService.PlayShortAd(StartCallback, OnEndCallback);
-            // }
+            if (Input.GetKeyDown(KeyCode.F9))
+            {
+                _adService.PlayShortAd(StartCallback, OnEndCallback);
+            }
             //
-            // if (Input.GetKeyDown(KeyCode.G))
-            // {
-            //     SceneManager.LoadScene(15);
-            // }
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                _worldDataService.WorldData.LevelData.Id = SceneManager.sceneCountInBuildSettings - 1;
+                _worldDataService.Save();
+                SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+            }
             //
             // if (Input.GetKeyDown(KeyCode.F10))
             // {
@@ -87,10 +88,10 @@ namespace CodeBase.Services.Cheats
             //     _wallet.AddMoney(5000);
             // }
             //
-            // if (Input.GetKeyDown(KeyCode.K))
-            // {
-            //     _worldDataService.Save();
-            // }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                _worldDataService.Save();
+            }
         }
 
         private void OnEndCallback()

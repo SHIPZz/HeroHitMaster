@@ -3771,6 +3771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 1534016363}
+  _rotateTime: 0.3
 --- !u!114 &207141126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5308,6 +5309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 1182769614}
+  _rotateTime: 0.3
 --- !u!114 &295324385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16559,7 +16561,6 @@ MonoBehaviour:
   _enemySpawners:
   - {fileID: 456629616}
   - {fileID: 1314270267}
-  _delayActivation: 1
 --- !u!114 &926246263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16621,6 +16622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 1761438785}
+  _rotateTime: 0.3
 --- !u!1 &926463008
 GameObject:
   m_ObjectHideFlags: 3
@@ -22665,6 +22667,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3346546093513028014, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3346546093513028014, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3645957623511616969, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -22929,6 +22939,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744649448529403541, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4841727718272158277, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: serializationData.Prefab
       value: 
@@ -22967,6 +22997,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4972331121382179875, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122611165678203331, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5333232423867466238, guid: b209d386e9950f24f94bf8e8c58e3b20, type: 3}
@@ -26788,6 +26838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 1512163886}
+  _rotateTime: 0.3
 --- !u!1 &1343417287
 GameObject:
   m_ObjectHideFlags: 3
@@ -29976,7 +30027,6 @@ MonoBehaviour:
   _enemySpawners:
   - {fileID: 1660340139}
   - {fileID: 2078210183}
-  _delayActivation: 1
 --- !u!114 &1512163889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30048,6 +30098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 1766091191}
+  _rotateTime: 0.3
 --- !u!1 &1512348636
 GameObject:
   m_ObjectHideFlags: 3
@@ -30467,7 +30518,6 @@ MonoBehaviour:
   - {fileID: 1554370166}
   - {fileID: 404016952}
   - {fileID: 1734086635}
-  _delayActivation: 1
 --- !u!114 &1534016366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30539,6 +30589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 841144970}
+  _rotateTime: 0.3
 --- !u!1 &1534179268
 GameObject:
   m_ObjectHideFlags: 3

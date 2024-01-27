@@ -17,6 +17,7 @@ namespace CodeBase.Gameplay.ObjectBodyPart
         private MeshRenderer _meshRenderer;
         private Collider _collider;
         private bool _isMaterialChanged;
+        private bool _isDestroyed;
 
         public event Action<DestroyableObjectTypeId> Destroyed;
 
@@ -50,16 +51,20 @@ namespace CodeBase.Gameplay.ObjectBodyPart
             _collider.enabled = false;
             MaterialChanged = true;
             _meshRenderer.enabled = true;
-            Destroyed?.Invoke(DestroyableObjectTypeId);
             _isMaterialChanged = true;
+            Destroyed?.Invoke(DestroyableObjectTypeId);
         }
 
         public void TakeDamage(int value)
         {
+            if (_isDestroyed)
+                return;
+
             if (_isMaterialChanged)
                 return;
 
             DisableVisibility();
+            _isDestroyed = true;
             Destroyed?.Invoke(DestroyableObjectTypeId);
         }
 

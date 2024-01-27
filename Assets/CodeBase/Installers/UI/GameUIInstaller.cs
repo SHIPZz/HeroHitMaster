@@ -245,7 +245,7 @@ namespace CodeBase.Installers.UI
             Container.BindInstance(_playButtonView);
             Container.BindInstance(_playWindowView);
             Container
-                .BindInterfacesTo<PlayWindowPresenter>()
+                .BindInterfacesAndSelfTo<PlayWindowPresenter>()
                 .AsSingle();
         }
 

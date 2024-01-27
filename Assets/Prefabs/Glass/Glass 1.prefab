@@ -208,6 +208,9 @@ MonoBehaviour:
   _enemyTrigger: {fileID: 4995024944798510942}
   _explodeDelay: 2
   _killDelay: 1.5
+  _enemySpawners: []
+  _activeColor: {r: 0.22614807, g: 0.583593, b: 0.6226415, a: 0}
+  _inActiveColor: {r: 0.20808114, g: 0.25905368, b: 0.26415092, a: 0}
 --- !u!54 &2373182934685324262
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -287,8 +290,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 53.817783, z: 0.87583756}
-  m_Center: {x: 0, y: 26.408884, z: -0.062081233}
+  m_Size: {x: 0.7286699, y: 53.817783, z: 0.65830994}
+  m_Center: {x: 0.007012248, y: 26.408884, z: -0.010909187}
 --- !u!114 &4995024944798510942
 MonoBehaviour:
   m_ObjectHideFlags: 0

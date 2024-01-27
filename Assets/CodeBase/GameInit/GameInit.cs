@@ -9,6 +9,7 @@ using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Spawners;
 using CodeBase.Gameplay.WaterSplash;
 using CodeBase.Gameplay.Weapons;
+using CodeBase.Infrastructure;
 using CodeBase.ScriptableObjects.PlayerSettings;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services;
@@ -27,6 +28,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using I2.Loc;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 using Player = CodeBase.Gameplay.Character.Players.Player;
 
@@ -85,7 +87,8 @@ namespace CodeBase.GameInit
             IEnemyProvider enemyProvider,
             AccuracyCounter accuracyCounter,
             EnemiesMovementInitializer enemiesMovementInitializer,
-            UIService uiService)
+            UIService uiService,
+            ILoadingCurtain loadingCurtain)
         {
             _uiService = uiService;
             _enemiesMovementInitializer = enemiesMovementInitializer;
@@ -121,23 +124,23 @@ namespace CodeBase.GameInit
             InitPlayerBeforeWeaponChoose(worldData.PlayerData);
             InitUIService(worldData);
             Weapon weapon = await InitializeInitialWeapon(worldData.PlayerData.LastWeaponId);
-            Player targetPlayer = InitPlayerAfterWeaponChoose(weapon);
-            InitMainCanvas();
-            InitializeCamera(targetPlayer, weapon);
+            InitializeCamera(weapon); 
+            InitPlayerAfterWeaponChoose(weapon);
+            InitAnotherServices(weapon);
+            InitMainUI();
+        }
+
+        private void InitAnotherServices(Weapon weapon)
+        {
             _waterSplashPoolInitializer.Init();
             _setterWeaponToPlayerHand.Init(weapon.WeaponTypeId);
         }
 
-        private void InitUIService(WorldData worldData) => 
+        private void InitUIService(WorldData worldData) =>
             _uiService.Init(worldData);
 
-        private async void InitMainCanvas()
+        private void InitMainUI()
         {
-            while (_enemyProvider.Enemies.Count(x => x != null && x.gameObject.activeSelf) == 0)
-            {
-                await UniTask.Yield();
-            }
-
             _uiService.EnableMainUI();
         }
 
@@ -146,12 +149,6 @@ namespace CodeBase.GameInit
             PlayerTypeId targetPlayerId = _playerSettings.PlayerTypeIdsByWeapon[weapon.WeaponTypeId];
             Player targetPlayer = GetPlayerFromStorage(targetPlayerId);
 
-            foreach (Enemy enemy in _enemyProvider.Enemies.Where(enemy => Vector3.Distance(targetPlayer.transform.position, enemy.transform.position) <= 5f))
-            {
-                targetPlayer.transform.rotation = Quaternion.LookRotation(enemy.transform.forward);
-                return targetPlayer;
-            }
-            
             return targetPlayer;
         }
 
@@ -195,7 +192,7 @@ namespace CodeBase.GameInit
             _worldDataService.Save();
         }
 
-        private void InitializeCamera(Player player, Weapon weapon)
+        private void InitializeCamera(Weapon weapon)
         {
             PlayerCameraFollower playerCameraFollower = InitializePlayerCamera();
             _cameraShakeMediator.SetCamerShake(playerCameraFollower.GetComponent<CameraShake>());

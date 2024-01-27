@@ -3244,6 +3244,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 984902348312482302, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1603163192465054283, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
       propertyPath: m_LocalScale.x
       value: 12.92
@@ -3304,6 +3308,22 @@ PrefabInstance:
       propertyPath: _explodeDelay
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 730029912}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.data[1]
+      value: 
+      objectReference: {fileID: 756098025}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.data[2]
+      value: 
+      objectReference: {fileID: 1585126912}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28629,7 +28649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd6f83a5e548c6a60bd5a11e2bb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 3, z: 0}
+  _offset: {x: 0, y: 5, z: 0}
 --- !u!114 &1192936392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51270,7 +51290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetAngleTransform: {fileID: 1984701824}
-  _rotateTime: 0.3
+  _rotateTime: 0.5
 --- !u!33 &8509096039549999644
 MeshFilter:
   m_ObjectHideFlags: 0

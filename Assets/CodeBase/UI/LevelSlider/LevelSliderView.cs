@@ -13,18 +13,25 @@ namespace CodeBase.UI.LevelSlider
         [SerializeField] private float _targetScaleX = 1f;
         
         private bool _isChanging;
+        private bool _maxValueReached;
 
         public void SetMaxValue(int enemyCount) =>
             _slider.maxValue = enemyCount;
 
         public void Enable(int i)
         {
+            if (_maxValueReached)
+                return;
+            
             gameObject.SetActive(true);
             transform.DOScale(_targetScaleX, _increaseScaleXDuration).SetUpdate(true);
         }
 
         public void Enable()
         {
+            if (_maxValueReached)
+                return;
+            
             gameObject.SetActive(true);
             transform.DOScale(_targetScaleX, _increaseScaleXDuration).SetUpdate(true);
         }
@@ -49,10 +56,13 @@ namespace CodeBase.UI.LevelSlider
             _isChanging = false;
 
             if (_slider.value == _slider.maxValue)
+            {
+                _maxValueReached = true;
                 transform
                     .DOScaleX(0, _increaseScaleXDuration)
                     .SetEase(Ease.InQuint)
                     .OnComplete(() => gameObject.SetActive(false)).SetUpdate(true);
+            }
         }
     }
 }

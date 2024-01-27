@@ -30,13 +30,15 @@ namespace CodeBase.UI.Windows.Popup
         private bool _hasFocus;
         private bool _isDisabled;
         private WindowService _windowService;
+        private FocusService _focusService;
 
         public event Action Initialized;
 
         [Inject]
         private void Construct(ISoundStorage soundStorage, PopupInfoView popupInfoView, 
-            IPauseService pauseService, WindowService windowService)
+            IPauseService pauseService, WindowService windowService, FocusService focusService)
         {
+            _focusService = focusService;
             _windowService = windowService;
             _pauseService = pauseService;
             _popupInfoView = popupInfoView;
@@ -83,6 +85,7 @@ namespace CodeBase.UI.Windows.Popup
                     await UniTask.Yield();
                 }
 
+                _focusService.HandleFocusGained();
                 FadeInOut(_whiteFrame, _timerText, FadeDuration, true);
                 await UniTask.Delay(TimeSpan.FromSeconds(CountdownInterval), true);
                 _startTime--;

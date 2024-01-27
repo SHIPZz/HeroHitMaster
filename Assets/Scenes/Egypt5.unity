@@ -39787,6 +39787,18 @@ PrefabInstance:
       propertyPath: _explodeDelay
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 426372318}
+    - target: {fileID: 4645812520819112065, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
+      propertyPath: _enemySpawners.Array.data[1]
+      value: 
+      objectReference: {fileID: 588544540}
     - target: {fileID: 9127344542739599379, guid: ede78f27dec904a48b154da5ac7ecb16, type: 3}
       propertyPath: m_Size.z
       value: 0.8581446
