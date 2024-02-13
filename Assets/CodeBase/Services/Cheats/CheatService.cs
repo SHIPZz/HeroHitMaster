@@ -52,7 +52,7 @@ namespace CodeBase.Services.Cheats
             {
                 _worldDataService.WorldData.LevelData.Id = Mathf.Clamp( _worldDataService.WorldData.LevelData.Id + 1, 1, SceneManager.sceneCountInBuildSettings -1);
                 _worldDataService.Save();
-                _gameStateMachine.ChangeState<LevelLoadState>(); 
+                _gameStateMachine.ChangeState<BootstrapState>(); 
             }
             //
             if (Input.GetKeyDown(KeyCode.F4))
@@ -60,10 +60,10 @@ namespace CodeBase.Services.Cheats
                 _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Popup));
             }
             //
-            if (Input.GetKeyDown(KeyCode.F9))
-            {
-                _adService.PlayShortAd(StartCallback, OnEndCallback);
-            }
+            // if (Input.GetKeyDown(KeyCode.F9))
+            // {
+            //     _adService.PlayShortAd(StartCallback, OnEndCallback);
+            // }
             //
             if (Input.GetKeyDown(KeyCode.G))
             {

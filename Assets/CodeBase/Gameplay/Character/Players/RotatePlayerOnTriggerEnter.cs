@@ -1,5 +1,6 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Collision;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -18,11 +19,13 @@ namespace CodeBase.Gameplay.Character.Players
         private IProvider<CameraData> _cameraProvider;
         private bool _isBlocked;
         private RotateCameraOnLastEnemyKilled _rotateCameraOnLastEnemyKilled;
+        private IPauseService _pauseService;
 
         [Inject]
         private void Construct(IProvider<CameraData> cameraProvider,
-            RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled)
+            RotateCameraOnLastEnemyKilled rotateCameraOnLastEnemyKilled, IPauseService pauseService)
         {
+            _pauseService = pauseService;
             _rotateCameraOnLastEnemyKilled = rotateCameraOnLastEnemyKilled;
             _cameraProvider = cameraProvider;
         }
@@ -30,8 +33,11 @@ namespace CodeBase.Gameplay.Character.Players
         private void Awake() =>
             _triggerObserver = GetComponent<TriggerObserver>();
 
-        private void OnEnable() =>
+        private void OnEnable()
+        {
+            _pauseService.UnPause();
             _triggerObserver.Entered += Rotate;
+        }
 
         private void OnDisable() =>
             _triggerObserver.Entered -= Rotate;

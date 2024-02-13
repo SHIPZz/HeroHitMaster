@@ -15,13 +15,36 @@ namespace CodeBase.Services.Ad
         public bool IsAdEnabled { get; private set; }
         public event Action AdFinished;
 
-        public void PlayShortAd(Action startCallback, Action<bool> onCloseCallback) => 
-            InterstitialAd.Show(() =>  OnShortAdStartCallback(startCallback), closed => OnShortAdCloseCallback(onCloseCallback, closed));
+        public void PlayShortAd(Action startCallback, Action<bool> onCloseCallback, Action<string> onErrorCallback,
+            Action onOfflineCallback)
+        {
+            InterstitialAd.Show(() => OnAdStartCallback(startCallback),
+                closed => OnShortAdCloseCallback(onCloseCallback, closed),
+                callback => OnAdErrorCallback(onErrorCallback, callback),
+                () => OnShortAdOfflineCallback(onOfflineCallback));
+        }
 
-        private void OnShortAdStartCallback(Action startCallback)
+        private void OnShortAdOfflineCallback(Action onOfflineCallback)
+        {
+            IsAdEnabled = false;
+            AdFinished?.Invoke();
+            _pauseService.UnPause();
+            onOfflineCallback?.Invoke();
+        }
+
+        private void OnAdErrorCallback(Action<string> onErrorCallback, string request)
+        {
+            IsAdEnabled = false;
+            AdFinished?.Invoke();
+            _pauseService.UnPause();
+            onErrorCallback?.Invoke(request);
+        }
+
+        private void OnAdStartCallback(Action startCallback)
         {
             startCallback?.Invoke();
             _pauseService.Pause();
+            AudioListener.volume = 0f;
             IsAdEnabled = true;
         }
 
@@ -33,8 +56,11 @@ namespace CodeBase.Services.Ad
             _pauseService.UnPause();
         }
 
-        public void PlayLongAd(Action startCallback, Action endCallback) =>
-            VideoAd.Show(() => OnOpenCallback(startCallback), null, () => OnCloseCallback(endCallback));
+        public void PlayLongAd(Action startCallback, Action endCallback,Action<string> onErrorCallback)
+        {
+            VideoAd.Show(() => OnAdStartCallback(startCallback), null, () => OnCloseCallback(endCallback),
+                error => OnAdErrorCallback(onErrorCallback, error));
+        }
 
         private void OnCloseCallback(Action endCallback)
         {
@@ -42,13 +68,6 @@ namespace CodeBase.Services.Ad
             AudioListener.volume = 1f;
             AdFinished?.Invoke();
             IsAdEnabled = false;
-        }
-
-        private void OnOpenCallback(Action startCallback)
-        {
-            IsAdEnabled = true;
-            startCallback?.Invoke();
-            AudioListener.volume = 0f;
         }
     }
 }

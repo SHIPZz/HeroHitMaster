@@ -1,7 +1,6 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Infrastructure;
-using CodeBase.Services.Ad;
-using CodeBase.Services.Pause;
+using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Windows;
@@ -15,27 +14,27 @@ namespace CodeBase.Services.UI
 {
     public class UIService
     {
+        private const int TargetPopupLevelInvoke = 4;
         private readonly Canvas _mainUi;
         private readonly ShopWeaponInfoView _shopWeaponInfoView;
         private readonly WalletPresenter _walletPresenter;
         private readonly ShopWeaponPresenter _shopWeaponPresenter;
-        private WindowService _windowService;
-        private readonly IPauseService _pauseService;
+        private readonly WindowService _windowService;
         private readonly PlayWindowPresenter _playWindowPresenter;
         private readonly ILoadingCurtain _loadingCurtain;
-        private readonly IAdInvokerService _adInvokerService;
+        private readonly IWorldDataService _worldDataService;
+        private bool _isBlocked;
 
         public UIService(Canvas mainUi, ShopWeaponInfoView shopWeaponInfoView, WalletPresenter walletPresenter,
             ShopWeaponPresenter shopWeaponPresenter,
             WindowService windowService,
-            IPauseService pauseService,
             PlayWindowPresenter playWindowPresenter
-            , ILoadingCurtain loadingCurtain, IAdInvokerService adInvokerService)
+            , ILoadingCurtain loadingCurtain,
+            IWorldDataService worldDataService)
         {
-            _adInvokerService = adInvokerService;
+            _worldDataService = worldDataService;
             _loadingCurtain = loadingCurtain;
             _playWindowPresenter = playWindowPresenter;
-            _pauseService = pauseService;
             _windowService = windowService;
             _mainUi = mainUi;
             _shopWeaponInfoView = shopWeaponInfoView;
@@ -51,19 +50,34 @@ namespace CodeBase.Services.UI
             _shopWeaponPresenter.Init(worldData.PlayerData.LastNotPopupWeaponId);
         }
 
-        public async void EnableMainUI()
+        public void EnableMainUI()
         {
-            _adInvokerService.Invoke();
-
-            while (_adInvokerService.AdEnabled)
-                await UniTask.Yield();
-
-            _pauseService.UnPause();
-            _playWindowPresenter.OnLoadingCurtainOnClosed();
-            _mainUi.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetUpdate(true).OnComplete(() =>
+            _loadingCurtain.Hide(() =>
             {
-                DOTween.Sequence().AppendInterval(1.5f).SetUpdate(true).OnComplete(() => _loadingCurtain.Hide());
+                _mainUi.GetComponent<CanvasGroup>().DOFade(1f, 0.3f).SetUpdate(true).OnComplete(HideCurtain);
             });
         }
+
+        private void HideCurtain() =>
+            _loadingCurtain.Hide(OnCurtainHidden);
+
+        private async void OnCurtainHidden()
+        {
+            var currentLevelId = _worldDataService.WorldData.LevelData.Id;
+
+            while (_isBlocked)
+                await UniTask.Yield();
+
+            if (currentLevelId % TargetPopupLevelInvoke == 0 && currentLevelId % 3 != 0)
+                _windowService.Open(WindowTypeId.Popup);
+
+            _playWindowPresenter.OnLoadingCurtainOnClosed();
+        }
+
+        public void BlockEnablingMainUI() =>
+            _isBlocked = true;
+
+        public void UnBlock() =>
+            _isBlocked = false;
     }
 }

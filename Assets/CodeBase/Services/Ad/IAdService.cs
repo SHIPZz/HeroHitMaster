@@ -7,7 +7,8 @@ namespace CodeBase.Services.Ad
     {
         bool IsAdEnabled { get; }
         event Action AdFinished;
-        void PlayShortAd([CanBeNull] Action startCallback,[CanBeNull] Action<bool> onCloseCallback);
-        void PlayLongAd([CanBeNull] Action startCallback,[CanBeNull] Action endCallback);
+        void PlayShortAd([CanBeNull] Action startCallback,[CanBeNull] Action<bool> onCloseCallback,Action<string> onErrorCallback,
+            Action onOfflineCallback);
+        void PlayLongAd([CanBeNull] Action startCallback,[CanBeNull] Action endCallback,Action<string> onErrorCallback);
     }
 }

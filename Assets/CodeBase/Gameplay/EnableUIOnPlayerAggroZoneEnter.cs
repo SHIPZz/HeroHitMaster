@@ -1,28 +1,44 @@
-﻿using CodeBase.Gameplay.Character.Players;
+﻿using System;
+using CodeBase.Gameplay.Character.Players;
+using CodeBase.Services.Pause;
+using CodeBase.Services.UI;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay
 {
     [RequireComponent(typeof(AggroZone))]
     public class EnableUIOnPlayerAggroZoneEnter : MonoBehaviour
     {
-        [SerializeField] private Canvas _mainCanvas;
-
         private AggroZone _aggroZone;
+        private UIService _uiService;
+        private IPauseService _pauseService;
 
-        private void Awake()
+        [Inject]
+        private void Construct(UIService uiService, IPauseService pauseService)
         {
-            _mainCanvas.enabled = false;
+            _pauseService = pauseService;
+            _uiService = uiService;
+        }
+        
+        private void Awake() => 
             _aggroZone = GetComponent<AggroZone>();
+
+        private void OnEnable()
+        {
+            _aggroZone.PlayerEntered += Turn;
+            _pauseService.UnPause();
         }
 
-        private void OnEnable() => 
-            _aggroZone.PlayerEntered += Turn;
+        private void Start() => 
+            _uiService.BlockEnablingMainUI();
 
         private void OnDisable() => 
             _aggroZone.PlayerEntered -= Turn;
 
-        private void Turn(Player obj) => 
-            _mainCanvas.enabled = true;
+        private void Turn(Player obj)
+        {
+            _uiService.UnBlock();
+        }
     }
 }

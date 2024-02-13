@@ -4,10 +4,8 @@ using CodeBase.Gameplay.Weapons;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
-using CodeBase.UI.Weapons;
 using CodeBase.UI.Windows.Popup;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI.Windows.Play
@@ -62,7 +60,6 @@ namespace CodeBase.UI.Windows.Play
                 await UniTask.Yield();
 
             _windowService.Open(WindowTypeId.Play, _pauseService.UnPause);
-            _pauseService.UnPause();
         }
     }
 }

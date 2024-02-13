@@ -59,12 +59,22 @@ namespace CodeBase.UI.Windows.Popup
         {
             _pauseService.Pause();
             
-            _adService.PlayLongAd(null, EndCallback);
+            _adService.PlayLongAd(null, EndCallback, OnErrorCallback);
+        }
+
+        private void OnErrorCallback(string error)
+        {
+            OpenPlayWindow();
         }
 
         private async void EndCallback()
         {
             await _popupInfoView.StartChooseRandomWeapon();
+            OpenPlayWindow();
+        }
+
+        private void OpenPlayWindow()
+        {
             _windowService.CloseAll();
             _pauseService.UnPause();
             _windowService.Open(WindowTypeId.Play);

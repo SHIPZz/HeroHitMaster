@@ -39,7 +39,8 @@ namespace CodeBase.UI.Weapons.ShopWeapons
 
             int targetAds = _weaponStaticDataService.Get(targetWeaponId).Price.AdQuantity;
 
-            _adService.PlayLongAd(null, () => OnAdEndedCallback(watchedAds, _worldDataService.WorldData, targetWeaponId, targetAds));
+            _adService.PlayLongAd(null, () => OnAdEndedCallback(watchedAds, _worldDataService.WorldData, targetWeaponId, targetAds),
+                error => OnAdEndedCallback(watchedAds, _worldDataService.WorldData, targetWeaponId, targetAds));
         }
 
         private void OnAdEndedCallback(int watchedAds, WorldData worldData, WeaponTypeId targetWeaponId,

@@ -26,9 +26,12 @@ namespace CodeBase.Services.GameContinues
         }
 
         public void Do() => 
-            _adService.PlayLongAd(null, RecoverPlayerOnEndAd);
+            _adService.PlayLongAd(null, RecoverPlayer, OnErrorCallback);
 
-        private void RecoverPlayerOnEndAd()
+        private void OnErrorCallback(string error) => 
+        RecoverPlayer();
+
+        private void RecoverPlayer()
         {
             var playerHealth = _playerProvider.Get().GetComponent<PlayerHealth>();
             playerHealth.Heal(100);

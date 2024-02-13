@@ -48,6 +48,7 @@ namespace CodeBase.UI.Windows.Popup
         private IPauseService _pauseService;
         private bool _hasFocus;
         private IAdService _adService;
+        private WindowService _windowService;
 
         public event Action AdButtonClicked;
         public event Action<WeaponTypeId> LastWeaponSelected;
@@ -55,8 +56,9 @@ namespace CodeBase.UI.Windows.Popup
         [Inject]
         private void Construct(IProvider<WeaponIconsProvider> provider, ISoundStorage soundStorage,
             EffectsProvider effectsProvider, IPauseService pauseService,
-            IAdService adService)
+            IAdService adService, WindowService windowService)
         {
+            _windowService = windowService;
             _adService = adService;
             _pauseService = pauseService;
             _lastWeaponSelectedSound = soundStorage.Get(SoundTypeId.SelectedWeapon);
@@ -76,6 +78,7 @@ namespace CodeBase.UI.Windows.Popup
 
         private void OnEnable()
         {
+            _windowService.Close(WindowTypeId.Play);
             WebApplication.InBackgroundChangeEvent += OnFocusChanged;
             Application.focusChanged += OnFocusChanged;
             _adButton.onClick.AddListener(OnAdClicked);

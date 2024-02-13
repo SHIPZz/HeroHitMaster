@@ -35,7 +35,7 @@ namespace CodeBase.Installers
         public async void Initialize()
         {
             await InitYandexSDK();
-            YandexGamesSdk.CallbackLogging = true;
+            YandexGamesSdk.CallbackLogging = false;
 
             BindSaveSystem();
             BindWorldDataService();
@@ -44,12 +44,6 @@ namespace CodeBase.Installers
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
             gameStateMachine.ChangeState<BootstrapState>();
         }
-
-        private void BindWorldDataService() =>
-            Container
-                .Bind<IWorldDataService>()
-                .To<WorldDataService>()
-                .AsSingle();
 
         private async UniTask InitYandexSDK()
         {
@@ -60,6 +54,23 @@ namespace CodeBase.Installers
             {
                 await UniTask.Yield();
             }
+            
+            YandexGamesSdk.GameReady();
+            YandexGamesSdk.CallbackLogging = false;
+        }
+
+        private void BindWorldDataService() =>
+            Container
+                .Bind<IWorldDataService>()
+                .To<WorldDataService>()
+                .AsSingle();
+
+        private void BindSaveSystem()
+        {
+            if (PlayerAccount.IsAuthorized)
+                Container.Bind<ISaveSystem>().To<YandexSaveSystem>().AsSingle();
+            else
+                Container.Bind<ISaveSystem>().To<PlayerPrefsSaveSystem>().AsSingle();
         }
 
         private IEnumerator InitSDK()
@@ -79,14 +90,6 @@ namespace CodeBase.Installers
             Container
                 .Bind<GlobalSlowMotionSystem>()
                 .AsSingle();
-
-        private void BindSaveSystem()
-        {
-            if (PlayerAccount.IsAuthorized)
-                Container.Bind<ISaveSystem>().To<YandexSaveSystem>().AsSingle();
-            else
-                Container.Bind<ISaveSystem>().To<PlayerPrefsSaveSystem>().AsSingle();
-        }
 
 
         private void BindStateFactory() =>

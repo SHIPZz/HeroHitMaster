@@ -115,8 +115,6 @@ namespace CodeBase.GameInit
         public async void Initialize()
         {
             LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
-            YandexGamesSdk.GameReady();
-            YandexGamesSdk.CallbackLogging = false;
 
             WorldData worldData = _worldDataService.WorldData;
             TranslateWeaponNames(worldData);
