@@ -28,15 +28,6 @@ namespace CodeBase.UI.Windows.Authorize
             _accuracyLeaderboardOpenerButton.Opened += OnLeaderboardOpenerButtonClicked;
         }
 
-        private void OnAuthorizedClicked()
-        {
-            PlayerAccount.Authorize(() =>
-            {
-                _windowService.CloseAll();
-                _windowService.Open(WindowTypeId.Leaderboard);
-            });
-        }
-
         public void Dispose()
         {
             _authorizeWindowView.AuthorizeButtonClicked -= OnAuthorizedClicked;
@@ -48,6 +39,15 @@ namespace CodeBase.UI.Windows.Authorize
         {
             _windowService.Close(WindowTypeId.Authorize);
             _windowService.Open(WindowTypeId.SettingWindow);
+        }
+
+        private void OnAuthorizedClicked()
+        {
+            PlayerAccount.Authorize(() =>
+            {
+                _windowService.CloseAll();
+                _windowService.Open(WindowTypeId.Leaderboard);
+            });
         }
 
         private void OnLeaderboardOpenerButtonClicked()

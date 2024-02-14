@@ -38,5 +38,10 @@ namespace CodeBase.Gameplay.EffectsData
             effect.Play();
             // _targetSound.Play();
         }
+
+        public void IncreaseOffset()
+        {
+            _offset = new Vector3(0, 4.5f, 0);
+        }
     }
 }

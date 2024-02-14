@@ -46,7 +46,7 @@ namespace CodeBase.UI.Windows.Leaderboards
                 return;
             
             Leaderboard.GetPlayerEntry(Name,
-                _ => { Leaderboard.SetScore(Name, score, () => Debug.Log("SUCCCESSSSS")); });
+                _ => { Leaderboard.SetScore(Name, score, () => Debug.Log("Leaderboard Set")); });
         }
 
         public void SetInfo(string weaponName, WeaponTypeId targetWeaponType)

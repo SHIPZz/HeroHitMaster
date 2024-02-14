@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Character.Players;
 using CodeBase.Gameplay.Character.Players.Shoot;
 using CodeBase.Gameplay.EffectsData;
@@ -73,7 +74,13 @@ namespace CodeBase.Gameplay.Character.Enemy
             {
                 enemy.gameObject.SetActive(true);
                 enemy.gameObject.transform.DOScale(enemy.InitialScale, 0.5f)
-                    .OnComplete(() => _effectOnEnemyActivation.Play(enemy));
+                    .OnComplete(() =>
+                    {
+                        if (enemy.EnemyTypeId is EnemyTypeId.SnakeLet or EnemyTypeId.SnakeNaga or EnemyTypeId.Werewolf)
+                            _effectOnEnemyActivation.IncreaseOffset();
+                        
+                        _effectOnEnemyActivation.Play(enemy);
+                    });
                 TryActivateMovement(enemy);
             }
 
