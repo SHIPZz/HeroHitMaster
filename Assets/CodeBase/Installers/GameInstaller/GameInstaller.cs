@@ -108,6 +108,7 @@ namespace CodeBase.Installers.GameInstaller
             BindMusicHandler();
             Container.BindInterfacesAndSelfTo<CheatService>().AsSingle();
             Container.Bind<SaveOnPlayButtonClicked>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ChangeWeaponShootSoundVolumeHandler>().AsSingle();
         }
 
         private void BindMusicHandler()

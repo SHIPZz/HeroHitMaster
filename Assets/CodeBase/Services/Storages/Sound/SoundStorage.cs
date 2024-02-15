@@ -27,6 +27,8 @@ namespace CodeBase.Services.Storages.Sound
 
         public AudioSource Get(MusicTypeId musicTypeId) =>
             _musics[musicTypeId];
+        
+        
 
         public List<AudioSource> GetAll()
         {

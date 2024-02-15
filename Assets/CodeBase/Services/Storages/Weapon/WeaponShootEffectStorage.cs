@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Enums;
 using CodeBase.ScriptableObjects.Weapon;
 using CodeBase.Services.Data;
@@ -16,20 +17,22 @@ namespace CodeBase.Services.Storages.Weapon
         public WeaponShootEffectStorage(IEffectFactory effectFactory, WeaponStaticDataService weaponStaticDataService)
         {
             _effectFactory = effectFactory;
-            var weaponDatas = weaponStaticDataService.GetAll();
+            List<WeaponData> weaponDatas = weaponStaticDataService.GetAll();
 
             FillShootEffects(weaponDatas);
             FillShootSounds(weaponDatas);
         }
 
+        public IEnumerable<AudioSource> GetAllSounds() => _shootSounds.Values;
+
         private void FillShootSounds(List<WeaponData> weaponDatas)
         {
-            foreach (var weaponData in weaponDatas)
+            foreach (WeaponData weaponData in weaponDatas)
             {
                 if (weaponData.ShootSound == null)
                     continue;
 
-                var targetSound = _effectFactory.Create(weaponData.ShootSound);
+                AudioSource targetSound = _effectFactory.Create(weaponData.ShootSound);
 
                 targetSound.playOnAwake = false;
                 _shootSounds[weaponData.WeaponTypeId] = targetSound;
@@ -38,12 +41,12 @@ namespace CodeBase.Services.Storages.Weapon
 
         private void FillShootEffects(List<WeaponData> weaponDatas)
         {
-            foreach (var weaponData in weaponDatas)
+            foreach (WeaponData weaponData in weaponDatas)
             {
                 if (weaponData.ShootEffect == null)
                     continue;
 
-                var targetEffect = _effectFactory.Create(weaponData.ShootEffect);
+                ParticleSystem targetEffect = _effectFactory.Create(weaponData.ShootEffect);
                 
                 _shootEffects[weaponData.WeaponTypeId] = targetEffect;
             }

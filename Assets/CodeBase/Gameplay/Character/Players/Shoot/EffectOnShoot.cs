@@ -34,7 +34,7 @@ namespace CodeBase.Gameplay.Character.Players.Shoot
 
         private void PlayEffects()
         {
-            var weaponWeaponTypeId = _weaponProvider.Get().WeaponTypeId;
+            WeaponTypeId weaponWeaponTypeId = _weaponProvider.Get().WeaponTypeId;
             AudioSource targetSound = _weaponShootEffectStorage.GetSoundBy(weaponWeaponTypeId);
             targetSound.transform.position = _initialShootPosition.position;
             targetSound.Play();

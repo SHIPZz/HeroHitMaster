@@ -13,6 +13,8 @@ namespace CodeBase.UI.Windows.Audio
         private readonly IWorldDataService _worldDataService;
         private readonly AudioSource _music;
 
+        public event Action<float> VolumeChanged; 
+
         public AudioVolumeChanger(ISoundStorage soundStorage, IWorldDataService worldDataService)
         {
             _worldDataService = worldDataService;
@@ -30,6 +32,7 @@ namespace CodeBase.UI.Windows.Audio
         {
             _allSounds.ForEach(x => x.volume = value);
             _worldDataService.WorldData.SettingsData.Volume = value;
+            VolumeChanged?.Invoke(value);
         }
 
         public void InitInitialValues()
