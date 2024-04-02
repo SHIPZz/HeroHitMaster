@@ -63,10 +63,8 @@ namespace CodeBase.Gameplay.Character.Enemy
         private void SetMove() =>
             _canMove = true;
 
-        private async void Activate(Player obj)
+        private void Activate(Player obj)
         {
-            // await UniTask.WaitForSeconds(DelayActivation);
-
             if (_activated)
                 return;
 
@@ -76,11 +74,20 @@ namespace CodeBase.Gameplay.Character.Enemy
                 enemy.gameObject.transform.DOScale(enemy.InitialScale, 0.5f)
                     .OnComplete(() =>
                     {
-                        if (enemy.EnemyTypeId is EnemyTypeId.SnakeLet or EnemyTypeId.SnakeNaga or EnemyTypeId.Werewolf)
-                            _effectOnEnemyActivation.IncreaseOffset();
-                        
+                        switch (enemy.EnemyTypeId)
+                        {
+                            case EnemyTypeId.SnakeLet or EnemyTypeId.SnakeNaga or EnemyTypeId.Werewolf:
+                                _effectOnEnemyActivation.IncreaseOffset(4.5f);
+                                break;
+                                
+                            case EnemyTypeId.Sunflora:
+                                _effectOnEnemyActivation.IncreaseOffset(5.5f);
+                                break;
+                        }
+
                         _effectOnEnemyActivation.Play(enemy);
                     });
+                
                 TryActivateMovement(enemy);
             }
 

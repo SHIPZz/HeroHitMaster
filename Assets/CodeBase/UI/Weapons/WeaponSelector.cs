@@ -115,7 +115,6 @@ namespace CodeBase.UI.Weapons
         {
             WorldData worldData = _worldDataService.WorldData;
             worldData.PlayerData.PurchasedWeapons.Add(_lastWeaponId);
-            _worldDataService.Save();
         }
     }
 }

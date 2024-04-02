@@ -48,7 +48,6 @@ namespace CodeBase.UI.Weapons.ShopWeapons
         {
             watchedAds++;
             worldData.AdWeaponsData.WatchedAdsToBuyWeapons[targetWeaponId] = watchedAds;
-            _worldDataService.Save();
 
             if (watchedAds == targetAds)
             {

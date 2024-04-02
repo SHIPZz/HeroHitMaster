@@ -39,9 +39,9 @@ namespace CodeBase.Gameplay.EffectsData
             // _targetSound.Play();
         }
 
-        public void IncreaseOffset()
+        public void IncreaseOffset(float y)
         {
-            _offset = new Vector3(0, 4.5f, 0);
+            _offset = new Vector3(0, y, 0);
         }
     }
 }

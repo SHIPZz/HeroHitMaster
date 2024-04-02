@@ -26,7 +26,6 @@ namespace CodeBase.Services.SaveSystems.WeaponSaves
         {
             WorldData worldData = _worldDataService.WorldData;
             worldData.PlayerData.PurchasedWeapons.Add(weaponTypeId);
-            _worldDataService.Save();
         }
     }
 }

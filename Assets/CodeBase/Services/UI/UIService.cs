@@ -1,4 +1,5 @@
-﻿using CodeBase.Enums;
+﻿using Agava.YandexGames;
+using CodeBase.Enums;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
@@ -70,6 +71,13 @@ namespace CodeBase.Services.UI
 
             if (currentLevelId % TargetPopupLevelInvoke == 0 && currentLevelId % 3 != 0)
                 _windowService.Open(WindowTypeId.Popup);
+
+            if (!_worldDataService.WorldData.GameApiInitialized)
+            {
+                YandexGamesSdk.GameReady();
+                YandexGamesSdk.CallbackLogging = false;
+                _worldDataService.WorldData.GameApiInitialized = true;
+            }
 
             _playWindowPresenter.OnLoadingCurtainOnClosed();
         }

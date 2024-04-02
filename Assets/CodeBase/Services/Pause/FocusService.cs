@@ -74,6 +74,7 @@ namespace CodeBase.Services.Pause
             switch (windowTypeId)
             {
                 case WindowTypeId.Pause:
+                    _pauseService.Pause();
                     MuteAudio(false);
                     break;
                 

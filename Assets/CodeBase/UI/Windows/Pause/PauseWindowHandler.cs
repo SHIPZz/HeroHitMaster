@@ -43,7 +43,10 @@ namespace CodeBase.UI.Windows.Pause
         private void OnFocusChanged(bool hasFocus)
         {
             if (_isOpened)
+            {
+                _pauseService.Pause();
                 return;
+            }
 
             if (!hasFocus && _hud.gameObject.activeSelf)
             {
@@ -55,7 +58,7 @@ namespace CodeBase.UI.Windows.Pause
 
         private void OnReturned()
         {
-            _windowService.CloseAll(() =>_windowService.OpenQuickly(WindowTypeId.Hud) );
+            _windowService.CloseAll(() => _windowService.OpenQuickly(WindowTypeId.Hud));
             AudioListener.pause = false;
             AudioListener.volume = 1f;
             _pauseService.UnPause();

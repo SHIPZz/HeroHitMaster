@@ -54,9 +54,6 @@ namespace CodeBase.Installers
             {
                 await UniTask.Yield();
             }
-            
-            YandexGamesSdk.GameReady();
-            YandexGamesSdk.CallbackLogging = false;
         }
 
         private void BindWorldDataService() =>

@@ -5,6 +5,7 @@ namespace CodeBase.Services.SaveSystems.Data
     [Serializable]
     public class WorldData
     {
+        public bool GameApiInitialized;
         public AdWeaponsData AdWeaponsData = new();
         public LevelData LevelData = new();
         public PlayerData PlayerData = new();

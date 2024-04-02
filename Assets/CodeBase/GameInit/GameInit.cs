@@ -122,7 +122,7 @@ namespace CodeBase.GameInit
             InitPlayerBeforeWeaponChoose(worldData.PlayerData);
             InitUIService(worldData);
             Weapon weapon = await InitializeInitialWeapon(worldData.PlayerData.LastWeaponId);
-            InitializeCamera(weapon); 
+            InitializeCamera(weapon);
             InitPlayerAfterWeaponChoose(weapon);
             InitAnotherServices(weapon);
             InitMainUI();
@@ -186,8 +186,6 @@ namespace CodeBase.GameInit
                 worldData.TranslatedWeaponNameData.Names[weaponData.WeaponTypeId] =
                     namePropertyGetter?.Invoke(weaponData);
             }
-
-            _worldDataService.Save();
         }
 
         private void InitializeCamera(Weapon weapon)
