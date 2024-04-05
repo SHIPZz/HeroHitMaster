@@ -17,7 +17,7 @@ namespace CodeBase.Gameplay.Character.PlayerSelection
             _playerStorage = playerStorage;
         }
 
-        public async void Select(WeaponTypeId weaponTypeId)
+        public void Select(WeaponTypeId weaponTypeId)
         {
             Player lastPlayer = _playerStorage.CurrentPlayer;
             

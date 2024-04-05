@@ -1,11 +1,8 @@
-﻿using System;
-using CodeBase.Enums;
-using CodeBase.Gameplay.Character;
+﻿using CodeBase.Enums;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
-using CodeBase.Services.SaveSystems.Data;
 using CodeBase.Services.Storages.Character;
 using CodeBase.UI.Wallet;
 using CodeBase.UI.Windows;
@@ -45,6 +42,7 @@ namespace CodeBase.Services.Cheats
                 _worldDataService.Reset();
                 PlayerPrefs.DeleteAll();
                 PlayerPrefs.Save();
+                _gameStateMachine.ChangeState<BootstrapState>();
             }
             
             //

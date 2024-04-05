@@ -2,6 +2,8 @@
 {
     public static class AssetPath
     {
+        public const string LevelData = "Data/Level";
+
         public const string MainCamera = "Prefabs/MainCamera";
         //characters
         public const string Spiderman = "Prefabs/Player/Spiderman";

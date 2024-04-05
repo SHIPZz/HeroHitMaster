@@ -114,7 +114,9 @@ namespace CodeBase.GameInit
 
         public async void Initialize()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
             LocalizationManager.CurrentLanguage = YandexGamesSdk.Environment.i18n.lang;
+#endif
 
             WorldData worldData = _worldDataService.WorldData;
             TranslateWeaponNames(worldData);

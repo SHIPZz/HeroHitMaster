@@ -72,12 +72,14 @@ namespace CodeBase.Services.UI
             if (currentLevelId % TargetPopupLevelInvoke == 0 && currentLevelId % 3 != 0)
                 _windowService.Open(WindowTypeId.Popup);
 
+#if UNITY_WEBGL && !UNITY_EDITOR
             if (!_worldDataService.WorldData.GameApiInitialized)
             {
                 YandexGamesSdk.GameReady();
                 YandexGamesSdk.CallbackLogging = false;
                 _worldDataService.WorldData.GameApiInitialized = true;
             }
+#endif
 
             _playWindowPresenter.OnLoadingCurtainOnClosed();
         }

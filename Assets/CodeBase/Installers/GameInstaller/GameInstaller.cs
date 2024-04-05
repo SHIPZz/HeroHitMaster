@@ -258,6 +258,7 @@ namespace CodeBase.Installers.GameInstaller
             BindAsSingle<WalletStaticDataService>();
             BindAsSingle<SoundStaticDataService>();
             BindAsSingle<EffectStaticDataService>();
+            BindAsSingle<LevelStaticDataService>();
         }
 
         private void BindWeaponShootEffectStorage() =>

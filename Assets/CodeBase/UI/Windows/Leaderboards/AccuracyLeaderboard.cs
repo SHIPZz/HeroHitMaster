@@ -42,11 +42,12 @@ namespace CodeBase.UI.Windows.Leaderboards
 
         public void SetScore(int score)
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
             if (!PlayerAccount.IsAuthorized)
                 return;
             
-            Leaderboard.GetPlayerEntry(Name,
-                _ => { Leaderboard.SetScore(Name, score, () => Debug.Log("Leaderboard Set")); });
+            Leaderboard.GetPlayerEntry(Name, _ => Leaderboard.SetScore(Name, score));
+#endif        
         }
 
         public void SetInfo(string weaponName, WeaponTypeId targetWeaponType)

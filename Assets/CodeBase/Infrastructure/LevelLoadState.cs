@@ -2,6 +2,7 @@
 using CodeBase.Services.Ad;
 using CodeBase.Services.SaveSystems.Data;
 using Cysharp.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,9 +25,17 @@ namespace CodeBase.Infrastructure
             _adInvokerService.Invoke();
             
             payload.LevelData.Id = Mathf.Clamp(payload.LevelData.Id, 1, SceneManager.sceneCountInBuildSettings - 1);
-            
-            AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(payload.LevelData.Id);
 
+
+            AsyncOperation loadSceneAsync;
+
+#if UNITY_EDITOR
+            loadSceneAsync =  SceneManager.LoadSceneAsync(EditorPrefs.GetString("Level id"));
+            
+            #else
+             loadSceneAsync = SceneManager.LoadSceneAsync(payload.LevelData.Id);
+#endif
+            
             while (!loadSceneAsync.isDone || _adInvokerService.AdEnabled)
                 await UniTask.Yield();
             

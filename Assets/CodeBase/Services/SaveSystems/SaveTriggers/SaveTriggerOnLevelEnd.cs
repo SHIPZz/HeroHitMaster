@@ -3,13 +3,11 @@ using CodeBase.Constants;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Collision;
 using CodeBase.ScriptableObjects.Weapon;
-using CodeBase.Services.Ad;
 using CodeBase.Services.Data;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Providers;
 using CodeBase.Services.SaveSystems.Data;
 using CodeBase.UI.Wallet;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -21,10 +19,10 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         [SerializeField] private TriggerObserver _triggerObserver;
 
         private IPauseService _pauseService;
-        private Level _level;
         private WeaponStaticDataService _weaponStaticDataService;
         private Wallet _wallet;
         private IWorldDataService _worldDataService;
+        private LevelStaticDataService _levelStaticDataService;
 
         public event Action PlayerEntered;
         public event Action LastLevelAchieved;
@@ -32,14 +30,14 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
         [Inject]
         private void Construct(IPauseService pauseService,
             IWorldDataService worldDataService,
-            Level level,
+            LevelStaticDataService levelStaticDataService,
             WeaponStaticDataService weaponStaticDataService,
             Wallet wallet)
         {
+            _levelStaticDataService = levelStaticDataService;
             _worldDataService = worldDataService;
             _wallet = wallet;
             _weaponStaticDataService = weaponStaticDataService;
-            _level = level;
             _pauseService = pauseService;
         }
 
@@ -62,18 +60,22 @@ namespace CodeBase.Services.SaveSystems.SaveTriggers
             if (currentWeapon.Price.PriceTypeId == PriceTypeId.Popup)
                 worldData.LevelData.LevelsWithPopupWeapon++;
 
-            _wallet.AddMoney(_level.Reward);
+            var levelName = SceneManager.GetActiveScene().name;
+
+            _wallet.AddMoney(_levelStaticDataService.Get(levelName).Reward);
 
             if (SceneManager.sceneCountInBuildSettings <= worldData.LevelData.Id)
             {
                 worldData.LevelData.Id = 1;
                 PlayerEntered = null;
                 LastLevelAchieved?.Invoke();
+                _worldDataService.Save();
                 return;
             }
 
             PlayerEntered?.Invoke();
             _pauseService.Pause();
+            _worldDataService.Save();
         }
     }
 }

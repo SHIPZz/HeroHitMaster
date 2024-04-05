@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Gameplay.Character.Enemy;
 using CodeBase.Services.Providers;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
@@ -81,14 +82,16 @@ namespace CodeBase.Gameplay.Camera
         private void BlockRotation() =>
             _blockRotation = true;
 
-        private void Do()
+        private async void Do()
         {
             if (_blockRotation)
             {
                 _cameraZoomer.Zoom(75, 1f, 0.5f, Ease.Linear);
                 return;
             }
-
+            
+            await UniTask.WaitUntil(() => _cameraData.Camera != null);
+            
             Vector3 directionToEnemy = _lastEnemyPosition - _cameraData.Camera.transform.localPosition;
             directionToEnemy = directionToEnemy.normalized;
 

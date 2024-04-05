@@ -34,8 +34,10 @@ namespace CodeBase.Installers
 
         public async void Initialize()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
             await InitYandexSDK();
             YandexGamesSdk.CallbackLogging = false;
+#endif
 
             BindSaveSystem();
             BindWorldDataService();
@@ -64,10 +66,16 @@ namespace CodeBase.Installers
 
         private void BindSaveSystem()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
             if (PlayerAccount.IsAuthorized)
                 Container.Bind<ISaveSystem>().To<YandexSaveSystem>().AsSingle();
-            else
-                Container.Bind<ISaveSystem>().To<PlayerPrefsSaveSystem>().AsSingle();
+#endif
+
+#if UNITY_EDITOR
+            Container.Bind<ISaveSystem>().To<PlayerPrefsSaveSystem>().AsSingle();
+#endif
+            
+            print(Container.Resolve<ISaveSystem>().GetType());
         }
 
         private IEnumerator InitSDK()

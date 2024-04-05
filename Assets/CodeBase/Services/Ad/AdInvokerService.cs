@@ -23,6 +23,7 @@ namespace CodeBase.Services.Ad
 
         public void Invoke(Action onCloseCallback = null)
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
             if (_worldDataService.WorldData.LevelData.Id % TargetAdInvoke == 0)
             {
                 AdEnabled = true;
@@ -33,6 +34,7 @@ namespace CodeBase.Services.Ad
 
             AdEnabled = false;
             onCloseCallback?.Invoke();
+#endif
         }
 
         private void OnOfflineCallback()
