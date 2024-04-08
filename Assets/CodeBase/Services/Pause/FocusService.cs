@@ -30,7 +30,6 @@ namespace CodeBase.Services.Pause
 
         public void Initialize()
         {
-            Application.focusChanged += OnFocusChanged;
             WebApplication.InBackgroundChangeEvent += OnFocusChanged;
             _adService.AdFinished += HandleFocusGained;
             AudioListener.pause = false;
@@ -39,7 +38,6 @@ namespace CodeBase.Services.Pause
 
         public void Dispose()
         {
-            Application.focusChanged -= OnFocusChanged;
             _adService.AdFinished -= HandleFocusGained;
             WebApplication.InBackgroundChangeEvent -= OnFocusChanged;
         }

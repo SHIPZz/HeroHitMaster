@@ -14,6 +14,7 @@ namespace CodeBase.UI.Windows.RectTransformAnimations
         [SerializeField] private float _duration;
         [SerializeField] private bool _setUpdate = true;
         [SerializeField] private bool _takeValuesFromTransform;
+        [SerializeField] private Ease _ease = Ease.OutQuad;
 
         private void Start()
         {
@@ -26,10 +27,10 @@ namespace CodeBase.UI.Windows.RectTransformAnimations
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(_rectTransform.DOSizeDelta(new Vector2(_targetWidth, _targetHeight), _duration)
-                .SetEase(Ease.OutQuad)).SetUpdate(_setUpdate); 
+                .SetEase(_ease)).SetUpdate(_setUpdate); 
 
             sequence.Append(_rectTransform.DOSizeDelta(new Vector2(_startWidth, _startHeight), _duration)
-                .SetEase(Ease.OutQuad)).SetUpdate(_setUpdate); 
+                .SetEase(_ease)).SetUpdate(_setUpdate); 
 
             sequence.SetLoops(-1).SetUpdate(_setUpdate);
 
