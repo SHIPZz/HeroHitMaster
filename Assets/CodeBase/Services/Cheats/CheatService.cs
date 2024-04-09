@@ -37,80 +37,37 @@ namespace CodeBase.Services.Cheats
 
         public void Tick()
         {
-            if (Input.GetKeyDown(KeyCode.F8))
-            {
-                _worldDataService.Reset();
-                PlayerPrefs.DeleteAll();
-                PlayerPrefs.Save();
-                _gameStateMachine.ChangeState<BootstrapState>();
-            }
-            
-            //
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                _worldDataService.WorldData.LevelData.Id = Mathf.Clamp( _worldDataService.WorldData.LevelData.Id + 1, 1, SceneManager.sceneCountInBuildSettings -1);
-                _worldDataService.Save();
-                _gameStateMachine.ChangeState<BootstrapState>(); 
-            }
-            //
-            if (Input.GetKeyDown(KeyCode.F4))
-            {
-                _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Popup));
-            }
-            //
-            // if (Input.GetKeyDown(KeyCode.F9))
+            // if (Input.GetKeyDown(KeyCode.F8))
             // {
-            //     _adService.PlayShortAd(StartCallback, OnEndCallback);
+            //     _worldDataService.Reset();
+            //     PlayerPrefs.DeleteAll();
+            //     PlayerPrefs.Save();
+            //     _gameStateMachine.ChangeState<BootstrapState>();
             // }
             //
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                _worldDataService.WorldData.LevelData.Id = SceneManager.sceneCountInBuildSettings - 1;
-                _worldDataService.Save();
-                SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
-            }
-            //
-            // if (Input.GetKeyDown(KeyCode.F10))
+            // if (Input.GetKeyDown(KeyCode.F))
             // {
-            //     _adService.PlayLongAd(StartCallback, OnEndCallback);
+            //     _worldDataService.WorldData.LevelData.Id = Mathf.Clamp( _worldDataService.WorldData.LevelData.Id + 1, 1, SceneManager.sceneCountInBuildSettings -1);
+            //     _worldDataService.Save();
+            //     _gameStateMachine.ChangeState<BootstrapState>(); 
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.F4))
+            // {
+            //     _windowService.CloseAll(() => _windowService.Open(WindowTypeId.Popup));
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.G))
+            // {
+            //     _worldDataService.WorldData.LevelData.Id = SceneManager.sceneCountInBuildSettings - 1;
+            //     _worldDataService.Save();
+            //     SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
             // }
             //
             // if (Input.GetKeyDown(KeyCode.K))
             // {
-            //     _playerStorage.CurrentPlayer.GetComponent<IDamageable>().TakeDamage(10000);
+            //     _worldDataService.Save();
             // }
-            //
-            //
-            // if (Input.GetKeyDown(KeyCode.Y))
-            // {
-            //     _wallet.AddMoney(5000);
-            // }
-            //
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                _worldDataService.Save();
-            }
-        }
-
-        private void OnEndCallback()
-        {
-            _pauseService.UnPause();
-            AudioListener.volume = 1;
-        }
-
-        private void OnEndCallback(bool closed)
-        {
-            if (!closed)
-                return;
-
-            _pauseService.UnPause();
-            AudioListener.volume = 1;
-        }
-
-        private void StartCallback()
-        {
-            _pauseService.Pause();
-            AudioListener.volume = 0f;
         }
     }
 }

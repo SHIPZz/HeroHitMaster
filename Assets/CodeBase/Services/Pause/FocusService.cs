@@ -16,7 +16,7 @@ namespace CodeBase.Services.Pause
     {
         private const float AudioMuteVolume = 0f;
         private const float AudioUnmuteVolume = 1f;
-        
+
         private readonly IPauseService _pauseService;
         private readonly List<Window> _allWindows;
         private readonly IAdService _adService;
@@ -30,7 +30,7 @@ namespace CodeBase.Services.Pause
 
         public void Initialize()
         {
-            WebApplication.InBackgroundChangeEvent += OnFocusChanged;
+            Application.focusChanged += OnFocusChanged;
             _adService.AdFinished += HandleFocusGained;
             AudioListener.pause = false;
             AudioListener.volume = AudioUnmuteVolume;
@@ -39,14 +39,14 @@ namespace CodeBase.Services.Pause
         public void Dispose()
         {
             _adService.AdFinished -= HandleFocusGained;
-            WebApplication.InBackgroundChangeEvent -= OnFocusChanged;
+            Application.focusChanged -= OnFocusChanged;
         }
 
         private async void OnFocusChanged(bool hasFocus)
         {
-            while (_adService.IsAdEnabled) 
+            while (_adService.IsAdEnabled)
                 await UniTask.Yield();
-
+            
             if (!hasFocus)
                 HandleFocusLost();
             else
@@ -75,11 +75,11 @@ namespace CodeBase.Services.Pause
                     _pauseService.Pause();
                     MuteAudio(false);
                     break;
-                
+
                 case WindowTypeId.Shop:
                     MuteAudio(false);
                     break;
-                
+
                 case WindowTypeId.Popup:
                     MuteAudio(false);
                     _pauseService.Pause();
@@ -89,13 +89,14 @@ namespace CodeBase.Services.Pause
                     MuteAudio(false);
                     _pauseService.UnPause();
                     break;
-                
+
                 case WindowTypeId.Play:
                     MuteAudio(false);
                     _pauseService.UnPause();
                     break;
-                
+
                 default:
+                    _pauseService.UnPause();
                     MuteAudio(false);
                     break;
             }
