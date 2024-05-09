@@ -22,9 +22,11 @@ namespace CodeBase.Infrastructure
         public async void Enter(WorldData payload)
         {
             _loadingCurtain.FillHalf(1.5f);
-            _adInvokerService.Invoke();
             
             payload.LevelData.Id = Mathf.Clamp(payload.LevelData.Id, 1, SceneManager.sceneCountInBuildSettings - 1);
+
+            if (payload.LevelData.Id > 1) 
+                _adInvokerService.Invoke();
 
 
             AsyncOperation loadSceneAsync;

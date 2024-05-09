@@ -24,6 +24,12 @@ namespace CodeBase.Services.Ad
                 () => OnShortAdOfflineCallback(onOfflineCallback));
         }
 
+        public void PlayLongAd(Action startCallback, Action endCallback,Action<string> onErrorCallback)
+        {
+            VideoAd.Show(() => OnAdStartCallback(startCallback), null, () => OnCloseCallback(endCallback),
+                error => OnAdErrorCallback(onErrorCallback, error));
+        }
+
         private void OnShortAdOfflineCallback(Action onOfflineCallback)
         {
             IsAdEnabled = false;
@@ -54,12 +60,6 @@ namespace CodeBase.Services.Ad
             IsAdEnabled = false;
             AdFinished?.Invoke();
             _pauseService.UnPause();
-        }
-
-        public void PlayLongAd(Action startCallback, Action endCallback,Action<string> onErrorCallback)
-        {
-            VideoAd.Show(() => OnAdStartCallback(startCallback), null, () => OnCloseCallback(endCallback),
-                error => OnAdErrorCallback(onErrorCallback, error));
         }
 
         private void OnCloseCallback(Action endCallback)

@@ -24,16 +24,10 @@ namespace CodeBase.Services.Ad
         public void Invoke(Action onCloseCallback = null)
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
-            if (_worldDataService.WorldData.LevelData.Id % TargetAdInvoke == 0)
-            {
                 AdEnabled = true;
+    Debug.Log("ShowAd");
                 _adService.PlayShortAd(StartCallback, closed => OnEndCallback(onCloseCallback, closed),
                     OnErrorCallback, OnOfflineCallback);
-                return;
-            }
-
-            AdEnabled = false;
-            onCloseCallback?.Invoke();
 #endif
         }
 

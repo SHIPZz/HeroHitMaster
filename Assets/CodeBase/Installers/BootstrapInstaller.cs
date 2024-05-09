@@ -74,8 +74,6 @@ namespace CodeBase.Installers
 #if UNITY_EDITOR
             Container.Bind<ISaveSystem>().To<PlayerPrefsSaveSystem>().AsSingle();
 #endif
-            
-            print(Container.Resolve<ISaveSystem>().GetType());
         }
 
         private IEnumerator InitSDK()
